@@ -46,8 +46,7 @@ officium-nova/
 ├── upstream/          # Divinum Officium as a Git submodule (source texts + legacy Perl app)
 ├── docs/              # Specifications and design documents
 │   ├── divinum-officium-modernization-spec.md
-│   ├── file-format-specification.md
-│   └── architecture-option-a*.md
+│   └── file-format-specification.md
 ├── LICENSE            # GPL-3.0
 └── .gitmodules
 ```
