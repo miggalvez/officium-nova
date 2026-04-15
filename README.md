@@ -114,16 +114,29 @@ Implemented in 2b:
 - Candidate-assembly substitution: `resolveOverlayCandidate` callback resolves both `feastRef` and `rank` for the replacement against the corpus, so the substituted candidate carries its own rank rather than inheriting the displaced one; resolver failures surface as `severity: 'error'` warnings and fall back to the displaced rank
 - Integration harness that loads every real `Tabulae/Transfer/*.txt` and `Tabulae/Stransfer/*.txt` file and asserts overlay directives for a focused matrix (leap-year companion substitution on 2024-01-08, hymn-merge on 2025-05-18, simultaneous dirge pair on 2025-11-02/2025-11-03, and `~R`/`~B`/`~A` scripture operations)
 
+**Phase 2c — Occurrence for 1960 (complete).** The 1960 occurrence stage from design §18 is now wired end-to-end: `resolveDayOfficeSummary(date)` returns a resolved `celebration` and raw `commemorations`, with deferred transfer signaling for Phase 2e.
+
+Implemented in 2c:
+
+- `PRECEDENCE_1960` plus class-symbol registry with explicit Rubricarum Instructum/Tabella citations
+- `rubrics1960Policy` with precedence lookup, seasonal preemption, deterministic candidate comparison, privileged-feria detection, and deferred octave hook
+- Pure `resolveOccurrence(candidates, temporal, policy)` outputting `celebration`, `commemorations`, `omitted`, `transferQueue`, and typed warnings (`occurrence-season-preemption`, `occurrence-transfer-deferred`, `occurrence-omitted`)
+- Expanded `RubricalPolicy` interface for occurrence hooks; non-1960 policies now fail loud at occurrence-time via `UnsupportedPolicyError` while still allowing engine construction
+- `DayOfficeSummary` evolution to include `celebration` + `commemorations` while preserving `winner` as a deprecated compatibility mirror
+- 1960-specific rank normalization (`rubrics1960ResolveRank`) mapped to precedence class symbols with a weight-consistency invariant against the precedence table
+- Edge-case coverage for design §10.4 (Annunciation/Holy Week, St Joseph/Palm Sunday, bisextile St Matthias remap semantics, Dec 8 vs Advent II, Vigil of Epiphany clash, Ember Saturday clash, dual sanctoral collision, Triduum suppression)
+- Focused upstream integration matrix (`test/fixtures/ordo-1960-2024.json`) validated against a real 1960 engine build
+
 ADRs for the key architectural decisions so far:
 
 - [`docs/adr/001-version-handle-primary-binding.md`](docs/adr/001-version-handle-primary-binding.md)
 - [`docs/adr/002-two-scope-rule-evaluation.md`](docs/adr/002-two-scope-rule-evaluation.md)
+- [`docs/adr/003-phase-2c-non-1960-stubs.md`](docs/adr/003-phase-2c-non-1960-stubs.md)
 
-213 rubrical-engine tests passing, including live integration suites against upstream `Tabulae/data.txt`, the Perl-oracle day-name matrix, and the `Transfer`/`Stransfer` overlay matrix.
+248 rubrical-engine tests passing, including live integration suites against upstream `Tabulae/data.txt`, the Perl-oracle day-name matrix, the `Transfer`/`Stransfer` overlay matrix, and a focused 1960 occurrence fixture matrix.
 
 Still pending in Phase 2:
 
-- **2c** — 1960 occurrence with precedence table
 - **2d** — Rule evaluation (`CelebrationRuleSet` / `HourRuleSet`, vide/ex chains, paragraph-scoped conditionals)
 - **2e** — Transfer computation and vigil handling
 - **2f** — Concurrence and Compline

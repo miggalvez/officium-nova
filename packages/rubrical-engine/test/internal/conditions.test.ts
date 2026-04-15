@@ -1,15 +1,13 @@
 import { parseCondition } from '@officium-nova/parser';
 import { describe, expect, it } from 'vitest';
 
-import { defaultResolveRank, type ResolvedVersion, type RubricalPolicy, asVersionHandle } from '../../src/index.js';
+import { type ResolvedVersion, type RubricalPolicy, asVersionHandle } from '../../src/index.js';
 import { conditionMatches } from '../../src/internal/conditions.js';
+import { makeTestPolicy } from '../policy-fixture.js';
 
 describe('conditionMatches', () => {
   it('evaluates aut / et / nisi combinations', () => {
-    const version = makeVersion('Rubrics 1960 - 1960', {
-      name: 'rubrics-1960',
-      resolveRank: defaultResolveRank
-    });
+    const version = makeVersion('Rubrics 1960 - 1960', makeTestPolicy('rubrics-1960'));
     const condition = parseCondition('(rubrica 1960 aut tempore adventus) et nisi feria vi');
 
     expect(
@@ -32,10 +30,7 @@ describe('conditionMatches', () => {
   });
 
   it('matches season predicates against supported LiturgicalSeason values', () => {
-    const version = makeVersion('Divino Afflatu - 1954', {
-      name: 'divino-afflatu',
-      resolveRank: defaultResolveRank
-    });
+    const version = makeVersion('Divino Afflatu - 1954', makeTestPolicy('divino-afflatu'));
 
     expect(matches('tempore adventus', 'advent', version)).toBe(true);
     expect(matches('tempore quadragesimae', 'lent', version)).toBe(true);
@@ -48,10 +43,7 @@ describe('conditionMatches', () => {
   });
 
   it('matches feria in Roman numerals and Arabic, plus mense/die numerics', () => {
-    const version = makeVersion('Reduced - 1955', {
-      name: 'reduced-1955',
-      resolveRank: defaultResolveRank
-    });
+    const version = makeVersion('Reduced - 1955', makeTestPolicy('reduced-1955'));
 
     const context = {
       date: { year: 2024, month: 3, day: 6 },
@@ -67,22 +59,19 @@ describe('conditionMatches', () => {
   });
 
   it('fans out rubric tags for monastic, cistercian, dominican, and Newcal handles', () => {
-    const monastic = makeVersion('Monastic - 1963 - Barroux', {
-      name: 'monastic-1963',
-      resolveRank: defaultResolveRank
-    });
-    const cistercian = makeVersion('Monastic Tridentinum Cisterciensis Altovadensis', {
-      name: 'cistercian-altovadense',
-      resolveRank: defaultResolveRank
-    });
-    const dominican = makeVersion('Ordo Praedicatorum - 1962', {
-      name: 'dominican-1962',
-      resolveRank: defaultResolveRank
-    });
-    const newcal = makeVersion('Rubrics 1960 - 2020 USA', {
-      name: 'rubrics-1960',
-      resolveRank: defaultResolveRank
-    });
+    const monastic = makeVersion(
+      'Monastic - 1963 - Barroux',
+      makeTestPolicy('monastic-1963')
+    );
+    const cistercian = makeVersion(
+      'Monastic Tridentinum Cisterciensis Altovadensis',
+      makeTestPolicy('cistercian-altovadense')
+    );
+    const dominican = makeVersion(
+      'Ordo Praedicatorum - 1962',
+      makeTestPolicy('dominican-1962')
+    );
+    const newcal = makeVersion('Rubrics 1960 - 2020 USA', makeTestPolicy('rubrics-1960'));
 
     expect(matches('rubrica 1963', 'time-after-pentecost', monastic)).toBe(true);
     expect(matches('rubrica Barroux', 'time-after-pentecost', monastic)).toBe(true);

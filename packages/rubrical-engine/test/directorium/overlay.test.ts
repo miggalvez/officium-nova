@@ -6,10 +6,10 @@ import {
   buildScriptureTransferTable,
   buildVersionRegistry,
   buildYearTransferTable,
-  computeYearKey,
-  defaultResolveRank
+  computeYearKey
 } from '../../src/index.js';
 import type { ResolvedVersion } from '../../src/index.js';
+import { makeTestPolicy } from '../policy-fixture.js';
 
 describe('buildOverlay', () => {
   it('combines all four overlay extractors and falls back along transferBase when needed', () => {
@@ -253,10 +253,7 @@ function childVersion(): ResolvedVersion {
     transfer: 'CHILD',
     stransfer: 'CHILD',
     transferBase: asVersionHandle('Base'),
-    policy: {
-      name: 'rubrics-1960',
-      resolveRank: defaultResolveRank
-    }
+    policy: makeTestPolicy('rubrics-1960')
   };
 }
 

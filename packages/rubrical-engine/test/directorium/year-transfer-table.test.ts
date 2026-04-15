@@ -3,10 +3,10 @@ import { describe, expect, it } from 'vitest';
 import {
   asVersionHandle,
   buildVersionRegistry,
-  buildYearTransferTable,
-  defaultResolveRank
+  buildYearTransferTable
 } from '../../src/index.js';
 import type { ResolvedVersion } from '../../src/index.js';
+import { makeTestPolicy } from '../policy-fixture.js';
 
 describe('buildYearTransferTable / lookup', () => {
   it('uses leap companion files for January lookups in leap years', () => {
@@ -87,9 +87,6 @@ function testVersion(): ResolvedVersion {
     kalendar: 'test',
     transfer: 'TEST',
     stransfer: 'TEST',
-    policy: {
-      name: 'rubrics-1960',
-      resolveRank: defaultResolveRank
-    }
+    policy: makeTestPolicy('rubrics-1960')
   };
 }

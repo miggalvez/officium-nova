@@ -1,5 +1,12 @@
 import type { Rank } from '@officium-nova/parser';
-import type { LiturgicalSeason } from './model.js';
+
+import type {
+  Candidate,
+  FeastReference,
+  LiturgicalSeason,
+  ResolvedRank,
+  TemporalContext
+} from './model.js';
 
 /**
  * Stable identifier for a rubrical policy family.
@@ -8,30 +15,6 @@ import type { LiturgicalSeason } from './model.js';
  * they run the same rubrics against different calendars — e.g. both
  * `"Rubrics 1960 - 1960"` and `"Rubrics 1960 - 2020 USA"` bind to
  * `'rubrics-1960'` but use different sanctoral tables.
- *
- * Phase 2a binds all 15 Breviary handles in `data.txt` by expanding the
- * 7-member illustrative list from design §11 to 10 distinct traditions:
- *
- *   | Policy                  | Versions in data.txt                                       |
- *   |-------------------------|------------------------------------------------------------|
- *   | tridentine-1570         | Tridentine - 1570, 1888, 1906                              |
- *   | divino-afflatu          | Divino Afflatu - 1939, 1954                                |
- *   | reduced-1955            | Reduced - 1955                                             |
- *   | rubrics-1960            | Rubrics 1960 - 1960, Rubrics 1960 - 2020 USA               |
- *   | monastic-tridentine     | Monastic Tridentinum 1617                                  |
- *   | monastic-divino         | Monastic Divino 1930                                       |
- *   | monastic-1963           | Monastic - 1963, Monastic - 1963 - Barroux                 |
- *   | cistercian-1951         | Monastic Tridentinum Cisterciensis 1951                    |
- *   | cistercian-altovadense  | Monastic Tridentinum Cisterciensis Altovadensis            |
- *   | dominican-1962          | Ordo Praedicatorum - 1962                                  |
- *
- * Policies are split conservatively: historically-distinct rubrical traditions
- * get their own {@link PolicyName} even when they share columns in `data.txt`
- * with a related tradition, because merging later is cheap (delete a name,
- * rebind the handle) while untangling an incorrect merge is expensive. If
- * Phase 2c research shows, e.g., that `cistercian-altovadense` is rubrically
- * identical to `cistercian-1951` aside from local customs, those two entries
- * can be collapsed at that point.
  */
 export type PolicyName =
   | 'tridentine-1570'
@@ -58,36 +41,63 @@ export interface RankContext {
   readonly season?: LiturgicalSeason;
 }
 
+export class UnsupportedPolicyError extends Error {
+  constructor(
+    public readonly policyName: string,
+    public readonly feature: string
+  ) {
+    super(
+      `Policy '${policyName}' does not implement '${feature}' (deferred to a later sub-phase).`
+    );
+    this.name = 'UnsupportedPolicyError';
+  }
+}
+
+export type PrecedenceFate = 'commemorate' | 'omit' | 'transfer';
+
+export interface PrecedenceRow {
+  /** The class symbol this row governs, e.g. 'I', 'II', 'III', 'IV'. */
+  readonly classSymbol: string;
+  /** Numeric weight for comparisons. Higher wins. */
+  readonly weight: number;
+  /** Citation back to the governing document. */
+  readonly citation: string;
+  /** What happens when this class loses to a higher-ranked winner. */
+  decide(params: {
+    readonly candidate: Candidate;
+    readonly winner: Candidate;
+    readonly temporal: TemporalContext;
+    readonly allCandidates: readonly Candidate[];
+  }): PrecedenceFate;
+}
+
+export interface TemporalPreemption {
+  readonly kept: readonly Candidate[];
+  readonly suppressed: readonly {
+    readonly candidate: Candidate;
+    readonly reason: string;
+  }[];
+}
+
 /**
  * Rubrical behaviour contract for a policy family.
- *
- * Phase 2a exposes only `name`. Design §11 prescribes the full interface —
- * `resolveRank`, `compareCandidates`, `resolveConcurrence`,
- * `buildCelebrationRuleSet`, `hourDirectives`, `transferTarget`, etc. — which
- * will be added in Phases 2c–2g as each consuming stage lands.
- *
- * Policy objects are constructed once per process and attached to every
- * {@link ResolvedVersion} that binds to their `name`. They must be pure
- * (no I/O, no mutable state).
  */
 export interface RubricalPolicy {
   /** Stable identifier used in diagnostics, test snapshots, and version projections. */
   readonly name: PolicyName;
-  /**
-   * Phase 2a normalizes raw parser ranks into a stable, policy-aware shape.
-   *
-   * The first implementation is intentionally simple: it preserves the raw
-   * class weight for naive Phase 2a winner selection and derives a lightweight
-   * class symbol from the textual rank name. Later phases will grow this into
-   * the fuller design-§11 contract.
-   */
-  resolveRank(raw: Rank, context: RankContext): {
-    readonly name: string;
-    readonly weight: number;
-    readonly classSymbol: string;
-  };
-  // PHASE 2c+: expand further per design §11:
-  //   precedenceRow, applySeasonPreemption, compareCandidates,
-  //   resolveConcurrence, limitCommemorations, buildCelebrationRuleSet,
-  //   hourDirectives, octavesEnabled, transferTarget.
+  /** Map the raw parser rank into a policy-normalized class symbol and weight. */
+  resolveRank(raw: Rank, context: RankContext): ResolvedRank;
+  /** Row lookup for the policy's precedence table. Throws if classSymbol is unknown. */
+  precedenceRow(classSymbol: string): PrecedenceRow;
+  /** Seasonal pre-emption — Triduum, Lent, privileged seasons may suppress candidates. */
+  applySeasonPreemption(
+    candidates: readonly Candidate[],
+    temporal: TemporalContext
+  ): TemporalPreemption;
+  /** Strict weak ordering over candidates (highest-dignity first). */
+  compareCandidates(a: Candidate, b: Candidate): number;
+  /** Whether a temporal candidate is a privileged feria under this policy. */
+  isPrivilegedFeria(temporal: TemporalContext): boolean;
+  /** Phase 2g hook — stubbed as `null` in Phase 2c. */
+  octavesEnabled(feastRef: FeastReference): null;
 }

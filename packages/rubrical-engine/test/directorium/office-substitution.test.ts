@@ -2,10 +2,10 @@ import { describe, expect, it } from 'vitest';
 
 import {
   asVersionHandle,
-  defaultResolveRank,
   extractOfficeSubstitution
 } from '../../src/index.js';
 import type { ResolvedVersion, RubricalPolicy } from '../../src/index.js';
+import { makeTestPolicy } from '../policy-fixture.js';
 
 describe('extractOfficeSubstitution', () => {
   it('normalizes Tempora targets to canonical Tempora paths', () => {
@@ -66,9 +66,6 @@ function makeVersion(policyName: RubricalPolicy['name']): ResolvedVersion {
     kalendar: 'test',
     transfer: 'test',
     stransfer: 'test',
-    policy: {
-      name: policyName,
-      resolveRank: defaultResolveRank
-    }
+    policy: makeTestPolicy(policyName)
   };
 }

@@ -1,7 +1,8 @@
-import { assembleCandidates, pickNaiveWinner } from './candidates/assemble.js';
+import { assembleCandidates } from './candidates/assemble.js';
 import { buildOverlay } from './directorium/overlay.js';
 import { resolveOfficeDefinition } from './internal/content.js';
 import { normalizeDateInput } from './internal/date.js';
+import { resolveOccurrence } from './occurrence/resolver.js';
 import { normalizeRank } from './sanctoral/rank-normalizer.js';
 import { buildTemporalContext } from './temporal/context.js';
 import { sanctoralCandidates } from './sanctoral/kalendarium-lookup.js';
@@ -62,7 +63,17 @@ export function createRubricalEngine(config: RubricalEngineConfig): RubricalEngi
       const overlay = hasOverlayDirectives(overlayResult.overlay)
         ? overlayResult.overlay
         : undefined;
-      const warnings = [...overlayResult.warnings, ...assembled.warnings];
+      const occurrence = resolveOccurrence(assembled.candidates, temporal, version.policy);
+      const warnings = [
+        ...overlayResult.warnings,
+        ...assembled.warnings,
+        ...occurrence.warnings
+      ];
+      const winner = {
+        feastRef: occurrence.celebration.feastRef,
+        rank: occurrence.celebration.rank,
+        source: occurrence.celebration.source
+      } as const;
 
       return {
         date: temporal.date,
@@ -71,7 +82,9 @@ export function createRubricalEngine(config: RubricalEngineConfig): RubricalEngi
         ...(overlay ? { overlay } : {}),
         warnings,
         candidates: assembled.candidates,
-        winner: pickNaiveWinner(assembled.candidates)
+        celebration: occurrence.celebration,
+        commemorations: occurrence.commemorations,
+        winner
       };
     }
   };

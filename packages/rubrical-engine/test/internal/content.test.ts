@@ -2,11 +2,11 @@ import { describe, expect, it } from 'vitest';
 
 import {
   asVersionHandle,
-  defaultResolveRank,
   type ResolvedVersion,
   type RubricalPolicy
 } from '../../src/index.js';
 import { canonicalContentDir, resolveOfficeDefinition } from '../../src/internal/content.js';
+import { makeTestPolicy } from '../policy-fixture.js';
 import { TestOfficeTextIndex } from '../helpers.js';
 
 describe('canonicalContentDir', () => {
@@ -16,10 +16,7 @@ describe('canonicalContentDir', () => {
     ['cistercian-1951', 'Sancti', 'SanctiCist'],
     ['dominican-1962', 'Sancti', 'SanctiOP']
   ] as const)('maps %s %s to %s', (policyName, base, expected) => {
-    const version = makeVersion('Test Handle', {
-      name: policyName,
-      resolveRank: defaultResolveRank
-    });
+    const version = makeVersion('Test Handle', makeTestPolicy(policyName));
 
     expect(canonicalContentDir(base, version)).toBe(expected);
   });
@@ -52,10 +49,7 @@ describe('resolveOfficeDefinition', () => {
         date: { year: 2024, month: 4, day: 1 },
         dayOfWeek: 1,
         season: 'eastertide',
-        version: makeVersion('Rubrics 1960 - 1960', {
-          name: 'rubrics-1960',
-          resolveRank: defaultResolveRank
-        })
+        version: makeVersion('Rubrics 1960 - 1960', makeTestPolicy('rubrics-1960'))
       }
     );
 
@@ -86,10 +80,7 @@ describe('resolveOfficeDefinition', () => {
         date: { year: 2024, month: 1, day: 7 },
         dayOfWeek: 0,
         season: 'christmastide',
-        version: makeVersion('Tridentine - 1570', {
-          name: 'tridentine-1570',
-          resolveRank: defaultResolveRank
-        })
+        version: makeVersion('Tridentine - 1570', makeTestPolicy('tridentine-1570'))
       }
     );
 

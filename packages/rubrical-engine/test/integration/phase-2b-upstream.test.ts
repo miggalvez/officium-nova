@@ -20,6 +20,7 @@ import {
   dayNameForDate
 } from '../../src/index.js';
 import { TestOfficeTextIndex } from '../helpers.js';
+import { makeTestPolicy } from '../policy-fixture.js';
 
 const TEST_DIR = dirname(fileURLToPath(import.meta.url));
 const PACKAGE_ROOT = resolve(TEST_DIR, '../..');
@@ -103,7 +104,8 @@ describeIfUpstream('Phase 2b overlay against upstream Transfer/Stransfer tables'
       scriptureTransfers: buildScriptureTransferTable(loadScriptureTransferTables()),
       versionRegistry,
       version: asVersionHandle('Divino Afflatu - 1954'),
-      policyMap: VERSION_POLICY
+      policyMap: VERSION_POLICY,
+      policyOverride: makeTestPolicy('divino-afflatu')
     });
 
     for (const row of matrix) {
