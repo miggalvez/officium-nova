@@ -5,7 +5,10 @@ import {
   VERSION_POLICY,
   asVersionHandle,
   buildKalendariumTable,
+  buildScriptureTransferTable,
   buildVersionRegistry,
+  buildYearTransferTable,
+  computeYearKey,
   createRubricalEngine,
   defaultResolveRank
 } from '../src/index.js';
@@ -41,6 +44,8 @@ describe('createRubricalEngine', () => {
     const engine = createRubricalEngine({
       corpus,
       kalendarium,
+      yearTransfers: buildYearTransferTable([]),
+      scriptureTransfers: buildScriptureTransferTable([]),
       versionRegistry: registry,
       version: asVersionHandle('Rubrics 1960 - 1960'),
       policyMap: VERSION_POLICY
@@ -50,6 +55,8 @@ describe('createRubricalEngine', () => {
 
     expect(summary.version.handle).toBe('Rubrics 1960 - 1960');
     expect(summary.temporal.dayName).toBe('Pasc2-0');
+    expect(summary.overlay).toBeUndefined();
+    expect(summary.warnings).toEqual([]);
     expect(summary.candidates).toHaveLength(2);
     expect(summary.winner.feastRef.path).toBe('Sancti/04-14');
     expect(summary.winner.rank.weight).toBe(6);
@@ -75,6 +82,8 @@ describe('createRubricalEngine', () => {
     const engine = createRubricalEngine({
       corpus,
       kalendarium,
+      yearTransfers: buildYearTransferTable([]),
+      scriptureTransfers: buildScriptureTransferTable([]),
       versionRegistry: registry,
       version: asVersionHandle('Future Breviary - 2099'),
       policyOverride: {
@@ -94,5 +103,66 @@ describe('createRubricalEngine', () => {
     expect(engine.version.handle).toBe('Future Breviary - 2099');
     expect(summary.version.handle).toBe('Future Breviary - 2099');
     expect(summary.winner.rank.weight).toBe(105);
+  });
+
+  it('applies overlay substitution with resolved replacement rank and emits replacement warning', () => {
+    const corpus = new TestOfficeTextIndex();
+    corpus.add(
+      'horas/Latin/Tempora/Pasc2-0.txt',
+      ['[Officium]', 'Dominica II post Pascha', '', '[Rank]', ';;Semiduplex;;5;;'].join('\n')
+    );
+    corpus.add(
+      'horas/Latin/Tempora/Nat2-0.txt',
+      ['[Officium]', 'Dominica post Nativitatem', '', '[Rank]', ';;Feria;;1;;'].join('\n')
+    );
+
+    const registry = buildVersionRegistry([
+      {
+        version: 'Rubrics 1960 - 1960',
+        kalendar: '1960',
+        transfer: '1960',
+        stransfer: '1960'
+      }
+    ]);
+    const kalendarium = buildKalendariumTable([{ name: '1960', entries: [] }]);
+    const yearKey = computeYearKey(2024);
+
+    const engine = createRubricalEngine({
+      corpus,
+      kalendarium,
+      yearTransfers: buildYearTransferTable([
+        {
+          yearKey: yearKey.letter,
+          entries: [
+            {
+              kind: 'transfer',
+              dateKey: '04-14',
+              target: 'Tempora/Nat2-0',
+              versionFilter: '1960'
+            }
+          ]
+        }
+      ]),
+      scriptureTransfers: buildScriptureTransferTable([]),
+      versionRegistry: registry,
+      version: asVersionHandle('Rubrics 1960 - 1960'),
+      policyMap: VERSION_POLICY
+    });
+
+    const summary = engine.resolveDayOfficeSummary('2024-04-14');
+
+    expect(summary.overlay?.officeSubstitution?.path).toBe('Tempora/Nat2-0');
+    expect(summary.candidates[0]?.feastRef.path).toBe('Tempora/Nat2-0');
+    expect(summary.candidates[0]?.rank.weight).toBe(1);
+    expect(summary.warnings).toContainEqual({
+      code: 'overlay-replaced-base-candidate',
+      message: 'Overlay substitution replaced the temporal base candidate.',
+      severity: 'info',
+      context: {
+        original: 'Tempora/Pasc2-0',
+        replaced: 'Tempora/Nat2-0',
+        kind: 'temporal'
+      }
+    });
   });
 });

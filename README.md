@@ -87,7 +87,7 @@ Implemented:
 
 **Phase 2a — Foundations (complete).** The end-to-end deliverable from design §18 is in place: `createRubricalEngine(config).resolveDayOfficeSummary(date)` returns temporal + sanctoral candidates with a naive (highest-raw-rank) winner for every date.
 
-Implemented:
+Implemented in 2a:
 
 - `@officium-nova/rubrical-engine` package scaffold with build, typecheck, and Vitest setup
 - Version-layer foundations: branded `VersionHandle`, `ResolvedVersion`, `VersionDescriptor`, and immutable `VersionRegistry`
@@ -100,14 +100,29 @@ Implemented:
 - Canonical content-dir routing (`Tempora`, `TemporaM`, `TemporaCist`, `TemporaOP`, same for `Sancti`)
 - Candidate assembly with equal-rank tie-breaking in favor of the temporal cycle
 - `policyOverride` composite pattern: overrides augment the configured policy map rather than replacing it
-- ADRs for the key architectural decisions so far:
-  - [`docs/adr/001-version-handle-primary-binding.md`](docs/adr/001-version-handle-primary-binding.md)
-  - [`docs/adr/002-two-scope-rule-evaluation.md`](docs/adr/002-two-scope-rule-evaluation.md)
-- 173 rubrical-engine tests passing, including a 37-case live integration suite against upstream `Tabulae/data.txt` and the Perl-oracle day-name matrix
+
+**Phase 2b — Directorium Overlay (complete).** The per-date `DirectoriumOverlay` is computed from the version's `Transfer`/`Stransfer` tables, surfaced on `DayOfficeSummary` (as `undefined` when empty), and threaded back into candidate assembly with resolved replacement ranks and typed warnings.
+
+Implemented in 2b:
+
+- `DirectoriumOverlay` type: `officeSubstitution?`, `dirgeAtVespers?`, `dirgeAtLauds?`, `hymnOverride?`, `scriptureTransfer?` — the split-Hour dirge shape reflects that `dirge1`/`dirge2`/`dirge3` are a month partition, not an Hour partition (per `Directorium.pm:229-237` and `horas/Help/technical.html`)
+- `computeYearKey(year)` — Sunday-letter + Easter-MMDD derivation mirroring Perl's `load_transfer`, including the leap-year companion pair with the `332 → 401` wrap
+- `YearTransferTable` / `ScriptureTransferTable` with inheritance-chain lookup via `ResolvedVersion.transferBase`, leap-chunk filtering equivalent to Perl's `load_transfer_file` `regexp`/`regexp2`, and a runtime guard that rejects mixed wildcard/named-handle inputs at construction
+- `matchesVersionFilter` — Perl-shape regex match (version name as pattern, filter as string) with a tokenized-substring fallback; agreement with Perl semantics validated on every `(filter × transfer-name)` pair from the live `Tabulae` files
+- Dirge extraction as a union scan over all three buckets, keyed on today's sday for Lauds and tomorrow's sday for Vespers — independently, so a single civil date can carry both attachments
+- Office-substitution extraction with `Tempora/<path>` and bare-`MM-DD` canonicalization, plus an `overlay-alternates-deferred` info warning when tilde-chained targets are seen (consumed in Phase 2e)
+- Candidate-assembly substitution: `resolveOverlayCandidate` callback resolves both `feastRef` and `rank` for the replacement against the corpus, so the substituted candidate carries its own rank rather than inheriting the displaced one; resolver failures surface as `severity: 'error'` warnings and fall back to the displaced rank
+- Integration harness that loads every real `Tabulae/Transfer/*.txt` and `Tabulae/Stransfer/*.txt` file and asserts overlay directives for a focused matrix (leap-year companion substitution on 2024-01-08, hymn-merge on 2025-05-18, simultaneous dirge pair on 2025-11-02/2025-11-03, and `~R`/`~B`/`~A` scripture operations)
+
+ADRs for the key architectural decisions so far:
+
+- [`docs/adr/001-version-handle-primary-binding.md`](docs/adr/001-version-handle-primary-binding.md)
+- [`docs/adr/002-two-scope-rule-evaluation.md`](docs/adr/002-two-scope-rule-evaluation.md)
+
+213 rubrical-engine tests passing, including live integration suites against upstream `Tabulae/data.txt`, the Perl-oracle day-name matrix, and the `Transfer`/`Stransfer` overlay matrix.
 
 Still pending in Phase 2:
 
-- **2b** — Directorium overlay (per-date transfers, dirges, hymn overrides, scripture transfers)
 - **2c** — 1960 occurrence with precedence table
 - **2d** — Rule evaluation (`CelebrationRuleSet` / `HourRuleSet`, vide/ex chains, paragraph-scoped conditionals)
 - **2e** — Transfer computation and vigil handling

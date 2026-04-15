@@ -1,5 +1,8 @@
 import type { KalendariumEntry, ParsedFile } from '@officium-nova/parser';
 
+import type { ScriptureTransferTable } from '../directorium/tables/scripture-transfer-table.js';
+import type { YearTransferTable } from '../directorium/tables/year-transfer-table.js';
+import type { DirectoriumOverlay, RubricalWarning } from './directorium.js';
 import type { RubricalPolicy } from './policy.js';
 import type {
   ResolvedVersion,
@@ -64,6 +67,8 @@ export interface DayOfficeSummary {
   readonly date: string;
   readonly version: VersionDescriptor;
   readonly temporal: TemporalContext;
+  readonly overlay?: DirectoriumOverlay;
+  readonly warnings: readonly RubricalWarning[];
   readonly candidates: readonly Candidate[];
   readonly winner: Candidate;
 }
@@ -81,6 +86,8 @@ export interface OfficeTextIndex {
 export interface RubricalEngineConfig {
   readonly corpus: OfficeTextIndex;
   readonly kalendarium: KalendariumTable;
+  readonly yearTransfers: YearTransferTable;
+  readonly scriptureTransfers: ScriptureTransferTable;
   readonly versionRegistry: VersionRegistry;
   readonly version: VersionHandle;
   readonly policyMap?: ReadonlyMap<VersionHandle, RubricalPolicy>;

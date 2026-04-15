@@ -1,5 +1,11 @@
 import { canonicalContentDir, resolveOfficeDefinition } from '../internal/content.js';
-import { dayOfWeek, formatIsoDate, normalizeDateInput, sanctoralDateKey } from '../internal/date.js';
+import {
+  dayOfWeek,
+  formatIsoDate,
+  normalizeDateInput,
+  sanctoralDateKey,
+  type CalendarDate
+} from '../internal/date.js';
 import { liturgicalSeasonForDate } from '../temporal/season.js';
 import { normalizeRank } from './rank-normalizer.js';
 import type {
@@ -15,7 +21,7 @@ import type {
 } from '../types/version.js';
 
 export function sanctoralCandidates(
-  input: DateInput,
+  input: DateInput | CalendarDate,
   version: ResolvedVersion,
   registry: VersionRegistry,
   kalendarium: KalendariumTable,

@@ -1,4 +1,9 @@
-import { dayOfWeek, formatIsoDate, normalizeDateInput } from '../internal/date.js';
+import {
+  dayOfWeek,
+  formatIsoDate,
+  normalizeDateInput,
+  type CalendarDate
+} from '../internal/date.js';
 import { canonicalContentDir, resolveOfficeDefinition } from '../internal/content.js';
 import { normalizeRank } from '../sanctoral/rank-normalizer.js';
 import type { DateInput, OfficeTextIndex, TemporalContext } from '../types/model.js';
@@ -8,7 +13,7 @@ import { dayNameForDate, weekStemForDate } from './day-name.js';
 import { liturgicalSeasonForDate } from './season.js';
 
 export function buildTemporalContext(
-  input: DateInput,
+  input: DateInput | CalendarDate,
   version: ResolvedVersion,
   corpus: OfficeTextIndex
 ): TemporalContext {
