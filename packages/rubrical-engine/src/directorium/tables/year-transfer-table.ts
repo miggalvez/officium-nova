@@ -90,7 +90,7 @@ class InMemoryYearTransferTable implements YearTransferTable {
     dateKey: string,
     chunk: LeapChunk
   ): void {
-    const entries = byYear.get(key);
+    const entries = byYear.get(key) ?? byYear.get(compactYearKey(key));
     if (!entries) {
       return;
     }
@@ -101,6 +101,14 @@ class InMemoryYearTransferTable implements YearTransferTable {
       }
     }
   }
+}
+
+function compactYearKey(key: string): string {
+  if (!/^0\d{3}$/u.test(key)) {
+    return key;
+  }
+  const compact = String(Number(key));
+  return compact.length > 0 ? compact : key;
 }
 
 export function buildYearTransferTable(

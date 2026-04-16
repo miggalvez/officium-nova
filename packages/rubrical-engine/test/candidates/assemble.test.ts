@@ -228,6 +228,82 @@ describe('assembleCandidates / pickNaiveWinner', () => {
     });
   });
 
+  it('appends transferred-in candidates with transferredFrom metadata', () => {
+    const transferredIn = [
+      {
+        feastRef: {
+          path: 'Sancti/03-19',
+          id: 'Sancti/03-19',
+          title: 'S. Joseph Sponsi B.M.V.'
+        },
+        rank: {
+          name: 'Duplex I classis',
+          weight: 1000,
+          classSymbol: 'I'
+        },
+        source: 'transferred-in' as const,
+        transferredFrom: '2024-03-19'
+      }
+    ] as const;
+
+    const result = assembleCandidates(TEMPORAL, [], {
+      transferredIn
+    });
+
+    expect(result.candidates).toContainEqual({
+      feastRef: transferredIn[0].feastRef,
+      rank: transferredIn[0].rank,
+      source: 'transferred-in',
+      transferredFrom: '2024-03-19'
+    });
+  });
+
+  it('tags vigil candidates when detectVigil returns a feast reference', () => {
+    const vigilOf = {
+      path: 'Sancti/12-25',
+      id: 'Sancti/12-25',
+      title: 'In Nativitate Domini'
+    };
+
+    const result = assembleCandidates(
+      TEMPORAL,
+      [
+        {
+          dateKey: '12-24',
+          feastRef: {
+            path: 'Sancti/12-24',
+            id: 'Sancti/12-24',
+            title: 'In Vigilia Nativitatis Domini'
+          },
+          rank: {
+            name: 'Duplex I classis',
+            weight: 1000,
+            classSymbol: 'I'
+          }
+        }
+      ],
+      {
+        detectVigil: (candidate) =>
+          candidate.feastRef.path === 'Sancti/12-24' ? vigilOf : null
+      }
+    );
+
+    expect(result.candidates[1]).toEqual({
+      feastRef: {
+        path: 'Sancti/12-24',
+        id: 'Sancti/12-24',
+        title: 'In Vigilia Nativitatis Domini'
+      },
+      rank: {
+        name: 'Duplex I classis',
+        weight: 1000,
+        classSymbol: 'I'
+      },
+      source: 'sanctoral',
+      vigilOf
+    });
+  });
+
   it('breaks equal-rank ties in favor of the temporal candidate', () => {
     const candidates = [
       {

@@ -132,6 +132,7 @@ ADRs for the key architectural decisions so far:
 - [`docs/adr/001-version-handle-primary-binding.md`](docs/adr/001-version-handle-primary-binding.md)
 - [`docs/adr/002-two-scope-rule-evaluation.md`](docs/adr/002-two-scope-rule-evaluation.md)
 - [`docs/adr/003-phase-2c-non-1960-stubs.md`](docs/adr/003-phase-2c-non-1960-stubs.md)
+- [`docs/adr/004-phase-2e-year-map-caching.md`](docs/adr/004-phase-2e-year-map-caching.md)
 
 **Phase 2d — Rule Evaluation (complete).** The dedicated rule-evaluation stage from design §12/§18 is now wired after occurrence: every winning celebration now carries a typed `CelebrationRuleSet`, with tested per-hour derivation via `deriveHourRuleSet`.
 
@@ -148,11 +149,12 @@ Implemented in 2d:
 - Engine integration: `DayOfficeSummary` now includes `celebrationRules`, and rule-evaluation warnings are merged into `summary.warnings`
 - Upstream regression harness for `horas/Latin/Sancti` + `horas/Latin/Tempora` with stable unmapped/missa-pass-through totals
 
-328 rubrical-engine tests passing, including live integration suites against upstream `Tabulae/data.txt`, the Perl-oracle day-name matrix, the `Transfer`/`Stransfer` overlay matrix, focused 1960 occurrence fixtures, and new rule-evaluation upstream invariants.
+**Phase 2e — Transfer Computation and Vigils (complete).** Transfer-flagged losers are now fully resolved into concrete target dates through a cached year-map (`(version, year)`), reconciled against the Directorium transfer table (overlay wins on disagreement), and surfaced back into daily candidate assembly as `source: 'transferred-in'` with `transferredFrom` metadata. Candidate assembly also tags vigils (`vigilOf`) and wires celebration-level vigil/transfer metadata through occurrence into `DayOfficeSummary`. New transfer diagnostics are emitted as data (`transfer-rule-agrees-with-overlay`, `transfer-table-overrides-rule`, `transfer-perpetually-impeded`, `transfer-bounded-search-exceeded`), and upstream integration coverage now includes transfer matrices plus vigil behavior.
+
+353 rubrical-engine tests passing, including live integration suites against upstream `Tabulae/data.txt`, the Perl-oracle day-name matrix, the `Transfer`/`Stransfer` overlay matrix, focused 1960 occurrence fixtures, rule-evaluation invariants, and the new Phase 2e transfer/vigil upstream matrix.
 
 Still pending in Phase 2:
 
-- **2e** — Transfer computation and vigil handling
 - **2f** — Concurrence and Compline
 - **2g** — Hour structuring, Matins last
 - **2h** — 1911 (Divino Afflatu) and 1955 (Reduced) policies

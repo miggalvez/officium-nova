@@ -43,8 +43,10 @@ export function makeTestPolicy(
       if (a.rank.weight !== b.rank.weight) {
         return b.rank.weight - a.rank.weight;
       }
-      if (a.source !== b.source) {
-        return a.source === 'temporal' ? -1 : 1;
+      const left = a.source === 'temporal' ? 0 : 1;
+      const right = b.source === 'temporal' ? 0 : 1;
+      if (left !== right) {
+        return left - right;
       }
       return a.feastRef.path.localeCompare(b.feastRef.path);
     },
@@ -53,6 +55,9 @@ export function makeTestPolicy(
     },
     buildCelebrationRuleSet(feastFile, commemorations, context) {
       return buildCelebrationRuleSet(feastFile, commemorations, context);
+    },
+    transferTarget(_candidate, _fromDate, _until) {
+      return null;
     },
     octavesEnabled() {
       return null;

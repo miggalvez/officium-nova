@@ -1,0 +1,16 @@
+{
+  "year": 2000,
+  "transfers": [
+    {
+      "feastPath": "Sancti/03-25",
+      "fromDate": "2000-03-25",
+      "outcome": "not-impeded"
+    },
+    {
+      "feastPath": "Sancti/03-19",
+      "fromDate": "2000-03-19",
+      "outcome": "transferred",
+      "target": "2000-03-20"
+    }
+  ]
+}

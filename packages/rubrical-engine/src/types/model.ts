@@ -61,7 +61,9 @@ export interface SanctoralCandidate {
 export interface Candidate {
   readonly feastRef: FeastReference;
   readonly rank: ResolvedRank;
-  readonly source: 'temporal' | 'sanctoral';
+  readonly source: 'temporal' | 'sanctoral' | 'transferred-in';
+  readonly transferredFrom?: string;
+  readonly vigilOf?: FeastReference;
 }
 
 export interface DayOfficeSummary {

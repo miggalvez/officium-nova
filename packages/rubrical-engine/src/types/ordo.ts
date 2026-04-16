@@ -24,6 +24,8 @@ export interface Celebration {
   readonly feastRef: FeastReference;
   readonly rank: ResolvedRank;
   readonly source: 'temporal' | 'sanctoral';
+  readonly vigil?: FeastReference;
+  readonly transferredFrom?: string;
 }
 
 export interface Commemoration {

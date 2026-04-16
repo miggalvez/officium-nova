@@ -1,0 +1,15 @@
+{
+  "year": 2026,
+  "transfers": [
+    {
+      "feastPath": "Sancti/03-25",
+      "fromDate": "2026-03-25",
+      "outcome": "not-impeded"
+    },
+    {
+      "feastPath": "Sancti/03-19",
+      "fromDate": "2026-03-19",
+      "outcome": "not-impeded"
+    }
+  ]
+}

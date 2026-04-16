@@ -4,6 +4,7 @@ import {
 } from '../occurrence/tables/precedence-1960.js';
 import { buildCelebrationRuleSet as defaultBuildCelebrationRuleSet } from '../rules/evaluate.js';
 import { rubrics1960ResolveRank } from '../sanctoral/rank-normalizer.js';
+import { walkTransferTargetDate } from '../transfer/compute.js';
 import type {
   Candidate,
   FeastReference,
@@ -36,11 +37,36 @@ const FEASTS_OF_THE_LORD = new Set<string>([
   'Sancti/10-DU',
   'Sancti/11-09',
   'Sancti/11-18',
+  'Sancti/12-24',
+  'Sancti/12-24s',
+  'Sancti/12-24so',
   'Sancti/12-25',
   'Tempora/Epi1-0',
   'Tempora/Nat2-0',
   'Tempora/Nat2-0r',
   'Tempora/Pent02-5'
+]);
+
+const HOLY_WEEK_KEYS = new Set([
+  'Quad6-0',
+  'Quad6-1',
+  'Quad6-2',
+  'Quad6-3',
+  'Quad6-4',
+  'Quad6-5',
+  'Quad6-6'
+]);
+
+const CHRISTMAS_RELATED_TRANSFER_PATHS = new Set([
+  'Sancti/12-25',
+  'Tempora/Nat25',
+  'Tempora/Nat26',
+  'Tempora/Nat27',
+  'Tempora/Nat28',
+  'Tempora/Nat29',
+  'Tempora/Nat30',
+  'Tempora/Nat31',
+  'Tempora/Nat01'
 ]);
 
 export const rubrics1960Policy: RubricalPolicy = {
@@ -88,8 +114,9 @@ export const rubrics1960Policy: RubricalPolicy = {
       return b.rank.weight - a.rank.weight;
     }
 
-    if (a.source !== b.source) {
-      return a.source === 'temporal' ? -1 : 1;
+    const sourceOrder = sourceTieBreakOrder(a.source) - sourceTieBreakOrder(b.source);
+    if (sourceOrder !== 0) {
+      return sourceOrder;
     }
 
     return a.feastRef.path.localeCompare(b.feastRef.path);
@@ -105,6 +132,25 @@ export const rubrics1960Policy: RubricalPolicy = {
   buildCelebrationRuleSet(feastFile, commemorations, context) {
     return defaultBuildCelebrationRuleSet(feastFile, commemorations, context);
   },
+  transferTarget(
+    candidate,
+    fromDate,
+    until,
+    dayContext,
+    overlayFor,
+    occupantOn
+  ) {
+    return walkTransferTargetDate({
+      impeded: candidate,
+      fromDate,
+      until,
+      dayContext,
+      overlayFor,
+      occupantOn,
+      compareCandidates: rubrics1960Policy.compareCandidates,
+      forbidsTransferInto: forbidsTransferInto1960
+    });
+  },
   octavesEnabled(_feastRef: FeastReference): null {
     return null;
   }
@@ -117,7 +163,7 @@ function comparePrivilegedTemporal(a: Candidate, b: Candidate): number | null {
   }
 
   const sanctoral = temporal === a ? b : a;
-  if (sanctoral.source !== 'sanctoral') {
+  if (sanctoral.source === 'temporal') {
     return null;
   }
 
@@ -161,4 +207,63 @@ function canDisplacePrivilegedTemporal(candidate: Candidate): boolean {
 
 function isTriduum(temporal: TemporalContext): boolean {
   return TRIDUUM_KEYS.has(temporal.dayName);
+}
+
+function sourceTieBreakOrder(source: Candidate['source']): number {
+  switch (source) {
+    case 'temporal':
+      return 0;
+    case 'sanctoral':
+    case 'transferred-in':
+      return 1;
+    default:
+      return 2;
+  }
+}
+
+function forbidsTransferInto1960(impeded: Candidate, temporal: TemporalContext): boolean {
+  // RI §95: no transfers are admitted into Palm Sunday or the feriae of Holy Week.
+  if (HOLY_WEEK_KEYS.has(temporal.dayName)) {
+    return true;
+  }
+
+  // RI §94 (with §95): the Sacred Triduum is absolutely privileged.
+  if (TRIDUUM_KEYS.has(temporal.dayName)) {
+    return true;
+  }
+
+  // RI §95: Ash Wednesday is privileged and does not receive transferred feasts.
+  if (temporal.dayName === 'Quadp3-3') {
+    return true;
+  }
+
+  // RI §95: the Vigil of Christmas (Dec 24) remains a privileged feria.
+  if (temporal.date.endsWith('-12-24')) {
+    return true;
+  }
+
+  // RI §§93, 95: the Christmas octave is restricted; non-Christmas transfers do not land here.
+  if (isWithinChristmasOctave(temporal.date) && !isChristmasRelatedTransfer(impeded)) {
+    return true;
+  }
+
+  return false;
+}
+
+function isWithinChristmasOctave(isoDate: string): boolean {
+  const monthDay = isoDate.slice(5);
+  return (
+    monthDay === '12-25' ||
+    monthDay === '12-26' ||
+    monthDay === '12-27' ||
+    monthDay === '12-28' ||
+    monthDay === '12-29' ||
+    monthDay === '12-30' ||
+    monthDay === '12-31' ||
+    monthDay === '01-01'
+  );
+}
+
+function isChristmasRelatedTransfer(candidate: Candidate): boolean {
+  return CHRISTMAS_RELATED_TRANSFER_PATHS.has(candidate.feastRef.path);
 }

@@ -55,7 +55,9 @@ export function resolveOccurrence(
   const celebration: Celebration = {
     feastRef: winner.feastRef,
     rank: winner.rank,
-    source: winner.source
+    source: winner.source === 'temporal' ? 'temporal' : 'sanctoral',
+    ...(winner.vigilOf ? { vigil: winner.vigilOf } : {}),
+    ...(winner.transferredFrom ? { transferredFrom: winner.transferredFrom } : {})
   };
 
   const commemorations: Commemoration[] = [];

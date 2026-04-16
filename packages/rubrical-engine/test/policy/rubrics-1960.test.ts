@@ -131,6 +131,35 @@ describe('rubrics1960Policy.isPrivilegedFeria', () => {
   });
 });
 
+describe('rubrics1960Policy.transferTarget', () => {
+  it('walks past Holy Week before selecting the first allowed date', () => {
+    const impeded = candidate('Sancti/03-25', 'sanctoral', 'I');
+    const fromDate = { year: 2024, month: 3, day: 24 } as const;
+    const until = { year: 2024, month: 4, day: 5 } as const;
+    const byDate: Readonly<Record<string, TemporalContext>> = {
+      '2024-03-25': temporal('2024-03-25', 'Quad6-1', 'passiontide'),
+      '2024-03-26': temporal('2024-03-26', 'Quad6-2', 'passiontide'),
+      '2024-03-27': temporal('2024-03-27', 'Quad6-3', 'passiontide'),
+      '2024-03-28': temporal('2024-03-28', 'Quad6-4', 'passiontide'),
+      '2024-03-29': temporal('2024-03-29', 'Quad6-5', 'passiontide'),
+      '2024-03-30': temporal('2024-03-30', 'Quad6-6', 'passiontide'),
+      '2024-03-31': temporal('2024-03-31', 'Pasc0-0', 'eastertide'),
+      '2024-04-01': temporal('2024-04-01', 'Pasc0-1', 'eastertide')
+    };
+
+    const target = rubrics1960Policy.transferTarget(
+      impeded,
+      fromDate,
+      until,
+      (date) => byDate[toIso(date)] ?? temporal('2024-04-02', 'Pasc0-2', 'eastertide'),
+      () => ({}),
+      () => []
+    );
+
+    expect(target).toEqual({ year: 2024, month: 3, day: 31 });
+  });
+});
+
 function context(
   date: string,
   feastPath: string,
@@ -204,4 +233,10 @@ function season(dayName: string): TemporalContext['season'] {
     return 'eastertide';
   }
   return 'time-after-pentecost';
+}
+
+function toIso(date: { readonly year: number; readonly month: number; readonly day: number }): string {
+  return `${String(date.year).padStart(4, '0')}-${String(date.month).padStart(2, '0')}-${String(
+    date.day
+  ).padStart(2, '0')}`;
 }

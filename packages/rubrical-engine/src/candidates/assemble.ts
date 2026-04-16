@@ -12,6 +12,8 @@ const SANCTORAL_DATE_KEY = /^\d{2}-\d{2}/u;
 
 export interface AssembleOptions {
   readonly overlay?: DirectoriumOverlay;
+  readonly transferredIn?: readonly Candidate[];
+  readonly detectVigil?: (candidate: Candidate) => FeastReference | null;
   readonly resolveOverlayCandidate?: (
     path: string,
     source: 'temporal' | 'sanctoral'
@@ -41,13 +43,14 @@ export function assembleCandidates(
       feastRef: candidate.feastRef,
       rank: candidate.rank,
       source: 'sanctoral'
-    }))
+    })),
+    ...normalizeTransferredIn(options.transferredIn)
   ];
 
   const substitution = options.overlay?.officeSubstitution;
   if (!substitution) {
     return {
-      candidates,
+      candidates: tagVigils(candidates, options.detectVigil),
       warnings
     };
   }
@@ -82,7 +85,7 @@ export function assembleCandidates(
       );
     }
     return {
-      candidates,
+      candidates: tagVigils(candidates, options.detectVigil),
       warnings
     };
   }
@@ -119,7 +122,7 @@ export function assembleCandidates(
       }
 
       return {
-        candidates,
+        candidates: tagVigils(candidates, options.detectVigil),
         warnings
       };
     }
@@ -139,7 +142,7 @@ export function assembleCandidates(
   });
 
   return {
-    candidates,
+    candidates: tagVigils(candidates, options.detectVigil),
     warnings
   };
 }
@@ -243,4 +246,38 @@ function replacedCandidateWarning(
       kind
     }
   };
+}
+
+function normalizeTransferredIn(candidates: readonly Candidate[] | undefined): readonly Candidate[] {
+  if (!candidates || candidates.length === 0) {
+    return [];
+  }
+
+  return candidates.map((candidate) => ({
+    feastRef: candidate.feastRef,
+    rank: candidate.rank,
+    source: 'transferred-in',
+    ...(candidate.transferredFrom ? { transferredFrom: candidate.transferredFrom } : {}),
+    ...(candidate.vigilOf ? { vigilOf: candidate.vigilOf } : {})
+  }));
+}
+
+function tagVigils(
+  candidates: readonly Candidate[],
+  detectVigil: AssembleOptions['detectVigil']
+): readonly Candidate[] {
+  if (!detectVigil) {
+    return candidates;
+  }
+
+  return candidates.map((candidate) => {
+    const vigilOf = detectVigil(candidate);
+    if (!vigilOf) {
+      return candidate;
+    }
+    return {
+      ...candidate,
+      vigilOf
+    };
+  });
 }

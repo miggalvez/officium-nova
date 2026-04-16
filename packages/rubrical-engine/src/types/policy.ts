@@ -7,11 +7,13 @@ import type {
   ResolvedRank,
   TemporalContext
 } from './model.js';
+import type { DirectoriumOverlay } from './directorium.js';
 import type { Commemoration } from './ordo.js';
 import type {
   CelebrationRuleEvaluation,
   RuleEvaluationContext
 } from './rule-set.js';
+import type { CalendarDate } from '../internal/date.js';
 
 /**
  * Stable identifier for a rubrical policy family.
@@ -109,6 +111,15 @@ export interface RubricalPolicy {
     commemorations: readonly Commemoration[],
     context: RuleEvaluationContext
   ): CelebrationRuleEvaluation;
+  /** Compute where an impeded feast may be transferred, if anywhere. */
+  transferTarget(
+    candidate: Candidate,
+    fromDate: CalendarDate,
+    until: CalendarDate,
+    dayContext: (date: CalendarDate) => TemporalContext,
+    overlayFor: (date: CalendarDate) => DirectoriumOverlay,
+    occupantOn: (date: CalendarDate) => readonly Candidate[]
+  ): CalendarDate | null;
   /** Phase 2g hook — stubbed as `null` in Phase 2c. */
   octavesEnabled(feastRef: FeastReference): null;
 }

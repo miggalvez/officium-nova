@@ -1,29 +1,42 @@
+import { detectVigil } from './candidates/vigil-detection.js';
 import { assembleCandidates } from './candidates/assemble.js';
 import { buildOverlay } from './directorium/overlay.js';
 import { resolveOfficeDefinition, resolveOfficeFile } from './internal/content.js';
-import { normalizeDateInput } from './internal/date.js';
+import { formatIsoDate, normalizeDateInput } from './internal/date.js';
 import { resolveOccurrence } from './occurrence/resolver.js';
 import { normalizeRank } from './sanctoral/rank-normalizer.js';
 import { buildTemporalContext } from './temporal/context.js';
 import { sanctoralCandidates } from './sanctoral/kalendarium-lookup.js';
+import { buildYearTransferMap } from './transfer/year-map.js';
 import { describeVersion, resolveVersion } from './version/resolver.js';
 import { VERSION_POLICY } from './version/policy-map.js';
 
 import type {
+  Candidate,
   DayOfficeSummary,
   RubricalEngine,
   RubricalEngineConfig
 } from './types/model.js';
 import type { ResolvedVersion } from './types/version.js';
+import type { Transfer, YearTransferMap } from './transfer/index.js';
 
 export function createRubricalEngine(config: RubricalEngineConfig): RubricalEngine {
   const version = resolveConfiguredVersion(config);
+  const yearTransferMapCache = new Map<string, YearTransferMap>();
 
   return {
     version,
     resolveDayOfficeSummary(date): DayOfficeSummary {
       const calendarDate = normalizeDateInput(date);
+      const isoDate = formatIsoDate(calendarDate);
       const temporal = buildTemporalContext(calendarDate, version, config.corpus);
+      const yearTransferMap = getYearTransferMap(calendarDate.year);
+      const transferredIn = collectTransfersInto(
+        isoDate,
+        calendarDate.year,
+        calendarDate.month,
+        calendarDate.day
+      );
       const sanctoral = sanctoralCandidates(
         calendarDate,
         version,
@@ -40,24 +53,26 @@ export function createRubricalEngine(config: RubricalEngineConfig): RubricalEngi
       });
       const assembled = assembleCandidates(temporal, sanctoral, {
         overlay: overlayResult.overlay,
+        transferredIn: transferredIn.map((transfer) => ({
+          ...resolveCandidate(
+            transfer.feastRef.path,
+            'sanctoral',
+            calendarDate,
+            temporal,
+            version,
+            config.corpus
+          ),
+          source: 'transferred-in',
+          transferredFrom: transfer.originalDate
+        })),
+        detectVigil: (candidate) =>
+          detectVigil({
+            candidate,
+            version,
+            corpus: config.corpus
+          }),
         resolveOverlayCandidate: (path, source) => {
-          const definition = resolveOfficeDefinition(config.corpus, path, {
-            date: calendarDate,
-            dayOfWeek: temporal.dayOfWeek,
-            season: temporal.season,
-            version
-          });
-
-          return {
-            feastRef: definition.feastRef,
-            rank: normalizeRank(definition.rawRank, version.policy, {
-              date: temporal.date,
-              feastPath: definition.feastRef.path,
-              source,
-              version: version.handle,
-              season: temporal.season
-            })
-          };
+          return resolveCandidate(path, source, calendarDate, temporal, version, config.corpus);
         }
       });
       const overlay = hasOverlayDirectives(overlayResult.overlay)
@@ -80,6 +95,7 @@ export function createRubricalEngine(config: RubricalEngineConfig): RubricalEngi
         }
       );
       const warnings = [
+        ...yearTransferMap.warningsOn(isoDate),
         ...overlayResult.warnings,
         ...assembled.warnings,
         ...occurrence.warnings,
@@ -105,6 +121,49 @@ export function createRubricalEngine(config: RubricalEngineConfig): RubricalEngi
       };
     }
   };
+
+  function getYearTransferMap(year: number): YearTransferMap {
+    const key = `${version.handle}::${year}`;
+    const cached = yearTransferMapCache.get(key);
+    if (cached) {
+      return cached;
+    }
+
+    const built = buildYearTransferMap({
+      year,
+      version,
+      policy: version.policy,
+      corpus: config.corpus,
+      versionRegistry: config.versionRegistry,
+      kalendarium: config.kalendarium,
+      yearTransfers: config.yearTransfers,
+      scriptureTransfers: config.scriptureTransfers
+    });
+    yearTransferMapCache.set(key, built);
+    return built;
+  }
+
+  function collectTransfersInto(
+    date: string,
+    year: number,
+    month: number,
+    day: number
+  ): readonly Transfer[] {
+    const maps = [getYearTransferMap(year)];
+    if (year > 1 && (month < 3 || (month === 3 && day <= 2))) {
+      maps.push(getYearTransferMap(year - 1));
+    }
+
+    const uniqueByTransfer = new Map<string, Transfer>();
+    for (const map of maps) {
+      for (const transfer of map.transfersInto(date)) {
+        const key = `${transfer.feastRef.path}|${transfer.originalDate}|${transfer.target}`;
+        uniqueByTransfer.set(key, transfer);
+      }
+    }
+
+    return [...uniqueByTransfer.values()];
+  }
 }
 
 function resolveConfiguredVersion(config: RubricalEngineConfig): ResolvedVersion {
@@ -135,4 +194,31 @@ function hasOverlayDirectives(overlay: {
     Boolean(overlay.hymnOverride) ||
     Boolean(overlay.scriptureTransfer)
   );
+}
+
+function resolveCandidate(
+  path: string,
+  source: 'temporal' | 'sanctoral',
+  calendarDate: ReturnType<typeof normalizeDateInput>,
+  temporal: ReturnType<typeof buildTemporalContext>,
+  version: ResolvedVersion,
+  corpus: RubricalEngineConfig['corpus']
+): { readonly feastRef: Candidate['feastRef']; readonly rank: Candidate['rank'] } {
+  const definition = resolveOfficeDefinition(corpus, path, {
+    date: calendarDate,
+    dayOfWeek: temporal.dayOfWeek,
+    season: temporal.season,
+    version
+  });
+
+  return {
+    feastRef: definition.feastRef,
+    rank: normalizeRank(definition.rawRank, version.policy, {
+      date: temporal.date,
+      feastPath: definition.feastRef.path,
+      source,
+      version: version.handle,
+      season: temporal.season
+    })
+  };
 }

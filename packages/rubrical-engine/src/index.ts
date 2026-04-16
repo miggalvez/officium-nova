@@ -6,5 +6,6 @@ export * from './policy/index.js';
 export * from './rules/index.js';
 export * from './sanctoral/index.js';
 export * from './temporal/index.js';
+export * from './transfer/index.js';
 export * from './types/index.js';
 export * from './version/index.js';

@@ -135,7 +135,7 @@
     },
     {
       "date": "2024-04-08",
-      "celebrationPath": "Tempora/Pasc1-1",
+      "celebrationPath": "Sancti/03-25",
       "commemorations": []
     },
     {
@@ -274,8 +274,10 @@
     },
     {
       "date": "2024-12-24",
-      "celebrationPath": "Tempora/Adv4-2",
-      "commemorations": []
+      "celebrationPath": "Sancti/12-24",
+      "commemorations": [
+        "Tempora/Adv4-2"
+      ]
     },
     {
       "date": "2024-12-26",

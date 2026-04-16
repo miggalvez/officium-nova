@@ -26,6 +26,9 @@ export function createUnsupportedOccurrencePolicy(
     buildCelebrationRuleSet() {
       throw unsupported(name, 'buildCelebrationRuleSet');
     },
+    transferTarget() {
+      throw unsupported(name, 'transferTarget');
+    },
     octavesEnabled() {
       throw unsupported(name, 'octavesEnabled');
     }
