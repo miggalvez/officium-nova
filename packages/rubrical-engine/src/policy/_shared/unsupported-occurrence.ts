@@ -35,6 +35,12 @@ export function createUnsupportedOccurrencePolicy(
     complineSource() {
       throw unsupported(name, 'complineSource');
     },
+    selectPsalmody() {
+      throw unsupported(name, 'selectPsalmody');
+    },
+    hourDirectives() {
+      throw unsupported(name, 'hourDirectives');
+    },
     octavesEnabled() {
       throw unsupported(name, 'octavesEnabled');
     }

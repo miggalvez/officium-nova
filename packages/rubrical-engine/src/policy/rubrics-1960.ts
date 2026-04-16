@@ -1,4 +1,6 @@
 import { lookupVespers1960Row } from '../concurrence/tables/vespers-1960.js';
+import { selectPsalmodyRoman1960 } from '../hours/psalter.js';
+import { deriveSeasonalDirectives1960 } from '../hours/transforms.js';
 import {
   PRECEDENCE_1960_BY_CLASS,
   type ClassSymbol1960
@@ -13,7 +15,11 @@ import type {
   VespersClass,
   VespersSideView
 } from '../types/concurrence.js';
-import type { ComplineSource } from '../types/hour-structure.js';
+import type {
+  ComplineSource,
+  HourDirective,
+  PsalmAssignment
+} from '../types/hour-structure.js';
 import type {
   Candidate,
   FeastReference,
@@ -21,8 +27,10 @@ import type {
 } from '../types/model.js';
 import type { Commemoration } from '../types/ordo.js';
 import type {
+  HourDirectivesParams,
   PrecedenceRow,
-  RubricalPolicy
+  RubricalPolicy,
+  SelectPsalmodyParams
 } from '../types/policy.js';
 
 const TRIDUUM_KEYS = new Set(['Quad6-4', 'Quad6-5', 'Quad6-6']);
@@ -247,6 +255,24 @@ export const rubrics1960Policy: RubricalPolicy = {
       occupantOn,
       compareCandidates: rubrics1960Policy.compareCandidates,
       forbidsTransferInto: forbidsTransferInto1960
+    });
+  },
+  selectPsalmody(params: SelectPsalmodyParams): readonly PsalmAssignment[] {
+    return selectPsalmodyRoman1960({
+      hour: params.hour,
+      celebration: params.celebration,
+      celebrationRules: params.celebrationRules,
+      hourRules: params.hourRules,
+      temporal: params.temporal
+    });
+  },
+  hourDirectives(params: HourDirectivesParams): ReadonlySet<HourDirective> {
+    return deriveSeasonalDirectives1960({
+      hour: params.hour,
+      celebrationRules: params.celebrationRules,
+      hourRules: params.hourRules,
+      temporal: params.temporal,
+      ...(params.overlay ? { overlay: params.overlay } : {})
     });
   },
   octavesEnabled(_feastRef: FeastReference): null {

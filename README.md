@@ -134,6 +134,7 @@ ADRs for the key architectural decisions so far:
 - [`docs/adr/003-phase-2c-non-1960-stubs.md`](docs/adr/003-phase-2c-non-1960-stubs.md)
 - [`docs/adr/004-phase-2e-year-map-caching.md`](docs/adr/004-phase-2e-year-map-caching.md)
 - [`docs/adr/005-phase-2f-concurrence-preview.md`](docs/adr/005-phase-2f-concurrence-preview.md)
+- [`docs/adr/006-phase-2g-ordinarium-skeleton-cache.md`](docs/adr/006-phase-2g-ordinarium-skeleton-cache.md)
 
 **Phase 2d — Rule Evaluation (complete).** The dedicated rule-evaluation stage from design §12/§18 is now wired after occurrence: every winning celebration now carries a typed `CelebrationRuleSet`, with tested per-hour derivation via `deriveHourRuleSet`.
 
@@ -154,12 +155,24 @@ Implemented in 2d:
 
 **Phase 2f — Concurrence and Compline (complete).** `resolveDayOfficeSummary(date)` now computes the Vespers boundary between today and tomorrow using cached per-date `DayConcurrencePreview` materialization, honors `hasFirstVespers` / `hasSecondVespers` veto flags before rank-matrix comparison, and emits typed concurrence outputs (`winner`, source celebration, Vespers-only concurrence commemorations, reason tags, warnings). The 1960 policy now provides explicit concurrence-table resolution (`concurrence/tables/vespers-1960.ts`) plus Compline-source selection (`vespers-winner` / `ordinary` / `triduum-special`), and `hours/compline.ts` ships the Phase 2f minimal `HourStructure` (source + directives, empty slots by design). Upstream fixture coverage now includes a focused 2024 concurrence/Compline matrix (`test/fixtures/vespers-1960-2024.json`).
 
-376 rubrical-engine tests passing (plus one TODO marker), including live integration suites against upstream `Tabulae/data.txt`, the Perl-oracle day-name matrix, overlay/transfer matrices, focused 1960 occurrence and concurrence fixtures, rule-evaluation invariants, and the Phase 2f upstream concurrence/Compline matrix.
+**Phase 2g-α — Non-Matins Hour Structuring (complete).** `summary.hours` is now populated with typed `HourStructure` values for the seven non-Matins Hours — `lauds`, `prime`, `terce`, `sext`, `none`, `vespers`, and `compline` — per design §16. Matins is deferred to sub-phase 2g-β per §18 ("`hours/matins.ts` is its own sub-phase deliverable"). New in 2g-α:
+
+- `hours/skeleton.ts` with `OrdinariumSkeletonCache` (per-engine, keyed on `(version.handle, hour)`); walks the legacy `#Heading` markers inside the `__preamble` of `horas/Ordinarium/*.txt` and maps each to a typed `SlotName`.
+- `hours/psalter.ts` implementing the §16.2 psalter-selection decision tree for Roman 1960 (ferial / dominica / festal / proper, with `psalmOverrides` and `psalterScheme` honored); emits `TextReference`-shaped `PsalmAssignment[]` for Phase 3 to dereference.
+- `hours/transforms.ts` emitting seasonal + rubric-driven `HourDirective`s (`add-alleluia` / `omit-alleluia` / `add-versicle-alleluia`, Triduum `omit-gloria-patri` + `short-chapter-only`, `preces-feriales`, 1960-always `omit-suffragium`, `dirge-vespers` / `dirge-lauds` from overlay, Ember-Wed `genuflection-at-oration`).
+- `hours/apply-rule-set.ts` common skeleton-application pipeline: feast proper → commune fallback (via `comkey`) → psalter (`policy.selectPsalmody`) → Ordinarium default; `hourRules.omit` suppresses as `{ kind: 'empty' }`; `overlay.hymnOverride` attaches typed `HymnOverrideMeta` to the hymn slot.
+- Per-Hour structurers: `structureLauds`, `structureVespers`, `structurePrime` / `structureTerce` / `structureSext` / `structureNone`, plus an expanded `buildCompline` that keeps the existing `source` field and now populates real slots.
+- Commemoration attachment for Lauds and Vespers (three ordered-ref slots: `commemoration-antiphons` / `-versicles` / `-orations`), consuming the existing `Commemoration.hours` field from Phase 2c/2f; minor hours and Compline never produce commemoration slots under 1960 per RI §107.
+- Policy interface gains `selectPsalmody(params)` and `hourDirectives(params)`; `rubrics-1960` wires both; non-1960 stubs throw `UnsupportedPolicyError`.
+- Engine integration: Vespers is structured for the concurrence winner (today's Second Vespers or tomorrow's First Vespers) with a uniform §16 input shape; Compline follows the Vespers winner; a missing Ordinarium file is demoted from a throw to a `hour-skeleton-missing` warning so legacy unit fixtures remain compatible.
+- New fixture `test/fixtures/hours-1960-2024.json` + `test/integration/phase-2g-upstream.test.ts` assert the seven-Hour inventory, absence of `matins`, and per-date directive flags (Lent omits alleluia; Triduum omits Gloria Patri + short chapter; Paschaltide adds alleluia; 1960 always omits suffragium).
+
+401 rubrical-engine tests passing (plus one TODO marker), including the new Phase 2g-α upstream matrix alongside every earlier integration suite.
 
 Still pending in Phase 2:
 
-- **2g** — Hour structuring, Matins last
-- **2h** — 1911 (Divino Afflatu) and 1955 (Reduced) policies
+- **2g-β** — Matins: `MatinsPlan`, `LessonSource`, scripture-transfer application, `in N loco` alternates, commemorated Lectio9 routing (its own sub-phase per design §18).
+- **2h** — 1911 (Divino Afflatu) and 1955 (Reduced) policies.
 
 ## License
 

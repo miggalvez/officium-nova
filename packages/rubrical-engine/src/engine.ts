@@ -2,7 +2,17 @@ import { detectVigil } from './candidates/vigil-detection.js';
 import { assembleCandidates } from './candidates/assemble.js';
 import { buildConcurrencePreview, resolveConcurrence } from './concurrence/index.js';
 import { buildOverlay } from './directorium/overlay.js';
-import { buildCompline } from './hours/index.js';
+import {
+  OrdinariumSkeletonCache,
+  buildComplineWithWarnings,
+  structureLauds,
+  structureNone,
+  structurePrime,
+  structureSext,
+  structureTerce,
+  structureVespers
+} from './hours/index.js';
+import { deriveHourRuleSet } from './rules/merge.js';
 import { resolveOfficeDefinition, resolveOfficeFile } from './internal/content.js';
 import { addDays, formatIsoDate, normalizeDateInput, type CalendarDate } from './internal/date.js';
 import { resolveOccurrence } from './occurrence/resolver.js';
@@ -18,6 +28,7 @@ import { VERSION_POLICY } from './version/policy-map.js';
 import type {
   Candidate,
   DayOfficeSummary,
+  OfficeTextIndex,
   TemporalContext,
   RubricalEngine,
   RubricalEngineConfig
@@ -25,14 +36,16 @@ import type {
 import type { ResolvedVersion } from './types/version.js';
 import type { Transfer, YearTransferMap } from './transfer/index.js';
 import type { DirectoriumOverlay, RubricalWarning } from './types/directorium.js';
-import type { Celebration, Commemoration } from './types/ordo.js';
+import type { HourStructure } from './types/hour-structure.js';
+import type { Celebration, Commemoration, HourName } from './types/ordo.js';
 import type { CelebrationRuleSet } from './types/rule-set.js';
-import type { DayConcurrencePreview } from './types/concurrence.js';
+import type { ConcurrenceResult, DayConcurrencePreview } from './types/concurrence.js';
 
 export function createRubricalEngine(config: RubricalEngineConfig): RubricalEngine {
   const version = resolveConfiguredVersion(config);
   const yearTransferMapCache = new Map<string, YearTransferMap>();
   const dayPreviewCache = new Map<string, DayConcurrencePreview>();
+  const skeletonCache = new OrdinariumSkeletonCache();
 
   return {
     version,
@@ -47,20 +60,221 @@ export function createRubricalEngine(config: RubricalEngineConfig): RubricalEngi
         temporal: todaySummary.temporal,
         policy: version.policy
       });
-      const compline = buildCompline({
+
+      const hoursResult = buildHours({
+        summary: todaySummary,
         concurrence,
         today: todayPreview,
-        tomorrow: tomorrowPreview,
-        policy: version.policy
+        tomorrow: tomorrowPreview
       });
+
       return {
         ...todaySummary,
-        warnings: [...todaySummary.warnings, ...concurrence.warnings],
+        warnings: [
+          ...todaySummary.warnings,
+          ...concurrence.warnings,
+          ...hoursResult.warnings
+        ],
         concurrence,
-        compline
+        compline: hoursResult.compline,
+        hours: hoursResult.hours
       };
     }
   };
+
+  function buildHours(params: {
+    readonly summary: BaseDaySummary;
+    readonly concurrence: ConcurrenceResult;
+    readonly today: DayConcurrencePreview;
+    readonly tomorrow: DayConcurrencePreview;
+  }): BuildHoursResult {
+    const { summary, concurrence, today, tomorrow } = params;
+    const warnings: RubricalWarning[] = [];
+    const hours: Partial<Record<HourName, HourStructure>> = {};
+    const corpus = config.corpus;
+
+    const lauds = structureHour('lauds', summary, corpus, warnings);
+    hours.lauds = lauds;
+
+    const prime = structureHour('prime', summary, corpus, warnings);
+    hours.prime = prime;
+
+    const terce = structureHour('terce', summary, corpus, warnings);
+    hours.terce = terce;
+
+    const sext = structureHour('sext', summary, corpus, warnings);
+    hours.sext = sext;
+
+    const none = structureHour('none', summary, corpus, warnings);
+    hours.none = none;
+
+    const vespers = structureVespersHour(summary, concurrence, today, tomorrow, warnings);
+    hours.vespers = vespers;
+
+    const complineSummary = selectComplineSummary(summary, concurrence, today, tomorrow);
+    const compline = structureComplineHour({
+      summary: complineSummary,
+      concurrence,
+      today,
+      tomorrow,
+      warnings
+    });
+    hours.compline = compline;
+
+    return {
+      hours,
+      compline,
+      warnings
+    };
+  }
+
+  function structureHour(
+    hour: Exclude<HourName, 'matins' | 'vespers' | 'compline'>,
+    summary: BaseDaySummary,
+    corpus: OfficeTextIndex,
+    warnings: RubricalWarning[]
+  ): HourStructure {
+    const { skeleton, missing } = skeletonCache.getOrEmpty(hour, version, corpus);
+    if (missing) {
+      warnings.push(missingOrdinariumWarning(hour, summary.date));
+    }
+    const hourRules = deriveHourRuleSet(summary.celebration, summary.celebrationRules, hour);
+    const overlay = summary.overlay;
+    const input = {
+      skeleton,
+      celebration: summary.celebration,
+      commemorations: summary.commemorations,
+      celebrationRules: summary.celebrationRules,
+      hourRules,
+      temporal: summary.temporal,
+      policy: version.policy,
+      corpus,
+      version,
+      ...(overlay ? { overlay } : {})
+    };
+    switch (hour) {
+      case 'lauds': {
+        const result = structureLauds(input);
+        warnings.push(...result.warnings);
+        return result.hour;
+      }
+      case 'prime': {
+        const result = structurePrime(input);
+        warnings.push(...result.warnings);
+        return result.hour;
+      }
+      case 'terce': {
+        const result = structureTerce(input);
+        warnings.push(...result.warnings);
+        return result.hour;
+      }
+      case 'sext': {
+        const result = structureSext(input);
+        warnings.push(...result.warnings);
+        return result.hour;
+      }
+      case 'none': {
+        const result = structureNone(input);
+        warnings.push(...result.warnings);
+        return result.hour;
+      }
+    }
+  }
+
+  function structureVespersHour(
+    summary: BaseDaySummary,
+    concurrence: ConcurrenceResult,
+    today: DayConcurrencePreview,
+    tomorrow: DayConcurrencePreview,
+    warnings: RubricalWarning[]
+  ): HourStructure {
+    const corpus = config.corpus;
+    const { skeleton, missing } = skeletonCache.getOrEmpty('vespers', version, corpus);
+    if (missing) {
+      warnings.push(missingOrdinariumWarning('vespers', summary.date));
+    }
+    const winner = concurrence.winner === 'tomorrow' ? tomorrow : today;
+    const celebration = concurrence.source;
+    const celebrationRules = winner.celebrationRules;
+    const hourRules = deriveHourRuleSet(celebration, celebrationRules, 'vespers');
+    const overlay = summary.overlay;
+    const result = structureVespers({
+      skeleton,
+      celebration,
+      commemorations: concurrence.commemorations,
+      celebrationRules,
+      hourRules,
+      temporal: winner.temporal,
+      policy: version.policy,
+      corpus,
+      version,
+      ...(overlay ? { overlay } : {})
+    });
+    warnings.push(...result.warnings);
+    return result.hour;
+  }
+
+  function selectComplineSummary(
+    summary: BaseDaySummary,
+    concurrence: ConcurrenceResult,
+    today: DayConcurrencePreview,
+    tomorrow: DayConcurrencePreview
+  ): ComplineSummaryView {
+    // Compline follows the Vespers winner under 1960.
+    if (concurrence.winner === 'tomorrow') {
+      return {
+        celebration: tomorrow.celebration,
+        celebrationRules: tomorrow.celebrationRules,
+        commemorations: tomorrow.commemorations,
+        temporal: tomorrow.temporal,
+        overlay: summary.overlay
+      };
+    }
+    return {
+      celebration: today.celebration,
+      celebrationRules: today.celebrationRules,
+      commemorations: today.commemorations,
+      temporal: today.temporal,
+      overlay: summary.overlay
+    };
+  }
+
+  function structureComplineHour(params: {
+    readonly summary: ComplineSummaryView;
+    readonly concurrence: ConcurrenceResult;
+    readonly today: DayConcurrencePreview;
+    readonly tomorrow: DayConcurrencePreview;
+    readonly warnings: RubricalWarning[];
+  }): HourStructure {
+    const corpus = config.corpus;
+    const { skeleton, missing } = skeletonCache.getOrEmpty('compline', version, corpus);
+    if (missing) {
+      params.warnings.push(missingOrdinariumWarning('compline', params.today.date));
+    }
+    const hourRules = deriveHourRuleSet(
+      params.summary.celebration,
+      params.summary.celebrationRules,
+      'compline'
+    );
+    const overlay = params.summary.overlay;
+    const built = buildComplineWithWarnings({
+      concurrence: params.concurrence,
+      today: params.today,
+      tomorrow: params.tomorrow,
+      policy: version.policy,
+      skeleton,
+      celebration: params.summary.celebration,
+      commemorations: params.summary.commemorations,
+      celebrationRules: params.summary.celebrationRules,
+      hourRules,
+      corpus,
+      temporal: params.summary.temporal,
+      version,
+      ...(overlay ? { overlay } : {})
+    });
+    params.warnings.push(...built.warnings);
+    return built.hour;
+  }
 
   function getDayConcurrencePreview(
     date: CalendarDate,
@@ -391,6 +605,29 @@ interface BaseDaySummary {
     readonly feastRef: Celebration['feastRef'];
     readonly rank: Celebration['rank'];
     readonly source: Celebration['source'];
+  };
+}
+
+interface BuildHoursResult {
+  readonly hours: Partial<Record<HourName, HourStructure>>;
+  readonly compline: HourStructure;
+  readonly warnings: readonly RubricalWarning[];
+}
+
+interface ComplineSummaryView {
+  readonly celebration: Celebration;
+  readonly celebrationRules: CelebrationRuleSet;
+  readonly commemorations: readonly Commemoration[];
+  readonly temporal: TemporalContext;
+  readonly overlay?: DirectoriumOverlay;
+}
+
+function missingOrdinariumWarning(hour: HourName, isoDate: string): RubricalWarning {
+  return {
+    code: 'hour-skeleton-missing',
+    message: `Ordinarium skeleton unavailable for ${hour}; hour was emitted with an empty slot map.`,
+    severity: 'warn',
+    context: { hour, date: isoDate }
   };
 }
 

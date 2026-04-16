@@ -12,11 +12,13 @@ export type SlotName =
   | 'antiphon-ad-magnificat'
   | 'antiphon-ad-nunc-dimittis'
   | 'oration'
+  | 'lectio-brevis'
   | 'commemoration-antiphons'
   | 'commemoration-versicles'
   | 'commemoration-orations'
   | 'suffragium'
   | 'preces'
+  | 'final-antiphon-bvm'
   | 'doxology-variant'
   | 'conclusion';
 
@@ -31,16 +33,39 @@ export interface PsalmAssignment {
   readonly antiphonRef?: TextReference;
 }
 
+export interface HymnOverrideMeta {
+  readonly mode: 'merge' | 'shift';
+  readonly hymnKey: string;
+  readonly source: 'overlay';
+}
+
 export type SlotContent =
-  | { readonly kind: 'single-ref'; readonly ref: TextReference }
+  | {
+      readonly kind: 'single-ref';
+      readonly ref: TextReference;
+      readonly hymnOverride?: HymnOverrideMeta;
+    }
   | { readonly kind: 'ordered-refs'; readonly refs: readonly TextReference[] }
   | { readonly kind: 'psalmody'; readonly psalms: readonly PsalmAssignment[] }
   | { readonly kind: 'empty' };
 
+/**
+ * Hour-scoped directives emitted by the structurer for Phase 3 to apply to
+ * the resolved text. Psalter-selection outcomes are NOT encoded here — they
+ * live on `HourRuleSet.psalterScheme`.
+ */
 export type HourDirective =
   | 'omit-gloria-patri'
+  | 'omit-alleluia'
+  | 'add-alleluia'
+  | 'add-versicle-alleluia'
   | 'preces-dominicales'
-  | 'short-chapter-only';
+  | 'preces-feriales'
+  | 'omit-suffragium'
+  | 'short-chapter-only'
+  | 'genuflection-at-oration'
+  | 'dirge-vespers'
+  | 'dirge-lauds';
 
 export type ComplineSource =
   | { readonly kind: 'vespers-winner'; readonly celebration: Celebration }
@@ -50,10 +75,10 @@ export type ComplineSource =
 export interface HourStructure {
   readonly hour: HourName;
   /**
-   * For Phase 2f this is the only populated information for Compline.
-   * Slot-level structure is deferred to Phase 2g.
+   * Compline-only: the concurrence-derived source for the day. `undefined`
+   * for other Hours.
    */
-  readonly source: ComplineSource;
+  readonly source?: ComplineSource;
   readonly slots: Readonly<Partial<Record<SlotName, SlotContent>>>;
   readonly directives: readonly HourDirective[];
 }

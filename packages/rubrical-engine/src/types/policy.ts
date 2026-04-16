@@ -13,12 +13,19 @@ import type {
   VespersSideView
 } from './concurrence.js';
 import type { DirectoriumOverlay } from './directorium.js';
-import type { ComplineSource } from './hour-structure.js';
-import type { Commemoration } from './ordo.js';
+import type {
+  ComplineSource,
+  HourDirective,
+  PsalmAssignment
+} from './hour-structure.js';
+import type { Celebration, Commemoration, HourName } from './ordo.js';
 import type {
   CelebrationRuleEvaluation,
+  CelebrationRuleSet,
+  HourRuleSet,
   RuleEvaluationContext
 } from './rule-set.js';
+import type { OfficeTextIndex } from './model.js';
 import type { CalendarDate } from '../internal/date.js';
 
 /**
@@ -138,6 +145,27 @@ export interface RubricalPolicy {
     readonly today: DayConcurrencePreview;
     readonly tomorrow: DayConcurrencePreview;
   }): ComplineSource;
+  /** Psalmody selection per §16.2 — Phase 2g-α. */
+  selectPsalmody(params: SelectPsalmodyParams): readonly PsalmAssignment[];
+  /** Seasonal and rubric-driven hour directives — Phase 2g-α. */
+  hourDirectives(params: HourDirectivesParams): ReadonlySet<HourDirective>;
   /** Phase 2g hook — stubbed as `null` in Phase 2c. */
   octavesEnabled(feastRef: FeastReference): null;
+}
+
+export interface SelectPsalmodyParams {
+  readonly hour: HourName;
+  readonly celebration: Celebration;
+  readonly celebrationRules: CelebrationRuleSet;
+  readonly hourRules: HourRuleSet;
+  readonly temporal: TemporalContext;
+  readonly corpus: OfficeTextIndex;
+}
+
+export interface HourDirectivesParams {
+  readonly hour: HourName;
+  readonly celebrationRules: CelebrationRuleSet;
+  readonly hourRules: HourRuleSet;
+  readonly temporal: TemporalContext;
+  readonly overlay?: DirectoriumOverlay;
 }

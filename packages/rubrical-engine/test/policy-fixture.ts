@@ -136,6 +136,12 @@ export function makeTestPolicy(
         celebration: params.concurrence.source
       } as const;
     },
+    selectPsalmody() {
+      return [];
+    },
+    hourDirectives() {
+      return new Set();
+    },
     octavesEnabled() {
       return null;
     }

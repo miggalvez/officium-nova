@@ -62,6 +62,90 @@ describe('buildCompline', () => {
     expect(compline.directives).toEqual([]);
   });
 
+  it('uses the winner temporal when First Vespers wins on a weekday (Codex P1 #3)', async () => {
+    const { TestOfficeTextIndex } = await import('../helpers.js');
+    const { loadOrdinariumSkeleton, deriveHourRuleSet } = await import('../../src/index.js');
+    const { buildVersionRegistry, resolveVersion, asVersionHandle } = await import(
+      '../../src/index.js'
+    );
+    const { VERSION_POLICY } = await import('../../src/version/policy-map.js');
+
+    const corpus = new TestOfficeTextIndex();
+    corpus.add(
+      'horas/Ordinarium/Completorium.txt',
+      ['#Incipit', '$Confiteor', '', '#Psalmi', '', '#Hymnus', '', '#Canticum: Nunc dimittis', '', '#Oratio', '', '#Conclusio'].join('\n')
+    );
+
+    // Saturday evening, concurrence winner is the Sunday celebration.
+    const today = makePreview('2024-01-06', 'IV', {
+      path: 'Tempora/Sabbato',
+      source: 'temporal',
+      dayName: 'Nat2-5'
+    });
+    const sundayCelebration: Celebration = {
+      feastRef: { path: 'Tempora/Epi1-0', id: 'Tempora/Epi1-0', title: 'Epi1-0' },
+      rank: {
+        name: 'I-privilegiata-sundays',
+        classSymbol: 'I-privilegiata-sundays',
+        weight: 1250
+      },
+      source: 'temporal'
+    };
+    const tomorrow: DayConcurrencePreview = {
+      ...makePreview('2024-01-07', 'I-privilegiata-sundays', {
+        path: 'Tempora/Epi1-0',
+        source: 'temporal',
+        dayName: 'Epi1-0'
+      }),
+      temporal: {
+        date: '2024-01-07',
+        dayOfWeek: 0,
+        weekStem: 'Epi1',
+        dayName: 'Epi1-0',
+        season: 'epiphanytide',
+        feastRef: sundayCelebration.feastRef,
+        rank: sundayCelebration.rank
+      }
+    };
+    const concurrence = makeConcurrence('tomorrow', sundayCelebration, 'tomorrow-higher-rank');
+
+    const registry = buildVersionRegistry([
+      {
+        version: 'Rubrics 1960 - 1960',
+        kalendar: '1960',
+        transfer: '1960',
+        stransfer: '1960'
+      }
+    ]);
+    const version = resolveVersion(
+      asVersionHandle('Rubrics 1960 - 1960'),
+      registry,
+      VERSION_POLICY
+    );
+    const skeleton = loadOrdinariumSkeleton('compline', version, corpus);
+    const hourRules = deriveHourRuleSet(sundayCelebration, tomorrow.celebrationRules, 'compline');
+
+    const compline = buildCompline({
+      concurrence,
+      today,
+      tomorrow,
+      policy: rubrics1960Policy,
+      skeleton,
+      celebration: sundayCelebration,
+      commemorations: [],
+      celebrationRules: tomorrow.celebrationRules,
+      hourRules,
+      corpus,
+      temporal: tomorrow.temporal
+    });
+
+    const psalmody = compline.slots.psalmody;
+    expect(psalmody?.kind).toBe('psalmody');
+    if (psalmody?.kind === 'psalmody') {
+      expect(psalmody.psalms[0]?.psalmRef.section).toBe('Compl Day0');
+    }
+  });
+
   it('uses triduum-special source and directives on Good Friday', () => {
     const today = makePreview('2024-03-29', 'I-privilegiata-triduum', {
       path: 'Tempora/Quad6-5',
