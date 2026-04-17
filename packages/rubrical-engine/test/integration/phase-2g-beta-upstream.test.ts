@@ -36,6 +36,7 @@ interface FixtureDate {
   readonly date: string;
   readonly matins: MatinsFixtureShape;
   readonly firstLessonPath?: string;
+  readonly firstAntiphonPath?: string;
   readonly expectTransferOp?: 'R' | 'B' | 'A';
   readonly expectMatinsRuleLessonCount?: 3 | 9 | 12;
   readonly assertNoCommemorationSlots?: boolean;
@@ -111,6 +112,10 @@ describeIfReady('Phase 2g-β Matins structuring against upstream 1960 corpus', (
       };
 
       expect(derivedShape).toEqual(row.matins);
+      for (const nocturn of psalmody.nocturns) {
+        expect(nocturn.antiphons.length).toBe(nocturn.lessons.length);
+        expect(nocturn.psalmody.length).toBeGreaterThan(0);
+      }
 
       if (row.firstLessonPath) {
         const firstSource = psalmody.nocturns[0]?.lessons[0]?.source;
@@ -118,6 +123,11 @@ describeIfReady('Phase 2g-β Matins structuring against upstream 1960 corpus', (
         if (firstSource) {
           expect(sourcePrimaryPath(firstSource)).toBe(row.firstLessonPath);
         }
+      }
+
+      if (row.firstAntiphonPath) {
+        const firstAntiphon = psalmody.nocturns[0]?.antiphons[0];
+        expect(firstAntiphon?.reference.path).toBe(row.firstAntiphonPath);
       }
 
       if (row.expectTransferOp) {

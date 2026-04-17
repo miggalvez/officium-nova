@@ -181,7 +181,7 @@ Implemented in 2d:
 - Policy hooks added for Matins shape, Te Deum resolution, and default scripture course (`resolveMatinsShape`, `resolveTeDeum`, `defaultScriptureCourse`), with non-1960 stubs throwing `UnsupportedPolicyError`.
 - New fixture `test/fixtures/matins-1960-2024.json` + `test/integration/phase-2g-beta-upstream.test.ts` asserting Matins shape across the focused date matrix, including Triduum Te Deum omission, Ember Saturday shape, and scripture-transfer application.
 
-440 rubrical-engine tests passing (plus one TODO marker) in full workspace validation, including the new Matins suites and upstream matrix.
+442 rubrical-engine tests passing (plus one TODO marker) in full workspace validation, including the new Matins suites, upstream matrix, and review-driven regressions (Psalterium antiphon/psalm/versicle fallback for seasonal/ferial Matins, pre-transfer Te Deum shape, dereferenceable season invitatory references).
 
 Still pending in Phase 2:
 

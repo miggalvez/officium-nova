@@ -195,7 +195,8 @@ function routePositionalDefault(
       const reference = findSectionReference(
         context,
         `Lectio${lessonIndex}`,
-        lessonIndex
+        lessonIndex,
+        { warnOnMissing: false }
       );
       if (reference) {
         return {
@@ -296,20 +297,24 @@ function mapOverrideSourceToCourse(
 function findSectionReference(
   context: RouteLessonContext,
   sectionName: string,
-  lessonIndex: LessonIndex
+  lessonIndex: LessonIndex,
+  options: { readonly warnOnMissing?: boolean } = {}
 ): TextReference | undefined {
+  const warnOnMissing = options.warnOnMissing ?? true;
   const feastFile = context.feastFile;
   if (!feastFile) {
-    context.warnings.push({
-      code: 'matins-skeleton-missing-section',
-      message: 'Matins lesson section missing because the celebration file was unavailable.',
-      severity: 'warn',
-      context: {
-        feast: context.celebration.feastRef.path,
-        section: sectionName,
-        lesson: String(lessonIndex)
-      }
-    });
+    if (warnOnMissing) {
+      context.warnings.push({
+        code: 'matins-skeleton-missing-section',
+        message: 'Matins lesson section missing because the celebration file was unavailable.',
+        severity: 'warn',
+        context: {
+          feast: context.celebration.feastRef.path,
+          section: sectionName,
+          lesson: String(lessonIndex)
+        }
+      });
+    }
     return undefined;
   }
 
@@ -338,16 +343,18 @@ function findSectionReference(
     }
   }
 
-  context.warnings.push({
-    code: 'matins-skeleton-missing-section',
-    message: 'Matins lesson/responsory section was not found in the celebration file.',
-    severity: 'warn',
-    context: {
-      feast: context.celebration.feastRef.path,
-      section: sectionName,
-      lesson: String(lessonIndex)
-    }
-  });
+  if (warnOnMissing) {
+    context.warnings.push({
+      code: 'matins-skeleton-missing-section',
+      message: 'Matins lesson/responsory section was not found in the celebration file.',
+      severity: 'warn',
+      context: {
+        feast: context.celebration.feastRef.path,
+        section: sectionName,
+        lesson: String(lessonIndex)
+      }
+    });
+  }
 
   return undefined;
 }

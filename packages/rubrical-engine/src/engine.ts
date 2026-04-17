@@ -313,44 +313,16 @@ export function createRubricalEngine(config: RubricalEngineConfig): RubricalEngi
   }
 
   function synthesizePreviewSummary(calendarDate: CalendarDate): BaseDaySummary {
-    const isoDate = formatIsoDate(calendarDate);
-    const dayName = dayNameForDate(calendarDate);
-    const season = liturgicalSeasonForDate(calendarDate);
-    const feastPath = `Tempora/${dayName}`;
-    const rank = version.policy.resolveRank(
-      {
-        name: 'Feria',
-        classWeight: 1
-      },
-      {
-        date: isoDate,
-        feastPath,
-        source: 'temporal',
-        version: version.handle,
-        season
-      }
-    );
+    const temporal = synthesizedTemporalContext(calendarDate);
     const celebration: Celebration = {
-      feastRef: {
-        path: feastPath,
-        id: feastPath,
-        title: dayName
-      },
-      rank,
+      feastRef: temporal.feastRef,
+      rank: temporal.rank,
       source: 'temporal'
     };
     return {
-      date: isoDate,
+      date: temporal.date,
       version: describeVersion(version),
-      temporal: {
-        date: isoDate,
-        dayOfWeek: new Date(`${isoDate}T00:00:00Z`).getUTCDay(),
-        weekStem: weekStemForDate(calendarDate),
-        dayName,
-        season,
-        feastRef: celebration.feastRef,
-        rank: celebration.rank
-      },
+      temporal,
       warnings: [],
       candidates: [
         {
@@ -476,7 +448,8 @@ export function createRubricalEngine(config: RubricalEngineConfig): RubricalEngi
 
   function resolveBaseDaySummary(calendarDate: CalendarDate): BaseDaySummary {
     const isoDate = formatIsoDate(calendarDate);
-    const temporal = buildTemporalContext(calendarDate, version, config.corpus);
+    const temporalResult = resolveTemporalContext(calendarDate);
+    const temporal = temporalResult.temporal;
     const yearTransferMap = getYearTransferMap(calendarDate.year);
     const transferredIn = collectTransfersInto(
       isoDate,
@@ -543,6 +516,7 @@ export function createRubricalEngine(config: RubricalEngineConfig): RubricalEngi
     );
     const warnings = [
       ...yearTransferMap.warningsOn(isoDate),
+      ...temporalResult.warnings,
       ...overlayResult.warnings,
       ...assembled.warnings,
       ...occurrence.warnings,
@@ -565,6 +539,78 @@ export function createRubricalEngine(config: RubricalEngineConfig): RubricalEngi
       celebrationRules: celebrationRuleEvaluation.celebrationRules,
       commemorations: occurrence.commemorations,
       winner
+    };
+  }
+
+  function resolveTemporalContext(calendarDate: CalendarDate): {
+    readonly temporal: TemporalContext;
+    readonly warnings: readonly RubricalWarning[];
+  } {
+    try {
+      return {
+        temporal: buildTemporalContext(calendarDate, version, config.corpus),
+        warnings: []
+      };
+    } catch (error) {
+      if (
+        !(error instanceof Error) ||
+        !error.message.startsWith('Corpus file not found for office path: Tempora/')
+      ) {
+        throw error;
+      }
+
+      return {
+        temporal: synthesizedTemporalContext(calendarDate),
+        warnings: [
+          {
+            code: 'rubric-synth-fallback',
+            message:
+              'Resolved day used synthesized temporal context because a Tempora office file was missing.',
+            severity: 'info',
+            context: {
+              scope: 'temporal-context',
+              date: formatIsoDate(calendarDate),
+              missingPath:
+                extractMissingOfficePath(error.message) ??
+                `Tempora/${dayNameForDate(calendarDate)}`,
+              cause: 'missing-office-file'
+            }
+          }
+        ]
+      };
+    }
+  }
+
+  function synthesizedTemporalContext(calendarDate: CalendarDate): TemporalContext {
+    const isoDate = formatIsoDate(calendarDate);
+    const dayName = dayNameForDate(calendarDate);
+    const season = liturgicalSeasonForDate(calendarDate);
+    const feastPath = `Tempora/${dayName}`;
+
+    return {
+      date: isoDate,
+      dayOfWeek: new Date(`${isoDate}T00:00:00Z`).getUTCDay(),
+      weekStem: weekStemForDate(calendarDate),
+      dayName,
+      season,
+      feastRef: {
+        path: feastPath,
+        id: feastPath,
+        title: dayName
+      },
+      rank: version.policy.resolveRank(
+        {
+          name: 'Feria',
+          classWeight: 1
+        },
+        {
+          date: isoDate,
+          feastPath,
+          source: 'temporal',
+          version: version.handle,
+          season
+        }
+      )
     };
   }
 

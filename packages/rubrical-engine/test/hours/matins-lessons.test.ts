@@ -123,6 +123,24 @@ describe('routeLesson', () => {
 
     expect(warnings.some((warning) => warning.code === 'matins-lesson-unresolved')).toBe(true);
   });
+
+  it('emits a single missing-section warning for unresolved nocturn-2 lessons', () => {
+    const warnings: ReturnType<typeof warningsBuffer> = [];
+
+    routeLesson(4, {
+      ...baseContext({
+        warnings,
+        shape: { nocturns: 3, totalLessons: 9, lessonsPerNocturn: [3, 3, 3] },
+        nocturnIndex: 2,
+        feastFile: parseFile('[Officium]\nTest', 'horas/Latin/Sancti/08-15.txt')
+      })
+    });
+
+    const missingSectionWarnings = warnings.filter(
+      (warning) => warning.code === 'matins-skeleton-missing-section'
+    );
+    expect(missingSectionWarnings).toHaveLength(1);
+  });
 });
 
 function baseContext(overrides: Partial<Parameters<typeof routeLesson>[1]> = {}) {

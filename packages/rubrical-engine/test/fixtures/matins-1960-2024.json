@@ -12,7 +12,8 @@
         "invitatoriumKind": "season",
         "nocturnLessonSourceKinds": [["scripture", "scripture", "scripture"]]
       },
-      "firstLessonPath": "horas/Latin/Tempora/Pent07-2"
+      "firstLessonPath": "horas/Latin/Tempora/Pent07-2",
+      "firstAntiphonPath": "horas/Latin/Psalterium/Psalmi/Psalmi matutinum"
     },
     {
       "date": "2024-02-25",
@@ -27,7 +28,8 @@
           ["hagiographic", "hagiographic", "hagiographic"],
           ["homily-on-gospel", "homily-on-gospel", "commemorated"]
         ]
-      }
+      },
+      "firstAntiphonPath": "horas/Latin/Psalterium/Psalmi/Psalmi matutinum"
     },
     {
       "date": "2024-08-15",
@@ -50,11 +52,11 @@
         "nocturns": 3,
         "totalLessons": 9,
         "teDeum": "say",
-        "hymnKind": "ordinary",
-        "invitatoriumKind": "season",
+        "hymnKind": "feast",
+        "invitatoriumKind": "feast",
         "nocturnLessonSourceKinds": [
           ["scripture", "scripture", "scripture"],
-          ["patristic", "patristic", "patristic"],
+          ["hagiographic", "hagiographic", "hagiographic"],
           ["homily-on-gospel", "homily-on-gospel", "homily-on-gospel"]
         ]
       }
@@ -118,7 +120,8 @@
           ["homily-on-gospel", "homily-on-gospel", "commemorated"]
         ]
       },
-      "expectMatinsRuleLessonCount": 9
+      "expectMatinsRuleLessonCount": 9,
+      "firstAntiphonPath": "horas/Latin/Psalterium/Psalmi/Psalmi matutinum"
     },
     {
       "date": "2030-01-12",
@@ -134,7 +137,24 @@
           ["homily-on-gospel", "homily-on-gospel", "homily-on-gospel"]
         ]
       },
-      "expectTransferOp": "R"
+      "expectTransferOp": "R",
+      "firstAntiphonPath": "horas/Latin/Psalterium/Psalmi/Psalmi matutinum"
+    },
+    {
+      "date": "2024-12-01",
+      "matins": {
+        "nocturns": 3,
+        "totalLessons": 9,
+        "teDeum": "say",
+        "hymnKind": "ordinary",
+        "invitatoriumKind": "season",
+        "nocturnLessonSourceKinds": [
+          ["scripture", "scripture", "scripture"],
+          ["hagiographic", "hagiographic", "hagiographic"],
+          ["homily-on-gospel", "homily-on-gospel", "homily-on-gospel"]
+        ]
+      },
+      "firstAntiphonPath": "horas/Latin/Psalterium/Psalmi/Psalmi matutinum"
     },
     {
       "date": "2024-12-08",

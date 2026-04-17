@@ -44,6 +44,10 @@ describe('buildMatinsPlan', () => {
   it('builds Advent Sunday as 3 nocturns with Te Deum said', () => {
     const corpus = new TestOfficeTextIndex();
     corpus.add('horas/Latin/Tempora/Adv1-0.txt', adventSundayMatinsSections());
+    corpus.add(
+      'horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt',
+      psalteriumMatinsSections()
+    );
 
     const result = buildMatinsPlanWithWarnings({
       celebration: celebration('Tempora/Adv1-0', 'I-privilegiata-sundays', 'temporal'),
@@ -58,6 +62,18 @@ describe('buildMatinsPlan', () => {
     expect(result.plan.nocturns).toBe(3);
     expect(result.plan.totalLessons).toBe(9);
     expect(result.plan.teDeum).toBe('say');
+    expect(result.plan.nocturnPlan.map((nocturn) => nocturn.antiphons.length)).toEqual([
+      3, 3, 3
+    ]);
+    expect(result.plan.nocturnPlan.map((nocturn) => nocturn.psalmody.length)).toEqual([
+      3, 3, 3
+    ]);
+    for (const nocturn of result.plan.nocturnPlan) {
+      expect(nocturn.versicle.reference.path).toBe(
+        'horas/Latin/Psalterium/Psalmi/Psalmi matutinum'
+      );
+      expect(nocturn.versicle.reference.section).toBe('Day0');
+    }
   });
 
   it('keeps festal hymn metadata (doxology variant) on I-class feast', () => {
@@ -103,6 +119,31 @@ describe('buildMatinsPlan', () => {
     });
 
     expect(result.plan.teDeum).toBe('say');
+  });
+
+  it("keeps ferial Te Deum replacement when scripture-transfer 'A' appends a lesson", () => {
+    const corpus = new TestOfficeTextIndex();
+    corpus.add('horas/Latin/Tempora/Pent07-2.txt', ferialMatinsSections());
+
+    const result = buildMatinsPlanWithWarnings({
+      celebration: celebration('Tempora/Pent07-2', 'IV', 'temporal'),
+      celebrationRules: baseRules(),
+      commemorations: [],
+      hourRules: HOUR_RULES,
+      temporal: temporal('2024-07-09', 'Pent07-2', 'time-after-pentecost', 'IV'),
+      policy: rubrics1960Policy,
+      corpus,
+      overlayScriptureTransfer: {
+        dateKey: '07-09',
+        target: 'Pent07-0',
+        operation: 'A'
+      }
+    });
+
+    expect(result.plan.totalLessons).toBe(4);
+    expect(result.plan.teDeum).toBe('replace-with-responsory');
+    const replaced = result.plan.nocturnPlan[0]?.responsories[2];
+    expect(replaced?.replacesTeDeum).toBe(true);
   });
 
   it('omits Te Deum in the Sacred Triduum without responsory replacement markers', () => {
@@ -384,5 +425,26 @@ function triduumMatinsSections(): string {
     '',
     '[Responsory9]',
     'Resp'
+  ].join('\n');
+}
+
+function psalteriumMatinsSections(): string {
+  return [
+    '[Day0]',
+    'Ant 1;;1',
+    'Ant 2;;2',
+    'Ant 3;;3',
+    'V. Versus I',
+    'R. Responsum I',
+    'Ant 4;;4',
+    'Ant 5;;5',
+    'Ant 6;;6',
+    'V. Versus II',
+    'R. Responsum II',
+    'Ant 7;;7',
+    'Ant 8;;8',
+    'Ant 9;;9',
+    'V. Versus III',
+    'R. Responsum III'
   ].join('\n');
 }

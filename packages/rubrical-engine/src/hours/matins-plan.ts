@@ -44,6 +44,10 @@ export interface BuildMatinsPlanResult {
   readonly warnings: readonly RubricalWarning[];
 }
 
+const PSALTERIUM_INVITATORIUM_PATH = 'horas/Latin/Psalterium/Invitatorium';
+const PSALTERIUM_MATINS_PATH = 'Psalterium/Psalmi/Psalmi matutinum';
+const PSALTERIUM_MATINS_CONTENT_PATH = 'horas/Latin/Psalterium/Psalmi/Psalmi matutinum';
+
 export function buildMatinsPlan(input: BuildMatinsPlanInput): MatinsPlan {
   return buildMatinsPlanWithWarnings(input).plan;
 }
@@ -53,6 +57,7 @@ export function buildMatinsPlanWithWarnings(
 ): BuildMatinsPlanResult {
   const warnings: RubricalWarning[] = [];
   const feastFile = resolveFeastFile(input.corpus, input.celebration);
+  const psalteriumDaySection = resolvePsalteriumMatinsDaySection(input);
 
   const shape = input.policy.resolveMatinsShape({
     celebration: input.celebration,
@@ -65,7 +70,7 @@ export function buildMatinsPlanWithWarnings(
   const hymn = buildHymnSource(input, feastFile);
   const defaultCourse = input.policy.defaultScriptureCourse(input.temporal);
 
-  const antiphonEntries = collectMatinsAntiphons(input, feastFile);
+  const antiphonEntries = collectMatinsAntiphons(input, feastFile, psalteriumDaySection);
   const antiphonPartitions = partitionAntiphons(antiphonEntries, shape.lessonsPerNocturn);
 
   const nocturnPlan: NocturnPlan[] = [];
@@ -131,7 +136,13 @@ export function buildMatinsPlanWithWarnings(
       index: nocturnIndex,
       psalmody,
       antiphons,
-      versicle: buildNocturnVersicle(nocturnIndex, input, feastFile, warnings),
+      versicle: buildNocturnVersicle(
+        nocturnIndex,
+        input,
+        feastFile,
+        psalteriumDaySection,
+        warnings
+      ),
       lessons,
       responsories
     });
@@ -148,16 +159,16 @@ export function buildMatinsPlanWithWarnings(
     teDeum: 'say'
   };
 
-  plan = applyScriptureTransfer(plan, input.overlayScriptureTransfer, warnings);
-
   const teDeum = input.policy.resolveTeDeum({
     plan: {
-      nocturns: plan.nocturns,
-      totalLessons: plan.totalLessons
+      nocturns: shape.nocturns,
+      totalLessons: shape.totalLessons
     },
     celebrationRules: input.celebrationRules,
     temporal: input.temporal
   });
+
+  plan = applyScriptureTransfer(plan, input.overlayScriptureTransfer, warnings);
   plan = {
     ...plan,
     teDeum
@@ -192,8 +203,9 @@ function buildInvitatoriumSource(
   return {
     kind: 'season',
     reference: {
-      path: 'horas/Latin/Psalterium/Invitatorium',
-      section: invitatoriumSeasonSection(input.temporal)
+      path: PSALTERIUM_INVITATORIUM_PATH,
+      section: '__preamble',
+      selector: invitatoriumSeasonSection(input.temporal)
     }
   };
 }
@@ -233,6 +245,7 @@ function buildNocturnVersicle(
   nocturnIndex: 1 | 2 | 3,
   input: BuildMatinsPlanInput,
   feastFile: ParsedFile | undefined,
+  psalteriumDaySection: ParsedFile['sections'][number] | undefined,
   warnings: RubricalWarning[]
 ): VersicleSource {
   const sectionName = `Nocturn ${nocturnIndex} Versum`;
@@ -240,6 +253,17 @@ function buildNocturnVersicle(
   if (section) {
     return {
       reference: feastReference(input.celebration.feastRef.path, section.header)
+    };
+  }
+
+  const versicleLine = versicleLineForNocturn(psalteriumDaySection, nocturnIndex);
+  if (psalteriumDaySection && versicleLine) {
+    return {
+      reference: {
+        path: PSALTERIUM_MATINS_CONTENT_PATH,
+        section: psalteriumDaySection.header,
+        selector: String(versicleLine)
+      }
     };
   }
 
@@ -298,32 +322,36 @@ function buildResponsory(
 
 function collectMatinsAntiphons(
   input: BuildMatinsPlanInput,
-  feastFile: ParsedFile | undefined
+  feastFile: ParsedFile | undefined,
+  psalteriumDaySection: ParsedFile['sections'][number] | undefined
 ): readonly {
   readonly reference: TextReference;
   readonly psalmRef?: PsalmAssignment;
 }[] {
-  const section = findSection(feastFile, 'Ant Matutinum', input);
+  const feastSection = findSection(feastFile, 'Ant Matutinum', input);
+  const section = feastSection ?? psalteriumDaySection;
   if (!section) {
     return [];
   }
 
+  const sourcePath = feastSection
+    ? `horas/Latin/${input.celebration.feastRef.path}`
+    : PSALTERIUM_MATINS_CONTENT_PATH;
   const entries: Array<{ readonly reference: TextReference; readonly psalmRef?: PsalmAssignment }> = [];
-  let lineIndex = 1;
 
-  for (const content of section.content) {
+  for (const [contentIndex, content] of section.content.entries()) {
     const antiphon = antiphonLineValue(content);
     if (!antiphon) {
       continue;
     }
 
     const ref: TextReference = {
-      path: `horas/Latin/${input.celebration.feastRef.path}`,
+      path: sourcePath,
       section: section.header,
-      selector: String(lineIndex)
+      selector: String(contentIndex + 1)
     };
 
-    const psalmNumber = extractPsalmNumber(antiphon);
+    const psalmNumber = extractPsalmNumber(content) ?? extractPsalmNumberFromLine(antiphon);
     const psalmRef = psalmNumber
       ? {
           psalmRef: {
@@ -338,7 +366,6 @@ function collectMatinsAntiphons(
       reference: ref,
       ...(psalmRef ? { psalmRef } : {})
     });
-    lineIndex += 1;
   }
 
   return entries;
@@ -378,6 +405,13 @@ function partitionAntiphons(
 }
 
 function antiphonLineValue(content: TextContent): string | undefined {
+  if (content.type === 'psalmRef') {
+    const value = content.antiphon?.trim();
+    if (value && value !== '_') {
+      return value;
+    }
+  }
+
   if (content.type === 'text') {
     const value = content.value.trim();
     if (value && value !== '_') {
@@ -385,7 +419,7 @@ function antiphonLineValue(content: TextContent): string | undefined {
     }
   }
 
-  if (content.type === 'verseMarker') {
+  if (content.type === 'verseMarker' && content.marker === 'Ant.') {
     const value = content.text.trim();
     if (value) {
       return value;
@@ -399,9 +433,44 @@ function antiphonLineValue(content: TextContent): string | undefined {
   return undefined;
 }
 
-function extractPsalmNumber(line: string): string | undefined {
+function extractPsalmNumber(content: TextContent): string | undefined {
+  if (content.type === 'psalmRef') {
+    return String(content.psalmNumber);
+  }
+
+  if (content.type === 'text') {
+    return extractPsalmNumberFromLine(content.value);
+  }
+
+  return undefined;
+}
+
+function extractPsalmNumberFromLine(line: string): string | undefined {
   const match = /;;\s*([0-9]+)/u.exec(line);
   return match?.[1];
+}
+
+function versicleLineForNocturn(
+  section: ParsedFile['sections'][number] | undefined,
+  nocturnIndex: 1 | 2 | 3
+): number | undefined {
+  if (!section) {
+    return undefined;
+  }
+
+  const versicleLines: number[] = [];
+
+  for (const [lineIndex, content] of section.content.entries()) {
+    if (content.type !== 'verseMarker') {
+      continue;
+    }
+
+    if (content.marker === 'V.' || content.marker === 'v.') {
+      versicleLines.push(lineIndex + 1);
+    }
+  }
+
+  return versicleLines[nocturnIndex - 1];
 }
 
 function markTeDeumReplacement(plan: MatinsPlan): MatinsPlan {
@@ -482,6 +551,17 @@ function resolveFeastFile(
 ): ParsedFile | undefined {
   try {
     return resolveOfficeFile(corpus, celebration.feastRef.path);
+  } catch {
+    return undefined;
+  }
+}
+
+function resolvePsalteriumMatinsDaySection(
+  input: Pick<BuildMatinsPlanInput, 'corpus' | 'temporal' | 'version'>
+): ParsedFile['sections'][number] | undefined {
+  try {
+    const file = resolveOfficeFile(input.corpus, PSALTERIUM_MATINS_PATH);
+    return findSection(file, `Day${input.temporal.dayOfWeek}`, input);
   } catch {
     return undefined;
   }
