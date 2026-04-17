@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Officium Novum modernizes the [Divinum Officium](https://github.com/DivinumOfficium/divinum-officium) project — a community-maintained application generating the traditional Roman Breviary and Missal texts. The upstream repo is a Git submodule at `upstream/`. The architecture decouples liturgical data, rubrical logic, and presentation into a layered pipeline: Parser → Rubrical Engine → Composition Engine → API → Clients.
 
-**Phase 1 (Parser) is complete. Phase 2 (Rubrical Engine) is next.**
+**Phase 1 (Parser) and Phase 2 (Rubrical Engine) are complete.** All eight Phase 2 sub-phases (2a–2h) ship; `resolveDayOfficeSummary(date)` works end-to-end for the three headline policies — `divino-afflatu` (1911), `reduced-1955`, and `rubrics-1960`. Tridentine, Monastic, Cistercian, and Dominican policies are explicit `UnsupportedPolicyError` stubs per design §20.5.
 
 ## Build and test
 
@@ -34,6 +34,8 @@ Integration tests that need the upstream corpus (e.g., `corpus-loader.test.ts`, 
 
 - `docs/divinum-officium-modernization-spec.md` — authoritative design document, phased roadmap, rubrical engine interface, validation strategy
 - `docs/file-format-specification.md` — the parser's input contract: section headers, directives, conditional system, rank format, calendar tables
+- `docs/phase-2-rubrical-engine-design.md` — the engine's detailed design: pipeline stages, version/policy model, occurrence/concurrence/transfer algorithms, Matins planning, §18 sub-phase plan, §19 validation strategy, §22 success criteria
+- `docs/adr/` — Architecture Decision Records (001 through 007). Any non-obvious architectural choice should either reference an existing ADR or add a new one.
 
 ## Parser architecture
 
