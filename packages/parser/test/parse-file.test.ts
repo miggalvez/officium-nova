@@ -131,6 +131,65 @@ describe('parseFile section content', () => {
     });
   });
 
+  it('binds a bare `deinde ... dicitur` condition to the following line', () => {
+    const content = [
+      '[Section]',
+      '$Alleluia',
+      '(deinde rubrica monastica dicitur)',
+      '$Domine labia'
+    ].join('\n');
+
+    const file = parseFile(content, 'horas/Latin/test.txt');
+    const section = file.sections[0]!;
+    expect(section.content).toEqual([
+      { type: 'formulaRef', name: 'Alleluia' },
+      {
+        type: 'conditional',
+        condition: {
+          expression: { type: 'match', subject: 'rubrica', predicate: 'monastica' },
+          stopword: 'deinde',
+          instruction: 'dicitur'
+        },
+        content: [{ type: 'formulaRef', name: 'Domine labia' }],
+        scope: { backwardLines: 0, forwardMode: 'line' }
+      }
+    ]);
+  });
+
+  it('keeps a following-line condition active across an intervening `_` separator', () => {
+    const content = [
+      '[Section]',
+      '(deinde rubrica monastica dicuntur)',
+      '_',
+      '&psalm(3)'
+    ].join('\n');
+
+    const file = parseFile(content, 'horas/Latin/test.txt');
+    const section = file.sections[0]!;
+    expect(section.content).toEqual([
+      {
+        type: 'conditional',
+        condition: {
+          expression: { type: 'match', subject: 'rubrica', predicate: 'monastica' },
+          stopword: 'deinde',
+          instruction: 'dicuntur'
+        },
+        content: [{ type: 'separator' }],
+        scope: { backwardLines: 0, forwardMode: 'line' }
+      },
+      {
+        type: 'conditional',
+        condition: {
+          expression: { type: 'match', subject: 'rubrica', predicate: 'monastica' },
+          stopword: 'deinde',
+          instruction: 'dicuntur'
+        },
+        content: [{ type: 'psalmInclude', psalmNumber: 3 }],
+        scope: { backwardLines: 0, forwardMode: 'line' }
+      }
+    ]);
+  });
+
   it('splits inline /:rubric:/ segments while keeping surrounding text on the same section', () => {
     const content = [
       '[Confiteor]',

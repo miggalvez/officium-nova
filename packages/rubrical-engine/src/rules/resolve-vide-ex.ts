@@ -13,6 +13,11 @@ export interface ResolveReferenceResult {
   readonly warnings: readonly RubricalWarning[];
 }
 
+export interface ResolveRuleFilesResult {
+  readonly files: readonly ParsedFile[];
+  readonly warnings: readonly RubricalWarning[];
+}
+
 interface ActiveReference {
   readonly mode: 'vide' | 'ex';
   readonly source: RuleDirective;
@@ -68,6 +73,34 @@ export function resolveVide(
   return {
     directives,
     warnings: base.warnings
+  };
+}
+
+export function resolveRuleReferenceFiles(
+  feastFile: ParsedFile,
+  context: Pick<RuleEvaluationContext, 'date' | 'dayOfWeek' | 'season' | 'version' | 'corpus'>,
+  maxDepth = DEFAULT_MAX_DEPTH
+): ResolveRuleFilesResult {
+  const files: ParsedFile[] = [];
+  const warnings: RubricalWarning[] = [];
+  const visited = new Set<string>([normalizePathKey(feastFile.path)]);
+
+  collectReferenceFiles(
+    feastFile,
+    {
+      context,
+      maxDepth,
+      rootPath: feastFile.path
+    },
+    files,
+    warnings,
+    0,
+    visited
+  );
+
+  return {
+    files,
+    warnings
   };
 }
 
@@ -140,6 +173,53 @@ function collectReferences(
   };
 }
 
+function collectReferenceFiles(
+  file: ParsedFile,
+  state: CollectState,
+  files: ParsedFile[],
+  warnings: RubricalWarning[],
+  depth: number,
+  visited: Set<string>
+): void {
+  if (depth > state.maxDepth) {
+    return;
+  }
+
+  const references = extractActiveReferencesInOrder(file, state.context);
+
+  for (const reference of references) {
+    const target = resolveRuleTargetFile(state.context.corpus, file.path, reference.path);
+    if (!target) {
+      warnings.push(
+        makeMissingTargetWarning(reference.mode, {
+          source: file.path,
+          target: reference.path,
+          ...(reference.modifier ? { modifier: reference.modifier } : {})
+        })
+      );
+      continue;
+    }
+
+    const cycleKey = normalizePathKey(target.path);
+    if (visited.has(cycleKey)) {
+      warnings.push(
+        makeCycleWarning(reference.mode, {
+          source: file.path,
+          target: target.path,
+          ...(reference.modifier ? { modifier: reference.modifier } : {}),
+          reason: 'cycle detected'
+        })
+      );
+      continue;
+    }
+
+    files.push(target);
+    const nextVisited = new Set(visited);
+    nextVisited.add(cycleKey);
+    collectReferenceFiles(target, state, files, warnings, depth + 1, nextVisited);
+  }
+}
+
 function extractActiveReferences(
   file: ParsedFile,
   mode: 'vide' | 'ex',
@@ -151,6 +231,29 @@ function extractActiveReferences(
   for (const directive of rules) {
     const reference = parseActiveReference(directive);
     if (!reference || reference.mode !== mode) {
+      continue;
+    }
+
+    if (!conditionMatches(directive.condition, context)) {
+      continue;
+    }
+
+    output.push(reference);
+  }
+
+  return output;
+}
+
+function extractActiveReferencesInOrder(
+  file: ParsedFile,
+  context: Pick<RuleEvaluationContext, 'date' | 'dayOfWeek' | 'season' | 'version'>
+): readonly ActiveReference[] {
+  const rules = extractRuleDirectives(file);
+  const output: ActiveReference[] = [];
+
+  for (const directive of rules) {
+    const reference = parseActiveReference(directive);
+    if (!reference) {
       continue;
     }
 

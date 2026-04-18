@@ -7,6 +7,7 @@ import type { ScriptureTransferEntry } from '@officium-novum/parser';
 import { routeLesson } from './matins-lessons.js';
 import { applyScriptureTransfer } from './matins-scripture.js';
 import { selectLessonAlternate } from './matins-alternates.js';
+import { resolveRuleReferenceFiles } from '../rules/resolve-vide-ex.js';
 
 import type {
   AntiphonReference,
@@ -57,6 +58,7 @@ export function buildMatinsPlanWithWarnings(
 ): BuildMatinsPlanResult {
   const warnings: RubricalWarning[] = [];
   const feastFile = resolveFeastFile(input.corpus, input.celebration);
+  const feastFiles = resolveProperMatinsFiles(feastFile, input);
   const psalteriumDaySection = resolvePsalteriumMatinsDaySection(input);
 
   const shape = input.policy.resolveMatinsShape({
@@ -66,11 +68,11 @@ export function buildMatinsPlanWithWarnings(
     commemorations: input.commemorations
   });
 
-  const invitatorium = buildInvitatoriumSource(input, feastFile);
-  const hymn = buildHymnSource(input, feastFile);
+  const invitatorium = buildInvitatoriumSource(input, feastFiles);
+  const hymn = buildHymnSource(input, feastFiles);
   const defaultCourse = input.policy.defaultScriptureCourse(input.temporal);
 
-  const antiphonEntries = collectMatinsAntiphons(input, feastFile, psalteriumDaySection);
+  const antiphonEntries = collectMatinsAntiphons(input, feastFiles, psalteriumDaySection);
   const antiphonPartitions = partitionAntiphons(antiphonEntries, shape.lessonsPerNocturn);
 
   const nocturnPlan: NocturnPlan[] = [];
@@ -118,7 +120,7 @@ export function buildMatinsPlanWithWarnings(
           buildResponsory(
             toResponsoryIndex(globalLessonIndex),
             input,
-            feastFile,
+            feastFiles,
             warnings
           )
         );
@@ -139,7 +141,7 @@ export function buildMatinsPlanWithWarnings(
       versicle: buildNocturnVersicle(
         nocturnIndex,
         input,
-        feastFile,
+        feastFiles,
         psalteriumDaySection,
         warnings
       ),
@@ -186,17 +188,17 @@ export function buildMatinsPlanWithWarnings(
 
 function buildInvitatoriumSource(
   input: BuildMatinsPlanInput,
-  feastFile: ParsedFile | undefined
+  feastFiles: readonly ParsedFile[]
 ): InvitatoriumSource {
   if (input.hourRules.omit.includes('invitatorium')) {
     return { kind: 'suppressed' };
   }
 
-  const section = findSection(feastFile, 'Invit', input);
-  if (section) {
+  const match = findSection(feastFiles, 'Invit', input);
+  if (match) {
     return {
       kind: 'feast',
-      reference: feastReference(input.celebration.feastRef.path, section.header)
+      reference: officeReference(match.file.path, match.section.header)
     };
   }
 
@@ -212,17 +214,17 @@ function buildInvitatoriumSource(
 
 function buildHymnSource(
   input: BuildMatinsPlanInput,
-  feastFile: ParsedFile | undefined
+  feastFiles: readonly ParsedFile[]
 ): HymnSource {
   if (input.hourRules.omit.includes('hymnus')) {
     return { kind: 'suppressed' };
   }
 
-  const section = findSection(feastFile, 'Hymnus Matutinum', input);
-  if (section) {
+  const match = findSection(feastFiles, 'Hymnus Matutinum', input);
+  if (match) {
     return {
       kind: 'feast',
-      reference: feastReference(input.celebration.feastRef.path, section.header),
+      reference: officeReference(match.file.path, match.section.header),
       ...(input.celebrationRules.doxologyVariant
         ? { doxologyVariant: input.celebrationRules.doxologyVariant }
         : {}),
@@ -244,15 +246,15 @@ function buildHymnSource(
 function buildNocturnVersicle(
   nocturnIndex: 1 | 2 | 3,
   input: BuildMatinsPlanInput,
-  feastFile: ParsedFile | undefined,
+  feastFiles: readonly ParsedFile[],
   psalteriumDaySection: ParsedFile['sections'][number] | undefined,
   warnings: RubricalWarning[]
 ): VersicleSource {
   const sectionName = `Nocturn ${nocturnIndex} Versum`;
-  const section = findSection(feastFile, sectionName, input);
-  if (section) {
+  const match = findSection(feastFiles, sectionName, input);
+  if (match) {
     return {
-      reference: feastReference(input.celebration.feastRef.path, section.header)
+      reference: officeReference(match.file.path, match.section.header)
     };
   }
 
@@ -288,15 +290,15 @@ function buildNocturnVersicle(
 function buildResponsory(
   index: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9,
   input: BuildMatinsPlanInput,
-  feastFile: ParsedFile | undefined,
+  feastFiles: readonly ParsedFile[],
   warnings: RubricalWarning[]
 ): ResponsorySource {
   const sectionName = `Responsory${index}`;
-  const section = findSection(feastFile, sectionName, input);
-  if (section) {
+  const match = findSection(feastFiles, sectionName, input);
+  if (match) {
     return {
       index,
-      reference: feastReference(input.celebration.feastRef.path, section.header)
+      reference: officeReference(match.file.path, match.section.header)
     };
   }
 
@@ -322,20 +324,20 @@ function buildResponsory(
 
 function collectMatinsAntiphons(
   input: BuildMatinsPlanInput,
-  feastFile: ParsedFile | undefined,
+  feastFiles: readonly ParsedFile[],
   psalteriumDaySection: ParsedFile['sections'][number] | undefined
 ): readonly {
   readonly reference: TextReference;
   readonly psalmRef?: PsalmAssignment;
 }[] {
-  const feastSection = findSection(feastFile, 'Ant Matutinum', input);
-  const section = feastSection ?? psalteriumDaySection;
+  const feastMatch = findSection(feastFiles, 'Ant Matutinum', input);
+  const section = feastMatch?.section ?? psalteriumDaySection;
   if (!section) {
     return [];
   }
 
-  const sourcePath = feastSection
-    ? `horas/Latin/${input.celebration.feastRef.path}`
+  const sourcePath = feastMatch
+    ? feastMatch.file.path.replace(/\.txt$/u, '')
     : PSALTERIUM_MATINS_CONTENT_PATH;
   const entries: Array<{ readonly reference: TextReference; readonly psalmRef?: PsalmAssignment }> = [];
 
@@ -505,44 +507,74 @@ function markTeDeumReplacement(plan: MatinsPlan): MatinsPlan {
   };
 }
 
+interface SectionMatch {
+  readonly file: ParsedFile;
+  readonly section: ParsedFile['sections'][number];
+}
+
 function findSection(
-  file: ParsedFile | undefined,
+  files: readonly ParsedFile[],
   header: string,
   input: Pick<BuildMatinsPlanInput, 'temporal' | 'version'>
-): ParsedFile['sections'][number] | undefined {
-  if (!file) {
+): SectionMatch | undefined {
+  if (files.length === 0) {
     return undefined;
   }
 
   const date = normalizeDateInput(input.temporal.date);
-  let fallback: ParsedFile['sections'][number] | undefined;
+  let fallback: SectionMatch | undefined;
 
-  for (const section of file.sections) {
-    if (section.header !== header) {
-      continue;
-    }
+  for (const file of files) {
+    for (const section of file.sections) {
+      if (section.header !== header) {
+        continue;
+      }
 
-    if (!section.condition) {
-      fallback ??= section;
-      continue;
-    }
+      if (!section.condition) {
+        fallback ??= { file, section };
+        continue;
+      }
 
-    if (!input.version) {
-      continue;
-    }
+      if (!input.version) {
+        continue;
+      }
 
-    const matches = conditionMatches(section.condition, {
-      date,
-      dayOfWeek: input.temporal.dayOfWeek,
-      season: input.temporal.season,
-      version: input.version
-    });
-    if (matches) {
-      return section;
+      const matches = conditionMatches(section.condition, {
+        date,
+        dayOfWeek: input.temporal.dayOfWeek,
+        season: input.temporal.season,
+        version: input.version
+      });
+      if (matches) {
+        return { file, section };
+      }
     }
   }
 
   return fallback;
+}
+
+function resolveProperMatinsFiles(
+  feastFile: ParsedFile | undefined,
+  input: BuildMatinsPlanInput
+): readonly ParsedFile[] {
+  if (!feastFile) {
+    return [];
+  }
+
+  if (!input.version) {
+    return [feastFile];
+  }
+
+  const inherited = resolveRuleReferenceFiles(feastFile, {
+    date: normalizeDateInput(input.temporal.date),
+    dayOfWeek: input.temporal.dayOfWeek,
+    season: input.temporal.season,
+    version: input.version,
+    corpus: input.corpus
+  });
+
+  return [feastFile, ...inherited.files];
 }
 
 function resolveFeastFile(
@@ -561,7 +593,7 @@ function resolvePsalteriumMatinsDaySection(
 ): ParsedFile['sections'][number] | undefined {
   try {
     const file = resolveOfficeFile(input.corpus, PSALTERIUM_MATINS_PATH);
-    return findSection(file, `Day${input.temporal.dayOfWeek}`, input);
+    return findSection([file], `Day${input.temporal.dayOfWeek}`, input)?.section;
   } catch {
     return undefined;
   }
@@ -570,6 +602,13 @@ function resolvePsalteriumMatinsDaySection(
 function feastReference(path: string, section: string): TextReference {
   return {
     path: `horas/Latin/${path}`,
+    section
+  };
+}
+
+function officeReference(path: string, section: string): TextReference {
+  return {
+    path: path.replace(/\.txt$/u, ''),
     section
   };
 }

@@ -8,6 +8,7 @@ import type { RubricalWarning } from '../types/directorium.js';
 import type {
   HourDirective,
   HymnOverrideMeta,
+  PsalmAssignment,
   SlotContent,
   SlotName,
   TextReference
@@ -23,6 +24,7 @@ import type {
 import type { DirectoriumOverlay } from '../types/directorium.js';
 
 import type { OrdinariumSkeleton, SkeletonSlot } from './skeleton.js';
+import { resolveRuleReferenceFiles } from '../rules/resolve-vide-ex.js';
 
 export interface ApplyRuleSetInput {
   readonly hour: HourName;
@@ -65,9 +67,10 @@ export function applyRuleSet(input: ApplyRuleSetInput): AppliedHourStructure {
   const slots: Partial<Record<SlotName, SlotContent>> = {};
 
   const feastFile = resolveFeastFile(input.corpus, input.celebration);
+  const properFiles = resolveProperTextFiles(feastFile, input, warnings);
 
   for (const skeletonSlot of input.skeleton.slots) {
-    const resolved = resolveSlot(skeletonSlot, feastFile, input, warnings);
+    const resolved = resolveSlot(skeletonSlot, properFiles, input, warnings);
     slots[skeletonSlot.name] = resolved;
   }
 
@@ -81,7 +84,7 @@ export function applyRuleSet(input: ApplyRuleSetInput): AppliedHourStructure {
 
 function resolveSlot(
   slot: SkeletonSlot,
-  feastFile: ParsedFile | undefined,
+  properFiles: readonly ParsedFile[],
   input: ApplyRuleSetInput,
   warnings: RubricalWarning[]
 ): SlotContent {
@@ -94,14 +97,18 @@ function resolveSlot(
   }
 
   if (slot.name === 'psalmody') {
-    const psalms = input.policy.selectPsalmody({
-      hour: input.hour,
-      celebration: input.celebration,
-      celebrationRules: input.celebrationRules,
-      hourRules: input.hourRules,
-      temporal: input.temporal,
-      corpus: input.corpus
-    });
+    const psalms = decoratePsalmodyAssignments(
+      input.policy.selectPsalmody({
+        hour: input.hour,
+        celebration: input.celebration,
+        celebrationRules: input.celebrationRules,
+        hourRules: input.hourRules,
+        temporal: input.temporal,
+        corpus: input.corpus
+      }),
+      properFiles,
+      input
+    );
     if (psalms.length === 0) {
       warnings.push({
         code: 'hour-slot-unresolved',
@@ -117,7 +124,7 @@ function resolveSlot(
     return { kind: 'psalmody', psalms };
   }
 
-  const properRef = findProperReference(feastFile, slot, input.hour);
+  const properRef = findProperReference(properFiles, slot, input.hour);
   const communeRef = properRef ? undefined : findCommuneReference(input, slot);
   if (input.hour === 'compline' && slot.name === 'lectio-brevis') {
     const wrapperRef = ordinariumSkeletonReference(input.skeleton, slot);
@@ -181,23 +188,52 @@ function resolveFeastFile(
   }
 }
 
-function findProperReference(
+function resolveProperTextFiles(
   feastFile: ParsedFile | undefined,
+  input: ApplyRuleSetInput,
+  warnings: RubricalWarning[]
+): readonly ParsedFile[] {
+  if (!feastFile) {
+    return [];
+  }
+
+  if (!input.version) {
+    return [feastFile];
+  }
+
+  const inherited = resolveRuleReferenceFiles(
+    feastFile,
+    {
+      date: normalizeDateInput(input.temporal.date),
+      dayOfWeek: input.temporal.dayOfWeek,
+      season: input.temporal.season,
+      version: input.version,
+      corpus: input.corpus
+    }
+  );
+  warnings.push(...inherited.warnings);
+  return [feastFile, ...inherited.files];
+}
+
+function findProperReference(
+  files: readonly ParsedFile[],
   slot: SkeletonSlot,
   hour: HourName
 ): TextReference | undefined {
-  if (!feastFile) {
+  if (files.length === 0) {
     return undefined;
   }
 
   const headers = properHeadersForSlot(slot.name, hour);
   for (const header of headers) {
-    const section = feastFile.sections.find((entry) => entry.header === header);
-    if (section) {
-      return {
-        path: feastFile.path.replace(/\.txt$/u, ''),
-        section: header
-      };
+    for (const file of files) {
+      const section = file.sections.find((entry) => entry.header === header);
+      if (section) {
+        return {
+          path: file.path.replace(/\.txt$/u, ''),
+          section: header
+        };
+      }
     }
   }
 
@@ -232,10 +268,106 @@ function findCommuneReference(
   return undefined;
 }
 
+function decoratePsalmodyAssignments(
+  assignments: readonly PsalmAssignment[],
+  properFiles: readonly ParsedFile[],
+  input: ApplyRuleSetInput
+): readonly PsalmAssignment[] {
+  if (assignments.length === 0 || assignments.some((assignment) => assignment.antiphonRef)) {
+    return assignments;
+  }
+
+  if (input.hourRules.minorHoursSineAntiphona) {
+    return assignments;
+  }
+
+  if (input.hour === 'lauds' || input.hour === 'vespers') {
+    const antiphons = resolveProperMajorHourAntiphonRefs(properFiles, input.hour);
+    if (antiphons.length === 0) {
+      return assignments;
+    }
+    return assignments.map((assignment, index) =>
+      antiphons[index]
+        ? {
+            ...assignment,
+            antiphonRef: antiphons[index]
+          }
+        : assignment
+    );
+  }
+
+  if (
+    (input.hour === 'prime' ||
+      input.hour === 'terce' ||
+      input.hour === 'sext' ||
+      input.hour === 'none') &&
+    input.celebrationRules.antiphonScheme === 'proper-minor-hours'
+  ) {
+    const antiphon = resolveProperMinorHourAntiphonRef(properFiles, input.hour);
+    if (!antiphon) {
+      return assignments;
+    }
+    return assignments.map((assignment, index) =>
+      index === 0
+        ? {
+            ...assignment,
+            antiphonRef: antiphon
+          }
+        : assignment
+    );
+  }
+
+  return assignments;
+}
+
+function resolveProperMajorHourAntiphonRefs(
+  files: readonly ParsedFile[],
+  hour: 'lauds' | 'vespers'
+): readonly TextReference[] {
+  const header = hour === 'lauds' ? 'Ant Laudes' : 'Ant Vespera';
+  const match = files.find((file) => file.sections.some((section) => section.header === header));
+  if (!match) {
+    return [];
+  }
+
+  return Array.from({ length: 5 }, (_, index) => ({
+    path: match.path.replace(/\.txt$/u, ''),
+    section: header,
+    selector: String(index + 1)
+  }));
+}
+
+function resolveProperMinorHourAntiphonRef(
+  files: readonly ParsedFile[],
+  hour: 'prime' | 'terce' | 'sext' | 'none'
+): TextReference | undefined {
+  const match = files.find((file) => file.sections.some((section) => section.header === 'Ant Laudes'));
+  if (!match) {
+    return undefined;
+  }
+
+  const selector =
+    hour === 'prime' ? '1'
+    : hour === 'terce' ? '2'
+    : hour === 'sext' ? '3'
+    : '5';
+
+  return {
+    path: match.path.replace(/\.txt$/u, ''),
+    section: 'Ant Laudes',
+    selector
+  };
+}
+
 function ordinariumFallbackReference(
   skeleton: OrdinariumSkeleton,
   slot: SkeletonSlot
 ): TextReference {
+  const minorHourSpecial = minorHourSpecialFallbackReference(skeleton.hour, slot.name);
+  if (minorHourSpecial) {
+    return minorHourSpecial;
+  }
+
   const complineSpecial = complineSpecialFallbackReference(skeleton.hour, slot.name);
   if (complineSpecial) {
     return complineSpecial;
@@ -271,6 +403,40 @@ function complineSpecialFallbackReference(
     path: 'horas/Latin/Psalterium/Special/Minor Special',
     section
   };
+}
+
+function minorHourSpecialFallbackReference(
+  hour: HourName,
+  slot: SlotName
+): TextReference | undefined {
+  if (slot !== 'hymn') {
+    return undefined;
+  }
+
+  switch (hour) {
+    case 'prime':
+      return {
+        path: 'horas/Latin/Psalterium/Special/Prima Special',
+        section: 'Hymnus Prima'
+      };
+    case 'terce':
+      return {
+        path: 'horas/Latin/Psalterium/Special/Minor Special',
+        section: 'Hymnus Tertia'
+      };
+    case 'sext':
+      return {
+        path: 'horas/Latin/Psalterium/Special/Minor Special',
+        section: 'Hymnus Sexta'
+      };
+    case 'none':
+      return {
+        path: 'horas/Latin/Psalterium/Special/Minor Special',
+        section: 'Hymnus Nona'
+      };
+    default:
+      return undefined;
+  }
 }
 
 function sameReference(left: TextReference, right: TextReference): boolean {

@@ -338,13 +338,16 @@ function buildSectionContent(lines: readonly string[]): TextContent[] {
       return;
     }
     if (pendingFollowingCondition) {
+      const separatorsOnly = nodes.every((node) => node.type === 'separator');
       out.push({
         type: 'conditional',
         condition: pendingFollowingCondition,
         content: nodes,
         scope: DEFAULT_SCOPE
       });
-      pendingFollowingCondition = undefined;
+      if (!separatorsOnly) {
+        pendingFollowingCondition = undefined;
+      }
     } else {
       out.push(...nodes);
     }
@@ -359,10 +362,7 @@ function buildSectionContent(lines: readonly string[]): TextContent[] {
 
     if (lexed.kind === 'bareCondition') {
       applyBareConditionModifier(out, lexed.condition);
-      if (
-        (lexed.condition.stopword === 'sed' || lexed.condition.stopword === 'atque') &&
-        !isOmitInstruction(lexed.condition.instruction)
-      ) {
+      if (shouldApplyToFollowingBlock(lexed.condition)) {
         pendingFollowingCondition = lexed.condition;
       }
       continue;
@@ -392,6 +392,19 @@ function buildSectionContent(lines: readonly string[]): TextContent[] {
 
 function isOmitInstruction(instruction: Condition['instruction']): boolean {
   return instruction === 'omittitur' || instruction === 'omittuntur';
+}
+
+function shouldApplyToFollowingBlock(condition: Condition): boolean {
+  if (isOmitInstruction(condition.instruction)) {
+    return false;
+  }
+
+  return (
+    condition.stopword === 'sed' ||
+    condition.stopword === 'atque' ||
+    condition.instruction === 'dicitur' ||
+    condition.instruction === 'dicuntur'
+  );
 }
 
 function applyBareConditionModifier(out: TextContent[], condition: Condition): void {

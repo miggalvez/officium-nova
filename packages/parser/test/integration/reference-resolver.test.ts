@@ -107,7 +107,7 @@ describeIfUpstream('CrossReferenceResolver integration', () => {
     );
 
     expect(incipitBlock.some((node) => node.type === 'conditional')).toBe(true);
-    expect(incipitBlock.some((node) => node.type === 'psalmInclude')).toBe(true);
+    expect(containsNodeType(incipitBlock, 'psalmInclude')).toBe(true);
     expect(collectTextValues(incipitBlock)).not.toEqual(
       expect.arrayContaining([
         expect.stringMatching(/^\(deinde/i),
@@ -148,4 +148,19 @@ function collectTextValues(content: readonly TextContent[]): string[] {
   }
 
   return values;
+}
+
+function containsNodeType(
+  content: readonly TextContent[],
+  wanted: TextContent['type']
+): boolean {
+  for (const node of content) {
+    if (node.type === wanted) {
+      return true;
+    }
+    if (node.type === 'conditional' && containsNodeType(node.content, wanted)) {
+      return true;
+    }
+  }
+  return false;
 }

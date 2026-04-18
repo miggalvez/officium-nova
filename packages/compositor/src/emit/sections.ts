@@ -67,7 +67,7 @@ export function emitSection(
   const languages = Array.from(perLanguage.keys());
   const perLanguageLines = new Map<string, ComposedLine[]>();
   for (const [lang, content] of perLanguage) {
-    perLanguageLines.set(lang, linesFromContent(lang, content));
+    perLanguageLines.set(lang, linesFromContent(slot, lang, content));
   }
 
   const maxLength = Math.max(0, ...Array.from(perLanguageLines.values(), (l) => l.length));
@@ -101,7 +101,11 @@ export function emitSection(
   });
 }
 
-function linesFromContent(language: string, content: readonly TextContent[]): ComposedLine[] {
+function linesFromContent(
+  slot: SlotName,
+  language: string,
+  content: readonly TextContent[]
+): ComposedLine[] {
   const lines: ComposedLine[] = [];
   let current: { marker?: string; parts: ComposedRun[] } | undefined;
   const flush = () => {
@@ -140,6 +144,13 @@ function linesFromContent(language: string, content: readonly TextContent[]): Co
   for (const node of content) {
     switch (node.type) {
       case 'text':
+        if (slot === 'hymn') {
+          flush();
+          current = {
+            parts: [{ type: 'text', value: node.value }]
+          };
+          break;
+        }
         pushRun({ type: 'text', value: node.value });
         break;
       case 'verseMarker':
