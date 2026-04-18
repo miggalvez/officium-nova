@@ -240,11 +240,55 @@ function renderContentLine(line: TextContent): string {
     case 'reference':
       return '@reference';
     case 'conditional':
-      return `conditional:${line.scope}`;
+      return renderConditionalLine(line);
     case 'gabcNotation':
       return 'gabc';
     default:
       return '';
+  }
+}
+
+function renderConditionalLine(line: Extract<TextContent, { type: 'conditional' }>): string {
+  const content = line.content
+    .map(renderContentLine)
+    .map(normalizeSnapshotLine)
+    .filter((value) => value.length > 0)
+    .join(' ');
+
+  const renderedCondition = renderCondition(line.condition);
+  return content.length > 0
+    ? `conditional[${renderedCondition}]: ${content}`
+    : `conditional[${renderedCondition}]: <empty>`;
+}
+
+function renderCondition(
+  condition: Extract<TextContent, { type: 'conditional' }>['condition']
+): string {
+  const pieces = [renderConditionExpression(condition.expression)];
+  if (condition.stopword) {
+    pieces.push(`stopword=${condition.stopword}`);
+  }
+  if (condition.instruction) {
+    pieces.push(`instruction=${condition.instruction}`);
+  }
+  if (condition.instructionModifier) {
+    pieces.push(`modifier=${condition.instructionModifier}`);
+  }
+  return pieces.join('; ');
+}
+
+function renderConditionExpression(
+  expression: Extract<TextContent, { type: 'conditional' }>['condition']['expression']
+): string {
+  switch (expression.type) {
+    case 'match':
+      return `${expression.subject}=${expression.predicate}`;
+    case 'not':
+      return `not(${renderConditionExpression(expression.inner)})`;
+    case 'and':
+      return `(${renderConditionExpression(expression.left)} and ${renderConditionExpression(expression.right)})`;
+    case 'or':
+      return `(${renderConditionExpression(expression.left)} or ${renderConditionExpression(expression.right)})`;
   }
 }
 

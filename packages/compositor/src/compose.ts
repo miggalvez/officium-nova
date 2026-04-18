@@ -60,6 +60,22 @@ export function composeHour(input: ComposeInput): ComposedHour {
   // dispatch. The generic path still emits the non-Matins slots (oration,
   // conclusion, commemorations, etc.) after the Matins-specific output.
   if (input.hour === 'matins') {
+    const incipit = hour.slots.incipit;
+    if (incipit) {
+      const section = composeSlot({
+        slot: 'incipit',
+        content: incipit,
+        hour: input.hour,
+        directives: hour.directives,
+        corpus: input.corpus,
+        options: input.options,
+        context
+      });
+      if (section) {
+        sections.push(section);
+      }
+    }
+
     sections.push(
       ...composeMatinsSections(hour, {
         corpus: input.corpus,
@@ -74,6 +90,9 @@ export function composeHour(input: ComposeInput): ComposedHour {
     [SlotName, SlotContent]
   >) {
     if (!slotContent) continue;
+    if (input.hour === 'matins' && slotName === 'incipit') {
+      continue;
+    }
     if (input.hour === 'matins' && isMatinsOwnedSlot(slotName, slotContent)) {
       continue;
     }
@@ -160,6 +179,7 @@ function composeSlot(args: ComposeSlotArgs): Section | undefined {
         index: args.corpus,
         language: lang,
         langfb: args.options.langfb,
+        season: args.context.season,
         seen: new Set(),
         maxDepth: MAX_DEFERRED_DEPTH
       });
@@ -168,7 +188,7 @@ function composeSlot(args: ComposeSlotArgs): Section | undefined {
         hour: args.hour,
         directives: args.directives
       });
-      bucket.push(...transformed);
+      appendContentWithBoundary(bucket, transformed);
     }
   }
 
@@ -201,6 +221,43 @@ function referencesFrom(content: SlotContent): readonly TextReference[] {
 
 function referenceKey(ref: TextReference): string {
   return `${ref.path}#${ref.section}${ref.selector ? `:${ref.selector}` : ''}`;
+}
+
+function appendContentWithBoundary(
+  target: TextContent[],
+  next: readonly TextContent[]
+): void {
+  if (next.length === 0) {
+    return;
+  }
+
+  const last = target.at(-1);
+  const first = next[0];
+  if (last && first && isInlineBoundaryNode(last) && isInlineBoundaryNode(first)) {
+    target.push({ type: 'separator' });
+  }
+
+  target.push(...next);
+}
+
+function isInlineBoundaryNode(node: TextContent): boolean {
+  switch (node.type) {
+    case 'text':
+    case 'citation':
+    case 'psalmRef':
+    case 'macroRef':
+    case 'formulaRef':
+    case 'psalmInclude':
+    case 'reference':
+      return true;
+    case 'verseMarker':
+    case 'rubric':
+    case 'separator':
+    case 'heading':
+    case 'conditional':
+    case 'gabcNotation':
+      return false;
+  }
 }
 
 function buildConditionContext(

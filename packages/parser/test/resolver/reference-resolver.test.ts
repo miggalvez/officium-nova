@@ -206,7 +206,7 @@ describe('CrossReferenceResolver', () => {
     const resolved = await resolver.resolveFile(await cache.get('preamble-overlay.txt'));
     const headers = resolved.sections.map((section) => section.header);
 
-    expect(headers).not.toContain('__preamble');
+    expect(headers).toContain('__preamble');
     expect(headers).toEqual(expect.arrayContaining(['Officium', 'Rank', 'Oratio', 'Ant Vespera']));
 
     expect(
@@ -249,6 +249,44 @@ describe('CrossReferenceResolver', () => {
     );
 
     expect(resolved).toEqual([{ type: 'text', value: 'Section-local text.' }]);
+  });
+
+  it('coalesces same-file duplicate text sections with header conditions', async () => {
+    const { resolver, cache } = await createResolver({
+      'duplicate-variants.txt': [
+        '[Prayer]',
+        'Base blessing.',
+        '',
+        '[Prayer] (rubrica specialis)',
+        'Special blessing.'
+      ].join('\n')
+    });
+
+    const resolved = await resolver.resolveFile(await cache.get('duplicate-variants.txt'));
+    const sections = resolved.sections.filter((section) => section.header === 'Prayer');
+
+    expect(sections).toHaveLength(1);
+    expect(sections[0]?.content).toEqual([
+      {
+        type: 'conditional',
+        condition: {
+          expression: {
+            type: 'not',
+            inner: { type: 'match', subject: 'rubrica', predicate: 'specialis' }
+          }
+        },
+        content: [{ type: 'text', value: 'Base blessing.' }],
+        scope: { backwardLines: 0, forwardMode: 'line' }
+      },
+      {
+        type: 'conditional',
+        condition: {
+          expression: { type: 'match', subject: 'rubrica', predicate: 'specialis' }
+        },
+        content: [{ type: 'text', value: 'Special blessing.' }],
+        scope: { backwardLines: 0, forwardMode: 'line' }
+      }
+    ]);
   });
 
   it('keeps resolving when a referenced file is missing and records warnings', async () => {

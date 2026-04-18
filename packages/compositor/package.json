@@ -16,6 +16,7 @@
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
+    "compare:phase-3-perl": "pnpm -C ../parser build && pnpm -C ../rubrical-engine build && pnpm build && node ./test/fixtures/compare-phase-3-perl.mjs",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run"
   },

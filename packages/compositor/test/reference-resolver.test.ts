@@ -86,6 +86,34 @@ describe('resolveReference', () => {
     expect(resolved.Latin).toBeUndefined();
   });
 
+  it('extracts heading-scoped content from __preamble files such as Ordinarium', () => {
+    const index = new InMemoryTextIndex();
+    index.addFile({
+      path: 'horas/Ordinarium/Prima.txt',
+      sections: [
+        {
+          header: '__preamble',
+          content: [
+            { type: 'heading', value: 'Incipit' },
+            { type: 'formulaRef', name: 'Deus in adjutorium' },
+            { type: 'heading', value: 'Conclusio' },
+            { type: 'formulaRef', name: 'Benedicamus Domino' }
+          ],
+          startLine: 1,
+          endLine: 4
+        }
+      ]
+    });
+
+    const resolved = resolveReference(
+      index,
+      { path: 'horas/Ordinarium/Prima', section: 'Incipit' },
+      { languages: ['Latin'] }
+    );
+
+    expect(resolved.Latin?.content).toEqual([{ type: 'formulaRef', name: 'Deus in adjutorium' }]);
+  });
+
   it('expands single-number psalm selectors against Psalmorum files instead of treating them as line picks', () => {
     const index = new InMemoryTextIndex();
     index.addFile(fakeFile('horas/Latin/Psalterium/Psalmorum/Psalm116', '__preamble', '116:1 Laudate Dominum'));
@@ -170,6 +198,100 @@ describe('resolveReference', () => {
     expect(rendered).not.toContain('Sunday antiphon');
   });
 
+  it('selects weekday-keyed minor-hour psalmody through conditional wrappers', () => {
+    const index = new InMemoryTextIndex();
+    index.addFile({
+      path: 'horas/Latin/Psalterium/Psalmi/Psalmi minor.txt',
+      sections: [
+        {
+          header: 'Prima',
+          content: [
+            {
+              type: 'conditional',
+              condition: {
+                expression: {
+                  type: 'not',
+                  inner: { type: 'match', subject: 'rubrica', predicate: 'praedicatorum' }
+                }
+              },
+              content: [
+                { type: 'text', value: 'Feria II = Monday antiphon' },
+                { type: 'text', value: '23,24' }
+              ],
+              scope: { backwardLines: 0, forwardMode: 'line' }
+            }
+          ],
+          startLine: 1,
+          endLine: 2
+        }
+      ]
+    });
+    index.addFile(fakeFile('horas/Latin/Psalterium/Psalmorum/Psalm23', '__preamble', '23:1 Domini est terra'));
+    index.addFile(fakeFile('horas/Latin/Psalterium/Psalmorum/Psalm24', '__preamble', '24:1 Ad te Domine levavi'));
+
+    const resolved = resolveReference(
+      index,
+      {
+        path: 'horas/Latin/Psalterium/Psalmi/Psalmi minor',
+        section: 'Prima',
+        selector: 'Feria II'
+      },
+      { languages: ['Latin'] }
+    );
+
+    expect(resolved.Latin?.content[0]).toMatchObject({
+      type: 'conditional',
+      condition: {
+        expression: {
+          type: 'not',
+          inner: { type: 'match', subject: 'rubrica', predicate: 'praedicatorum' }
+        }
+      }
+    });
+    const rendered = collectTexts(resolved.Latin?.content ?? []).join('|');
+    expect(rendered).toContain('Monday antiphon');
+    expect(rendered).toContain('23:1 Domini est terra');
+    expect(rendered).toContain('24:1 Ad te Domine levavi');
+  });
+
+  it('selects weekday-keyed Compline psalmody from the Completorium section', () => {
+    const index = new InMemoryTextIndex();
+    index.addFile({
+      path: 'horas/Latin/Psalterium/Psalmi/Psalmi minor.txt',
+      sections: [
+        {
+          header: 'Completorium',
+          content: [
+            { type: 'text', value: 'Dominica = Sunday compline antiphon' },
+            { type: 'text', value: '4,90,133' },
+            { type: 'text', value: 'Feria II = Monday compline antiphon' },
+            { type: 'text', value: '6,7(2-10),7(11-18)' }
+          ],
+          startLine: 1,
+          endLine: 4
+        }
+      ]
+    });
+    index.addFile(fakeFile('horas/Latin/Psalterium/Psalmorum/Psalm6', '__preamble', '6:1 Domine ne in furore'));
+    index.addFile(fakeFile('horas/Latin/Psalterium/Psalmorum/Psalm7', '__preamble', '7:2 Domine Deus meus'));
+
+    const resolved = resolveReference(
+      index,
+      {
+        path: 'horas/Latin/Psalterium/Psalmi/Psalmi minor',
+        section: 'Completorium',
+        selector: 'Feria II'
+      },
+      { languages: ['Latin'] }
+    );
+
+    const rendered = collectTexts(resolved.Latin?.content ?? []).join('|');
+    expect(rendered).toContain('Monday compline antiphon');
+    expect(rendered).toContain('6:1 Domine ne in furore');
+    expect(rendered).toContain('7:2 Domine Deus meus');
+    expect(rendered).not.toContain('Sunday compline antiphon');
+  });
+
   it('injects the seasonal invitatory antiphon into the Psalm 94 skeleton', () => {
     const index = new InMemoryTextIndex();
     index.addFile({
@@ -218,4 +340,89 @@ describe('resolveReference', () => {
       'Surrexit Dominus vere, alleluja.|Venite exsultemus Domino|Surrexit Dominus vere, alleluja.'
     );
   });
+
+  it('injects weekday-keyed invitatory antiphons through conditional wrappers', () => {
+    const index = new InMemoryTextIndex();
+    index.addFile({
+      path: 'horas/Latin/Psalterium/Invitatorium.txt',
+      sections: [
+        {
+          header: '__preamble',
+          content: [
+            { type: 'formulaRef', name: 'ant' },
+            { type: 'verseMarker', marker: 'v.', text: 'Venite exsultemus Domino' },
+            { type: 'formulaRef', name: 'ant2' }
+          ],
+          startLine: 1,
+          endLine: 3
+        }
+      ]
+    });
+    index.addFile({
+      path: 'horas/Latin/Psalterium/Special/Matutinum Special.txt',
+      sections: [
+        {
+          header: 'Invit',
+          content: [
+            {
+              type: 'conditional',
+              condition: {
+                expression: {
+                  type: 'not',
+                  inner: { type: 'match', subject: 'rubrica', predicate: 'praedicatorum' }
+                }
+              },
+              content: [{ type: 'text', value: 'Feria II = Venite, * Exsultemus Domino.' }],
+              scope: { backwardLines: 0, forwardMode: 'line' }
+            }
+          ],
+          startLine: 1,
+          endLine: 1
+        }
+      ]
+    });
+
+    const resolved = resolveReference(
+      index,
+      {
+        path: 'horas/Latin/Psalterium/Invitatorium',
+        section: '__preamble',
+        selector: 'Nativitatis'
+      },
+      { languages: ['Latin'], dayOfWeek: 1 }
+    );
+
+    expect(resolved.Latin?.content[0]).toMatchObject({
+      type: 'conditional',
+      condition: {
+        expression: {
+          type: 'not',
+          inner: { type: 'match', subject: 'rubrica', predicate: 'praedicatorum' }
+        }
+      }
+    });
+    expect(collectTexts(resolved.Latin?.content ?? []).join('|')).toContain(
+      'Venite, * Exsultemus Domino.'
+    );
+  });
 });
+
+function collectTexts(content: readonly import('@officium-novum/parser').TextContent[]): string[] {
+  const out: string[] = [];
+
+  for (const node of content) {
+    if (node.type === 'text') {
+      out.push(node.value);
+      continue;
+    }
+    if (node.type === 'verseMarker') {
+      out.push(node.text);
+      continue;
+    }
+    if (node.type === 'conditional') {
+      out.push(...collectTexts(node.content));
+    }
+  }
+
+  return out;
+}

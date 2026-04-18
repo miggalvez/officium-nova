@@ -1,5 +1,8 @@
+import type { Condition, ConditionalScope } from '../types/conditions.js';
 import type { TextContent } from '../types/schema.js';
 import type { CrossReference, LineSelector, Substitution } from '../types/directives.js';
+
+import { parseCondition, ConditionParseError } from './condition-parser.js';
 
 const VERSE_MARKER_REGEX =
   /^(R\.br\.|Responsorium\.|Benedictio\.|Absolutio\.|Ant\.|v\.|r\.|V\.|R\.|M\.|S\.)\s*(.*)$/u;
@@ -7,6 +10,12 @@ const PSALM_DIRECTIVE_REGEX = /^(.*?)\s*;;\s*(\d+)(?:\s*;;\s*(.+))?$/u;
 const SUBSTITUTION_REGEX = /^s\/((?:\\.|[^/])*)\/((?:\\.|[^/])*)\/([a-z]*)$/iu;
 type VerseMarker = Extract<TextContent, { type: 'verseMarker' }>['marker'];
 const TRAILING_CONTRACTION_REGEX = /~\s*$/u;
+const DEFAULT_SCOPE: ConditionalScope = Object.freeze({
+  backwardLines: 0,
+  forwardMode: 'line'
+});
+
+const LEADING_CONDITION_REGEX = /^\s*\(([^()]+(?:\([^)]*\)[^()]*)*)\)\s*(.*)$/u;
 
 export class DirectiveParseError extends Error {
   constructor(message: string) {
@@ -115,7 +124,337 @@ export function parseDirectiveLine(line: string): TextContent {
 }
 
 export function parseDirectiveLines(lines: readonly string[]): TextContent[] {
-  return contractTrailingLines(lines).map((line) => parseDirectiveLine(line));
+  return buildSectionContentFromLines(lines);
+}
+
+/**
+ * Structured result of lexing one raw source line. Richer than
+ * {@link parseDirectiveLine} — exposes inline `/:rubric:/` segments, a
+ * leading `(condition)` prefix, and the parenthesized-only shape used by the
+ * section-level preprocessor for `sed`/alternation handling.
+ *
+ * Examples:
+ *   `"(rubrica altovadensis) $rubrica Incipit"` →
+ *     `{ kind: 'content', leadingCondition, nodes: [formulaRef] }`
+ *   `"/:Fit reverentia:/ Sanctus, Sanctus"` →
+ *     `{ kind: 'content', nodes: [rubric, text] }`
+ *   `"(sed rubrica 196 omittuntur)"` →
+ *     `{ kind: 'bareCondition', condition }`
+ */
+export type LexedLine =
+  | { kind: 'content'; leadingCondition?: Condition; nodes: TextContent[] }
+  | { kind: 'bareCondition'; condition: Condition }
+  | { kind: 'bareMetadata' };
+
+export function lexSourceLine(line: string): LexedLine {
+  const normalizedLine = stripTrailingContractionMarker(line);
+  const trimmed = normalizedLine.trim();
+
+  const bare = tryParseBareCondition(trimmed);
+  if (bare) {
+    return { kind: 'bareCondition', condition: bare };
+  }
+
+  if (isBareMetadataLine(trimmed)) {
+    return { kind: 'bareMetadata' };
+  }
+
+  const { leadingCondition, remainder } = extractLeadingCondition(normalizedLine);
+  const segments = segmentInlineRubrics(remainder);
+  const nodes: TextContent[] = [];
+  for (const segment of segments) {
+    if (segment.kind === 'rubric') {
+      if (segment.value.length > 0) {
+        nodes.push({ type: 'rubric', value: segment.value });
+      }
+      continue;
+    }
+    if (segment.value.length === 0) {
+      continue;
+    }
+    nodes.push(parseDirectiveLine(segment.value));
+  }
+
+  if (nodes.length === 0 && leadingCondition) {
+    return { kind: 'content', leadingCondition, nodes: [] };
+  }
+
+  if (leadingCondition) {
+    return { kind: 'content', leadingCondition, nodes };
+  }
+
+  return { kind: 'content', nodes };
+}
+
+const METADATA_TOKENS = new Set<string>([
+  'si',
+  'sed',
+  'vero',
+  'atque',
+  'attamen',
+  'deinde',
+  'dicitur',
+  'dicuntur',
+  'omittitur',
+  'omittuntur',
+  'semper'
+]);
+
+/**
+ * Recognize parenthesized "rubric connector" lines that carry stopwords and
+ * instructions but no actual condition predicate — e.g. `(deinde dicitur)`,
+ * `(atque dicuntur semper)`, `(sed dicitur)`. These function as metadata in
+ * the source file and should not produce visible output.
+ */
+function isBareMetadataLine(trimmed: string): boolean {
+  if (!trimmed.startsWith('(') || !trimmed.endsWith(')')) {
+    return false;
+  }
+  if (!isBalancedWrappingParens(trimmed)) {
+    return false;
+  }
+  const inner = trimmed.slice(1, -1).trim();
+  if (inner.length === 0) {
+    return false;
+  }
+  const tokens = inner.split(/\s+/u);
+  return tokens.length > 0 && tokens.every((token) => METADATA_TOKENS.has(token.toLowerCase()));
+}
+
+function tryParseBareCondition(trimmed: string): Condition | undefined {
+  if (!trimmed.startsWith('(') || !trimmed.endsWith(')')) {
+    return undefined;
+  }
+  if (!isBalancedWrappingParens(trimmed)) {
+    return undefined;
+  }
+  const inner = trimmed.slice(1, -1).trim();
+  if (inner.length === 0) {
+    return undefined;
+  }
+  try {
+    return parseCondition(inner);
+  } catch (error) {
+    if (error instanceof ConditionParseError) {
+      return undefined;
+    }
+    throw error;
+  }
+}
+
+function extractLeadingCondition(
+  line: string
+): { leadingCondition?: Condition; remainder: string } {
+  const match = line.match(LEADING_CONDITION_REGEX);
+  if (!match) {
+    return { remainder: line };
+  }
+  const body = match[1];
+  const rest = match[2];
+  if (body === undefined || rest === undefined) {
+    return { remainder: line };
+  }
+  if (rest.trim().length === 0) {
+    return { remainder: line };
+  }
+  try {
+    const condition = parseCondition(body);
+    return { leadingCondition: condition, remainder: rest };
+  } catch (error) {
+    if (error instanceof ConditionParseError) {
+      return { remainder: line };
+    }
+    throw error;
+  }
+}
+
+interface InlineSegment {
+  kind: 'text' | 'rubric';
+  value: string;
+}
+
+function segmentInlineRubrics(line: string): InlineSegment[] {
+  if (!line.includes('/:')) {
+    return [{ kind: 'text', value: line }];
+  }
+  const segments: InlineSegment[] = [];
+  let cursor = 0;
+  while (cursor < line.length) {
+    const start = line.indexOf('/:', cursor);
+    if (start < 0) {
+      segments.push({ kind: 'text', value: line.slice(cursor) });
+      break;
+    }
+    if (start > cursor) {
+      segments.push({ kind: 'text', value: line.slice(cursor, start) });
+    }
+    const end = line.indexOf(':/', start + 2);
+    if (end < 0) {
+      segments.push({ kind: 'text', value: line.slice(start) });
+      break;
+    }
+    const inner = line.slice(start + 2, end).trim();
+    segments.push({ kind: 'rubric', value: inner });
+    cursor = end + 2;
+  }
+  return segments
+    .map((segment) =>
+      segment.kind === 'text'
+        ? { kind: 'text' as const, value: segment.value.trim() }
+        : segment
+    )
+    .filter((segment) => !(segment.kind === 'text' && segment.value.length === 0));
+}
+
+function isBalancedWrappingParens(input: string): boolean {
+  let depth = 0;
+  for (let i = 0; i < input.length; i += 1) {
+    const char = input[i];
+    if (char === '(') depth += 1;
+    else if (char === ')') {
+      depth -= 1;
+      if (depth === 0 && i < input.length - 1) return false;
+      if (depth < 0) return false;
+    }
+  }
+  return depth === 0;
+}
+
+/**
+ * Canonical section-content builder shared by `parseFile`, cross-reference
+ * resolution, and the public `parseDirectiveLines()` helper.
+ */
+export function buildSectionContentFromLines(lines: readonly string[]): TextContent[] {
+  return buildSectionContent(contractTrailingLines(lines));
+}
+
+function buildSectionContent(lines: readonly string[]): TextContent[] {
+  const out: TextContent[] = [];
+  let pendingFollowingCondition: Condition | undefined;
+
+  const appendFollowingBlock = (nodes: TextContent[]): void => {
+    if (nodes.length === 0) {
+      pendingFollowingCondition = undefined;
+      return;
+    }
+    if (pendingFollowingCondition) {
+      out.push({
+        type: 'conditional',
+        condition: pendingFollowingCondition,
+        content: nodes,
+        scope: DEFAULT_SCOPE
+      });
+      pendingFollowingCondition = undefined;
+    } else {
+      out.push(...nodes);
+    }
+  };
+
+  for (const rawLine of lines) {
+    const lexed: LexedLine = lexSourceLine(rawLine);
+
+    if (lexed.kind === 'bareMetadata') {
+      continue;
+    }
+
+    if (lexed.kind === 'bareCondition') {
+      applyBareConditionModifier(out, lexed.condition);
+      if (
+        (lexed.condition.stopword === 'sed' || lexed.condition.stopword === 'atque') &&
+        !isOmitInstruction(lexed.condition.instruction)
+      ) {
+        pendingFollowingCondition = lexed.condition;
+      }
+      continue;
+    }
+
+    const { nodes, leadingCondition } = lexed;
+    if (nodes.length === 0 && !leadingCondition) {
+      continue;
+    }
+
+    const segments = leadingCondition
+      ? [
+          {
+            type: 'conditional' as const,
+            condition: leadingCondition,
+            content: nodes,
+            scope: DEFAULT_SCOPE
+          }
+        ]
+      : nodes;
+
+    appendFollowingBlock(segments);
+  }
+
+  return out;
+}
+
+function isOmitInstruction(instruction: Condition['instruction']): boolean {
+  return instruction === 'omittitur' || instruction === 'omittuntur';
+}
+
+function applyBareConditionModifier(out: TextContent[], condition: Condition): void {
+  if (condition.stopword !== 'sed' && condition.stopword !== 'atque') {
+    return;
+  }
+
+  const negated: Condition = {
+    ...condition,
+    expression: { type: 'not', inner: condition.expression }
+  };
+  delete negated.stopword;
+  delete negated.instruction;
+  delete negated.instructionModifier;
+
+  const wrapped = wrapTrailingBlock(out, negated);
+  if (!wrapped && isOmitInstruction(condition.instruction)) {
+    const markerCondition: Condition = {
+      ...negated,
+      ...(condition.instruction ? { instruction: condition.instruction } : {}),
+      ...(condition.instructionModifier ? { instructionModifier: condition.instructionModifier } : {})
+    };
+    out.push({
+      type: 'conditional',
+      condition: markerCondition,
+      content: [],
+      scope: DEFAULT_SCOPE
+    });
+  }
+}
+
+function wrapTrailingBlock(out: TextContent[], condition: Condition): boolean {
+  if (out.length === 0) {
+    return false;
+  }
+
+  let startIndex = out.length;
+  for (let i = out.length - 1; i >= 0; i -= 1) {
+    const node = out[i];
+    if (!node) break;
+    if (isBlockBoundary(node)) {
+      break;
+    }
+    startIndex = i;
+  }
+
+  if (startIndex >= out.length) {
+    return false;
+  }
+
+  const block = out.slice(startIndex);
+  out.length = startIndex;
+  out.push({
+    type: 'conditional',
+    condition,
+    content: block,
+    scope: DEFAULT_SCOPE
+  });
+  return true;
+}
+
+function isBlockBoundary(node: TextContent): boolean {
+  return node.type === 'heading';
 }
 
 export function contractTrailingLines(lines: readonly string[]): string[] {

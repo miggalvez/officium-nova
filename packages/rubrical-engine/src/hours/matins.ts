@@ -54,7 +54,8 @@ export function structureMatins(input: StructureMatinsInput): StructureMatinsRes
   const wrapperSkeleton: OrdinariumSkeleton = {
     ...input.skeleton,
     slots: input.skeleton.slots.filter(
-      (slot) => slot.name === 'oration' || slot.name === 'conclusion'
+      (slot) =>
+        slot.name === 'incipit' || slot.name === 'oration' || slot.name === 'conclusion'
     )
   };
 
@@ -74,6 +75,7 @@ export function structureMatins(input: StructureMatinsInput): StructureMatinsRes
   warnings.push(...applied.warnings);
 
   const slots: Partial<Record<SlotName, SlotContent>> = {
+    incipit: applied.slots.incipit ?? { kind: 'empty' },
     invitatory: {
       kind: 'matins-invitatorium',
       source: planResult.plan.invitatorium

@@ -4,20 +4,22 @@ import type { TextReference } from '@officium-novum/rubrical-engine';
 import { resolveReference } from './reference-resolver.js';
 
 const COMMON_PRAYERS_PATH = 'horas/Latin/Psalterium/Common/Prayers';
+const COMMON_RUBRICAE_PATH = 'horas/Latin/Psalterium/Common/Rubricae';
 const REVTRANS_PATH = 'horas/Latin/Psalterium/Revtrans';
 
 export interface DeferredNodeContext {
   readonly index: TextIndex;
   readonly language: string;
   readonly langfb?: string;
+  readonly season?: string;
   readonly seen: ReadonlySet<string>;
   readonly maxDepth: number;
 }
 
 /**
  * Expand the residual node kinds that remain after Phase 1 has already
- * resolved `@` cross-references for the corpus: `psalmInclude`, `macroRef`,
- * and `formulaRef`.
+ * resolved `@` cross-references for the corpus: `psalmInclude`, `psalmRef`,
+ * `macroRef`, and `formulaRef`.
  *
  * A bare `reference` node reaching this phase is treated as an unresolved
  * artifact and intentionally preserved for the emitter to surface.
@@ -41,10 +43,40 @@ export function expandDeferredNodes(
           },
           context
         );
-        out.push(...(expanded ?? [node]));
+        out.push(...(expanded ? interleaveSeparators(expanded) : [node]));
+        break;
+      }
+      case 'psalmRef': {
+        const antiphon = node.antiphon?.trim();
+        if (antiphon) {
+          out.push({ type: 'text', value: antiphon });
+          out.push({ type: 'separator' });
+        }
+
+        const expanded = expandReference(
+          {
+            path: `horas/Latin/Psalterium/Psalmorum/Psalm${node.psalmNumber}`,
+            section: '__preamble'
+          },
+          context
+        );
+        const fallbackPsalm: Extract<TextContent, { type: 'psalmInclude' }> = {
+          type: 'psalmInclude',
+          psalmNumber: node.psalmNumber
+        };
+        out.push(
+          ...(expanded && expanded.length > 0
+            ? interleaveSeparators(expanded)
+            : [fallbackPsalm])
+        );
         break;
       }
       case 'macroRef': {
+        if (node.name === 'Alleluia') {
+          const expanded = expandAlleluiaMacro(context);
+          out.push(...(expanded ?? [node]));
+          break;
+        }
         const expanded = expandNamedSection(
           macroSectionCandidates(node.name),
           [COMMON_PRAYERS_PATH, REVTRANS_PATH],
@@ -56,10 +88,20 @@ export function expandDeferredNodes(
       case 'formulaRef': {
         const expanded = expandNamedSection(
           formulaSectionCandidates(node.name),
-          [COMMON_PRAYERS_PATH, REVTRANS_PATH],
+          [COMMON_PRAYERS_PATH, COMMON_RUBRICAE_PATH, REVTRANS_PATH],
           context
         );
         out.push(...(expanded ?? [node]));
+        break;
+      }
+      case 'conditional': {
+        const expandedChildren = expandDeferredNodes(node.content, context);
+        out.push({
+          type: 'conditional',
+          condition: node.condition,
+          content: [...expandedChildren],
+          scope: node.scope
+        });
         break;
       }
       default:
@@ -114,6 +156,28 @@ function expandReference(
   });
 }
 
+function expandAlleluiaMacro(
+  context: DeferredNodeContext
+): readonly TextContent[] | undefined {
+  const expanded = expandNamedSection(['Alleluia'], [COMMON_PRAYERS_PATH, REVTRANS_PATH], context);
+  if (!expanded) {
+    return undefined;
+  }
+
+  const verseLines = expanded.filter(
+    (node): node is Extract<TextContent, { type: 'verseMarker' }> => node.type === 'verseMarker'
+  );
+  if (verseLines.length < 2) {
+    return expanded;
+  }
+
+  const useLausTibi =
+    context.season === 'septuagesima' ||
+    context.season === 'lent' ||
+    context.season === 'passiontide';
+  return Object.freeze([useLausTibi ? verseLines[1]! : verseLines[0]!]);
+}
+
 function macroSectionCandidates(name: string): readonly string[] {
   return dedupe([normalizeMacroLikeName(name), ...macroAliasSections(name)]);
 }
@@ -164,4 +228,21 @@ function dedupe(values: readonly string[]): readonly string[] {
     out.push(normalized);
   }
   return out;
+}
+
+function interleaveSeparators(content: readonly TextContent[]): readonly TextContent[] {
+  const out: TextContent[] = [];
+
+  for (const node of content) {
+    if (out.length > 0 && out[out.length - 1]?.type !== 'separator' && node.type !== 'separator') {
+      out.push({ type: 'separator' });
+    }
+    out.push(node);
+  }
+
+  while (out[out.length - 1]?.type === 'separator') {
+    out.pop();
+  }
+
+  return Object.freeze(out);
 }

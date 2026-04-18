@@ -46,8 +46,8 @@ exports[`Phase 1 spot-check validation > spot-checks 50+ representative feast fi
         "Oratio": [],
         "Rank": [],
         "Responsory1": [
-          "R. Na počátku Bůh, než stvořil zemi, dříve než ustanovil propasti, dříve než vyvedl ze země prameny vod, dříve než hory dostaly své místo;",
-          "* Přede všemi pahorky mě zrodil Hospodin.",
+          "conditional[not(rubrica=cisterciensis)]: R. Na počátku Bůh - než stvořil zemi - dříve než ustanovil propasti, dříve než vyvedl ze země prameny vod, * Dříve než hory dostaly své místo, přede všemi pahorky mě zrodil Hospodin. V. Když připravoval nebesa, byla jsem, a vše s ním skládala. R. Dříve než hory dostaly své místo, přede všemi pahorky mě zrodil Hospodin.",
+          "conditional[rubrica=cisterciensis]: R. Na počátku Bůh, než stvořil zemi, dříve než ustanovil propasti, dříve než vyvedl ze země prameny vod, dříve než hory dostaly své místo; * Přede všemi pahorky mě zrodil Hospodin. V. Já přebývám na výsostech, a můj trůn je v oblačném sloupu. R. Přede všemi pahorky mě zrodil Hospodin.",
         ],
         "Rule": [],
       },
@@ -521,8 +521,8 @@ exports[`Phase 1 spot-check validation > spot-checks 50+ representative feast fi
           "Festum Domini",
         ],
       },
-      "sectionCount": 48,
-      "warningCount": 3,
+      "sectionCount": 49,
+      "warningCount": 4,
     },
     {
       "domain": "horas",
@@ -539,8 +539,8 @@ exports[`Phase 1 spot-check validation > spot-checks 50+ representative feast fi
         "Oratio": [],
         "Rank": [],
         "Responsory1": [
-          "R. In princípio Deus ántequam terram fáceret, priúsquam abýssos constitúeret, priúsquam prodúceret fontes aquárum, antequam montes collocaréntur:",
-          "* Ante omnes colles generávit me Dóminus.",
+          "conditional[not(rubrica=cisterciensis)]: R. In princípio Deus ántequam terram fáceret, priúsquam abýssos constitúeret, priúsquam prodúceret fontes aquárum, * Antequam montes collocaréntur, ante omnes colles generávit me Dóminus. V. Quando præparábat cælos, áderam, cum eo cuncta compónens. R. Antequam montes collocaréntur, ante omnes colles generávit me Dóminus.",
+          "conditional[rubrica=cisterciensis]: R. In princípio Deus ántequam terram fáceret, priúsquam abýssos constitúeret, priúsquam prodúceret fontes aquárum, antequam montes collocaréntur: * Ante omnes colles generávit me Dóminus. V. Ego in altíssimis hábito, et thronus meus in colúmna nubis. R. Ante omnes colles generávit me Dóminus.",
         ],
         "Rule": [],
       },
@@ -566,16 +566,15 @@ exports[`Phase 1 spot-check validation > spot-checks 50+ representative feast fi
           "|Simplex|1.3|vide C10",
         ],
         "Responsory1": [
-          "R. Sancta et immaculáta virgínitas, quibus te láudibus éfferam, néscio:",
-          "* Quia quem cæli cápere non póterant, tuo grémio contulísti.",
+          "conditional[rubrica=tridentina]: R. Sancta et immaculáta virgínitas, quibus te láudibus éfferam, néscio: * Quia quem cæli cápere non póterant, tuo grémio contulísti. V. Benedícta tu in muliéribus, et benedíctus fructus ventris tui. R. Quia quem cæli cápere non póterant, tuo grémio contulisti.",
         ],
         "Rule": [
           "vide C10",
           "Special Benedictio",
         ],
       },
-      "sectionCount": 55,
-      "warningCount": 0,
+      "sectionCount": 56,
+      "warningCount": 4,
     },
     {
       "domain": "horas",
@@ -841,8 +840,8 @@ exports[`Phase 1 spot-check validation > spot-checks 50+ representative feast fi
         "Ant Vespera": [],
         "Lectio1": [],
         "Officium": [
-          "S. Hilarii Episcopi Confessoris Ecclesiæ Doctoris",
-          "(sed rubrica 1570 aut rubrica 1617)",
+          "conditional[not((rubrica=1570 or rubrica=1617))]: S. Hilarii Episcopi Confessoris Ecclesiæ Doctoris",
+          "conditional[(rubrica=1570 or rubrica=1617); stopword=sed]: S. Hilarii Episcopi Confessoris",
         ],
         "Oratio": [],
         "Rank": [],
@@ -964,16 +963,15 @@ exports[`Phase 1 spot-check validation > spot-checks 50+ representative feast fi
           "|Simplex|1.3|vide C10",
         ],
         "Responsory1": [
-          "R. Sancta et immaculáta virgínitas, quibus te láudibus éfferam, néscio:",
-          "* Quia quem cæli cápere non póterant, tuo grémio contulísti.",
+          "conditional[rubrica=tridentina]: R. Sancta et immaculáta virgínitas, quibus te láudibus éfferam, néscio: * Quia quem cæli cápere non póterant, tuo grémio contulísti. V. Benedícta tu in muliéribus, et benedíctus fructus ventris tui. R. Quia quem cæli cápere non póterant, tuo grémio contulisti.",
         ],
         "Rule": [
           "vide C10",
           "Special Benedictio",
         ],
       },
-      "sectionCount": 55,
-      "warningCount": 0,
+      "sectionCount": 56,
+      "warningCount": 5,
     },
     {
       "domain": "horas",
@@ -994,16 +992,15 @@ exports[`Phase 1 spot-check validation > spot-checks 50+ representative feast fi
           "|Simplex|1.3|vide C10",
         ],
         "Responsory1": [
-          "R. Sancta et immaculáta virgínitas, quibus te láudibus éfferam, néscio:",
-          "* Quia quem cæli cápere non póterant, tuo grémio contulísti.",
+          "conditional[rubrica=tridentina]: R. Sancta et immaculáta virgínitas, quibus te láudibus éfferam, néscio: * Quia quem cæli cápere non póterant, tuo grémio contulísti. V. Benedícta tu in muliéribus, et benedíctus fructus ventris tui. R. Quia quem cæli cápere non póterant, tuo grémio contulisti.",
         ],
         "Rule": [
           "vide C10",
           "Special Benedictio",
         ],
       },
-      "sectionCount": 55,
-      "warningCount": 0,
+      "sectionCount": 56,
+      "warningCount": 5,
     },
     {
       "domain": "horas",
@@ -1021,8 +1018,8 @@ exports[`Phase 1 spot-check validation > spot-checks 50+ representative feast fi
           "Officium parvum Beatæ Maríæ Virginis",
         ],
         "Oratio": [
-          "Concéde nos fámulos tuos, quǽsumus, Dómine Deus, perpétua mentis et córporis sanitáte gaudére: et, gloriósa beátæ Maríæ semper Vírginis intercessióne, a præsénti liberári tristítia, et ætérna pérfrui lætítia.",
-          "$Per Dominum",
+          "conditional[not(tempore=Nativitatis)]: conditional[not(tempore=Adventus)]: Concéde nos fámulos tuos, quǽsumus, Dómine Deus, perpétua mentis et córporis sanitáte gaudére: et, gloriósa beátæ Maríæ semper Vírginis intercessióne, a præsénti liberári tristítia, et ætérna pérfrui lætítia. $Per Dominum conditional[tempore=Adventus; stopword=sed]: Deus, qui de beátæ Maríæ Vírginis útero Verbum tuum, Angelo nuntiánte, carnem suscípere voluísti: præsta supplícibus tuis; ut, qui vere eam Genetrícem Dei crédimus, ejus apud te intercessiónibus adjuvémur. $Per eumdem",
+          "conditional[tempore=Nativitatis; stopword=sed]: Deus, qui salútis ætérnæ, beátæ Maríæ virginitáte fecúnda, humáno géneri prǽmia præstitísti: tríbue, quǽsumus; ut ipsam pro nobis intercédere sentiámus, per quam merúimus auctórem vitæ suscípere, Dóminum nostrum $Qui tecum",
         ],
         "Rank": [
           "|Simplex|1|ex C11",
@@ -1033,8 +1030,8 @@ exports[`Phase 1 spot-check validation > spot-checks 50+ representative feast fi
           "Ave only",
         ],
       },
-      "sectionCount": 58,
-      "warningCount": 47,
+      "sectionCount": 59,
+      "warningCount": 50,
     },
     {
       "domain": "horas",
@@ -1052,8 +1049,8 @@ exports[`Phase 1 spot-check validation > spot-checks 50+ representative feast fi
           "Officium parvum Beatæ Maríæ Virginis",
         ],
         "Oratio": [
-          "Concéde nos fámulos tuos, quǽsumus, Dómine Deus, perpétua mentis et córporis sanitáte gaudére: et, gloriósa beátæ Maríæ semper Vírginis intercessióne, a præsénti liberári tristítia, et ætérna pérfrui lætítia.",
-          "$Per Dominum",
+          "conditional[not(tempore=Nativitatis)]: conditional[not(tempore=Adventus)]: Concéde nos fámulos tuos, quǽsumus, Dómine Deus, perpétua mentis et córporis sanitáte gaudére: et, gloriósa beátæ Maríæ semper Vírginis intercessióne, a præsénti liberári tristítia, et ætérna pérfrui lætítia. $Per Dominum conditional[tempore=Adventus; stopword=sed]: Deus, qui de beátæ Maríæ Vírginis útero Verbum tuum, Angelo nuntiánte, carnem suscípere voluísti: præsta supplícibus tuis; ut, qui vere eam Genetrícem Dei crédimus, ejus apud te intercessiónibus adjuvémur. $Per eumdem",
+          "conditional[tempore=Nativitatis; stopword=sed]: Deus, qui salútis ætérnæ, beátæ Maríæ virginitáte fecúnda, humáno géneri prǽmia præstitísti: tríbue, quǽsumus; ut ipsam pro nobis intercédere sentiámus, per quam merúimus auctórem vitæ suscípere, Dóminum nostrum $Qui tecum",
         ],
         "Rank": [
           "Officium Parvum Beatae Mariae Virginis tempore Adventus|Simplex|1|",
@@ -1064,8 +1061,8 @@ exports[`Phase 1 spot-check validation > spot-checks 50+ representative feast fi
           "Ave only",
         ],
       },
-      "sectionCount": 58,
-      "warningCount": 47,
+      "sectionCount": 59,
+      "warningCount": 51,
     },
     {
       "domain": "horas",
@@ -1083,8 +1080,8 @@ exports[`Phase 1 spot-check validation > spot-checks 50+ representative feast fi
           "Officium parvum Beatæ Maríæ Virginis",
         ],
         "Oratio": [
-          "Concéde nos fámulos tuos, quǽsumus, Dómine Deus, perpétua mentis et córporis sanitáte gaudére: et, gloriósa beátæ Maríæ semper Vírginis intercessióne, a præsénti liberári tristítia, et ætérna pérfrui lætítia.",
-          "$Per Dominum",
+          "conditional[not(tempore=Nativitatis)]: conditional[not(tempore=Adventus)]: Concéde nos fámulos tuos, quǽsumus, Dómine Deus, perpétua mentis et córporis sanitáte gaudére: et, gloriósa beátæ Maríæ semper Vírginis intercessióne, a præsénti liberári tristítia, et ætérna pérfrui lætítia. $Per Dominum conditional[tempore=Adventus; stopword=sed]: Deus, qui de beátæ Maríæ Vírginis útero Verbum tuum, Angelo nuntiánte, carnem suscípere voluísti: præsta supplícibus tuis; ut, qui vere eam Genetrícem Dei crédimus, ejus apud te intercessiónibus adjuvémur. $Per eumdem",
+          "conditional[tempore=Nativitatis; stopword=sed]: Deus, qui salútis ætérnæ, beátæ Maríæ virginitáte fecúnda, humáno géneri prǽmia præstitísti: tríbue, quǽsumus; ut ipsam pro nobis intercédere sentiámus, per quam merúimus auctórem vitæ suscípere, Dóminum nostrum $Qui tecum",
         ],
         "Rank": [
           "Officium parvum Beatae Mariae Virginis Tempora Nativitatis|Simplex|1|",
@@ -1095,8 +1092,8 @@ exports[`Phase 1 spot-check validation > spot-checks 50+ representative feast fi
           "Ave only",
         ],
       },
-      "sectionCount": 58,
-      "warningCount": 47,
+      "sectionCount": 59,
+      "warningCount": 51,
     },
     {
       "domain": "horas",
@@ -1128,8 +1125,8 @@ exports[`Phase 1 spot-check validation > spot-checks 50+ representative feast fi
           "Antiphonas horas",
         ],
       },
-      "sectionCount": 61,
-      "warningCount": 2,
+      "sectionCount": 62,
+      "warningCount": 3,
     },
     {
       "domain": "horas",
@@ -1139,8 +1136,7 @@ exports[`Phase 1 spot-check validation > spot-checks 50+ representative feast fi
       "samples": {
         "Ant Vespera": [],
         "Lectio1": [
-          "(nisi mense 4 et mense 6) De Canticis canticorum",
-          "1617 only",
+          "conditional[((((((mense=4 or mense=5) or mense=6) or mense=7) or mense=8) or mense=9) or mense=10)]: conditional[not(mense=10)]: conditional[not(mense=9)]: conditional[not(mense=8)]: conditional[not(mense=7)]: conditional[not(mense=6)]: conditional[not(mense=5)]: conditional[not(mense=4)]: conditional[(not(mense=4) and mense=6)]: De Canticis canticorum 1617 only conditional[mense=4; stopword=sed]: De Cánticis canticórum !Cant 2:1-7 1 Ego flos campi et lílium convállium. 2 Sicut lílium inter spinas, sic amíca mea inter fílias. 3 Sicut malus inter ligna silvárum, sic diléctus meus inter fílios. Sub umbra illíus quem desideráveram sedi, et fructus ejus dulcis gútturi meo. 4 Introdúxit me in cellam vináriam, ordinávit in me caritátem. 5 Fulcíte me flóribus, stipáte me malis, quia amóre lángueo. 6 Læva ejus sub cápite meo, et déxtera illíus amplexábitur me. 7 Adjúro vos, fíliæ Jerúsalem, per cápreas cervósque campórum, ne suscitétis neque evigiláre faciátis diléctam, quoadúsque ipsa velit. conditional[mense=5; stopword=sed]: !Cant 2:13-17 13 Surge, amíca mea, speciósa mea, et veni, 14 colúmba mea, in foramínibus petræ, in cavérna macériæ, osténde mihi fáciem tuam, sonet vox tua in áuribus meis: vox enim tua dulcis, et fácies tua decóra. 15 Cápite nobis vulpes párvulas, quæ demoliúntur víneas; nam vínea nostra flóruit. 16 Diléctus meus mihi, et ego illi, páscitur inter lília, 17 donec aspíret dies, et inclinéntur umbræ. Revértere; símilis esto, dilécte mi, cápreæ hinnulóque cervórum super montes Bether. conditional[mense=6; stopword=sed]: conditional[not(rubrica=1955)]: De Canticis canticorum !Cant 4:1-4 1 (Sponsus) Quam pulchra es, amica mea ! quam pulchra es ! Oculi tui columbarum, absque eo quod intrinsecus latet. Capilli tui sicut greges caprarum quæ ascenderunt de monte Galaad. 2 Dentes tui sicut greges tonsarum quæ ascenderunt de lavacro; omnes gemellis fœtibus, et sterilis non est inter eas. 3 Sicut vitta coccinea labia tua, et eloquium tuum dulce. Sicut fragmen mali punici, ita genæ tuæ, absque eo quod intrinsecus latet. 4 Sicut turris David collum tuum, quæ ædificata est cum propugnaculis; mille clypei pendent ex ea, omnis armatura fortium. conditional[mense=7; stopword=sed]: conditional[not(rubrica=1955)]: !Cant 4:11-15 11 Favus distíllans lábia tua, sponsa; mel et lac sub lingua tua: et odor vestimentórum tuórum sicut odor thuris. 12 Hortus conclúsus soror mea, sponsa, hortus conclúsus, fons signátus. 13 Emissiónes tuæ paradísus malórum punicórum, cum pomórum frúctibus, cypri cum nardo. 14 Nardus et crocus, fístula et cinnamómum, cum univérsis lignis Líbani; myrrha et áloe, cum ómnibus primis unguéntis. 15 Fons hortórum, púteus aquárum vivéntium, quæ fluunt ímpetu de Líbano. conditional[mense=8; stopword=sed]: !Cant 5:4-7 4 Diléctus meus misit manum suam per forámen, et venter meus intrémuit ad tactum ejus. 5 Surréxi ut aperírem dilécto meo: manus meæ stillavérunt myrrham, et dígiti mei pleni myrrha probatíssima. 6 Péssulum óstii mei apérui dilécto meo, at ille declináverat, atque transíerat. Anima mea liquefácta est, ut locútus est: quæsívi, et non invéni illum: vocávi, et non respóndit mihi. 7 Invenérunt me custódes qui circúmeunt civitátem: percussérunt me, et vulneravérunt me. Tulérunt pállium meum mihi custódes murórum. conditional[mense=9; stopword=sed]: !Cant 6:1-5 1 (Sponsa) Dilectus meus descendit in hortum suum ad areolam aromatum, ut pascatur in hortis, et lilia colligat. 2 Ego dilecto meo, et dilectus meus mihi, qui pascitur inter lilia. 3 (Sponsus) Pulchra es, amica mea; suavis, et decora sicut Jerúsalem; terribilis ut castrorum acies ordinata. 4 Averte oculos tuos a me, quia ipsi me avolare fecerunt. Capilli tui sicut grex caprarum quæ apparuerunt de Galaad. 5 Dentes tui sicut grex ovium quæ ascenderunt de lavacro: omnes gemellis fœtibus, et sterilis non est in eis. conditional[mense=10; stopword=sed]: !Cant 7:6-9 6 Quam pulchra es, et quam decora, carissima, in deliciis ! 7 Statura tua assimilata est palmæ, et ubera tua botris. 8 Dixi: Ascendam in palmam, et apprehendam fructus ejus; et erunt ubera tua sicut botri vineæ, et odor oris tui sicut malorum. 9 Guttur tuum sicut vinum optimum, dignum dilecto meo ad potandum, labiisque et dentibus illius ad ruminandum.",
         ],
         "Officium": [
           "Sanctæ Mariæ Sabbato",
@@ -1153,16 +1149,15 @@ exports[`Phase 1 spot-check validation > spot-checks 50+ representative feast fi
           "|Simplex|1.3|vide C10",
         ],
         "Responsory1": [
-          "R. Sancta et immaculáta virgínitas, quibus te láudibus éfferam, néscio:",
-          "* Quia quem cæli cápere non póterant, tuo grémio contulísti.",
+          "conditional[rubrica=tridentina]: R. Sancta et immaculáta virgínitas, quibus te láudibus éfferam, néscio: * Quia quem cæli cápere non póterant, tuo grémio contulísti. V. Benedícta tu in muliéribus, et benedíctus fructus ventris tui. R. Quia quem cæli cápere non póterant, tuo grémio contulisti.",
         ],
         "Rule": [
           "vide C10",
           "Special Benedictio",
         ],
       },
-      "sectionCount": 111,
-      "warningCount": 0,
+      "sectionCount": 112,
+      "warningCount": 1,
     },
     {
       "domain": "horas",
@@ -1172,8 +1167,7 @@ exports[`Phase 1 spot-check validation > spot-checks 50+ representative feast fi
       "samples": {
         "Ant Vespera": [],
         "Lectio1": [
-          "(nisi mense 4 et mense 6) De Canticis canticorum",
-          "1617 only",
+          "conditional[((((((mense=4 or mense=5) or mense=6) or mense=7) or mense=8) or mense=9) or mense=10)]: conditional[not(mense=10)]: conditional[not(mense=9)]: conditional[not(mense=8)]: conditional[not(mense=7)]: conditional[not(mense=6)]: conditional[not(mense=5)]: conditional[not(mense=4)]: conditional[(not(mense=4) and mense=6)]: De Canticis canticorum 1617 only conditional[mense=4; stopword=sed]: De Cánticis canticórum !Cant 2:1-7 1 Ego flos campi et lílium convállium. 2 Sicut lílium inter spinas, sic amíca mea inter fílias. 3 Sicut malus inter ligna silvárum, sic diléctus meus inter fílios. Sub umbra illíus quem desideráveram sedi, et fructus ejus dulcis gútturi meo. 4 Introdúxit me in cellam vináriam, ordinávit in me caritátem. 5 Fulcíte me flóribus, stipáte me malis, quia amóre lángueo. 6 Læva ejus sub cápite meo, et déxtera illíus amplexábitur me. 7 Adjúro vos, fíliæ Jerúsalem, per cápreas cervósque campórum, ne suscitétis neque evigiláre faciátis diléctam, quoadúsque ipsa velit. conditional[mense=5; stopword=sed]: !Cant 2:13-17 13 Surge, amíca mea, speciósa mea, et veni, 14 colúmba mea, in foramínibus petræ, in cavérna macériæ, osténde mihi fáciem tuam, sonet vox tua in áuribus meis: vox enim tua dulcis, et fácies tua decóra. 15 Cápite nobis vulpes párvulas, quæ demoliúntur víneas; nam vínea nostra flóruit. 16 Diléctus meus mihi, et ego illi, páscitur inter lília, 17 donec aspíret dies, et inclinéntur umbræ. Revértere; símilis esto, dilécte mi, cápreæ hinnulóque cervórum super montes Bether. conditional[mense=6; stopword=sed]: conditional[not(rubrica=1955)]: De Canticis canticorum !Cant 4:1-4 1 (Sponsus) Quam pulchra es, amica mea ! quam pulchra es ! Oculi tui columbarum, absque eo quod intrinsecus latet. Capilli tui sicut greges caprarum quæ ascenderunt de monte Galaad. 2 Dentes tui sicut greges tonsarum quæ ascenderunt de lavacro; omnes gemellis fœtibus, et sterilis non est inter eas. 3 Sicut vitta coccinea labia tua, et eloquium tuum dulce. Sicut fragmen mali punici, ita genæ tuæ, absque eo quod intrinsecus latet. 4 Sicut turris David collum tuum, quæ ædificata est cum propugnaculis; mille clypei pendent ex ea, omnis armatura fortium. conditional[mense=7; stopword=sed]: conditional[not(rubrica=1955)]: !Cant 4:11-15 11 Favus distíllans lábia tua, sponsa; mel et lac sub lingua tua: et odor vestimentórum tuórum sicut odor thuris. 12 Hortus conclúsus soror mea, sponsa, hortus conclúsus, fons signátus. 13 Emissiónes tuæ paradísus malórum punicórum, cum pomórum frúctibus, cypri cum nardo. 14 Nardus et crocus, fístula et cinnamómum, cum univérsis lignis Líbani; myrrha et áloe, cum ómnibus primis unguéntis. 15 Fons hortórum, púteus aquárum vivéntium, quæ fluunt ímpetu de Líbano. conditional[mense=8; stopword=sed]: !Cant 5:4-7 4 Diléctus meus misit manum suam per forámen, et venter meus intrémuit ad tactum ejus. 5 Surréxi ut aperírem dilécto meo: manus meæ stillavérunt myrrham, et dígiti mei pleni myrrha probatíssima. 6 Péssulum óstii mei apérui dilécto meo, at ille declináverat, atque transíerat. Anima mea liquefácta est, ut locútus est: quæsívi, et non invéni illum: vocávi, et non respóndit mihi. 7 Invenérunt me custódes qui circúmeunt civitátem: percussérunt me, et vulneravérunt me. Tulérunt pállium meum mihi custódes murórum. conditional[mense=9; stopword=sed]: !Cant 6:1-5 1 (Sponsa) Dilectus meus descendit in hortum suum ad areolam aromatum, ut pascatur in hortis, et lilia colligat. 2 Ego dilecto meo, et dilectus meus mihi, qui pascitur inter lilia. 3 (Sponsus) Pulchra es, amica mea; suavis, et decora sicut Jerúsalem; terribilis ut castrorum acies ordinata. 4 Averte oculos tuos a me, quia ipsi me avolare fecerunt. Capilli tui sicut grex caprarum quæ apparuerunt de Galaad. 5 Dentes tui sicut grex ovium quæ ascenderunt de lavacro: omnes gemellis fœtibus, et sterilis non est in eis. conditional[mense=10; stopword=sed]: !Cant 7:6-9 6 Quam pulchra es, et quam decora, carissima, in deliciis ! 7 Statura tua assimilata est palmæ, et ubera tua botris. 8 Dixi: Ascendam in palmam, et apprehendam fructus ejus; et erunt ubera tua sicut botri vineæ, et odor oris tui sicut malorum. 9 Guttur tuum sicut vinum optimum, dignum dilecto meo ad potandum, labiisque et dentibus illius ad ruminandum.",
         ],
         "Officium": [
           "Sanctæ Mariæ Sabbato",
@@ -1186,16 +1180,15 @@ exports[`Phase 1 spot-check validation > spot-checks 50+ representative feast fi
           "|Simplex|1.3|vide C10",
         ],
         "Responsory1": [
-          "R. Sancta et immaculáta virgínitas, quibus te láudibus éfferam, néscio:",
-          "* Quia quem cæli cápere non póterant, tuo grémio contulísti.",
+          "conditional[rubrica=tridentina]: R. Sancta et immaculáta virgínitas, quibus te láudibus éfferam, néscio: * Quia quem cæli cápere non póterant, tuo grémio contulísti. V. Benedícta tu in muliéribus, et benedíctus fructus ventris tui. R. Quia quem cæli cápere non póterant, tuo grémio contulisti.",
         ],
         "Rule": [
           "vide C10",
           "Special Benedictio",
         ],
       },
-      "sectionCount": 111,
-      "warningCount": 0,
+      "sectionCount": 112,
+      "warningCount": 2,
     },
     {
       "domain": "horas",
@@ -1205,8 +1198,7 @@ exports[`Phase 1 spot-check validation > spot-checks 50+ representative feast fi
       "samples": {
         "Ant Vespera": [],
         "Lectio1": [
-          "(nisi mense 4 et mense 6) De Canticis canticorum",
-          "1617 only",
+          "conditional[((((((mense=4 or mense=5) or mense=6) or mense=7) or mense=8) or mense=9) or mense=10)]: conditional[not(mense=10)]: conditional[not(mense=9)]: conditional[not(mense=8)]: conditional[not(mense=7)]: conditional[not(mense=6)]: conditional[not(mense=5)]: conditional[not(mense=4)]: conditional[(not(mense=4) and mense=6)]: De Canticis canticorum 1617 only conditional[mense=4; stopword=sed]: De Cánticis canticórum !Cant 2:1-7 1 Ego flos campi et lílium convállium. 2 Sicut lílium inter spinas, sic amíca mea inter fílias. 3 Sicut malus inter ligna silvárum, sic diléctus meus inter fílios. Sub umbra illíus quem desideráveram sedi, et fructus ejus dulcis gútturi meo. 4 Introdúxit me in cellam vináriam, ordinávit in me caritátem. 5 Fulcíte me flóribus, stipáte me malis, quia amóre lángueo. 6 Læva ejus sub cápite meo, et déxtera illíus amplexábitur me. 7 Adjúro vos, fíliæ Jerúsalem, per cápreas cervósque campórum, ne suscitétis neque evigiláre faciátis diléctam, quoadúsque ipsa velit. conditional[mense=5; stopword=sed]: !Cant 2:13-17 13 Surge, amíca mea, speciósa mea, et veni, 14 colúmba mea, in foramínibus petræ, in cavérna macériæ, osténde mihi fáciem tuam, sonet vox tua in áuribus meis: vox enim tua dulcis, et fácies tua decóra. 15 Cápite nobis vulpes párvulas, quæ demoliúntur víneas; nam vínea nostra flóruit. 16 Diléctus meus mihi, et ego illi, páscitur inter lília, 17 donec aspíret dies, et inclinéntur umbræ. Revértere; símilis esto, dilécte mi, cápreæ hinnulóque cervórum super montes Bether. conditional[mense=6; stopword=sed]: conditional[not(rubrica=1955)]: De Canticis canticorum !Cant 4:1-4 1 (Sponsus) Quam pulchra es, amica mea ! quam pulchra es ! Oculi tui columbarum, absque eo quod intrinsecus latet. Capilli tui sicut greges caprarum quæ ascenderunt de monte Galaad. 2 Dentes tui sicut greges tonsarum quæ ascenderunt de lavacro; omnes gemellis fœtibus, et sterilis non est inter eas. 3 Sicut vitta coccinea labia tua, et eloquium tuum dulce. Sicut fragmen mali punici, ita genæ tuæ, absque eo quod intrinsecus latet. 4 Sicut turris David collum tuum, quæ ædificata est cum propugnaculis; mille clypei pendent ex ea, omnis armatura fortium. conditional[mense=7; stopword=sed]: conditional[not(rubrica=1955)]: !Cant 4:11-15 11 Favus distíllans lábia tua, sponsa; mel et lac sub lingua tua: et odor vestimentórum tuórum sicut odor thuris. 12 Hortus conclúsus soror mea, sponsa, hortus conclúsus, fons signátus. 13 Emissiónes tuæ paradísus malórum punicórum, cum pomórum frúctibus, cypri cum nardo. 14 Nardus et crocus, fístula et cinnamómum, cum univérsis lignis Líbani; myrrha et áloe, cum ómnibus primis unguéntis. 15 Fons hortórum, púteus aquárum vivéntium, quæ fluunt ímpetu de Líbano. conditional[mense=8; stopword=sed]: !Cant 5:4-7 4 Diléctus meus misit manum suam per forámen, et venter meus intrémuit ad tactum ejus. 5 Surréxi ut aperírem dilécto meo: manus meæ stillavérunt myrrham, et dígiti mei pleni myrrha probatíssima. 6 Péssulum óstii mei apérui dilécto meo, at ille declináverat, atque transíerat. Anima mea liquefácta est, ut locútus est: quæsívi, et non invéni illum: vocávi, et non respóndit mihi. 7 Invenérunt me custódes qui circúmeunt civitátem: percussérunt me, et vulneravérunt me. Tulérunt pállium meum mihi custódes murórum. conditional[mense=9; stopword=sed]: !Cant 6:1-5 1 (Sponsa) Dilectus meus descendit in hortum suum ad areolam aromatum, ut pascatur in hortis, et lilia colligat. 2 Ego dilecto meo, et dilectus meus mihi, qui pascitur inter lilia. 3 (Sponsus) Pulchra es, amica mea; suavis, et decora sicut Jerúsalem; terribilis ut castrorum acies ordinata. 4 Averte oculos tuos a me, quia ipsi me avolare fecerunt. Capilli tui sicut grex caprarum quæ apparuerunt de Galaad. 5 Dentes tui sicut grex ovium quæ ascenderunt de lavacro: omnes gemellis fœtibus, et sterilis non est in eis. conditional[mense=10; stopword=sed]: !Cant 7:6-9 6 Quam pulchra es, et quam decora, carissima, in deliciis ! 7 Statura tua assimilata est palmæ, et ubera tua botris. 8 Dixi: Ascendam in palmam, et apprehendam fructus ejus; et erunt ubera tua sicut botri vineæ, et odor oris tui sicut malorum. 9 Guttur tuum sicut vinum optimum, dignum dilecto meo ad potandum, labiisque et dentibus illius ad ruminandum.",
         ],
         "Officium": [
           "Sanctæ Mariæ Sabbato",
@@ -1219,16 +1211,15 @@ exports[`Phase 1 spot-check validation > spot-checks 50+ representative feast fi
           "|Simplex|1.3|vide C10",
         ],
         "Responsory1": [
-          "R. Sancta et immaculáta virgínitas, quibus te láudibus éfferam, néscio:",
-          "* Quia quem cæli cápere non póterant, tuo grémio contulísti.",
+          "conditional[rubrica=tridentina]: R. Sancta et immaculáta virgínitas, quibus te láudibus éfferam, néscio: * Quia quem cæli cápere non póterant, tuo grémio contulísti. V. Benedícta tu in muliéribus, et benedíctus fructus ventris tui. R. Quia quem cæli cápere non póterant, tuo grémio contulisti.",
         ],
         "Rule": [
           "vide C10",
           "Special Benedictio",
         ],
       },
-      "sectionCount": 111,
-      "warningCount": 0,
+      "sectionCount": 112,
+      "warningCount": 2,
     },
     {
       "domain": "horas",
@@ -1238,8 +1229,7 @@ exports[`Phase 1 spot-check validation > spot-checks 50+ representative feast fi
       "samples": {
         "Ant Vespera": [],
         "Lectio1": [
-          "(nisi mense 4 et mense 6) De Canticis canticorum",
-          "1617 only",
+          "conditional[((((((mense=4 or mense=5) or mense=6) or mense=7) or mense=8) or mense=9) or mense=10)]: conditional[not(mense=10)]: conditional[not(mense=9)]: conditional[not(mense=8)]: conditional[not(mense=7)]: conditional[not(mense=6)]: conditional[not(mense=5)]: conditional[not(mense=4)]: conditional[(not(mense=4) and mense=6)]: De Canticis canticorum 1617 only conditional[mense=4; stopword=sed]: De Cánticis canticórum !Cant 2:1-7 1 Ego flos campi et lílium convállium. 2 Sicut lílium inter spinas, sic amíca mea inter fílias. 3 Sicut malus inter ligna silvárum, sic diléctus meus inter fílios. Sub umbra illíus quem desideráveram sedi, et fructus ejus dulcis gútturi meo. 4 Introdúxit me in cellam vináriam, ordinávit in me caritátem. 5 Fulcíte me flóribus, stipáte me malis, quia amóre lángueo. 6 Læva ejus sub cápite meo, et déxtera illíus amplexábitur me. 7 Adjúro vos, fíliæ Jerúsalem, per cápreas cervósque campórum, ne suscitétis neque evigiláre faciátis diléctam, quoadúsque ipsa velit. conditional[mense=5; stopword=sed]: !Cant 2:13-17 13 Surge, amíca mea, speciósa mea, et veni, 14 colúmba mea, in foramínibus petræ, in cavérna macériæ, osténde mihi fáciem tuam, sonet vox tua in áuribus meis: vox enim tua dulcis, et fácies tua decóra. 15 Cápite nobis vulpes párvulas, quæ demoliúntur víneas; nam vínea nostra flóruit. 16 Diléctus meus mihi, et ego illi, páscitur inter lília, 17 donec aspíret dies, et inclinéntur umbræ. Revértere; símilis esto, dilécte mi, cápreæ hinnulóque cervórum super montes Bether. conditional[mense=6; stopword=sed]: conditional[not(rubrica=1955)]: De Canticis canticorum !Cant 4:1-4 1 (Sponsus) Quam pulchra es, amica mea ! quam pulchra es ! Oculi tui columbarum, absque eo quod intrinsecus latet. Capilli tui sicut greges caprarum quæ ascenderunt de monte Galaad. 2 Dentes tui sicut greges tonsarum quæ ascenderunt de lavacro; omnes gemellis fœtibus, et sterilis non est inter eas. 3 Sicut vitta coccinea labia tua, et eloquium tuum dulce. Sicut fragmen mali punici, ita genæ tuæ, absque eo quod intrinsecus latet. 4 Sicut turris David collum tuum, quæ ædificata est cum propugnaculis; mille clypei pendent ex ea, omnis armatura fortium. conditional[mense=7; stopword=sed]: conditional[not(rubrica=1955)]: !Cant 4:11-15 11 Favus distíllans lábia tua, sponsa; mel et lac sub lingua tua: et odor vestimentórum tuórum sicut odor thuris. 12 Hortus conclúsus soror mea, sponsa, hortus conclúsus, fons signátus. 13 Emissiónes tuæ paradísus malórum punicórum, cum pomórum frúctibus, cypri cum nardo. 14 Nardus et crocus, fístula et cinnamómum, cum univérsis lignis Líbani; myrrha et áloe, cum ómnibus primis unguéntis. 15 Fons hortórum, púteus aquárum vivéntium, quæ fluunt ímpetu de Líbano. conditional[mense=8; stopword=sed]: !Cant 5:4-7 4 Diléctus meus misit manum suam per forámen, et venter meus intrémuit ad tactum ejus. 5 Surréxi ut aperírem dilécto meo: manus meæ stillavérunt myrrham, et dígiti mei pleni myrrha probatíssima. 6 Péssulum óstii mei apérui dilécto meo, at ille declináverat, atque transíerat. Anima mea liquefácta est, ut locútus est: quæsívi, et non invéni illum: vocávi, et non respóndit mihi. 7 Invenérunt me custódes qui circúmeunt civitátem: percussérunt me, et vulneravérunt me. Tulérunt pállium meum mihi custódes murórum. conditional[mense=9; stopword=sed]: !Cant 6:1-5 1 (Sponsa) Dilectus meus descendit in hortum suum ad areolam aromatum, ut pascatur in hortis, et lilia colligat. 2 Ego dilecto meo, et dilectus meus mihi, qui pascitur inter lilia. 3 (Sponsus) Pulchra es, amica mea; suavis, et decora sicut Jerúsalem; terribilis ut castrorum acies ordinata. 4 Averte oculos tuos a me, quia ipsi me avolare fecerunt. Capilli tui sicut grex caprarum quæ apparuerunt de Galaad. 5 Dentes tui sicut grex ovium quæ ascenderunt de lavacro: omnes gemellis fœtibus, et sterilis non est in eis. conditional[mense=10; stopword=sed]: !Cant 7:6-9 6 Quam pulchra es, et quam decora, carissima, in deliciis ! 7 Statura tua assimilata est palmæ, et ubera tua botris. 8 Dixi: Ascendam in palmam, et apprehendam fructus ejus; et erunt ubera tua sicut botri vineæ, et odor oris tui sicut malorum. 9 Guttur tuum sicut vinum optimum, dignum dilecto meo ad potandum, labiisque et dentibus illius ad ruminandum.",
         ],
         "Officium": [
           "Sanctæ Mariæ Sabbato",
@@ -1252,16 +1242,15 @@ exports[`Phase 1 spot-check validation > spot-checks 50+ representative feast fi
           "|Simplex|1.3|vide C10",
         ],
         "Responsory1": [
-          "R. Sancta et immaculáta virgínitas, quibus te láudibus éfferam, néscio:",
-          "* Quia quem cæli cápere non póterant, tuo grémio contulísti.",
+          "conditional[rubrica=tridentina]: R. Sancta et immaculáta virgínitas, quibus te láudibus éfferam, néscio: * Quia quem cæli cápere non póterant, tuo grémio contulísti. V. Benedícta tu in muliéribus, et benedíctus fructus ventris tui. R. Quia quem cæli cápere non póterant, tuo grémio contulisti.",
         ],
         "Rule": [
           "vide C10",
           "Special Benedictio",
         ],
       },
-      "sectionCount": 111,
-      "warningCount": 0,
+      "sectionCount": 112,
+      "warningCount": 2,
     },
     {
       "domain": "horas",
@@ -1271,30 +1260,27 @@ exports[`Phase 1 spot-check validation > spot-checks 50+ representative feast fi
       "samples": {
         "Ant Vespera": [],
         "Lectio1": [
-          "(nisi mense 4 et mense 6) De Canticis canticorum",
-          "1617 only",
+          "conditional[((((((mense=4 or mense=5) or mense=6) or mense=7) or mense=8) or mense=9) or mense=10)]: conditional[not(mense=10)]: conditional[not(mense=9)]: conditional[not(mense=8)]: conditional[not(mense=7)]: conditional[not(mense=6)]: conditional[not(mense=5)]: conditional[not(mense=4)]: conditional[(not(mense=4) and mense=6)]: De Canticis canticorum 1617 only conditional[mense=4; stopword=sed]: De Cánticis canticórum !Cant 2:1-7 1 Ego flos campi et lílium convállium. 2 Sicut lílium inter spinas, sic amíca mea inter fílias. 3 Sicut malus inter ligna silvárum, sic diléctus meus inter fílios. Sub umbra illíus quem desideráveram sedi, et fructus ejus dulcis gútturi meo. 4 Introdúxit me in cellam vináriam, ordinávit in me caritátem. 5 Fulcíte me flóribus, stipáte me malis, quia amóre lángueo. 6 Læva ejus sub cápite meo, et déxtera illíus amplexábitur me. 7 Adjúro vos, fíliæ Jerúsalem, per cápreas cervósque campórum, ne suscitétis neque evigiláre faciátis diléctam, quoadúsque ipsa velit. conditional[mense=5; stopword=sed]: !Cant 2:13-17 13 Surge, amíca mea, speciósa mea, et veni, 14 colúmba mea, in foramínibus petræ, in cavérna macériæ, osténde mihi fáciem tuam, sonet vox tua in áuribus meis: vox enim tua dulcis, et fácies tua decóra. 15 Cápite nobis vulpes párvulas, quæ demoliúntur víneas; nam vínea nostra flóruit. 16 Diléctus meus mihi, et ego illi, páscitur inter lília, 17 donec aspíret dies, et inclinéntur umbræ. Revértere; símilis esto, dilécte mi, cápreæ hinnulóque cervórum super montes Bether. conditional[mense=6; stopword=sed]: conditional[not(rubrica=1955)]: De Canticis canticorum !Cant 4:1-4 1 (Sponsus) Quam pulchra es, amica mea ! quam pulchra es ! Oculi tui columbarum, absque eo quod intrinsecus latet. Capilli tui sicut greges caprarum quæ ascenderunt de monte Galaad. 2 Dentes tui sicut greges tonsarum quæ ascenderunt de lavacro; omnes gemellis fœtibus, et sterilis non est inter eas. 3 Sicut vitta coccinea labia tua, et eloquium tuum dulce. Sicut fragmen mali punici, ita genæ tuæ, absque eo quod intrinsecus latet. 4 Sicut turris David collum tuum, quæ ædificata est cum propugnaculis; mille clypei pendent ex ea, omnis armatura fortium. conditional[mense=7; stopword=sed]: conditional[not(rubrica=1955)]: !Cant 4:11-15 11 Favus distíllans lábia tua, sponsa; mel et lac sub lingua tua: et odor vestimentórum tuórum sicut odor thuris. 12 Hortus conclúsus soror mea, sponsa, hortus conclúsus, fons signátus. 13 Emissiónes tuæ paradísus malórum punicórum, cum pomórum frúctibus, cypri cum nardo. 14 Nardus et crocus, fístula et cinnamómum, cum univérsis lignis Líbani; myrrha et áloe, cum ómnibus primis unguéntis. 15 Fons hortórum, púteus aquárum vivéntium, quæ fluunt ímpetu de Líbano. conditional[mense=8; stopword=sed]: !Cant 5:4-7 4 Diléctus meus misit manum suam per forámen, et venter meus intrémuit ad tactum ejus. 5 Surréxi ut aperírem dilécto meo: manus meæ stillavérunt myrrham, et dígiti mei pleni myrrha probatíssima. 6 Péssulum óstii mei apérui dilécto meo, at ille declináverat, atque transíerat. Anima mea liquefácta est, ut locútus est: quæsívi, et non invéni illum: vocávi, et non respóndit mihi. 7 Invenérunt me custódes qui circúmeunt civitátem: percussérunt me, et vulneravérunt me. Tulérunt pállium meum mihi custódes murórum. conditional[mense=9; stopword=sed]: !Cant 6:1-5 1 (Sponsa) Dilectus meus descendit in hortum suum ad areolam aromatum, ut pascatur in hortis, et lilia colligat. 2 Ego dilecto meo, et dilectus meus mihi, qui pascitur inter lilia. 3 (Sponsus) Pulchra es, amica mea; suavis, et decora sicut Jerúsalem; terribilis ut castrorum acies ordinata. 4 Averte oculos tuos a me, quia ipsi me avolare fecerunt. Capilli tui sicut grex caprarum quæ apparuerunt de Galaad. 5 Dentes tui sicut grex ovium quæ ascenderunt de lavacro: omnes gemellis fœtibus, et sterilis non est in eis. conditional[mense=10; stopword=sed]: !Cant 7:6-9 6 Quam pulchra es, et quam decora, carissima, in deliciis ! 7 Statura tua assimilata est palmæ, et ubera tua botris. 8 Dixi: Ascendam in palmam, et apprehendam fructus ejus; et erunt ubera tua sicut botri vineæ, et odor oris tui sicut malorum. 9 Guttur tuum sicut vinum optimum, dignum dilecto meo ad potandum, labiisque et dentibus illius ad ruminandum.",
         ],
         "Officium": [
           "Sanctæ Mariæ Sabbato",
         ],
         "Oratio": [
-          "Deus, qui salútis ætérnæ, beátæ Maríæ virginitáte fecúnda, humáno géneri prǽmia præstitísti: tríbue, quǽsumus; ut ipsam pro nobis intercédere sentiámus, per quam merúimus auctórem vitæ suscípere, Dóminum nostrum Jesum Christum Fílium tuum:",
-          "$Qui tecum",
+          "conditional[not(rubrica=cisterciensis)]: Deus, qui salútis ætérnæ, beátæ Maríæ virginitáte fecúnda, humáno géneri prǽmia præstitísti: tríbue, quǽsumus; ut ipsam pro nobis intercédere sentiámus, per quam merúimus auctórem vitæ suscípere, Dóminum nostrum Jesum Christum Fílium tuum: $Qui tecum",
         ],
         "Rank": [
           "|Simplex|1.3|vide C10",
         ],
         "Responsory1": [
-          "R. Sancta et immaculáta virgínitas, quibus te láudibus éfferam, néscio:",
-          "* Quia quem cæli cápere non póterant, tuo grémio contulísti.",
+          "conditional[rubrica=tridentina]: R. Sancta et immaculáta virgínitas, quibus te láudibus éfferam, néscio: * Quia quem cæli cápere non póterant, tuo grémio contulísti. V. Benedícta tu in muliéribus, et benedíctus fructus ventris tui. R. Quia quem cæli cápere non póterant, tuo grémio contulisti.",
         ],
         "Rule": [
           "vide C10",
           "Special Benedictio",
         ],
       },
-      "sectionCount": 111,
-      "warningCount": 0,
+      "sectionCount": 112,
+      "warningCount": 2,
     },
     {
       "domain": "horas",
@@ -1304,8 +1290,7 @@ exports[`Phase 1 spot-check validation > spot-checks 50+ representative feast fi
       "samples": {
         "Ant Vespera": [],
         "Lectio1": [
-          "(nisi mense 4 et mense 6) De Canticis canticorum",
-          "1617 only",
+          "conditional[((((((mense=4 or mense=5) or mense=6) or mense=7) or mense=8) or mense=9) or mense=10)]: conditional[not(mense=10)]: conditional[not(mense=9)]: conditional[not(mense=8)]: conditional[not(mense=7)]: conditional[not(mense=6)]: conditional[not(mense=5)]: conditional[not(mense=4)]: conditional[(not(mense=4) and mense=6)]: De Canticis canticorum 1617 only conditional[mense=4; stopword=sed]: De Cánticis canticórum !Cant 2:1-7 1 Ego flos campi et lílium convállium. 2 Sicut lílium inter spinas, sic amíca mea inter fílias. 3 Sicut malus inter ligna silvárum, sic diléctus meus inter fílios. Sub umbra illíus quem desideráveram sedi, et fructus ejus dulcis gútturi meo. 4 Introdúxit me in cellam vináriam, ordinávit in me caritátem. 5 Fulcíte me flóribus, stipáte me malis, quia amóre lángueo. 6 Læva ejus sub cápite meo, et déxtera illíus amplexábitur me. 7 Adjúro vos, fíliæ Jerúsalem, per cápreas cervósque campórum, ne suscitétis neque evigiláre faciátis diléctam, quoadúsque ipsa velit. conditional[mense=5; stopword=sed]: !Cant 2:13-17 13 Surge, amíca mea, speciósa mea, et veni, 14 colúmba mea, in foramínibus petræ, in cavérna macériæ, osténde mihi fáciem tuam, sonet vox tua in áuribus meis: vox enim tua dulcis, et fácies tua decóra. 15 Cápite nobis vulpes párvulas, quæ demoliúntur víneas; nam vínea nostra flóruit. 16 Diléctus meus mihi, et ego illi, páscitur inter lília, 17 donec aspíret dies, et inclinéntur umbræ. Revértere; símilis esto, dilécte mi, cápreæ hinnulóque cervórum super montes Bether. conditional[mense=6; stopword=sed]: conditional[not(rubrica=1955)]: De Canticis canticorum !Cant 4:1-4 1 (Sponsus) Quam pulchra es, amica mea ! quam pulchra es ! Oculi tui columbarum, absque eo quod intrinsecus latet. Capilli tui sicut greges caprarum quæ ascenderunt de monte Galaad. 2 Dentes tui sicut greges tonsarum quæ ascenderunt de lavacro; omnes gemellis fœtibus, et sterilis non est inter eas. 3 Sicut vitta coccinea labia tua, et eloquium tuum dulce. Sicut fragmen mali punici, ita genæ tuæ, absque eo quod intrinsecus latet. 4 Sicut turris David collum tuum, quæ ædificata est cum propugnaculis; mille clypei pendent ex ea, omnis armatura fortium. conditional[mense=7; stopword=sed]: conditional[not(rubrica=1955)]: !Cant 4:11-15 11 Favus distíllans lábia tua, sponsa; mel et lac sub lingua tua: et odor vestimentórum tuórum sicut odor thuris. 12 Hortus conclúsus soror mea, sponsa, hortus conclúsus, fons signátus. 13 Emissiónes tuæ paradísus malórum punicórum, cum pomórum frúctibus, cypri cum nardo. 14 Nardus et crocus, fístula et cinnamómum, cum univérsis lignis Líbani; myrrha et áloe, cum ómnibus primis unguéntis. 15 Fons hortórum, púteus aquárum vivéntium, quæ fluunt ímpetu de Líbano. conditional[mense=8; stopword=sed]: !Cant 5:4-7 4 Diléctus meus misit manum suam per forámen, et venter meus intrémuit ad tactum ejus. 5 Surréxi ut aperírem dilécto meo: manus meæ stillavérunt myrrham, et dígiti mei pleni myrrha probatíssima. 6 Péssulum óstii mei apérui dilécto meo, at ille declináverat, atque transíerat. Anima mea liquefácta est, ut locútus est: quæsívi, et non invéni illum: vocávi, et non respóndit mihi. 7 Invenérunt me custódes qui circúmeunt civitátem: percussérunt me, et vulneravérunt me. Tulérunt pállium meum mihi custódes murórum. conditional[mense=9; stopword=sed]: !Cant 6:1-5 1 (Sponsa) Dilectus meus descendit in hortum suum ad areolam aromatum, ut pascatur in hortis, et lilia colligat. 2 Ego dilecto meo, et dilectus meus mihi, qui pascitur inter lilia. 3 (Sponsus) Pulchra es, amica mea; suavis, et decora sicut Jerúsalem; terribilis ut castrorum acies ordinata. 4 Averte oculos tuos a me, quia ipsi me avolare fecerunt. Capilli tui sicut grex caprarum quæ apparuerunt de Galaad. 5 Dentes tui sicut grex ovium quæ ascenderunt de lavacro: omnes gemellis fœtibus, et sterilis non est in eis. conditional[mense=10; stopword=sed]: !Cant 7:6-9 6 Quam pulchra es, et quam decora, carissima, in deliciis ! 7 Statura tua assimilata est palmæ, et ubera tua botris. 8 Dixi: Ascendam in palmam, et apprehendam fructus ejus; et erunt ubera tua sicut botri vineæ, et odor oris tui sicut malorum. 9 Guttur tuum sicut vinum optimum, dignum dilecto meo ad potandum, labiisque et dentibus illius ad ruminandum.",
         ],
         "Officium": [
           "Sanctæ Mariæ Sabbato",
@@ -1318,16 +1303,15 @@ exports[`Phase 1 spot-check validation > spot-checks 50+ representative feast fi
           "|Simplex|1.3|vide C10",
         ],
         "Responsory1": [
-          "R. Sancta et immaculáta virgínitas, quibus te láudibus éfferam, néscio:",
-          "* Quia quem cæli cápere non póterant, tuo grémio contulísti.",
+          "conditional[rubrica=tridentina]: R. Sancta et immaculáta virgínitas, quibus te láudibus éfferam, néscio: * Quia quem cæli cápere non póterant, tuo grémio contulísti. V. Benedícta tu in muliéribus, et benedíctus fructus ventris tui. R. Quia quem cæli cápere non póterant, tuo grémio contulisti.",
         ],
         "Rule": [
           "vide C10",
           "Special Benedictio",
         ],
       },
-      "sectionCount": 111,
-      "warningCount": 0,
+      "sectionCount": 112,
+      "warningCount": 2,
     },
     {
       "domain": "horas",
@@ -1360,8 +1344,8 @@ exports[`Phase 1 spot-check validation > spot-checks 50+ representative feast fi
           "Antiphonas horas",
         ],
       },
-      "sectionCount": 75,
-      "warningCount": 0,
+      "sectionCount": 76,
+      "warningCount": 3,
     },
     {
       "domain": "horas",
@@ -1370,12 +1354,10 @@ exports[`Phase 1 spot-check validation > spot-checks 50+ representative feast fi
       "path": "horas/Latin/CommuneM/C12.txt",
       "samples": {
         "Ant Vespera": [
-          "Beáta Mater * et intácta Virgo, gloriósa Regína mundi, intercéde pro nobis ad Dóminum.;;109\\n;;112\\n;;121\\n;;126",
-          ";;109\\n;;112\\n;;121\\n;;126",
+          "conditional[rubrica=cisterciensis]: Beáta Mater * et intácta Virgo, gloriósa Regína mundi, intercéde pro nobis ad Dóminum.;;109\\n;;112\\n;;121\\n;;126 ;;109\\n;;112\\n;;121\\n;;126",
         ],
         "Lectio1": [
-          "!Lectio brevis",
-          "!S. Aug. Serm. 18. de Sanctis",
+          "conditional[rubrica=cisterciensis]: !Lectio brevis !S. Aug. Serm. 18. de Sanctis Admítte piíssima Dei Génitrix preces nostras intra sacrárium exauditiónis, et repórta nobis antídotum reconciliatiónis. Sit per te excussábile quod per te ingérimus: fiat impetrábile quod fida mente póscimus. Accipe quod offérimus, redóna quod rogámus, excúsa quod timémus.",
         ],
         "Officium": [
           "Officium parvum Beatæ Maríæ Virginis",
@@ -1385,16 +1367,15 @@ exports[`Phase 1 spot-check validation > spot-checks 50+ representative feast fi
           "|Simplex|1|ex C11",
         ],
         "Responsory1": [
-          "_",
-          "$rubrica Matutinum parvum",
+          "conditional[rubrica=cisterciensis]: _ $rubrica Matutinum parvum",
         ],
         "Rule": [
           "Omit Incipit mute",
           "Omit Suffragium mute",
         ],
       },
-      "sectionCount": 69,
-      "warningCount": 47,
+      "sectionCount": 70,
+      "warningCount": 53,
     },
     {
       "domain": "horas",
@@ -1428,8 +1409,8 @@ exports[`Phase 1 spot-check validation > spot-checks 50+ representative feast fi
           "@CommuneM/C12",
         ],
       },
-      "sectionCount": 36,
-      "warningCount": 18,
+      "sectionCount": 37,
+      "warningCount": 19,
     },
     {
       "domain": "horas",
@@ -1460,8 +1441,8 @@ exports[`Phase 1 spot-check validation > spot-checks 50+ representative feast fi
           "@CommuneM/C12",
         ],
       },
-      "sectionCount": 57,
-      "warningCount": 56,
+      "sectionCount": 58,
+      "warningCount": 58,
     },
     {
       "domain": "horas",
@@ -1470,12 +1451,10 @@ exports[`Phase 1 spot-check validation > spot-checks 50+ representative feast fi
       "path": "horas/Latin/CommuneM/C12Q.txt",
       "samples": {
         "Ant Vespera": [
-          "Beáta Mater * et intácta Virgo, gloriósa Regína mundi, intercéde pro nobis ad Dóminum.;;109\\n;;112\\n;;121\\n;;126",
-          ";;109\\n;;112\\n;;121\\n;;126",
+          "conditional[rubrica=cisterciensis]: Beáta Mater * et intácta Virgo, gloriósa Regína mundi, intercéde pro nobis ad Dóminum.;;109\\n;;112\\n;;121\\n;;126 ;;109\\n;;112\\n;;121\\n;;126",
         ],
         "Lectio1": [
-          "!Lectio brevis",
-          "!S. Aug. Serm. 18. de Sanctis",
+          "conditional[rubrica=cisterciensis]: !Lectio brevis !S. Aug. Serm. 18. de Sanctis Admítte piíssima Dei Génitrix preces nostras intra sacrárium exauditiónis, et repórta nobis antídotum reconciliatiónis. Sit per te excussábile quod per te ingérimus: fiat impetrábile quod fida mente póscimus. Accipe quod offérimus, redóna quod rogámus, excúsa quod timémus.",
         ],
         "Officium": [
           "Officium parvum Beatæ Maríæ Virginis",
@@ -1485,16 +1464,15 @@ exports[`Phase 1 spot-check validation > spot-checks 50+ representative feast fi
           "|Simplex|1|ex C11",
         ],
         "Responsory1": [
-          "_",
-          "$rubrica Matutinum parvum",
+          "conditional[rubrica=cisterciensis]: _ $rubrica Matutinum parvum",
         ],
         "Rule": [
           "Omit Incipit mute",
           "Omit Suffragium mute",
         ],
       },
-      "sectionCount": 69,
-      "warningCount": 47,
+      "sectionCount": 70,
+      "warningCount": 54,
     },
   ],
   "skippedCount": 2,

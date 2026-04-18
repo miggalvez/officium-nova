@@ -141,6 +141,77 @@ describe('composeHour', () => {
     expect(renderRuns(hymn.lines[0]!, 'English')).toBe('Before the ending of the day');
   });
 
+  it('resolves an incipit slot from an Ordinarium __preamble heading block', () => {
+    const corpus = new InMemoryTextIndex();
+    corpus.addFile({
+      path: 'horas/Ordinarium/Prima.txt',
+      sections: [
+        {
+          header: '__preamble',
+          content: [
+            { type: 'heading', value: 'Incipit' },
+            { type: 'formulaRef', name: 'Deus in adjutorium' },
+            { type: 'separator' },
+            { type: 'macroRef', name: 'Alleluia' },
+            { type: 'heading', value: 'Conclusio' },
+            { type: 'formulaRef', name: 'Benedicamus Domino' }
+          ],
+          startLine: 1,
+          endLine: 6
+        }
+      ]
+    });
+    corpus.addFile(
+      makeFileMulti('horas/Latin/Psalterium/Common/Prayers', [
+        {
+          header: 'Deus in adjutorium',
+          content: [{ type: 'verseMarker', marker: 'V.', text: 'Deus, in adjutórium meum inténde.' }]
+        },
+        {
+          header: 'Alleluia',
+          content: [{ type: 'text', value: 'Allelúja.' }]
+        },
+        {
+          header: 'Benedicamus Domino',
+          content: [
+            { type: 'verseMarker', marker: 'V.', text: 'Benedicámus Dómino.' },
+            { type: 'verseMarker', marker: 'R.', text: 'Deo grátias.' }
+          ]
+        }
+      ])
+    );
+
+    const hour: HourStructure = {
+      hour: 'prime',
+      slots: {
+        incipit: {
+          kind: 'single-ref',
+          ref: { path: 'horas/Ordinarium/Prima', section: 'Incipit' }
+        },
+        conclusion: {
+          kind: 'single-ref',
+          ref: { path: 'horas/Ordinarium/Prima', section: 'Conclusio' }
+        }
+      },
+      directives: []
+    };
+
+    const composed = composeHour({
+      corpus,
+      summary: buildSummary(hour),
+      version: stubVersion,
+      hour: 'prime',
+      options: { languages: ['Latin'] }
+    });
+
+    expect(composed.sections.map((section) => section.slot)).toEqual(['incipit', 'conclusion']);
+    expect(renderRuns(composed.sections[0]!.lines[0]!, 'Latin')).toBe(
+      'Deus, in adjutórium meum inténde.'
+    );
+    expect(renderRuns(composed.sections[0]!.lines[1]!, 'Latin')).toBe('Allelúja.');
+    expect(renderRuns(composed.sections[1]!.lines[0]!, 'Latin')).toBe('Benedicámus Dómino.');
+  });
+
   it('applies conditional flattening when resolving content', () => {
     const corpus = new InMemoryTextIndex();
     corpus.addFile(
@@ -227,6 +298,85 @@ describe('composeHour', () => {
     expect(renderRuns(composed.sections[0]!.lines[2]!, 'Latin')).toBe('Deo grátias.');
   });
 
+  it('selects the season-appropriate Alleluia line during Christmastide', () => {
+    const corpus = new InMemoryTextIndex();
+    corpus.addFile(
+      makeFile('horas/Latin/Commune/C4v', 'Hymnus', [{ type: 'macroRef', name: 'Alleluia' }])
+    );
+    corpus.addFile(
+      makeFile('horas/Latin/Psalterium/Common/Prayers', 'Alleluia', [
+        { type: 'verseMarker', marker: 'v.', text: 'Allelúja.' },
+        { type: 'verseMarker', marker: 'v.', text: 'Laus tibi, Dómine, Rex ætérnæ glóriæ.' }
+      ])
+    );
+
+    const hour: HourStructure = {
+      hour: 'compline',
+      slots: {
+        hymn: {
+          kind: 'single-ref',
+          ref: { path: 'horas/Latin/Commune/C4v', section: 'Hymnus' }
+        }
+      },
+      directives: []
+    };
+
+    const baseSummary = buildSummary(hour);
+    const summary = {
+      ...baseSummary,
+      temporal: {
+        ...baseSummary.temporal,
+        season: 'christmastide'
+      }
+    };
+
+    const composed = composeHour({
+      corpus,
+      summary,
+      version: stubVersion,
+      hour: 'compline',
+      options: { languages: ['Latin'] }
+    });
+
+    expect(composed.sections[0]!.lines).toHaveLength(1);
+    expect(renderRuns(composed.sections[0]!.lines[0]!, 'Latin')).toBe('Allelúja.');
+  });
+
+  it('expands rubric formulaRef entries from Common/Rubricae', () => {
+    const corpus = new InMemoryTextIndex();
+    corpus.addFile(
+      makeFile('horas/Latin/Commune/C4v', 'Hymnus', [{ type: 'formulaRef', name: 'rubrica Jube' }])
+    );
+    corpus.addFile(
+      makeFile('horas/Latin/Psalterium/Common/Rubricae', 'Jube', [
+        { type: 'rubric', value: 'Extra Chorum, quando ab uno tantum recitatur Officium dicitur.' }
+      ])
+    );
+
+    const hour: HourStructure = {
+      hour: 'compline',
+      slots: {
+        hymn: {
+          kind: 'single-ref',
+          ref: { path: 'horas/Latin/Commune/C4v', section: 'Hymnus' }
+        }
+      },
+      directives: []
+    };
+
+    const composed = composeHour({
+      corpus,
+      summary: buildSummary(hour),
+      version: stubVersion,
+      hour: 'compline',
+      options: { languages: ['Latin'] }
+    });
+
+    expect(renderRuns(composed.sections[0]!.lines[0]!, 'Latin')).toBe(
+      'Extra Chorum, quando ab uno tantum recitatur Officium dicitur.'
+    );
+  });
+
   it('expands psalmInclude from the Psalterium', () => {
     const corpus = new InMemoryTextIndex();
     corpus.addFile(
@@ -260,6 +410,46 @@ describe('composeHour', () => {
     });
 
     expect(renderRuns(composed.sections[0]!.lines[0]!, 'Latin')).toBe('Beátus vir');
+  });
+
+  it('expands psalmRef into antiphon plus Psalmorum content', () => {
+    const corpus = new InMemoryTextIndex();
+    corpus.addFile(
+      makeFile('horas/Latin/Commune/C4v', 'Hymnus', [
+        { type: 'psalmRef', psalmNumber: 117, antiphon: 'Ant. Confitémini Dómino.' }
+      ])
+    );
+    corpus.addFile(
+      makeFile('horas/Latin/Psalterium/Psalmorum/Psalm117', '__preamble', [
+        { type: 'text', value: '117:1 Confitémini Dómino quóniam bonus.' },
+        { type: 'text', value: '117:2 Dicat nunc Israël.' }
+      ])
+    );
+
+    const hour: HourStructure = {
+      hour: 'compline',
+      slots: {
+        hymn: {
+          kind: 'single-ref',
+          ref: { path: 'horas/Latin/Commune/C4v', section: 'Hymnus' }
+        }
+      },
+      directives: []
+    };
+
+    const composed = composeHour({
+      corpus,
+      summary: buildSummary(hour),
+      version: stubVersion,
+      hour: 'compline',
+      options: { languages: ['Latin'] }
+    });
+
+    expect(renderRuns(composed.sections[0]!.lines[0]!, 'Latin')).toBe('Ant. Confitémini Dómino.');
+    expect(renderRuns(composed.sections[0]!.lines[1]!, 'Latin')).toBe(
+      '117:1 Confitémini Dómino quóniam bonus.'
+    );
+    expect(renderRuns(composed.sections[0]!.lines[2]!, 'Latin')).toBe('117:2 Dicat nunc Israël.');
   });
 
   it('uses the parser fallback chain for deferred nodes on a resolved corpus', () => {

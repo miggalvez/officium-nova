@@ -170,14 +170,27 @@ function buildSlots(file: ParsedFile): readonly SkeletonSlot[] {
       // e.g. `(sed rubrica 196 aut rubrica 1955 aut rubrica cisterciensis
       // omittuntur)`. Once captured we still append the text to the slot
       // content so downstream consumers see the full skeleton.
-      if (
-        currentBuffer.length === 0 &&
-        currentOmission === undefined &&
-        content.type === 'text'
-      ) {
-        const omission = tryParseOmissionCondition(content.value);
-        if (omission) {
-          currentOmission = omission;
+      if (currentBuffer.length === 0 && currentOmission === undefined) {
+        if (content.type === 'text') {
+          const omission = tryParseOmissionCondition(content.value);
+          if (omission) {
+            currentOmission = omission;
+          }
+        } else if (
+          content.type === 'conditional' &&
+          content.content.length === 0 &&
+          isNegatedExpression(content.condition.expression) &&
+          (content.condition.instruction === 'omittitur' ||
+            content.condition.instruction === 'omittuntur')
+        ) {
+          currentOmission = {
+            expression: content.condition.expression.inner,
+            instruction: content.condition.instruction,
+            ...(content.condition.instructionModifier
+              ? { instructionModifier: content.condition.instructionModifier }
+              : {})
+          };
+          continue;
         }
       }
 
@@ -188,6 +201,12 @@ function buildSlots(file: ParsedFile): readonly SkeletonSlot[] {
   }
 
   return Object.freeze(slots);
+}
+
+function isNegatedExpression(
+  expression: Condition['expression']
+): expression is { type: 'not'; inner: Condition['expression'] } {
+  return expression.type === 'not';
 }
 
 function tryParseOmissionCondition(raw: string): Condition | undefined {
@@ -222,6 +241,9 @@ function tryParseOmissionCondition(raw: string): Condition | undefined {
 export function mapHeaderToSlots(header: string): readonly SlotName[] {
   const normalized = header.trim();
 
+  if (normalized === 'Incipit') {
+    return ['incipit'];
+  }
   if (normalized === 'Invit' || normalized.startsWith('Invitatorium')) {
     return ['invitatory'];
   }

@@ -1,7 +1,7 @@
 import type { RuleDirective } from '../types/directives.js';
 import type { ParsedFile, ParsedSection, RawSection } from '../types/sections.js';
 import { parseCondition } from './condition-parser.js';
-import { parseDirectiveLine } from './directive-parser.js';
+import { buildSectionContentFromLines } from './directive-parser.js';
 import { parseRankSection } from './rank-parser.js';
 import { parseRuleLine } from './rule-parser.js';
 import { splitSections } from './section-splitter.js';
@@ -63,7 +63,7 @@ function parseSection(section: RawSection): ParsedSection {
   return {
     header: section.header,
     condition,
-    content: section.lines.map((line) => parseDirectiveLine(line.text)),
+    content: buildSectionContentFromLines(section.lines.map((line) => line.text)),
     startLine: section.startLine,
     endLine: section.endLine
   };

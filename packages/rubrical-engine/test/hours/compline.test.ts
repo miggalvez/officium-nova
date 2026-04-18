@@ -142,8 +142,123 @@ describe('buildCompline', () => {
     const psalmody = compline.slots.psalmody;
     expect(psalmody?.kind).toBe('psalmody');
     if (psalmody?.kind === 'psalmody') {
-      expect(psalmody.psalms[0]?.psalmRef.section).toBe('Compl Day0');
+      expect(psalmody.psalms[0]?.psalmRef.section).toBe('Completorium');
+      expect(psalmody.psalms[0]?.psalmRef.selector).toBe('Dominica');
     }
+  });
+
+  it('uses Minor Special fallbacks for Compline-specific non-proper slots', async () => {
+    const { TestOfficeTextIndex } = await import('../helpers.js');
+    const { loadOrdinariumSkeleton, deriveHourRuleSet } = await import('../../src/index.js');
+    const { buildVersionRegistry, resolveVersion, asVersionHandle } = await import('../../src/index.js');
+    const { VERSION_POLICY } = await import('../../src/version/policy-map.js');
+
+    const corpus = new TestOfficeTextIndex();
+    corpus.add(
+      'horas/Ordinarium/Completorium.txt',
+      [
+        '#Incipit',
+        '$benedictio Completorium',
+        '',
+        '#Lectio brevis',
+        '',
+        '#Psalmi',
+        '',
+        '#Hymnus',
+        '',
+        '#Capitulum Responsorium Versus',
+        '',
+        '#Canticum: Nunc dimittis',
+        '',
+        '#Oratio',
+        '',
+        '#Conclusio'
+      ].join('\n')
+    );
+
+    const today = makePreview('2024-11-05', 'IV', {
+      path: 'Tempora/Pent24-2',
+      source: 'temporal',
+      dayName: 'Pent24-2'
+    });
+    const tomorrow = makePreview('2024-11-06', 'IV', {
+      path: 'Tempora/Pent24-3',
+      source: 'temporal',
+      dayName: 'Pent24-3'
+    });
+    const concurrence = makeConcurrence('today', today.celebration, 'today-only-has-vespers');
+
+    const registry = buildVersionRegistry([
+      {
+        version: 'Rubrics 1960 - 1960',
+        kalendar: '1960',
+        transfer: '1960',
+        stransfer: '1960'
+      }
+    ]);
+    const version = resolveVersion(
+      asVersionHandle('Rubrics 1960 - 1960'),
+      registry,
+      VERSION_POLICY
+    );
+    const skeleton = loadOrdinariumSkeleton('compline', version, corpus);
+    const hourRules = deriveHourRuleSet(today.celebration, today.celebrationRules, 'compline');
+
+    const compline = buildCompline({
+      concurrence,
+      today,
+      tomorrow,
+      policy: rubrics1960Policy,
+      skeleton,
+      celebration: today.celebration,
+      commemorations: [],
+      celebrationRules: today.celebrationRules,
+      hourRules,
+      corpus,
+      temporal: today.temporal
+    });
+
+    expect(compline.slots['lectio-brevis']).toEqual({
+      kind: 'ordered-refs',
+      refs: [
+        {
+          path: 'horas/Latin/Psalterium/Special/Minor Special',
+          section: 'Lectio Completorium'
+        },
+        {
+          path: 'horas/Ordinarium/Completorium',
+          section: 'Lectio brevis'
+        }
+      ]
+    });
+    expect(compline.slots.hymn).toEqual({
+      kind: 'single-ref',
+      ref: {
+        path: 'horas/Latin/Psalterium/Special/Minor Special',
+        section: 'Hymnus Completorium'
+      }
+    });
+    expect(compline.slots.chapter).toEqual({
+      kind: 'single-ref',
+      ref: {
+        path: 'horas/Latin/Psalterium/Special/Minor Special',
+        section: 'Completorium'
+      }
+    });
+    expect(compline.slots.responsory).toEqual({
+      kind: 'single-ref',
+      ref: {
+        path: 'horas/Latin/Psalterium/Special/Minor Special',
+        section: 'Responsory Completorium'
+      }
+    });
+    expect(compline.slots.versicle).toEqual({
+      kind: 'single-ref',
+      ref: {
+        path: 'horas/Latin/Psalterium/Special/Minor Special',
+        section: 'Versum 4'
+      }
+    });
   });
 
   it('uses triduum-special source and directives on Good Friday', () => {

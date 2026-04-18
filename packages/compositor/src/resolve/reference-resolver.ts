@@ -64,6 +64,10 @@ export interface ResolveOptions {
  *     inject the season's invitatory antiphon into the fixed Psalm 94
  *     skeleton using the current day of week where the special file is
  *     weekday-keyed.
+ *   - **Heading-backed synthetic sections** on files such as
+ *     `horas/Ordinarium/*.txt` — when a named section is absent but the file
+ *     exposes a `__preamble` with `#Heading` markers, the resolver slices the
+ *     content between matching headings and returns it as a synthetic section.
  *
  * Returns `undefined` for a language when no file in its fallback chain
  * contains the referenced section.
@@ -93,7 +97,7 @@ function resolveForLanguage(
   const chain = languageFallbackChain(language, { langfb });
   for (const candidate of chain) {
     const candidatePath = swapLanguageSegment(reference.path, candidate);
-    const section = index.getSection(ensureTxtSuffix(candidatePath), reference.section);
+    const section = resolveSectionByName(index, candidatePath, reference.section);
     if (section) {
       return applySelector(index, {
         language: candidate,
@@ -106,6 +110,70 @@ function resolveForLanguage(
     }
   }
   return undefined;
+}
+
+function resolveSectionByName(
+  index: TextIndex,
+  path: string,
+  sectionName: string
+): ParsedSection | undefined {
+  const normalizedPath = ensureTxtSuffix(path);
+  const direct = index.getSection(normalizedPath, sectionName);
+  if (direct) {
+    return direct;
+  }
+
+  const file = index.getFile(normalizedPath);
+  if (!file) {
+    return undefined;
+  }
+
+  const preamble = file.sections.find((section) => section.header === '__preamble');
+  if (!preamble) {
+    return undefined;
+  }
+
+  const headingContent = extractHeadingSection(preamble, sectionName);
+  if (!headingContent) {
+    return undefined;
+  }
+
+  return {
+    header: sectionName,
+    condition: undefined,
+    content: headingContent,
+    startLine: preamble.startLine,
+    endLine: preamble.endLine
+  };
+}
+
+function extractHeadingSection(
+  preamble: ParsedSection,
+  sectionName: string
+): TextContent[] | undefined {
+  const wanted = normalizeHeading(sectionName);
+  let collecting = false;
+  const content: TextContent[] = [];
+
+  for (const node of preamble.content) {
+    if (node.type === 'heading') {
+      if (collecting) {
+        break;
+      }
+      collecting = normalizeHeading(node.value) === wanted;
+      continue;
+    }
+
+    if (collecting) {
+      content.push(node);
+    }
+  }
+
+  return collecting ? content : undefined;
+}
+
+function normalizeHeading(value: string): string {
+  return value.trim().replace(/\s+/gu, ' ').toLowerCase();
 }
 
 interface SelectorContext {
@@ -221,7 +289,7 @@ function resolveStructuredSelector(
 
   if (
     context.path.endsWith(PSALMI_MINOR_SUFFIX) &&
-    isMinorHourSection(context.section.header) &&
+    isKeyedPsalterSection(context.section.header) &&
     isWeekdayKey(selector)
   ) {
     return resolveMinorHourPsalmody(index, context.language, context.langfb, context.section, selector);
@@ -288,14 +356,7 @@ function resolveInvitatoryAntiphon(
   }
 
   const weekdayKey = WEEKDAY_KEYS[clampDayOfWeek(dayOfWeek)] ?? WEEKDAY_KEYS[0];
-  const value = selectKeyedTextValue(section.content, weekdayKey);
-  if (value === undefined) {
-    return undefined;
-  }
-
-  return value.length > 0
-    ? Object.freeze([{ type: 'text', value }])
-    : Object.freeze([]);
+  return selectKeyedTextContent(section.content, weekdayKey);
 }
 
 function invitatorySource(
@@ -328,21 +389,7 @@ function resolveMinorHourPsalmody(
   section: ParsedSection,
   selector: string
 ): readonly TextContent[] | undefined {
-  const entry = selectKeyedPair(section.content, selector);
-  if (!entry) {
-    return undefined;
-  }
-
-  const out: TextContent[] = [];
-  if (entry.antiphon.length > 0 && entry.antiphon !== '_') {
-    out.push({ type: 'text', value: entry.antiphon });
-    out.push({ type: 'separator' });
-  }
-
-  const psalmContent = expandPsalmTokenList(index, language, langfb, entry.psalms);
-  out.push(...psalmContent);
-
-  return finalizeContent(out);
+  return resolveKeyedMinorHourContent(index, language, langfb, section.content, selector);
 }
 
 function expandPsalmTokenList(
@@ -591,12 +638,28 @@ function resolveAuxiliarySection(
   return undefined;
 }
 
-function selectKeyedPair(
+function resolveKeyedMinorHourContent(
+  textIndex: TextIndex,
+  language: string,
+  langfb: string | undefined,
   content: readonly TextContent[],
   wantedKey: string
-): { readonly antiphon: string; readonly psalms: string } | undefined {
-  for (let index = 0; index < content.length; index += 1) {
-    const node = content[index];
+): readonly TextContent[] | undefined {
+  for (let contentIndex = 0; contentIndex < content.length; contentIndex += 1) {
+    const node = content[contentIndex];
+    if (node?.type === 'conditional') {
+      const nested = resolveKeyedMinorHourContent(
+        textIndex,
+        language,
+        langfb,
+        node.content,
+        wantedKey
+      );
+      if (nested) {
+        return wrapSelectedContent(node, nested);
+      }
+      continue;
+    }
     if (!node || node.type !== 'text') {
       continue;
     }
@@ -606,31 +669,46 @@ function selectKeyedPair(
       continue;
     }
 
-    const psalmSpec = nextTextValue(content, index + 1);
+    const psalmSpec = nextTextValue(content, contentIndex + 1);
     if (psalmSpec === undefined) {
       return undefined;
     }
 
-    return {
-      antiphon: keyed.value,
-      psalms: psalmSpec
-    };
+    const out: TextContent[] = [];
+    if (keyed.value.length > 0 && keyed.value !== '_') {
+      out.push({ type: 'text', value: keyed.value });
+      out.push({ type: 'separator' });
+    }
+
+    const psalmContent = expandPsalmTokenList(textIndex, language, langfb, psalmSpec);
+    out.push(...psalmContent);
+
+    return finalizeContent(out);
   }
 
   return undefined;
 }
 
-function selectKeyedTextValue(
+function selectKeyedTextContent(
   content: readonly TextContent[],
   wantedKey: string
-): string | undefined {
+): readonly TextContent[] | undefined {
   for (const node of content) {
+    if (node.type === 'conditional') {
+      const nested = selectKeyedTextContent(node.content, wantedKey);
+      if (nested) {
+        return wrapSelectedContent(node, nested);
+      }
+      continue;
+    }
     if (node.type !== 'text') {
       continue;
     }
     const keyed = parseKeyedText(node.value);
     if (keyed && normalizeKey(keyed.key) === normalizeKey(wantedKey)) {
-      return keyed.value;
+      return keyed.value.length > 0
+        ? Object.freeze([{ type: 'text', value: keyed.value }])
+        : Object.freeze([]);
     }
   }
   return undefined;
@@ -657,8 +735,28 @@ function nextTextValue(content: readonly TextContent[], startIndex: number): str
     if (node?.type === 'text') {
       return node.value.trim();
     }
+    if (node?.type === 'conditional') {
+      const nested = nextTextValue(node.content, 0);
+      if (nested !== undefined) {
+        return nested;
+      }
+    }
   }
   return undefined;
+}
+
+function wrapSelectedContent(
+  node: Extract<TextContent, { type: 'conditional' }>,
+  content: readonly TextContent[]
+): readonly TextContent[] {
+  return Object.freeze([
+    {
+      type: 'conditional',
+      condition: node.condition,
+      content: [...content],
+      scope: node.scope
+    }
+  ]);
 }
 
 function normalizeKey(key: string): string {
@@ -669,8 +767,14 @@ function isWeekdayKey(selector: string): boolean {
   return WEEKDAY_KEYS.some((key) => normalizeKey(key) === normalizeKey(selector));
 }
 
-function isMinorHourSection(sectionName: string): boolean {
-  return sectionName === 'Prima' || sectionName === 'Tertia' || sectionName === 'Sexta' || sectionName === 'Nona';
+function isKeyedPsalterSection(sectionName: string): boolean {
+  return (
+    sectionName === 'Prima' ||
+    sectionName === 'Tertia' ||
+    sectionName === 'Sexta' ||
+    sectionName === 'Nona' ||
+    sectionName === 'Completorium'
+  );
 }
 
 function clampDayOfWeek(dayOfWeek: number): number {

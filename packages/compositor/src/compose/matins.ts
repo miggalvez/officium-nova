@@ -232,6 +232,7 @@ function composeMergedSlot(
         index: args.corpus,
         language: lang,
         langfb: args.options.langfb,
+        season: args.context.season,
         seen: new Set(),
         maxDepth: MAX_DEFERRED_DEPTH
       });
@@ -240,7 +241,7 @@ function composeMergedSlot(
         hour: 'matins',
         directives: args.directives
       });
-      bucket.push(...transformed);
+      appendContentWithBoundary(bucket, transformed);
     }
   }
 
@@ -267,4 +268,41 @@ function headingSection(heading: HeadingDescriptor): Section {
 
 function referenceIdentity(reference: TextReference): string {
   return `${reference.path}#${reference.section}${reference.selector ? `:${reference.selector}` : ''}`;
+}
+
+function appendContentWithBoundary(
+  target: TextContent[],
+  next: readonly TextContent[]
+): void {
+  if (next.length === 0) {
+    return;
+  }
+
+  const last = target.at(-1);
+  const first = next[0];
+  if (last && first && isInlineBoundaryNode(last) && isInlineBoundaryNode(first)) {
+    target.push({ type: 'separator' });
+  }
+
+  target.push(...next);
+}
+
+function isInlineBoundaryNode(node: TextContent): boolean {
+  switch (node.type) {
+    case 'text':
+    case 'citation':
+    case 'psalmRef':
+    case 'macroRef':
+    case 'formulaRef':
+    case 'psalmInclude':
+    case 'reference':
+      return true;
+    case 'verseMarker':
+    case 'rubric':
+    case 'separator':
+    case 'heading':
+    case 'conditional':
+    case 'gabcNotation':
+      return false;
+  }
 }

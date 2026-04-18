@@ -9,6 +9,8 @@ import type { ComposedLine, ComposedRun, Section, SectionType } from '../types/c
  */
 export function sectionTypeFor(slot: SlotName): SectionType {
   switch (slot) {
+    case 'incipit':
+      return 'other';
     case 'hymn':
       return 'hymn';
     case 'psalmody':

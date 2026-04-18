@@ -119,6 +119,14 @@ function resolveSlot(
 
   const properRef = findProperReference(feastFile, slot, input.hour);
   const communeRef = properRef ? undefined : findCommuneReference(input, slot);
+  if (input.hour === 'compline' && slot.name === 'lectio-brevis') {
+    const wrapperRef = ordinariumSkeletonReference(input.skeleton, slot);
+    const readingRef = properRef ?? communeRef ?? complineSpecialFallbackReference(input.hour, slot.name) ?? wrapperRef;
+    const refs = sameReference(readingRef, wrapperRef) ? [readingRef] : [readingRef, wrapperRef];
+    return refs.length === 1
+      ? { kind: 'single-ref', ref: refs[0]! }
+      : { kind: 'ordered-refs', refs };
+  }
   const ref = properRef ?? communeRef ?? ordinariumFallbackReference(input.skeleton, slot);
 
   if (!ref) {
@@ -228,10 +236,45 @@ function ordinariumFallbackReference(
   skeleton: OrdinariumSkeleton,
   slot: SkeletonSlot
 ): TextReference {
+  const complineSpecial = complineSpecialFallbackReference(skeleton.hour, slot.name);
+  if (complineSpecial) {
+    return complineSpecial;
+  }
+
+  return ordinariumSkeletonReference(skeleton, slot);
+}
+
+function ordinariumSkeletonReference(
+  skeleton: OrdinariumSkeleton,
+  slot: SkeletonSlot
+): TextReference {
   return {
     path: skeleton.sourcePath.replace(/\.txt$/u, ''),
     section: slot.header
   };
+}
+
+function complineSpecialFallbackReference(
+  hour: HourName,
+  slot: SlotName
+): TextReference | undefined {
+  if (hour !== 'compline') {
+    return undefined;
+  }
+
+  const section = COMPLINE_SPECIAL_FALLBACKS[slot];
+  if (!section) {
+    return undefined;
+  }
+
+  return {
+    path: 'horas/Latin/Psalterium/Special/Minor Special',
+    section
+  };
+}
+
+function sameReference(left: TextReference, right: TextReference): boolean {
+  return left.path === right.path && left.section === right.section && left.selector === right.selector;
 }
 
 function properHeadersForSlot(slot: SlotName, hour: HourName): readonly string[] {
@@ -337,6 +380,14 @@ const HOUR_SECTION_SUFFIX: Readonly<Record<HourName, string>> = {
   none: 'Nona',
   vespers: 'Vespera',
   compline: 'Completorium'
+};
+
+const COMPLINE_SPECIAL_FALLBACKS: Readonly<Partial<Record<SlotName, string>>> = {
+  hymn: 'Hymnus Completorium',
+  chapter: 'Completorium',
+  responsory: 'Responsory Completorium',
+  versicle: 'Versum 4',
+  'lectio-brevis': 'Lectio Completorium'
 };
 
 function isOmittedByHeadingRubric(

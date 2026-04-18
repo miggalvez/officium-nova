@@ -114,11 +114,12 @@ function vespersReferences(
 
 function complineReferences(temporal: TemporalContext): readonly PsalmAssignment[] {
   // Pius X's Compline (1911) varies by day of week; 1960 retains that
-  // distribution — see Breviarium Romanum 1961 ordinary.
-  const section = `Compl Day${temporal.dayOfWeek}`;
+  // distribution — the source file stores it as weekday-keyed entries under
+  // the shared `Completorium` section in `Psalmi minor.txt`.
+  const weekdayKey = WEEKDAY_KEYS[temporal.dayOfWeek] ?? WEEKDAY_KEYS[0];
   return [
     {
-      psalmRef: { path: PSALMI_MINOR, section }
+      psalmRef: { path: PSALMI_MINOR, section: 'Completorium', selector: weekdayKey }
     }
   ];
 }

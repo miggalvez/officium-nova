@@ -1,0 +1,608 @@
+import { spawnSync } from 'node:child_process';
+import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
+
+const THIS_DIR = dirname(fileURLToPath(import.meta.url));
+const PACKAGE_ROOT = resolve(THIS_DIR, '..', '..');
+const REPO_ROOT = resolve(PACKAGE_ROOT, '..', '..');
+const UPSTREAM_ROOT = resolve(REPO_ROOT, 'upstream/web/www');
+const DIVERGENCE_DIR = resolve(PACKAGE_ROOT, 'test/divergence');
+const PERL_SNAPSHOT = resolve(THIS_DIR, 'officium-content-snapshot.pl');
+
+const PARSER_DIST = resolve(REPO_ROOT, 'packages/parser/dist/index.js');
+const RUBRICAL_ENGINE_DIST = resolve(REPO_ROOT, 'packages/rubrical-engine/dist/index.js');
+const COMPOSITOR_DIST = resolve(REPO_ROOT, 'packages/compositor/dist/index.js');
+
+const HANDLE_CONFIG = {
+  'Divino Afflatu - 1954': {
+    title: 'Divino Afflatu',
+    docPath: resolve(DIVERGENCE_DIR, 'divino-afflatu-2024.md'),
+    dateFixture: resolve(REPO_ROOT, 'packages/rubrical-engine/test/fixtures/divino-afflatu-2024.json')
+  },
+  'Reduced - 1955': {
+    title: 'Reduced 1955',
+    docPath: resolve(DIVERGENCE_DIR, 'reduced-1955-2024.md'),
+    dateFixture: resolve(REPO_ROOT, 'packages/rubrical-engine/test/fixtures/reduced-1955-2024.json')
+  },
+  'Rubrics 1960 - 1960': {
+    title: 'Rubrics 1960',
+    docPath: resolve(DIVERGENCE_DIR, 'rubrics-1960-2024.md'),
+    // Phase 2h used the same shared 61-date Roman matrix for 1955 and 1960.
+    dateFixture: resolve(REPO_ROOT, 'packages/rubrical-engine/test/fixtures/reduced-1955-2024.json')
+  }
+};
+
+const HOURS = [
+  { hour: 'matins', perlHour: 'Matutinum', label: 'Matins' },
+  { hour: 'lauds', perlHour: 'Laudes', label: 'Lauds' },
+  { hour: 'prime', perlHour: 'Prima', label: 'Prime' },
+  { hour: 'terce', perlHour: 'Tertia', label: 'Terce' },
+  { hour: 'sext', perlHour: 'Sexta', label: 'Sext' },
+  { hour: 'none', perlHour: 'Nona', label: 'None' },
+  { hour: 'vespers', perlHour: 'Vespera', label: 'Vespers' },
+  { hour: 'compline', perlHour: 'Completorium', label: 'Compline' }
+];
+
+const args = parseArgs(process.argv.slice(2));
+
+if (!existsSync(UPSTREAM_ROOT)) {
+  throw new Error(`Missing upstream corpus at ${UPSTREAM_ROOT}`);
+}
+if (!existsSync(PERL_SNAPSHOT)) {
+  throw new Error(`Missing Perl snapshot helper at ${PERL_SNAPSHOT}`);
+}
+for (const distPath of [PARSER_DIST, RUBRICAL_ENGINE_DIST, COMPOSITOR_DIST]) {
+  if (!existsSync(distPath)) {
+    throw new Error(
+      `Missing build artifact ${distPath}. Run pnpm -r build before compare:phase-3-perl.`
+    );
+  }
+}
+
+const parser = await import(pathToFileURL(PARSER_DIST).href);
+const rubricalEngine = await import(pathToFileURL(RUBRICAL_ENGINE_DIST).href);
+const compositor = await import(pathToFileURL(COMPOSITOR_DIST).href);
+
+const {
+  loadCorpus,
+  parseKalendarium,
+  parseScriptureTransfer,
+  parseTransfer,
+  parseVersionRegistry
+} = parser;
+const {
+  VERSION_POLICY,
+  asVersionHandle,
+  buildKalendariumTable,
+  buildScriptureTransferTable,
+  buildVersionRegistry,
+  buildYearTransferTable,
+  createRubricalEngine
+} = rubricalEngine;
+const { composeHour } = compositor;
+
+const selectedHandles = args.version
+  ? [args.version]
+  : Object.keys(HANDLE_CONFIG);
+
+for (const handle of selectedHandles) {
+  if (!HANDLE_CONFIG[handle]) {
+    throw new Error(
+      `Unsupported --version ${JSON.stringify(handle)}. Expected one of: ${Object.keys(HANDLE_CONFIG).join(', ')}`
+    );
+  }
+}
+
+const selectedHours = args.hour
+  ? HOURS.filter((entry) => entry.hour === args.hour || entry.perlHour === args.hour || entry.label === args.hour)
+  : HOURS;
+if (selectedHours.length === 0) {
+  throw new Error(`Unknown --hour ${JSON.stringify(args.hour)}`);
+}
+
+const rawCorpus = await loadCorpus(UPSTREAM_ROOT, { resolveReferences: false });
+const resolvedCorpus = await loadCorpus(UPSTREAM_ROOT);
+const versionRegistry = buildVersionRegistry(
+  parseVersionRegistry(readFileSync(resolve(UPSTREAM_ROOT, 'Tabulae/data.txt'), 'utf8'))
+);
+const kalendarium = buildKalendariumTable(loadKalendaria());
+const yearTransfers = buildYearTransferTable(loadTransferTables());
+const scriptureTransfers = buildScriptureTransferTable(loadScriptureTransferTables());
+
+let totalMismatches = 0;
+mkdirSync(DIVERGENCE_DIR, { recursive: true });
+
+for (const handle of selectedHandles) {
+  const config = HANDLE_CONFIG[handle];
+  const dates = loadDates(config.dateFixture, args.date);
+  const engine = createRubricalEngine({
+    corpus: rawCorpus.index,
+    kalendarium,
+    yearTransfers,
+    scriptureTransfers,
+    versionRegistry,
+    version: asVersionHandle(handle),
+    policyMap: VERSION_POLICY
+  });
+
+  const mismatches = [];
+  const mismatchCountsByHour = new Map(selectedHours.map((entry) => [entry.label, 0]));
+  let comparedHours = 0;
+
+  for (const date of dates) {
+    const summary = engine.resolveDayOfficeSummary(date);
+
+    for (const hourConfig of selectedHours) {
+      comparedHours += 1;
+
+      try {
+        const perlSnapshot = runPerlSnapshot({
+          handle,
+          date,
+          perlHour: hourConfig.perlHour,
+          language: args.language,
+          otherLanguage: args.otherLanguage
+        });
+        const expected = normalizePerlLines(selectUnitsForLanguage(perlSnapshot, args.language));
+
+        const composed = composeHour({
+          corpus: resolvedCorpus.index,
+          summary,
+          version: engine.version,
+          hour: hourConfig.hour,
+          options: {
+            languages: [args.language],
+            langfb: args.langfb
+          }
+        });
+        const actual = normalizeComposedLines(composed, args.language);
+        const mismatch = compareLineArrays(expected, actual);
+        if (mismatch) {
+          mismatches.push({
+            date,
+            hour: hourConfig.label,
+            expectedCount: expected.length,
+            actualCount: actual.length,
+            ...mismatch
+          });
+          mismatchCountsByHour.set(
+            hourConfig.label,
+            (mismatchCountsByHour.get(hourConfig.label) ?? 0) + 1
+          );
+        }
+      } catch (error) {
+        mismatches.push({
+          date,
+          hour: hourConfig.label,
+          expectedCount: 0,
+          actualCount: 0,
+          firstMismatchIndex: 0,
+          expectedLine: null,
+          actualLine: null,
+          expectedContext: [],
+          actualContext: [],
+          error: String(error instanceof Error ? error.message : error)
+        });
+        mismatchCountsByHour.set(
+          hourConfig.label,
+          (mismatchCountsByHour.get(hourConfig.label) ?? 0) + 1
+        );
+      }
+    }
+  }
+
+  totalMismatches += mismatches.length;
+
+  console.log(
+    `${handle}: ${mismatches.length} divergent hours across ${comparedHours} comparisons`
+  );
+  for (const mismatch of mismatches.slice(0, args.maxReport)) {
+    const expected = mismatch.expectedLine === null ? '∅' : JSON.stringify(mismatch.expectedLine);
+    const actual = mismatch.actualLine === null ? '∅' : JSON.stringify(mismatch.actualLine);
+    const suffix = mismatch.error ? ` (${mismatch.error})` : '';
+    console.log(
+      `  ${mismatch.date} ${mismatch.hour} line ${mismatch.firstMismatchIndex + 1}: expected=${expected} actual=${actual}${suffix}`
+    );
+  }
+
+  if (args.writeDocs) {
+    writeFileSync(
+      config.docPath,
+      renderDivergenceDoc({
+        handle,
+        title: config.title,
+        comparedHours,
+        dates,
+        mismatches,
+        mismatchCountsByHour,
+        hours: selectedHours,
+        language: args.language,
+        maxRows: args.maxDocRows
+      })
+    );
+  }
+}
+
+if (totalMismatches > 0) {
+  process.exitCode = 1;
+}
+
+function parseArgs(argv) {
+  const out = {
+    version: undefined,
+    hour: undefined,
+    date: undefined,
+    language: 'Latin',
+    otherLanguage: 'English',
+    langfb: 'English',
+    maxReport: 20,
+    maxDocRows: 40,
+    writeDocs: true
+  };
+
+  for (let index = 0; index < argv.length; index += 1) {
+    const arg = argv[index];
+    const next = argv[index + 1];
+    switch (arg) {
+      case '--':
+        break;
+      case '--version':
+        if (!next) throw new Error('--version requires a value');
+        out.version = next;
+        index += 1;
+        break;
+      case '--hour':
+        if (!next) throw new Error('--hour requires a value');
+        out.hour = next;
+        index += 1;
+        break;
+      case '--date':
+        if (!next) throw new Error('--date requires a value');
+        out.date = next;
+        index += 1;
+        break;
+      case '--language':
+        if (!next) throw new Error('--language requires a value');
+        out.language = next;
+        index += 1;
+        break;
+      case '--other-language':
+        if (!next) throw new Error('--other-language requires a value');
+        out.otherLanguage = next;
+        index += 1;
+        break;
+      case '--langfb':
+        if (!next) throw new Error('--langfb requires a value');
+        out.langfb = next;
+        index += 1;
+        break;
+      case '--max-report':
+        if (!next) throw new Error('--max-report requires a value');
+        out.maxReport = Number(next);
+        index += 1;
+        break;
+      case '--max-doc-rows':
+        if (!next) throw new Error('--max-doc-rows requires a value');
+        out.maxDocRows = Number(next);
+        index += 1;
+        break;
+      case '--no-write-docs':
+        out.writeDocs = false;
+        break;
+      default:
+        throw new Error(`Unknown argument ${arg}`);
+    }
+  }
+
+  return out;
+}
+
+function loadDates(fixturePath, selectedDate) {
+  if (!existsSync(fixturePath)) {
+    throw new Error(`Missing fixture ${fixturePath}`);
+  }
+  const fixture = JSON.parse(readFileSync(fixturePath, 'utf8'));
+  const dates = Array.from(
+    new Set((fixture.rows ?? []).map((row) => row.date).filter((value) => typeof value === 'string'))
+  ).sort((left, right) => left.localeCompare(right));
+
+  if (!selectedDate) {
+    return dates;
+  }
+
+  return [selectedDate];
+}
+
+function loadKalendaria() {
+  const dir = resolve(UPSTREAM_ROOT, 'Tabulae/Kalendaria');
+  return readDirTxt(dir).map((name) => ({
+    name: name.slice(0, -4),
+    entries: parseKalendarium(readFileSync(resolve(dir, name), 'utf8'))
+  }));
+}
+
+function loadTransferTables() {
+  const dir = resolve(UPSTREAM_ROOT, 'Tabulae/Transfer');
+  return readDirTxt(dir).map((name) => ({
+    yearKey: name.slice(0, -4),
+    entries: parseTransfer(readFileSync(resolve(dir, name), 'utf8'))
+  }));
+}
+
+function loadScriptureTransferTables() {
+  const dir = resolve(UPSTREAM_ROOT, 'Tabulae/Stransfer');
+  return readDirTxt(dir).map((name) => ({
+    yearKey: name.slice(0, -4),
+    entries: parseScriptureTransfer(readFileSync(resolve(dir, name), 'utf8'))
+  }));
+}
+
+function readDirTxt(dir) {
+  return readdirSync(dir)
+    .filter((name) => name.endsWith('.txt'))
+    .sort((left, right) => left.localeCompare(right));
+}
+
+function runPerlSnapshot({ handle, date, perlHour, language, otherLanguage }) {
+  const result = spawnSync(
+    'perl',
+    [PERL_SNAPSHOT, handle, isoToMdy(date), perlHour, language, otherLanguage],
+    {
+      encoding: 'utf8'
+    }
+  );
+
+  if (result.status !== 0) {
+    throw new Error(
+      `Perl snapshot failed for ${handle} ${date} ${perlHour}: ${(result.stderr || result.stdout || '').trim()}`
+    );
+  }
+
+  return JSON.parse(result.stdout);
+}
+
+function selectUnitsForLanguage(snapshot, language) {
+  if (snapshot.language1 === language) {
+    return snapshot.units1 ?? [];
+  }
+  if (snapshot.language2 === language) {
+    return snapshot.units2 ?? [];
+  }
+  throw new Error(
+    `Perl snapshot did not capture language ${language}; available=${snapshot.language1}, ${snapshot.language2}`
+  );
+}
+
+function normalizePerlLines(units) {
+  const lines = [];
+
+  for (const unit of units) {
+    let unitLines = htmlToLines(unit.html ?? '');
+    if ((unit.rawFirstLine ?? '').startsWith('#') && unitLines.length > 0) {
+      unitLines = unitLines.slice(1);
+    }
+
+    for (const line of unitLines) {
+      const normalized = renderCanonicalText(line);
+      if (normalized) {
+        lines.push(normalized);
+      }
+    }
+  }
+
+  return lines;
+}
+
+function htmlToLines(html) {
+  const withBreaks = html
+    .replace(/<br\s*\/?>/giu, '\n')
+    .replace(/<\/p>/giu, '\n')
+    .replace(/<p\b[^>]*>/giu, '')
+    .replace(/<svg[\s\S]*?<\/svg>/giu, '');
+
+  const stripped = decodeHtmlEntities(withBreaks.replace(/<[^>]+>/gu, ''));
+  return stripped
+    .split(/\n+/u)
+    .map((line) => line.trim())
+    .filter((line) => line.length > 0);
+}
+
+function normalizeComposedLines(composed, language) {
+  const lines = [];
+
+  for (const section of composed.sections) {
+    if (section.type === 'heading') {
+      continue;
+    }
+
+    for (const line of section.lines) {
+      const rendered = renderComposedLine(line, language);
+      const normalized = renderCanonicalText(rendered);
+      if (normalized) {
+        lines.push(normalized);
+      }
+    }
+  }
+
+  return lines;
+}
+
+function renderComposedLine(line, language) {
+  const runs = line.texts[language] ?? [];
+  const text = runs.map(renderRun).join('').trim();
+  const marker = canonicalizeLineMarker(line.marker);
+  if (marker) {
+    return `${marker} ${text}`.trim();
+  }
+  return text;
+}
+
+function canonicalizeLineMarker(marker) {
+  if (marker === 'v.' || marker === 'r.') {
+    return undefined;
+  }
+  return marker;
+}
+
+function renderRun(run) {
+  switch (run.type) {
+    case 'text':
+    case 'rubric':
+    case 'citation':
+      return run.value;
+    case 'unresolved-macro':
+      return `&${run.name}`;
+    case 'unresolved-formula':
+      return `$${run.name}`;
+    case 'unresolved-reference':
+      return `@${run.ref.path}:${run.ref.section}`;
+  }
+}
+
+function renderCanonicalText(text) {
+  return text
+    .replace(/\u00a0/gu, ' ')
+    .replace(/\+{2,}/gu, '+')
+    .replace(/℣\./gu, 'V.')
+    .replace(/℟\./gu, 'R.')
+    .replace(/✠/gu, '+')
+    .replace(/\s+/gu, ' ')
+    .trim();
+}
+
+function decodeHtmlEntities(text) {
+  return text.replace(/&(#x?[0-9a-f]+|nbsp|amp|lt|gt|quot|apos);/giu, (match, entity) => {
+    const key = String(entity).toLowerCase();
+    switch (key) {
+      case 'nbsp':
+        return ' ';
+      case 'amp':
+        return '&';
+      case 'lt':
+        return '<';
+      case 'gt':
+        return '>';
+      case 'quot':
+        return '"';
+      case 'apos':
+        return "'";
+      default:
+        if (key.startsWith('#x')) {
+          return String.fromCodePoint(Number.parseInt(key.slice(2), 16));
+        }
+        if (key.startsWith('#')) {
+          return String.fromCodePoint(Number.parseInt(key.slice(1), 10));
+        }
+        return match;
+    }
+  });
+}
+
+function compareLineArrays(expected, actual) {
+  if (expected.length === actual.length && expected.every((line, index) => line === actual[index])) {
+    return null;
+  }
+
+  let index = 0;
+  while (
+    index < expected.length &&
+    index < actual.length &&
+    expected[index] === actual[index]
+  ) {
+    index += 1;
+  }
+
+  return {
+    firstMismatchIndex: index,
+    expectedLine: expected[index] ?? null,
+    actualLine: actual[index] ?? null,
+    expectedContext: expected.slice(Math.max(0, index - 2), index + 3),
+    actualContext: actual.slice(Math.max(0, index - 2), index + 3)
+  };
+}
+
+function renderDivergenceDoc({
+  handle,
+  title,
+  comparedHours,
+  dates,
+  mismatches,
+  mismatchCountsByHour,
+  hours,
+  language,
+  maxRows
+}) {
+  const exactMatches = comparedHours - mismatches.length;
+  const divergentDates = new Set(mismatches.map((entry) => entry.date));
+  const heading = `${title} 2024 Compositor Divergences`;
+  const hourTotals = new Map(hours.map((entry) => [entry.label, dates.length]));
+
+  const lines = [
+    `# ${heading}`,
+    '',
+    `This file tracks the current **legacy Perl rendered Hour vs compositor** comparison state for \`${handle}\`.`,
+    '',
+    '## Current status',
+    '',
+    '- Comparison surface:',
+    `  - live Perl helper: \`packages/compositor/test/fixtures/officium-content-snapshot.pl\``,
+    `  - live harness: \`pnpm -C packages/compositor compare:phase-3-perl -- --version "${handle}"\``,
+    `  - dates: \`${dates.length}\` snapshot dates from the existing Roman Phase 2h matrix`,
+    `  - hours: \`${hours.map((entry) => entry.label).join(', ')}\``,
+    `  - language: \`${language}\``,
+    `- Compared hours: \`${comparedHours}\``,
+    `- Exact-match hours: \`${exactMatches}\``,
+    `- Divergent hours: \`${mismatches.length}\``,
+    `- Divergent dates: \`${divergentDates.size}\``,
+    '- Divergence breakdown by hour:'
+  ];
+
+  for (const hour of hours) {
+    const mismatchesForHour = mismatchCountsByHour.get(hour.label) ?? 0;
+    const totalForHour = hourTotals.get(hour.label) ?? 0;
+    lines.push(`  - \`${hour.label}\`: \`${mismatchesForHour}/${totalForHour}\``);
+  }
+
+  lines.push('', '## Sample mismatches', '');
+
+  if (mismatches.length === 0) {
+    lines.push('None. The current live harness run reports exact line-stream parity.');
+  } else {
+    lines.push('| Date | Hour | Expected lines | Actual lines | First expected | First actual |');
+    lines.push('|---|---|---|---|---|---|');
+    for (const mismatch of mismatches.slice(0, maxRows)) {
+      lines.push(
+        `| ${mismatch.date} | ${mismatch.hour} | ${mismatch.expectedCount} | ${mismatch.actualCount} | ${markdownCell(mismatch.expectedLine ?? mismatch.error ?? '∅')} | ${markdownCell(mismatch.actualLine ?? mismatch.error ?? '∅')} |`
+      );
+    }
+    if (mismatches.length > maxRows) {
+      lines.push('', `Only the first \`${maxRows}\` divergent rows are listed here. Re-run the live harness for the full detail.`);
+    }
+  }
+
+  lines.push(
+    '',
+    '## Notes',
+    '',
+    '- This is a raw content-level comparison harness against the legacy Perl renderer, not yet an adjudicated source-backed ledger.',
+    '- Many current rows may reflect real Phase 3 gaps such as omitted wrapper material, incomplete directive substitution, or unresolved output-model differences. The harness exists to make those differences enumerable and reproducible.',
+    ''
+  );
+
+  return lines.join('\n');
+}
+
+function markdownCell(value) {
+  return String(value)
+    .replace(/\|/gu, '\\|')
+    .replace(/\r?\n/gu, '<br/>');
+}
+
+function isoToMdy(date) {
+  const [year, month, day] = date.split('-');
+  if (!year || !month || !day) {
+    throw new Error(`Invalid ISO date ${date}`);
+  }
+  return `${month}-${day}-${year}`;
+}

@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import {
   contractTrailingLines,
+  lexSourceLine,
   parseCrossReference,
   parseDirectiveLine,
   parseDirectiveLines,
@@ -143,6 +144,90 @@ describe('cross-reference parsers', () => {
   });
 });
 
+describe('lexSourceLine', () => {
+  it('extracts inline rubric segments from a text line', () => {
+    const lexed = lexSourceLine('/:Fit reverentia:/ Sanctus, Sanctus');
+    expect(lexed).toEqual({
+      kind: 'content',
+      nodes: [
+        { type: 'rubric', value: 'Fit reverentia' },
+        { type: 'text', value: 'Sanctus, Sanctus' }
+      ]
+    });
+  });
+
+  it('splits interior inline rubrics around running text', () => {
+    const lexed = lexSourceLine(
+      'quia peccavi nimis: /:percutit sibi pectus:/ mea culpa.'
+    );
+    expect(lexed.kind).toBe('content');
+    if (lexed.kind !== 'content') return;
+    expect(lexed.nodes).toEqual([
+      { type: 'text', value: 'quia peccavi nimis:' },
+      { type: 'rubric', value: 'percutit sibi pectus' },
+      { type: 'text', value: 'mea culpa.' }
+    ]);
+  });
+
+  it('parses a standalone rubric-delimited line as a single rubric node', () => {
+    const lexed = lexSourceLine('/:secreto:/');
+    expect(lexed).toEqual({
+      kind: 'content',
+      nodes: [{ type: 'rubric', value: 'secreto' }]
+    });
+  });
+
+  it('preserves a terminal colon inside ::/ inline rubric payloads', () => {
+    const lexed = lexSourceLine(
+      '/:Si Matutinum a Laudibus separatur, tunc dicitur secreto::/'
+    );
+    expect(lexed).toEqual({
+      kind: 'content',
+      nodes: [
+        {
+          type: 'rubric',
+          value: 'Si Matutinum a Laudibus separatur, tunc dicitur secreto:'
+        }
+      ]
+    });
+  });
+
+  it('treats a parenthesized-only line as a bare condition', () => {
+    const lexed = lexSourceLine('(sed rubrica 196 aut rubrica 1955 omittuntur)');
+    expect(lexed.kind).toBe('bareCondition');
+    if (lexed.kind !== 'bareCondition') return;
+    expect(lexed.condition.stopword).toBe('sed');
+    expect(lexed.condition.instruction).toBe('omittuntur');
+    expect(lexed.condition.expression).toEqual({
+      type: 'or',
+      left: { type: 'match', subject: 'rubrica', predicate: '196' },
+      right: { type: 'match', subject: 'rubrica', predicate: '1955' }
+    });
+  });
+
+  it('attaches a leading parenthesized condition to the directive that follows', () => {
+    const lexed = lexSourceLine('(rubrica altovadensis) $rubrica Incipit');
+    expect(lexed.kind).toBe('content');
+    if (lexed.kind !== 'content') return;
+    expect(lexed.leadingCondition?.expression).toEqual({
+      type: 'match',
+      subject: 'rubrica',
+      predicate: 'altovadensis'
+    });
+    expect(lexed.nodes).toEqual([{ type: 'formulaRef', name: 'rubrica Incipit' }]);
+  });
+
+  it('falls back to raw text when a parenthesized prefix is not a valid condition', () => {
+    const lexed = lexSourceLine('(Tunc, detecto Calice, dicit:) Amen');
+    expect(lexed.kind).toBe('content');
+    if (lexed.kind !== 'content') return;
+    expect(lexed.leadingCondition).toBeUndefined();
+    expect(lexed.nodes).toEqual([
+      { type: 'text', value: '(Tunc, detecto Calice, dicit:) Amen' }
+    ]);
+  });
+});
+
 describe('line contraction helpers', () => {
   it('contracts lines ending in ~ with the following line', () => {
     const merged = contractTrailingLines([
@@ -175,6 +260,31 @@ describe('line contraction helpers', () => {
         type: 'verseMarker',
         marker: 'R.',
         text: 'Amen.'
+      }
+    ]);
+  });
+
+  it('applies the same conditional preprocessing as parseFile', () => {
+    const parsed = parseDirectiveLines([
+      '$rubrica Secreto',
+      '$Pater noster',
+      '(sed rubrica 196 omittitur)'
+    ]);
+
+    expect(parsed).toEqual([
+      {
+        type: 'conditional',
+        condition: {
+          expression: {
+            type: 'not',
+            inner: { type: 'match', subject: 'rubrica', predicate: '196' }
+          }
+        },
+        content: [
+          { type: 'formulaRef', name: 'rubrica Secreto' },
+          { type: 'formulaRef', name: 'Pater noster' }
+        ],
+        scope: { backwardLines: 0, forwardMode: 'line' }
       }
     ]);
   });

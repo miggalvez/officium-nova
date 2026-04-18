@@ -1,10 +1,16 @@
 import { languageFallbackChain } from '../corpus/language.js';
-import { parseDirectiveLine } from '../parser/directive-parser.js';
+import { buildSectionContentFromLines } from '../parser/directive-parser.js';
+import type { Condition } from '../types/conditions.js';
 import type { CrossReference, LineSelector, Substitution } from '../types/directives.js';
 import type { TextContent } from '../types/schema.js';
 import type { ParsedFile, ParsedSection, RawSection } from '../types/sections.js';
 import { ensureTxtSuffix, normalizeRelativePath } from '../utils/path.js';
 import { FileCache } from './file-cache.js';
+
+const DEFAULT_CONDITIONAL_SCOPE = Object.freeze({
+  backwardLines: 0,
+  forwardMode: 'line' as const
+});
 
 export interface ResolverConfig {
   domain: 'horas' | 'missa';
@@ -105,7 +111,7 @@ export class CrossReferenceResolver {
       selectedLines,
       reference.substitutions
     );
-    const parsed = transformedLines.map((line) => parseDirectiveLine(line));
+    const parsed = buildSectionContentFromLines(transformedLines);
 
     const nextVisited = new Set(context.visited);
     nextVisited.add(cycleKey);
@@ -205,19 +211,61 @@ export class CrossReferenceResolver {
       }
 
       const clone = cloneSection(section);
-      const index = sectionIndex.get(clone.header);
+      const incomingGateCondition = isTextSection(clone) ? clone.condition : undefined;
+      const normalizedClone = materializeTextSectionCondition(clone);
+      const index = sectionIndex.get(normalizedClone.header);
       if (index === undefined) {
-        sectionIndex.set(clone.header, mergedSections.length);
-        mergedSections.push(clone);
-        sectionSource.set(clone.header, normalizedPath);
+        sectionIndex.set(normalizedClone.header, mergedSections.length);
+        mergedSections.push(normalizedClone);
+        sectionSource.set(normalizedClone.header, normalizedPath);
         continue;
       }
 
-      mergedSections[index] = clone;
-      sectionSource.set(clone.header, normalizedPath);
+      const existing = mergedSections[index];
+      const existingSource = sectionSource.get(normalizedClone.header);
+      if (
+        existing &&
+        existingSource === normalizedPath &&
+        incomingGateCondition &&
+        isTextSection(existing)
+      ) {
+        mergedSections[index] = mergeSameSourceTextVariants(
+          existing,
+          normalizedClone,
+          incomingGateCondition
+        );
+        sectionSource.set(normalizedClone.header, normalizedPath);
+        continue;
+      }
+
+      mergedSections[index] = normalizedClone;
+      sectionSource.set(normalizedClone.header, normalizedPath);
     }
 
     const resolvedSections: ParsedSection[] = [];
+    for (const section of file.sections) {
+      if (section.header !== '__preamble') {
+        continue;
+      }
+
+      if (section.content.length === 0) {
+        resolvedSections.push(cloneSection(section));
+        continue;
+      }
+
+      const resolvedContent = await this.resolveContent(section.content, {
+        sourceFile: normalizedPath,
+        currentSection: '__preamble',
+        visited: new Set(),
+        depth: 0
+      });
+
+      resolvedSections.push({
+        ...section,
+        content: resolvedContent
+      });
+      sectionSource.set('__preamble', normalizedPath);
+    }
 
     for (const section of mergedSections) {
       if (section.content.length === 0) {
@@ -251,13 +299,24 @@ export class CrossReferenceResolver {
     const resolved: TextContent[] = [];
 
     for (const item of content) {
-      if (item.type !== 'reference') {
-        resolved.push(item);
+      if (item.type === 'reference') {
+        const expanded = await this.resolve(item.ref, context);
+        resolved.push(...expanded);
         continue;
       }
 
-      const expanded = await this.resolve(item.ref, context);
-      resolved.push(...expanded);
+      if (item.type === 'conditional') {
+        const innerResolved = await this.resolveContent(item.content, context);
+        resolved.push({
+          type: 'conditional',
+          condition: item.condition,
+          content: innerResolved,
+          scope: item.scope
+        });
+        continue;
+      }
+
+      resolved.push(item);
     }
 
     return resolved;
@@ -367,6 +426,62 @@ function cloneSection(section: ParsedSection): ParsedSection {
     rank: section.rank ? [...section.rank] : undefined,
     rules: section.rules ? [...section.rules] : undefined
   };
+}
+
+function isTextSection(section: ParsedSection): boolean {
+  return !section.rank && !section.rules;
+}
+
+function materializeTextSectionCondition(section: ParsedSection): ParsedSection {
+  if (!isTextSection(section) || !section.condition) {
+    return section;
+  }
+
+  return {
+    ...section,
+    condition: undefined,
+    content: [
+      {
+        type: 'conditional',
+        condition: section.condition,
+        content: [...section.content],
+        scope: DEFAULT_CONDITIONAL_SCOPE
+      }
+    ]
+  };
+}
+
+function mergeSameSourceTextVariants(
+  existing: ParsedSection,
+  incoming: ParsedSection,
+  incomingGateCondition: Condition
+): ParsedSection {
+  return {
+    ...existing,
+    condition: undefined,
+    startLine: Math.min(existing.startLine, incoming.startLine),
+    endLine: Math.max(existing.endLine, incoming.endLine),
+    content: [
+      {
+        type: 'conditional',
+        condition: negateCondition(incomingGateCondition),
+        content: [...existing.content],
+        scope: DEFAULT_CONDITIONAL_SCOPE
+      },
+      ...incoming.content
+    ]
+  };
+}
+
+function negateCondition(condition: Condition): Condition {
+  const negated: Condition = {
+    ...condition,
+    expression: { type: 'not', inner: condition.expression }
+  };
+  delete negated.stopword;
+  delete negated.instruction;
+  delete negated.instructionModifier;
+  return negated;
 }
 
 function dedupe(values: readonly string[]): string[] {

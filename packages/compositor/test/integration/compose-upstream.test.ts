@@ -33,9 +33,10 @@ const describeIfUpstream = HAS_UPSTREAM ? describe : describe.skip;
  * End-to-end smoke test against the real upstream corpus: load the Phase 1
  * index twice — unresolved for the Rubrical Engine, resolved for the
  * compositor — create a Rubrics-1960 engine, resolve a handful of
- * representative dates, and run each Hour through composition. We don't assert
- * exact textual content (that belongs to a Perl-comparison layer once Phase 3
- * is shaped), only that the pipeline never throws and that every Hour emits a
+ * representative dates, and run each Hour through composition. The exact
+ * textual-comparison job now lives in `compare:phase-3-perl`; this suite stays
+ * intentionally smoke-level and asserts only that the pipeline never throws and
+ * that every Hour emits a
  * non-empty Section list with Latin content or structured heading metadata.
  */
 describeIfUpstream('Phase 3 composition smoke against upstream corpus (1960)', () => {
@@ -141,7 +142,7 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (1960)', (
     });
 
     const slotOrder = composed.sections.map((s) => s.slot);
-    expect(slotOrder[0]).toBe('invitatory');
+    expect(['incipit', 'invitatory']).toContain(slotOrder[0]);
     expect(slotOrder).toContain('psalmody');
     expect(slotOrder).toContain('heading');
     expect(composed.sections.find((section) => section.type === 'heading')?.heading).toBeDefined();

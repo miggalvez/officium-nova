@@ -6,6 +6,7 @@ import type {
 } from './matins.js';
 
 export type SlotName =
+  | 'incipit'
   | 'invitatory'
   | 'hymn'
   | 'psalmody'
