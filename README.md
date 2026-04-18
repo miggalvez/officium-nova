@@ -25,7 +25,7 @@ Source Texts (.txt)  ──>  Parser  ──>  Rubrical Engine  ──>  Composi
 
 - **Parser** — reads the legacy `.txt` files and emits typed, validated objects. Builds an in-memory text index queryable by feast, hour, language, and rubrical system.
 - **Rubrical Engine** — the target pure function is `(date, versionHandle) → OrdoEntry`. It encodes the calendar, occurrence, concurrence, and commemoration logic for the supported Breviary versions by resolving each `VersionHandle` to a calendar chain plus a rubrical policy family. No I/O.
-- **Composition Engine** — resolves text references from the `DayOfficeSummary` against a Phase-1-resolved text index, expands deferred node kinds (`psalmInclude`, `macroRef`, `formulaRef`), flattens seasonal conditionals, applies `HourDirective` post-transforms, and emits a format-agnostic `ComposedHour` tree of typed `Section`s with per-language `ComposedRun[]` lines.
+- **Composition Engine** — resolves text references from the `DayOfficeSummary` against a Phase-1-resolved text index, expands deferred node kinds (`psalmInclude`, `psalmRef`, `macroRef`, `formulaRef`), flattens seasonal conditionals, applies `HourDirective` post-transforms, and emits a format-agnostic `ComposedHour` tree of typed `Section`s with per-language `ComposedRun[]` lines. Phase 3 also carries the live Perl comparison harness used to enumerate and burn down output divergences.
 - **API** — stateless, read-only JSON API (`GET /api/v1/office/{date}/{hour}`) with aggressive HTTP caching.
 - **Frontend** — lightweight SPA consuming the API, with offline support via service worker caching.
 
@@ -84,11 +84,11 @@ officium-novum/
 | **1 — Parser** | Complete |
 | **2 — Rubrical Engine** (Roman: 1911 / 1955 / 1960) | Complete |
 | **2 — Non-Roman families** (Tridentine, Monastic, Cistercian, Dominican) | Deferred by design — explicit `UnsupportedPolicyError` stubs |
-| **3 — Composition Engine** | Core pipeline and Perl comparison harness shipped; liturgical directives (preces, suffragium, dirge) and divergence adjudication still open |
+| **3 — Composition Engine** | In progress — end-to-end hour composition and the live Perl comparison harness are shipped; remaining work is slot-order/fallback parity (especially hymns and canticle material), fully liturgical preces/suffragium/dirge substitutions, Matins commemorations, and Ordo-backed divergence adjudication |
 | **4 — API** | Not started |
 | **5 — Frontend** | Not started |
 
-**Validation.** Per design §19.1, the authority order is Ordo Recitandi → governing rubrical books (1911 / 1955 / 1960) → legacy Divinum Officium Perl output. Perl is a comparison target, not an oracle. Divergence ledgers live in `packages/rubrical-engine/test/divergence/` and `packages/compositor/test/divergence/`. Workspace validation currently passes with `pnpm -r typecheck` and `pnpm -r test` (parser + rubrical-engine + compositor).
+**Validation.** Per design §19.1, the authority order is Ordo Recitandi → governing rubrical books (1911 / 1955 / 1960) → legacy Divinum Officium Perl output. Perl is a comparison target, not an oracle. Divergence ledgers live in `packages/rubrical-engine/test/divergence/` and `packages/compositor/test/divergence/`. Workspace validation currently passes with `pnpm -r typecheck` and `pnpm -r test` (parser + rubrical-engine + compositor), and the Phase 3 live comparison harness is available at `pnpm -C packages/compositor compare:phase-3-perl`. Recent Phase 3 work closed the broad parser/composition gap around wrapper material, conditionalized keyed psalter data, and Compline special-source fallbacks; the remaining compare rows are now narrower slot-order/fallback and liturgical-substitution issues rather than missing openings.
 
 See [CHANGELOG.md](CHANGELOG.md) for the sub-phase implementation log, and [`docs/adr/`](docs/adr/) for architectural decisions.
 

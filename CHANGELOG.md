@@ -4,7 +4,7 @@ Phase-by-phase implementation log for Officium Novum. The README's [Status](READ
 
 ## Phase 3 — Composition Engine (in progress)
 
-Core pipeline and Perl comparison harness shipped; liturgical directives and divergence adjudication still open. The `@officium-novum/compositor` package now turns a `DayOfficeSummary` + Phase-1-resolved `CorpusIndex` into a typed, format-agnostic `ComposedHour`. The architectural boundary from ADR-008 / ADR-009 is enforced in code: the compositor never re-runs the parser's `@`-reference resolver, and unresolved `reference` nodes are surfaced as `unresolved-reference` runs rather than silently dropped.
+Core pipeline and live Perl comparison harness shipped; Phase 3 is now past the original all-hours-divergent state. The `@officium-novum/compositor` package turns a `DayOfficeSummary` + Phase-1-resolved `CorpusIndex` into a typed, format-agnostic `ComposedHour`, and the supporting parser / rubrical-engine changes now preserve the wrapper, conditional, and keyed-psalter source structures that Phase 3 needs. The architectural boundary from ADR-008 / ADR-009 is still enforced in code: the compositor never re-runs the parser's general `@`-reference resolver, and unresolved `reference` nodes are surfaced as `unresolved-reference` runs rather than silently dropped.
 
 Implemented:
 
@@ -19,11 +19,20 @@ Implemented:
 - Lossless output model: `ComposedRun` discriminated union (`text` / `rubric` / `citation` / `unresolved-macro` / `unresolved-formula` / `unresolved-reference`) on every `Section.lines.texts[lang]`, so rubrics keep their typing and unexpanded artifacts are visible to clients instead of being flattened to strings
 - Live Perl comparison harness at `packages/compositor/test/fixtures/officium-content-snapshot.pl` with `pnpm -C packages/compositor compare:phase-3-perl`; the harness composes every Hour across the existing Roman Phase 2h date matrices for `divino-afflatu`, `reduced-1955`, and `rubrics-1960`, compares normalized `ComposedHour` output against the legacy Perl-rendered Hour, and writes divergence ledgers to `packages/compositor/test/divergence/divino-afflatu-2024.md`, `packages/compositor/test/divergence/reduced-1955-2024.md`, and `packages/compositor/test/divergence/rubrics-1960-2024.md`
 - Smoke integration test against the upstream corpus composing every Hour on a handful of 1960 dates without throwing, plus a focused Matins shape assertion; gates on `existsSync(UPSTREAM_ROOT)` like the engine's integration suites
+- Parser-side section-content preprocessing shared across `parseFile`, `parseDirectiveLines`, and cross-reference resolution: inline `/:rubric:/` segments, leading parenthesized conditions, `sed` alternation / omission lines, and readable conditional snapshot serialization for corpus validation
+- `__preamble` preservation plus same-source duplicate conditioned-section coalescing in the parser resolver, so heading-based wrapper files and conditional section variants (for example `benedictio Completorium`) remain available to Phase 3 instead of collapsing to a last-one-wins overwrite
+- Heading-backed synthetic section resolution for `horas/Ordinarium/*.txt` plus a new `incipit` slot in `HourStructure`, allowing the compositor to compose `#Incipit` wrapper material from heading-based Ordinarium files rather than starting at the first proper slot
+- Conditional-aware keyed selector resolution for `Psalterium/Psalmi/Psalmi minor` and `Psalterium/Special/Matutinum Special`: weekday-keyed minor-hour psalmody, weekday-keyed Compline psalmody under the `Completorium` section, and seasonal / weekday invitatory antiphons now continue to resolve correctly after parser-side conditionalization
+- Deferred-node expansion extended to `psalmRef`, `Common/Rubricae` formula lookups, season-aware `Alleluia` macro selection, and separator insertion between expanded psalm blocks so the composed line stream stays aligned with the source corpus
+- Compline-specific fallback bundle: `Minor Special` now supplies the short reading, hymn, chapter, responsory, and versicle when no proper/commune override exists, and `lectio-brevis` now composes the special short reading plus the Ordinarium wrapper block instead of only the wrapper material
+- Compare-harness canonicalization for repeated `+` signs and lowercase `v.` / `r.` markers so the live Phase 3 compare surface is dominated by structural differences rather than render-equivalent noise
 
 Open:
 
 - **Liturgically complete preces / suffragium / dirge directive implementations.** The current MVP emits a banner rubric; the full implementations need to splice in the real preces block from `Psalterium/Special/Preces.txt`, the suffragium from the corresponding common, and the Office-of-the-Dead skeletons for the dirge directives.
-- **Perl-comparison divergence burn-down and Ordo-backed adjudication.** The Phase 3 live harness now exists, but the current ledgers show large systematic differences between the compositor and the legacy renderer. Those rows still need to be triaged against the published *Ordo* and the governing rubrics so the comparison surface becomes a bounded, source-backed divergence list rather than a raw mismatch dump.
+- **Slot-order and fallback parity for the remaining non-Compline hours.** The live compare surface has moved past the original parser/composition wrapper gap; the next visible rows are broader hour-order / fallback issues such as minor-hour hymns, Lauds/Vespers canticle-antiphon placement, and Matins opening / invitatory sequencing.
+- **Compline tail-order and wording/punctuation parity.** The special short reading and source fallbacks are now in place, but the final sequencing from `Adjutorium nostrum` onward and a few wording / punctuation differences (for example quoted rubric text) still diverge from the legacy renderer.
+- **Perl-comparison divergence burn-down and Ordo-backed adjudication.** The Phase 3 live harness now enumerates narrower structural rows than before, but those rows still need to be triaged against the published *Ordo* and the governing rubrics so the comparison surface becomes a bounded, source-backed divergence list rather than a raw mismatch dump.
 - **`selectorUnhandled` warning wiring.** The resolver sets the flag structurally for novel selector shapes, but callers currently only branch on `selectorMissing`; novel selectors fall through to full-section output without surfacing a warning.
 - **Policy-wide smoke coverage in Vitest.** The live comparison harness exercises all three Roman policies end-to-end, but the checked-in Vitest smoke suite is still 1960-only; `divino-afflatu` and `reduced-1955` should gain explicit smoke assertions too.
 - **Upstream engine gap: Matins commemorations.** `rubrical-engine/src/hours/apply-rule-set.ts:attachCommemorationSlots` currently early-returns for any hour other than Lauds or Vespers, so Matins commemorations never reach `HourStructure.slots`. The compositor can't emit what the engine doesn't produce; lifting that guard (where rubrically correct for the given policy) is a prerequisite for fully-commemorated Matins output.
@@ -34,7 +43,7 @@ Roman scope complete; non-Roman families deferred by design. The detailed design
 
 **Validation.** Per design §19.1, the authority order is: Ordo Recitandi → governing rubrical books (1911 / 1955 / 1960) → legacy Divinum Officium Perl output. Perl is a comparison target, not an oracle. Divergence ledgers live in `packages/rubrical-engine/test/divergence/`, with the current documented residual state at `rubrics-1960`: `8` mismatches across `7` dates, `divino-afflatu`: `0/62` divergent rows, and `reduced-1955`: `0/61` divergent rows.
 
-476 rubrical-engine tests passing (plus one TODO marker) in package validation, including the 1911/1955 suites, the year-wide supported-handle no-throw matrix, the refreshed 1960 upstream fixtures, and the upstream-backed Phase 2h regression fixtures.
+477 rubrical-engine tests passing (plus one TODO marker) in package validation, including the 1911/1955 suites, the year-wide supported-handle no-throw matrix, the refreshed 1960 upstream fixtures, and the upstream-backed Phase 2h regression fixtures.
 
 ### 2h — 1911 and 1955 Policies (complete)
 
@@ -143,7 +152,7 @@ The end-to-end deliverable from design §18 is in place: `createRubricalEngine(c
 
 ## Phase 1 — Parser (complete)
 
-The `@officium-novum/parser` package parses the full 34,000+ file corpus across 16 languages, resolves cross-references with language fallback, and builds an in-memory text index. All 64 tests pass, including a spot-check validation of 62 representative feast files across languages against resolved snapshots.
+The `@officium-novum/parser` package parses the full 34,000+ file corpus across 16 languages, resolves cross-references with language fallback, and builds an in-memory text index. All 82 tests pass, including a spot-check validation of 62 representative feast files across languages against resolved snapshots.
 
 - Section splitter, directive parser, condition parser (recursive descent with `aut`/`et`/`nisi` precedence), rank parser, rule parser
 - Cross-reference resolver with path resolution, language fallback chains, line selectors, regex substitutions, cycle detection, and preamble merging
