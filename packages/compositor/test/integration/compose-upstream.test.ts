@@ -458,6 +458,129 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
     }
   }, 240_000);
 
+  it('renders the 1960 January minor-hour hymn endings from the selected January doxology source', async () => {
+    const { engine, resolvedCorpus } = await createHarness('Rubrics 1960 - 1960');
+
+    for (const [date, firstLine] of [
+      ['2024-01-01', 'Jesu, tibi sit glória,'],
+      ['2024-01-06', 'Jesu, tibi sit glória,'],
+      ['2024-01-07', 'Jesu, tuis obédiens'],
+      ['2024-01-13', 'Jesu, tibi sit glória,']
+    ] as const) {
+      const summary = engine.resolveDayOfficeSummary(date);
+      for (const hour of ['prime', 'terce', 'sext', 'none'] as const) {
+        const composed = composeHour({
+          corpus: resolvedCorpus.index,
+          summary,
+          version: engine.version,
+          hour,
+          options: { languages: ['Latin'] }
+        });
+
+        expect(normalizeLatin(firstLineOfLastHymnStanza(composed)), `${date} ${hour} hymn doxology`).toBe(
+          normalizeLatin(firstLine)
+        );
+      }
+    }
+  }, 240_000);
+
+  it('renders 1955 January minor-hour explicit antiphons with shortened openings and full closing repeats', async () => {
+    const { engine, resolvedCorpus } = await createHarness('Reduced - 1955');
+
+    for (const [date, expectations] of [
+      [
+        '2024-01-06',
+        [
+          ['Ante lucíferum génitus.', 'Ante lucíferum génitus, et ante sǽcula, Dóminus Salvátor noster hódie mundo appáruit.'],
+          ['Venit lumen tuum.', 'Venit lumen tuum Jerúsalem, et glória Dómini super te orta est, et ambulábunt gentes in lúmine tuo, allelúja.'],
+          ['Apértis thesáuris suis.', 'Apértis thesáuris suis obtulérunt Magi Dómino aurum, thus, et myrrham, allelúja.'],
+          ['Stella ista.', 'Stella ista sicut flamma corúscat, et Regem regum Deum demónstrat: Magi eam vidérunt, et magno Regi múnera obtulérunt.']
+        ]
+      ],
+      [
+        '2024-01-07',
+        [
+          ['Post tríduum.', 'Post tríduum invenérunt Jesum in templo sedéntem in médio doctórum, audiéntem illos, et interrogántem eos.'],
+          ['Dixit mater Jesu.', 'Dixit mater Jesu ad illum: Fili, quid fecísti nobis sic? Ecce pater tuus et ego doléntes quærebámus te.'],
+          ['Descéndit Jesus.', 'Descéndit Jesus cum eis, et venit Názareth, et erat súbditus illis.'],
+          ['Et dicébant:', 'Et dicébant: Unde huic sapiéntia hæc, et virtútes? Nonne hic est fabri fílius?']
+        ]
+      ]
+    ] as const) {
+      const summary = engine.resolveDayOfficeSummary(date);
+      for (const [hour, [opening, closing]] of [
+        ['prime', expectations[0]],
+        ['terce', expectations[1]],
+        ['sext', expectations[2]],
+        ['none', expectations[3]]
+      ] as const) {
+        const composed = composeHour({
+          corpus: resolvedCorpus.index,
+          summary,
+          version: engine.version,
+          hour,
+          options: { languages: ['Latin'] }
+        });
+
+        const antiphons = psalmodyAntiphons(composed);
+        expect(normalizeLatin(antiphons[0] ?? ''), `${date} ${hour} opening antiphon`).toBe(normalizeLatin(opening));
+        expect(normalizeLatin(antiphons.at(-1) ?? ''), `${date} ${hour} closing antiphon`).toBe(normalizeLatin(closing));
+      }
+    }
+  }, 240_000);
+
+  it('renders 1955 January major-hour explicit antiphons as full opening and closing pairs', async () => {
+    const { engine, resolvedCorpus } = await createHarness('Reduced - 1955');
+
+    for (const [date, hours] of [
+      [
+        '2024-01-06',
+        {
+          lauds: [
+            'Ante lucíferum génitus, * et ante sǽcula, Dóminus Salvátor noster hódie mundo appáruit.',
+            'Ante lucíferum génitus, et ante sǽcula, Dóminus Salvátor noster hódie mundo appáruit.'
+          ],
+          vespers: [
+            'Ante lucíferum génitus, * et ante sǽcula, Dóminus Salvátor noster hódie mundo appáruit.',
+            'Ante lucíferum génitus, et ante sǽcula, Dóminus Salvátor noster hódie mundo appáruit.'
+          ]
+        }
+      ],
+      [
+        '2024-01-07',
+        {
+          lauds: [
+            'Post tríduum * invenérunt Jesum in templo sedéntem in médio doctórum, audiéntem illos, et interrogántem eos.',
+            'Post tríduum invenérunt Jesum in templo sedéntem in médio doctórum, audiéntem illos, et interrogántem eos.'
+          ],
+          vespers: [
+            'Jacob autem * génuit Joseph virum Maríæ; de qua natus est Jesus, qui vocátur Christus.',
+            'Jacob autem génuit Joseph virum Maríæ; de qua natus est Jesus, qui vocátur Christus.'
+          ]
+        }
+      ]
+    ] as const) {
+      const summary = engine.resolveDayOfficeSummary(date);
+      for (const hour of ['lauds', 'vespers'] as const) {
+        const composed = composeHour({
+          corpus: resolvedCorpus.index,
+          summary,
+          version: engine.version,
+          hour,
+          options: { languages: ['Latin'] }
+        });
+
+        const antiphons = psalmodyAntiphons(composed);
+        expect(normalizeLatin(antiphons[0] ?? ''), `${date} ${hour} opening antiphon`).toBe(
+          normalizeLatin(hours[hour][0])
+        );
+        expect(normalizeLatin(antiphons[1] ?? ''), `${date} ${hour} first closing antiphon`).toBe(
+          normalizeLatin(hours[hour][1])
+        );
+      }
+    }
+  }, 240_000);
+
   it('renders 1960 January proper-minor-hours antiphons from the winning office', async () => {
     const { engine, resolvedCorpus } = await createHarness('Rubrics 1960 - 1960');
 
@@ -534,11 +657,23 @@ function firstLineOfLastHymnStanza(
 function firstPsalmodyAntiphon(
   composed: ReturnType<typeof composeHour>
 ): string {
-  const psalmody = composed.sections.find((section) => section.slot === 'psalmody');
-  expect(psalmody, `${composed.hour} is missing the psalmody section`).toBeDefined();
-  const antiphonLine = psalmody?.lines.find((line) => line.marker === 'Ant.');
+  const antiphonLine = psalmodyAntiphonLines(composed)[0];
   expect(antiphonLine, `${composed.hour} is missing the opening antiphon line`).toBeDefined();
   return antiphonLine ? renderLatinText(antiphonLine) : '';
+}
+
+function psalmodyAntiphons(
+  composed: ReturnType<typeof composeHour>
+): readonly string[] {
+  return psalmodyAntiphonLines(composed).map(renderLatinText);
+}
+
+function psalmodyAntiphonLines(
+  composed: ReturnType<typeof composeHour>
+) {
+  const psalmody = composed.sections.find((section) => section.slot === 'psalmody');
+  expect(psalmody, `${composed.hour} is missing the psalmody section`).toBeDefined();
+  return psalmody?.lines.filter((line) => line.marker === 'Ant.') ?? [];
 }
 
 function normalizeLatin(text: string): string {

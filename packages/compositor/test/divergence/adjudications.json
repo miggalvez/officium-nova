@@ -621,6 +621,54 @@
     "resolvedAt": "2026-04-19",
     "commitSha": "pending"
   },
+  "Rubrics 1960 - 1960/2024-01-01/None/318cf47a": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-01-01",
+    "hour": "None",
+    "firstExpected": "Præsta, Pater piíssime,",
+    "firstActual": "Jesu, tibi sit glória,",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-06.txt:4-8 and upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:1-20 and upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:664-672 and docs/phase-2-rubrical-engine-design.md:1469 — the Roman January offices set `Doxology=Epi` or a local `[Doxology]`, and fallback hymn resolution is supposed to substitute the seasonal stanza from `Psalterium/Doxologies` in place of the default `Præsta, Pater piíssime,` close. The compositor follows that source-backed rule; the Perl comparison surface retains the unsubstituted fallback stanza.",
+    "notes": "Representative entry for the Rubrics 1960 January Terce/Sext/None fallback-hymn doxology family where the default `Præsta, Pater piíssime,` close is replaced by the Christmas or Epiphany stanza required by the winning office.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "pending"
+  },
+  "Rubrics 1960 - 1960/2024-01-01/Prime/c52cc2ef": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-01-01",
+    "hour": "Prime",
+    "firstExpected": "Deo Patri sit glória,",
+    "firstActual": "Jesu, tibi sit glória,",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-06.txt:4-8 and upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:1-20 and upstream/web/www/horas/Latin/Psalterium/Special/Prima Special.txt:100-109 and docs/phase-2-rubrical-engine-design.md:1469 — the Roman January offices set `Doxology=Epi` or a local `[Doxology]`, and fallback hymn resolution is supposed to substitute the seasonal stanza from `Psalterium/Doxologies` in place of the default `Deo Patri sit glória,` close. The compositor follows that source-backed rule; the Perl comparison surface retains the unsubstituted fallback stanza.",
+    "notes": "Representative entry for the Rubrics 1960 January Prime fallback-hymn doxology family where the default `Deo Patri sit glória,` close is replaced by the Christmas or Epiphany stanza required by the winning office.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "pending"
+  },
+  "Rubrics 1960 - 1960/2024-01-01/Sext/318cf47a": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-01-01",
+    "hour": "Sext",
+    "firstExpected": "Præsta, Pater piíssime,",
+    "firstActual": "Jesu, tibi sit glória,",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-06.txt:4-8 and upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:1-20 and upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:664-672 and docs/phase-2-rubrical-engine-design.md:1469 — the Roman January offices set `Doxology=Epi` or a local `[Doxology]`, and fallback hymn resolution is supposed to substitute the seasonal stanza from `Psalterium/Doxologies` in place of the default `Præsta, Pater piíssime,` close. The compositor follows that source-backed rule; the Perl comparison surface retains the unsubstituted fallback stanza.",
+    "notes": "Representative entry for the Rubrics 1960 January Terce/Sext/None fallback-hymn doxology family where the default `Præsta, Pater piíssime,` close is replaced by the Christmas or Epiphany stanza required by the winning office.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "pending"
+  },
+  "Rubrics 1960 - 1960/2024-01-01/Terce/318cf47a": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-01-01",
+    "hour": "Terce",
+    "firstExpected": "Præsta, Pater piíssime,",
+    "firstActual": "Jesu, tibi sit glória,",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-06.txt:4-8 and upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:1-20 and upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:664-672 and docs/phase-2-rubrical-engine-design.md:1469 — the Roman January offices set `Doxology=Epi` or a local `[Doxology]`, and fallback hymn resolution is supposed to substitute the seasonal stanza from `Psalterium/Doxologies` in place of the default `Præsta, Pater piíssime,` close. The compositor follows that source-backed rule; the Perl comparison surface retains the unsubstituted fallback stanza.",
+    "notes": "Representative entry for the Rubrics 1960 January Terce/Sext/None fallback-hymn doxology family where the default `Præsta, Pater piíssime,` close is replaced by the Christmas or Epiphany stanza required by the winning office.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "pending"
+  },
   "Rubrics 1960 - 1960/2024-01-06/Compline/57de2841": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2024-01-06",
@@ -631,6 +679,54 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Rubricae.txt:129 — the corpus source carries `«Pater Noster»` with guillemets. Both Perl (strip) and compositor (preserve) are defensible renderings of the same source token; neither is liturgically wrong. Phase 3 §3h defers to the corpus author's formatting.",
     "notes": "Pattern affects every Compline row across every policy and date. This single entry is representative; the full row-key fan-out is a follow-up bulk-populate task (see ADJUDICATION_LOG.md).",
     "resolvedAt": "2026-04-18",
+    "commitSha": "pending"
+  },
+  "Rubrics 1960 - 1960/2024-01-06/None/318cf47a": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-01-06",
+    "hour": "None",
+    "firstExpected": "Præsta, Pater piíssime,",
+    "firstActual": "Jesu, tibi sit glória,",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-06.txt:4-8 and upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:1-20 and upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:664-672 and docs/phase-2-rubrical-engine-design.md:1469 — the Roman January offices set `Doxology=Epi` or a local `[Doxology]`, and fallback hymn resolution is supposed to substitute the seasonal stanza from `Psalterium/Doxologies` in place of the default `Præsta, Pater piíssime,` close. The compositor follows that source-backed rule; the Perl comparison surface retains the unsubstituted fallback stanza.",
+    "notes": "Representative entry for the Rubrics 1960 January Terce/Sext/None fallback-hymn doxology family where the default `Præsta, Pater piíssime,` close is replaced by the Christmas or Epiphany stanza required by the winning office.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "pending"
+  },
+  "Rubrics 1960 - 1960/2024-01-06/Prime/c52cc2ef": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-01-06",
+    "hour": "Prime",
+    "firstExpected": "Deo Patri sit glória,",
+    "firstActual": "Jesu, tibi sit glória,",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-06.txt:4-8 and upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:1-20 and upstream/web/www/horas/Latin/Psalterium/Special/Prima Special.txt:100-109 and docs/phase-2-rubrical-engine-design.md:1469 — the Roman January offices set `Doxology=Epi` or a local `[Doxology]`, and fallback hymn resolution is supposed to substitute the seasonal stanza from `Psalterium/Doxologies` in place of the default `Deo Patri sit glória,` close. The compositor follows that source-backed rule; the Perl comparison surface retains the unsubstituted fallback stanza.",
+    "notes": "Representative entry for the Rubrics 1960 January Prime fallback-hymn doxology family where the default `Deo Patri sit glória,` close is replaced by the Christmas or Epiphany stanza required by the winning office.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "pending"
+  },
+  "Rubrics 1960 - 1960/2024-01-06/Sext/318cf47a": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-01-06",
+    "hour": "Sext",
+    "firstExpected": "Præsta, Pater piíssime,",
+    "firstActual": "Jesu, tibi sit glória,",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-06.txt:4-8 and upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:1-20 and upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:664-672 and docs/phase-2-rubrical-engine-design.md:1469 — the Roman January offices set `Doxology=Epi` or a local `[Doxology]`, and fallback hymn resolution is supposed to substitute the seasonal stanza from `Psalterium/Doxologies` in place of the default `Præsta, Pater piíssime,` close. The compositor follows that source-backed rule; the Perl comparison surface retains the unsubstituted fallback stanza.",
+    "notes": "Representative entry for the Rubrics 1960 January Terce/Sext/None fallback-hymn doxology family where the default `Præsta, Pater piíssime,` close is replaced by the Christmas or Epiphany stanza required by the winning office.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "pending"
+  },
+  "Rubrics 1960 - 1960/2024-01-06/Terce/318cf47a": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-01-06",
+    "hour": "Terce",
+    "firstExpected": "Præsta, Pater piíssime,",
+    "firstActual": "Jesu, tibi sit glória,",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-06.txt:4-8 and upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:1-20 and upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:664-672 and docs/phase-2-rubrical-engine-design.md:1469 — the Roman January offices set `Doxology=Epi` or a local `[Doxology]`, and fallback hymn resolution is supposed to substitute the seasonal stanza from `Psalterium/Doxologies` in place of the default `Præsta, Pater piíssime,` close. The compositor follows that source-backed rule; the Perl comparison surface retains the unsubstituted fallback stanza.",
+    "notes": "Representative entry for the Rubrics 1960 January Terce/Sext/None fallback-hymn doxology family where the default `Præsta, Pater piíssime,` close is replaced by the Christmas or Epiphany stanza required by the winning office.",
+    "resolvedAt": "2026-04-19",
     "commitSha": "pending"
   },
   "Rubrics 1960 - 1960/2024-01-07/Compline/57de2841": {
@@ -657,6 +753,54 @@
     "resolvedAt": "2026-04-19",
     "commitSha": "pending"
   },
+  "Rubrics 1960 - 1960/2024-01-07/None/274511e7": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-01-07",
+    "hour": "None",
+    "firstExpected": "Præsta, Pater piíssime,",
+    "firstActual": "Jesu, tuis obédiens",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Tempora/Epi1-0.txt:56-67 and upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:664-672 and docs/phase-2-rubrical-engine-design.md:1469 — Holy Family provides a local `[Doxology]` stanza (`Jesu, tuis obédiens ...`) for fallback hymns, so the compositor correctly substitutes it instead of the default `Præsta, Pater piíssime,` close. The Perl comparison surface retains the unsubstituted fallback stanza.",
+    "notes": "Representative entry for the Rubrics 1960 Holy Family Terce/Sext/None fallback-hymn doxology family where the local `[Doxology]` overrides the default `Præsta, Pater piíssime,` close.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "pending"
+  },
+  "Rubrics 1960 - 1960/2024-01-07/Prime/6b019b6f": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-01-07",
+    "hour": "Prime",
+    "firstExpected": "Deo Patri sit glória,",
+    "firstActual": "Jesu, tuis obédiens",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Tempora/Epi1-0.txt:56-67 and upstream/web/www/horas/Latin/Psalterium/Special/Prima Special.txt:100-109 and docs/phase-2-rubrical-engine-design.md:1469 — Holy Family provides a local `[Doxology]` stanza (`Jesu, tuis obédiens ...`) for fallback hymns, so the compositor correctly substitutes it instead of the default `Deo Patri sit glória,` close. The Perl comparison surface retains the unsubstituted fallback stanza.",
+    "notes": "Representative entry for the Rubrics 1960 Holy Family Prime fallback-hymn doxology family where the local `[Doxology]` overrides the default `Deo Patri sit glória,` close.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "pending"
+  },
+  "Rubrics 1960 - 1960/2024-01-07/Sext/274511e7": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-01-07",
+    "hour": "Sext",
+    "firstExpected": "Præsta, Pater piíssime,",
+    "firstActual": "Jesu, tuis obédiens",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Tempora/Epi1-0.txt:56-67 and upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:664-672 and docs/phase-2-rubrical-engine-design.md:1469 — Holy Family provides a local `[Doxology]` stanza (`Jesu, tuis obédiens ...`) for fallback hymns, so the compositor correctly substitutes it instead of the default `Præsta, Pater piíssime,` close. The Perl comparison surface retains the unsubstituted fallback stanza.",
+    "notes": "Representative entry for the Rubrics 1960 Holy Family Terce/Sext/None fallback-hymn doxology family where the local `[Doxology]` overrides the default `Præsta, Pater piíssime,` close.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "pending"
+  },
+  "Rubrics 1960 - 1960/2024-01-07/Terce/274511e7": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-01-07",
+    "hour": "Terce",
+    "firstExpected": "Præsta, Pater piíssime,",
+    "firstActual": "Jesu, tuis obédiens",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Tempora/Epi1-0.txt:56-67 and upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:664-672 and docs/phase-2-rubrical-engine-design.md:1469 — Holy Family provides a local `[Doxology]` stanza (`Jesu, tuis obédiens ...`) for fallback hymns, so the compositor correctly substitutes it instead of the default `Præsta, Pater piíssime,` close. The Perl comparison surface retains the unsubstituted fallback stanza.",
+    "notes": "Representative entry for the Rubrics 1960 Holy Family Terce/Sext/None fallback-hymn doxology family where the local `[Doxology]` overrides the default `Præsta, Pater piíssime,` close.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "pending"
+  },
   "Rubrics 1960 - 1960/2024-01-13/Compline/57de2841": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2024-01-13",
@@ -667,6 +811,54 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Rubricae.txt:129 — the corpus source carries `«Pater Noster»` with guillemets. Both Perl (strip) and compositor (preserve) are defensible renderings of the same source token; neither is liturgically wrong. Phase 3 §3h defers to the corpus author's formatting.",
     "notes": "Pattern affects every Compline row across every policy and date. This single entry is representative; the full row-key fan-out is a follow-up bulk-populate task (see ADJUDICATION_LOG.md).",
     "resolvedAt": "2026-04-18",
+    "commitSha": "pending"
+  },
+  "Rubrics 1960 - 1960/2024-01-13/None/318cf47a": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-01-13",
+    "hour": "None",
+    "firstExpected": "Præsta, Pater piíssime,",
+    "firstActual": "Jesu, tibi sit glória,",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-06.txt:4-8 and upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:1-20 and upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:664-672 and docs/phase-2-rubrical-engine-design.md:1469 — the Roman January offices set `Doxology=Epi` or a local `[Doxology]`, and fallback hymn resolution is supposed to substitute the seasonal stanza from `Psalterium/Doxologies` in place of the default `Præsta, Pater piíssime,` close. The compositor follows that source-backed rule; the Perl comparison surface retains the unsubstituted fallback stanza.",
+    "notes": "Representative entry for the Rubrics 1960 January Terce/Sext/None fallback-hymn doxology family where the default `Præsta, Pater piíssime,` close is replaced by the Christmas or Epiphany stanza required by the winning office.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "pending"
+  },
+  "Rubrics 1960 - 1960/2024-01-13/Prime/c52cc2ef": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-01-13",
+    "hour": "Prime",
+    "firstExpected": "Deo Patri sit glória,",
+    "firstActual": "Jesu, tibi sit glória,",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-06.txt:4-8 and upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:1-20 and upstream/web/www/horas/Latin/Psalterium/Special/Prima Special.txt:100-109 and docs/phase-2-rubrical-engine-design.md:1469 — the Roman January offices set `Doxology=Epi` or a local `[Doxology]`, and fallback hymn resolution is supposed to substitute the seasonal stanza from `Psalterium/Doxologies` in place of the default `Deo Patri sit glória,` close. The compositor follows that source-backed rule; the Perl comparison surface retains the unsubstituted fallback stanza.",
+    "notes": "Representative entry for the Rubrics 1960 January Prime fallback-hymn doxology family where the default `Deo Patri sit glória,` close is replaced by the Christmas or Epiphany stanza required by the winning office.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "pending"
+  },
+  "Rubrics 1960 - 1960/2024-01-13/Sext/318cf47a": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-01-13",
+    "hour": "Sext",
+    "firstExpected": "Præsta, Pater piíssime,",
+    "firstActual": "Jesu, tibi sit glória,",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-06.txt:4-8 and upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:1-20 and upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:664-672 and docs/phase-2-rubrical-engine-design.md:1469 — the Roman January offices set `Doxology=Epi` or a local `[Doxology]`, and fallback hymn resolution is supposed to substitute the seasonal stanza from `Psalterium/Doxologies` in place of the default `Præsta, Pater piíssime,` close. The compositor follows that source-backed rule; the Perl comparison surface retains the unsubstituted fallback stanza.",
+    "notes": "Representative entry for the Rubrics 1960 January Terce/Sext/None fallback-hymn doxology family where the default `Præsta, Pater piíssime,` close is replaced by the Christmas or Epiphany stanza required by the winning office.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "pending"
+  },
+  "Rubrics 1960 - 1960/2024-01-13/Terce/318cf47a": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-01-13",
+    "hour": "Terce",
+    "firstExpected": "Præsta, Pater piíssime,",
+    "firstActual": "Jesu, tibi sit glória,",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-06.txt:4-8 and upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:1-20 and upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:664-672 and docs/phase-2-rubrical-engine-design.md:1469 — the Roman January offices set `Doxology=Epi` or a local `[Doxology]`, and fallback hymn resolution is supposed to substitute the seasonal stanza from `Psalterium/Doxologies` in place of the default `Præsta, Pater piíssime,` close. The compositor follows that source-backed rule; the Perl comparison surface retains the unsubstituted fallback stanza.",
+    "notes": "Representative entry for the Rubrics 1960 January Terce/Sext/None fallback-hymn doxology family where the default `Præsta, Pater piíssime,` close is replaced by the Christmas or Epiphany stanza required by the winning office.",
+    "resolvedAt": "2026-04-19",
     "commitSha": "pending"
   },
   "Rubrics 1960 - 1960/2024-01-14/Compline/57de2841": {

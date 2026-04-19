@@ -68,6 +68,28 @@ describeIfUpstream('January hymn routing regressions', () => {
         expectMinorHourDoxology(reduced, '2024-01-07', hour, 'horas/Latin/Tempora/Epi1-0:Doxology');
       }
 
+      // 1960 keeps the same January doxology selectors on fallback minor-hour
+      // hymns; the rules still carry `Doxology=Nat/Epi`, and Holy Family
+      // still owns its local `[Doxology]` stanza.
+      for (const [date, variant] of [
+        ['2024-01-01', 'horas/Latin/Psalterium/Doxologies:Nat'],
+        ['2024-01-06', 'horas/Latin/Psalterium/Doxologies:Epi'],
+        ['2024-01-13', 'horas/Latin/Psalterium/Doxologies:Epi']
+      ] as const) {
+        expectMinorHourHymn(roman1960, date, 'prime', 'horas/Latin/Psalterium/Special/Prima Special:Hymnus Prima');
+        expectMinorHourDoxology(roman1960, date, 'prime', variant);
+        expectMinorHourHymn(roman1960, date, 'terce', 'horas/Latin/Psalterium/Special/Minor Special:Hymnus Tertia');
+        expectMinorHourDoxology(roman1960, date, 'terce', variant);
+        expectMinorHourHymn(roman1960, date, 'sext', 'horas/Latin/Psalterium/Special/Minor Special:Hymnus Sexta');
+        expectMinorHourDoxology(roman1960, date, 'sext', variant);
+        expectMinorHourHymn(roman1960, date, 'none', 'horas/Latin/Psalterium/Special/Minor Special:Hymnus Nona');
+        expectMinorHourDoxology(roman1960, date, 'none', variant);
+      }
+
+      for (const hour of ['prime', 'terce', 'sext', 'none'] as const) {
+        expectMinorHourDoxology(roman1960, '2024-01-07', hour, 'horas/Latin/Tempora/Epi1-0:Doxology');
+      }
+
       // Non-January controls: ordinary dates should not sprout a doxology
       // slot just because the hymn fell back to Prima/Minor Special.
       expectNoDoxologyVariant(reduced, '2024-02-18', 'prime');

@@ -172,6 +172,7 @@ interface ComposeSlotArgs {
 interface TaggedRef {
   readonly ref: TextReference;
   readonly isAntiphon: boolean;
+  readonly openingAntiphon?: boolean;
   readonly repeatAntiphon?: boolean;
   /**
    * True when the psalm assignment also carried an explicit `antiphonRef`.
@@ -193,7 +194,7 @@ interface TaggedRef {
 
 function composeSlot(args: ComposeSlotArgs): Section | undefined {
   const effectiveContent = directiveDrivenSlotContent(args) ?? args.content;
-  const refs = taggedReferencesFrom(args.slot, effectiveContent);
+  const refs = taggedReferencesFrom(args.hour, args.slot, effectiveContent);
   if (refs.length === 0) return undefined;
 
   const perLanguage = new Map<string, TextContent[]>();
@@ -203,7 +204,7 @@ function composeSlot(args: ComposeSlotArgs): Section | undefined {
   const hymnDoxologyByLanguage = resolveHymnDoxologyByLanguage(args);
 
   const primary = refs[0]?.ref;
-  for (const { ref, isAntiphon, psalmIndex, hasExplicitAntiphon, repeatAntiphon } of refs) {
+  for (const { ref, isAntiphon, openingAntiphon, psalmIndex, hasExplicitAntiphon, repeatAntiphon } of refs) {
     const resolved = resolveReference(args.corpus, ref, {
       languages: args.options.languages,
       langfb: args.options.langfb,
@@ -247,7 +248,15 @@ function composeSlot(args: ComposeSlotArgs): Section | undefined {
         appendContentWithBoundary(
           bucket,
           markAntiphonFirstText(
-            repeatAntiphon ? normalizeRepeatedAntiphonContent(transformed) : transformed
+            repeatAntiphon
+              ? normalizeRepeatedAntiphonContent(transformed)
+              : openingAntiphon
+                ? normalizeOpeningPsalmodyAntiphonContent(
+                    transformed,
+                    args.hour,
+                    args.context.version
+                  )
+                : transformed
           )
         );
         continue;
@@ -303,7 +312,15 @@ function composeSlot(args: ComposeSlotArgs): Section | undefined {
       // only its antiphon refs so psalm verses stay unmarked.
       const markered = isAntiphon
         ? markAntiphonFirstText(
-            repeatAntiphon ? normalizeRepeatedAntiphonContent(withHymnDoxology) : withHymnDoxology
+            repeatAntiphon
+              ? normalizeRepeatedAntiphonContent(withHymnDoxology)
+              : openingAntiphon
+                ? normalizeOpeningPsalmodyAntiphonContent(
+                    withHymnDoxology,
+                    args.hour,
+                    args.context.version
+                  )
+                : withHymnDoxology
           )
         : withHymnDoxology;
       // Phase 3 §3h — emit a `Psalmus N [index]` heading before each psalm
@@ -443,7 +460,11 @@ function suffragiumSection(args: ComposeSlotArgs): string {
   return 'Suffragium';
 }
 
-function taggedReferencesFrom(slot: SlotName, content: SlotContent): readonly TaggedRef[] {
+function taggedReferencesFrom(
+  hour: HourName,
+  slot: SlotName,
+  content: SlotContent
+): readonly TaggedRef[] {
   const wholeAntiphon = isWholeAntiphonSlot(slot);
   switch (content.kind) {
     case 'single-ref':
@@ -452,15 +473,42 @@ function taggedReferencesFrom(slot: SlotName, content: SlotContent): readonly Ta
       return content.refs.map((ref) => ({ ref, isAntiphon: wholeAntiphon }));
     case 'psalmody': {
       const refs: TaggedRef[] = [];
+      const slotWideAntiphonRef = isMinorHour(hour) ? content.psalms[0]?.antiphonRef : undefined;
+      if (slotWideAntiphonRef) {
+        refs.push({
+          ref: slotWideAntiphonRef,
+          isAntiphon: true,
+          openingAntiphon: true
+        });
+      }
       for (const [index, assignment] of content.psalms.entries()) {
-        if (assignment.antiphonRef) {
-          refs.push({ ref: assignment.antiphonRef, isAntiphon: true });
+        if (!slotWideAntiphonRef && assignment.antiphonRef) {
+          refs.push({
+            ref: assignment.antiphonRef,
+            isAntiphon: true
+          });
         }
         refs.push({
           ref: assignment.psalmRef,
           isAntiphon: false,
           psalmIndex: index + 1,
-          hasExplicitAntiphon: Boolean(assignment.antiphonRef)
+          hasExplicitAntiphon: slotWideAntiphonRef
+            ? index === 0
+            : Boolean(assignment.antiphonRef)
+        });
+        if (!slotWideAntiphonRef && assignment.antiphonRef) {
+          refs.push({
+            ref: assignment.antiphonRef,
+            isAntiphon: true,
+            repeatAntiphon: true
+          });
+        }
+      }
+      if (slotWideAntiphonRef) {
+        refs.push({
+          ref: slotWideAntiphonRef,
+          isAntiphon: true,
+          repeatAntiphon: true
         });
       }
       return refs;
@@ -700,6 +748,60 @@ function normalizeRepeatedAntiphonText(text: string): string {
   return text.replace(/\s*[*‡†]\s*/gu, ' ').replace(/\s{2,}/gu, ' ').trim();
 }
 
+function normalizeOpeningPsalmodyAntiphonContent(
+  content: readonly TextContent[],
+  hour: HourName,
+  version: ResolvedVersion
+): readonly TextContent[] {
+  if (!isMinorHour(hour) || version.handle.includes('1960')) {
+    return content;
+  }
+
+  const out = [...content];
+  for (let index = 0; index < out.length; index += 1) {
+    const node = out[index];
+    if (!node) continue;
+    if (node.type === 'text') {
+      out[index] = {
+        type: 'text',
+        value: normalizeOpeningPsalmodyAntiphonText(node.value)
+      };
+      break;
+    }
+    if (node.type === 'verseMarker') {
+      out[index] = {
+        type: 'verseMarker',
+        marker: node.marker,
+        text: normalizeOpeningPsalmodyAntiphonText(node.text)
+      };
+      break;
+    }
+  }
+  return out;
+}
+
+function normalizeOpeningPsalmodyAntiphonText(text: string): string {
+  const match = text.match(/^(.*?)(?:\s*[*‡†]\s*)(.+)$/u);
+  if (!match) {
+    return text;
+  }
+
+  const prefix = match[1]?.trim();
+  if (!prefix) {
+    return text;
+  }
+
+  if (/[.:!?]$/u.test(prefix)) {
+    return prefix;
+  }
+
+  return `${prefix.replace(/[;,]\s*$/u, '').trim()}.`;
+}
+
+function isMinorHour(hour: SlotName | HourName): hour is 'prime' | 'terce' | 'sext' | 'none' {
+  return hour === 'prime' || hour === 'terce' || hour === 'sext' || hour === 'none';
+}
+
 function resolveHymnDoxologyByLanguage(
   args: ComposeSlotArgs
 ): ReadonlyMap<string, readonly TextContent[]> | undefined {
@@ -707,7 +809,7 @@ function resolveHymnDoxologyByLanguage(
     return undefined;
   }
 
-  const refs = taggedReferencesFrom('doxology-variant', args.hymnDoxology);
+  const refs = taggedReferencesFrom(args.hour, 'doxology-variant', args.hymnDoxology);
   if (refs.length === 0) {
     return undefined;
   }

@@ -210,6 +210,59 @@ renderings represent the same rubric sentence.
 family and leaves the remaining January rows concentrated in the real
 selection / ordering seams instead of another corpus-formatting dispute.
 
+### 2026-04-19 — Pattern: Rubrics 1960 January fallback-hymn doxology substitution (perl-bug)
+
+**Ledger signal.** After the January Roman antiphon and hymn-routing
+pass, the remaining `Rubrics 1960 - 1960` minor-hour January rows no
+longer fail on selection. They now fail on the final hymn stanza only:
+Perl keeps the unsubstituted fallback closes (`Deo Patri sit glória,`
+or `Præsta, Pater piíssime,`), while the compositor emits the January
+seasonal or local office doxology (`Jesu, tibi sit glória,` for the
+Nativity / Epiphany family and `Jesu, tuis obédiens` for Holy Family).
+
+**Root cause.** This is not an engine overreach. The upstream Roman
+corpus explicitly requests these substitutions:
+
+- `Sancti/01-06.txt` carries `Doxology=Epi` in `[Rule]`.
+- `Tempora/Epi1-0.txt` carries a local `[Doxology]` stanza for Holy
+  Family.
+- The fallback hymn sources in `Psalterium/Special/Prima Special.txt`
+  and `Psalterium/Special/Minor Special.txt` still end with the default
+  closes (`Deo Patri sit glória,` / `Præsta, Pater piíssime,`), so the
+  seasonal or local doxology must be substituted at composition time.
+- Phase 2 design §16.3.5 explicitly says hymn resolution uses
+  `celebrationRules.doxologyVariant` when present.
+
+The compositor now follows that source-backed rule. The legacy Perl
+comparison surface still shows the unsubstituted fallback stanza on
+these January `1960` rows.
+
+**Resolution.** Class `perl-bug`. Representative row-level entries were
+added for the four stable Rubrics 1960 key-hashes:
+
+- `c52cc2ef` — `Deo Patri sit glória,` → `Jesu, tibi sit glória,`
+- `318cf47a` — `Præsta, Pater piíssime,` → `Jesu, tibi sit glória,`
+- `6b019b6f` — `Deo Patri sit glória,` → `Jesu, tuis obédiens`
+- `274511e7` — `Præsta, Pater piíssime,` → `Jesu, tuis obédiens`
+
+These are then fanned out across the January `1960` Prime / Terce /
+Sext / None rows where the first divergence is the fallback hymn
+doxology line.
+
+**Citation.**
+
+- `upstream/web/www/horas/Latin/Sancti/01-06.txt:4-8`
+- `upstream/web/www/horas/Latin/Tempora/Epi1-0.txt:56-67`
+- `upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:1-20`
+- `upstream/web/www/horas/Latin/Psalterium/Special/Prima Special.txt:100-109`
+- `upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:664-672`
+- `docs/phase-2-rubrical-engine-design.md:1469`
+
+**Impact.** The January `1960` minor-hour doxology family stops blocking
+the ledger as `unadjudicated` code work. What remains after this batch
+is narrower: genuine Roman January antiphon / verse-shape / ordering
+families, not another unresolved doxology decision.
+
 ### Pattern catalogue (pending per-pattern entries)
 
 The following patterns remain open after the fixes above and will each

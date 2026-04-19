@@ -780,9 +780,140 @@ describe('composeHour', () => {
 
     const psalmodyLines = composed.sections[0]!.lines.map((line) => renderRuns(line, 'Latin'));
     expect(psalmodyLines[0]).toBe('O admirábile commércium: * Creátor géneris humáni.');
+    expect(psalmodyLines.at(-1)).toBe('O admirábile commércium: Creátor géneris humáni.');
     expect(psalmodyLines).not.toContain(
       'Ant. Allelúja, Dóminus regnávit, decórem índuit, allelúja, allelúja.'
     );
+  });
+
+  it('keeps unmarked explicit antiphons as full opening and closing repeats', () => {
+    const corpus = new InMemoryTextIndex();
+    corpus.addFile(
+      makeFile('horas/Latin/Sancti/01-01', 'Ant 1', [
+        { type: 'text', value: 'O admirábile commércium.' }
+      ])
+    );
+    corpus.addFile(
+      makeFile('horas/Latin/Psalterium/Psalmorum/Psalm92', '__preamble', [
+        { type: 'text', value: '92:1 Dóminus regnávit, decórem indútus est.' }
+      ])
+    );
+    corpus.addFile(
+      makeFile('horas/Latin/Psalterium/Common/Prayers', 'Gloria', [
+        { type: 'verseMarker', marker: 'V.', text: 'Glória Patri.' },
+        { type: 'verseMarker', marker: 'R.', text: 'Sicut erat.' }
+      ])
+    );
+
+    const hour: HourStructure = {
+      hour: 'lauds',
+      slots: {
+        psalmody: {
+          kind: 'psalmody',
+          psalms: [
+            {
+              psalmRef: {
+                path: 'horas/Latin/Psalterium/Psalmorum/Psalm92',
+                section: '__preamble'
+              },
+              antiphonRef: {
+                path: 'horas/Latin/Sancti/01-01',
+                section: 'Ant 1'
+              }
+            }
+          ]
+        }
+      },
+      directives: []
+    };
+
+    const composed = composeHour({
+      corpus,
+      summary: buildSummary(hour),
+      version: stubVersion,
+      hour: 'lauds',
+      options: { languages: ['Latin'] }
+    });
+
+    const psalmodyLines = composed.sections[0]!.lines.map((line) => renderRuns(line, 'Latin'));
+    expect(psalmodyLines.filter((line) => line === 'O admirábile commércium.')).toHaveLength(2);
+  });
+
+  it('renders pre-1960 minor-hour explicit antiphons with a shortened opening and full closing repeat', () => {
+    const corpus = new InMemoryTextIndex();
+    corpus.addFile(
+      makeFile('horas/Latin/Sancti/01-06', 'Ant Laudes', [
+        {
+          type: 'text',
+          value: 'Ante lucíferum génitus, * et ante sǽcula, Dóminus Salvátor noster hódie mundo appáruit.'
+        }
+      ])
+    );
+    corpus.addFile(
+      makeFile('horas/Latin/Psalterium/Psalmorum/Psalm53', '__preamble', [
+        { type: 'text', value: '53:3 Deus, in nómine tuo salvum me fac.' }
+      ])
+    );
+    corpus.addFile(
+      makeFile('horas/Latin/Psalterium/Psalmorum/Psalm54', '__preamble', [
+        { type: 'text', value: '54:1 Exáudi, Deus, oratiónem meam.' }
+      ])
+    );
+    corpus.addFile(
+      makeFile('horas/Latin/Psalterium/Common/Prayers', 'Gloria', [
+        { type: 'verseMarker', marker: 'V.', text: 'Glória Patri.' },
+        { type: 'verseMarker', marker: 'R.', text: 'Sicut erat.' }
+      ])
+    );
+
+    const reduced1955Version: ResolvedVersion = {
+      ...stubVersion,
+      handle: 'Reduced - 1955' as never
+    };
+
+    const hour: HourStructure = {
+      hour: 'prime',
+      slots: {
+        psalmody: {
+          kind: 'psalmody',
+          psalms: [
+            {
+              psalmRef: {
+                path: 'horas/Latin/Psalterium/Psalmorum/Psalm53',
+                section: '__preamble'
+              },
+              antiphonRef: {
+                path: 'horas/Latin/Sancti/01-06',
+                section: 'Ant Laudes',
+                selector: '1'
+              }
+            },
+            {
+              psalmRef: {
+                path: 'horas/Latin/Psalterium/Psalmorum/Psalm54',
+                section: '__preamble'
+              }
+            }
+          ]
+        }
+      },
+      directives: []
+    };
+
+    const composed = composeHour({
+      corpus,
+      summary: buildSummary(hour, { version: reduced1955Version }),
+      version: reduced1955Version,
+      hour: 'prime',
+      options: { languages: ['Latin'] }
+    });
+
+    const psalmodyLines = composed.sections[0]!.lines.map((line) => renderRuns(line, 'Latin'));
+    expect(psalmodyLines[0]).toBe('Ante lucíferum génitus.');
+    expect(psalmodyLines.at(-1)).toBe(
+      'Ante lucíferum génitus, et ante sǽcula, Dóminus Salvátor noster hódie mundo appáruit.'
+    );
+    expect(psalmodyLines.filter((line) => line.startsWith('Ante lucíferum génitus'))).toHaveLength(2);
   });
 
   it('uses the parser fallback chain for deferred nodes on a resolved corpus', () => {

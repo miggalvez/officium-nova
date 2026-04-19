@@ -99,6 +99,69 @@ source-backed rubric prose from `Common/Rubricae.txt`.
 | Divino Afflatu - 1954 | 2024-01-14 | None | `919de480` |
 | Divino Afflatu - 1954 | 2024-01-14 | Vespers | `919de480` |
 
+### 2026-04-19 — Rubrics 1960 January fallback-hymn doxology substitution is dropped by the Perl render surface
+
+**Classification.** `perl-bug`
+
+**Summary.** Under `Rubrics 1960 - 1960`, the January Roman minor Hours
+correctly substitute the Christmas, Epiphany, or Holy Family doxology
+when the office falls back to the generic `Prima Special` or
+`Minor Special` hymn. The compositor now emits those source-backed
+stanzas, but the legacy Perl comparison surface still shows the default
+fallback closes (`Deo Patri sit glória,` / `Præsta, Pater piíssime,`),
+creating stable January divergences at Prime / Terce / Sext / None.
+
+**Primary source.**
+
+- `upstream/web/www/horas/Latin/Sancti/01-06.txt:4-8`
+- `upstream/web/www/horas/Latin/Tempora/Epi1-0.txt:56-67`
+- `upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:1-20`
+- `upstream/web/www/horas/Latin/Psalterium/Special/Prima Special.txt:100-109`
+- `upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:664-672`
+- `docs/phase-2-rubrical-engine-design.md:1469`
+
+These sources together establish that:
+
+- Epiphany carries `Doxology=Epi`.
+- Holy Family provides its own local `[Doxology]`.
+- the fallback hymns still carry the default doxology stanza and
+  therefore require substitution.
+- the Roman Phase 2/3 design explicitly expects hymn resolution to
+  apply `celebrationRules.doxologyVariant` when present.
+
+**Reproduction.**
+Run:
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Rubrics 1960 - 1960"
+```
+
+Then inspect the January Prime / Terce / Sext / None rows in
+`packages/compositor/test/divergence/rubrics-1960-2024.md`. The Perl
+side shows the default fallback doxology line, while the compositor
+shows the source-backed January substitution.
+
+**Affected stable divergence-row keys.**
+
+| Policy | Date | Hour | Row key suffix |
+|---|---|---|---|
+| Rubrics 1960 - 1960 | 2024-01-01 | Prime | `c52cc2ef` |
+| Rubrics 1960 - 1960 | 2024-01-01 | Terce | `318cf47a` |
+| Rubrics 1960 - 1960 | 2024-01-01 | Sext | `318cf47a` |
+| Rubrics 1960 - 1960 | 2024-01-01 | None | `318cf47a` |
+| Rubrics 1960 - 1960 | 2024-01-06 | Prime | `c52cc2ef` |
+| Rubrics 1960 - 1960 | 2024-01-06 | Terce | `318cf47a` |
+| Rubrics 1960 - 1960 | 2024-01-06 | Sext | `318cf47a` |
+| Rubrics 1960 - 1960 | 2024-01-06 | None | `318cf47a` |
+| Rubrics 1960 - 1960 | 2024-01-07 | Prime | `6b019b6f` |
+| Rubrics 1960 - 1960 | 2024-01-07 | Terce | `274511e7` |
+| Rubrics 1960 - 1960 | 2024-01-07 | Sext | `274511e7` |
+| Rubrics 1960 - 1960 | 2024-01-07 | None | `274511e7` |
+| Rubrics 1960 - 1960 | 2024-01-13 | Prime | `c52cc2ef` |
+| Rubrics 1960 - 1960 | 2024-01-13 | Terce | `318cf47a` |
+| Rubrics 1960 - 1960 | 2024-01-13 | Sext | `318cf47a` |
+| Rubrics 1960 - 1960 | 2024-01-13 | None | `318cf47a` |
+
 ## See also
 
 - [ADR-011 — Phase 3 divergence adjudication](./adr/011-phase-3-divergence-adjudication.md)
