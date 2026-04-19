@@ -41,7 +41,7 @@ Direct pointers to the governing texts most often cited during Phase 3 divergenc
 **Fetch fallbacks.** The live host returns `403` to automated fetches. Two workarounds:
 
 - GitHub raw mirror: replace `https://www.divinumofficium.com/www/horas/Help/` with `https://raw.githubusercontent.com/DivinumOfficium/divinum-officium/master/web/www/horas/Help/` (keep the remaining path segments identical).
-- Local copies: the same files live in the `upstream/` submodule at `upstream/web/www/horas/Help/Rubrics/` when the submodule is initialized (`git submodule update --init`).
+- Local copies: the same files live in the `upstream/` submodule at `upstream/web/www/horas/Help/` when the submodule is initialized (`git submodule update --init`).
 
 ### `rubrics-1960`
 
