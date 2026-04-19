@@ -34,8 +34,42 @@ The rubrics index does not currently provide separate dedicated sections for the
 | `cistercian-1951` / `cistercian-altovadense` | `Monastic Tridentinum Cisterciensis 1951`, `Monastic Tridentinum Cisterciensis Altovadensis` | No dedicated section on the Divinum Officium rubrics index; source collection must be handled separately when implementation begins | Deferred by scope |
 | `dominican-1962` | `Ordo Praedicatorum - 1962` | No dedicated section on the Divinum Officium rubrics index; source collection must be handled separately when implementation begins | Deferred by scope |
 
+## Direct Document Links (Active Policies)
+
+Direct pointers to the governing texts most often cited during Phase 3 divergence adjudication (see [ADR-011](./adr/011-phase-3-divergence-adjudication.md)). The upstream [rubrics index](https://www.divinumofficium.com/www/horas/Help/rubrics.html) remains authoritative; this section is a convenience cache scoped to currently implemented policies.
+
+**Fetch fallbacks.** The live host returns `403` to automated fetches. Two workarounds:
+
+- GitHub raw mirror: replace `https://www.divinumofficium.com/www/horas/Help/` with `https://raw.githubusercontent.com/DivinumOfficium/divinum-officium/master/web/www/horas/Help/` (keep the remaining path segments identical).
+- Local copies: the same files live in the `upstream/` submodule at `upstream/web/www/horas/Help/Rubrics/` when the submodule is initialized (`git submodule update --init`).
+
+### `rubrics-1960`
+
+- [Rubricarum Instructum](https://www.divinumofficium.com/www/horas/Help/Rubrics/Rubricarum%20Instructum.html) — the 1960 motu proprio itself
+- [General Rubrics](https://www.divinumofficium.com/www/horas/Help/Rubrics/General%20Rubrics.html) — primary citation target for precedence, commemoration, and occurrence rules
+- [Rubrics of Breviarium Romanum](https://www.divinumofficium.com/www/horas/Help/Rubrics/Breviary%201960.html) — Hour-by-Hour rubrics
+- [Tables of Feasts](https://www.divinumofficium.com/www/horas/Help/Rubrics/Tables%201960.txt)
+- [Variationes in Breviario et Missali Romano](https://www.divinumofficium.com/www/horas/Help/Rubrics/Variationes1960.html)
+
+### `divino-afflatu`
+
+*Additiones ad normam Divino Afflatu* (St. Pius X), nine Latin sections:
+
+- [I. Ratio](https://www.divinumofficium.com/www/horas/Help/Rubrics/N1.txt) · [II. Praecedentia](https://www.divinumofficium.com/www/horas/Help/Rubrics/N2.txt) · [III. Octavas](https://www.divinumofficium.com/www/horas/Help/Rubrics/N3.txt) · [IV. Occurentia accidentalis](https://www.divinumofficium.com/www/horas/Help/Rubrics/N4.txt) · [V. Occurentia perpetua](https://www.divinumofficium.com/www/horas/Help/Rubrics/N5.txt) · [VI. Concurrentia](https://www.divinumofficium.com/www/horas/Help/Rubrics/N6.txt) · [VII. Commemorationes](https://www.divinumofficium.com/www/horas/Help/Rubrics/N7.txt) · [VIII. Conclusiones](https://www.divinumofficium.com/www/horas/Help/Rubrics/N8.txt) · [IX. Locales](https://www.divinumofficium.com/www/horas/Help/Rubrics/N9.txt)
+
+Compiled and supporting:
+
+- [All sections composed](https://www.divinumofficium.com/www/horas/Help/Rubrics/rubrics.txt)
+- [Tabellae festorum](https://www.divinumofficium.com/www/horas/Help/Rubrics/Tabellae.txt) · [Notanda in praecedentes tabellas](https://www.divinumofficium.com/www/horas/Help/Rubrics/Notanda.txt)
+- [English Divino Afflatu Rubrics (PDF)](https://www.divinumofficium.com/www/horas/Help/Rubrics/EnglishDORubrics.pdf) — convenient first-pass reference; cite the Latin sections above for dispositive citations
+
+### `reduced-1955`
+
+- [Cum Nostra Hac Aetate (1955 reductions)](https://www.divinumofficium.com/www/horas/Help/Rubrics/1955.txt) — the entire governing text
+
 ## Maintenance Notes
 
 - When policy support changes, update this file, [README.md](../README.md), and [AGENTS.md](../AGENTS.md) together.
+- When a new policy is implemented, add its direct-links subsection above. The upstream [rubrics index](https://www.divinumofficium.com/www/horas/Help/rubrics.html) remains authoritative; if it gains new documents for a policy we already ship, refresh the matching subsection.
 - The authoritative repo mapping from `VersionHandle` to policy family is [`packages/rubrical-engine/src/version/policy-map.ts`](../packages/rubrical-engine/src/version/policy-map.ts).
 - This file is a source index, not an adjudication shortcut. Divergence resolution still requires citations from the governing rubrical text or an Ordo source, not just a link to the index page.
