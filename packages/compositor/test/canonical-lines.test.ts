@@ -802,10 +802,10 @@ describe('Psalmus N [index] heading emission', () => {
       '109:1 Donec ponam inimícos tuos.',
       'Glória Patri, et Fílio, * et Spirítui Sancto.',
       'Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.',
-      'Dixit Dóminus Dómino meo: Sede a dextris meis.',
       'Magna ópera Dómini * exquisíta in omnes voluntátes ejus.',
       'Psalmus 110 [2]',
-      '110:1 Confitébor tibi, Dómine, in toto corde meo.'
+      '110:1 Confitébor tibi, Dómine, in toto corde meo.',
+      '110:2 Magna ópera Dómini.'
     ]);
   });
 

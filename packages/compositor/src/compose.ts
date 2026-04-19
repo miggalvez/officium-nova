@@ -60,6 +60,7 @@ export function composeHour(input: ComposeInput): ComposedHour {
 
   const context = buildConditionContext(input.summary, input.version);
   const sections: Section[] = [];
+  const hymnDoxology = hour.slots['doxology-variant'];
   // Phase 3 §3f: warnings surfaced from the reference resolver,
   // deferred-node expander, and downstream Matins plan walker. Each
   // slot-compose pass pushes into this array; the aggregate lands on
@@ -106,6 +107,9 @@ export function composeHour(input: ComposeInput): ComposedHour {
     [SlotName, SlotContent]
   >) {
     if (!slotContent) continue;
+    if (slotName === 'doxology-variant') {
+      continue;
+    }
     if (input.hour === 'matins' && slotName === 'incipit') {
       continue;
     }
@@ -120,6 +124,7 @@ export function composeHour(input: ComposeInput): ComposedHour {
       corpus: input.corpus,
       options: input.options,
       context,
+      ...(slotName === 'hymn' && hymnDoxology ? { hymnDoxology } : {}),
       onWarning
     });
     if (section) {
@@ -160,6 +165,7 @@ interface ComposeSlotArgs {
   readonly corpus: TextIndex;
   readonly options: ComposeOptions;
   readonly context: ConditionEvalContext;
+  readonly hymnDoxology?: SlotContent;
   readonly onWarning?: (warning: ComposeWarning) => void;
 }
 
@@ -194,6 +200,7 @@ function composeSlot(args: ComposeSlotArgs): Section | undefined {
   for (const lang of args.options.languages) {
     perLanguage.set(lang, []);
   }
+  const hymnDoxologyByLanguage = resolveHymnDoxologyByLanguage(args);
 
   const primary = refs[0]?.ref;
   for (const { ref, isAntiphon, psalmIndex, hasExplicitAntiphon, repeatAntiphon } of refs) {
@@ -262,6 +269,7 @@ function composeSlot(args: ComposeSlotArgs): Section | undefined {
           maxDepth: MAX_DEFERRED_DEPTH,
           psalmIndex,
           suppressFirstInlineAntiphon: hasExplicitAntiphon === true,
+          suppressTrailingAntiphon: hasExplicitAntiphon === true,
           ...(args.onWarning ? { onWarning: args.onWarning } : {})
         });
         continue;
@@ -285,15 +293,19 @@ function composeSlot(args: ComposeSlotArgs): Section | undefined {
         hour: args.hour,
         directives: args.directives
       });
+      const withHymnDoxology =
+        args.slot === 'hymn'
+          ? replaceFinalHymnDoxology(transformed, hymnDoxologyByLanguage?.get(lang))
+          : transformed;
       // Synthesise the `Ant.` marker the Perl renderer adds at presentation
       // time. Scoped per-ref: whole-antiphon slots (invitatory, canticle
       // antiphons, commemoration antiphons) mark every ref; psalmody marks
       // only its antiphon refs so psalm verses stay unmarked.
       const markered = isAntiphon
         ? markAntiphonFirstText(
-            repeatAntiphon ? normalizeRepeatedAntiphonContent(transformed) : transformed
+            repeatAntiphon ? normalizeRepeatedAntiphonContent(withHymnDoxology) : withHymnDoxology
           )
-        : transformed;
+        : withHymnDoxology;
       // Phase 3 §3h — emit a `Psalmus N [index]` heading before each psalm
       // of the psalmody slot (and only for the psalmody slot — Matins
       // psalmody runs through its own composer and gets its headings from
@@ -536,6 +548,7 @@ interface ExpandPsalmWrapperArgs {
   readonly maxDepth: number;
   readonly psalmIndex: number;
   readonly suppressFirstInlineAntiphon: boolean;
+  readonly suppressTrailingAntiphon: boolean;
   readonly onWarning?: (warning: ComposeWarning) => void;
 }
 
@@ -581,7 +594,8 @@ function appendExpandedPsalmWrapper(
       ]);
     }
     appendContentWithBoundary(target, psalmBody);
-    const trailingAntiphon = node.antiphon?.trim();
+    const trailingAntiphon =
+      args.suppressTrailingAntiphon ? undefined : node.antiphon?.trim();
     if (trailingAntiphon) {
       appendContentWithBoundary(target, [
         {
@@ -684,6 +698,100 @@ function normalizeRepeatedAntiphonContent(
 
 function normalizeRepeatedAntiphonText(text: string): string {
   return text.replace(/\s*[*‡†]\s*/gu, ' ').replace(/\s{2,}/gu, ' ').trim();
+}
+
+function resolveHymnDoxologyByLanguage(
+  args: ComposeSlotArgs
+): ReadonlyMap<string, readonly TextContent[]> | undefined {
+  if (args.slot !== 'hymn' || !args.hymnDoxology) {
+    return undefined;
+  }
+
+  const refs = taggedReferencesFrom('doxology-variant', args.hymnDoxology);
+  if (refs.length === 0) {
+    return undefined;
+  }
+
+  const perLanguage = new Map<string, TextContent[]>();
+  for (const lang of args.options.languages) {
+    perLanguage.set(lang, []);
+  }
+
+  for (const { ref } of refs) {
+    const resolved = resolveReference(args.corpus, ref, {
+      languages: args.options.languages,
+      langfb: args.options.langfb,
+      dayOfWeek: args.context.dayOfWeek,
+      date: args.context.date,
+      modernStyleMonthday: args.context.version.handle.includes('1960'),
+      ...(args.onWarning ? { onWarning: args.onWarning } : {})
+    });
+
+    for (const lang of args.options.languages) {
+      const bucket = perLanguage.get(lang);
+      const section = resolved[lang];
+      if (!bucket || !section || section.selectorMissing) {
+        continue;
+      }
+
+      const expanded = expandDeferredNodes(section.content, {
+        index: args.corpus,
+        language: lang,
+        langfb: args.options.langfb,
+        season: args.context.season,
+        seen: new Set(),
+        maxDepth: MAX_DEFERRED_DEPTH,
+        ...(args.onWarning ? { onWarning: args.onWarning } : {})
+      });
+      const flattened = flattenConditionals(expanded, args.context);
+      const transformed = applyDirectives('doxology-variant', flattened, {
+        hour: args.hour,
+        directives: args.directives
+      });
+      appendContentWithBoundary(bucket, transformed);
+    }
+  }
+
+  const frozen = new Map<string, readonly TextContent[]>();
+  for (const [lang, nodes] of perLanguage) {
+    if (nodes.length > 0) {
+      frozen.set(lang, Object.freeze(nodes));
+    }
+  }
+  return frozen.size > 0 ? frozen : undefined;
+}
+
+function replaceFinalHymnDoxology(
+  content: readonly TextContent[],
+  variant: readonly TextContent[] | undefined
+): readonly TextContent[] {
+  if (!variant || variant.length === 0) {
+    return content;
+  }
+
+  let lastSeparator = -1;
+  for (let index = content.length - 1; index >= 0; index -= 1) {
+    if (content[index]?.type === 'separator') {
+      lastSeparator = index;
+      break;
+    }
+  }
+  if (lastSeparator < 0) {
+    return content;
+  }
+
+  return Object.freeze([
+    ...content.slice(0, lastSeparator + 1),
+    ...trimLeadingSeparators(variant)
+  ]);
+}
+
+function trimLeadingSeparators(content: readonly TextContent[]): readonly TextContent[] {
+  let start = 0;
+  while (content[start]?.type === 'separator') {
+    start += 1;
+  }
+  return content.slice(start);
 }
 
 function referenceKey(ref: TextReference): string {

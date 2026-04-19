@@ -665,6 +665,126 @@ describe('composeHour', () => {
     expect(renderRuns(composed.sections[0]!.lines[2]!, 'Latin')).toBe('117:2 Dicat nunc Israël.');
   });
 
+  it('replaces the fallback hymn doxology with the doxology-variant slot', () => {
+    const corpus = new InMemoryTextIndex();
+    corpus.addFile(
+      makeFile('horas/Latin/Psalterium/Special/Prima Special', 'Hymnus Prima', [
+        { type: 'text', value: 'Jam lucis orto sídere,' },
+        { type: 'text', value: 'Deum precémur súpplices,' },
+        { type: 'separator' },
+        { type: 'text', value: '* Deo Patri sit glória,' },
+        { type: 'text', value: 'Ejúsque soli Fílio,' },
+        { type: 'text', value: 'Cum Spíritu Paráclito,' },
+        { type: 'text', value: 'Nunc et per omne sǽculum.' },
+        { type: 'text', value: 'Amen.' }
+      ])
+    );
+    corpus.addFile(
+      makeFile('horas/Latin/Psalterium/Doxologies', 'Nat', [
+        { type: 'text', value: 'Jesu, tibi sit glória,' },
+        { type: 'text', value: 'Qui natus es de Vírgine,' },
+        { type: 'text', value: 'Cum Patre et almo Spíritu,' },
+        { type: 'text', value: 'In sempitérna sǽcula.' },
+        { type: 'text', value: 'Amen.' }
+      ])
+    );
+
+    const hour: HourStructure = {
+      hour: 'prime',
+      slots: {
+        hymn: {
+          kind: 'single-ref',
+          ref: { path: 'horas/Latin/Psalterium/Special/Prima Special', section: 'Hymnus Prima' }
+        },
+        'doxology-variant': {
+          kind: 'single-ref',
+          ref: { path: 'horas/Latin/Psalterium/Doxologies', section: 'Nat' }
+        }
+      },
+      directives: []
+    };
+
+    const composed = composeHour({
+      corpus,
+      summary: buildSummary(hour),
+      version: stubVersion,
+      hour: 'prime',
+      options: { languages: ['Latin'] }
+    });
+
+    expect(composed.sections.map((section) => section.slot)).toEqual(['hymn']);
+    const hymnLines = composed.sections[0]!.lines.map((line) => renderRuns(line, 'Latin'));
+    expect(hymnLines).toContain('Jesu, tibi sit glória,');
+    expect(hymnLines).not.toContain('Deo Patri sit glória,');
+  });
+
+  it('suppresses wrapper closing antiphons when explicit psalmody antiphons are present', () => {
+    const corpus = new InMemoryTextIndex();
+    corpus.addFile(
+      makeFile('horas/Latin/Sancti/01-01', 'Ant Laudes', [
+        { type: 'text', value: 'O admirábile commércium: * Creátor géneris humáni.' }
+      ])
+    );
+    corpus.addFile(
+      makeFile('horas/Latin/Psalterium/Psalmi/Psalmi major', 'Day0 Laudes1', [
+        {
+          type: 'psalmRef',
+          psalmNumber: 92,
+          antiphon: 'Ant. Allelúja, Dóminus regnávit, decórem índuit, allelúja, allelúja.'
+        }
+      ])
+    );
+    corpus.addFile(
+      makeFile('horas/Latin/Psalterium/Psalmorum/Psalm92', '__preamble', [
+        { type: 'text', value: '92:1 Dóminus regnávit, decórem indútus est.' }
+      ])
+    );
+    corpus.addFile(
+      makeFile('horas/Latin/Psalterium/Common/Prayers', 'Gloria', [
+        { type: 'verseMarker', marker: 'V.', text: 'Glória Patri.' },
+        { type: 'verseMarker', marker: 'R.', text: 'Sicut erat.' }
+      ])
+    );
+
+    const hour: HourStructure = {
+      hour: 'lauds',
+      slots: {
+        psalmody: {
+          kind: 'psalmody',
+          psalms: [
+            {
+              psalmRef: {
+                path: 'horas/Latin/Psalterium/Psalmi/Psalmi major',
+                section: 'Day0 Laudes1',
+                selector: '1'
+              },
+              antiphonRef: {
+                path: 'horas/Latin/Sancti/01-01',
+                section: 'Ant Laudes',
+                selector: '1'
+              }
+            }
+          ]
+        }
+      },
+      directives: []
+    };
+
+    const composed = composeHour({
+      corpus,
+      summary: buildSummary(hour),
+      version: stubVersion,
+      hour: 'lauds',
+      options: { languages: ['Latin'] }
+    });
+
+    const psalmodyLines = composed.sections[0]!.lines.map((line) => renderRuns(line, 'Latin'));
+    expect(psalmodyLines[0]).toBe('O admirábile commércium: * Creátor géneris humáni.');
+    expect(psalmodyLines).not.toContain(
+      'Ant. Allelúja, Dóminus regnávit, decórem índuit, allelúja, allelúja.'
+    );
+  });
+
   it('uses the parser fallback chain for deferred nodes on a resolved corpus', () => {
     const corpus = new InMemoryTextIndex();
     corpus.addFile(

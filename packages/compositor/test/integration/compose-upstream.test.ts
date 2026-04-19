@@ -431,12 +431,118 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
       expect(benedictioIndex).toBeLessThan(lessonHeadingIndex);
     }
   }, 240_000);
+
+  it('renders the 1955 January minor-hour hymn endings from the selected January doxology source', async () => {
+    const { engine, resolvedCorpus } = await createHarness('Reduced - 1955');
+
+    for (const [date, firstLine] of [
+      ['2024-01-01', 'Jesu, tibi sit glória,'],
+      ['2024-01-06', 'Jesu, tibi sit glória,'],
+      ['2024-01-07', 'Jesu, tuis obédiens'],
+      ['2024-01-13', 'Jesu, tibi sit glória,']
+    ] as const) {
+      const summary = engine.resolveDayOfficeSummary(date);
+      for (const hour of ['prime', 'terce', 'sext', 'none'] as const) {
+        const composed = composeHour({
+          corpus: resolvedCorpus.index,
+          summary,
+          version: engine.version,
+          hour,
+          options: { languages: ['Latin'] }
+        });
+
+        expect(normalizeLatin(firstLineOfLastHymnStanza(composed)), `${date} ${hour} hymn doxology`).toBe(
+          normalizeLatin(firstLine)
+        );
+      }
+    }
+  }, 240_000);
+
+  it('renders 1960 January proper-minor-hours antiphons from the winning office', async () => {
+    const { engine, resolvedCorpus } = await createHarness('Rubrics 1960 - 1960');
+
+    for (const [date, expectations] of [
+      [
+        '2024-01-06',
+        [
+          'Ante lucíferum génitus, * et ante sǽcula, Dóminus Salvátor noster hódie mundo appáruit.',
+          'Venit lumen tuum * Jerúsalem, et glória Dómini super te orta est, et ambulábunt gentes in lúmine tuo, allelúja.',
+          'Apértis thesáuris suis * obtulérunt Magi Dómino aurum, thus, et myrrham, allelúja.',
+          'Stella ista * sicut flamma corúscat, et Regem regum Deum demónstrat: Magi eam vidérunt, et magno Regi múnera obtulérunt.'
+        ]
+      ],
+      [
+        '2024-01-07',
+        [
+          'Post tríduum * invenérunt Jesum in templo sedéntem in médio doctórum, audiéntem illos, et interrogántem eos.',
+          'Dixit mater Jesu * ad illum: Fili, quid fecísti nobis sic? Ecce pater tuus et ego doléntes quærebámus te.',
+          'Descéndit Jesus * cum eis, et venit Názareth, et erat súbditus illis.',
+          'Et dicébant: * Unde huic sapiéntia hæc, et virtútes? Nonne hic est fabri fílius?'
+        ]
+      ],
+      [
+        '2024-01-13',
+        [
+          'Ante lucíferum génitus, * et ante sǽcula, Dóminus Salvátor noster hódie mundo appáruit.',
+          'Venit lumen tuum * Jerúsalem, et glória Dómini super te orta est, et ambulábunt gentes in lúmine tuo, allelúja.',
+          'Apértis thesáuris suis * obtulérunt Magi Dómino aurum, thus, et myrrham, allelúja.',
+          'Stella ista * sicut flamma corúscat, et Regem regum Deum demónstrat: Magi eam vidérunt, et magno Regi múnera obtulérunt.'
+        ]
+      ]
+    ] as const) {
+      const summary = engine.resolveDayOfficeSummary(date);
+      for (const [hour, expected] of [
+        ['prime', expectations[0]],
+        ['terce', expectations[1]],
+        ['sext', expectations[2]],
+        ['none', expectations[3]]
+      ] as const) {
+        const composed = composeHour({
+          corpus: resolvedCorpus.index,
+          summary,
+          version: engine.version,
+          hour,
+          options: { languages: ['Latin'] }
+        });
+
+        expect(normalizeLatin(firstPsalmodyAntiphon(composed)), `${date} ${hour} antiphon`).toBe(
+          normalizeLatin(expected)
+        );
+      }
+    }
+  }, 240_000);
 });
 
 function renderLatinText(line: { readonly texts: Record<string, readonly { readonly type: string; readonly value?: string }[]> }): string {
   return (line.texts.Latin ?? [])
     .map((run) => ('value' in run && run.value ? run.value : ''))
     .join('');
+}
+
+function firstLineOfLastHymnStanza(
+  composed: ReturnType<typeof composeHour>
+): string {
+  const hymn = composed.sections.find((section) => section.slot === 'hymn');
+  expect(hymn, `${composed.hour} is missing the hymn section`).toBeDefined();
+  const hymnLines = hymn?.lines.map(renderLatinText).filter((line) => line !== '_') ?? [];
+  expect(hymnLines.length, `${composed.hour} hymn should contain at least one stanza`).toBeGreaterThan(0);
+  const lastAmen = hymnLines.lastIndexOf('Amen.');
+  const stanzaStart = lastAmen >= 4 ? lastAmen - 4 : Math.max(0, hymnLines.length - 5);
+  return hymnLines[stanzaStart] ?? '';
+}
+
+function firstPsalmodyAntiphon(
+  composed: ReturnType<typeof composeHour>
+): string {
+  const psalmody = composed.sections.find((section) => section.slot === 'psalmody');
+  expect(psalmody, `${composed.hour} is missing the psalmody section`).toBeDefined();
+  const antiphonLine = psalmody?.lines.find((line) => line.marker === 'Ant.');
+  expect(antiphonLine, `${composed.hour} is missing the opening antiphon line`).toBeDefined();
+  return antiphonLine ? renderLatinText(antiphonLine) : '';
+}
+
+function normalizeLatin(text: string): string {
+  return text.normalize('NFC');
 }
 
 function loadKalendaria() {

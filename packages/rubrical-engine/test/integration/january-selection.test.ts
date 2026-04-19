@@ -68,14 +68,43 @@ describeIfUpstream('January selection regressions', () => {
         'horas/Latin/Sancti/01-01:Ant Vespera:5'
       ]);
 
-      // 1955-01-06 and 1955-01-13: Epiphany Vespers keeps five psalm slots;
-      // only the fifth slot is replaced by the feast's Psalm 116 override.
+      // 1955-01-06 and 1955-01-13: Epiphany keeps its Sanctoral antiphons at
+      // both major hours, while Vespers still only overrides the fifth psalm
+      // slot to Psalm 116.
+      expectAntiphonRefs(psalmodyAt(reduced, '2024-01-06', 'lauds')).toEqual([
+        'horas/Latin/Sancti/01-06:Ant Laudes:1',
+        'horas/Latin/Sancti/01-06:Ant Laudes:2',
+        'horas/Latin/Sancti/01-06:Ant Laudes:3',
+        'horas/Latin/Sancti/01-06:Ant Laudes:4',
+        'horas/Latin/Sancti/01-06:Ant Laudes:5'
+      ]);
+      expectAntiphonRefs(psalmodyAt(reduced, '2024-01-06', 'vespers')).toEqual([
+        'horas/Latin/Sancti/01-06:Ant Vespera:1',
+        'horas/Latin/Sancti/01-06:Ant Vespera:2',
+        'horas/Latin/Sancti/01-06:Ant Vespera:3',
+        'horas/Latin/Sancti/01-06:Ant Vespera:4',
+        'horas/Latin/Sancti/01-06:Ant Vespera:5'
+      ]);
       expectPsalmRefs(psalmodyAt(reduced, '2024-01-06', 'vespers')).toEqual([
         'horas/Latin/Psalterium/Psalmi/Psalmi major:Day0 Vespera:1',
         'horas/Latin/Psalterium/Psalmi/Psalmi major:Day0 Vespera:2',
         'horas/Latin/Psalterium/Psalmi/Psalmi major:Day0 Vespera:3',
         'horas/Latin/Psalterium/Psalmi/Psalmi major:Day0 Vespera:4',
         'horas/Latin/Psalterium/Psalmorum/Psalm116:__preamble:116'
+      ]);
+      expectAntiphonRefs(psalmodyAt(reduced, '2024-01-13', 'lauds')).toEqual([
+        'horas/Latin/Sancti/01-06:Ant Laudes:1',
+        'horas/Latin/Sancti/01-06:Ant Laudes:2',
+        'horas/Latin/Sancti/01-06:Ant Laudes:3',
+        'horas/Latin/Sancti/01-06:Ant Laudes:4',
+        'horas/Latin/Sancti/01-06:Ant Laudes:5'
+      ]);
+      expectAntiphonRefs(psalmodyAt(reduced, '2024-01-13', 'vespers')).toEqual([
+        'horas/Latin/Sancti/01-06:Ant Vespera:1',
+        'horas/Latin/Sancti/01-06:Ant Vespera:2',
+        'horas/Latin/Sancti/01-06:Ant Vespera:3',
+        'horas/Latin/Sancti/01-06:Ant Vespera:4',
+        'horas/Latin/Sancti/01-06:Ant Vespera:5'
       ]);
       expectPsalmRefs(psalmodyAt(reduced, '2024-01-13', 'vespers')).toEqual([
         'horas/Latin/Psalterium/Psalmi/Psalmi major:Day0 Vespera:1',
@@ -97,26 +126,40 @@ describeIfUpstream('January selection regressions', () => {
       ]);
 
       // 1960-01-06: Epiphany minor hours use the Sunday/festal `Tridentinum`
-      // tables from Psalmi minor, while Lauds and Vespers keep Epiphany's
-      // proper antiphons.
+      // tables from Psalmi minor, while proper-minor-hours replaces the lead
+      // antiphon with the feast's own `Ant Laudes` selector.
+      expectAntiphonRefs(psalmodyAt(roman1960, '2024-01-01', 'lauds')).toEqual([
+        'horas/Latin/Sancti/01-01:Ant Laudes:1',
+        'horas/Latin/Sancti/01-01:Ant Laudes:2',
+        'horas/Latin/Sancti/01-01:Ant Laudes:3',
+        'horas/Latin/Sancti/01-01:Ant Laudes:4',
+        'horas/Latin/Sancti/01-01:Ant Laudes:5'
+      ]);
+      expectAntiphonRefs(psalmodyAt(roman1960, '2024-01-01', 'vespers')).toEqual([
+        'horas/Latin/Sancti/01-01:Ant Vespera:1',
+        'horas/Latin/Sancti/01-01:Ant Vespera:2',
+        'horas/Latin/Sancti/01-01:Ant Vespera:3',
+        'horas/Latin/Sancti/01-01:Ant Vespera:4',
+        'horas/Latin/Sancti/01-01:Ant Vespera:5'
+      ]);
       expectMinorHour(
         psalmodyAt(roman1960, '2024-01-06', 'prime'),
-        'Prima Festis#antiphon',
+        'horas/Latin/Sancti/01-06:Ant Laudes:1',
         ['53', '118(1-16)', '118(17-32)']
       );
       expectMinorHour(
         psalmodyAt(roman1960, '2024-01-06', 'terce'),
-        'Tertia Dominica#antiphon',
+        'horas/Latin/Sancti/01-06:Ant Laudes:2',
         ['118(33-48)', '118(49-64)', '118(65-80)']
       );
       expectMinorHour(
         psalmodyAt(roman1960, '2024-01-06', 'sext'),
-        'Sexta Dominica#antiphon',
+        'horas/Latin/Sancti/01-06:Ant Laudes:3',
         ['118(81-96)', '118(97-112)', '118(113-128)']
       );
       expectMinorHour(
         psalmodyAt(roman1960, '2024-01-06', 'none'),
-        'Nona Dominica#antiphon',
+        'horas/Latin/Sancti/01-06:Ant Laudes:5',
         ['118(129-144)', '118(145-160)', '118(161-176)']
       );
       expectAntiphonRefs(psalmodyAt(roman1960, '2024-01-06', 'lauds')).toEqual([
@@ -138,22 +181,22 @@ describeIfUpstream('January selection regressions', () => {
       // and Vespers, while the Sunday minor-hour psalm tables remain in force.
       expectMinorHour(
         psalmodyAt(roman1960, '2024-01-07', 'prime'),
-        'Prima Dominica#antiphon',
+        'horas/Latin/Tempora/Epi1-0:Ant Laudes:1',
         ['53', '117', '118(1-16)', '118(17-32)']
       );
       expectMinorHour(
         psalmodyAt(roman1960, '2024-01-07', 'terce'),
-        'Tertia Dominica#antiphon',
+        'horas/Latin/Tempora/Epi1-0:Ant Laudes:2',
         ['118(33-48)', '118(49-64)', '118(65-80)']
       );
       expectMinorHour(
         psalmodyAt(roman1960, '2024-01-07', 'sext'),
-        'Sexta Dominica#antiphon',
+        'horas/Latin/Tempora/Epi1-0:Ant Laudes:3',
         ['118(81-96)', '118(97-112)', '118(113-128)']
       );
       expectMinorHour(
         psalmodyAt(roman1960, '2024-01-07', 'none'),
-        'Nona Dominica#antiphon',
+        'horas/Latin/Tempora/Epi1-0:Ant Laudes:5',
         ['118(129-144)', '118(145-160)', '118(161-176)']
       );
       expectAntiphonRefs(psalmodyAt(roman1960, '2024-01-07', 'lauds')).toEqual([
@@ -175,22 +218,22 @@ describeIfUpstream('January selection regressions', () => {
       // proper antiphons and the festal minor-hour Tridentinum tables.
       expectMinorHour(
         psalmodyAt(roman1960, '2024-01-13', 'prime'),
-        'Prima Festis#antiphon',
+        'horas/Latin/Sancti/01-06:Ant Laudes:1',
         ['53', '118(1-16)', '118(17-32)']
       );
       expectMinorHour(
         psalmodyAt(roman1960, '2024-01-13', 'terce'),
-        'Tertia Dominica#antiphon',
+        'horas/Latin/Sancti/01-06:Ant Laudes:2',
         ['118(33-48)', '118(49-64)', '118(65-80)']
       );
       expectMinorHour(
         psalmodyAt(roman1960, '2024-01-13', 'sext'),
-        'Sexta Dominica#antiphon',
+        'horas/Latin/Sancti/01-06:Ant Laudes:3',
         ['118(81-96)', '118(97-112)', '118(113-128)']
       );
       expectMinorHour(
         psalmodyAt(roman1960, '2024-01-13', 'none'),
-        'Nona Dominica#antiphon',
+        'horas/Latin/Sancti/01-06:Ant Laudes:5',
         ['118(129-144)', '118(145-160)', '118(161-176)']
       );
       expectAntiphonRefs(psalmodyAt(roman1960, '2024-01-13', 'lauds')).toEqual([
@@ -213,22 +256,22 @@ describeIfUpstream('January selection regressions', () => {
       // ranges that used to flatten away.
       expectMinorHour(
         psalmodyAt(roman1960, '2024-01-14', 'prime'),
-        'Prima Dominica#antiphon',
+        'horas/Latin/Psalterium/Psalmi/Psalmi minor:Tridentinum:Prima Dominica#antiphon',
         ['53', '117', '118(1-16)', '118(17-32)']
       );
       expectMinorHour(
         psalmodyAt(roman1960, '2024-01-14', 'terce'),
-        'Tertia Dominica#antiphon',
+        'horas/Latin/Psalterium/Psalmi/Psalmi minor:Tridentinum:Tertia Dominica#antiphon',
         ['118(33-48)', '118(49-64)', '118(65-80)']
       );
       expectMinorHour(
         psalmodyAt(roman1960, '2024-01-14', 'sext'),
-        'Sexta Dominica#antiphon',
+        'horas/Latin/Psalterium/Psalmi/Psalmi minor:Tridentinum:Sexta Dominica#antiphon',
         ['118(81-96)', '118(97-112)', '118(113-128)']
       );
       expectMinorHour(
         psalmodyAt(roman1960, '2024-01-14', 'none'),
-        'Nona Dominica#antiphon',
+        'horas/Latin/Psalterium/Psalmi/Psalmi minor:Tridentinum:Nona Dominica#antiphon',
         ['118(129-144)', '118(145-160)', '118(161-176)']
       );
     },
@@ -346,12 +389,12 @@ function expectPsalmRefs(psalms: readonly PsalmAssignment[]) {
 
 function expectMinorHour(
   psalms: readonly PsalmAssignment[],
-  antiphonSelector: string,
+  antiphonRef: string,
   selectors: readonly string[]
 ) {
   expect(psalms).toHaveLength(selectors.length);
   expectAntiphonRefs(psalms).toEqual([
-    `horas/Latin/Psalterium/Psalmi/Psalmi minor:Tridentinum:${antiphonSelector}`,
+    antiphonRef,
     ...Array.from({ length: selectors.length - 1 }, () => '-')
   ]);
   expect(psalms.map((entry) => entry.psalmRef.selector)).toEqual(selectors);

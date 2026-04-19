@@ -74,6 +74,7 @@ export function applyRuleSet(input: ApplyRuleSetInput): AppliedHourStructure {
     slots[skeletonSlot.name] = resolved;
   }
 
+  attachDoxologyVariantSlot(slots, properFiles, input);
   attachCommemorationSlots(input, slots, warnings);
 
   return {
@@ -273,7 +274,7 @@ function decoratePsalmodyAssignments(
   properFiles: readonly ParsedFile[],
   input: ApplyRuleSetInput
 ): readonly PsalmAssignment[] {
-  if (assignments.length === 0 || assignments.some((assignment) => assignment.antiphonRef)) {
+  if (assignments.length === 0) {
     return assignments;
   }
 
@@ -282,7 +283,7 @@ function decoratePsalmodyAssignments(
   }
 
   if (input.hour === 'lauds' || input.hour === 'vespers') {
-    const antiphons = resolveProperMajorHourAntiphonRefs(properFiles, input.hour);
+    const antiphons = resolveMajorHourAntiphonRefs(properFiles, input);
     if (antiphons.length === 0) {
       return assignments;
     }
@@ -303,7 +304,7 @@ function decoratePsalmodyAssignments(
       input.hour === 'none') &&
     input.celebrationRules.antiphonScheme === 'proper-minor-hours'
   ) {
-    const antiphon = resolveProperMinorHourAntiphonRef(properFiles, input.hour);
+    const antiphon = resolveMinorHourAntiphonRef(properFiles, input);
     if (!antiphon) {
       return assignments;
     }
@@ -320,14 +321,14 @@ function decoratePsalmodyAssignments(
   return assignments;
 }
 
-function resolveProperMajorHourAntiphonRefs(
+function resolveMajorHourAntiphonRefs(
   files: readonly ParsedFile[],
-  hour: 'lauds' | 'vespers'
+  input: ApplyRuleSetInput
 ): readonly TextReference[] {
-  const header = hour === 'lauds' ? 'Ant Laudes' : 'Ant Vespera';
+  const header = input.hour === 'lauds' ? 'Ant Laudes' : 'Ant Vespera';
   const match = files.find((file) => file.sections.some((section) => section.header === header));
   if (!match) {
-    return [];
+    return resolveCommuneAntiphonRefs(input, header);
   }
 
   return Array.from({ length: 5 }, (_, index) => ({
@@ -337,25 +338,130 @@ function resolveProperMajorHourAntiphonRefs(
   }));
 }
 
-function resolveProperMinorHourAntiphonRef(
+function resolveCommuneAntiphonRefs(
+  input: ApplyRuleSetInput,
+  header: 'Ant Laudes' | 'Ant Vespera'
+): readonly TextReference[] {
+  const communeFile = resolveCommuneFile(input);
+  if (!communeFile || !communeFile.sections.some((section) => section.header === header)) {
+    return [];
+  }
+
+  return Array.from({ length: 5 }, (_, index) => ({
+    path: communeFile.path.replace(/\.txt$/u, ''),
+    section: header,
+    selector: String(index + 1)
+  }));
+}
+
+function resolveMinorHourAntiphonRef(
   files: readonly ParsedFile[],
-  hour: 'prime' | 'terce' | 'sext' | 'none'
+  input: ApplyRuleSetInput
 ): TextReference | undefined {
   const match = files.find((file) => file.sections.some((section) => section.header === 'Ant Laudes'));
+  const selector =
+    input.hour === 'prime' ||
+    input.hour === 'terce' ||
+    input.hour === 'sext' ||
+    input.hour === 'none'
+      ? minorHourAntiphonSelector(input.hour)
+      : undefined;
+  if (!selector) {
+    return undefined;
+  }
+  if (match) {
+    return {
+      path: match.path.replace(/\.txt$/u, ''),
+      section: 'Ant Laudes',
+      selector
+    };
+  }
+
+  const communeFile = resolveCommuneFile(input);
+  if (!communeFile || !communeFile.sections.some((section) => section.header === 'Ant Laudes')) {
+    return undefined;
+  }
+
+  return {
+    path: communeFile.path.replace(/\.txt$/u, ''),
+    section: 'Ant Laudes',
+    selector
+  };
+}
+
+function minorHourAntiphonSelector(
+  hour: 'prime' | 'terce' | 'sext' | 'none'
+): '1' | '2' | '3' | '5' {
+  return (
+    hour === 'prime' ? '1'
+    : hour === 'terce' ? '2'
+    : hour === 'sext' ? '3'
+    : '5'
+  );
+}
+
+function resolveCommuneFile(input: ApplyRuleSetInput): ParsedFile | undefined {
+  const comkey = input.celebrationRules.comkey;
+  if (!comkey) {
+    return undefined;
+  }
+  return input.corpus.getFile(`horas/Latin/Commune/${comkey}.txt`);
+}
+
+function attachDoxologyVariantSlot(
+  slots: Partial<Record<SlotName, SlotContent>>,
+  properFiles: readonly ParsedFile[],
+  input: ApplyRuleSetInput
+): void {
+  const hymn = slots.hymn;
+  if (!hymn || hymn.kind !== 'single-ref' || !isFallbackMinorHourHymn(hymn.ref)) {
+    return;
+  }
+
+  const doxologyRef =
+    findProperDoxologyReference(properFiles) ??
+    findVariantDoxologyReference(input.celebrationRules.doxologyVariant);
+  if (!doxologyRef) {
+    return;
+  }
+
+  slots['doxology-variant'] = {
+    kind: 'single-ref',
+    ref: doxologyRef
+  };
+}
+
+function isFallbackMinorHourHymn(ref: TextReference): boolean {
+  return (
+    ref.path === 'horas/Latin/Psalterium/Special/Prima Special' ||
+    ref.path === 'horas/Latin/Psalterium/Special/Minor Special'
+  );
+}
+
+function findProperDoxologyReference(
+  files: readonly ParsedFile[]
+): TextReference | undefined {
+  const match = files.find((file) => file.sections.some((section) => section.header === 'Doxology'));
   if (!match) {
     return undefined;
   }
 
-  const selector =
-    hour === 'prime' ? '1'
-    : hour === 'terce' ? '2'
-    : hour === 'sext' ? '3'
-    : '5';
-
   return {
     path: match.path.replace(/\.txt$/u, ''),
-    section: 'Ant Laudes',
-    selector
+    section: 'Doxology'
+  };
+}
+
+function findVariantDoxologyReference(
+  variant: string | undefined
+): TextReference | undefined {
+  if (!variant) {
+    return undefined;
+  }
+
+  return {
+    path: 'horas/Latin/Psalterium/Doxologies',
+    section: variant
   };
 }
 
