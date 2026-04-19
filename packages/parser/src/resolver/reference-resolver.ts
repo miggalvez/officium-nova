@@ -1,4 +1,5 @@
 import { languageFallbackChain } from '../corpus/language.js';
+import { parseCondition } from '../parser/condition-parser.js';
 import { buildSectionContentFromLines } from '../parser/directive-parser.js';
 import type { Condition } from '../types/conditions.js';
 import type { CrossReference, LineSelector, Substitution } from '../types/directives.js';
@@ -29,7 +30,12 @@ export interface ResolveContext {
 }
 
 export interface ResolverWarning {
-  type: 'missing-file' | 'missing-section' | 'cycle-detected' | 'depth-exceeded';
+  type:
+    | 'missing-file'
+    | 'missing-section'
+    | 'cycle-detected'
+    | 'depth-exceeded'
+    | 'ambiguous-section';
   message: string;
   sourceFile: string;
   section?: string;
@@ -91,8 +97,8 @@ export class CrossReferenceResolver {
       return [];
     }
 
-    const section = target.raw.find((candidate) => candidate.header === sectionName);
-    if (!section) {
+    const sections = target.raw.filter((candidate) => candidate.header === sectionName);
+    if (sections.length === 0) {
       this.warn({
         type: 'missing-section',
         sourceFile: context.sourceFile,
@@ -103,15 +109,12 @@ export class CrossReferenceResolver {
       return [];
     }
 
-    const selectedLines = applyLineSelector(
-      section.lines.map((line) => line.text),
-      reference.lineSelector
-    );
-    const transformedLines = applySubstitutions(
-      selectedLines,
-      reference.substitutions
-    );
-    const parsed = buildSectionContentFromLines(transformedLines);
+    const parsed = buildReferencedSection(sectionName, sections, reference, {
+      resolver: this,
+      sourceFile: context.sourceFile,
+      currentSection: context.currentSection,
+      targetPath: target.path
+    });
 
     const nextVisited = new Set(context.visited);
     nextVisited.add(cycleKey);
@@ -360,6 +363,13 @@ interface ResolvedFileState {
   sectionSource: Map<string, string>;
 }
 
+interface ReferenceSectionBuildContext {
+  readonly resolver: CrossReferenceResolver;
+  readonly sourceFile: string;
+  readonly currentSection: string;
+  readonly targetPath: string;
+}
+
 export function defaultPathResolver(referencePath: string, config: ResolverConfig): string[] {
   const normalizedReference = ensureTxtSuffix(normalizeRelativePath(referencePath));
 
@@ -426,6 +436,66 @@ function cloneSection(section: ParsedSection): ParsedSection {
     rank: section.rank ? [...section.rank] : undefined,
     rules: section.rules ? [...section.rules] : undefined
   };
+}
+
+function buildReferencedSection(
+  header: string,
+  sections: readonly RawSection[],
+  reference: CrossReference,
+  context: ReferenceSectionBuildContext
+): readonly TextContent[] {
+  let merged: ParsedSection | undefined;
+
+  for (const section of sections) {
+    const gateCondition = section.condition ? parseCondition(section.condition) : undefined;
+    const candidate = materializeTextSectionCondition({
+      header,
+      condition: gateCondition,
+      content: buildRawSectionContent(section, reference),
+      startLine: section.startLine,
+      endLine: section.endLine
+    });
+
+    if (!merged) {
+      merged = candidate;
+      continue;
+    }
+
+    if (!gateCondition) {
+      context.resolver.warnings.push({
+        type: 'ambiguous-section',
+        sourceFile: context.sourceFile,
+        section: context.currentSection,
+        reference: formatReference(reference),
+        message:
+          `Multiple unconditional sections named '${header}' found in ${context.targetPath}; ` +
+          'later duplicate overrides earlier content.'
+      });
+      merged = candidate;
+      continue;
+    }
+
+    if (!isTextSection(merged)) {
+      merged = candidate;
+      continue;
+    }
+
+    merged = mergeSameSourceTextVariants(merged, candidate, gateCondition);
+  }
+
+  return merged?.content ?? [];
+}
+
+function buildRawSectionContent(
+  section: RawSection,
+  reference: CrossReference
+): TextContent[] {
+  const selectedLines = applyLineSelector(
+    section.lines.map((line) => line.text),
+    reference.lineSelector
+  );
+  const transformedLines = applySubstitutions(selectedLines, reference.substitutions);
+  return [...buildSectionContentFromLines(transformedLines)];
 }
 
 function isTextSection(section: ParsedSection): boolean {

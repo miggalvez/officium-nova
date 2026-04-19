@@ -40,22 +40,32 @@ const stubVersion: ResolvedVersion = {
   policy: {} as never
 };
 
-function buildSummary(hour: HourStructure): DayOfficeSummary {
+function buildSummary(
+  hour: HourStructure,
+  options: {
+    version?: ResolvedVersion;
+    season?: DayOfficeSummary['temporal']['season'];
+    dayName?: string;
+  } = {}
+): DayOfficeSummary {
+  const version = options.version ?? stubVersion;
+  const season = options.season ?? 'eastertide';
+  const dayName = options.dayName ?? 'Dominica in Albis';
   return {
     date: '2024-04-14',
     version: {
-      handle: stubVersion.handle,
-      kalendar: stubVersion.kalendar,
-      transfer: stubVersion.transfer,
-      stransfer: stubVersion.stransfer,
+      handle: version.handle,
+      kalendar: version.kalendar,
+      transfer: version.transfer,
+      stransfer: version.stransfer,
       policyName: 'rubrics-1960'
     },
     temporal: {
       date: '2024-04-14',
       dayOfWeek: 0,
       weekStem: 'Pasc',
-      dayName: 'Dominica in Albis',
-      season: 'eastertide',
+      dayName,
+      season,
       feastRef: { path: 'horas/Latin/Tempora/Pasc1-0', sectionRef: undefined } as never,
       rank: {} as never
     },
@@ -247,6 +257,203 @@ describe('composeHour', () => {
     });
 
     expect(renderRuns(composed.sections[0]!.lines[0]!, 'Latin')).toBe('Beatus vir, alleluia');
+  });
+
+  it('injects Sunday Compline preces from the special corpus section when the slot is empty', () => {
+    const corpus = new InMemoryTextIndex();
+    corpus.addFile(
+      makeFile('horas/Latin/Psalterium/Special/Preces', 'Preces dominicales Completorium', [
+        { type: 'verseMarker', marker: 'V.', text: 'Benedíctus es, Dómine, Deus patrum nostrórum.' },
+        { type: 'verseMarker', marker: 'R.', text: 'Et laudábilis et gloriósus in sǽcula.' }
+      ])
+    );
+
+    const hour: HourStructure = {
+      hour: 'compline',
+      slots: {
+        preces: { kind: 'empty' }
+      },
+      directives: ['preces-dominicales']
+    };
+
+    const composed = composeHour({
+      corpus,
+      summary: buildSummary(hour),
+      version: stubVersion,
+      hour: 'compline',
+      options: { languages: ['Latin'] }
+    });
+
+    expect(composed.sections).toHaveLength(1);
+    expect(composed.sections[0]!.slot).toBe('preces');
+    expect(composed.sections[0]!.reference).toBe(
+      'horas/Latin/Psalterium/Special/Preces#Preces dominicales Completorium'
+    );
+    expect(renderRuns(composed.sections[0]!.lines[0]!, 'Latin')).toBe(
+      'Benedíctus es, Dómine, Deus patrum nostrórum.'
+    );
+  });
+
+  it('injects ferial Lauds preces from the special corpus section when the slot is empty', () => {
+    const corpus = new InMemoryTextIndex();
+    corpus.addFile(
+      makeFile('horas/Latin/Psalterium/Special/Preces', 'Preces feriales Laudes', [
+        { type: 'verseMarker', marker: 'V.', text: 'Ego dixi: Dómine, miserére mei.' },
+        { type: 'verseMarker', marker: 'R.', text: 'Sana ánimam meam quia peccávi tibi.' }
+      ])
+    );
+
+    const hour: HourStructure = {
+      hour: 'lauds',
+      slots: {
+        preces: { kind: 'empty' }
+      },
+      directives: ['preces-feriales']
+    };
+
+    const composed = composeHour({
+      corpus,
+      summary: buildSummary(hour),
+      version: stubVersion,
+      hour: 'lauds',
+      options: { languages: ['Latin'] }
+    });
+
+    expect(composed.sections).toHaveLength(1);
+    expect(composed.sections[0]!.slot).toBe('preces');
+    expect(composed.sections[0]!.reference).toBe(
+      'horas/Latin/Psalterium/Special/Preces#Preces feriales Laudes'
+    );
+    expect(renderRuns(composed.sections[0]!.lines[0]!, 'Latin')).toBe(
+      'Ego dixi: Dómine, miserére mei.'
+    );
+  });
+
+  it('injects pre-1955 suffragium from Major Special when the slot is empty', () => {
+    const corpus = new InMemoryTextIndex();
+    corpus.addFile(
+      makeFile('horas/Latin/Psalterium/Special/Major Special', 'Suffragium', [
+        { type: 'text', value: 'Ant. Beáta Dei Génitrix Virgo María.' },
+        { type: 'separator' },
+        { type: 'verseMarker', marker: 'V.', text: 'Mirificávit Dóminus Sanctos suos.' },
+        { type: 'verseMarker', marker: 'R.', text: 'Et exaudívit eos clamántes ad se.' }
+      ])
+    );
+
+    const divinoAfflatuVersion: ResolvedVersion = {
+      ...stubVersion,
+      handle: 'Divino Afflatu - 1954' as never
+    };
+    const hour: HourStructure = {
+      hour: 'lauds',
+      slots: {
+        suffragium: { kind: 'empty' }
+      },
+      directives: ['suffragium-of-the-saints']
+    };
+
+    const composed = composeHour({
+      corpus,
+      summary: buildSummary(hour, {
+        version: divinoAfflatuVersion,
+        season: 'time-after-pentecost',
+        dayName: 'Pent03-0'
+      }),
+      version: divinoAfflatuVersion,
+      hour: 'lauds',
+      options: { languages: ['Latin'] }
+    });
+
+    expect(composed.sections).toHaveLength(1);
+    expect(composed.sections[0]!.slot).toBe('suffragium');
+    expect(composed.sections[0]!.reference).toBe(
+      'horas/Latin/Psalterium/Special/Major Special#Suffragium'
+    );
+    expect(renderRuns(composed.sections[0]!.lines[0]!, 'Latin')).toBe(
+      'Ant. Beáta Dei Génitrix Virgo María.'
+    );
+  });
+
+  it('uses the Paschaltide suffragium variant during Eastertide', () => {
+    const corpus = new InMemoryTextIndex();
+    corpus.addFile(
+      makeFile('horas/Latin/Psalterium/Special/Major Special', 'Suffragium Paschale', [
+        { type: 'text', value: 'Ant. Crucifíxus surréxit a mórtuis, allelúja.' }
+      ])
+    );
+
+    const reduced1955Version: ResolvedVersion = {
+      ...stubVersion,
+      handle: 'Reduced - 1955' as never
+    };
+    const hour: HourStructure = {
+      hour: 'vespers',
+      slots: {
+        suffragium: { kind: 'empty' }
+      },
+      directives: ['suffragium-of-the-saints']
+    };
+
+    const composed = composeHour({
+      corpus,
+      summary: buildSummary(hour, {
+        version: reduced1955Version,
+        season: 'eastertide',
+        dayName: 'Pasc5-0'
+      }),
+      version: reduced1955Version,
+      hour: 'vespers',
+      options: { languages: ['Latin'] }
+    });
+
+    expect(composed.sections).toHaveLength(1);
+    expect(composed.sections[0]!.reference).toBe(
+      'horas/Latin/Psalterium/Special/Major Special#Suffragium Paschale'
+    );
+    expect(renderRuns(composed.sections[0]!.lines[0]!, 'Latin')).toBe(
+      'Ant. Crucifíxus surréxit a mórtuis, allelúja.'
+    );
+  });
+
+  it('preserves rubric prose from Common/Rubricae instead of stripping it from the rendered line stream', () => {
+    const corpus = new InMemoryTextIndex();
+    corpus.addFile(
+      makeFile('horas/Latin/Psalterium/Common/Rubricae', 'Clara voce', [
+        { type: 'rubric', value: 'Deinde, clara voce, dicitur Versus:' }
+      ])
+    );
+
+    const divinoAfflatuVersion: ResolvedVersion = {
+      ...stubVersion,
+      handle: 'Divino Afflatu - 1954' as never
+    };
+    const hour: HourStructure = {
+      hour: 'prime',
+      slots: {
+        versicle: {
+          kind: 'single-ref',
+          ref: { path: 'horas/Latin/Psalterium/Common/Rubricae', section: 'Clara voce' }
+        }
+      },
+      directives: []
+    };
+
+    const composed = composeHour({
+      corpus,
+      summary: buildSummary(hour, {
+        version: divinoAfflatuVersion,
+        season: 'time-after-pentecost',
+        dayName: 'Pent03-1'
+      }),
+      version: divinoAfflatuVersion,
+      hour: 'prime',
+      options: { languages: ['Latin'] }
+    });
+
+    expect(composed.sections).toHaveLength(1);
+    expect(renderRuns(composed.sections[0]!.lines[0]!, 'Latin')).toBe(
+      'Deinde, clara voce, dicitur Versus:'
+    );
   });
 
   it('expands formulaRef and macroRef from Common/Prayers', () => {

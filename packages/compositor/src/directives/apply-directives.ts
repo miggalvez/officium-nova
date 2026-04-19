@@ -60,12 +60,6 @@ function transformsFor(flags: ReadonlySet<HourDirective>): SlotTransform[] {
   if (flags.has('add-alleluia')) pipeline.push(addAlleluia);
   if (flags.has('add-versicle-alleluia')) pipeline.push(addVersicleAlleluia);
 
-  if (flags.has('preces-dominicales')) pipeline.push(banner('preces', 'Preces dominicales'));
-  if (flags.has('preces-feriales')) pipeline.push(banner('preces', 'Preces feriales'));
-
-  if (flags.has('suffragium-of-the-saints')) {
-    pipeline.push(banner('suffragium', 'Suffragium Sanctorum'));
-  }
   if (flags.has('omit-suffragium')) pipeline.push(clearSlot('suffragium'));
 
   if (flags.has('genuflection-at-oration')) pipeline.push(genuflectionAtOration);
@@ -209,16 +203,8 @@ function isAntiphonSlot(slot: SlotName): boolean {
 }
 
 // --------------------------------------------------------------------------
-// preces / suffragium / dirge: banner + clear
+// suffragium / dirge: banner + clear
 // --------------------------------------------------------------------------
-
-function banner(targetSlot: SlotName, label: string): SlotTransform {
-  return (slot, content) => {
-    if (slot !== targetSlot) return content;
-    const rubric: TextContent = { type: 'rubric', value: label };
-    return Object.freeze([rubric, ...content]);
-  };
-}
 
 function clearSlot(targetSlot: SlotName): SlotTransform {
   return (slot, content) => {

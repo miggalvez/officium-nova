@@ -22,6 +22,10 @@ import {
 import { describe, expect, it } from 'vitest';
 
 import { composeHour } from '../../src/compose.js';
+import {
+  PHASE_3_GOLDEN_DATES,
+  PHASE_3_ROMAN_HANDLES
+} from '../fixtures/phase-3-golden-dates.js';
 
 const TEST_DIR = dirname(fileURLToPath(import.meta.url));
 const PACKAGE_ROOT = resolve(TEST_DIR, '../..');
@@ -29,17 +33,69 @@ const UPSTREAM_ROOT = resolve(PACKAGE_ROOT, '../../upstream/web/www');
 const HAS_UPSTREAM = existsSync(UPSTREAM_ROOT);
 const describeIfUpstream = HAS_UPSTREAM ? describe : describe.skip;
 
+type RomanHandle = (typeof PHASE_3_ROMAN_HANDLES)[number];
+
+interface SharedResources {
+  rawCorpus: Awaited<ReturnType<typeof loadCorpus>>;
+  resolvedCorpus: Awaited<ReturnType<typeof loadCorpus>>;
+  versionRegistry: ReturnType<typeof buildVersionRegistry>;
+  kalendarium: ReturnType<typeof buildKalendariumTable>;
+  yearTransfers: ReturnType<typeof buildYearTransferTable>;
+  scriptureTransfers: ReturnType<typeof buildScriptureTransferTable>;
+}
+
+let sharedResourcesPromise: Promise<SharedResources> | undefined;
+
+async function loadSharedResources(): Promise<SharedResources> {
+  sharedResourcesPromise ??= (async () => {
+    const rawCorpus = await loadCorpus(UPSTREAM_ROOT, { resolveReferences: false });
+    const resolvedCorpus = await loadCorpus(UPSTREAM_ROOT);
+    const versionRegistry = buildVersionRegistry(
+      parseVersionRegistry(readFileSync(resolve(UPSTREAM_ROOT, 'Tabulae/data.txt'), 'utf8'))
+    );
+
+    return {
+      rawCorpus,
+      resolvedCorpus,
+      versionRegistry,
+      kalendarium: buildKalendariumTable(loadKalendaria()),
+      yearTransfers: buildYearTransferTable(loadTransferTables()),
+      scriptureTransfers: buildScriptureTransferTable(loadScriptureTransferTables())
+    };
+  })();
+
+  return sharedResourcesPromise;
+}
+
+async function createHarness(version: RomanHandle) {
+  const resources = await loadSharedResources();
+  const engine = createRubricalEngine({
+    corpus: resources.rawCorpus.index,
+    kalendarium: resources.kalendarium,
+    yearTransfers: resources.yearTransfers,
+    scriptureTransfers: resources.scriptureTransfers,
+    versionRegistry: resources.versionRegistry,
+    version: asVersionHandle(version),
+    policyMap: VERSION_POLICY
+  });
+
+  return {
+    engine,
+    resolvedCorpus: resources.resolvedCorpus
+  };
+}
+
 /**
  * End-to-end smoke test against the real upstream corpus: load the Phase 1
  * index twice — unresolved for the Rubrical Engine, resolved for the
- * compositor — create a Rubrics-1960 engine, resolve a handful of
- * representative dates, and run each Hour through composition. The exact
- * textual-comparison job now lives in `compare:phase-3-perl`; this suite stays
- * intentionally smoke-level and asserts only that the pipeline never throws and
- * that every Hour emits a
- * non-empty Section list with Latin content or structured heading metadata.
+ * compositor — then resolve the canonical Phase 3 Roman date matrix across
+ * all three implemented Roman policy families. The exact textual-comparison
+ * job lives in `compare:phase-3-perl`; this suite stays intentionally
+ * smoke-level and asserts only that the pipeline never throws and that every
+ * Hour emits a non-empty Section list with Latin content or structured
+ * heading metadata.
  */
-describeIfUpstream('Phase 3 composition smoke against upstream corpus (1960)', () => {
+describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman policies)', () => {
   const HOURS: readonly HourName[] = [
     'matins',
     'lauds',
@@ -51,82 +107,51 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (1960)', (
     'compline'
   ];
 
-  const DATES = [
-    '2024-01-14', // 2nd Sunday after Epiphany (ordinary Sunday structure)
-    '2024-04-14', // Dominica in Albis (Paschaltide; add-alleluia directives fire)
-    '2024-08-15', // Assumption B.V.M. (I class feast)
-    '2024-11-22' // St. Cecilia, Virgin and Martyr (commune-heavy)
-  ] as const;
+  it('composes every Hour for the canonical Phase 3 Roman date matrix without throwing', async () => {
+    for (const version of PHASE_3_ROMAN_HANDLES) {
+      const { engine, resolvedCorpus } = await createHarness(version);
 
-  it('composes every Hour for a handful of representative 1960 dates without throwing', async () => {
-    const rawCorpus = await loadCorpus(UPSTREAM_ROOT, { resolveReferences: false });
-    const resolvedCorpus = await loadCorpus(UPSTREAM_ROOT);
-    const versionRegistry = buildVersionRegistry(
-      parseVersionRegistry(readFileSync(resolve(UPSTREAM_ROOT, 'Tabulae/data.txt'), 'utf8'))
-    );
-    const engine = createRubricalEngine({
-      corpus: rawCorpus.index,
-      kalendarium: buildKalendariumTable(loadKalendaria()),
-      yearTransfers: buildYearTransferTable(loadTransferTables()),
-      scriptureTransfers: buildScriptureTransferTable(loadScriptureTransferTables()),
-      versionRegistry,
-      version: asVersionHandle('Rubrics 1960 - 1960'),
-      policyMap: VERSION_POLICY
-    });
+      for (const date of PHASE_3_GOLDEN_DATES) {
+        const summary = engine.resolveDayOfficeSummary(date);
+        for (const hour of HOURS) {
+          const hourStructure = summary.hours[hour];
+          if (!hourStructure) continue;
 
-    for (const date of DATES) {
-      const summary = engine.resolveDayOfficeSummary(date);
-      for (const hour of HOURS) {
-        const hourStructure = summary.hours[hour];
-        if (!hourStructure) continue;
+          const composed = composeHour({
+            corpus: resolvedCorpus.index,
+            summary,
+            version: engine.version,
+            hour,
+            options: { languages: ['Latin'] }
+          });
 
-        const composed = composeHour({
-          corpus: resolvedCorpus.index,
-          summary,
-          version: engine.version,
-          hour,
-          options: { languages: ['Latin'] }
-        });
-
-        expect(composed.hour).toBe(hour);
-        expect(composed.date).toBe(date);
-        expect(composed.languages).toEqual(['Latin']);
-        expect(composed.sections.length).toBeGreaterThan(0);
-        for (const section of composed.sections) {
-          if (section.type === 'heading') {
-            expect(section.heading).toBeDefined();
-            expect(section.lines).toEqual([]);
-            continue;
-          }
-          expect(section.languages).toContain('Latin');
-          for (const line of section.lines) {
-            if (Object.keys(line.texts).length === 0) {
-              expect(line.marker, `empty line without marker in ${hour} ${section.slot}`).toBeTruthy();
+          expect(composed.hour).toBe(hour);
+          expect(composed.date).toBe(date);
+          expect(composed.languages).toEqual(['Latin']);
+          expect(composed.sections.length).toBeGreaterThan(0);
+          for (const section of composed.sections) {
+            if (section.type === 'heading') {
+              expect(section.heading).toBeDefined();
+              expect(section.lines).toEqual([]);
+              continue;
             }
-            for (const runs of Object.values(line.texts)) {
-              expect(runs.length, `empty run list in ${hour} ${section.slot}`).toBeGreaterThan(0);
+            expect(section.languages).toContain('Latin');
+            for (const line of section.lines) {
+              if (Object.keys(line.texts).length === 0) {
+                expect(line.marker, `empty line without marker in ${version} ${hour} ${section.slot}`).toBeTruthy();
+              }
+              for (const runs of Object.values(line.texts)) {
+                expect(runs.length, `empty run list in ${version} ${hour} ${section.slot}`).toBeGreaterThan(0);
+              }
             }
           }
         }
       }
     }
-  }, 240_000);
+  }, 360_000);
 
   it('emits a non-empty Matins shape (invitatory + heading + psalmody + Te Deum) on a double feast', async () => {
-    const rawCorpus = await loadCorpus(UPSTREAM_ROOT, { resolveReferences: false });
-    const resolvedCorpus = await loadCorpus(UPSTREAM_ROOT);
-    const versionRegistry = buildVersionRegistry(
-      parseVersionRegistry(readFileSync(resolve(UPSTREAM_ROOT, 'Tabulae/data.txt'), 'utf8'))
-    );
-    const engine = createRubricalEngine({
-      corpus: rawCorpus.index,
-      kalendarium: buildKalendariumTable(loadKalendaria()),
-      yearTransfers: buildYearTransferTable(loadTransferTables()),
-      scriptureTransfers: buildScriptureTransferTable(loadScriptureTransferTables()),
-      versionRegistry,
-      version: asVersionHandle('Rubrics 1960 - 1960'),
-      policyMap: VERSION_POLICY
-    });
+    const { engine, resolvedCorpus } = await createHarness('Rubrics 1960 - 1960');
 
     const summary = engine.resolveDayOfficeSummary('2024-08-15');
     const matins = summary.hours.matins;
@@ -149,20 +174,7 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (1960)', (
   }, 240_000);
 
   it('renders July 9 Matins benedictions line-by-line and emits the Te Deum replacement responsory only once', async () => {
-    const rawCorpus = await loadCorpus(UPSTREAM_ROOT, { resolveReferences: false });
-    const resolvedCorpus = await loadCorpus(UPSTREAM_ROOT);
-    const versionRegistry = buildVersionRegistry(
-      parseVersionRegistry(readFileSync(resolve(UPSTREAM_ROOT, 'Tabulae/data.txt'), 'utf8'))
-    );
-    const engine = createRubricalEngine({
-      corpus: rawCorpus.index,
-      kalendarium: buildKalendariumTable(loadKalendaria()),
-      yearTransfers: buildYearTransferTable(loadTransferTables()),
-      scriptureTransfers: buildScriptureTransferTable(loadScriptureTransferTables()),
-      versionRegistry,
-      version: asVersionHandle('Rubrics 1960 - 1960'),
-      policyMap: VERSION_POLICY
-    });
+    const { engine, resolvedCorpus } = await createHarness('Rubrics 1960 - 1960');
 
     const summary = engine.resolveDayOfficeSummary('2024-07-09');
     const composed = composeHour({

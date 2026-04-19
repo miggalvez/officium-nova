@@ -186,7 +186,8 @@ interface TaggedRef {
 }
 
 function composeSlot(args: ComposeSlotArgs): Section | undefined {
-  const refs = taggedReferencesFrom(args.slot, args.content);
+  const effectiveContent = directiveDrivenSlotContent(args) ?? args.content;
+  const refs = taggedReferencesFrom(args.slot, effectiveContent);
   if (refs.length === 0) return undefined;
 
   const perLanguage = new Map<string, TextContent[]>();
@@ -324,6 +325,110 @@ function composeSlot(args: ComposeSlotArgs): Section | undefined {
   if (frozen.size === 0) return undefined;
 
   return emitSection(args.slot, frozen, primary ? referenceKey(primary) : undefined);
+}
+
+function directiveDrivenSlotContent(args: ComposeSlotArgs): SlotContent | undefined {
+  if (args.slot === 'preces') {
+    const ref = precesDirectiveReference(args.hour, args.directives);
+    if (!ref) {
+      return undefined;
+    }
+
+    return {
+      kind: 'single-ref',
+      ref
+    };
+  }
+
+  if (args.slot !== 'suffragium') {
+    return undefined;
+  }
+
+  const ref = suffragiumDirectiveReference(args);
+  if (!ref) {
+    return undefined;
+  }
+
+  return {
+    kind: 'single-ref',
+    ref
+  };
+}
+
+function precesDirectiveReference(
+  hour: HourName,
+  directives: HourStructure['directives']
+): TextReference | undefined {
+  const flags = new Set(directives);
+  if (flags.has('preces-dominicales')) {
+    if (hour === 'compline') {
+      return {
+        path: 'horas/Latin/Psalterium/Special/Preces',
+        section: 'Preces dominicales Completorium'
+      };
+    }
+    return undefined;
+  }
+
+  if (!flags.has('preces-feriales')) {
+    return undefined;
+  }
+
+  switch (hour) {
+    case 'lauds':
+      return {
+        path: 'horas/Latin/Psalterium/Special/Preces',
+        section: 'Preces feriales Laudes'
+      };
+    case 'vespers':
+      return {
+        path: 'horas/Latin/Psalterium/Special/Preces',
+        section: 'Preces feriales Vespera'
+      };
+    case 'prime':
+      return {
+        path: 'horas/Latin/Psalterium/Special/Preces',
+        section: 'Preces feriales Prima'
+      };
+    case 'terce':
+    case 'sext':
+    case 'none':
+      return {
+        path: 'horas/Latin/Psalterium/Special/Preces',
+        section: 'Preces feriales minora'
+      };
+    default:
+      return undefined;
+  }
+}
+
+function suffragiumDirectiveReference(args: ComposeSlotArgs): TextReference | undefined {
+  const flags = new Set(args.directives);
+  if (flags.has('omit-suffragium') || !flags.has('suffragium-of-the-saints')) {
+    return undefined;
+  }
+
+  if (args.hour !== 'lauds' && args.hour !== 'vespers') {
+    return undefined;
+  }
+
+  return {
+    path: 'horas/Latin/Psalterium/Special/Major Special',
+    section: suffragiumSection(args)
+  };
+}
+
+function suffragiumSection(args: ComposeSlotArgs): string {
+  const handle = args.context.version.handle;
+  if (args.context.season === 'eastertide') {
+    return 'Suffragium Paschale';
+  }
+
+  if (handle.includes('Tridentine') || handle.includes('1570') || handle.includes('1888') || handle.includes('1906')) {
+    return args.hour === 'vespers' ? 'Suffragium Vespera' : 'Suffragium Laudes';
+  }
+
+  return 'Suffragium';
 }
 
 function taggedReferencesFrom(slot: SlotName, content: SlotContent): readonly TaggedRef[] {

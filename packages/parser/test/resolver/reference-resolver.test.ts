@@ -289,6 +289,81 @@ describe('CrossReferenceResolver', () => {
     ]);
   });
 
+  it('coalesces duplicate referenced sections with header conditions', async () => {
+    const { resolver } = await createResolver({
+      'duplicate-reference-source.txt': [
+        '[Caller]',
+        '@duplicate-reference-target:Prayer',
+        '',
+        '[Prayer]',
+        'Base blessing.',
+        '',
+        '[Prayer] (rubrica specialis)',
+        'Special blessing.'
+      ].join('\n'),
+      'duplicate-reference-target.txt': [
+        '[Prayer]',
+        'Base blessing.',
+        '',
+        '[Prayer] (rubrica specialis)',
+        'Special blessing.'
+      ].join('\n')
+    });
+
+    const resolved = await resolver.resolve(
+      parseCrossReference('@duplicate-reference-target:Prayer'),
+      baseContext('duplicate-reference-source.txt', 'Caller')
+    );
+
+    expect(resolved).toEqual([
+      {
+        type: 'conditional',
+        condition: {
+          expression: {
+            type: 'not',
+            inner: { type: 'match', subject: 'rubrica', predicate: 'specialis' }
+          }
+        },
+        content: [{ type: 'text', value: 'Base blessing.' }],
+        scope: { backwardLines: 0, forwardMode: 'line' }
+      },
+      {
+        type: 'conditional',
+        condition: {
+          expression: { type: 'match', subject: 'rubrica', predicate: 'specialis' }
+        },
+        content: [{ type: 'text', value: 'Special blessing.' }],
+        scope: { backwardLines: 0, forwardMode: 'line' }
+      }
+    ]);
+  });
+
+  it('warns when duplicate referenced sections are unconditional', async () => {
+    const { resolver } = await createResolver({
+      'duplicate-unconditional-target.txt': [
+        '[Prayer]',
+        'First blessing.',
+        '',
+        '[Prayer]',
+        'Second blessing.'
+      ].join('\n')
+    });
+
+    const resolved = await resolver.resolve(
+      parseCrossReference('@duplicate-unconditional-target:Prayer'),
+      baseContext('reference-chain-a.txt', 'Oratio')
+    );
+
+    expect(extractText(resolved)).toEqual(['Second blessing.']);
+    expect(
+      resolver.warnings.some(
+        (warning) =>
+          warning.type === 'ambiguous-section' &&
+          warning.reference === '@duplicate-unconditional-target:Prayer'
+      )
+    ).toBe(true);
+  });
+
   it('keeps resolving when a referenced file is missing and records warnings', async () => {
     const directMissing = parseFile('[Oratio]\n@missing-file:Oratio', 'direct-missing.txt');
     const { resolver } = await createResolver({

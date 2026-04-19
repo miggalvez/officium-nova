@@ -1,6 +1,13 @@
 import { describe, expect, it } from 'vitest';
 
-import { InMemoryTextIndex, type ParsedFile } from '@officium-novum/parser';
+import {
+  CrossReferenceResolver,
+  FileCache,
+  InMemoryTextIndex,
+  parseFile,
+  type FileLoader,
+  type ParsedFile
+} from '@officium-novum/parser';
 import type {
   DayOfficeSummary,
   HourStructure,
@@ -95,6 +102,21 @@ function runTypes(
   language: string
 ): readonly string[] {
   return (line.texts[language] ?? []).map((r) => r.type);
+}
+
+class LocalLoader implements FileLoader {
+  constructor(private readonly files: Readonly<Record<string, string>>) {}
+
+  async load(relativePath: string): Promise<string> {
+    const value = this.files[relativePath];
+    if (value !== undefined) {
+      return value;
+    }
+
+    const error = new Error(`Corpus file not found: ${relativePath}`) as NodeJS.ErrnoException;
+    error.code = 'ENOENT';
+    throw error;
+  }
 }
 
 // --- Bug 3: psalmInclude expands from Psalmorum (not Psalms) --------------
@@ -383,5 +405,70 @@ describe('TextReference selector handling (Bug 1)', () => {
     expect(rendered).toBe(
       'Surrexit Dominus vere, alleluja.|Venite exsultemus Domino|Surrexit Dominus vere, alleluja.'
     );
+  });
+});
+
+describe('duplicate-header conditional resolution (ADR-012)', () => {
+  it('keeps the Roman compline benediction and suppresses the Dominican variant', async () => {
+    const corpusFilePath = 'horas/Latin/Psalterium/Common/Prayers.txt';
+    const loader = new LocalLoader({
+      [corpusFilePath]: [
+        '[Jube domne]',
+        'Jube, domne, benedícere.',
+        '',
+        '[Benedictio Completorium_]',
+        'Benedictio. Noctem quiétam et finem perféctum concédat nobis Dóminus omnípotens.',
+        '',
+        '[benedictio Completorium]',
+        '@:Jube domne',
+        '@:Benedictio Completorium_',
+        '',
+        '[benedictio Completorium] (rubrica Ordo Praedicatorum)',
+        '@:Jube domne',
+        '@:Benedictio Completorium_:s/concédat/tríbuat/'
+      ].join('\n')
+    });
+    const cache = new FileCache(loader);
+    const resolver = new CrossReferenceResolver(cache, {
+      domain: 'horas',
+      language: 'Latin',
+      pathResolver: (referencePath) => [
+        referencePath.toLowerCase().endsWith('.txt') ? referencePath : `${referencePath}.txt`
+      ]
+    });
+
+    const resolved = await resolver.resolveFile(
+      parseFile(await loader.load(corpusFilePath), corpusFilePath)
+    );
+
+    const corpus = new InMemoryTextIndex();
+    corpus.addFile(resolved);
+
+    const hour: HourStructure = {
+      hour: 'compline',
+      slots: {
+        conclusion: {
+          kind: 'single-ref',
+          ref: { path: 'horas/Latin/Psalterium/Common/Prayers', section: 'benedictio Completorium' }
+        }
+      },
+      directives: []
+    };
+
+    const composed = composeHour({
+      corpus,
+      summary: buildSummary(hour),
+      version: stubVersion,
+      hour: 'compline',
+      options: { languages: ['Latin'] }
+    });
+
+    const rendered = composed.sections
+      .flatMap((section) => section.lines)
+      .map((line) => renderRuns(line, 'Latin'))
+      .join(' ');
+
+    expect(rendered).toContain('concédat nobis Dóminus omnípotens.');
+    expect(rendered).not.toContain('tríbuat nobis Dóminus omnípotens.');
   });
 });

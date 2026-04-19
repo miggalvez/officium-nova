@@ -15,12 +15,14 @@
     "dist"
   ],
   "scripts": {
+    "adjudications:fanout": "node ./test/divergence/fanout-adjudications.mjs --write",
     "build": "tsc -p tsconfig.json",
     "compare:phase-3-perl": "pnpm -C ../parser build && pnpm -C ../rubrical-engine build && pnpm build && node ./test/fixtures/compare-phase-3-perl.mjs",
     "compare:phase-3-perl:full": "pnpm compare:phase-3-perl -- --date __full-year__",
     "test": "vitest run",
     "test:no-throw": "vitest run -- test/integration/no-throw-sweep.test.ts",
-    "typecheck": "tsc -p tsconfig.json --noEmit"
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "verify:phase-3-signoff": "node ./scripts/verify-phase-3-signoff.mjs"
   },
   "dependencies": {
     "@officium-novum/parser": "workspace:*",

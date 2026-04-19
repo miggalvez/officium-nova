@@ -115,6 +115,40 @@ similar forward progress. Total row counts are unchanged because
 subsequent pattern divergences remain; individual-row collapse comes
 with the next engine-bug fix in the pattern catalogue.
 
+### 2026-04-19 — Pattern: Divino Afflatu opening rubric prose (perl-bug)
+
+**Ledger signal.** Divino Afflatu rows still diverge almost immediately
+across nearly every Hour because the compositor emits rubric prose like
+`Deinde, clara voce, dicitur Versus:` and `Secus absolute incipiuntur,
+ut sequitur:` while the Perl comparison surface often shows a blank line
+or jumps straight to `Nocturnus I`.
+
+**Root cause.** These lines are not compositor inventions. They are
+present verbatim in the upstream Latin corpus at
+`Psalterium/Common/Rubricae.txt` under the `Clara voce`,
+`Secus absolute`, and `Secus absolute Parvum` sections. The compositor
+is preserving source-backed rubric prose; the legacy Perl rendering
+surface elides it before comparison.
+
+**Resolution.** Class `perl-bug`. Representative row-level entries were
+added to `adjudications.json` for the three repeated live signatures:
+
+- `_` → `Deinde, clara voce, dicitur Versus:`
+- `_` → `Secus absolute incipiuntur, ut sequitur:`
+- `Nocturnus I` → `Deinde, clara voce, dicitur Versus:`
+
+These are fanned out across the current Divino Afflatu ledger rather
+than fixed in code, because the compositor output matches the corpus and
+no governing Divino Afflatu rubric has been found that suppresses these
+rubric sentences.
+
+**Citation.** `upstream/web/www/horas/Latin/Psalterium/Common/Rubricae.txt:50-65`.
+
+**Impact.** This is the first large non-code burn-down batch for the DA
+ledger: dozens of shallow `unadjudicated` rows become source-backed
+`perl-bug` rows immediately, making the remaining real engine work
+easier to see.
+
 ### Pattern catalogue (pending per-pattern entries)
 
 The following patterns were observed during the 3h kickoff analysis
@@ -141,6 +175,16 @@ and will each get their own `## Entry` block as they are adjudicated:
   (`upstream/.../Common/Rubricae.txt:129`) carries the guillemets.
   Preliminary class: `rendering-difference` — both renderings are
   defensible; the compositor matches the corpus author's formatting.
+- **Divino Afflatu Compline `Jube, Dómine` guillemets** — compositor
+  preserves `«Jube, Dómine, benedícere;»`, Perl strips the guillemets.
+  Corpus source (`upstream/.../Common/Rubricae.txt:168`) carries the
+  guillemeted rubric. Preliminary class: `rendering-difference`.
+- **Reduced 1955 Compline cross glyph** — Perl renders the source token
+  `+++` as `✙︎` in `V. Convérte nos ✙︎ Deus...`, while the compositor
+  currently emits `+`. Corpus source
+  (`upstream/.../Common/Prayers.txt:52`) confirms this is a glyph-level
+  rendering choice, not a selection bug. Preliminary class:
+  `rendering-difference`.
 - **Compline benediction verb** — already adjudicated in
   [ADR-012](../../../../docs/adr/012-compline-benediction-verb.md) as
   `engine-bug` (duplicate-header resolution in Phase 1). Not yet fixed.

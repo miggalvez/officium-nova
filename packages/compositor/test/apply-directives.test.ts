@@ -93,15 +93,11 @@ describe('applyDirectives — short-chapter-only', () => {
   });
 });
 
-describe('applyDirectives — preces / suffragium banners', () => {
-  it('prepends a preces-feriales rubric banner on the preces slot only', () => {
+describe('applyDirectives — preces / suffragium handling', () => {
+  it('leaves preces slot content unchanged; directive-backed insertion happens upstream', () => {
     const content: TextContent[] = [{ type: 'text', value: 'Kyrie eléison.' }];
     const out = run('preces', content, ['preces-feriales']);
-    expect(out[0]).toEqual({ type: 'rubric', value: 'Preces feriales' });
-    expect(out.slice(1)).toEqual(content);
-
-    const notPreces = run('hymn', content, ['preces-feriales']);
-    expect(notPreces).toEqual(content);
+    expect(out).toEqual(content);
   });
 
   it('omit-suffragium clears the suffragium slot', () => {
