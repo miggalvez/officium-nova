@@ -45,6 +45,10 @@ export interface ApplyRuleSetInput {
   readonly version?: ResolvedVersion;
 }
 
+type InternalVespersAwareInput = ApplyRuleSetInput & {
+  readonly __vespersSide?: 'first' | 'second';
+};
+
 export interface AppliedHourStructure {
   readonly slots: Readonly<Partial<Record<SlotName, SlotContent>>>;
   readonly warnings: readonly RubricalWarning[];
@@ -325,10 +329,26 @@ function resolveMajorHourAntiphonRefs(
   files: readonly ParsedFile[],
   input: ApplyRuleSetInput
 ): readonly TextReference[] {
-  const header = input.hour === 'lauds' ? 'Ant Laudes' : 'Ant Vespera';
-  const match = files.find((file) => file.sections.some((section) => section.header === header));
+  const headers =
+    input.hour === 'lauds' ? ['Ant Laudes']
+    : (input as InternalVespersAwareInput).__vespersSide === 'second' ?
+      ['Ant Vespera 3', 'Ant Vespera']
+    : ['Ant Vespera'];
+  const match = files.find((file) =>
+    headers.some((header) => file.sections.some((section) => section.header === header))
+  );
   if (!match) {
-    return resolveCommuneAntiphonRefs(input, header);
+    return resolveCommuneAntiphonRefs(
+      input,
+      input.hour === 'lauds' ? 'Ant Laudes' : 'Ant Vespera'
+    );
+  }
+
+  const header = headers.find((candidate) =>
+    match.sections.some((section) => section.header === candidate)
+  );
+  if (!header) {
+    return [];
   }
 
   return Array.from({ length: 5 }, (_, index) => ({

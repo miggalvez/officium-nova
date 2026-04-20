@@ -554,8 +554,8 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
             'Post tríduum invenérunt Jesum in templo sedéntem in médio doctórum, audiéntem illos, et interrogántem eos.'
           ],
           vespers: [
-            'Jacob autem * génuit Joseph virum Maríæ; de qua natus est Jesus, qui vocátur Christus.',
-            'Jacob autem génuit Joseph virum Maríæ; de qua natus est Jesus, qui vocátur Christus.'
+            'Post tríduum * invenérunt Jesum in templo sedéntem in médio doctórum, audiéntem illos, et interrogántem eos.',
+            'Post tríduum invenérunt Jesum in templo sedéntem in médio doctórum, audiéntem illos, et interrogántem eos.'
           ]
         }
       ]

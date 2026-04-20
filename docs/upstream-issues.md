@@ -162,6 +162,100 @@ shows the source-backed January substitution.
 | Rubrics 1960 - 1960 | 2024-01-13 | Sext | `318cf47a` |
 | Rubrics 1960 - 1960 | 2024-01-13 | None | `318cf47a` |
 
+### 2026-04-19 — Reduced 1955 January minor Hours fall back to weekday psalter antiphons in the Perl render surface
+
+**Classification.** `perl-bug`
+
+**Summary.** Under `Reduced - 1955`, the January `1` and `13`
+minor-Hour rows are now source-backed on the Officium Novum side: the
+winning office files explicitly carry `Antiphonas Horas`, so the lead
+minor-Hour antiphons come from the office's own `Ant Laudes` selectors.
+The legacy Perl comparison surface instead falls back to the weekday
+psalter antiphons (`Ínnocens mánibus`, `Illuminátio mea`, `Exaltáre`,
+etc.).
+
+**Primary source.**
+
+- `upstream/web/www/horas/Latin/Sancti/01-01.txt:7-20`
+- `upstream/web/www/horas/Latin/Sancti/12-25.txt:1-6`
+- `upstream/web/www/horas/Latin/Sancti/01-13.txt:1-20`
+- `upstream/web/www/horas/Latin/Sancti/01-06.txt:4-20`
+- `upstream/web/www/horas/Help/Rubrics/1955.txt:141-147`
+- `docs/file-format-specification.md:638`
+
+These sources establish that:
+
+- Jan `1` remains a Christmas-octave office via `ex Sancti/12-25`.
+- Jan `13` is said "as at present on the Octave of the Epiphany" and
+  inherits Epiphany via `ex Sancti/01-06`.
+- `Antiphonas Horas` means the office's proper antiphons govern the
+  Hours, so the lead antiphon at Prime / Terce / Sext / None stays with
+  the office instead of falling back to the weekday psalter.
+
+**Reproduction.**
+Run:
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Reduced - 1955"
+```
+
+Then inspect the January `1` and `13` Prime / Terce / Sext / None rows
+in `packages/compositor/test/divergence/reduced-1955-2024.md`. The Perl
+side shows weekday psalter antiphons, while the compositor shows the
+source-backed office antiphons selected through `Antiphonas Horas`.
+
+**Affected stable divergence-row keys.**
+
+| Policy | Date | Hour | Row key suffix |
+|---|---|---|---|
+| Reduced - 1955 | 2024-01-01 | Prime | `52bc4c6c` |
+| Reduced - 1955 | 2024-01-01 | Terce | `5f5913ea` |
+| Reduced - 1955 | 2024-01-01 | Sext | `9d5ea204` |
+| Reduced - 1955 | 2024-01-01 | None | `477e6920` |
+| Reduced - 1955 | 2024-01-13 | Prime | `cd271387` |
+| Reduced - 1955 | 2024-01-13 | Terce | `766b1f47` |
+| Reduced - 1955 | 2024-01-13 | Sext | `ab7f4509` |
+| Reduced - 1955 | 2024-01-13 | None | `b32a46de` |
+
+### 2026-04-19 — Rubrics 1960 Jan 6 Vespers is switched to Holy Family in the Perl render surface
+
+**Classification.** `perl-bug`
+
+**Summary.** Under `Rubrics 1960 - 1960`, Jan `6` Vespers should remain
+with Epiphany's own antiphons. Officium Novum now keeps
+`Ante lucíferum génitus...` because the higher-class Epiphany office
+prevails in concurrence. The legacy Perl comparison surface instead
+switches to Holy Family's first-Vespers antiphon `Jacob autem...`.
+
+**Primary source.**
+
+- `upstream/web/www/horas/Help/Rubrics/General Rubrics.html:74-82, 465-469`
+- `upstream/web/www/horas/Help/Rubrics/Tables 1960.txt:49, 75-79, 118-121`
+- `upstream/web/www/horas/Latin/Sancti/01-06.txt:1-18`
+
+These sources establish that Epiphany is a feast of the 1st class while
+Holy Family is a feast of the 2nd class, and in concurrence the Vespers
+of the higher-class office prevail.
+
+**Reproduction.**
+Run:
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Rubrics 1960 - 1960"
+```
+
+Then inspect the Jan `6` Vespers row in
+`packages/compositor/test/divergence/rubrics-1960-2024.md`. The Perl
+side shows Holy Family's first-Vespers antiphon, while the compositor
+shows Epiphany's own `Ant Vespera` as required by the 1960 concurrence
+rules.
+
+**Affected stable divergence-row keys.**
+
+| Policy | Date | Hour | Row key suffix |
+|---|---|---|---|
+| Rubrics 1960 - 1960 | 2024-01-06 | Vespers | `3965f59d` |
+
 ## See also
 
 - [ADR-011 — Phase 3 divergence adjudication](./adr/011-phase-3-divergence-adjudication.md)

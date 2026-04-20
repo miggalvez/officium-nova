@@ -35,6 +35,25 @@ $Pater noster
 #Conclusio
 `.trim();
 
+const SECOND_VESPERS_FILE = `
+[Rank]
+Holy Family;;Duplex II classis;;5;;
+
+[Ant Vespera]
+Jacob autem;;109
+Maria autem;;110
+Et venerunt;;111
+Videntes stellam;;112
+Invenerunt puerum;;113
+
+[Ant Vespera 3]
+Post triduum;;109
+Descendit cum eis;;110
+Proficiebat sapientia;;111
+Erat subditus;;112
+Et mater ejus;;113
+`.trim();
+
 function setup() {
   const corpus = new TestOfficeTextIndex();
   corpus.add('horas/Ordinarium/Vespera.txt', ORDINARIUM_VESPERA);
@@ -171,5 +190,87 @@ describe('structureVespers', () => {
     });
 
     expect(result.hour.directives).toContain('dirge-vespers');
+  });
+
+  it('prefers Ant Vespera 3 for second-Vespers psalmody when that proper exists', () => {
+    const { corpus, skeleton } = setup();
+    corpus.add('horas/Latin/Tempora/Epi1-0.txt', SECOND_VESPERS_FILE);
+    const celeb: Celebration = {
+      feastRef: { path: 'Tempora/Epi1-0', id: 'Tempora/Epi1-0', title: 'Epi1-0' },
+      rank: { name: 'II', classSymbol: 'II', weight: 800 },
+      source: 'temporal'
+    };
+    const celebrationRules: CelebrationRuleSet = {
+      ...rules(),
+      festumDomini: true
+    };
+    const hourRules = deriveHourRuleSet(celeb, celebrationRules, 'vespers');
+
+    const result = structureVespers({
+      skeleton,
+      celebration: celeb,
+      commemorations: [],
+      celebrationRules,
+      hourRules,
+      temporal: {
+        ...temporal('2024-01-07', 'Epi1-0', 0),
+        season: 'epiphanytide'
+      },
+      policy: rubrics1960Policy,
+      corpus,
+      __vespersSide: 'second'
+    } as Parameters<typeof structureVespers>[0]);
+
+    const psalmody = result.hour.slots.psalmody;
+    expect(psalmody?.kind).toBe('psalmody');
+    if (psalmody?.kind === 'psalmody') {
+      expect(psalmody.psalms[0]?.antiphonRef).toEqual({
+        path: 'horas/Latin/Tempora/Epi1-0',
+        section: 'Ant Vespera 3',
+        selector: '1'
+      });
+      expect(psalmody.psalms[4]?.antiphonRef?.section).toBe('Ant Vespera 3');
+    }
+  });
+
+  it('keeps Ant Vespera for first-Vespers psalmody when both sets exist', () => {
+    const { corpus, skeleton } = setup();
+    corpus.add('horas/Latin/Tempora/Epi1-0.txt', SECOND_VESPERS_FILE);
+    const celeb: Celebration = {
+      feastRef: { path: 'Tempora/Epi1-0', id: 'Tempora/Epi1-0', title: 'Epi1-0' },
+      rank: { name: 'II', classSymbol: 'II', weight: 800 },
+      source: 'temporal'
+    };
+    const celebrationRules: CelebrationRuleSet = {
+      ...rules(),
+      festumDomini: true
+    };
+    const hourRules = deriveHourRuleSet(celeb, celebrationRules, 'vespers');
+
+    const result = structureVespers({
+      skeleton,
+      celebration: celeb,
+      commemorations: [],
+      celebrationRules,
+      hourRules,
+      temporal: {
+        ...temporal('2024-01-06', 'Epi1-0', 0),
+        season: 'epiphanytide'
+      },
+      policy: rubrics1960Policy,
+      corpus,
+      __vespersSide: 'first'
+    } as Parameters<typeof structureVespers>[0]);
+
+    const psalmody = result.hour.slots.psalmody;
+    expect(psalmody?.kind).toBe('psalmody');
+    if (psalmody?.kind === 'psalmody') {
+      expect(psalmody.psalms[0]?.antiphonRef).toEqual({
+        path: 'horas/Latin/Tempora/Epi1-0',
+        section: 'Ant Vespera',
+        selector: '1'
+      });
+      expect(psalmody.psalms[4]?.antiphonRef?.section).toBe('Ant Vespera');
+    }
   });
 });

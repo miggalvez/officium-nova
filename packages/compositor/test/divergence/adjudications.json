@@ -525,6 +525,54 @@
     "resolvedAt": "2026-04-19",
     "commitSha": "pending"
   },
+  "Reduced - 1955/2024-01-01/None/477e6920": {
+    "policy": "Reduced - 1955",
+    "date": "2024-01-01",
+    "hour": "None",
+    "firstExpected": "Ant. Exsultáte, justi.",
+    "firstActual": "Ant. Ecce María génuit.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-01.txt:7-20 and upstream/web/www/horas/Latin/Sancti/12-25.txt:1-6 and docs/file-format-specification.md:638 — the Circumcision office explicitly carries `Antiphonas Horas` while remaining an `ex Sancti/12-25` Christmas-octave office, so the winning 1955 Phase 2 refs properly take the minor-hour lead antiphons from `Sancti/01-01:Ant Laudes`. The Perl comparison surface instead falls back to weekday psalter antiphons.",
+    "notes": "Representative entry for the Reduced 1955 Circumcision minor-hour antiphon-ownership family where the source-backed `Antiphonas Horas` rule keeps the office's own lead antiphon instead of the weekday psalter fallback.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "pending"
+  },
+  "Reduced - 1955/2024-01-01/Prime/52bc4c6c": {
+    "policy": "Reduced - 1955",
+    "date": "2024-01-01",
+    "hour": "Prime",
+    "firstExpected": "Ant. Ínnocens mánibus.",
+    "firstActual": "Ant. O admirábile commércium:",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-01.txt:7-20 and upstream/web/www/horas/Latin/Sancti/12-25.txt:1-6 and docs/file-format-specification.md:638 — the Circumcision office explicitly carries `Antiphonas Horas` while remaining an `ex Sancti/12-25` Christmas-octave office, so the winning 1955 Phase 2 refs properly take the minor-hour lead antiphons from `Sancti/01-01:Ant Laudes`. The Perl comparison surface instead falls back to weekday psalter antiphons.",
+    "notes": "Representative entry for the Reduced 1955 Circumcision minor-hour antiphon-ownership family where the source-backed `Antiphonas Horas` rule keeps the office's own lead antiphon instead of the weekday psalter fallback.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "pending"
+  },
+  "Reduced - 1955/2024-01-01/Sext/9d5ea204": {
+    "policy": "Reduced - 1955",
+    "date": "2024-01-01",
+    "hour": "Sext",
+    "firstExpected": "Ant. In tua justítia.",
+    "firstActual": "Ant. Rubum, quem víderat Móyses.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-01.txt:7-20 and upstream/web/www/horas/Latin/Sancti/12-25.txt:1-6 and docs/file-format-specification.md:638 — the Circumcision office explicitly carries `Antiphonas Horas` while remaining an `ex Sancti/12-25` Christmas-octave office, so the winning 1955 Phase 2 refs properly take the minor-hour lead antiphons from `Sancti/01-01:Ant Laudes`. The Perl comparison surface instead falls back to weekday psalter antiphons.",
+    "notes": "Representative entry for the Reduced 1955 Circumcision minor-hour antiphon-ownership family where the source-backed `Antiphonas Horas` rule keeps the office's own lead antiphon instead of the weekday psalter fallback.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "pending"
+  },
+  "Reduced - 1955/2024-01-01/Terce/5f5913ea": {
+    "policy": "Reduced - 1955",
+    "date": "2024-01-01",
+    "hour": "Terce",
+    "firstExpected": "Ant. Illuminátio mea.",
+    "firstActual": "Ant. Quando natus es.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-01.txt:7-20 and upstream/web/www/horas/Latin/Sancti/12-25.txt:1-6 and docs/file-format-specification.md:638 — the Circumcision office explicitly carries `Antiphonas Horas` while remaining an `ex Sancti/12-25` Christmas-octave office, so the winning 1955 Phase 2 refs properly take the minor-hour lead antiphons from `Sancti/01-01:Ant Laudes`. The Perl comparison surface instead falls back to weekday psalter antiphons.",
+    "notes": "Representative entry for the Reduced 1955 Circumcision minor-hour antiphon-ownership family where the source-backed `Antiphonas Horas` rule keeps the office's own lead antiphon instead of the weekday psalter fallback.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "pending"
+  },
   "Reduced - 1955/2024-01-06/Compline/5dc10d20": {
     "policy": "Reduced - 1955",
     "date": "2024-01-06",
@@ -570,6 +618,54 @@
     "class": "rendering-difference",
     "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Prayers.txt:52 — the source encodes the cross as `+++`. Perl renders that token as `✙︎`; the compositor currently normalizes it to `+`. This is a surface glyph-choice difference, not a text-selection error.",
     "notes": "Representative entry for the Reduced 1955 Compline cross-glyph family. Fan out to all matching 1955 Compline rows with the same first-divergence text.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "pending"
+  },
+  "Reduced - 1955/2024-01-13/None/b32a46de": {
+    "policy": "Reduced - 1955",
+    "date": "2024-01-13",
+    "hour": "None",
+    "firstExpected": "Ant. Ne tacúeris Deus.",
+    "firstActual": "Ant. Stella ista.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-13.txt:1-20 and upstream/web/www/horas/Latin/Sancti/01-06.txt:4-20 and upstream/web/www/horas/Help/Rubrics/1955.txt:141-147 and docs/file-format-specification.md:638 — the 1955 Baptism commemoration is said “as at present on the Octave of the Epiphany,” and `Sancti/01-13` therefore inherits Epiphany by `ex Sancti/01-06`, including `Antiphonas horas`. The winning 1955 Phase 2 refs correctly keep the lead minor-hour antiphons from the Epiphany office; Perl falls back to weekday psalter antiphons instead.",
+    "notes": "Representative entry for the Reduced 1955 Baptism minor-hour antiphon-ownership family where the source-backed `ex Sancti/01-06` and `Antiphonas horas` inheritance keeps the Epiphany lead antiphons instead of weekday psalter fallback.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "pending"
+  },
+  "Reduced - 1955/2024-01-13/Prime/cd271387": {
+    "policy": "Reduced - 1955",
+    "date": "2024-01-13",
+    "hour": "Prime",
+    "firstExpected": "Ant. Exaltáre, Dómine.",
+    "firstActual": "Ant. Ante lucíferum génitus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-13.txt:1-20 and upstream/web/www/horas/Latin/Sancti/01-06.txt:4-20 and upstream/web/www/horas/Help/Rubrics/1955.txt:141-147 and docs/file-format-specification.md:638 — the 1955 Baptism commemoration is said “as at present on the Octave of the Epiphany,” and `Sancti/01-13` therefore inherits Epiphany by `ex Sancti/01-06`, including `Antiphonas horas`. The winning 1955 Phase 2 refs correctly keep the lead minor-hour antiphons from the Epiphany office; Perl falls back to weekday psalter antiphons instead.",
+    "notes": "Representative entry for the Reduced 1955 Baptism minor-hour antiphon-ownership family where the source-backed `ex Sancti/01-06` and `Antiphonas horas` inheritance keeps the Epiphany lead antiphons instead of weekday psalter fallback.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "pending"
+  },
+  "Reduced - 1955/2024-01-13/Sext/ab7f4509": {
+    "policy": "Reduced - 1955",
+    "date": "2024-01-13",
+    "hour": "Sext",
+    "firstExpected": "Ant. Dómine, Deus meus.",
+    "firstActual": "Ant. Apértis thesáuris suis.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-13.txt:1-20 and upstream/web/www/horas/Latin/Sancti/01-06.txt:4-20 and upstream/web/www/horas/Help/Rubrics/1955.txt:141-147 and docs/file-format-specification.md:638 — the 1955 Baptism commemoration is said “as at present on the Octave of the Epiphany,” and `Sancti/01-13` therefore inherits Epiphany by `ex Sancti/01-06`, including `Antiphonas horas`. The winning 1955 Phase 2 refs correctly keep the lead minor-hour antiphons from the Epiphany office; Perl falls back to weekday psalter antiphons instead.",
+    "notes": "Representative entry for the Reduced 1955 Baptism minor-hour antiphon-ownership family where the source-backed `ex Sancti/01-06` and `Antiphonas horas` inheritance keeps the Epiphany lead antiphons instead of weekday psalter fallback.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "pending"
+  },
+  "Reduced - 1955/2024-01-13/Terce/766b1f47": {
+    "policy": "Reduced - 1955",
+    "date": "2024-01-13",
+    "hour": "Terce",
+    "firstExpected": "Ant. Clamor meus.",
+    "firstActual": "Ant. Venit lumen tuum.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-13.txt:1-20 and upstream/web/www/horas/Latin/Sancti/01-06.txt:4-20 and upstream/web/www/horas/Help/Rubrics/1955.txt:141-147 and docs/file-format-specification.md:638 — the 1955 Baptism commemoration is said “as at present on the Octave of the Epiphany,” and `Sancti/01-13` therefore inherits Epiphany by `ex Sancti/01-06`, including `Antiphonas horas`. The winning 1955 Phase 2 refs correctly keep the lead minor-hour antiphons from the Epiphany office; Perl falls back to weekday psalter antiphons instead.",
+    "notes": "Representative entry for the Reduced 1955 Baptism minor-hour antiphon-ownership family where the source-backed `ex Sancti/01-06` and `Antiphonas horas` inheritance keeps the Epiphany lead antiphons instead of weekday psalter fallback.",
     "resolvedAt": "2026-04-19",
     "commitSha": "pending"
   },
@@ -679,6 +775,18 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Rubricae.txt:129 — the corpus source carries `«Pater Noster»` with guillemets. Both Perl (strip) and compositor (preserve) are defensible renderings of the same source token; neither is liturgically wrong. Phase 3 §3h defers to the corpus author's formatting.",
     "notes": "Pattern affects every Compline row across every policy and date. This single entry is representative; the full row-key fan-out is a follow-up bulk-populate task (see ADJUDICATION_LOG.md).",
     "resolvedAt": "2026-04-18",
+    "commitSha": "pending"
+  },
+  "Rubrics 1960 - 1960/2024-01-06/Vespers/3965f59d": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-01-06",
+    "hour": "Vespers",
+    "firstExpected": "Ant. Jacob autem * génuit Joseph virum Maríæ; de qua natus est Jesus, qui vocátur Christus.",
+    "firstActual": "Ant. Ante lucíferum génitus, * et ante sǽcula, Dóminus Salvátor noster hódie mundo appáruit.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Help/Rubrics/General Rubrics.html:74-82, 465-469 and upstream/web/www/horas/Help/Rubrics/Tables 1960.txt:49, 75-79, 118-121 and upstream/web/www/horas/Latin/Sancti/01-06.txt:1-18 — under the 1960 concurrence rules, Epiphany is a feast of the 1st class while Holy Family is a feast of the 2nd class; in concurrence the Vespers of the higher class prevail. The winning Phase 2 refs therefore remain Epiphany’s own `Ant Vespera`, while the Perl comparison surface incorrectly switches to Holy Family’s first-Vespers antiphons.",
+    "notes": "Representative entry for the Rubrics 1960 Jan 6 Vespers concurrence family where the higher-class Epiphany office keeps Vespers ownership against Holy Family's first Vespers.",
+    "resolvedAt": "2026-04-19",
     "commitSha": "pending"
   },
   "Rubrics 1960 - 1960/2024-01-06/None/318cf47a": {

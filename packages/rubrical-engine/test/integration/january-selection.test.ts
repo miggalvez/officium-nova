@@ -52,13 +52,34 @@ describeIfUpstream('January selection regressions', () => {
       // the Phase 2 source refs that the policies choose.
 
       // 1955-01-01: Christmas Octave retains proper Sanctoral antiphons at
-      // Lauds and Vespers while using the festive Sunday psalm distribution.
+      // Lauds and Vespers, and the source-backed `Antiphonas horas` rule
+      // keeps proper antiphon ownership on the lead minor-hour slot.
       expectAntiphonRefs(psalmodyAt(reduced, '2024-01-01', 'lauds')).toEqual([
         'horas/Latin/Sancti/01-01:Ant Laudes:1',
         'horas/Latin/Sancti/01-01:Ant Laudes:2',
         'horas/Latin/Sancti/01-01:Ant Laudes:3',
         'horas/Latin/Sancti/01-01:Ant Laudes:4',
         'horas/Latin/Sancti/01-01:Ant Laudes:5'
+      ]);
+      expectAntiphonRefs(psalmodyAt(reduced, '2024-01-01', 'prime')).toEqual([
+        'horas/Latin/Sancti/01-01:Ant Laudes:1',
+        '-',
+        '-'
+      ]);
+      expectAntiphonRefs(psalmodyAt(reduced, '2024-01-01', 'terce')).toEqual([
+        'horas/Latin/Sancti/01-01:Ant Laudes:2',
+        '-',
+        '-'
+      ]);
+      expectAntiphonRefs(psalmodyAt(reduced, '2024-01-01', 'sext')).toEqual([
+        'horas/Latin/Sancti/01-01:Ant Laudes:3',
+        '-',
+        '-'
+      ]);
+      expectAntiphonRefs(psalmodyAt(reduced, '2024-01-01', 'none')).toEqual([
+        'horas/Latin/Sancti/01-01:Ant Laudes:5',
+        '-',
+        '-'
       ]);
       expectAntiphonRefs(psalmodyAt(reduced, '2024-01-01', 'vespers')).toEqual([
         'horas/Latin/Sancti/01-01:Ant Vespera:1',
@@ -68,9 +89,9 @@ describeIfUpstream('January selection regressions', () => {
         'horas/Latin/Sancti/01-01:Ant Vespera:5'
       ]);
 
-      // 1955-01-06 and 1955-01-13: Epiphany keeps its Sanctoral antiphons at
-      // both major hours, while Vespers still only overrides the fifth psalm
-      // slot to Psalm 116.
+      // 1955-01-06: Epiphany keeps its Sanctoral antiphons at both major
+      // hours, while concurrence leaves Jan 6 Vespers on Epiphany's own side
+      // and the fifth psalm slot alone is overridden to Psalm 116.
       expectAntiphonRefs(psalmodyAt(reduced, '2024-01-06', 'lauds')).toEqual([
         'horas/Latin/Sancti/01-06:Ant Laudes:1',
         'horas/Latin/Sancti/01-06:Ant Laudes:2',
@@ -114,20 +135,46 @@ describeIfUpstream('January selection regressions', () => {
         'horas/Latin/Psalterium/Psalmorum/Psalm116:__preamble:116'
       ]);
 
-      // 1955-01-07: Holy Family Vespers takes its own temporal proper
-      // antiphons from Epi1-0 rather than falling back to Epiphany's Sanctoral
-      // antiphons.
+      // 1955-01-07: Holy Family keeps its temporal office ownership at
+      // Vespers, and because this is the day's own second Vespers the psalmody
+      // antiphons come from `Ant Vespera 3`, not the first-Vespers set.
       expectAntiphonRefs(psalmodyAt(reduced, '2024-01-07', 'vespers')).toEqual([
-        'horas/Latin/Tempora/Epi1-0:Ant Vespera:1',
-        'horas/Latin/Tempora/Epi1-0:Ant Vespera:2',
-        'horas/Latin/Tempora/Epi1-0:Ant Vespera:3',
-        'horas/Latin/Tempora/Epi1-0:Ant Vespera:4',
-        'horas/Latin/Tempora/Epi1-0:Ant Vespera:5'
+        'horas/Latin/Tempora/Epi1-0:Ant Vespera 3:1',
+        'horas/Latin/Tempora/Epi1-0:Ant Vespera 3:2',
+        'horas/Latin/Tempora/Epi1-0:Ant Vespera 3:3',
+        'horas/Latin/Tempora/Epi1-0:Ant Vespera 3:4',
+        'horas/Latin/Tempora/Epi1-0:Ant Vespera 3:5'
+      ]);
+
+      // 1955-01-13: the Baptism office inherits Epiphany by `ex Sancti/01-06`,
+      // so proper antiphon ownership remains on the lead minor-hour slot as
+      // well as at Lauds and Vespers.
+      expectAntiphonRefs(psalmodyAt(reduced, '2024-01-13', 'prime')).toEqual([
+        'horas/Latin/Sancti/01-06:Ant Laudes:1',
+        '-',
+        '-'
+      ]);
+      expectAntiphonRefs(psalmodyAt(reduced, '2024-01-13', 'terce')).toEqual([
+        'horas/Latin/Sancti/01-06:Ant Laudes:2',
+        '-',
+        '-'
+      ]);
+      expectAntiphonRefs(psalmodyAt(reduced, '2024-01-13', 'sext')).toEqual([
+        'horas/Latin/Sancti/01-06:Ant Laudes:3',
+        '-',
+        '-'
+      ]);
+      expectAntiphonRefs(psalmodyAt(reduced, '2024-01-13', 'none')).toEqual([
+        'horas/Latin/Sancti/01-06:Ant Laudes:5',
+        '-',
+        '-'
       ]);
 
       // 1960-01-06: Epiphany minor hours use the Sunday/festal `Tridentinum`
       // tables from Psalmi minor, while proper-minor-hours replaces the lead
-      // antiphon with the feast's own `Ant Laudes` selector.
+      // antiphon with the feast's own `Ant Laudes` selector. Vespers office
+      // ownership stays with Epiphany itself because the current I-class feast
+      // outranks Holy Family's first Vespers at concurrence.
       expectAntiphonRefs(psalmodyAt(roman1960, '2024-01-01', 'lauds')).toEqual([
         'horas/Latin/Sancti/01-01:Ant Laudes:1',
         'horas/Latin/Sancti/01-01:Ant Laudes:2',
@@ -178,7 +225,8 @@ describeIfUpstream('January selection regressions', () => {
       ]);
 
       // 1960-01-07: Holy Family keeps its temporal proper antiphons at Lauds
-      // and Vespers, while the Sunday minor-hour psalm tables remain in force.
+      // and its own second-Vespers psalmody (`Ant Vespera 3`), while the
+      // Sunday minor-hour psalm tables remain in force.
       expectMinorHour(
         psalmodyAt(roman1960, '2024-01-07', 'prime'),
         'horas/Latin/Tempora/Epi1-0:Ant Laudes:1',
@@ -207,11 +255,11 @@ describeIfUpstream('January selection regressions', () => {
         'horas/Latin/Tempora/Epi1-0:Ant Laudes:5'
       ]);
       expectAntiphonRefs(psalmodyAt(roman1960, '2024-01-07', 'vespers')).toEqual([
-        'horas/Latin/Tempora/Epi1-0:Ant Vespera:1',
-        'horas/Latin/Tempora/Epi1-0:Ant Vespera:2',
-        'horas/Latin/Tempora/Epi1-0:Ant Vespera:3',
-        'horas/Latin/Tempora/Epi1-0:Ant Vespera:4',
-        'horas/Latin/Tempora/Epi1-0:Ant Vespera:5'
+        'horas/Latin/Tempora/Epi1-0:Ant Vespera 3:1',
+        'horas/Latin/Tempora/Epi1-0:Ant Vespera 3:2',
+        'horas/Latin/Tempora/Epi1-0:Ant Vespera 3:3',
+        'horas/Latin/Tempora/Epi1-0:Ant Vespera 3:4',
+        'horas/Latin/Tempora/Epi1-0:Ant Vespera 3:5'
       ]);
 
       // 1960-01-13: the post-Epiphany Sunday keeps Epiphany's Lauds/Vespers
@@ -251,9 +299,10 @@ describeIfUpstream('January selection regressions', () => {
         'horas/Latin/Sancti/01-06:Ant Vespera:5'
       ]);
 
-      // 1960-01-14: ordinary Sunday after Epiphany continues to use the
-      // Sunday Tridentinum minor-hour tables, including the split Psalm 118
-      // ranges that used to flatten away.
+      // 1960-01-14 checkpoint: ordinary Sunday after Epiphany continues to
+      // use the Sunday Tridentinum minor-hour tables, including the split
+      // Psalm 118 ranges and the `Psalmi minor:Tridentinum ... #antiphon`
+      // ownership that keeps this date out of the current Phase 2 fix path.
       expectMinorHour(
         psalmodyAt(roman1960, '2024-01-14', 'prime'),
         'horas/Latin/Psalterium/Psalmi/Psalmi minor:Tridentinum:Prima Dominica#antiphon',

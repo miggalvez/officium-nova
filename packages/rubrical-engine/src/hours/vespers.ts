@@ -40,7 +40,10 @@ export interface StructureVespersResult {
  * function, so the uniform §16 signature is preserved.
  */
 export function structureVespers(input: StructureVespersInput): StructureVespersResult {
-  const applied = applyRuleSet({ hour: 'vespers', ...input });
+  type InternalVespersInput = StructureVespersInput & {
+    readonly __vespersSide?: 'first' | 'second';
+  };
+  const applied = applyRuleSet({ hour: 'vespers', ...(input as InternalVespersInput) });
   const directives = directivesFromPolicy({ hour: 'vespers', ...input });
 
   return {

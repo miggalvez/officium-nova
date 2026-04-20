@@ -263,6 +263,103 @@ the ledger as `unadjudicated` code work. What remains after this batch
 is narrower: genuine Roman January antiphon / verse-shape / ordering
 families, not another unresolved doxology decision.
 
+### 2026-04-19 — Pattern: Roman January second-Vespers antiphon ownership (engine-bug, fixed)
+
+**Ledger signal.** `Reduced - 1955` and `Rubrics 1960 - 1960` both
+showed Jan `7` Vespers diverging immediately on the opening antiphon:
+Perl expected `Post tríduum...`, while the engine/compositor were still
+selecting `Jacob autem...`.
+
+**Root cause.** This was a real Phase 2 routing bug. The concurrence
+winner was already the day's own office (`Tempora/Epi1-0`), but the
+Vespers psalmody selection path treated every winning office as if it
+should read only `[Ant Vespera]`. For a day's own **second** Vespers,
+the Roman source file instead provides the psalmody antiphons under
+`[Ant Vespera 3]`.
+
+**Resolution.** Class `engine-bug`. Fixed in the rubrical engine by
+threading an internal Vespers-side signal from concurrence/hour
+structuring into `applyRuleSet`, then preferring `Ant Vespera 3` over
+`Ant Vespera` when the composed Vespers is the day's own second
+Vespers. First-Vespers selection stays on `Ant Vespera`.
+
+**Citation.** `upstream/web/www/horas/Latin/Tempora/Epi1-0.txt:11-21`.
+
+**Impact.** The Jan `7` Roman Vespers rows no longer diverge on antiphon
+ownership. Their first divergence now moves later to the psalm-heading /
+later Phase 3 surface, which confirms the Phase 2 routing seam is fixed
+rather than merely shifted.
+
+### 2026-04-19 — Pattern: Reduced 1955 January minor-hour antiphons fall back to weekday psalter in Perl (perl-bug)
+
+**Ledger signal.** `Reduced - 1955` Jan `1` and Jan `13` Prime / Terce /
+Sext / None still diverged on the opening antiphon after the January
+Roman routing pass. Perl expected weekday psalter antiphons such as
+`Ínnocens mánibus.` or `Exaltáre, Dómine.`, while the engine/compositor
+kept the proper office antiphons.
+
+**Root cause.** The remaining difference is not an engine bug. The
+winning `1955` Phase 2 refs are source-backed:
+
+- `Sancti/01-01` is still a Christmas-octave office via
+  `ex Sancti/12-25`, and its `[Rank]` section explicitly carries
+  `Antiphonas Horas`.
+- `Sancti/01-13` is explicitly said "as at present on the Octave of the
+  Epiphany" and inherits Epiphany via `ex Sancti/01-06`, which likewise
+  carries `Antiphonas horas`.
+
+Under the file-format contract, `Antiphonas horas` means the office's
+proper hour antiphons govern the minor Hours. Perl instead falls back to
+the weekday psalter antiphons on these 1955 January rows.
+
+**Resolution.** Class `perl-bug`. Added row-level adjudications for the
+eight stable Jan `1` / Jan `13` Reduced 1955 minor-hour keys rather than
+changing the engine away from the corpus-backed `Antiphonas horas`
+ownership.
+
+**Citation.**
+
+- `upstream/web/www/horas/Latin/Sancti/01-01.txt:7-20`
+- `upstream/web/www/horas/Latin/Sancti/12-25.txt:1-6`
+- `upstream/web/www/horas/Latin/Sancti/01-13.txt:1-20`
+- `upstream/web/www/horas/Latin/Sancti/01-06.txt:4-20`
+- `upstream/web/www/horas/Help/Rubrics/1955.txt:141-147`
+- `docs/file-format-specification.md:638`
+
+**Impact.** These rows now leave the "possible Phase 2 engine bug"
+bucket. The remaining January Reduced 1955 backlog is narrower and
+concentrated in later Phase 3 normalization / heading seams instead of
+office-ownership ambiguity.
+
+### 2026-04-19 — Pattern: Rubrics 1960 Jan 6 Vespers is switched to Holy Family in Perl (perl-bug)
+
+**Ledger signal.** `Rubrics 1960 - 1960` Jan `6` Vespers still diverged
+immediately on the opening antiphon after the January routing pass:
+Perl expected Holy Family's `Jacob autem...`, while the engine/compositor
+kept Epiphany's `Ante lucíferum génitus...`.
+
+**Root cause.** Source review showed the engine is already correct. Under
+the 1960 concurrence rules, Epiphany is a feast of the 1st class while
+Holy Family is a feast of the 2nd class. In concurrence, the Vespers of
+the higher-class office prevail, so Jan `6` Vespers stays with
+Epiphany's own `Ant Vespera` rather than switching to Holy Family's
+first Vespers.
+
+**Resolution.** Class `perl-bug`. Added a row-level adjudication for the
+stable Jan `6` Rubrics 1960 Vespers key instead of changing Phase 2
+concurrence or antiphon-decoration logic.
+
+**Citation.**
+
+- `upstream/web/www/horas/Help/Rubrics/General Rubrics.html:74-82, 465-469`
+- `upstream/web/www/horas/Help/Rubrics/Tables 1960.txt:49, 75-79, 118-121`
+- `upstream/web/www/horas/Latin/Sancti/01-06.txt:1-18`
+
+**Impact.** Jan `6` Roman Vespers is no longer treated as unresolved
+Phase 2 office-boundary ambiguity. The remaining January Rubrics 1960
+Vespers rows can now be triaged cleanly as either later Phase 3 surface
+issues or separate adjudication candidates.
+
 ### Pattern catalogue (pending per-pattern entries)
 
 The following patterns remain open after the fixes above and will each

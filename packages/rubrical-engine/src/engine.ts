@@ -210,6 +210,7 @@ export function createRubricalEngine(config: RubricalEngineConfig): RubricalEngi
     const celebrationRules = winner.celebrationRules;
     const hourRules = deriveHourRuleSet(celebration, celebrationRules, 'vespers');
     const overlay = summary.overlay;
+    const vespersSide = concurrence.winner === 'tomorrow' ? 'first' : 'second';
     const result = structureVespers({
       skeleton,
       celebration,
@@ -220,8 +221,9 @@ export function createRubricalEngine(config: RubricalEngineConfig): RubricalEngi
       policy: version.policy,
       corpus,
       version,
+      __vespersSide: vespersSide,
       ...(overlay ? { overlay } : {})
-    });
+    } as Parameters<typeof structureVespers>[0]);
     warnings.push(...result.warnings);
     return result.hour;
   }
