@@ -409,6 +409,119 @@ source-backed Day0 `Vespera` text without that marker.
 |---|---|---|---|
 | Rubrics 1960 - 1960 | 2024-01-14 | Vespers | `019555e4` |
 
+### 2026-04-19 — Roman Jan 1/7 Vespers skips Psalm 110 in the Perl render surface
+
+**Classification.** `perl-bug`
+
+**Summary.** Under both `Reduced - 1955` and `Rubrics 1960 - 1960`,
+Jan `1` and Jan `7` Vespers now first diverge at the second psalm
+heading. The compositor emits the source-backed `Psalmus 110 [2]`, while
+the Perl comparison surface skips ahead to `Psalmus 112 [2]`.
+
+**Primary source.**
+`upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:15-20`
+
+The Roman Sunday `Day0 Vespera` table explicitly lists:
+`109,110,111,112,113`.
+
+**Reproduction.**
+Run either:
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Reduced - 1955" --hour Vespers
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Rubrics 1960 - 1960" --hour Vespers
+```
+
+Then inspect the Jan `1` / `7` Vespers rows in the corresponding
+divergence ledger. Perl shows `Psalmus 112 [2]`; the compositor shows
+the source-backed second-slot heading `Psalmus 110 [2]`.
+
+**Affected stable divergence-row keys.**
+
+| Policy | Date | Hour | Row key suffix |
+|---|---|---|---|
+| Reduced - 1955 | 2024-01-01 | Vespers | `22de27ef` |
+| Reduced - 1955 | 2024-01-07 | Vespers | `22de27ef` |
+| Rubrics 1960 - 1960 | 2024-01-01 | Vespers | `22de27ef` |
+| Rubrics 1960 - 1960 | 2024-01-07 | Vespers | `22de27ef` |
+
+### 2026-04-19 — Roman Epiphany-octave Vespers loses the Psalm 116 override in the Perl render surface
+
+**Classification.** `perl-bug`
+
+**Summary.** `Reduced - 1955` Jan `6/13` Vespers and `Rubrics 1960 -
+1960` Jan `13` Vespers now first diverge at the fifth psalm heading.
+The compositor emits the source-backed `Psalmus 116 [5]`, while the
+Perl comparison surface falls back to `Psalmus 113 [5]`.
+
+**Primary source.**
+
+- `upstream/web/www/horas/Latin/Sancti/01-06.txt:4-11`
+- `upstream/web/www/horas/Latin/Sancti/01-13.txt:1-15`
+- `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:15-20`
+
+These sources establish that Epiphany explicitly sets `Psalm5
+Vespera=116`, and Jan `13` inherits the same rule set by
+`ex Sancti/01-06`.
+
+**Reproduction.**
+Run:
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --hour Vespers
+```
+
+Then inspect the affected Jan `6/13` Roman Vespers rows in the
+corresponding divergence ledgers. Perl shows the unspecialized Day0
+fifth heading `Psalmus 113 [5]`; the compositor keeps the source-backed
+override `Psalmus 116 [5]`.
+
+**Affected stable divergence-row keys.**
+
+| Policy | Date | Hour | Row key suffix |
+|---|---|---|---|
+| Reduced - 1955 | 2024-01-06 | Vespers | `39846534` |
+| Reduced - 1955 | 2024-01-13 | Vespers | `39846534` |
+| Rubrics 1960 - 1960 | 2024-01-13 | Vespers | `39846534` |
+
+### 2026-04-19 — Rubrics 1960 Jan 14 minor hours gain underscore separators around the short responsory in the Perl render surface
+
+**Classification.** `perl-bug`
+
+**Summary.** After the Jan `14` `Rubrics 1960` minor-hour fallback fix,
+`Terce`, `Sext`, and `None` now correctly emit the Sunday chapter,
+short responsory, versicle, and oration. The remaining first divergence
+is a literal `_` line that the Perl comparison surface inserts before
+the short responsory. The source-backed compositor output begins
+directly with the `R.br.` line.
+
+**Primary source.**
+`upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:1-20,36-50,66-80`
+
+These Sunday later-block sections contain the chapter, `R.br.` short
+responsory, and versicle directly. They do not contain underscore-only
+separator lines.
+
+**Reproduction.**
+Run:
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --date 2024-01-14 --hour Tertia
+pnpm -C packages/compositor compare:phase-3-perl -- --date 2024-01-14 --hour Sexta
+pnpm -C packages/compositor compare:phase-3-perl -- --date 2024-01-14 --hour Nona
+```
+
+Each row now first diverges on `expected="_"` versus the compositor's
+source-backed `R.br.` opening line.
+
+**Affected stable divergence-row keys.**
+
+| Policy | Date | Hour | Row key suffix |
+|---|---|---|---|
+| Rubrics 1960 - 1960 | 2024-01-14 | Terce | `89c6190b` |
+| Rubrics 1960 - 1960 | 2024-01-14 | Sext | `bc17de3d` |
+| Rubrics 1960 - 1960 | 2024-01-14 | None | `4a1aadd8` |
+
 ## See also
 
 - [ADR-011 — Phase 3 divergence adjudication](./adr/011-phase-3-divergence-adjudication.md)

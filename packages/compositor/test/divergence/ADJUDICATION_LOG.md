@@ -472,6 +472,90 @@ Phase 2 office-boundary ambiguity. The remaining January Rubrics 1960
 Vespers rows can now be triaged cleanly as either later Phase 3 surface
 issues or separate adjudication candidates.
 
+### 2026-04-19 — Pattern: Roman Jan 1/7 Vespers second psalm remains Psalm 110 (perl-bug)
+
+**Ledger signal.** Under both `Reduced - 1955` and
+`Rubrics 1960 - 1960`, Jan `1` and Jan `7` Vespers still diverged at
+the second psalm heading after the later-block checkpoint. Perl expected
+`Psalmus 112 [2]`, while the compositor emitted `Psalmus 110 [2]`.
+
+**Root cause.** The Phase 2 seam was already correct. The Roman Sunday
+`Day0 Vespera` table in `Psalmi major.txt` explicitly lists the psalm
+order `109,110,111,112,113`. The current composed output therefore
+correctly reopens the second antiphon and heads the next psalm as
+`Psalmus 110 [2]`. Perl skips ahead to Psalm `112`, which is the fourth
+entry in the same source table, not the second.
+
+**Resolution.** Class `perl-bug`. Added representative row-level
+adjudications for the stable key-hash `22de27ef` under both Roman
+policies, then fanned them out across the matching Jan `1/7` Vespers
+rows.
+
+**Citation.** `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:15-20`.
+
+**Impact.** The shared Roman Vespers Jan `1/7` rows leave the
+"maybe-wrapper, maybe-routing" bucket. What remains in January Vespers
+is now narrower: the fifth-psalm override family and later
+continuation-marker surfaces.
+
+### 2026-04-19 — Pattern: Roman Epiphany-octave Vespers fifth psalm remains Psalm 116 (perl-bug)
+
+**Ledger signal.** `Reduced - 1955` Jan `6/13` Vespers and
+`Rubrics 1960 - 1960` Jan `13` Vespers still first diverged at the
+fifth psalm heading after the later-block checkpoint. Perl expected
+`Psalmus 113 [5]`, while the compositor emitted `Psalmus 116 [5]`.
+
+**Root cause.** This is not a Phase 2 routing bug. `Sancti/01-06.txt`
+explicitly sets `Psalm5 Vespera=116`; `Sancti/01-13.txt` inherits that
+Epiphany rule set by `ex Sancti/01-06`. The current Roman Vespers
+summaries therefore correctly keep Psalm `116` in the fifth slot rather
+than the Day0 default Psalm `113`. Perl falls back to the unspecialized
+Day0 heading.
+
+**Resolution.** Class `perl-bug`. Added representative row-level
+adjudications for stable key-hash `39846534` under `Reduced - 1955` and
+`Rubrics 1960 - 1960`, then fanned out the matching `1955` Jan `13`
+row.
+
+**Citation.**
+
+- `upstream/web/www/horas/Latin/Sancti/01-06.txt:4-11`
+- `upstream/web/www/horas/Latin/Sancti/01-13.txt:1-15`
+- `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:15-20`
+
+**Impact.** The shared Roman fifth-psalm Vespers family is now removed
+from the unadjudicated backlog. The remaining January Vespers work is no
+longer blocked on "is Psalm 116 real?" uncertainty.
+
+### 2026-04-19 — Pattern: Rubrics 1960 Jan 14 minor-hour short responsories gain underscore separators in Perl (perl-bug)
+
+**Ledger signal.** After the Jan `14` `Rubrics 1960` Phase 2 fallback
+fix restored `chapter → responsory → versicle → oration` at `Terce`,
+`Sext`, and `None`, the first divergence moved later. Perl now expects a
+literal `_` line immediately before each short responsory, while the
+compositor emits the source-backed `R.br.` opening line.
+
+**Root cause.** The restored Phase 2 refs are correct. `Minor
+Special.txt` contains the Sunday later-block sections directly:
+chapter, `R.br.` short responsory, versicle, and no underscore-only
+separator lines. The compositor now emits that source-backed stream.
+Perl inserts `_` separator lines around the short responsory even though
+the source section has none.
+
+**Resolution.** Class `perl-bug`. Added row-level adjudications for the
+three stable Jan `14` Rubrics 1960 key-hashes:
+
+- `89c6190b` — `Terce`
+- `bc17de3d` — `Sext`
+- `4a1aadd8` — `None`
+
+**Citation.** `upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:1-20, 36-50, 66-80`.
+
+**Impact.** The Jan `14` `1960` minor-hour checkpoint is now closed as
+far as this tranche is concerned. The code fix was the Phase 2 fallback;
+the remaining underscore lines are source-backed adjudication work, not
+another later-block structuring bug.
+
 ### Pattern catalogue (pending per-pattern entries)
 
 The following patterns remain open after the fixes above and will each

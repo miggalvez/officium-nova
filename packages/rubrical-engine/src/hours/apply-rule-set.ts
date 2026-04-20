@@ -139,7 +139,11 @@ function resolveSlot(
       ? { kind: 'single-ref', ref: refs[0]! }
       : { kind: 'ordered-refs', refs };
   }
-  const ref = properRef ?? communeRef ?? ordinariumFallbackReference(input.skeleton, slot);
+  const ref =
+    properRef ??
+    communeRef ??
+    minorHourLaterBlockFallbackReference(input, slot.name) ??
+    ordinariumFallbackReference(input.skeleton, slot);
 
   if (!ref) {
     warnings.push({
@@ -560,6 +564,73 @@ function minorHourSpecialFallbackReference(
         path: 'horas/Latin/Psalterium/Special/Minor Special',
         section: 'Hymnus Nona'
       };
+    default:
+      return undefined;
+  }
+}
+
+function minorHourLaterBlockFallbackReference(
+  input: ApplyRuleSetInput,
+  slot: SlotName
+): TextReference | undefined {
+  // Jan 14 1960 checkpoint: Sunday ordinary post-psalmody minor-hour text
+  // does not live on `Ordinarium/Minor#Capitulum Responsorium Versus`; that
+  // heading is only the empty wrapper. When no office file supplies these
+  // slots, Rubrics 1960 falls back to the Sunday later-block sections in
+  // `Psalterium/Special/Minor Special`.
+  if (input.policy.name !== 'rubrics-1960' || input.temporal.dayOfWeek !== 0) {
+    return undefined;
+  }
+
+  const section = minorHourLaterBlockFallbackSection(input.hour, slot);
+  if (!section) {
+    return undefined;
+  }
+
+  return {
+    path: 'horas/Latin/Psalterium/Special/Minor Special',
+    section
+  };
+}
+
+function minorHourLaterBlockFallbackSection(
+  hour: HourName,
+  slot: SlotName
+): string | undefined {
+  switch (hour) {
+    case 'terce':
+      switch (slot) {
+        case 'chapter':
+          return 'Dominica Tertia';
+        case 'responsory':
+          return 'Responsory breve Dominica Tertia';
+        case 'versicle':
+          return 'Versum Dominica Tertia';
+        default:
+          return undefined;
+      }
+    case 'sext':
+      switch (slot) {
+        case 'chapter':
+          return 'Dominica Sexta';
+        case 'responsory':
+          return 'Responsory breve Dominica Sexta';
+        case 'versicle':
+          return 'Versum Dominica Sexta';
+        default:
+          return undefined;
+      }
+    case 'none':
+      switch (slot) {
+        case 'chapter':
+          return 'Dominica Nona';
+        case 'responsory':
+          return 'Responsory breve Dominica Nona';
+        case 'versicle':
+          return 'Versum Dominica Nona';
+        default:
+          return undefined;
+      }
     default:
       return undefined;
   }

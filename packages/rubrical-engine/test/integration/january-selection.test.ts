@@ -88,6 +88,13 @@ describeIfUpstream('January selection regressions', () => {
         'horas/Latin/Sancti/01-01:Ant Vespera:4',
         'horas/Latin/Sancti/01-01:Ant Vespera:5'
       ]);
+      expectPsalmRefs(psalmodyAt(reduced, '2024-01-01', 'vespers')).toEqual([
+        'horas/Latin/Psalterium/Psalmi/Psalmi major:Day0 Vespera:1',
+        'horas/Latin/Psalterium/Psalmi/Psalmi major:Day0 Vespera:2',
+        'horas/Latin/Psalterium/Psalmi/Psalmi major:Day0 Vespera:3',
+        'horas/Latin/Psalterium/Psalmi/Psalmi major:Day0 Vespera:4',
+        'horas/Latin/Psalterium/Psalmi/Psalmi major:Day0 Vespera:5'
+      ]);
 
       // 1955-01-06: Epiphany keeps its Sanctoral antiphons at both major
       // hours, while concurrence leaves Jan 6 Vespers on Epiphany's own side
@@ -145,6 +152,13 @@ describeIfUpstream('January selection regressions', () => {
         'horas/Latin/Tempora/Epi1-0:Ant Vespera 3:4',
         'horas/Latin/Tempora/Epi1-0:Ant Vespera 3:5'
       ]);
+      expectPsalmRefs(psalmodyAt(reduced, '2024-01-07', 'vespers')).toEqual([
+        'horas/Latin/Psalterium/Psalmi/Psalmi major:Day0 Vespera:1',
+        'horas/Latin/Psalterium/Psalmi/Psalmi major:Day0 Vespera:2',
+        'horas/Latin/Psalterium/Psalmi/Psalmi major:Day0 Vespera:3',
+        'horas/Latin/Psalterium/Psalmi/Psalmi major:Day0 Vespera:4',
+        'horas/Latin/Psalterium/Psalmi/Psalmi major:Day0 Vespera:5'
+      ]);
 
       // 1955-01-13: the Baptism office inherits Epiphany by `ex Sancti/01-06`,
       // so proper antiphon ownership remains on the lead minor-hour slot as
@@ -189,6 +203,13 @@ describeIfUpstream('January selection regressions', () => {
         'horas/Latin/Sancti/01-01:Ant Vespera:4',
         'horas/Latin/Sancti/01-01:Ant Vespera:5'
       ]);
+      expectPsalmRefs(psalmodyAt(roman1960, '2024-01-01', 'vespers')).toEqual([
+        'horas/Latin/Psalterium/Psalmi/Psalmi major:Day0 Vespera:1',
+        'horas/Latin/Psalterium/Psalmi/Psalmi major:Day0 Vespera:2',
+        'horas/Latin/Psalterium/Psalmi/Psalmi major:Day0 Vespera:3',
+        'horas/Latin/Psalterium/Psalmi/Psalmi major:Day0 Vespera:4',
+        'horas/Latin/Psalterium/Psalmi/Psalmi major:Day0 Vespera:5'
+      ]);
       expectMinorHour(
         psalmodyAt(roman1960, '2024-01-06', 'prime'),
         'horas/Latin/Sancti/01-06:Ant Laudes:1',
@@ -222,6 +243,13 @@ describeIfUpstream('January selection regressions', () => {
         'horas/Latin/Sancti/01-06:Ant Vespera:3',
         'horas/Latin/Sancti/01-06:Ant Vespera:4',
         'horas/Latin/Sancti/01-06:Ant Vespera:5'
+      ]);
+      expectPsalmRefs(psalmodyAt(roman1960, '2024-01-06', 'vespers')).toEqual([
+        'horas/Latin/Psalterium/Psalmi/Psalmi major:Day0 Vespera:1',
+        'horas/Latin/Psalterium/Psalmi/Psalmi major:Day0 Vespera:2',
+        'horas/Latin/Psalterium/Psalmi/Psalmi major:Day0 Vespera:3',
+        'horas/Latin/Psalterium/Psalmi/Psalmi major:Day0 Vespera:4',
+        'horas/Latin/Psalterium/Psalmorum/Psalm116:__preamble:116'
       ]);
 
       // 1960-01-07: Holy Family keeps its temporal proper antiphons at Lauds
@@ -261,6 +289,13 @@ describeIfUpstream('January selection regressions', () => {
         'horas/Latin/Tempora/Epi1-0:Ant Vespera 3:4',
         'horas/Latin/Tempora/Epi1-0:Ant Vespera 3:5'
       ]);
+      expectPsalmRefs(psalmodyAt(roman1960, '2024-01-07', 'vespers')).toEqual([
+        'horas/Latin/Psalterium/Psalmi/Psalmi major:Day0 Vespera:1',
+        'horas/Latin/Psalterium/Psalmi/Psalmi major:Day0 Vespera:2',
+        'horas/Latin/Psalterium/Psalmi/Psalmi major:Day0 Vespera:3',
+        'horas/Latin/Psalterium/Psalmi/Psalmi major:Day0 Vespera:4',
+        'horas/Latin/Psalterium/Psalmi/Psalmi major:Day0 Vespera:5'
+      ]);
 
       // 1960-01-13: the post-Epiphany Sunday keeps Epiphany's Lauds/Vespers
       // proper antiphons and the festal minor-hour Tridentinum tables.
@@ -298,11 +333,20 @@ describeIfUpstream('January selection regressions', () => {
         'horas/Latin/Sancti/01-06:Ant Vespera:4',
         'horas/Latin/Sancti/01-06:Ant Vespera:5'
       ]);
+      expectPsalmRefs(psalmodyAt(roman1960, '2024-01-13', 'vespers')).toEqual([
+        'horas/Latin/Psalterium/Psalmi/Psalmi major:Day0 Vespera:1',
+        'horas/Latin/Psalterium/Psalmi/Psalmi major:Day0 Vespera:2',
+        'horas/Latin/Psalterium/Psalmi/Psalmi major:Day0 Vespera:3',
+        'horas/Latin/Psalterium/Psalmi/Psalmi major:Day0 Vespera:4',
+        'horas/Latin/Psalterium/Psalmorum/Psalm116:__preamble:116'
+      ]);
 
       // 1960-01-14 checkpoint: ordinary Sunday after Epiphany continues to
       // use the Sunday Tridentinum minor-hour tables, including the split
       // Psalm 118 ranges and the `Psalmi minor:Tridentinum ... #antiphon`
-      // ownership that keeps this date out of the current Phase 2 fix path.
+      // ownership that keeps this date out of the current Phase 2 antiphon
+      // fix path. The later block after psalmody still comes from Minor
+      // Special on Sundays, not from the empty Ordinarium compound heading.
       expectMinorHour(
         psalmodyAt(roman1960, '2024-01-14', 'prime'),
         'horas/Latin/Psalterium/Psalmi/Psalmi minor:Tridentinum:Prima Dominica#antiphon',
@@ -322,6 +366,54 @@ describeIfUpstream('January selection regressions', () => {
         psalmodyAt(roman1960, '2024-01-14', 'none'),
         'horas/Latin/Psalterium/Psalmi/Psalmi minor:Tridentinum:Nona Dominica#antiphon',
         ['118(129-144)', '118(145-160)', '118(161-176)']
+      );
+      expectSingleRef(
+        slotAt(roman1960, '2024-01-14', 'terce', 'chapter'),
+        'horas/Latin/Psalterium/Special/Minor Special:Dominica Tertia'
+      );
+      expectSingleRef(
+        slotAt(roman1960, '2024-01-14', 'terce', 'responsory'),
+        'horas/Latin/Psalterium/Special/Minor Special:Responsory breve Dominica Tertia'
+      );
+      expectSingleRef(
+        slotAt(roman1960, '2024-01-14', 'terce', 'versicle'),
+        'horas/Latin/Psalterium/Special/Minor Special:Versum Dominica Tertia'
+      );
+      expectSingleRef(
+        slotAt(roman1960, '2024-01-14', 'terce', 'oration'),
+        'horas/Latin/Tempora/Epi2-0:Oratio'
+      );
+      expectSingleRef(
+        slotAt(roman1960, '2024-01-14', 'sext', 'chapter'),
+        'horas/Latin/Psalterium/Special/Minor Special:Dominica Sexta'
+      );
+      expectSingleRef(
+        slotAt(roman1960, '2024-01-14', 'sext', 'responsory'),
+        'horas/Latin/Psalterium/Special/Minor Special:Responsory breve Dominica Sexta'
+      );
+      expectSingleRef(
+        slotAt(roman1960, '2024-01-14', 'sext', 'versicle'),
+        'horas/Latin/Psalterium/Special/Minor Special:Versum Dominica Sexta'
+      );
+      expectSingleRef(
+        slotAt(roman1960, '2024-01-14', 'sext', 'oration'),
+        'horas/Latin/Tempora/Epi2-0:Oratio'
+      );
+      expectSingleRef(
+        slotAt(roman1960, '2024-01-14', 'none', 'chapter'),
+        'horas/Latin/Psalterium/Special/Minor Special:Dominica Nona'
+      );
+      expectSingleRef(
+        slotAt(roman1960, '2024-01-14', 'none', 'responsory'),
+        'horas/Latin/Psalterium/Special/Minor Special:Responsory breve Dominica Nona'
+      );
+      expectSingleRef(
+        slotAt(roman1960, '2024-01-14', 'none', 'versicle'),
+        'horas/Latin/Psalterium/Special/Minor Special:Versum Dominica Nona'
+      );
+      expectSingleRef(
+        slotAt(roman1960, '2024-01-14', 'none', 'oration'),
+        'horas/Latin/Tempora/Epi2-0:Oratio'
       );
     },
     240_000
@@ -415,6 +507,15 @@ function psalmodyAt(
   return slot.psalms;
 }
 
+function slotAt(
+  engine: RubricalEngine,
+  date: string,
+  hour: 'terce' | 'sext' | 'none',
+  slot: 'chapter' | 'responsory' | 'versicle' | 'oration'
+) {
+  return engine.resolveDayOfficeSummary(date).hours[hour]?.slots[slot];
+}
+
 function expectAntiphonRefs(psalms: readonly PsalmAssignment[]) {
   return expect(
     psalms.map((entry) =>
@@ -434,6 +535,19 @@ function expectPsalmRefs(psalms: readonly PsalmAssignment[]) {
         }`
     )
   );
+}
+
+function expectSingleRef(
+  slot: ReturnType<typeof slotAt>,
+  expected: string
+) {
+  expect(slot?.kind).toBe('single-ref');
+  if (!slot || slot.kind !== 'single-ref') {
+    return;
+  }
+  expect(
+    `${slot.ref.path}:${slot.ref.section}${slot.ref.selector ? `:${slot.ref.selector}` : ''}`
+  ).toBe(expected);
 }
 
 function expectMinorHour(

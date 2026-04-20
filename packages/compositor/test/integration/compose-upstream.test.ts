@@ -744,6 +744,107 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
       }
     }
   }, 240_000);
+
+  it('keeps January Roman Vespers later-block headings on the source-backed Day0 and Psalm116 refs', async () => {
+    for (const version of ['Reduced - 1955', 'Rubrics 1960 - 1960'] as const) {
+      const { engine, resolvedCorpus } = await createHarness(version);
+
+      for (const [date, sliceStart, expected] of [
+        [
+          '2024-01-01',
+          12,
+          [
+            'O admirábile commércium: Creátor géneris humáni, animátum corpus sumens, de Vírgine nasci dignátus est; et procédens homo sine sémine, largítus est nobis suam Deitátem.',
+            'Quando natus es * ineffabíliter ex Vírgine, tunc implétæ sunt Scriptúræ: sicut plúvia in vellus descendísti, ut salvum fáceres genus humánum: te laudámus, Deus noster.',
+            'Psalmus 110 [2]'
+          ]
+        ],
+        [
+          '2024-01-07',
+          12,
+          [
+            'Post tríduum invenérunt Jesum in templo sedéntem in médio doctórum, audiéntem illos, et interrogántem eos.',
+            'Dixit mater Jesu * ad illum: Fili, quid fecísti nobis sic? Ecce pater tuus et ego doléntes quærebámus te.',
+            'Psalmus 110 [2]'
+          ]
+        ],
+        [
+          '2024-01-06',
+          54,
+          [
+            'Mária et flúmina benedícite Dómino: hymnum dícite fontes Dómino, allelúja.',
+            'Stella ista * sicut flamma corúscat, et Regem regum Deum demónstrat: Magi eam vidérunt, et magno Regi múnera obtulérunt.',
+            'Psalmus 116 [5]'
+          ]
+        ],
+        [
+          '2024-01-13',
+          54,
+          [
+            'Mária et flúmina benedícite Dómino: hymnum dícite fontes Dómino, allelúja.',
+            'Stella ista * sicut flamma corúscat, et Regem regum Deum demónstrat: Magi eam vidérunt, et magno Regi múnera obtulérunt.',
+            'Psalmus 116 [5]'
+          ]
+        ]
+      ] as const) {
+        const summary = engine.resolveDayOfficeSummary(date);
+        const composed = composeHour({
+          corpus: resolvedCorpus.index,
+          summary,
+          version: engine.version,
+          hour: 'vespers',
+          options: { languages: ['Latin'] }
+        });
+
+        expect(
+          psalmodyTexts(composed).slice(sliceStart, sliceStart + expected.length).map(normalizeLatin),
+          `${version} ${date} later-block Vespers boundary`
+        ).toEqual(expected.map(normalizeLatin));
+      }
+    }
+  }, 240_000);
+
+  it('keeps Jan 14 1960 minor hours in chapter-responsory-versicle-oration order after psalmody', async () => {
+    const { engine, resolvedCorpus } = await createHarness('Rubrics 1960 - 1960');
+    const summary = engine.resolveDayOfficeSummary('2024-01-14');
+
+    for (const [hour, chapterCitation, versicleOpening] of [
+      ['terce', '1 Joann. 4:16', 'Ego dixi: Dómine, miserére mei.'],
+      ['sext', 'Gal 6:2', 'Dóminus regit me, et nihil mihi déerit.'],
+      ['none', '1 Cor 6:20', 'Ab occúltis meis munda me, Dómine.']
+    ] as const) {
+      const composed = composeHour({
+        corpus: resolvedCorpus.index,
+        summary,
+        version: engine.version,
+        hour,
+        options: { languages: ['Latin'] }
+      });
+
+      const sectionOrder = composed.sections.map((section) => section.slot);
+      const psalmodyIndex = sectionOrder.indexOf('psalmody');
+      expect(psalmodyIndex, `${hour} is missing psalmody`).toBeGreaterThanOrEqual(0);
+      expect(
+        sectionOrder.slice(psalmodyIndex, psalmodyIndex + 5),
+        `${hour} later-block order`
+      ).toEqual(['psalmody', 'chapter', 'responsory', 'versicle', 'oration']);
+
+      expect(
+        sectionTexts(composed, 'chapter')[0]?.trim(),
+        `${hour} chapter citation`
+      ).toBe(chapterCitation);
+      expect(
+        sectionTexts(composed, 'versicle')[0]?.trim(),
+        `${hour} versicle opening`
+      ).toBe(versicleOpening);
+      expect(
+        sectionTexts(composed, 'oration')[0]?.trim(),
+        `${hour} oration opening`
+      ).toBe(
+        'Omnípotens sempitérne Deus, qui cæléstia simul et terréna moderáris: supplicatiónes pópuli tui cleménter exáudi; et pacem tuam nostris concéde tempóribus.'
+      );
+    }
+  }, 240_000);
 });
 
 function renderLatinText(line: { readonly texts: Record<string, readonly { readonly type: string; readonly value?: string }[]> }): string {
@@ -776,6 +877,23 @@ function psalmodyAntiphons(
   composed: ReturnType<typeof composeHour>
 ): readonly string[] {
   return psalmodyAntiphonLines(composed).map(renderLatinText);
+}
+
+function psalmodyTexts(
+  composed: ReturnType<typeof composeHour>
+): readonly string[] {
+  const psalmody = composed.sections.find((section) => section.slot === 'psalmody');
+  expect(psalmody, `${composed.hour} is missing the psalmody section`).toBeDefined();
+  return psalmody?.lines.map(renderLatinText).filter((line) => line !== '_') ?? [];
+}
+
+function sectionTexts(
+  composed: ReturnType<typeof composeHour>,
+  slot: 'chapter' | 'responsory' | 'versicle' | 'oration'
+): readonly string[] {
+  const section = composed.sections.find((candidate) => candidate.slot === slot);
+  expect(section, `${composed.hour} is missing the ${slot} section`).toBeDefined();
+  return section?.lines.map(renderLatinText).filter((line) => line !== '_') ?? [];
 }
 
 function psalmodyAntiphonLines(

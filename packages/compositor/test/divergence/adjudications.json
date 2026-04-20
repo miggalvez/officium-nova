@@ -585,6 +585,18 @@
     "resolvedAt": "2026-04-19",
     "commitSha": "pending"
   },
+  "Reduced - 1955/2024-01-01/Vespers/22de27ef": {
+    "policy": "Reduced - 1955",
+    "date": "2024-01-01",
+    "hour": "Vespers",
+    "firstExpected": "Psalmus 112 [2]",
+    "firstActual": "Psalmus 110 [2]",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:15-20 — the Roman Sunday `Day0 Vespera` table explicitly runs `109,110,111,112,113`, so the second emitted heading is source-backed `Psalmus 110 [2]`. The Perl comparison surface skips ahead to `Psalmus 112 [2]`.",
+    "notes": "Representative entry for the Reduced 1955 Roman January Vespers second-psalm heading family where the source-backed Day0 sequence keeps Psalm 110 in the second slot. Fan out to matching 1955 rows with the same first-divergence pair.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "pending"
+  },
   "Reduced - 1955/2024-01-06/Compline/5dc10d20": {
     "policy": "Reduced - 1955",
     "date": "2024-01-06",
@@ -606,6 +618,18 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm99.txt:3-5 — the psalm corpus explicitly encodes 99:3b as `Pópulus ejus, et oves páscuæ ejus: ‡ (4a) introíte portas ejus in confessióne, * átria ejus in hymnis: confitémini illi.` The compositor preserves that half-verse structure while removing the numeric carry marker; the Perl comparison surface flattens the same line to a single `*` split.",
     "notes": "Representative entry for the Reduced 1955 Lauds Psalm 99 half-verse family where the corpus keeps a `‡ ... *` structure and Perl flattens it to a single `*` boundary.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "pending"
+  },
+  "Reduced - 1955/2024-01-06/Vespers/39846534": {
+    "policy": "Reduced - 1955",
+    "date": "2024-01-06",
+    "hour": "Vespers",
+    "firstExpected": "Psalmus 113 [5]",
+    "firstActual": "Psalmus 116 [5]",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-06.txt:4-11 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:15-20 — the Epiphany rule set explicitly overrides the fifth Vespers psalm with `Psalm5 Vespera=116`, so the source-backed fifth heading is `Psalmus 116 [5]` rather than the Day0 default Psalm 113.",
+    "notes": "Representative entry for the Reduced 1955 Epiphany/Baptism Vespers fifth-psalm override family where the corpus-backed Rule section replaces the Day0 fifth slot with Psalm 116. Fan out to matching 1955 rows with the same first-divergence pair.",
     "resolvedAt": "2026-04-19",
     "commitSha": "pending"
   },
@@ -654,6 +678,18 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:218 — the `Tridentinum` Sunday Prime row explicitly lists `53,117,118(1-16),118(17-32)`. The compositor therefore keeps Psalm 53 ahead of Psalm 117 on Jan 14 Prime, while the Perl comparison surface skips directly to Psalm 117.",
     "notes": "Representative entry for the Roman Jan 14 Sunday Prime psalm-table family where the source-backed `Tridentinum` row begins with Psalm 53 before Psalm 117.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "pending"
+  },
+  "Reduced - 1955/2024-01-07/Vespers/22de27ef": {
+    "policy": "Reduced - 1955",
+    "date": "2024-01-07",
+    "hour": "Vespers",
+    "firstExpected": "Psalmus 112 [2]",
+    "firstActual": "Psalmus 110 [2]",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:15-20 — the Roman Sunday `Day0 Vespera` table explicitly runs `109,110,111,112,113`, so the second emitted heading is source-backed `Psalmus 110 [2]`. The Perl comparison surface skips ahead to `Psalmus 112 [2]`.",
+    "notes": "Representative entry for the Reduced 1955 Roman January Vespers second-psalm heading family where the source-backed Day0 sequence keeps Psalm 110 in the second slot. Fan out to matching 1955 rows with the same first-divergence pair.",
     "resolvedAt": "2026-04-19",
     "commitSha": "pending"
   },
@@ -726,6 +762,18 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Sancti/01-13.txt:1-20 and upstream/web/www/horas/Latin/Sancti/01-06.txt:4-20 and upstream/web/www/horas/Help/Rubrics/1955.txt:141-147 and docs/file-format-specification.md:638 — the 1955 Baptism commemoration is said “as at present on the Octave of the Epiphany,” and `Sancti/01-13` therefore inherits Epiphany by `ex Sancti/01-06`, including `Antiphonas horas`. The winning 1955 Phase 2 refs correctly keep the lead minor-hour antiphons from the Epiphany office; Perl falls back to weekday psalter antiphons instead.",
     "notes": "Representative entry for the Reduced 1955 Baptism minor-hour antiphon-ownership family where the source-backed `ex Sancti/01-06` and `Antiphonas horas` inheritance keeps the Epiphany lead antiphons instead of weekday psalter fallback.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "pending"
+  },
+  "Reduced - 1955/2024-01-13/Vespers/39846534": {
+    "policy": "Reduced - 1955",
+    "date": "2024-01-13",
+    "hour": "Vespers",
+    "firstExpected": "Psalmus 113 [5]",
+    "firstActual": "Psalmus 116 [5]",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-06.txt:4-11 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:15-20 — the Epiphany rule set explicitly overrides the fifth Vespers psalm with `Psalm5 Vespera=116`, so the source-backed fifth heading is `Psalmus 116 [5]` rather than the Day0 default Psalm 113.",
+    "notes": "Representative entry for the Reduced 1955 Epiphany/Baptism Vespers fifth-psalm override family where the corpus-backed Rule section replaces the Day0 fifth slot with Psalm 116. Fan out to matching 1955 rows with the same first-divergence pair.",
     "resolvedAt": "2026-04-19",
     "commitSha": "pending"
   },
@@ -909,6 +957,18 @@
     "resolvedAt": "2026-04-19",
     "commitSha": "pending"
   },
+  "Rubrics 1960 - 1960/2024-01-01/Vespers/22de27ef": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-01-01",
+    "hour": "Vespers",
+    "firstExpected": "Psalmus 112 [2]",
+    "firstActual": "Psalmus 110 [2]",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:15-20 — the Roman Sunday `Day0 Vespera` table explicitly runs `109,110,111,112,113`, so the second emitted heading is source-backed `Psalmus 110 [2]`. The Perl comparison surface skips ahead to `Psalmus 112 [2]`.",
+    "notes": "Representative entry for the Rubrics 1960 Roman January Vespers second-psalm heading family where the source-backed Day0 sequence keeps Psalm 110 in the second slot. Fan out to matching 1960 rows with the same first-divergence pair.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "pending"
+  },
   "Rubrics 1960 - 1960/2024-01-06/Compline/57de2841": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2024-01-06",
@@ -1077,6 +1137,18 @@
     "resolvedAt": "2026-04-19",
     "commitSha": "pending"
   },
+  "Rubrics 1960 - 1960/2024-01-07/Vespers/22de27ef": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-01-07",
+    "hour": "Vespers",
+    "firstExpected": "Psalmus 112 [2]",
+    "firstActual": "Psalmus 110 [2]",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:15-20 — the Roman Sunday `Day0 Vespera` table explicitly runs `109,110,111,112,113`, so the second emitted heading is source-backed `Psalmus 110 [2]`. The Perl comparison surface skips ahead to `Psalmus 112 [2]`.",
+    "notes": "Representative entry for the Rubrics 1960 Roman January Vespers second-psalm heading family where the source-backed Day0 sequence keeps Psalm 110 in the second slot. Fan out to matching 1960 rows with the same first-divergence pair.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "pending"
+  },
   "Rubrics 1960 - 1960/2024-01-13/Compline/57de2841": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2024-01-13",
@@ -1149,6 +1221,18 @@
     "resolvedAt": "2026-04-19",
     "commitSha": "pending"
   },
+  "Rubrics 1960 - 1960/2024-01-13/Vespers/39846534": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-01-13",
+    "hour": "Vespers",
+    "firstExpected": "Psalmus 113 [5]",
+    "firstActual": "Psalmus 116 [5]",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-13.txt:1-15 and upstream/web/www/horas/Latin/Sancti/01-06.txt:4-11 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:15-20 — Jan 13 inherits Epiphany by `ex Sancti/01-06`, and the inherited Epiphany rule set explicitly overrides the fifth Vespers psalm with `Psalm5 Vespera=116`, so the source-backed fifth heading is `Psalmus 116 [5]` rather than the Day0 default Psalm 113.",
+    "notes": "Representative entry for the Rubrics 1960 Epiphany-octave Vespers fifth-psalm override family where the inherited Rule section replaces the Day0 fifth slot with Psalm 116.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "pending"
+  },
   "Rubrics 1960 - 1960/2024-01-14/Compline/57de2841": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2024-01-14",
@@ -1173,6 +1257,18 @@
     "resolvedAt": "2026-04-19",
     "commitSha": "pending"
   },
+  "Rubrics 1960 - 1960/2024-01-14/None/4a1aadd8": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-01-14",
+    "hour": "None",
+    "firstExpected": "_",
+    "firstActual": "R.br. Clamávi in toto corde meo: * Exáudi me, Dómine.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:66-80 — the Sunday None later block consists of the chapter, the short responsory beginning `R.br. Clamávi in toto corde meo...`, and the versicle, with no underscore separator lines in the source. The compositor now emits that source-backed sequence; the Perl comparison surface inserts `_` separator lines into the rendered stream.",
+    "notes": "Representative entry for the Rubrics 1960 Jan 14 None later-block separator family where Perl inserts underscore-only lines around the short responsory even though the source section has none.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "pending"
+  },
   "Rubrics 1960 - 1960/2024-01-14/Prime/5531f29c": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2024-01-14",
@@ -1182,6 +1278,30 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:218 — the `Tridentinum` Sunday Prime row explicitly lists `53,117,118(1-16),118(17-32)`. The compositor therefore keeps Psalm 53 ahead of Psalm 117 on Jan 14 Prime, while the Perl comparison surface skips directly to Psalm 117.",
     "notes": "Representative entry for the Roman Jan 14 Sunday Prime psalm-table family where the source-backed `Tridentinum` row begins with Psalm 53 before Psalm 117.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "pending"
+  },
+  "Rubrics 1960 - 1960/2024-01-14/Sext/bc17de3d": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-01-14",
+    "hour": "Sext",
+    "firstExpected": "_",
+    "firstActual": "R.br. In ætérnum, Dómine, * Pérmanet verbum tuum.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:36-50 — the Sunday Sext later block consists of the chapter, the short responsory beginning `R.br. In ætérnum, Dómine...`, and the versicle, with no underscore separator lines in the source. The compositor now emits that source-backed sequence; the Perl comparison surface inserts `_` separator lines into the rendered stream.",
+    "notes": "Representative entry for the Rubrics 1960 Jan 14 Sext later-block separator family where Perl inserts underscore-only lines around the short responsory even though the source section has none.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "pending"
+  },
+  "Rubrics 1960 - 1960/2024-01-14/Terce/89c6190b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-01-14",
+    "hour": "Terce",
+    "firstExpected": "_",
+    "firstActual": "R.br. Inclína cor meum, Deus, * In testimónia tua.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:1-20 — the Sunday Terce later block consists of the chapter, the short responsory beginning `R.br. Inclína cor meum, Deus...`, and the versicle, with no underscore separator lines in the source. The compositor now emits that source-backed sequence; the Perl comparison surface inserts `_` separator lines into the rendered stream.",
+    "notes": "Representative entry for the Rubrics 1960 Jan 14 Terce later-block separator family where Perl inserts underscore-only lines around the short responsory even though the source section has none.",
     "resolvedAt": "2026-04-19",
     "commitSha": "pending"
   },

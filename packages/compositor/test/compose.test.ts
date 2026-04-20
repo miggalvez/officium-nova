@@ -795,6 +795,82 @@ describe('composeHour', () => {
     );
   });
 
+  it('preserves wrapper reopening antiphons and source-backed heading numbers across inline psalm overrides', () => {
+    const corpus = new InMemoryTextIndex();
+    corpus.addFile(
+      makeFile('horas/Latin/Psalterium/Psalmi/Psalmi major', 'Day0 Vespera', [
+        {
+          type: 'psalmRef',
+          psalmNumber: 109,
+          antiphon: 'Dixit Dóminus * Dómino meo: Sede a dextris meis.'
+        },
+        {
+          type: 'psalmRef',
+          psalmNumber: 116,
+          antiphon: 'Magna ópera Dómini: * exquisíta in omnes voluntátes ejus.'
+        }
+      ])
+    );
+    corpus.addFile(
+      makeFile('horas/Latin/Psalterium/Psalmorum/Psalm109', '__preamble', [
+        { type: 'text', value: '109:1 Dixit Dóminus Dómino meo: * Sede a dextris meis:' }
+      ])
+    );
+    corpus.addFile(
+      makeFile('horas/Latin/Psalterium/Psalmorum/Psalm116', '__preamble', [
+        { type: 'text', value: '116:1 Laudáte Dóminum, omnes gentes: * laudáte eum, omnes pópuli:' }
+      ])
+    );
+    corpus.addFile(
+      makeFile('horas/Latin/Psalterium/Common/Prayers', 'Gloria', [
+        { type: 'verseMarker', marker: 'V.', text: 'Glória Patri.' },
+        { type: 'verseMarker', marker: 'R.', text: 'Sicut erat.' }
+      ])
+    );
+
+    const hour: HourStructure = {
+      hour: 'vespers',
+      slots: {
+        psalmody: {
+          kind: 'psalmody',
+          psalms: [
+            {
+              psalmRef: {
+                path: 'horas/Latin/Psalterium/Psalmi/Psalmi major',
+                section: 'Day0 Vespera'
+              }
+            }
+          ]
+        }
+      },
+      directives: []
+    };
+
+    const composed = composeHour({
+      corpus,
+      summary: buildSummary(hour),
+      version: stubVersion,
+      hour: 'vespers',
+      options: { languages: ['Latin'] }
+    });
+
+    const psalmodyLines = composed.sections[0]!.lines.map((line) => renderRuns(line, 'Latin'));
+    expect(psalmodyLines).toContain('Dixit Dóminus * Dómino meo: Sede a dextris meis.');
+    expect(psalmodyLines).toContain('Dixit Dóminus Dómino meo: Sede a dextris meis.');
+    expect(psalmodyLines).toContain('Magna ópera Dómini: * exquisíta in omnes voluntátes ejus.');
+    expect(psalmodyLines).toContain('Magna ópera Dómini: exquisíta in omnes voluntátes ejus.');
+
+    const firstRepeat = psalmodyLines.indexOf('Dixit Dóminus Dómino meo: Sede a dextris meis.');
+    const secondOpening = psalmodyLines.indexOf(
+      'Magna ópera Dómini: * exquisíta in omnes voluntátes ejus.'
+    );
+    const secondHeading = psalmodyLines.indexOf('Psalmus 116 [2]');
+
+    expect(firstRepeat).toBeGreaterThanOrEqual(0);
+    expect(secondOpening).toBe(firstRepeat + 1);
+    expect(secondHeading).toBe(secondOpening + 1);
+  });
+
   it('keeps unmarked explicit antiphons as full opening and closing repeats', () => {
     const corpus = new InMemoryTextIndex();
     corpus.addFile(
