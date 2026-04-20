@@ -868,6 +868,52 @@ matching rows in each policy.
 family is now explicitly classified, reducing `unadjudicated` backlog
 without introducing compositor or rubrical-engine date logic.
 
+### 2026-04-20 — Pattern: festal Sunday Prime must prefer `Prima Festis` over `Prima Dominica` (engine-bug)
+
+**Ledger signal.** A shared Roman Prime seam remained on festal Sundays
+such as Trinity (`2024-05-26`), St Michael (`2024-09-29`), and the
+Immaculate Conception (`2024-12-08`): the compare surface still opened
+the second Prime psalm at `Psalmus 117 [2]`, even though the source
+`Prima Festis` table omits Psalm 117 and goes straight from Psalm 53 to
+`118(1-16)`.
+
+**Root cause.** This was a Phase 2 selector bug in
+`packages/rubrical-engine/src/hours/psalter.ts`. Sunday Prime keyed
+directly off the civil Sunday and therefore kept asking for
+`Prima Dominica` unless the day was a `Quad*` Sunday. That leaked the
+ordinary Sunday 117-row into festal Sunday offices that carry proper
+minor-hour antiphons via `Antiphonas horas` and therefore belong on the
+`Prima Festis` row.
+
+**Resolution.** Class `engine-bug`. Prime now prefers
+`Prima Festis` whenever a Sunday office carries proper minor-hour
+antiphons, while preserving the existing `Prima Dominica SQP` override
+for `Quad*` Sundays. Added a focused selector regression in
+`packages/rubrical-engine/test/hours/psalter.test.ts` plus upstream
+integration coverage in
+`packages/rubrical-engine/test/integration/temporal-sunday-minor-antiphons.test.ts`
+for `2024-05-26`, `2024-09-29`, and `2024-12-08` across both Roman
+policies. Updated the January Roman integration lock as the same source
+rule also applies to `2024-01-07`.
+
+**Citation.**
+
+- `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:226`
+  (`Prima Festis=...;;53,118(1-16),118(17-32)`)
+- `upstream/web/www/horas/Latin/Tempora/Pent01-0.txt:12-16`
+- `upstream/web/www/horas/Latin/Tempora/Epi1-0.txt:13-14`
+- `upstream/web/www/horas/Latin/Sancti/05-08.txt:9-15`
+- `upstream/web/www/horas/Latin/Sancti/12-08.txt:9-12`
+
+**Impact.** The shared Roman Prime family no longer stalls at the
+spurious `Psalmus 117 [2]` seam. Representative targeted compares now
+move deeper into later Prime-block families (`Canticum Quicumque [4]`
+on Trinity, `1 Tim. 1:17` versus the office's proper citation on St
+Michael), and the Roman average matching-prefix metrics improve to
+`35.9` (`Reduced - 1955`) and `38.1`
+(`Rubrics 1960 - 1960`). No new adjudications landed in this tranche
+because the residual later-block seams are different families.
+
 ### Pattern catalogue (pending per-pattern entries)
 
 The following patterns remain open after the fixes above and will each

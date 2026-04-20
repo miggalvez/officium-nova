@@ -74,6 +74,37 @@ describeIfUpstream('temporal Sunday minor-hour antiphon ownership', () => {
     },
     240_000
   );
+
+  it(
+    'keeps festal Sunday Prime on Prima Festis when Psalmi Dominica combines with proper minor-hour antiphons',
+    async () => {
+      const engines = await loadEngines([
+        'Reduced - 1955',
+        'Rubrics 1960 - 1960'
+      ]);
+
+      for (const handle of ['Reduced - 1955', 'Rubrics 1960 - 1960'] as const) {
+        const engine = engines.get(handle);
+        expect(engine, `${handle} engine`).toBeDefined();
+        if (!engine) {
+          continue;
+        }
+
+        for (const [date, officePath] of [
+          ['2024-05-26', 'horas/Latin/Tempora/Pent01-0r'],
+          ['2024-09-29', 'horas/Latin/Sancti/05-08'],
+          ['2024-12-08', 'horas/Latin/Sancti/12-08']
+        ] as const) {
+          expectMinorHour(psalmodyAt(engine, date, 'prime'), `${officePath}:Ant Laudes:1`, [
+            '53',
+            '118(1-16)',
+            '118(17-32)'
+          ]);
+        }
+      }
+    },
+    240_000
+  );
 });
 
 let enginesPromise: Promise<ReadonlyMap<string, RubricalEngine>> | undefined;

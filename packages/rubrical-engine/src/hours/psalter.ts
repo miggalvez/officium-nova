@@ -123,7 +123,8 @@ function minorHourReferences(
     const selectors = tridentinumMinorHourSelectors(
       hour,
       temporal.dayOfWeek === 0,
-      temporal.dayName
+      temporal.dayName,
+      params.celebrationRules.antiphonScheme === 'proper-minor-hours'
     );
     for (const selector of selectors) {
       const assignments = resolveTridentinumMinorHourAssignments(corpus, selector);
@@ -343,7 +344,8 @@ const FEAST_PSALM_SECTION: Readonly<Partial<Record<HourName, string>>> = {
 function tridentinumMinorHourSelectors(
   hour: 'prime' | 'terce' | 'sext' | 'none',
   isSunday: boolean,
-  dayName: string
+  dayName: string,
+  preferFestalPrime: boolean
 ): readonly string[] {
   switch (hour) {
     case 'prime':
@@ -354,7 +356,10 @@ function tridentinumMinorHourSelectors(
       if (isSunday && /^Quad/u.test(dayName)) {
         return ['Prima Dominica SQP', 'Prima Dominica'];
       }
-      return [isSunday ? 'Prima Dominica' : 'Prima Festis'];
+      // Sunday offices that carry proper minor-hour antiphons still source
+      // Prime from `Prima Festis`; only the ordinary temporal Sunday Prime
+      // stays on `Prima Dominica` (or the SQP override above).
+      return [isSunday && !preferFestalPrime ? 'Prima Dominica' : 'Prima Festis'];
     case 'terce':
       return ['Tertia Dominica'];
     case 'sext':

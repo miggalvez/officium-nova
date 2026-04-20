@@ -253,12 +253,13 @@ describeIfUpstream('January selection regressions', () => {
       ]);
 
       // 1960-01-07: Holy Family keeps its temporal proper antiphons at Lauds
-      // and its own second-Vespers psalmody (`Ant Vespera 3`), while the
-      // Sunday minor-hour psalm tables remain in force.
+      // and its own second-Vespers psalmody (`Ant Vespera 3`); Prime follows
+      // the festal `Prima Festis` row while Terce/Sext/None keep the Sunday
+      // Tridentinum ranges.
       expectMinorHour(
         psalmodyAt(roman1960, '2024-01-07', 'prime'),
         'horas/Latin/Tempora/Epi1-0:Ant Laudes:1',
-        ['53', '117', '118(1-16)', '118(17-32)']
+        ['53', '118(1-16)', '118(17-32)']
       );
       expectMinorHour(
         psalmodyAt(roman1960, '2024-01-07', 'terce'),
