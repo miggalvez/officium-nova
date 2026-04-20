@@ -914,6 +914,62 @@ Michael), and the Roman average matching-prefix metrics improve to
 (`Rubrics 1960 - 1960`). No new adjudications landed in this tranche
 because the residual later-block seams are different families.
 
+### 2026-04-20 — Pattern: Roman Triduum `Special Completorium` must compose the temporal source block (mixed fix + adjudication)
+
+**Ledger signal.** A shared Roman Compline seam remained on the Triduum
+block (`2024-03-28` through `2024-03-30`) across both `Reduced - 1955`
+and `Rubrics 1960 - 1960`: the compare surface still opened at the
+ordinary short-reading citation `1 Pet 5:8-9`, while Perl expected the
+temporal `Special Completorium` office block.
+
+**Root cause.** This was primarily a Phase 3 composition bug. Phase 2
+already marked these rows with `source.kind = triduum-special`, but the
+compositor still fell through the ordinary Compline slot lattice and
+therefore opened at `Lectio Completorium` / `Completorium` instead of
+the temporal `Special Completorium` section. Once that source seam was
+composed directly, the corpus itself split the family: Holy Thursday
+and Good Friday (`1955/1960`) explicitly collapse the older block to a
+short `Vísita, quǽsumus...` close, while Holy Saturday keeps the full
+special office and then advances into the already-classified Psalm 4
+half-verse `‡ ... *` family.
+
+**Resolution.** Mixed outcome:
+
+- `engine-bug` fix in `packages/compositor/src/compose.ts`: Compline now
+  detects `source.kind = triduum-special`, resolves the winning
+  temporal `Special Completorium` section directly, preserves the source
+  `_` separators, and emits the inline psalm headings that the special
+  office requires on Holy Saturday.
+- Immediate adjudication for the Thursday / Friday rows: the corrected
+  compositor now follows the source-backed 1955/1960 short
+  `Vísita, quǽsumus...` block, while Perl keeps the older full-block
+  opening `Special Completorium`; those rows are therefore classified
+  `perl-bug`.
+- Holy Saturday (`2024-03-30`) no longer stalls at the special-office
+  routing seam; it now lands on the pre-existing Psalm 4 half-verse
+  `perl-bug` family (`89cb274b`) already tracked elsewhere in this log.
+
+Added upstream-backed compositor coverage in
+`packages/compositor/test/integration/compose-upstream.test.ts` for
+`2024-03-28` / `2024-03-29` / `2024-03-30` across both Roman policies,
+locking the source-backed Triduum Compline openings before the code
+change.
+
+**Citation.**
+
+- `upstream/web/www/horas/Latin/Tempora/Quad6-4.txt:210-233`
+- `upstream/web/www/horas/Latin/Tempora/Quad6-4r.txt:1`
+- `upstream/web/www/horas/Latin/Tempora/Quad6-5.txt:204`
+- `upstream/web/www/horas/Latin/Tempora/Quad6-5r.txt:1`
+- `upstream/web/www/horas/Latin/Tempora/Quad6-6r.txt:28-47`
+- `upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm4.txt:5`
+
+**Impact.** The shared Roman Triduum Compline family is no longer
+blocked on the ordinary `1 Pet 5:8-9` fallback. Thursday / Friday are
+now classified cleanly as source-backed Perl bugs, and Holy Saturday
+moves deeper into the already-adjudicated Psalm 4 half-verse render
+surface instead of remaining a mixed ownership question.
+
 ### Pattern catalogue (pending per-pattern entries)
 
 The following patterns remain open after the fixes above and will each

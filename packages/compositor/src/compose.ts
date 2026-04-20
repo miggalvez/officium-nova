@@ -14,6 +14,7 @@ import { stripLaudsSecretoPrayers } from './compose/incipit.js';
 import { composeMatinsSections } from './compose/matins.js';
 import { applyDirectives } from './directives/index.js';
 import { isWholeAntiphonSlot, markAntiphonFirstText } from './emit/antiphon-marker.js';
+import { emitConfiguredSection } from './emit/sections.js';
 import { flattenConditionals } from './flatten/index.js';
 import { emitSection } from './emit/index.js';
 import { expandDeferredNodes } from './resolve/expand-deferred-nodes.js';
@@ -70,6 +71,27 @@ export function composeHour(input: ComposeInput): ComposedHour {
   const onWarning = (warning: ComposeWarning): void => {
     warnings.push(warning);
   };
+
+  const specialCompline = composeTriduumSpecialComplineSection({
+    hour: input.hour,
+    structure: hour,
+    summary: input.summary,
+    corpus: input.corpus,
+    options: input.options,
+    context,
+    onWarning
+  });
+  if (specialCompline) {
+    sections.push(specialCompline);
+    return Object.freeze({
+      date: input.summary.date,
+      hour: input.hour,
+      celebration: input.summary.celebration.feastRef.title,
+      languages: Object.freeze(Array.from(input.options.languages)),
+      sections: Object.freeze(sections),
+      warnings: Object.freeze(warnings)
+    });
+  }
 
   // Matins is plan-shaped (§16.3): composition walks InvitatoriumSource /
   // NocturnPlan / te-deum decisions rather than the generic SlotContent
@@ -141,6 +163,124 @@ export function composeHour(input: ComposeInput): ComposedHour {
     sections: Object.freeze(sections),
     warnings: Object.freeze(warnings)
   });
+}
+
+interface ComposeTriduumSpecialComplineArgs {
+  readonly hour: HourName;
+  readonly structure: HourStructure;
+  readonly summary: DayOfficeSummary;
+  readonly corpus: TextIndex;
+  readonly options: ComposeOptions;
+  readonly context: ConditionEvalContext;
+  readonly onWarning?: (warning: ComposeWarning) => void;
+}
+
+function composeTriduumSpecialComplineSection(
+  args: ComposeTriduumSpecialComplineArgs
+): Section | undefined {
+  if (args.hour !== 'compline' || args.structure.source?.kind !== 'triduum-special') {
+    return undefined;
+  }
+
+  const ref: TextReference = {
+    path: `horas/Latin/${args.summary.celebration.feastRef.path}`,
+    section: 'Special Completorium'
+  };
+  const resolved = resolveReference(args.corpus, ref, {
+    languages: args.options.languages,
+    langfb: args.options.langfb,
+    dayOfWeek: args.context.dayOfWeek,
+    date: args.context.date,
+    season: args.context.season,
+    version: args.context.version,
+    modernStyleMonthday: args.context.version.handle.includes('1960'),
+    ...(args.onWarning ? { onWarning: args.onWarning } : {})
+  });
+
+  const perLanguage = new Map<string, readonly TextContent[]>();
+  for (const lang of args.options.languages) {
+    const section = resolved[lang];
+    if (!section) {
+      continue;
+    }
+    if (section.selectorMissing) {
+      perLanguage.set(
+        lang,
+        Object.freeze([
+          {
+            type: 'rubric',
+            value: `(Section missing: ${ref.section})`
+          } satisfies TextContent
+        ])
+      );
+      continue;
+    }
+    const bucket: TextContent[] = [];
+    const sourceNodes = flattenConditionals(section.content, args.context);
+    for (const node of sourceNodes) {
+      if (node.type === 'separator') {
+        bucket.push({
+          type: 'gabcNotation',
+          notation: {
+            kind: 'header',
+            notation: '',
+            text: '_'
+          }
+        });
+        continue;
+      }
+
+      if (node.type === 'psalmInclude') {
+        appendContentWithBoundary(bucket, [
+          {
+            type: 'gabcNotation',
+            notation: {
+              kind: 'header',
+              notation: '',
+              text: `Psalmus ${node.psalmNumber} [${node.psalmNumber}]`
+            }
+          }
+        ]);
+      }
+
+      const expanded = expandDeferredNodes([node], {
+        index: args.corpus,
+        language: lang,
+        langfb: args.options.langfb,
+        season: args.context.season,
+        seen: new Set(),
+        maxDepth: MAX_DEFERRED_DEPTH,
+        ...(args.onWarning ? { onWarning: args.onWarning } : {})
+      });
+      const flattened = flattenConditionals(expanded, args.context);
+      // The Triduum uses a single `Special Completorium` source block rather
+      // than the ordinary slot lattice. We still run the psalmody-style
+      // normalizer/directive pass so inline psalm text canonicalizes the same
+      // way as ordinary Compline while bypassing the ordinary short reading.
+      const transformed = applyDirectives('psalmody', flattened, {
+        hour: args.hour,
+        directives: args.structure.directives
+      });
+      appendContentWithBoundary(bucket, transformed);
+    }
+    if (bucket.length > 0) {
+      perLanguage.set(lang, Object.freeze(bucket));
+    }
+  }
+
+  if (perLanguage.size === 0) {
+    return undefined;
+  }
+
+  return emitConfiguredSection(
+    {
+      slot: 'psalmody',
+      sectionSlot: 'special-compline',
+      sectionType: 'other'
+    },
+    perLanguage,
+    referenceKey(ref)
+  );
 }
 
 /**

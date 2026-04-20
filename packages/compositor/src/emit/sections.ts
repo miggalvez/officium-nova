@@ -3,6 +3,12 @@ import type { SlotName } from '@officium-novum/rubrical-engine';
 
 import type { ComposedLine, ComposedRun, Section, SectionType } from '../types/composed-hour.js';
 
+export interface EmitSectionOptions {
+  readonly slot: SlotName;
+  readonly sectionSlot?: string;
+  readonly sectionType?: SectionType;
+}
+
 /**
  * Classify a {@link SlotName} into a {@link SectionType}. Several slots map
  * cleanly; others fall back to `other`.
@@ -66,10 +72,18 @@ export function emitSection(
   perLanguage: ReadonlyMap<string, readonly TextContent[]>,
   reference: string | undefined
 ): Section {
+  return emitConfiguredSection({ slot }, perLanguage, reference);
+}
+
+export function emitConfiguredSection(
+  options: EmitSectionOptions,
+  perLanguage: ReadonlyMap<string, readonly TextContent[]>,
+  reference: string | undefined
+): Section {
   const languages = Array.from(perLanguage.keys());
   const perLanguageLines = new Map<string, ComposedLine[]>();
   for (const [lang, content] of perLanguage) {
-    perLanguageLines.set(lang, linesFromContent(slot, lang, content));
+    perLanguageLines.set(lang, linesFromContent(options, lang, content));
   }
 
   const maxLength = Math.max(0, ...Array.from(perLanguageLines.values(), (l) => l.length));
@@ -94,8 +108,8 @@ export function emitSection(
   }
 
   return Object.freeze({
-    type: sectionTypeFor(slot),
-    slot,
+    type: options.sectionType ?? sectionTypeFor(options.slot),
+    slot: options.sectionSlot ?? options.slot,
     reference,
     lines: Object.freeze(merged),
     languages: Object.freeze(languages),
@@ -104,10 +118,11 @@ export function emitSection(
 }
 
 function linesFromContent(
-  slot: SlotName,
+  options: EmitSectionOptions,
   language: string,
   content: readonly TextContent[]
 ): ComposedLine[] {
+  const slot = options.slot;
   const lines: ComposedLine[] = [];
   let current: { marker?: string; parts: ComposedRun[] } | undefined;
   const flush = () => {
