@@ -306,6 +306,65 @@ describe('Ant. marker emission', () => {
     expect(markers[1]).toBeUndefined();
   });
 
+  it('applies Paschaltide add-alleluia to bare psalmody antiphon refs before marker synthesis', () => {
+    const corpus = new InMemoryTextIndex();
+    corpus.addFile({
+      path: 'horas/Latin/Sancti/01-01.txt',
+      sections: [
+        {
+          header: 'Ant 1',
+          startLine: 1,
+          endLine: 1,
+          content: [{ type: 'text', value: 'O admirábile commércium, psalm antiphon' }]
+        }
+      ]
+    });
+    corpus.addFile({
+      path: 'horas/Latin/Psalterium/Psalmorum/Psalm92.txt',
+      sections: [
+        {
+          header: '__preamble',
+          startLine: 1,
+          endLine: 1,
+          content: [{ type: 'text', value: 'Dóminus regnávit, decórem índuit...' }]
+        }
+      ]
+    });
+
+    const hour: HourStructure = {
+      hour: 'lauds',
+      slots: {
+        psalmody: {
+          kind: 'psalmody',
+          psalms: [
+            {
+              antiphonRef: { path: 'horas/Latin/Sancti/01-01.txt', section: 'Ant 1' },
+              psalmRef: {
+                path: 'horas/Latin/Psalterium/Psalmorum/Psalm92.txt',
+                section: '__preamble'
+              }
+            }
+          ]
+        }
+      },
+      directives: ['add-alleluia']
+    };
+
+    const composed = composeHour({
+      corpus,
+      summary: buildSummary(hour),
+      version: stubVersion,
+      hour: 'lauds',
+      options: { languages: ['Latin'] }
+    });
+
+    const markers = lineMarkers(composed, 'psalmody');
+    const texts = lineTexts(composed, 'psalmody', 'Latin');
+    const antiphonTexts = texts.filter((_, index) => markers[index] === 'Ant.');
+
+    expect(antiphonTexts).toContain('O admirábile commércium, psalm antiphon, allelúja.');
+  });
+
   it('keeps inline rubrics on the same rendered line instead of splitting them into separate lines', () => {
     const corpus = new InMemoryTextIndex();
     corpus.addFile({

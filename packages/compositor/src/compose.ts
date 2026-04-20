@@ -242,7 +242,7 @@ function composeSlot(args: ComposeSlotArgs): Section | undefined {
           ? stripLaudsSecretoPrayers(section.content)
           : section.content;
       if (args.slot === 'psalmody' && isAntiphon && containsInlinePsalmRefs(sourceContent)) {
-        const antiphonOnly = extractInlinePsalmAntiphons(sourceContent);
+        const antiphonOnly = markAntiphonFirstText(extractInlinePsalmAntiphons(sourceContent));
         const flattened = flattenConditionals(antiphonOnly, args.context);
         const transformed = applyDirectives(args.slot, flattened, {
           hour: args.hour,
@@ -250,18 +250,16 @@ function composeSlot(args: ComposeSlotArgs): Section | undefined {
         });
         appendContentWithBoundary(
           bucket,
-          markAntiphonFirstText(
-            repeatAntiphon
-              ? normalizeRepeatedAntiphonContent(transformed)
-              : openingAntiphon
-                ? normalizeOpeningPsalmodyAntiphonContent(
-                    transformed,
-                    args.hour,
-                    args.context.version,
-                    ref
-                  )
-                : transformed
-          )
+          repeatAntiphon
+            ? normalizeRepeatedAntiphonContent(transformed)
+            : openingAntiphon
+              ? normalizeOpeningPsalmodyAntiphonContent(
+                  transformed,
+                  args.hour,
+                  args.context.version,
+                  ref
+                )
+              : transformed
         );
         continue;
       }
@@ -302,7 +300,11 @@ function composeSlot(args: ComposeSlotArgs): Section | undefined {
         }
       );
       const flattened = flattenConditionals(expanded, args.context);
-      const transformed = applyDirectives(args.slot, flattened, {
+      // Directives run before final emission. For psalmody antiphon refs we
+      // synthesize the `Ant.` marker first so transforms like `add-alleluia`
+      // can target the antiphon line rather than no-op on bare text.
+      const directiveInput = isAntiphon ? markAntiphonFirstText(flattened) : flattened;
+      const transformed = applyDirectives(args.slot, directiveInput, {
         hour: args.hour,
         directives: args.directives
       });
@@ -315,18 +317,16 @@ function composeSlot(args: ComposeSlotArgs): Section | undefined {
       // antiphons, commemoration antiphons) mark every ref; psalmody marks
       // only its antiphon refs so psalm verses stay unmarked.
       const markered = isAntiphon
-        ? markAntiphonFirstText(
-            repeatAntiphon
-              ? normalizeRepeatedAntiphonContent(withHymnDoxology)
-              : openingAntiphon
-                ? normalizeOpeningPsalmodyAntiphonContent(
-                    withHymnDoxology,
-                    args.hour,
-                    args.context.version,
-                    ref
-                  )
-                : withHymnDoxology
-          )
+        ? repeatAntiphon
+          ? normalizeRepeatedAntiphonContent(withHymnDoxology)
+          : openingAntiphon
+            ? normalizeOpeningPsalmodyAntiphonContent(
+                withHymnDoxology,
+                args.hour,
+                args.context.version,
+                ref
+              )
+            : withHymnDoxology
         : withHymnDoxology;
       // Phase 3 §3h — emit a `Psalmus N [index]` heading before each psalm
       // of the psalmody slot (and only for the psalmody slot — Matins
