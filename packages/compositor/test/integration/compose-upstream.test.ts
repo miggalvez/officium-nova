@@ -634,6 +634,116 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
       }
     }
   }, 240_000);
+
+  it('renders Jan 14 Sunday Tridentinum minor-hour antiphons from the keyed psalter surface', async () => {
+    for (const [version, expectations] of [
+      [
+        'Reduced - 1955',
+        {
+          primeOpening: 'Allelúja.',
+          primeClosing:
+            'Allelúja, confitémini Dómino, quóniam in sǽculum misericórdia ejus, allelúja, allelúja.',
+          terce:
+            'Allelúja, * deduc me, Dómine, in sémitam mandatórum tuórum, allelúja, allelúja.',
+          sexta:
+            'Allelúja, * tuus sum ego, salvum me fac, Dómine, allelúja, allelúja.',
+          none:
+            'Allelúja, * fáciem tuam, Dómine, illúmina super servum tuum, allelúja, allelúja.'
+        }
+      ],
+      [
+        'Rubrics 1960 - 1960',
+        {
+          prime:
+            'Allelúja, * confitémini Dómino, quóniam in sǽculum misericórdia ejus, allelúja, allelúja.',
+          terce:
+            'Allelúja, * deduc me, Dómine, in sémitam mandatórum tuórum, allelúja, allelúja.',
+          sexta:
+            'Allelúja, * tuus sum ego, salvum me fac, Dómine, allelúja, allelúja.',
+          none:
+            'Allelúja, * fáciem tuam, Dómine, illúmina super servum tuum, allelúja, allelúja.'
+        }
+      ]
+    ] as const) {
+      const { engine, resolvedCorpus } = await createHarness(version);
+      const summary = engine.resolveDayOfficeSummary('2024-01-14');
+
+      for (const hour of ['prime', 'terce', 'sext', 'none'] as const) {
+        const composed = composeHour({
+          corpus: resolvedCorpus.index,
+          summary,
+          version: engine.version,
+          hour,
+          options: { languages: ['Latin'] }
+        });
+
+        const antiphons = psalmodyAntiphons(composed);
+        if (version === 'Reduced - 1955' && hour === 'prime') {
+          expect(normalizeLatin(antiphons[0] ?? ''), `${version} ${hour} opening antiphon`).toBe(
+            normalizeLatin(expectations.primeOpening)
+          );
+          expect(normalizeLatin(antiphons.at(-1) ?? ''), `${version} ${hour} closing antiphon`).toBe(
+            normalizeLatin(expectations.primeClosing)
+          );
+          continue;
+        }
+
+        const expected =
+          hour === 'prime'
+            ? expectations.prime
+            : hour === 'terce'
+              ? expectations.terce
+              : hour === 'sext'
+                ? expectations.sexta
+                : expectations.none;
+        expect(normalizeLatin(antiphons[0] ?? ''), `${version} ${hour} opening antiphon`).toBe(
+          normalizeLatin(expected)
+        );
+      }
+    }
+  }, 240_000);
+
+  it('renders Jan 14 psalter major wrappers with repeated closes plus the next opening antiphon', async () => {
+    for (const version of ['Reduced - 1955', 'Rubrics 1960 - 1960'] as const) {
+      const { engine, resolvedCorpus } = await createHarness(version);
+      const summary = engine.resolveDayOfficeSummary('2024-01-14');
+
+      for (const [hour, expected] of [
+        [
+          'lauds',
+          [
+            'Allelúja, * Dóminus regnávit, decórem índuit, allelúja, allelúja.',
+            'Allelúja, Dóminus regnávit, decórem índuit, allelúja, allelúja.',
+            'Jubiláte * Deo omnis terra, allelúja.',
+            'Jubiláte Deo omnis terra, allelúja.',
+            'Benedícam te * in vita mea, Dómine: et in nómine tuo levábo manus meas, allelúja.',
+          ]
+        ],
+        [
+          'vespers',
+          [
+            'Dixit Dóminus * Dómino meo: Sede a dextris meis.',
+            'Dixit Dóminus Dómino meo: Sede a dextris meis.',
+            'Magna ópera Dómini: * exquisíta in omnes voluntátes ejus.',
+            'Magna ópera Dómini: exquisíta in omnes voluntátes ejus.',
+            'Qui timet Dóminum, * in mandátis ejus cupit nimis.',
+          ]
+        ]
+      ] as const) {
+        const composed = composeHour({
+          corpus: resolvedCorpus.index,
+          summary,
+          version: engine.version,
+          hour,
+          options: { languages: ['Latin'] }
+        });
+
+        expect(psalmodyAntiphons(composed).map(normalizeLatin).slice(0, 5), `${version} ${hour} antiphon order`).toEqual(
+          expected.map(normalizeLatin)
+        );
+      }
+    }
+  }, 240_000);
 });
 
 function renderLatinText(line: { readonly texts: Record<string, readonly { readonly type: string; readonly value?: string }[]> }): string {

@@ -809,7 +809,7 @@ describe('Psalmus N [index] heading emission', () => {
     ]);
   });
 
-  it('removes numeric carry-over markers like (4a) and (7) from psalmody lines', () => {
+  it('removes numeric carry-over markers like (4a), (5), and (8) from psalmody lines', () => {
     const corpus = new InMemoryTextIndex();
     corpus.addFile({
       path: 'horas/Latin/Psalterium/Psalmorum/Psalm92.txt',
@@ -823,7 +823,11 @@ describe('Psalmus N [index] heading emission', () => {
             { type: 'separator' },
             { type: 'text', value: '92:3b Elevavérunt flúmina fluctus suos, * (4a) a vócibus aquárum multárum.' },
             { type: 'separator' },
-            { type: 'text', value: '92:4 Mirábiles elatiónes maris, * (7) mirábilis in altis Dóminus.' }
+            { type: 'text', value: '92:4 Mirábiles elatiónes maris, * (7) mirábilis in altis Dóminus.' },
+            { type: 'separator' },
+            { type: 'text', value: '92:5 Parátum cor ejus speráre in Dómino, (8) confirmátum est cor ejus: * non commovébitur.' },
+            { type: 'separator' },
+            { type: 'text', value: '92:6 Laudáte nomen ejus: (5) quóniam suávis est Dóminus, † in ætérnum misericórdia ejus, * et usque in finem.' }
           ]
         }
       ]
@@ -859,7 +863,9 @@ describe('Psalmus N [index] heading emission', () => {
       'Psalmus 92 [1]',
       '92:3 Elevavérunt flúmina fluctus suos,',
       '92:3 Elevavérunt flúmina fluctus suos, * a vócibus aquárum multárum.',
-      '92:4 Mirábiles elatiónes maris, * mirábilis in altis Dóminus.'
+      '92:4 Mirábiles elatiónes maris, * mirábilis in altis Dóminus.',
+      '92:5 Parátum cor ejus speráre in Dómino, confirmátum est cor ejus: * non commovébitur.',
+      '92:6 Laudáte nomen ejus: quóniam suávis est Dóminus, in ætérnum misericórdia ejus, * et usque in finem.'
     ]);
   });
 

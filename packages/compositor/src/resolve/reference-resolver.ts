@@ -368,7 +368,7 @@ function resolveStructuredSelector(
     context.path.endsWith(PSALMI_MINOR_SUFFIX) &&
     context.section.header === 'Tridentinum'
   ) {
-    return resolveTridentinumAntiphon(context.section, antiphonSelector);
+    return resolveTridentinumAntiphon(index, context.path, context.section, antiphonSelector);
   }
 
   if (
@@ -930,10 +930,13 @@ function parseAntiphonSelector(selector: string): string | undefined {
 }
 
 function resolveTridentinumAntiphon(
+  index: TextIndex,
+  path: string,
   section: ParsedSection,
   wantedKey: string
 ): readonly TextContent[] | undefined {
-  const keyed = selectKeyedTextContent(section.content, wantedKey);
+  const dominical = resolveDominicalTridentinumAntiphon(index, path, wantedKey);
+  const keyed = dominical ?? selectKeyedTextContent(section.content, wantedKey);
   const firstText = keyed?.find((node) => node.type === 'text');
   if (!firstText || firstText.type !== 'text') {
     return undefined;
@@ -943,6 +946,32 @@ function resolveTridentinumAntiphon(
     return undefined;
   }
   return Object.freeze([{ type: 'text', value: antiphon }]);
+}
+
+function resolveDominicalTridentinumAntiphon(
+  index: TextIndex,
+  path: string,
+  wantedKey: string
+): readonly TextContent[] | undefined {
+  const match = wantedKey.match(/^(Prima|Tertia|Sexta|Nona)\s+(Dominica(?:\s+SQP)?)$/u);
+  if (!match) {
+    return undefined;
+  }
+
+  const sectionHeader = match[1];
+  const matchedKey = match[2];
+  const keyedHeader = matchedKey?.startsWith('Dominica') ? 'Dominica' : matchedKey;
+  if (!sectionHeader || !keyedHeader) {
+    return undefined;
+  }
+
+  const file = index.getFile(ensureTxtSuffix(path));
+  const psalterSection = file?.sections.find((candidate) => candidate.header === sectionHeader);
+  if (!psalterSection) {
+    return undefined;
+  }
+
+  return selectKeyedTextContent(psalterSection.content, keyedHeader);
 }
 
 function selectKeyedTextContent(

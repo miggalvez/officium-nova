@@ -256,6 +256,159 @@ rules.
 |---|---|---|---|
 | Rubrics 1960 - 1960 | 2024-01-06 | Vespers | `3965f59d` |
 
+### 2026-04-19 — Roman Lauds Psalm 99 half-verse structure is flattened by the Perl render surface
+
+**Classification.** `perl-bug`
+
+**Summary.** Under both `Reduced - 1955` and `Rubrics 1960 - 1960`, the
+January Roman Lauds rows for Jan `1`, `6`, `7`, and `13` first diverge
+at Psalm 99 line `99:3b`. The compositor preserves the corpus
+half-verse structure `... ‡ ... * ...` while removing the numeric carry
+marker; the Perl comparison surface flattens the same source line to a
+single `*` split.
+
+**Primary source.**
+`upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm99.txt:3-5`
+
+In particular, line `99:3b` explicitly reads:
+`Pópulus ejus, et oves páscuæ ejus: ‡ (4a) introíte portas ejus in confessióne, * átria ejus in hymnis: confitémini illi.`
+
+**Reproduction.**
+Run either:
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Reduced - 1955"
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Rubrics 1960 - 1960"
+```
+
+Then inspect the January Lauds rows in the corresponding divergence
+ledger. Perl shows a flattened `*` split, while the compositor shows the
+source-backed `‡ ... *` half-verse structure from `Psalm99.txt`.
+
+**Affected stable divergence-row keys.**
+
+| Policy | Date | Hour | Row key suffix |
+|---|---|---|---|
+| Reduced - 1955 | 2024-01-01 | Lauds | `2af868c1` |
+| Reduced - 1955 | 2024-01-06 | Lauds | `2af868c1` |
+| Reduced - 1955 | 2024-01-07 | Lauds | `2af868c1` |
+| Reduced - 1955 | 2024-01-13 | Lauds | `2af868c1` |
+| Rubrics 1960 - 1960 | 2024-01-01 | Lauds | `2af868c1` |
+| Rubrics 1960 - 1960 | 2024-01-06 | Lauds | `2af868c1` |
+| Rubrics 1960 - 1960 | 2024-01-07 | Lauds | `2af868c1` |
+| Rubrics 1960 - 1960 | 2024-01-13 | Lauds | `2af868c1` |
+| Rubrics 1960 - 1960 | 2024-01-14 | Lauds | `2af868c1` |
+
+### 2026-04-19 — Roman Jan 14 Sunday Prime skips Psalm 53 in the Perl render surface
+
+**Classification.** `perl-bug`
+
+**Summary.** Under both `Reduced - 1955` and `Rubrics 1960 - 1960`,
+Jan `14` Prime now first diverges at the opening psalm heading. The
+compositor emits the source-backed `Psalmus 53 [1]`, while the Perl
+comparison surface skips directly to `Psalmus 117 [1]`.
+
+**Primary source.**
+`upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:218`
+
+The `Tridentinum` Sunday Prime row explicitly lists:
+`53,117,118(1-16),118(17-32)`.
+
+**Reproduction.**
+Run either:
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Reduced - 1955"
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Rubrics 1960 - 1960"
+```
+
+Then inspect the Jan `14` Prime row in the corresponding divergence
+ledger. Perl starts at `Psalmus 117 [1]`, while the compositor surfaces
+the source-backed leading Psalm 53 heading from the `Tridentinum` row.
+
+**Affected stable divergence-row keys.**
+
+| Policy | Date | Hour | Row key suffix |
+|---|---|---|---|
+| Reduced - 1955 | 2024-01-14 | Prime | `5531f29c` |
+| Rubrics 1960 - 1960 | 2024-01-14 | Prime | `5531f29c` |
+
+### 2026-04-19 — Reduced 1955 Jan 14 Sunday psalter antiphon surface is collapsed by the Perl render surface
+
+**Classification.** `perl-bug`
+
+**Summary.** Under `Reduced - 1955`, Jan `14` `Lauds`, `Terce`,
+`Sext`, `None`, and `Vespers` now all expose the same source-backed
+Sunday psalter surface: full Day0 psalter-major openings at `Lauds` and
+`Vespers`, and full keyed Sunday minor-hour antiphons at `Terce`,
+`Sext`, and `None`. The legacy Perl render surface abbreviates these to
+generic `Ant. Allelúja.` or incipit-only forms such as `Ant. Dixit
+Dóminus. ‡`.
+
+**Primary source.**
+
+- `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:1-6`
+- `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:15-20`
+- `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:17-19,33-35,49-51,227-231`
+
+These sources establish that the Sunday Day0 Lauds/Vespers wrappers and
+the keyed Sunday minor-hour sections carry the full antiphon text that
+the compositor now emits.
+
+**Reproduction.**
+Run:
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Reduced - 1955"
+```
+
+Then inspect the Jan `14` `Lauds`, `Terce`, `Sext`, `None`, and
+`Vespers` rows in
+`packages/compositor/test/divergence/reduced-1955-2024.md`. Perl
+abbreviates the Sunday psalter antiphons; the compositor shows the
+source-backed full Day0/keyed surface.
+
+**Affected stable divergence-row keys.**
+
+| Policy | Date | Hour | Row key suffix |
+|---|---|---|---|
+| Reduced - 1955 | 2024-01-14 | Lauds | `a4224c0e` |
+| Reduced - 1955 | 2024-01-14 | Terce | `50fad344` |
+| Reduced - 1955 | 2024-01-14 | Sext | `5e2b4bef` |
+| Reduced - 1955 | 2024-01-14 | None | `f178bdcc` |
+| Reduced - 1955 | 2024-01-14 | Vespers | `557f2156` |
+
+### 2026-04-19 — Rubrics 1960 Jan 14 Vespers gains an unsupported trailing `‡` in the Perl render surface
+
+**Classification.** `perl-bug`
+
+**Summary.** Under `Rubrics 1960 - 1960`, the remaining Jan `14`
+`Vespers` opening divergence is punctuation-only. The Day0 Sunday source
+antiphon is `Dixit Dóminus * Dómino meo: Sede a dextris meis.` without a
+trailing continuation marker. The compositor preserves that corpus text;
+the Perl comparison surface appends an unsupported trailing `‡`.
+
+**Primary source.**
+`upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:15-20`
+
+**Reproduction.**
+Run:
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Rubrics 1960 - 1960"
+```
+
+Then inspect the Jan `14` `Vespers` row in
+`packages/compositor/test/divergence/rubrics-1960-2024.md`. Perl adds a
+trailing `‡` to the opening antiphon; the compositor preserves the
+source-backed Day0 `Vespera` text without that marker.
+
+**Affected stable divergence-row keys.**
+
+| Policy | Date | Hour | Row key suffix |
+|---|---|---|---|
+| Rubrics 1960 - 1960 | 2024-01-14 | Vespers | `019555e4` |
+
 ## See also
 
 - [ADR-011 — Phase 3 divergence adjudication](./adr/011-phase-3-divergence-adjudication.md)

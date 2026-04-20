@@ -513,6 +513,18 @@
     "resolvedAt": "2026-04-19",
     "commitSha": "pending"
   },
+  "Reduced - 1955/2024-01-01/Lauds/2af868c1": {
+    "policy": "Reduced - 1955",
+    "date": "2024-01-01",
+    "hour": "Lauds",
+    "firstExpected": "99:3 Pópulus ejus, et oves páscuæ ejus: * introíte portas ejus in confessióne, átria ejus in hymnis: confitémini illi.",
+    "firstActual": "99:3 Pópulus ejus, et oves páscuæ ejus: ‡ introíte portas ejus in confessióne, * átria ejus in hymnis: confitémini illi.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm99.txt:3-5 — the psalm corpus explicitly encodes 99:3b as `Pópulus ejus, et oves páscuæ ejus: ‡ (4a) introíte portas ejus in confessióne, * átria ejus in hymnis: confitémini illi.` The compositor preserves that half-verse structure while removing the numeric carry marker; the Perl comparison surface flattens the same line to a single `*` split.",
+    "notes": "Representative entry for the Reduced 1955 Lauds Psalm 99 half-verse family where the corpus keeps a `‡ ... *` structure and Perl flattens it to a single `*` boundary.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "pending"
+  },
   "Reduced - 1955/2024-01-01/Matins/29ec2a3d": {
     "policy": "Reduced - 1955",
     "date": "2024-01-01",
@@ -585,6 +597,18 @@
     "resolvedAt": "2026-04-19",
     "commitSha": "pending"
   },
+  "Reduced - 1955/2024-01-06/Lauds/2af868c1": {
+    "policy": "Reduced - 1955",
+    "date": "2024-01-06",
+    "hour": "Lauds",
+    "firstExpected": "99:3 Pópulus ejus, et oves páscuæ ejus: * introíte portas ejus in confessióne, átria ejus in hymnis: confitémini illi.",
+    "firstActual": "99:3 Pópulus ejus, et oves páscuæ ejus: ‡ introíte portas ejus in confessióne, * átria ejus in hymnis: confitémini illi.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm99.txt:3-5 — the psalm corpus explicitly encodes 99:3b as `Pópulus ejus, et oves páscuæ ejus: ‡ (4a) introíte portas ejus in confessióne, * átria ejus in hymnis: confitémini illi.` The compositor preserves that half-verse structure while removing the numeric carry marker; the Perl comparison surface flattens the same line to a single `*` split.",
+    "notes": "Representative entry for the Reduced 1955 Lauds Psalm 99 half-verse family where the corpus keeps a `‡ ... *` structure and Perl flattens it to a single `*` boundary.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "pending"
+  },
   "Reduced - 1955/2024-01-07/Compline/5dc10d20": {
     "policy": "Reduced - 1955",
     "date": "2024-01-07",
@@ -594,6 +618,18 @@
     "class": "rendering-difference",
     "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Prayers.txt:52 — the source encodes the cross as `+++`. Perl renders that token as `✙︎`; the compositor currently normalizes it to `+`. This is a surface glyph-choice difference, not a text-selection error.",
     "notes": "Representative entry for the Reduced 1955 Compline cross-glyph family. Fan out to all matching 1955 Compline rows with the same first-divergence text.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "pending"
+  },
+  "Reduced - 1955/2024-01-07/Lauds/2af868c1": {
+    "policy": "Reduced - 1955",
+    "date": "2024-01-07",
+    "hour": "Lauds",
+    "firstExpected": "99:3 Pópulus ejus, et oves páscuæ ejus: * introíte portas ejus in confessióne, átria ejus in hymnis: confitémini illi.",
+    "firstActual": "99:3 Pópulus ejus, et oves páscuæ ejus: ‡ introíte portas ejus in confessióne, * átria ejus in hymnis: confitémini illi.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm99.txt:3-5 — the psalm corpus explicitly encodes 99:3b as `Pópulus ejus, et oves páscuæ ejus: ‡ (4a) introíte portas ejus in confessióne, * átria ejus in hymnis: confitémini illi.` The compositor preserves that half-verse structure while removing the numeric carry marker; the Perl comparison surface flattens the same line to a single `*` split.",
+    "notes": "Representative entry for the Reduced 1955 Lauds Psalm 99 half-verse family where the corpus keeps a `‡ ... *` structure and Perl flattens it to a single `*` boundary.",
     "resolvedAt": "2026-04-19",
     "commitSha": "pending"
   },
@@ -609,6 +645,18 @@
     "resolvedAt": "2026-04-19",
     "commitSha": "pending"
   },
+  "Reduced - 1955/2024-01-07/Prime/5531f29c": {
+    "policy": "Reduced - 1955",
+    "date": "2024-01-07",
+    "hour": "Prime",
+    "firstExpected": "Psalmus 117 [1]",
+    "firstActual": "Psalmus 53 [1]",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:218 — the `Tridentinum` Sunday Prime row explicitly lists `53,117,118(1-16),118(17-32)`. The compositor therefore keeps Psalm 53 ahead of Psalm 117 on Jan 14 Prime, while the Perl comparison surface skips directly to Psalm 117.",
+    "notes": "Representative entry for the Roman Jan 14 Sunday Prime psalm-table family where the source-backed `Tridentinum` row begins with Psalm 53 before Psalm 117.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "pending"
+  },
   "Reduced - 1955/2024-01-13/Compline/5dc10d20": {
     "policy": "Reduced - 1955",
     "date": "2024-01-13",
@@ -618,6 +666,18 @@
     "class": "rendering-difference",
     "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Prayers.txt:52 — the source encodes the cross as `+++`. Perl renders that token as `✙︎`; the compositor currently normalizes it to `+`. This is a surface glyph-choice difference, not a text-selection error.",
     "notes": "Representative entry for the Reduced 1955 Compline cross-glyph family. Fan out to all matching 1955 Compline rows with the same first-divergence text.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "pending"
+  },
+  "Reduced - 1955/2024-01-13/Lauds/2af868c1": {
+    "policy": "Reduced - 1955",
+    "date": "2024-01-13",
+    "hour": "Lauds",
+    "firstExpected": "99:3 Pópulus ejus, et oves páscuæ ejus: * introíte portas ejus in confessióne, átria ejus in hymnis: confitémini illi.",
+    "firstActual": "99:3 Pópulus ejus, et oves páscuæ ejus: ‡ introíte portas ejus in confessióne, * átria ejus in hymnis: confitémini illi.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm99.txt:3-5 — the psalm corpus explicitly encodes 99:3b as `Pópulus ejus, et oves páscuæ ejus: ‡ (4a) introíte portas ejus in confessióne, * átria ejus in hymnis: confitémini illi.` The compositor preserves that half-verse structure while removing the numeric carry marker; the Perl comparison surface flattens the same line to a single `*` split.",
+    "notes": "Representative entry for the Reduced 1955 Lauds Psalm 99 half-verse family where the corpus keeps a `‡ ... *` structure and Perl flattens it to a single `*` boundary.",
     "resolvedAt": "2026-04-19",
     "commitSha": "pending"
   },
@@ -681,6 +741,78 @@
     "resolvedAt": "2026-04-19",
     "commitSha": "pending"
   },
+  "Reduced - 1955/2024-01-14/Lauds/a4224c0e": {
+    "policy": "Reduced - 1955",
+    "date": "2024-01-14",
+    "hour": "Lauds",
+    "firstExpected": "Ant. Allelúja.",
+    "firstActual": "Ant. Allelúja, * Dóminus regnávit, decórem índuit, allelúja, allelúja.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:1-6 — the Day0 `Laudes1` psalter-major wrapper carries the full Sunday antiphon `Allelúja, * Dóminus regnávit, decórem índuit, allelúja, allelúja.` The compositor now emits that source-backed antiphon surface; the Perl comparison surface abbreviates it to incipit-only `Ant. Allelúja.`.",
+    "notes": "Representative entry for the Reduced 1955 Jan 14 Sunday Lauds psalter-major antiphon family where Perl collapses the full Day0 opening to a generic `Ant. Allelúja.` surface.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "pending"
+  },
+  "Reduced - 1955/2024-01-14/None/f178bdcc": {
+    "policy": "Reduced - 1955",
+    "date": "2024-01-14",
+    "hour": "None",
+    "firstExpected": "Ant. Allelúja.",
+    "firstActual": "Ant. Allelúja, * fáciem tuam, Dómine, illúmina super servum tuum, allelúja, allelúja.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:17-19,33-35,49-51 and 227-231 — the Sunday keyed minor-hour sections `[Tertia]`, `[Sexta]`, and `[Nona]` carry the full antiphons `deduc me...`, `tuus sum ego...`, and `fáciem tuam...`, while the `Tridentinum` Sunday rows remain only the psalm-table source. The compositor now materializes that source-backed Sunday antiphon surface; the Perl comparison surface collapses these openings to generic `Ant. Allelúja.`.",
+    "notes": "Representative entry for the Reduced 1955 Jan 14 Sunday keyed `Psalmi minor` family where the source-backed full minor-hour antiphons are flattened by Perl to generic `Ant. Allelúja.` openings.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "pending"
+  },
+  "Reduced - 1955/2024-01-14/Prime/5531f29c": {
+    "policy": "Reduced - 1955",
+    "date": "2024-01-14",
+    "hour": "Prime",
+    "firstExpected": "Psalmus 117 [1]",
+    "firstActual": "Psalmus 53 [1]",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:218 — the `Tridentinum` Sunday Prime row explicitly lists `53,117,118(1-16),118(17-32)`. The compositor therefore keeps Psalm 53 ahead of Psalm 117 on Jan 14 Prime, while the Perl comparison surface skips directly to Psalm 117.",
+    "notes": "Representative entry for the Roman Jan 14 Sunday Prime psalm-table family where the source-backed `Tridentinum` row begins with Psalm 53 before Psalm 117.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "pending"
+  },
+  "Reduced - 1955/2024-01-14/Sext/5e2b4bef": {
+    "policy": "Reduced - 1955",
+    "date": "2024-01-14",
+    "hour": "Sext",
+    "firstExpected": "Ant. Allelúja.",
+    "firstActual": "Ant. Allelúja, * tuus sum ego, salvum me fac, Dómine, allelúja, allelúja.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:17-19,33-35,49-51 and 227-231 — the Sunday keyed minor-hour sections `[Tertia]`, `[Sexta]`, and `[Nona]` carry the full antiphons `deduc me...`, `tuus sum ego...`, and `fáciem tuam...`, while the `Tridentinum` Sunday rows remain only the psalm-table source. The compositor now materializes that source-backed Sunday antiphon surface; the Perl comparison surface collapses these openings to generic `Ant. Allelúja.`.",
+    "notes": "Representative entry for the Reduced 1955 Jan 14 Sunday keyed `Psalmi minor` family where the source-backed full minor-hour antiphons are flattened by Perl to generic `Ant. Allelúja.` openings.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "pending"
+  },
+  "Reduced - 1955/2024-01-14/Terce/50fad344": {
+    "policy": "Reduced - 1955",
+    "date": "2024-01-14",
+    "hour": "Terce",
+    "firstExpected": "Ant. Allelúja.",
+    "firstActual": "Ant. Allelúja, * deduc me, Dómine, in sémitam mandatórum tuórum, allelúja, allelúja.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:17-19,33-35,49-51 and 227-231 — the Sunday keyed minor-hour sections `[Tertia]`, `[Sexta]`, and `[Nona]` carry the full antiphons `deduc me...`, `tuus sum ego...`, and `fáciem tuam...`, while the `Tridentinum` Sunday rows remain only the psalm-table source. The compositor now materializes that source-backed Sunday antiphon surface; the Perl comparison surface collapses these openings to generic `Ant. Allelúja.`.",
+    "notes": "Representative entry for the Reduced 1955 Jan 14 Sunday keyed `Psalmi minor` family where the source-backed full minor-hour antiphons are flattened by Perl to generic `Ant. Allelúja.` openings.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "pending"
+  },
+  "Reduced - 1955/2024-01-14/Vespers/557f2156": {
+    "policy": "Reduced - 1955",
+    "date": "2024-01-14",
+    "hour": "Vespers",
+    "firstExpected": "Ant. Dixit Dóminus. ‡",
+    "firstActual": "Ant. Dixit Dóminus * Dómino meo: Sede a dextris meis.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:15-20 — the Day0 `Vespera` psalter-major wrapper carries the full Sunday antiphon `Dixit Dóminus * Dómino meo: Sede a dextris meis.` The compositor preserves that source-backed opening; the Perl comparison surface abbreviates it to incipit-only `Ant. Dixit Dóminus. ‡`.",
+    "notes": "Representative entry for the Reduced 1955 Jan 14 Sunday Vespers psalter-major antiphon family where Perl shortens the full Day0 opening to an incipit-only surface.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "pending"
+  },
   "Rubrics 1960 - 1960/2024-01-01/Compline/57de2841": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2024-01-01",
@@ -691,6 +823,18 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Rubricae.txt:129 — the corpus source carries `«Pater Noster»` with guillemets. Both Perl (strip) and compositor (preserve) are defensible renderings of the same source token; neither is liturgically wrong. Phase 3 §3h defers to the corpus author's formatting.",
     "notes": "Pattern affects every Compline row across every policy and date. This single entry is representative; the full row-key fan-out is a follow-up bulk-populate task (see ADJUDICATION_LOG.md).",
     "resolvedAt": "2026-04-18",
+    "commitSha": "pending"
+  },
+  "Rubrics 1960 - 1960/2024-01-01/Lauds/2af868c1": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-01-01",
+    "hour": "Lauds",
+    "firstExpected": "99:3 Pópulus ejus, et oves páscuæ ejus: * introíte portas ejus in confessióne, átria ejus in hymnis: confitémini illi.",
+    "firstActual": "99:3 Pópulus ejus, et oves páscuæ ejus: ‡ introíte portas ejus in confessióne, * átria ejus in hymnis: confitémini illi.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm99.txt:3-5 — the psalm corpus explicitly encodes 99:3b as `Pópulus ejus, et oves páscuæ ejus: ‡ (4a) introíte portas ejus in confessióne, * átria ejus in hymnis: confitémini illi.` The compositor preserves that half-verse structure while removing the numeric carry marker; the Perl comparison surface flattens the same line to a single `*` split.",
+    "notes": "Representative entry for the Rubrics 1960 Lauds Psalm 99 half-verse family where the corpus keeps a `‡ ... *` structure and Perl flattens it to a single `*` boundary.",
+    "resolvedAt": "2026-04-19",
     "commitSha": "pending"
   },
   "Rubrics 1960 - 1960/2024-01-01/Lauds/9feb093a": {
@@ -777,15 +921,15 @@
     "resolvedAt": "2026-04-18",
     "commitSha": "pending"
   },
-  "Rubrics 1960 - 1960/2024-01-06/Vespers/3965f59d": {
+  "Rubrics 1960 - 1960/2024-01-06/Lauds/2af868c1": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2024-01-06",
-    "hour": "Vespers",
-    "firstExpected": "Ant. Jacob autem * génuit Joseph virum Maríæ; de qua natus est Jesus, qui vocátur Christus.",
-    "firstActual": "Ant. Ante lucíferum génitus, * et ante sǽcula, Dóminus Salvátor noster hódie mundo appáruit.",
+    "hour": "Lauds",
+    "firstExpected": "99:3 Pópulus ejus, et oves páscuæ ejus: * introíte portas ejus in confessióne, átria ejus in hymnis: confitémini illi.",
+    "firstActual": "99:3 Pópulus ejus, et oves páscuæ ejus: ‡ introíte portas ejus in confessióne, * átria ejus in hymnis: confitémini illi.",
     "class": "perl-bug",
-    "citation": "upstream/web/www/horas/Help/Rubrics/General Rubrics.html:74-82, 465-469 and upstream/web/www/horas/Help/Rubrics/Tables 1960.txt:49, 75-79, 118-121 and upstream/web/www/horas/Latin/Sancti/01-06.txt:1-18 — under the 1960 concurrence rules, Epiphany is a feast of the 1st class while Holy Family is a feast of the 2nd class; in concurrence the Vespers of the higher class prevail. The winning Phase 2 refs therefore remain Epiphany’s own `Ant Vespera`, while the Perl comparison surface incorrectly switches to Holy Family’s first-Vespers antiphons.",
-    "notes": "Representative entry for the Rubrics 1960 Jan 6 Vespers concurrence family where the higher-class Epiphany office keeps Vespers ownership against Holy Family's first Vespers.",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm99.txt:3-5 — the psalm corpus explicitly encodes 99:3b as `Pópulus ejus, et oves páscuæ ejus: ‡ (4a) introíte portas ejus in confessióne, * átria ejus in hymnis: confitémini illi.` The compositor preserves that half-verse structure while removing the numeric carry marker; the Perl comparison surface flattens the same line to a single `*` split.",
+    "notes": "Representative entry for the Rubrics 1960 Lauds Psalm 99 half-verse family where the corpus keeps a `‡ ... *` structure and Perl flattens it to a single `*` boundary.",
     "resolvedAt": "2026-04-19",
     "commitSha": "pending"
   },
@@ -837,6 +981,18 @@
     "resolvedAt": "2026-04-19",
     "commitSha": "pending"
   },
+  "Rubrics 1960 - 1960/2024-01-06/Vespers/3965f59d": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-01-06",
+    "hour": "Vespers",
+    "firstExpected": "Ant. Jacob autem * génuit Joseph virum Maríæ; de qua natus est Jesus, qui vocátur Christus.",
+    "firstActual": "Ant. Ante lucíferum génitus, * et ante sǽcula, Dóminus Salvátor noster hódie mundo appáruit.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Help/Rubrics/General Rubrics.html:74-82, 465-469 and upstream/web/www/horas/Help/Rubrics/Tables 1960.txt:49, 75-79, 118-121 and upstream/web/www/horas/Latin/Sancti/01-06.txt:1-18 — under the 1960 concurrence rules, Epiphany is a feast of the 1st class while Holy Family is a feast of the 2nd class; in concurrence the Vespers of the higher class prevail. The winning Phase 2 refs therefore remain Epiphany’s own `Ant Vespera`, while the Perl comparison surface incorrectly switches to Holy Family’s first-Vespers antiphons.",
+    "notes": "Representative entry for the Rubrics 1960 Jan 6 Vespers concurrence family where the higher-class Epiphany office keeps Vespers ownership against Holy Family's first Vespers.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "pending"
+  },
   "Rubrics 1960 - 1960/2024-01-07/Compline/57de2841": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2024-01-07",
@@ -847,6 +1003,18 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Rubricae.txt:129 — the corpus source carries `«Pater Noster»` with guillemets. Both Perl (strip) and compositor (preserve) are defensible renderings of the same source token; neither is liturgically wrong. Phase 3 §3h defers to the corpus author's formatting.",
     "notes": "Pattern affects every Compline row across every policy and date. This single entry is representative; the full row-key fan-out is a follow-up bulk-populate task (see ADJUDICATION_LOG.md).",
     "resolvedAt": "2026-04-18",
+    "commitSha": "pending"
+  },
+  "Rubrics 1960 - 1960/2024-01-07/Lauds/2af868c1": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-01-07",
+    "hour": "Lauds",
+    "firstExpected": "99:3 Pópulus ejus, et oves páscuæ ejus: * introíte portas ejus in confessióne, átria ejus in hymnis: confitémini illi.",
+    "firstActual": "99:3 Pópulus ejus, et oves páscuæ ejus: ‡ introíte portas ejus in confessióne, * átria ejus in hymnis: confitémini illi.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm99.txt:3-5 — the psalm corpus explicitly encodes 99:3b as `Pópulus ejus, et oves páscuæ ejus: ‡ (4a) introíte portas ejus in confessióne, * átria ejus in hymnis: confitémini illi.` The compositor preserves that half-verse structure while removing the numeric carry marker; the Perl comparison surface flattens the same line to a single `*` split.",
+    "notes": "Representative entry for the Rubrics 1960 Lauds Psalm 99 half-verse family where the corpus keeps a `‡ ... *` structure and Perl flattens it to a single `*` boundary.",
+    "resolvedAt": "2026-04-19",
     "commitSha": "pending"
   },
   "Rubrics 1960 - 1960/2024-01-07/Matins/29ec2a3d": {
@@ -921,6 +1089,18 @@
     "resolvedAt": "2026-04-18",
     "commitSha": "pending"
   },
+  "Rubrics 1960 - 1960/2024-01-13/Lauds/2af868c1": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-01-13",
+    "hour": "Lauds",
+    "firstExpected": "99:3 Pópulus ejus, et oves páscuæ ejus: * introíte portas ejus in confessióne, átria ejus in hymnis: confitémini illi.",
+    "firstActual": "99:3 Pópulus ejus, et oves páscuæ ejus: ‡ introíte portas ejus in confessióne, * átria ejus in hymnis: confitémini illi.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm99.txt:3-5 — the psalm corpus explicitly encodes 99:3b as `Pópulus ejus, et oves páscuæ ejus: ‡ (4a) introíte portas ejus in confessióne, * átria ejus in hymnis: confitémini illi.` The compositor preserves that half-verse structure while removing the numeric carry marker; the Perl comparison surface flattens the same line to a single `*` split.",
+    "notes": "Representative entry for the Rubrics 1960 Lauds Psalm 99 half-verse family where the corpus keeps a `‡ ... *` structure and Perl flattens it to a single `*` boundary.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "pending"
+  },
   "Rubrics 1960 - 1960/2024-01-13/None/318cf47a": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2024-01-13",
@@ -979,6 +1159,42 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Rubricae.txt:129 — the corpus source carries `«Pater Noster»` with guillemets. Both Perl (strip) and compositor (preserve) are defensible renderings of the same source token; neither is liturgically wrong. Phase 3 §3h defers to the corpus author's formatting.",
     "notes": "Pattern affects every Compline row across every policy and date. This single entry is representative; the full row-key fan-out is a follow-up bulk-populate task (see ADJUDICATION_LOG.md).",
     "resolvedAt": "2026-04-18",
+    "commitSha": "pending"
+  },
+  "Rubrics 1960 - 1960/2024-01-14/Lauds/2af868c1": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-01-14",
+    "hour": "Lauds",
+    "firstExpected": "99:3 Pópulus ejus, et oves páscuæ ejus: * introíte portas ejus in confessióne, átria ejus in hymnis: confitémini illi.",
+    "firstActual": "99:3 Pópulus ejus, et oves páscuæ ejus: ‡ introíte portas ejus in confessióne, * átria ejus in hymnis: confitémini illi.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm99.txt:3-5 — the psalm corpus explicitly encodes 99:3b as `Pópulus ejus, et oves páscuæ ejus: ‡ (4a) introíte portas ejus in confessióne, * átria ejus in hymnis: confitémini illi.` The compositor preserves that half-verse structure while removing the numeric carry marker; the Perl comparison surface flattens the same line to a single `*` split.",
+    "notes": "Representative entry for the Rubrics 1960 Lauds Psalm 99 half-verse family where the corpus keeps a `‡ ... *` structure and Perl flattens it to a single `*` boundary.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "pending"
+  },
+  "Rubrics 1960 - 1960/2024-01-14/Prime/5531f29c": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-01-14",
+    "hour": "Prime",
+    "firstExpected": "Psalmus 117 [1]",
+    "firstActual": "Psalmus 53 [1]",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:218 — the `Tridentinum` Sunday Prime row explicitly lists `53,117,118(1-16),118(17-32)`. The compositor therefore keeps Psalm 53 ahead of Psalm 117 on Jan 14 Prime, while the Perl comparison surface skips directly to Psalm 117.",
+    "notes": "Representative entry for the Roman Jan 14 Sunday Prime psalm-table family where the source-backed `Tridentinum` row begins with Psalm 53 before Psalm 117.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "pending"
+  },
+  "Rubrics 1960 - 1960/2024-01-14/Vespers/019555e4": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-01-14",
+    "hour": "Vespers",
+    "firstExpected": "Ant. Dixit Dóminus * Dómino meo: Sede a dextris meis. ‡",
+    "firstActual": "Ant. Dixit Dóminus * Dómino meo: Sede a dextris meis.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:15-20 — the Day0 `Vespera` source carries the full opening antiphon `Dixit Dóminus * Dómino meo: Sede a dextris meis.` without a trailing `‡`. The compositor preserves the corpus text; the Perl comparison surface adds an unsupported trailing continuation marker.",
+    "notes": "Representative entry for the Rubrics 1960 Jan 14 Sunday Vespers surface family where Perl adds a trailing `‡` that is not present in the psalter-major source.",
+    "resolvedAt": "2026-04-19",
     "commitSha": "pending"
   }
 }

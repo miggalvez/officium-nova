@@ -75,6 +75,55 @@ describe('swapLanguageSegment', () => {
     ]);
   });
 
+  it('materializes Sunday Tridentinum antiphons from the keyed minor-hour sections', () => {
+    const index = new InMemoryTextIndex();
+    index.addFile({
+      path: 'horas/Latin/Psalterium/Psalmi/Psalmi minor.txt',
+      sections: [
+        {
+          header: 'Tridentinum',
+          content: [
+            {
+              type: 'text',
+              value: 'Tertia Dominica=Allelúja, * allelúja, allelúja;;118(33-48),118(49-64),118(65-80)'
+            }
+          ],
+          startLine: 1,
+          endLine: 1
+        },
+        {
+          header: 'Tertia',
+          content: [
+            {
+              type: 'text',
+              value:
+                'Dominica = Allelúja, * deduc me, Dómine, in sémitam mandatórum tuórum, allelúja, allelúja.'
+            }
+          ],
+          startLine: 2,
+          endLine: 2
+        }
+      ]
+    });
+
+    const resolved = resolveReference(
+      index,
+      {
+        path: 'horas/Latin/Psalterium/Psalmi/Psalmi minor',
+        section: 'Tridentinum',
+        selector: 'Tertia Dominica#antiphon'
+      },
+      { languages: ['Latin'] }
+    );
+
+    expect(resolved.Latin?.content).toEqual([
+      {
+        type: 'text',
+        value: 'Allelúja, * deduc me, Dómine, in sémitam mandatórum tuórum, allelúja, allelúja.'
+      }
+    ]);
+  });
+
   it('trims the first Psalm 94 tail segment for Invit2 materialization before antiphon insertion', () => {
     const materialized = materializeInvitatoryContent(
       [

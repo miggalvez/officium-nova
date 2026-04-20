@@ -263,6 +263,118 @@ the ledger as `unadjudicated` code work. What remains after this batch
 is narrower: genuine Roman January antiphon / verse-shape / ordering
 families, not another unresolved doxology decision.
 
+### 2026-04-19 — Pattern: Roman Lauds Psalm 99 half-verse structure (perl-bug)
+
+**Ledger signal.** Under both `Reduced - 1955` and
+`Rubrics 1960 - 1960`, the January Roman Lauds rows for Jan `1`, `6`,
+`7`, and `13` now first diverge at Psalm 99 line `99:3b`. Perl flattens
+the line to `... * introíte ...`, while the compositor emits
+`... ‡ introíte ... * ...`. After the Jan `14` Sunday psalter work, the
+same Rubrics 1960 Jan `14` Lauds row also lands in this family.
+
+**Root cause.** The compositor is now preserving the corpus half-verse
+shape, not inventing a new marker rule. `Psalm99.txt` encodes the source
+as `Pópulus ejus, et oves páscuæ ejus: ‡ (4a) introíte portas ejus in
+confessióne, * átria ejus in hymnis: confitémini illi.` The numeric
+carry marker is normalized away, but the `‡ ... *` structure remains.
+The Perl comparison surface flattens that same source line to a single
+`*` split.
+
+**Resolution.** Class `perl-bug`. Representative row-level entries were
+added for the stable Roman Lauds key-hash `2af868c1` under both
+`Reduced - 1955` and `Rubrics 1960 - 1960`, then fanned out across the
+matching current January ledger rows.
+
+**Citation.** `upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm99.txt:3-5`.
+
+**Impact.** Converts the remaining shared Roman Lauds continuation-marker
+family from `unadjudicated` to source-backed `perl-bug`, dropping the
+current unadjudicated totals to `462` for `Reduced - 1955` and `457` for
+`Rubrics 1960 - 1960`.
+
+### 2026-04-19 — Pattern: Roman Jan 14 Sunday Prime psalm table begins with Psalm 53 (perl-bug)
+
+**Ledger signal.** Under both `Reduced - 1955` and
+`Rubrics 1960 - 1960`, Jan `14` Prime now first diverges at the opening
+heading: Perl expects `Psalmus 117 [1]`, while the compositor emits the
+source-backed `Psalmus 53 [1]`.
+
+**Root cause.** This is not a routing regression. The Roman Sunday Prime
+`Tridentinum` row in `Psalmi minor.txt` explicitly lists the psalm order
+`53,117,118(1-16),118(17-32)`. Once the Jan `14` explicit-antiphon
+materialization stopped collapsing the wrapper surface, the compositor
+correctly exposed Psalm 53 as the first heading. The Perl comparison
+surface skips directly to Psalm 117.
+
+**Resolution.** Class `perl-bug`. Representative row-level entries were
+added for the stable Jan `14` Prime key-hash `5531f29c` under both Roman
+policies.
+
+**Citation.** `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:218`.
+
+**Impact.** Removes Jan `14` Prime from the Roman engine backlog; the
+remaining Jan `14` Roman rows are now either source-backed surface
+families or later-block seams.
+
+### 2026-04-19 — Pattern: Reduced 1955 Jan 14 Sunday psalter antiphon surface is flattened by the Perl render surface (perl-bug)
+
+**Ledger signal.** Under `Reduced - 1955`, Jan `14` `Lauds`, `Terce`,
+`Sext`, `None`, and `Vespers` no longer fail on generic `Allelúja`
+leakage or wrapper duplication. They now fail because Perl abbreviates
+the Sunday psalter antiphons to `Ant. Allelúja.` or `Ant. Dixit
+Dóminus. ‡`, while the compositor emits the full source-backed psalter
+surface.
+
+**Root cause.** The Jan `14` Phase 3 fix now materializes the Roman
+Sunday psalter exactly where the source stores it:
+
+- `Psalmi major.txt` `Day0 Laudes1` / `Day0 Vespera` carry the full
+  Sunday Lauds and Vespers antiphons.
+- `Psalmi minor.txt` keyed Sunday sections `[Tertia]`, `[Sexta]`, and
+  `[Nona]` carry the full minor-hour antiphons `deduc me...`, `tuus sum
+  ego...`, and `fáciem tuam...`, while the `Tridentinum` rows remain the
+  psalm-table source only.
+
+The compositor now emits that corpus-backed Sunday surface. The legacy
+Perl rendering continues to collapse these rows to incipit-only or
+generic `Allelúja` openings.
+
+**Resolution.** Class `perl-bug`. Row-level entries were added for the
+stable key-hashes `a4224c0e`, `50fad344`, `5e2b4bef`, `f178bdcc`, and
+`557f2156`.
+
+**Citation.**
+
+- `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:1-6`
+- `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:15-20`
+- `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:17-19,33-35,49-51,227-231`
+
+**Impact.** Closes the exposed `Reduced - 1955` Jan `14` Sunday
+antiphon-surface family as adjudicated source-backed disagreement rather
+than more compositor work.
+
+### 2026-04-19 — Pattern: Rubrics 1960 Jan 14 Vespers adds an unsupported trailing continuation marker (perl-bug)
+
+**Ledger signal.** After the Sunday psalter-major fix, the remaining
+`Rubrics 1960 - 1960` Jan `14` `Vespers` opening divergence is
+punctuation-only: Perl expects `Ant. Dixit Dóminus * Dómino meo: Sede a
+dextris meis. ‡`, while the compositor emits the same source text
+without the trailing `‡`.
+
+**Root cause.** The Sunday Day0 `Vespera` source carries the full
+opening antiphon without a trailing continuation marker. The compositor
+preserves that source-backed text. The Perl comparison surface appends
+an unsupported trailing `‡`.
+
+**Resolution.** Class `perl-bug`. A row-level entry was added for the
+stable key-hash `019555e4`.
+
+**Citation.** `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:15-20`.
+
+**Impact.** Removes the last Jan `14` Rubrics 1960 opening-antiphon
+surface row from the engine backlog; the remaining Jan `14` `1960`
+minor-hour rows now fail later at the oration / later-block seam.
+
 ### 2026-04-19 — Pattern: Roman January second-Vespers antiphon ownership (engine-bug, fixed)
 
 **Ledger signal.** `Reduced - 1955` and `Rubrics 1960 - 1960` both

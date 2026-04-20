@@ -106,6 +106,15 @@ function renderRuns(
     .join('');
 }
 
+function slotLines(
+  composed: ReturnType<typeof composeHour>,
+  slot: 'psalmody' | 'hymn',
+  language: string
+): readonly string[] {
+  const section = composed.sections.find((candidate) => candidate.slot === slot);
+  return section?.lines.map((line) => renderRuns(line, language)) ?? [];
+}
+
 describe('composeHour', () => {
   it('resolves a single-ref slot and emits a Section with per-language lines', () => {
     const corpus = new InMemoryTextIndex();
@@ -914,6 +923,132 @@ describe('composeHour', () => {
       'Ante lucíferum génitus, et ante sǽcula, Dóminus Salvátor noster hódie mundo appáruit.'
     );
     expect(psalmodyLines.filter((line) => line.startsWith('Ante lucíferum génitus'))).toHaveLength(2);
+  });
+
+  it('keeps the Sunday keyed Psalmi minor opening at Terce while still shortening Prime in pre-1960', () => {
+    const corpus = new InMemoryTextIndex();
+    corpus.addFile(
+      makeFileMulti('horas/Latin/Psalterium/Psalmi/Psalmi minor', [
+        {
+          header: 'Tridentinum',
+          content: [
+            {
+              type: 'text',
+              value: 'Prima Dominica=Allelúja, * allelúja, allelúja;;53,117,118(1-16),118(17-32)'
+            },
+            {
+              type: 'text',
+              value: 'Tertia Dominica=Allelúja, * allelúja, allelúja;;118(33-48),118(49-64),118(65-80)'
+            }
+          ]
+        },
+        {
+          header: 'Prima',
+          content: [
+            {
+              type: 'text',
+              value:
+                'Dominica = Allelúja, * confitémini Dómino, quóniam in sǽculum misericórdia ejus, allelúja, allelúja.'
+            }
+          ]
+        },
+        {
+          header: 'Tertia',
+          content: [
+            {
+              type: 'text',
+              value:
+                'Dominica = Allelúja, * deduc me, Dómine, in sémitam mandatórum tuórum, allelúja, allelúja.'
+            }
+          ]
+        }
+      ])
+    );
+    corpus.addFile(
+      makeFile('horas/Latin/Psalterium/Psalmorum/Psalm53', '__preamble', [
+        { type: 'text', value: '53:3 Deus, in nómine tuo salvum me fac.' }
+      ])
+    );
+    corpus.addFile(
+      makeFile('horas/Latin/Psalterium/Psalmorum/Psalm118', '__preamble', [
+        { type: 'text', value: '118:33 Legem pone mihi, Dómine.' }
+      ])
+    );
+    corpus.addFile(
+      makeFile('horas/Latin/Psalterium/Common/Prayers', 'Gloria', [
+        { type: 'verseMarker', marker: 'V.', text: 'Glória Patri.' },
+        { type: 'verseMarker', marker: 'R.', text: 'Sicut erat.' }
+      ])
+    );
+
+    const reduced1955Version: ResolvedVersion = {
+      ...stubVersion,
+      handle: 'Reduced - 1955' as never
+    };
+
+    const composedPrime = composeHour({
+      corpus,
+      summary: buildSummary({
+        hour: 'prime',
+        slots: {
+          psalmody: {
+            kind: 'psalmody',
+            psalms: [
+              {
+                antiphonRef: {
+                  path: 'horas/Latin/Psalterium/Psalmi/Psalmi minor',
+                  section: 'Tridentinum',
+                  selector: 'Prima Dominica#antiphon'
+                },
+                psalmRef: {
+                  path: 'horas/Latin/Psalterium/Psalmorum/Psalm53',
+                  section: '__preamble'
+                }
+              }
+            ]
+          }
+        },
+        directives: []
+      }, { version: reduced1955Version }),
+      version: reduced1955Version,
+      hour: 'prime',
+      options: { languages: ['Latin'] }
+    });
+
+    const composedTerce = composeHour({
+      corpus,
+      summary: buildSummary({
+        hour: 'terce',
+        slots: {
+          psalmody: {
+            kind: 'psalmody',
+            psalms: [
+              {
+                antiphonRef: {
+                  path: 'horas/Latin/Psalterium/Psalmi/Psalmi minor',
+                  section: 'Tridentinum',
+                  selector: 'Tertia Dominica#antiphon'
+                },
+                psalmRef: {
+                  path: 'horas/Latin/Psalterium/Psalmorum/Psalm118',
+                  section: '__preamble',
+                  selector: '118(33-48)'
+                }
+              }
+            ]
+          }
+        },
+        directives: []
+      }, { version: reduced1955Version }),
+      version: reduced1955Version,
+      hour: 'terce',
+      options: { languages: ['Latin'] }
+    });
+
+    expect(slotLines(composedPrime, 'psalmody', 'Latin')[0]).toBe('Allelúja.');
+    expect(slotLines(composedTerce, 'psalmody', 'Latin')[0]).toBe(
+      'Allelúja, * deduc me, Dómine, in sémitam mandatórum tuórum, allelúja, allelúja.'
+    );
   });
 
   it('uses the parser fallback chain for deferred nodes on a resolved corpus', () => {

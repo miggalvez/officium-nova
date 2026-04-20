@@ -21,6 +21,7 @@ import { resolveReference } from './resolve/reference-resolver.js';
 import type { ComposedHour, ComposeOptions, ComposeWarning, Section } from './types/composed-hour.js';
 
 const MAX_DEFERRED_DEPTH = 8;
+const PSALMI_MINOR_SUFFIX = '/Psalterium/Psalmi/Psalmi minor';
 const GLORIA_PATRI_MACRO: Extract<TextContent, { type: 'macroRef' }> = {
   type: 'macroRef',
   name: 'Gloria'
@@ -254,7 +255,8 @@ function composeSlot(args: ComposeSlotArgs): Section | undefined {
                 ? normalizeOpeningPsalmodyAntiphonContent(
                     transformed,
                     args.hour,
-                    args.context.version
+                    args.context.version,
+                    ref
                   )
                 : transformed
           )
@@ -318,7 +320,8 @@ function composeSlot(args: ComposeSlotArgs): Section | undefined {
                 ? normalizeOpeningPsalmodyAntiphonContent(
                     withHymnDoxology,
                     args.hour,
-                    args.context.version
+                    args.context.version,
+                    ref
                   )
                 : withHymnDoxology
           )
@@ -606,12 +609,16 @@ function appendExpandedPsalmWrapper(
   args: ExpandPsalmWrapperArgs
 ): void {
   let localPsalmOffset = 0;
-  const suppressFirstInlineAntiphon =
-    args.suppressFirstInlineAntiphon || endsWithStandaloneAntiphon(target);
   for (const node of content) {
     if (node.type !== 'psalmRef') {
       continue;
     }
+    const priorAntiphon = lastStandaloneAntiphonText(target);
+    const suppressFirstInlineAntiphon =
+      args.suppressFirstInlineAntiphon ||
+      (priorAntiphon !== undefined &&
+        node.antiphon !== undefined &&
+        normalizeRepeatedAntiphonText(priorAntiphon) === normalizeRepeatedAntiphonText(node.antiphon));
     const psalmNode =
       suppressFirstInlineAntiphon && localPsalmOffset === 0 && node.antiphon
         ? { ...node, antiphon: undefined }
@@ -681,17 +688,6 @@ function splitLeadingPsalmAntiphon(
   return [[], content];
 }
 
-function endsWithStandaloneAntiphon(content: readonly TextContent[]): boolean {
-  for (let index = content.length - 1; index >= 0; index -= 1) {
-    const node = content[index];
-    if (!node || node.type === 'separator') {
-      continue;
-    }
-    return node.type === 'verseMarker' && node.marker === 'Ant.';
-  }
-  return false;
-}
-
 /**
  * Scan the expanded psalm content for the first text node whose value
  * begins with a `N:M` verse-number prefix (Perl's psalm verse format).
@@ -716,6 +712,17 @@ function extractPsalmNumberFromContent(
 
 function withPsalmGloriaPatri(content: readonly TextContent[]): readonly TextContent[] {
   return Object.freeze([...content, GLORIA_PATRI_MACRO]);
+}
+
+function lastStandaloneAntiphonText(content: readonly TextContent[]): string | undefined {
+  for (let index = content.length - 1; index >= 0; index -= 1) {
+    const node = content[index];
+    if (!node || node.type === 'separator') {
+      continue;
+    }
+    return node.type === 'verseMarker' && node.marker === 'Ant.' ? node.text : undefined;
+  }
+  return undefined;
 }
 
 function normalizeRepeatedAntiphonContent(
@@ -751,9 +758,10 @@ function normalizeRepeatedAntiphonText(text: string): string {
 function normalizeOpeningPsalmodyAntiphonContent(
   content: readonly TextContent[],
   hour: HourName,
-  version: ResolvedVersion
+  version: ResolvedVersion,
+  ref: TextReference
 ): readonly TextContent[] {
-  if (!isMinorHour(hour) || version.handle.includes('1960')) {
+  if (!shouldNormalizeOpeningPsalmodyAntiphon(hour, version, ref)) {
     return content;
   }
 
@@ -778,6 +786,22 @@ function normalizeOpeningPsalmodyAntiphonContent(
     }
   }
   return out;
+}
+
+function shouldNormalizeOpeningPsalmodyAntiphon(
+  hour: HourName,
+  version: ResolvedVersion,
+  ref: TextReference
+): boolean {
+  if (!isMinorHour(hour) || version.handle.includes('1960')) {
+    return false;
+  }
+
+  if (!ref.path.endsWith(PSALMI_MINOR_SUFFIX)) {
+    return true;
+  }
+
+  return hour === 'prime';
 }
 
 function normalizeOpeningPsalmodyAntiphonText(text: string): string {
