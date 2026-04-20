@@ -101,12 +101,13 @@ Every tranche must follow this loop:
    - If Phase 2 behavior changed, also run:
      - `pnpm -C packages/rubrical-engine compare:phase-2h-perl-fixtures`
 
-6. Commit the tranche.
-   - Every completed tranche ends in a local git commit.
-   - Do not leave a completed tranche uncommitted.
+6. Commit and push the tranche.
+   - Every completed tranche ends in a local git commit and push.
+   - Do not leave a completed tranche uncommitted or unpushed.
    - One tranche = one coherent commit with code, tests, docs, and
      adjudications together.
-   - Commit only when the tranche is verified and in a good stopping state.
+   - Commit and push only when the tranche is verified and in a good stopping
+     state.
 
 7. Name the next family before ending the session.
    - Summarize:
