@@ -683,6 +683,11 @@ engine-bug fixes:
 - **Representative adjudications** landed in `adjudications.json`:
   current live sidecar count is 53 row mappings: 35 `perl-bug`,
   17 `rendering-difference`, and 1 `engine-bug`.
+- **Progress reporting** lives in
+  `pnpm -C packages/compositor report:phase-3-progress`, which reads the
+  three generated divergence ledgers and prints the current per-policy
+  `unadjudicated` / adjudicated counts together with the matching-prefix
+  metrics.
 - **Pattern catalogue** documented for follow-up sessions:
   Matins Invitatorium Psalm 94 responsorial structure and wrong-psalm
   selection under 1960 for Christmas Octave (Phase 2
@@ -756,8 +761,10 @@ The remainder of Phase 3 should run in four lanes, in this order:
    interleaved randomly with Roman work.
 4. **Stabilization and sign-off.** When the ledgers are mostly adjudication
    work and row churn has slowed materially, commit the 312 Appendix-A
-   snapshots, run `verify:phase-3-signoff`, prune stale sidecar entries if
-   needed, and drive each policy below the <10 `unadjudicated` threshold.
+   snapshots, run `verify:phase-3-signoff` (which now enforces the
+   per-policy <10 `unadjudicated` threshold as well as the source-file and
+   adjudication hygiene checks), prune stale sidecar entries if needed, and
+   drive each policy below the <10 `unadjudicated` threshold.
 
 #### 19.9.3 Definition of done for a family
 

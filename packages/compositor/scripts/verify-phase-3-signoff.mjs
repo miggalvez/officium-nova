@@ -1,10 +1,15 @@
-import { readFileSync, readdirSync, statSync } from 'node:fs';
-import { join, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { readFileSync } from 'node:fs';
 
-const PACKAGE_ROOT = resolve(fileURLToPath(new URL('..', import.meta.url)));
-const SRC_ROOT = resolve(PACKAGE_ROOT, 'src');
-const ADJUDICATIONS_FILE = resolve(PACKAGE_ROOT, 'test/divergence/adjudications.json');
+import {
+  PHASE3_UNADJUDICATED_THRESHOLD,
+  SRC_ROOT,
+  findPendingCommitShaKeys,
+  listSourceFiles,
+  loadAdjudications,
+  loadPhase3LedgerSummaries,
+  rowsToClearForThreshold
+} from './phase-3-ledgers.mjs';
+
 const MAX_LINES = 800;
 
 const sourceFiles = listSourceFiles(SRC_ROOT);
@@ -15,12 +20,14 @@ const lineFailures = sourceFiles
   }))
   .filter((entry) => entry.lineCount > MAX_LINES);
 
-const adjudications = JSON.parse(readFileSync(ADJUDICATIONS_FILE, 'utf8'));
-const pendingCommitSha = Object.entries(adjudications)
-  .filter(([, value]) => value && typeof value === 'object' && value.commitSha === 'pending')
-  .map(([key]) => key);
+const adjudications = loadAdjudications();
+const pendingCommitSha = findPendingCommitShaKeys(adjudications);
+const ledgerSummaries = loadPhase3LedgerSummaries();
+const thresholdFailures = ledgerSummaries.filter(
+  (summary) => summary.adjudicationBreakdown.unadjudicated >= PHASE3_UNADJUDICATED_THRESHOLD
+);
 
-if (lineFailures.length === 0 && pendingCommitSha.length === 0) {
+if (lineFailures.length === 0 && pendingCommitSha.length === 0 && thresholdFailures.length === 0) {
   console.log('Phase 3 sign-off verification passed.');
   process.exit(0);
 }
@@ -32,6 +39,14 @@ if (lineFailures.length > 0) {
   }
 }
 
+if (thresholdFailures.length > 0) {
+  console.error(`Policies over the Phase 3 sign-off threshold (<${PHASE3_UNADJUDICATED_THRESHOLD} unadjudicated required):`);
+  for (const failure of thresholdFailures) {
+    const unadjudicated = failure.adjudicationBreakdown.unadjudicated;
+    console.error(`- ${failure.policy}: ${unadjudicated} unadjudicated (${rowsToClearForThreshold(unadjudicated)} rows must clear)`);
+  }
+}
+
 if (pendingCommitSha.length > 0) {
   console.error('Adjudications with commitSha \"pending\":');
   for (const key of pendingCommitSha) {
@@ -40,27 +55,3 @@ if (pendingCommitSha.length > 0) {
 }
 
 process.exit(1);
-
-function listSourceFiles(root) {
-  const out = [];
-
-  for (const entry of readdirSync(root, { withFileTypes: true })) {
-    const path = join(root, entry.name);
-    if (entry.isDirectory()) {
-      out.push(...listSourceFiles(path));
-      continue;
-    }
-
-    if (!entry.isFile() || !/\.tsx?$/u.test(entry.name)) {
-      continue;
-    }
-
-    if (!statSync(path).isFile()) {
-      continue;
-    }
-
-    out.push(path);
-  }
-
-  return out.sort((left, right) => left.localeCompare(right));
-}
