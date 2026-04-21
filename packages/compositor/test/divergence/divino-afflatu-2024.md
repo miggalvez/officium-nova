@@ -14,7 +14,7 @@ This file tracks the current **legacy Perl rendered Hour vs compositor** compari
 - Exact-match hours: `0`
 - Divergent hours: `496`
 - Divergent dates: `62`
-- Best matching prefix before divergence: `4` lines
+- Best matching prefix before divergence: `5` lines
 - Average matching prefix before divergence: `2.7` lines
 - Divergence breakdown by hour:
   - `Matins`: `62/62`

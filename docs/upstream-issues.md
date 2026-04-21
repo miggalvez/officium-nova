@@ -718,6 +718,57 @@ first diverges at `Psalmus 118(1-16) [2]` (Perl) vs
 | Reduced - 1955 | 2024-01-28 | Prime | `2e28d92b` |
 | Rubrics 1960 - 1960 | 2024-01-28 | Prime | `67634c25` |
 
+### 2026-04-20 — Roman 1955/1960 Triduum Thursday-Friday Compline keeps the pre-1955 special block in Perl
+
+**Classification.** `perl-bug`
+
+**Summary.** On Holy Thursday and Good Friday under the Roman `1955`
+and `1960` policies, the compositor now follows the temporal
+`Special Completorium` source block directly. That source explicitly
+collapses the older long block to the short `Vísita, quǽsumus...`
+close for `rubrica 1955` / `rubrica 1960`, but the legacy Perl render
+surface still opens with the older heading `Special Completorium`.
+
+**Primary source.**
+
+- `upstream/web/www/horas/Latin/Tempora/Quad6-4.txt:210-233`
+- `upstream/web/www/horas/Latin/Tempora/Quad6-4r.txt:1`
+- `upstream/web/www/horas/Latin/Tempora/Quad6-5.txt:204`
+- `upstream/web/www/horas/Latin/Tempora/Quad6-5r.txt:1`
+
+These sources establish that:
+
+- Holy Thursday's `Special Completorium` carries the explicit rubric
+  `(sed rubrica 1955 aut rubrica 1960 loco horum versuum dicuntur)`
+  before the shortened `Vísita, quǽsumus...` close.
+- the Roman `r` variant files for `1955/1960` inherit those temporal
+  sections by preamble.
+- Good Friday inherits Holy Thursday's special Compline section through
+  `@Tempora/Quad6-4::s/usque ad mortem/usque ad mortem, mortem autem crucis/`,
+  so the same short 1955/1960 close governs there too.
+
+**Reproduction.**
+Run:
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Reduced - 1955" --date 2024-03-28 --hour Compline
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Reduced - 1955" --date 2024-03-29 --hour Compline
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Rubrics 1960 - 1960" --date 2024-03-28 --hour Compline
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Rubrics 1960 - 1960" --date 2024-03-29 --hour Compline
+```
+
+Each row first diverges at `Special Completorium` (Perl) vs the
+source-backed short `Vísita, quǽsumus...` block (compositor).
+
+**Affected stable divergence-row keys.**
+
+| Policy | Date | Hour | Row key suffix |
+|---|---|---|---|
+| Reduced - 1955 | 2024-03-28 | Compline | `fa4d64f6` |
+| Reduced - 1955 | 2024-03-29 | Compline | `fa4d64f6` |
+| Rubrics 1960 - 1960 | 2024-03-28 | Compline | `fa4d64f6` |
+| Rubrics 1960 - 1960 | 2024-03-29 | Compline | `fa4d64f6` |
+
 ### 2026-04-20 — Roman psalm half-verse `‡` markers are flattened by the Perl render surface
 
 **Classification.** `perl-bug`

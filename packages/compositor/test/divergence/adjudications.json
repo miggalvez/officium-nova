@@ -6597,6 +6597,42 @@
     "resolvedAt": "2026-04-19",
     "commitSha": "pending"
   },
+  "Reduced - 1955/2024-03-28/Compline/fa4d64f6": {
+    "policy": "Reduced - 1955",
+    "date": "2024-03-28",
+    "hour": "Compline",
+    "firstExpected": "Special Completorium",
+    "firstActual": "Vísita, quǽsumus, Dómine, habitatiónem istam, et omnes insídias inimíci ab ea longe repélle: Ángeli tui sancti hábitent in ea, qui nos in pace custódiant; et benedíctio tua sit super nos semper.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Tempora/Quad6-4.txt:210-233 and upstream/web/www/horas/Latin/Tempora/Quad6-4r.txt:1 — the Holy Thursday `Special Completorium` section explicitly says `(sed rubrica 1955 aut rubrica 1960 loco horum versuum dicuntur)` before the shortened `Vísita, quǽsumus...` close, and the 1955/1960 `Quad6-4r` file inherits that source section by preamble. The compositor now follows that source-backed 1955/1960 collapse; Perl keeps the older full-block opening `Special Completorium`.",
+    "notes": "Shared Roman 1955/1960 Holy Thursday Special Completorium family. After the compositor started honoring `source.kind = triduum-special`, this row proved source-backed `perl-bug` rather than a remaining composition seam.",
+    "resolvedAt": "2026-04-20",
+    "commitSha": "pending"
+  },
+  "Reduced - 1955/2024-03-29/Compline/fa4d64f6": {
+    "policy": "Reduced - 1955",
+    "date": "2024-03-29",
+    "hour": "Compline",
+    "firstExpected": "Special Completorium",
+    "firstActual": "Vísita, quǽsumus, Dómine, habitatiónem istam, et omnes insídias inimíci ab ea longe repélle: Ángeli tui sancti hábitent in ea, qui nos in pace custódiant; et benedíctio tua sit super nos semper.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Tempora/Quad6-5.txt:204 and upstream/web/www/horas/Latin/Tempora/Quad6-4.txt:210-233 and upstream/web/www/horas/Latin/Tempora/Quad6-5r.txt:1 — Good Friday inherits Holy Thursday's `Special Completorium` section by `@Tempora/Quad6-4::s/usque ad mortem/usque ad mortem, mortem autem crucis/`, while the 1955/1960 `Quad6-5r` file inherits that via preamble. The inherited source still carries the 1955/1960 short `Vísita, quǽsumus...` close instead of the older full-block opening `Special Completorium` that Perl expects.",
+    "notes": "Shared Roman 1955/1960 Good Friday Special Completorium family. The corrected compositor follows the inherited source-shortened block; Perl retains the pre-1955 opening surface.",
+    "resolvedAt": "2026-04-20",
+    "commitSha": "pending"
+  },
+  "Reduced - 1955/2024-03-30/Compline/89cb274b": {
+    "policy": "Reduced - 1955",
+    "date": "2024-03-30",
+    "hour": "Compline",
+    "firstExpected": "4:5 Irascímini, et nolíte peccáre: * quæ dícitis in córdibus vestris, in cubílibus vestris compungímini.",
+    "firstActual": "4:5 Irascímini, et nolíte peccáre: ‡ quæ dícitis in córdibus vestris, * in cubílibus vestris compungímini.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm4.txt:5 — the source line carries `‡ ... *` in Psalm 4:5. The compositor keeps that half-verse split while Perl flattens the same line to a single `*` divider.",
+    "notes": "Fanout of the Reduced 1955 Psalm 4 half-verse family after the Special Completorium routing fix advanced Holy Saturday Compline into the same source-backed psalm seam.",
+    "resolvedAt": "2026-04-20",
+    "commitSha": "pending"
+  },
   "Reduced - 1955/2024-03-30/Matins/89cb274b": {
     "policy": "Reduced - 1955",
     "date": "2024-03-30",
@@ -9151,6 +9187,42 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Rubricae.txt:129 — the corpus source carries `«Pater Noster»` with guillemets. Both Perl (strip) and compositor (preserve) are defensible renderings of the same source token; neither is liturgically wrong. Phase 3 §3h defers to the corpus author's formatting.",
     "notes": "Pattern affects every Compline row across every policy and date. This single entry is representative; the full row-key fan-out is a follow-up bulk-populate task (see ADJUDICATION_LOG.md).",
     "resolvedAt": "2026-04-18",
+    "commitSha": "pending"
+  },
+  "Rubrics 1960 - 1960/2024-03-28/Compline/fa4d64f6": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-03-28",
+    "hour": "Compline",
+    "firstExpected": "Special Completorium",
+    "firstActual": "Vísita, quǽsumus, Dómine, habitatiónem istam, et omnes insídias inimíci ab ea longe repélle: Ángeli tui sancti hábitent in ea, qui nos in pace custódiant; et benedíctio tua sit super nos semper.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Tempora/Quad6-4.txt:210-233 and upstream/web/www/horas/Latin/Tempora/Quad6-4r.txt:1 — the Holy Thursday `Special Completorium` section explicitly says `(sed rubrica 1955 aut rubrica 1960 loco horum versuum dicuntur)` before the shortened `Vísita, quǽsumus...` close, and the 1955/1960 `Quad6-4r` file inherits that source section by preamble. The compositor now follows that source-backed 1955/1960 collapse; Perl keeps the older full-block opening `Special Completorium`.",
+    "notes": "Shared Roman 1955/1960 Holy Thursday Special Completorium family. After the compositor started honoring `source.kind = triduum-special`, this row proved source-backed `perl-bug` rather than a remaining composition seam.",
+    "resolvedAt": "2026-04-20",
+    "commitSha": "pending"
+  },
+  "Rubrics 1960 - 1960/2024-03-29/Compline/fa4d64f6": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-03-29",
+    "hour": "Compline",
+    "firstExpected": "Special Completorium",
+    "firstActual": "Vísita, quǽsumus, Dómine, habitatiónem istam, et omnes insídias inimíci ab ea longe repélle: Ángeli tui sancti hábitent in ea, qui nos in pace custódiant; et benedíctio tua sit super nos semper.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Tempora/Quad6-5.txt:204 and upstream/web/www/horas/Latin/Tempora/Quad6-4.txt:210-233 and upstream/web/www/horas/Latin/Tempora/Quad6-5r.txt:1 — Good Friday inherits Holy Thursday's `Special Completorium` section by `@Tempora/Quad6-4::s/usque ad mortem/usque ad mortem, mortem autem crucis/`, while the 1955/1960 `Quad6-5r` file inherits that via preamble. The inherited source still carries the 1955/1960 short `Vísita, quǽsumus...` close instead of the older full-block opening `Special Completorium` that Perl expects.",
+    "notes": "Shared Roman 1955/1960 Good Friday Special Completorium family. The corrected compositor follows the inherited source-shortened block; Perl retains the pre-1955 opening surface.",
+    "resolvedAt": "2026-04-20",
+    "commitSha": "pending"
+  },
+  "Rubrics 1960 - 1960/2024-03-30/Compline/89cb274b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-03-30",
+    "hour": "Compline",
+    "firstExpected": "4:5 Irascímini, et nolíte peccáre: * quæ dícitis in córdibus vestris, in cubílibus vestris compungímini.",
+    "firstActual": "4:5 Irascímini, et nolíte peccáre: ‡ quæ dícitis in córdibus vestris, * in cubílibus vestris compungímini.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm4.txt:5 — the source line carries `‡ ... *` in Psalm 4:5. The compositor keeps that half-verse split while Perl flattens the same line to a single `*` divider.",
+    "notes": "Fanout of the Rubrics 1960 Psalm 4 half-verse family after the Special Completorium routing fix advanced Holy Saturday Compline into the same source-backed psalm seam.",
+    "resolvedAt": "2026-04-20",
     "commitSha": "pending"
   },
   "Rubrics 1960 - 1960/2024-03-30/Matins/89cb274b": {

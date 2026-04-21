@@ -173,6 +173,62 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
     expect(composed.sections.find((section) => section.type === 'heading')?.heading).toBeDefined();
   }, 240_000);
 
+  it('renders Roman Triduum Compline from the Special Completorium block instead of the ordinary short reading', async () => {
+    const expectedOpenings = {
+      '2024-03-28': [
+        'Vísita, quǽsumus, Dómine, habitatiónem istam, et omnes insídias inimíci ab ea longe repélle: Ángeli tui sancti hábitent in ea, qui nos in pace custódiant; et benedíctio tua sit super nos semper.'
+      ],
+      '2024-03-29': [
+        'Vísita, quǽsumus, Dómine, habitatiónem istam, et omnes insídias inimíci ab ea longe repélle: Ángeli tui sancti hábitent in ea, qui nos in pace custódiant; et benedíctio tua sit super nos semper.'
+      ],
+      '2024-03-30': ['Special Completorium', '_']
+    } as const;
+
+    for (const version of ['Reduced - 1955', 'Rubrics 1960 - 1960'] as const) {
+      const { engine, resolvedCorpus } = await createHarness(version);
+
+      for (const date of ['2024-03-28', '2024-03-29', '2024-03-30'] as const) {
+        const summary = engine.resolveDayOfficeSummary(date);
+        const compline = summary.hours.compline;
+        expect(compline?.source?.kind, `${version} ${date} should keep the Triduum Compline source`).toBe(
+          'triduum-special'
+        );
+        if (!compline) {
+          continue;
+        }
+
+        const composed = composeHour({
+          corpus: resolvedCorpus.index,
+          summary,
+          version: engine.version,
+          hour: 'compline',
+          options: { languages: ['Latin'] }
+        });
+
+        const lines = canonicalLatinLines(composed);
+        expect(
+          lines.slice(0, expectedOpenings[date].length),
+          `${version} ${date} should open with the source-backed Triduum Compline block`
+        ).toEqual(expectedOpenings[date].map(normalizeLatin));
+        expect(
+          lines,
+          `${version} ${date} should not fall back to the ordinary Compline short reading`
+        ).not.toContain(normalizeLatin('1 Pet 5:8-9'));
+        expect(
+          lines,
+          `${version} ${date} should not leak the ordinary short-reading citation`
+        ).not.toContain(normalizeLatin('Sóbrii estóte, et vigiláte: quia adversárius vester diábolus tamquam leo rúgiens círcuit, quærens quem dévoret: cui resístite fortes in fide.')
+        );
+        expect(
+          lines,
+          `${version} ${date} should not leak the Special Completorium pre-1955 block on Thursday or Friday`
+        ).not.toContain(
+          normalizeLatin('Christus factus est pro nobis obédiens usque ad mortem.')
+        );
+      }
+    }
+  }, 240_000);
+
   it('renders July 9 Matins benedictions line-by-line and emits the Te Deum replacement responsory only once', async () => {
     const { engine, resolvedCorpus } = await createHarness('Rubrics 1960 - 1960');
 
@@ -1046,6 +1102,15 @@ function psalmodyAntiphonLines(
   const psalmody = composed.sections.find((section) => section.slot === 'psalmody');
   expect(psalmody, `${composed.hour} is missing the psalmody section`).toBeDefined();
   return psalmody?.lines.filter((line) => line.marker === 'Ant.') ?? [];
+}
+
+function canonicalLatinLines(
+  composed: ReturnType<typeof composeHour>
+): readonly string[] {
+  return composed.sections
+    .flatMap((section) => section.lines.map(renderLatinText))
+    .map((line) => normalizeLatin(line.trim()))
+    .filter((line) => line.length > 0);
 }
 
 function normalizeLatin(text: string): string {
