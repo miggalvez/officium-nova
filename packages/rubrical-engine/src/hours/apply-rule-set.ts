@@ -26,6 +26,8 @@ import type { DirectoriumOverlay } from '../types/directorium.js';
 import type { OrdinariumSkeleton, SkeletonSlot } from './skeleton.js';
 import { resolveRuleReferenceFiles } from '../rules/resolve-vide-ex.js';
 
+const COMMON_PRAYERS_PATH = 'horas/Latin/Psalterium/Common/Prayers';
+
 export interface ApplyRuleSetInput {
   readonly hour: HourName;
   readonly skeleton: OrdinariumSkeleton;
@@ -151,6 +153,11 @@ function resolveSlot(
     if (slot.name === 'responsory' || slot.name === 'versicle') {
       return { kind: 'empty' };
     }
+  }
+
+  const specialOration = resolveSpecialMinorHourOration(slot.name, input);
+  if (specialOration) {
+    return specialOration;
   }
 
   const properRef = findProperReference(properFiles, slot, input.hour);
@@ -735,6 +742,27 @@ function findReferenceInFile(
 
 function sameReference(left: TextReference, right: TextReference): boolean {
   return left.path === right.path && left.section === right.section && left.selector === right.selector;
+}
+
+function resolveSpecialMinorHourOration(
+  slotName: SlotName,
+  input: ApplyRuleSetInput
+): SlotContent | undefined {
+  if (slotName !== 'oration' || input.hour !== 'prime' || !usesVersum2InPlaceOfLaterBlock(input)) {
+    return undefined;
+  }
+
+  return {
+    kind: 'ordered-refs',
+    refs: [commonPrayerRef('oratio_Domine'), commonPrayerRef('Per Dominum')]
+  };
+}
+
+function commonPrayerRef(section: string): TextReference {
+  return {
+    path: COMMON_PRAYERS_PATH,
+    section
+  };
 }
 
 function properHeadersForSlot(slot: SlotName, hour: HourName): readonly string[] {

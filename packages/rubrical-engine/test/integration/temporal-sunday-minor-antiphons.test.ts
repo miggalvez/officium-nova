@@ -193,6 +193,38 @@ describeIfUpstream('temporal Sunday minor-hour antiphon ownership', () => {
     },
     240_000
   );
+
+  it(
+    'keeps Easter Octave Prime on the ordinary Prima oration while the other minor hours keep the temporal collect',
+    async () => {
+      const engines = await loadEngines([
+        'Reduced - 1955',
+        'Rubrics 1960 - 1960'
+      ]);
+
+      for (const handle of ['Reduced - 1955', 'Rubrics 1960 - 1960'] as const) {
+        const engine = engines.get(handle);
+        expect(engine, `${handle} engine`).toBeDefined();
+        if (!engine) {
+          continue;
+        }
+
+        for (const [date, officePath] of [
+          ['2024-03-31', 'horas/Latin/Tempora/Pasc0-0'],
+          ['2024-04-02', 'horas/Latin/Tempora/Pasc0-2']
+        ] as const) {
+          expectOrderedRefs(slotAt(engine, date, 'prime', 'oration'), [
+            'horas/Latin/Psalterium/Common/Prayers:oratio_Domine',
+            'horas/Latin/Psalterium/Common/Prayers:Per Dominum'
+          ]);
+          expectSingleRef(slotAt(engine, date, 'terce', 'oration'), `${officePath}:Oratio`);
+          expectSingleRef(slotAt(engine, date, 'sext', 'oration'), `${officePath}:Oratio`);
+          expectSingleRef(slotAt(engine, date, 'none', 'oration'), `${officePath}:Oratio`);
+        }
+      }
+    },
+    240_000
+  );
 });
 
 let enginesPromise: Promise<ReadonlyMap<string, RubricalEngine>> | undefined;
@@ -326,7 +358,7 @@ function slotAt(
   engine: RubricalEngine,
   date: string,
   hour: 'prime' | 'terce' | 'sext' | 'none',
-  slotName: 'chapter' | 'responsory' | 'versicle'
+  slotName: 'chapter' | 'responsory' | 'versicle' | 'oration'
 ) {
   return engine.resolveDayOfficeSummary(date).hours[hour]?.slots[slotName];
 }
@@ -345,4 +377,16 @@ function expectSingleRef(
   }
 
   expect(`${slot.ref.path}:${slot.ref.section}`).toBe(expected);
+}
+
+function expectOrderedRefs(
+  slot: ReturnType<typeof slotAt>,
+  expected: readonly string[]
+) {
+  expect(slot?.kind).toBe('ordered-refs');
+  if (!slot || slot.kind !== 'ordered-refs') {
+    return;
+  }
+
+  expect(slot.refs.map((ref) => `${ref.path}:${ref.section}`)).toEqual(expected);
 }
