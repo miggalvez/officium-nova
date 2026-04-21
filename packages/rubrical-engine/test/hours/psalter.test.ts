@@ -214,6 +214,39 @@ Nona Dominica=Allelúja, * allelúja, allelúja;;118(129-144),118(145-160),118(1
     expect(refs[1]?.psalmRef.selector).toBe('118(1-16)');
   });
 
+  it('drops the Tridentinum opening antiphon when Minores sine Antiphona still uses the festal Prime table', () => {
+    const textIndex = new TestOfficeTextIndex();
+    textIndex.add(
+      'horas/Latin/Psalterium/Psalmi/Psalmi minor.txt',
+      `
+[Tridentinum]
+Prima Festis=Allelúja, * allelúja, allelúja;;53,118(1-16),118(17-32)
+Tertia Dominica=Allelúja, * allelúja, allelúja;;118(33-48),118(49-64),118(65-80)
+Sexta Dominica=Allelúja, * allelúja, allelúja;;118(81-96),118(97-112),118(113-128)
+Nona Dominica=Allelúja, * allelúja, allelúja;;118(129-144),118(145-160),118(161-176)
+`.trim()
+    );
+
+    const refs = selectPsalmodyRoman1960({
+      hour: 'prime',
+      celebration: celebration('Tempora/Pasc0-1'),
+      celebrationRules: baseCelebrationRules(),
+      hourRules: hourRules('prime', {
+        psalterScheme: 'dominica',
+        minorHoursSineAntiphona: true
+      }),
+      temporal: temporal('2024-04-01', 'Pasc0-1', 'eastertide', 1),
+      corpus: textIndex
+    });
+
+    expect(refs.map((entry) => entry.psalmRef.selector)).toEqual([
+      '53',
+      '118(1-16)',
+      '118(17-32)'
+    ]);
+    expect(refs[0]?.antiphonRef).toBeUndefined();
+  });
+
   it('keeps Prime on the Tridentinum festis table for Sunday feasts with proper minor-hour antiphons', () => {
     const textIndex = new TestOfficeTextIndex();
     textIndex.add(

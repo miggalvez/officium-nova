@@ -1020,6 +1020,47 @@ moves deeper to the later Lenten Sunday Matins versicle-routing seam
 (`V. Memor fui nocte nóminis tui, Dómine.` versus the office's proper
 versicle).
 
+### 2026-04-21 — Pattern: Roman Easter Octave minor hours must keep Sunday/festal psalm tables without a lead antiphon (engine-bug fix)
+
+**Ledger signal.** The shared Roman Easter Octave frontier on
+`2024-03-31` through `2024-04-06` kept stalling before the first psalm
+heading in Prime / Terce / Sext / None. Perl advanced straight to the
+psalmody, while the compositor emitted an opening `Ant. Allelúja...`
+line from the Sunday/festal `Psalmi minor:Tridentinum` table.
+
+**Root cause.** This was a Phase 2 structural bug, not a Phase 3
+composition problem. The temporal source files for Easter Sunday and the
+inherited octave ferias explicitly pair `Minores sine Antiphona` with
+`Psalmi Dominica`, but `selectPsalmodyRoman1960()` still copied the
+built-in lead antiphon from the Sunday/festal Tridentinum table row into
+the first `PsalmAssignment`. That leaked a psalm-table convenience
+string back across the Phase 2 / Phase 3 boundary even though the rule
+set had already decided the minor hours were antiphonless.
+
+**Resolution.** `packages/rubrical-engine/src/hours/psalter.ts` now
+threads `hourRules.minorHoursSineAntiphona` into the Sunday/festal
+minor-hour selector path, so `resolveTridentinumMinorHourAssignments()`
+keeps the same psalm selectors but suppresses the table's lead
+antiphon when the temporal rules say `Minores sine Antiphona`. Coverage
+was locked before and after the fix in:
+
+- `packages/rubrical-engine/test/hours/psalter.test.ts`
+- `packages/rubrical-engine/test/integration/temporal-sunday-minor-antiphons.test.ts`
+
+**Citation.**
+
+- `upstream/web/www/horas/Latin/Tempora/Pasc0-0.txt:7-13`
+- `upstream/web/www/horas/Latin/Tempora/Pasc0-3.txt:11-16`
+- `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:217-231`
+
+**Impact.** The false Easter-Octave opening-antiphon frontier is gone.
+Representative compares now move deeper into two later lanes instead:
+Easter Sunday Prime reaches the surviving `Psalmus 117 [2]` table seam,
+while shared Roman weekday Prime / Terce rows now first diverge at the
+later-block `Ant. Hæc dies * quam fecit Dóminus...` surface. The Roman
+average matching-prefix metrics improve to `41.7`
+(`Reduced - 1955`) and `44.1` (`Rubrics 1960 - 1960`).
+
 ### Pattern catalogue (pending per-pattern entries)
 
 The following patterns remain open after the fixes above and will each
@@ -1050,13 +1091,13 @@ get their own `## Entry` block as they are adjudicated:
   replaces that tail with localized `Gloria omittitur` content before
   emission, so Holy Thursday / Good Friday Roman Matins advance beyond
   the old psalmody seam.
-- **Triduum Matins secret `Pater Noster` rubric** — after the psalmody
-  fix, Holy Thursday and Good Friday now first diverge at the secret
-  `Pater Noster` rubric (`2024-03-28` line `91`, `2024-03-29` line
-  `83`) across both Roman policies: Perl expects `Pater Noster dicitur
-  totum secreto.`, while the compositor currently emits `« Pater Noster
-  » dicitur secreto usque ad « Et ne nos indúcas in tentatiónem: »`.
-  This is the next shared Roman Matins family to lock and adjudicate.
+- **Easter Octave minor-hour `Hæc dies` later-block seam** — after the
+  antiphon-opening fix above, shared Roman Prime / Terce rows on
+  `2024-03-31` through `2024-04-06` now first diverge later in the same
+  lane: Perl expects `Ant. Hæc dies * quam fecit Dóminus...`, while the
+  compositor currently drops straight to the oration after antiphonless
+  psalmody. Preliminary class: open ownership question; likely a shared
+  Roman structural family rather than a date-by-date compositor tweak.
 
 ## See also
 

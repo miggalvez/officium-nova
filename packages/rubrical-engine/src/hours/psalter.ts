@@ -127,7 +127,11 @@ function minorHourReferences(
       params.celebrationRules.antiphonScheme === 'proper-minor-hours'
     );
     for (const selector of selectors) {
-      const assignments = resolveTridentinumMinorHourAssignments(corpus, selector);
+      const assignments = resolveTridentinumMinorHourAssignments(
+        corpus,
+        selector,
+        hourRules.minorHoursSineAntiphona
+      );
       if (assignments.length > 0) {
         return assignments;
       }
@@ -371,7 +375,8 @@ function tridentinumMinorHourSelectors(
 
 function resolveTridentinumMinorHourAssignments(
   corpus: OfficeTextIndex,
-  selector: string
+  selector: string,
+  omitOpeningAntiphon = false
 ): readonly PsalmAssignment[] {
   const file = corpus.getFile(`${PSALMI_MINOR}.txt`);
   const section = file?.sections.find((entry) => entry.header === 'Tridentinum');
@@ -400,7 +405,7 @@ function resolveTridentinumMinorHourAssignments(
   return Object.freeze(
     tokens.map((token, index): PsalmAssignment => ({
       psalmRef: psalmTokenReference(token),
-      ...(index === 0 && antiphon
+      ...(!omitOpeningAntiphon && index === 0 && antiphon
         ? {
             antiphonRef: {
               path: PSALMI_MINOR,

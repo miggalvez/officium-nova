@@ -105,6 +105,68 @@ describeIfUpstream('temporal Sunday minor-hour antiphon ownership', () => {
     },
     240_000
   );
+
+  it(
+    'keeps Easter Octave minor hours on the dominica psalm table while omitting the opening antiphon',
+    async () => {
+      const engines = await loadEngines([
+        'Reduced - 1955',
+        'Rubrics 1960 - 1960'
+      ]);
+
+      for (const handle of ['Reduced - 1955', 'Rubrics 1960 - 1960'] as const) {
+        const engine = engines.get(handle);
+        expect(engine, `${handle} engine`).toBeDefined();
+        if (!engine) {
+          continue;
+        }
+
+        expectMinorHourWithoutAntiphon(psalmodyAt(engine, '2024-03-31', 'prime'), [
+          '53',
+          '117',
+          '118(1-16)',
+          '118(17-32)'
+        ]);
+        expectMinorHourWithoutAntiphon(psalmodyAt(engine, '2024-03-31', 'terce'), [
+          '118(33-48)',
+          '118(49-64)',
+          '118(65-80)'
+        ]);
+        expectMinorHourWithoutAntiphon(psalmodyAt(engine, '2024-03-31', 'sext'), [
+          '118(81-96)',
+          '118(97-112)',
+          '118(113-128)'
+        ]);
+        expectMinorHourWithoutAntiphon(psalmodyAt(engine, '2024-03-31', 'none'), [
+          '118(129-144)',
+          '118(145-160)',
+          '118(161-176)'
+        ]);
+
+        expectMinorHourWithoutAntiphon(psalmodyAt(engine, '2024-04-03', 'prime'), [
+          '53',
+          '118(1-16)',
+          '118(17-32)'
+        ]);
+        expectMinorHourWithoutAntiphon(psalmodyAt(engine, '2024-04-03', 'terce'), [
+          '118(33-48)',
+          '118(49-64)',
+          '118(65-80)'
+        ]);
+        expectMinorHourWithoutAntiphon(psalmodyAt(engine, '2024-04-03', 'sext'), [
+          '118(81-96)',
+          '118(97-112)',
+          '118(113-128)'
+        ]);
+        expectMinorHourWithoutAntiphon(psalmodyAt(engine, '2024-04-03', 'none'), [
+          '118(129-144)',
+          '118(145-160)',
+          '118(161-176)'
+        ]);
+      }
+    },
+    240_000
+  );
 });
 
 let enginesPromise: Promise<ReadonlyMap<string, RubricalEngine>> | undefined;
@@ -210,5 +272,16 @@ function expectMinorHour(
     antiphonRef,
     ...Array.from({ length: selectors.length - 1 }, () => '-')
   ]);
+  expect(psalms.map((entry) => entry.psalmRef.selector)).toEqual(selectors);
+}
+
+function expectMinorHourWithoutAntiphon(
+  psalms: readonly PsalmAssignment[],
+  selectors: readonly string[]
+) {
+  expect(psalms).toHaveLength(selectors.length);
+  expect(psalms.map((entry) => entry.antiphonRef ?? null)).toEqual(
+    Array.from({ length: selectors.length }, () => null)
+  );
   expect(psalms.map((entry) => entry.psalmRef.selector)).toEqual(selectors);
 }
