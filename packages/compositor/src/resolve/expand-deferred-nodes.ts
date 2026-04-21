@@ -110,9 +110,10 @@ export function expandDeferredNodes(
         break;
       }
       case 'formulaRef': {
+        const sectionCandidates = formulaSectionCandidates(node.name);
         const expanded = expandNamedSection(
-          formulaSectionCandidates(node.name),
-          formulaPathCandidates(node.name),
+          sectionCandidates,
+          formulaPathCandidates(sectionCandidates),
           context
         );
         out.push(...(expanded ?? [node]));
@@ -219,9 +220,9 @@ function formulaSectionCandidates(name: string): readonly string[] {
   return dedupe([trimmed, strippedPeriod, strippedRubric, rubricLowered]);
 }
 
-function formulaPathCandidates(name: string): readonly string[] {
+function formulaPathCandidates(sectionCandidates: readonly string[]): readonly string[] {
   const base = [COMMON_PRAYERS_PATH, COMMON_RUBRICAE_PATH, REVTRANS_PATH];
-  return formulaSectionCandidates(name).includes('Gloria omittitur')
+  return sectionCandidates.includes('Gloria omittitur')
     ? [COMMON_PRAYERS_PATH, COMMON_RUBRICAE_PATH, COMMON_TRANSLATE_PATH, REVTRANS_PATH]
     : base;
 }
