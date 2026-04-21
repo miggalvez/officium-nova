@@ -8,9 +8,14 @@ import { applyDirectives } from '../src/directives/apply-directives.js';
 function run(
   slot: SlotName,
   content: readonly TextContent[],
-  directives: readonly HourDirective[]
+  directives: readonly HourDirective[],
+  gloriaOmittiturReplacement?: readonly TextContent[]
 ): readonly TextContent[] {
-  return applyDirectives(slot, content, { hour: 'lauds', directives });
+  return applyDirectives(slot, content, {
+    hour: 'lauds',
+    directives,
+    gloriaOmittiturReplacement
+  });
 }
 
 describe('applyDirectives — pass-through', () => {
@@ -21,7 +26,7 @@ describe('applyDirectives — pass-through', () => {
 });
 
 describe('applyDirectives — omit-gloria-patri', () => {
-  it('drops a final Gloria Patri verse-marker pair on psalmody', () => {
+  it('replaces a final Gloria Patri verse-marker pair with Gloria omittitur on psalmody', () => {
     const content: TextContent[] = [
       { type: 'text', value: 'Beátus vir' },
       { type: 'separator' },
@@ -29,7 +34,28 @@ describe('applyDirectives — omit-gloria-patri', () => {
       { type: 'verseMarker', marker: 'R.', text: 'Sicut erat in princípio…' }
     ];
     const out = run('psalmody', content, ['omit-gloria-patri']);
-    expect(out.map((n) => (n.type === 'text' ? n.value : n.type))).toEqual(['Beátus vir']);
+    expect(out).toEqual([
+      { type: 'text', value: 'Beátus vir' },
+      { type: 'separator' },
+      { type: 'text', value: 'Gloria omittitur' }
+    ]);
+  });
+
+  it('uses the caller-provided Gloria omittitur replacement when available', () => {
+    const content: TextContent[] = [
+      { type: 'text', value: 'Beátus vir' },
+      { type: 'separator' },
+      { type: 'verseMarker', marker: 'V.', text: 'Glória Patri, et Fílio, * et Spirítui Sancto.' },
+      { type: 'verseMarker', marker: 'R.', text: 'Sicut erat in princípio…' }
+    ];
+    const out = run('psalmody', content, ['omit-gloria-patri'], [
+      { type: 'text', value: 'Glory be omitted' }
+    ]);
+    expect(out).toEqual([
+      { type: 'text', value: 'Beátus vir' },
+      { type: 'separator' },
+      { type: 'text', value: 'Glory be omitted' }
+    ]);
   });
 
   it('is a no-op on non-psalmody slots', () => {

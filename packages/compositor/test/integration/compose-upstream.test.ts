@@ -229,6 +229,39 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
     }
   }, 240_000);
 
+  it('renders Gloria omittitur immediately before the closing Triduum Matins antiphon on Holy Thursday and Good Friday', async () => {
+    const expectedClosings = {
+      '2024-03-28': 'Zelus domus tuæ comédit me, et oppróbria exprobrántium tibi cecidérunt super me.',
+      '2024-03-29': 'Astitérunt reges terræ, et príncipes convenérunt in unum, advérsus Dóminum, et advérsus Christum ejus.'
+    } as const;
+
+    for (const version of ['Reduced - 1955', 'Rubrics 1960 - 1960'] as const) {
+      const { engine, resolvedCorpus } = await createHarness(version);
+
+      for (const date of ['2024-03-28', '2024-03-29'] as const) {
+        const summary = engine.resolveDayOfficeSummary(date);
+        const composed = composeHour({
+          corpus: resolvedCorpus.index,
+          summary,
+          version: engine.version,
+          hour: 'matins',
+          options: { languages: ['Latin'] }
+        });
+
+        const lines = psalmodyTexts(composed).map(normalizeLatin);
+        const closingAntiphonIndex = lines.lastIndexOf(normalizeLatin(expectedClosings[date]));
+        expect(
+          closingAntiphonIndex,
+          `${version} ${date} should end the first psalm with its repeated Triduum antiphon`
+        ).toBeGreaterThan(0);
+        expect(
+          lines[closingAntiphonIndex - 1],
+          `${version} ${date} should emit Gloria omittitur before the repeated closing antiphon`
+        ).toBe(normalizeLatin('Gloria omittitur'));
+      }
+    }
+  }, 240_000);
+
   it('renders July 9 Matins benedictions line-by-line and emits the Te Deum replacement responsory only once', async () => {
     const { engine, resolvedCorpus } = await createHarness('Rubrics 1960 - 1960');
 

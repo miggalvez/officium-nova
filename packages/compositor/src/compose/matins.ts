@@ -513,7 +513,15 @@ function composeMergedSlot(
         const flattened = flattenConditionals(antiphonOnly, args.context);
         const transformed = applyDirectives(slot, flattened, {
           hour: 'matins',
-          directives: args.directives
+          directives: args.directives,
+          gloriaOmittiturReplacement: resolveGloriaOmittiturReplacement({
+            directives: args.directives,
+            corpus: args.corpus,
+            language: lang,
+            langfb: args.options.langfb,
+            context: args.context,
+            ...(args.onWarning ? { onWarning: args.onWarning } : {})
+          })
         });
         const normalized = repeatAntiphon
           ? normalizeRepeatedAntiphonContent(transformed)
@@ -562,7 +570,18 @@ function composeMergedSlot(
       const flattened = flattenConditionals(expanded, args.context);
       const transformed = applyDirectives(slot, flattened, {
         hour: 'matins',
-        directives: args.directives
+        directives: args.directives,
+        gloriaOmittiturReplacement:
+          slot === 'psalmody'
+            ? resolveGloriaOmittiturReplacement({
+                directives: args.directives,
+                corpus: args.corpus,
+                language: lang,
+                langfb: args.options.langfb,
+                context: args.context,
+                ...(args.onWarning ? { onWarning: args.onWarning } : {})
+              })
+            : undefined
       });
       const lineSeparated =
         slot === 'psalmody' && !isAntiphon && psalmIndex !== undefined
@@ -720,7 +739,15 @@ function appendExpandedPsalmWrapper(
     const flattened = flattenConditionals(expanded, args.context);
     const transformed = applyDirectives('psalmody', flattened, {
       hour: 'matins',
-      directives: args.directives
+      directives: args.directives,
+      gloriaOmittiturReplacement: resolveGloriaOmittiturReplacement({
+        directives: args.directives,
+        corpus: args.index,
+        language: args.language,
+        langfb: args.langfb,
+        context: args.context,
+        ...(args.onWarning ? { onWarning: args.onWarning } : {})
+      })
     });
     const [leadingAntiphon, psalmBody] = splitLeadingPsalmAntiphon(transformed);
     if (leadingAntiphon.length > 0) {
@@ -797,6 +824,35 @@ function extractPsalmNumberFromContent(
 
 function withPsalmGloriaPatri(content: readonly TextContent[]): readonly TextContent[] {
   return Object.freeze([...content, GLORIA_PATRI_MACRO]);
+}
+
+interface GloriaOmittiturReplacementArgs {
+  readonly directives: readonly HourDirective[];
+  readonly corpus: TextIndex;
+  readonly language: string;
+  readonly langfb?: string;
+  readonly context: ConditionEvalContext;
+  readonly onWarning?: (warning: ComposeWarning) => void;
+}
+
+function resolveGloriaOmittiturReplacement(
+  args: GloriaOmittiturReplacementArgs
+): readonly TextContent[] | undefined {
+  if (!args.directives.includes('omit-gloria-patri')) {
+    return undefined;
+  }
+
+  const expanded = expandDeferredNodes([{ type: 'formulaRef', name: 'Gloria omittitur' }], {
+    index: args.corpus,
+    language: args.language,
+    langfb: args.langfb,
+    season: args.context.season,
+    seen: new Set(),
+    maxDepth: MAX_DEFERRED_DEPTH,
+    ...(args.onWarning ? { onWarning: args.onWarning } : {})
+  });
+  const flattened = flattenConditionals(expanded, args.context);
+  return flattened.length > 0 ? flattened : undefined;
 }
 
 function normalizeRepeatedAntiphonContent(
@@ -1175,7 +1231,15 @@ function resolveFirstPsalmVerseText(
   const flattened = flattenConditionals(expanded, args.context);
   const transformed = applyDirectives('psalmody', flattened, {
     hour: 'matins',
-    directives: args.directives
+    directives: args.directives,
+    gloriaOmittiturReplacement: resolveGloriaOmittiturReplacement({
+      directives: args.directives,
+      corpus: args.corpus,
+      language,
+      langfb: args.options.langfb,
+      context: args.context,
+      ...(args.onWarning ? { onWarning: args.onWarning } : {})
+    })
   });
 
   for (const node of transformed) {
