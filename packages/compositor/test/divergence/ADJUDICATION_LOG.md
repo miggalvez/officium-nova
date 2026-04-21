@@ -1050,13 +1050,25 @@ get their own `## Entry` block as they are adjudicated:
   replaces that tail with localized `Gloria omittitur` content before
   emission, so Holy Thursday / Good Friday Roman Matins advance beyond
   the old psalmody seam.
-- **Triduum Matins secret `Pater Noster` rubric** — after the psalmody
-  fix, Holy Thursday and Good Friday now first diverge at the secret
-  `Pater Noster` rubric (`2024-03-28` line `91`, `2024-03-29` line
-  `83`) across both Roman policies: Perl expects `Pater Noster dicitur
-  totum secreto.`, while the compositor currently emits `« Pater Noster
-  » dicitur secreto usque ad « Et ne nos indúcas in tentatiónem: »`.
-  This is the next shared Roman Matins family to lock and adjudicate.
+- **Triduum Matins `Limit Benedictiones Oratio` / `Pater totum secreto`**
+  — closed as `engine-bug` plus shared Roman `perl-bug`. Holy Thursday
+  and Good Friday carry the reusable rule seam
+  `Limit Benedictiones Oratio` (`Tempora/Quad6-4.txt:11`,
+  `Tempora/Quad6-5.txt:16`), and `specmatins.pl::lectiones`
+  (`upstream/web/cgi-bin/horas/specmatins.pl:654-660`) shows that this
+  swaps the ordinary pre-lesson bundle for `$Pater totum secreto`.
+  `[Pater totum secreto]` expands in
+  `upstream/web/www/horas/Latin/Psalterium/Common/Prayers.txt:28-30`
+  to both the fully secret rubric and the full `Pater noster`, so
+  ownership split cleanly:
+  Phase 2 had to encode the special Matins lesson-introduction seam,
+  and Phase 3 had to compose that source section instead of the
+  ordinary partial-`Pater` path. After the fix, the live compare rows
+  still first surface at the rubric line because Perl strips the source
+  guillemets, but a deeper source-backed probe shows Perl also stops
+  after the rubric and never emits the full secretly said prayer before
+  `Lectio 1`. Those four Roman Holy Thursday / Good Friday rows are now
+  adjudicated as `perl-bug`, not as a mere rendering difference.
 
 ## See also
 

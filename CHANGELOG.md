@@ -107,6 +107,21 @@ into the next shared Triduum Matins rubric lane, and the Roman average
 matching-prefix metrics improve again to `37.4` (`Reduced - 1955`) and
 `39.8` (`Rubrics 1960 - 1960`).
 
+The next shared-Roman tranche then closed the Triduum Matins
+`Limit Benedictiones Oratio` pre-lesson family. Phase 2 now carries a
+typed `matinsLessonIntroduction` seam so Holy Thursday / Good Friday
+Nocturn plans suppress the ordinary benedictions and switch to the
+special secret-`Pater` introduction, while Phase 3 now composes
+`[Pater totum secreto]` from `Psalterium/Common/Prayers` instead of
+falling back to the ordinary partial-`Pater` bundle. Focused
+Phase 2h / Phase 3 upstream tests lock the Roman 1955/1960 Triduum
+behavior, the live Roman unadjudicated counts drop to `309`
+(`Reduced - 1955`) and `228` (`Rubrics 1960 - 1960`), and those
+Holy Thursday / Good Friday Matins rows are now recorded as
+shared-Roman `perl-bug` entries because the legacy Perl surface still
+stops after the rubric and never materializes the full source-backed
+secret `Pater noster`.
+
 A follow-up adjudication sweep then ran a full-ledger fanout pass across
 all three policy ledgers (`--max-doc-rows 600` + `adjudications:fanout`)
 to propagate existing representative `perl-bug` and
