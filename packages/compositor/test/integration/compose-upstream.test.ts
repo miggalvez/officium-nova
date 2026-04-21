@@ -343,6 +343,12 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
       normalizeLatin('Et clamor meus ad te véniat.'),
       normalizeLatin('Orémus.')
     ] as const;
+    const primeCollect = normalizeLatin(
+      'Dómine Deus omnípotens, qui ad princípium hujus diéi nos perveníre fecísti: tua nos hódie salva virtúte; ut in hac die ad nullum declinémus peccátum, sed semper ad tuam justítiam faciéndam nostra procédant elóquia, dirigántur cogitatiónes et ópera.'
+    );
+    const temporalCollect = normalizeLatin(
+      'Deus, qui Ecclésiam tuam novo semper fœtu multíplicas: concéde fámulis tuis; ut sacraméntum vivéndo téneant, quod fide percepérunt.'
+    );
     const primeOrationTail = [
       normalizeLatin('Dómine, exáudi oratiónem meam.'),
       normalizeLatin('Et clamor meus ad te véniat.'),
@@ -360,7 +366,7 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
 
     for (const version of ['Reduced - 1955', 'Rubrics 1960 - 1960'] as const) {
       const { engine, resolvedCorpus } = await createHarness(version);
-      const summary = engine.resolveDayOfficeSummary('2024-04-01');
+      const summary = engine.resolveDayOfficeSummary('2024-04-02');
 
       const prime = composeHour({
         corpus: resolvedCorpus.index,
@@ -373,6 +379,10 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
         sectionTexts(prime, 'oration').map(normalizeLatin).slice(0, orationPrelude.length),
         `${version} Prime should still open the one-alone oration with Domine exaudi / Oremus`
       ).toEqual(orationPrelude);
+      expect(
+        sectionTexts(prime, 'oration').map(normalizeLatin)[orationPrelude.length],
+        `${version} Prime should use the ordinary Prima collect under the one-alone Easter-Octave shape`
+      ).toBe(primeCollect);
       expect(
         sectionTexts(prime, 'oration').map(normalizeLatin).slice(-primeOrationTail.length),
         `${version} Prime should keep the one-alone post-oration Benedicamus bridge`
@@ -391,6 +401,10 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
           sectionTexts(composed, 'oration').map(normalizeLatin).slice(0, orationPrelude.length),
           `${version} ${hour} should still open the one-alone oration with Domine exaudi / Oremus`
         ).toEqual(orationPrelude);
+        expect(
+          sectionTexts(composed, 'oration').map(normalizeLatin)[orationPrelude.length],
+          `${version} ${hour} should keep the Easter-Octave temporal collect under the one-alone wrapper`
+        ).toBe(temporalCollect);
         expect(
           sectionTexts(composed, 'conclusion').map(normalizeLatin),
           `${version} ${hour} should emit the one-alone minor-hour conclusion block after the collect`

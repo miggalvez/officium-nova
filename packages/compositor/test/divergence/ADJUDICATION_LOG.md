@@ -1165,6 +1165,59 @@ psalm-table family (`Psalmus 117 [2]` vs `Psalmus 118(1-16) [2]`), so
 the next tranche should take the repeated weekday Prime collect-routing
 seam first and leave Easter Sunday as the adjacent smaller family.
 
+### 2026-04-21 — Pattern: Easter Octave Prime ordinary oration uses the ordinarium collect (engine-bug, narrowed)
+
+**Scope.** Shared Roman Prime on Easter Octave days with the
+`Capitulum Versum 2` shape (`2024-03-31` through at least
+`2024-04-03`, both `Reduced - 1955` and `Rubrics 1960 - 1960`):
+after the one-alone wrapper fix, the first weekday Prime divergence
+shifted to the collect itself. Perl expected the ordinary Prime oration
+`Dómine Deus omnípotens, qui ad princípium hujus diéi nos perveníre
+fecísti...`, while the compositor still routed Prime to the temporal
+Easter-Octave collect from `Tempora/Pasc0-*:[Oratio]`.
+
+**Ownership.** Phase 2 structure bug with a small Phase 3 follow-on.
+This was not a date-led compositor problem. `specials.pl` explicitly
+skips the generic `oratio()` routine for Prime outside the Triduum, so
+the ordinary Prime oration block in `Ordinarium/Prima.txt` remains in
+force even when the office file itself carries a temporal `[Oratio]`.
+Phase 2 was still modeling the Easter-Octave Prime slot like Terce /
+Sext / None and pointing `summary.hours.prime.slots.oration` at the
+temporal office collect.
+
+**Resolution.**
+
+- Phase 2 now routes Easter-Octave Prime under `Capitulum Versum 2` to
+  the ordinary Prime collect structurally, as ordered refs
+  `oratio_Domine` → `Per Dominum`, while Terce / Sext / None keep the
+  temporal collect from the office.
+- Phase 3's existing one-alone wrapper helper now accepts ordered-ref
+  oration slots as well as single refs, so the corrected Prime slot
+  still receives the source-backed `Domine exaudi` / `Oremus` prelude
+  and the post-collect `Domine exaudi` / `Benedicamus Domino` bridge
+  without any date-specific patching.
+- Coverage was locked before and after the fix in:
+  - `packages/rubrical-engine/test/integration/temporal-sunday-minor-antiphons.test.ts`
+  - `packages/compositor/test/integration/compose-upstream.test.ts`
+
+**Citation.**
+
+- `upstream/web/www/horas/Latin/Tempora/Pasc0-0.txt:7-13`
+- `upstream/web/www/horas/Ordinarium/Prima.txt:29-42`
+- `upstream/web/www/horas/Latin/Psalterium/Common/Prayers.txt:188`
+- `upstream/web/www/horas/Latin/Psalterium/Common/Prayers.txt:423`
+- `upstream/web/cgi-bin/horas/specials.pl:255-276`
+
+**Impact.** The shared Roman weekday Prime collect-routing family is
+closed. `2024-04-01`, `2024-04-02`, and `2024-04-03` now advance past
+the ordinary-oration seam to the deeper Prime Martyrologium boundary at
+line `65` (`Tértio/Quarto/Prídie Nonas Aprílis ...` expected,
+currently `∅`), while Easter Sunday Prime still exposes its separate
+psalm-table seam at line `16` (`Psalmus 117 [2]` versus
+`Psalmus 118(1-16) [2]`). The live Roman unadjudicated counts stay at
+`288` (`Reduced - 1955`) and `207` (`Rubrics 1960 - 1960`), with the
+Rubrics 1960 average matching prefix ticking up to `43.4`.
+
 ### Pattern catalogue (pending per-pattern entries)
 
 The following patterns remain open after the fixes above and will each
@@ -1217,15 +1270,15 @@ get their own `## Entry` block as they are adjudicated:
   compositor and Perl emit the same full secret prayer, and the only
   stable remaining divergence on those four Triduum rows is the source
   guillemet rendering on `« Pater Noster » dicitur totum secreto.`.
-- **Easter Octave Prime ordinary-oration routing seam** — after the
-  wrapper fix above, the repeated Roman weekday Prime rows
+- **Easter Octave Prime Martyrologium seam** — after the ordinary-Prime
+  oration fix above, the repeated Roman weekday Prime rows
   (`2024-04-01` through at least `2024-04-03`, both `Reduced - 1955`
-  and `Rubrics 1960 - 1960`) now first diverge at the collect text:
-  Perl expects the ordinary Prime oration `Dómine Deus omnípotens, qui
-  ad princípium hujus diéi nos perveníre fecísti...`, while the
-  compositor still uses the temporal Easter-Octave collect from the
-  winning office. Preliminary class: open ownership question, likely a
-  Prime-specific structural-routing seam rather than a rendering issue.
+  and `Rubrics 1960 - 1960`) now first diverge at the Martyrologium
+  handoff. Perl expects the lunar-date heading
+  `Quarto/Tértio/Prídie Nonas Aprílis ...`, while the compositor stops
+  after the oration bridge and emits no Prime-after-oration section at
+  all (`∅`). Preliminary class: open ownership question, likely a
+  shared Roman Prime post-oratio structural seam.
 
 ## See also
 

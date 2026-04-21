@@ -204,6 +204,26 @@ repeated family on the live frontier is the narrower Easter-Octave
 Prime ordinary-oration routing seam (while Easter Sunday Prime remains a
 separate psalm-table family).
 
+The follow-up Prime tranche then closed that ordinary-oration seam at
+the owning structural layer. Easter-Octave Prime under the shared
+`Capitulum Versum 2` shape no longer points its `oration` slot at the
+temporal `Tempora/Pasc0-*:[Oratio]` collect. Instead, Phase 2 now
+routes Prime to the ordinary Prime oration structurally as ordered refs
+`oratio_Domine` + `Per Dominum`, while Terce / Sext / None keep the
+temporal office collect. Phase 3's one-alone wrapper helper was widened
+just enough to accept ordered-ref oration slots, so the corrected Prime
+slot still receives the source-backed `Domine exaudi` / `Oremus`
+prelude and the post-collect `Domine exaudi` / `Benedicamus Domino`
+bridge. Focused regressions in
+`packages/rubrical-engine/test/integration/temporal-sunday-minor-antiphons.test.ts`
+and `packages/compositor/test/integration/compose-upstream.test.ts`
+lock the seam across both Roman policies. With that fix in place, the
+shared weekday Easter-Octave Prime rows move past the collect and now
+first diverge at the deeper Prime Martyrologium boundary at line `65`,
+while Easter Sunday Prime still holds the separate psalm-table seam at
+line `16`. The live Roman unadjudicated counts stay at `288` and `207`,
+and `Rubrics 1960 - 1960` improves to `43.4` average matching prefix.
+
 Core composition engine implemented (pre-sub-phase breakdown):
 
 - `@officium-novum/compositor` package scaffold with build, typecheck, and Vitest setup

@@ -653,14 +653,15 @@ function oneAloneMinorHourWrapperContent(args: ComposeSlotArgs): SlotContent | u
   }
 
   if (args.slot === 'oration') {
-    if (args.content.kind !== 'single-ref') {
+    const innerRefs = refsForOneAloneMinorHourOration(args.content);
+    if (!innerRefs) {
       return undefined;
     }
 
     const refs: TextReference[] = [
       commonPrayerRef('Domine exaudi'),
       commonPrayerRef('Oremus'),
-      args.content.ref
+      ...innerRefs
     ];
     if (args.hour === 'prime') {
       refs.push(commonPrayerRef('Domine exaudi'), commonPrayerRef('Benedicamus Domino'));
@@ -698,6 +699,19 @@ function usesOneAloneMinorHourWrapper(args: ComposeSlotArgs): boolean {
     responsory?.kind === 'empty' &&
     versicle?.kind === 'empty'
   );
+}
+
+function refsForOneAloneMinorHourOration(
+  content: SlotContent
+): readonly TextReference[] | undefined {
+  switch (content.kind) {
+    case 'single-ref':
+      return [content.ref];
+    case 'ordered-refs':
+      return content.refs;
+    default:
+      return undefined;
+  }
 }
 
 function commonPrayerRef(section: string): TextReference {
