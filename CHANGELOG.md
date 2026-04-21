@@ -92,6 +92,21 @@ Lenten Sunday Matins versicle-routing seam. The Roman average
 matching-prefix metrics rise again to `37.1` (`Reduced - 1955`) and
 `39.5` (`Rubrics 1960 - 1960`).
 
+The next shared-Roman Matins tranche then closed the Triduum
+`Gloria omittitur` psalmody seam that surfaced after the suppressed
+invitatory on Holy Thursday and Good Friday. The shared
+`omit-gloria-patri` directive now replaces a stripped psalm doxology
+with `Gloria omittitur` instead of silently deleting the tail, and the
+generic / Matins psalmody compose paths now pass the localized formula
+expansion through that transform before emission. Focused regressions in
+`test/apply-directives.test.ts` and
+`test/integration/compose-upstream.test.ts` lock both the shared
+directive behavior and the upstream Roman Matins result. With that
+fix, the live Roman frontier moves off the false March psalmody seam
+into the next shared Triduum Matins rubric lane, and the Roman average
+matching-prefix metrics improve again to `37.4` (`Reduced - 1955`) and
+`39.8` (`Rubrics 1960 - 1960`).
+
 A follow-up adjudication sweep then ran a full-ledger fanout pass across
 all three policy ledgers (`--max-doc-rows 600` + `adjudications:fanout`)
 to propagate existing representative `perl-bug` and

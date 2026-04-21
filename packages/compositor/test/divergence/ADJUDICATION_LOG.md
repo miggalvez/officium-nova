@@ -1044,10 +1044,19 @@ get their own `## Entry` block as they are adjudicated:
   [ADR-012](../../../../docs/adr/012-compline-benediction-verb.md) as
   `engine-bug` (duplicate-header resolution in Phase 1). Not yet fixed.
 - **Triduum Matins `Gloria omittitur` after suppressed invitatory** —
-  Holy Thursday and Good Friday now first diverge at `Gloria omittitur`
-  (`2024-03-28` / `2024-03-29`) across both Roman policies even though
-  the invitatory wrapper itself is suppressed. Preliminary class:
-  `engine-bug`.
+  closed as `engine-bug`. The shared Phase 3 `omit-gloria-patri`
+  psalmody transform was stripping the synthetic psalm doxology without
+  inserting the source-backed replacement line. The compositor now
+  replaces that tail with localized `Gloria omittitur` content before
+  emission, so Holy Thursday / Good Friday Roman Matins advance beyond
+  the old psalmody seam.
+- **Triduum Matins secret `Pater Noster` rubric** — after the psalmody
+  fix, Holy Thursday and Good Friday now first diverge at the secret
+  `Pater Noster` rubric (`2024-03-28` line `91`, `2024-03-29` line
+  `83`) across both Roman policies: Perl expects `Pater Noster dicitur
+  totum secreto.`, while the compositor currently emits `« Pater Noster
+  » dicitur secreto usque ad « Et ne nos indúcas in tentatiónem: »`.
+  This is the next shared Roman Matins family to lock and adjudicate.
 
 ## See also
 

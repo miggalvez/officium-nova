@@ -14,6 +14,7 @@ import type {
 import { conditionMatches } from '@officium-novum/rubrical-engine';
 
 import { applyDirectives } from '../directives/apply-directives.js';
+import { resolveGloriaOmittiturReplacement } from './gloria-omittitur.js';
 import { isWholeAntiphonSlot, markAntiphonFirstText } from '../emit/antiphon-marker.js';
 import { emitSection } from '../emit/sections.js';
 import { flattenConditionals } from '../flatten/evaluate-conditionals.js';
@@ -495,6 +496,18 @@ function composeMergedSlot(
     for (const lang of args.options.languages) {
       const bucket = perLanguage.get(lang);
       if (!bucket) continue;
+      const gloriaOmittiturReplacement =
+        slot === 'psalmody'
+          ? resolveGloriaOmittiturReplacement({
+              directives: args.directives,
+              corpus: args.corpus,
+              language: lang,
+              langfb: args.options.langfb,
+              context: args.context,
+              maxDepth: MAX_DEFERRED_DEPTH,
+              ...(args.onWarning ? { onWarning: args.onWarning } : {})
+            })
+          : undefined;
       const section = resolved[lang];
       if (!section) continue;
       if (section.selectorMissing) {
@@ -513,7 +526,8 @@ function composeMergedSlot(
         const flattened = flattenConditionals(antiphonOnly, args.context);
         const transformed = applyDirectives(slot, flattened, {
           hour: 'matins',
-          directives: args.directives
+          directives: args.directives,
+          gloriaOmittiturReplacement
         });
         const normalized = repeatAntiphon
           ? normalizeRepeatedAntiphonContent(transformed)
@@ -562,7 +576,8 @@ function composeMergedSlot(
       const flattened = flattenConditionals(expanded, args.context);
       const transformed = applyDirectives(slot, flattened, {
         hour: 'matins',
-        directives: args.directives
+        directives: args.directives,
+        gloriaOmittiturReplacement
       });
       const lineSeparated =
         slot === 'psalmody' && !isAntiphon && psalmIndex !== undefined
@@ -700,6 +715,15 @@ function appendExpandedPsalmWrapper(
   let localPsalmOffset = 0;
   const suppressFirstInlineAntiphon =
     args.suppressFirstInlineAntiphon || endsWithStandaloneAntiphon(target);
+  const gloriaOmittiturReplacement = resolveGloriaOmittiturReplacement({
+    directives: args.directives,
+    corpus: args.index,
+    language: args.language,
+    langfb: args.langfb,
+    context: args.context,
+    maxDepth: args.maxDepth,
+    ...(args.onWarning ? { onWarning: args.onWarning } : {})
+  });
   for (const node of content) {
     if (node.type !== 'psalmRef') {
       continue;
@@ -720,7 +744,8 @@ function appendExpandedPsalmWrapper(
     const flattened = flattenConditionals(expanded, args.context);
     const transformed = applyDirectives('psalmody', flattened, {
       hour: 'matins',
-      directives: args.directives
+      directives: args.directives,
+      gloriaOmittiturReplacement
     });
     const [leadingAntiphon, psalmBody] = splitLeadingPsalmAntiphon(transformed);
     if (leadingAntiphon.length > 0) {
@@ -1175,7 +1200,16 @@ function resolveFirstPsalmVerseText(
   const flattened = flattenConditionals(expanded, args.context);
   const transformed = applyDirectives('psalmody', flattened, {
     hour: 'matins',
-    directives: args.directives
+    directives: args.directives,
+    gloriaOmittiturReplacement: resolveGloriaOmittiturReplacement({
+      directives: args.directives,
+      corpus: args.corpus,
+      language,
+      langfb: args.options.langfb,
+      context: args.context,
+      maxDepth: MAX_DEFERRED_DEPTH,
+      ...(args.onWarning ? { onWarning: args.onWarning } : {})
+    })
   });
 
   for (const node of transformed) {

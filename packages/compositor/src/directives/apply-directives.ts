@@ -4,6 +4,7 @@ import type { HourDirective, SlotName } from '@officium-novum/rubrical-engine';
 export interface DirectiveContext {
   readonly hour: string;
   readonly directives: readonly HourDirective[];
+  readonly gloriaOmittiturReplacement?: readonly TextContent[];
 }
 
 type SlotTransform = (
@@ -37,14 +38,17 @@ export function applyDirectives(
   let out = content;
   const flags = new Set<HourDirective>(context.directives);
 
-  for (const transform of transformsFor(flags)) {
+  for (const transform of transformsFor(flags, context)) {
     out = transform(slot, out);
   }
 
   return out;
 }
 
-function transformsFor(flags: ReadonlySet<HourDirective>): SlotTransform[] {
+function transformsFor(
+  flags: ReadonlySet<HourDirective>,
+  context: DirectiveContext
+): SlotTransform[] {
   const pipeline: SlotTransform[] = [];
 
   // Dirge banners land first so the downstream alleluia/preces transforms
@@ -54,7 +58,11 @@ function transformsFor(flags: ReadonlySet<HourDirective>): SlotTransform[] {
 
   // Structural clip-offs before surface-text manipulations.
   if (flags.has('short-chapter-only')) pipeline.push(shortChapterOnly);
-  if (flags.has('omit-gloria-patri')) pipeline.push(omitGloriaPatri);
+  if (flags.has('omit-gloria-patri')) {
+    pipeline.push((slot, content) =>
+      omitGloriaPatri(slot, content, context.gloriaOmittiturReplacement)
+    );
+  }
 
   if (flags.has('omit-alleluia')) pipeline.push(omitAlleluia);
   if (flags.has('add-alleluia')) pipeline.push(addAlleluia);
@@ -83,24 +91,43 @@ function transformsFor(flags: ReadonlySet<HourDirective>): SlotTransform[] {
  * We strip both shapes when they appear at the tail of the node list. The
  * Triduum (RI §160) is the primary caller.
  */
-function omitGloriaPatri(slot: SlotName, content: readonly TextContent[]): readonly TextContent[] {
+const DEFAULT_GLORIA_OMITTITUR_REPLACEMENT: readonly TextContent[] = Object.freeze([
+  Object.freeze({ type: 'text', value: 'Gloria omittitur' } satisfies TextContent)
+]);
+
+function omitGloriaPatri(
+  slot: SlotName,
+  content: readonly TextContent[],
+  replacement: readonly TextContent[] = DEFAULT_GLORIA_OMITTITUR_REPLACEMENT
+): readonly TextContent[] {
   if (slot !== 'psalmody') return content;
 
-  const out = content.slice();
-  let trimmed = true;
-  while (trimmed && out.length > 0) {
-    trimmed = false;
-    const last = out[out.length - 1]!;
-    if (isGloriaPatriNode(last)) {
-      out.pop();
-      trimmed = true;
-      continue;
-    }
-    if (last.type === 'separator') {
-      out.pop();
-      trimmed = true;
+  let end = content.length;
+  while (end > 0 && content[end - 1]!.type === 'separator') {
+    end -= 1;
+  }
+
+  let strippedGloria = false;
+  while (end > 0 && isGloriaPatriNode(content[end - 1]!)) {
+    strippedGloria = true;
+    end -= 1;
+    while (end > 0 && content[end - 1]!.type === 'separator') {
+      end -= 1;
     }
   }
+
+  if (!strippedGloria) {
+    return content;
+  }
+
+  const out = content.slice(0, end);
+  if (replacement.length > 0) {
+    if (out.length > 0 && out[out.length - 1]!.type !== 'separator') {
+      out.push({ type: 'separator' });
+    }
+    out.push(...replacement);
+  }
+
   return Object.freeze(out);
 }
 

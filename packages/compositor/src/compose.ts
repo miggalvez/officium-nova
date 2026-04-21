@@ -11,6 +11,7 @@ import type {
 } from '@officium-novum/rubrical-engine';
 
 import { stripLaudsSecretoPrayers } from './compose/incipit.js';
+import { resolveGloriaOmittiturReplacement } from './compose/gloria-omittitur.js';
 import { composeMatinsSections } from './compose/matins.js';
 import { applyDirectives } from './directives/index.js';
 import { isWholeAntiphonSlot, markAntiphonFirstText } from './emit/antiphon-marker.js';
@@ -217,6 +218,15 @@ function composeTriduumSpecialComplineSection(
       continue;
     }
     const bucket: TextContent[] = [];
+    const gloriaOmittiturReplacement = resolveGloriaOmittiturReplacement({
+      directives: args.structure.directives,
+      corpus: args.corpus,
+      language: lang,
+      langfb: args.options.langfb,
+      context: args.context,
+      maxDepth: MAX_DEFERRED_DEPTH,
+      ...(args.onWarning ? { onWarning: args.onWarning } : {})
+    });
     const sourceNodes = flattenConditionals(section.content, args.context);
     for (const node of sourceNodes) {
       if (node.type === 'separator') {
@@ -260,7 +270,8 @@ function composeTriduumSpecialComplineSection(
       // way as ordinary Compline while bypassing the ordinary short reading.
       const transformed = applyDirectives('psalmody', flattened, {
         hour: args.hour,
-        directives: args.structure.directives
+        directives: args.structure.directives,
+        gloriaOmittiturReplacement
       });
       appendContentWithBoundary(bucket, transformed);
     }
@@ -360,6 +371,18 @@ function composeSlot(args: ComposeSlotArgs): Section | undefined {
     for (const lang of args.options.languages) {
       const bucket = perLanguage.get(lang);
       if (!bucket) continue;
+      const gloriaOmittiturReplacement =
+        args.slot === 'psalmody'
+          ? resolveGloriaOmittiturReplacement({
+              directives: args.directives,
+              corpus: args.corpus,
+              language: lang,
+              langfb: args.options.langfb,
+              context: args.context,
+              maxDepth: MAX_DEFERRED_DEPTH,
+              ...(args.onWarning ? { onWarning: args.onWarning } : {})
+            })
+          : undefined;
       const section = resolved[lang];
       if (!section) continue;
       if (section.selectorMissing) {
@@ -447,7 +470,8 @@ function composeSlot(args: ComposeSlotArgs): Section | undefined {
       const directiveInput = isAntiphon ? markAntiphonFirstText(flattened) : flattened;
       const transformed = applyDirectives(args.slot, directiveInput, {
         hour: args.hour,
-        directives: args.directives
+        directives: args.directives,
+        gloriaOmittiturReplacement
       });
       const withHymnDoxology =
         args.slot === 'hymn'
@@ -752,6 +776,15 @@ function appendExpandedPsalmWrapper(
   args: ExpandPsalmWrapperArgs
 ): void {
   let localPsalmOffset = 0;
+  const gloriaOmittiturReplacement = resolveGloriaOmittiturReplacement({
+    directives: args.directives,
+    corpus: args.index,
+    language: args.language,
+    langfb: args.langfb,
+    context: args.context,
+    maxDepth: args.maxDepth,
+    ...(args.onWarning ? { onWarning: args.onWarning } : {})
+  });
   for (const node of content) {
     if (node.type !== 'psalmRef') {
       continue;
@@ -778,7 +811,8 @@ function appendExpandedPsalmWrapper(
     const flattened = flattenConditionals(expanded, args.context);
     const transformed = applyDirectives('psalmody', flattened, {
       hour: args.hour,
-      directives: args.directives
+      directives: args.directives,
+      gloriaOmittiturReplacement
     });
     const [leadingAntiphon, psalmBody] = splitLeadingPsalmAntiphon(transformed);
     if (leadingAntiphon.length > 0) {
