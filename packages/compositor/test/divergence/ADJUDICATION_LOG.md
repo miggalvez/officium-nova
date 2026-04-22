@@ -1283,7 +1283,7 @@ Prime Martyrologium handoff, not another collect-routing variant.
 
 ### 2026-04-21 — Pattern: Easter-Octave Prime Martyrologium handoff + lunar heading (engine-bug, narrowed)
 
-**Commit.** `pending tranche commit`
+**Commit.** `2e2325e`
 
 **Ledger signal.** After the ordinary-Prime oration fix above, shared
 Roman weekday Prime rows on the Easter Octave (`2024-04-01` through at
@@ -1343,7 +1343,7 @@ post-oration handoff.
 
 ### 2026-04-21 — Pattern: Easter-Octave Prime Martyrologium responsorial body-formatting (engine-bug)
 
-**Commit.** `pending tranche commit`
+**Commit.** `f82c180`
 
 **Ledger signal.** After the Prime Martyrologium handoff + lunar-heading
 fix above, the shared Roman weekday Prime rows (`2024-04-01` through at
@@ -1392,7 +1392,7 @@ inténde.` while the compositor currently emits nothing after
 
 ### 2026-04-21 — Pattern: Easter-Octave Prime `De Officio Capituli` structural split (engine-bug)
 
-**Commit.** `pending tranche commit`
+**Commit.** `768ce6a`
 
 **Ledger signal.** After the Prime Martyrologium body-formatting fix,
 the repeated Roman weekday Prime rows (`2024-04-01` through at least
@@ -1446,6 +1446,8 @@ rubric `« Pater Noster » dicitur secreto usque ad « Et ne nos indúcas
 in tentatiónem: »`.
 
 ### 2026-04-21 — Pattern: Roman Prime post-Martyrologium secret `Pater Noster` guillemets (rendering-difference)
+
+**Commit.** `f1fecef`
 
 **Ledger signal.** After the Easter-Octave Prime structural fixes
 restored the Martyrologium tail and `De Officio Capituli`, the repeated
