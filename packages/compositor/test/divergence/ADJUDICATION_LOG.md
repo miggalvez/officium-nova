@@ -1620,7 +1620,7 @@ conclusion seam.
 
 ### 2026-04-22 — Pattern: Easter-Octave Vespers conclusion (engine-bug)
 
-**Commit.** `pending tranche commit`
+**Commit.** `8cd901e`
 
 **Ledger signal.** After the Easter-Octave Vespers oration-prelude tranche,
 both Roman policies on `2024-04-01` / `2024-04-02` Vespers first diverged
@@ -1663,6 +1663,47 @@ unadjudicated rows for `Rubrics 1960 - 1960`. The next shared Roman family
 is no longer another Vespers code seam but the Easter-Octave Lauds Psalm 99
 half-verse lane, which now surfaces as an 8-row Roman unadjudicated
 adjudication/fanout sweep.
+
+### 2026-04-22 — Pattern: Easter-Octave Lauds Psalm 99 half-verse fanout (perl-bug)
+
+**Commit.** `7508fb4`
+
+**Ledger signal.** After the Easter-Octave Vespers structural fixes cleared
+the major-hour Roman frontier, the newly exposed April Lauds rows on
+`2024-04-01` / `2024-04-02` (`Reduced - 1955`) and `2024-04-01` through
+`2024-04-06` (`Rubrics 1960 - 1960`) all first diverged at Psalm 99 line
+`99:3b`: Perl flattened the verse to `... * introíte ...`, while the
+compositor preserved `... ‡ introíte ... * ...`.
+
+**Root cause.** Not a new code defect. This is the same source-backed Roman
+Lauds Psalm 99 half-verse family already adjudicated earlier in the burn-down.
+`Psalm99.txt` still explicitly encodes `99:3b` with `‡ ... *`, and the
+compositor keeps that structure while removing the numeric carry marker.
+What remained open here was row-key coverage: the previously landed
+representative/fanout sweep predated the Easter-Octave Vespers fixes, so
+these April rows had never been propagated into the sidecar.
+
+**Resolution.** Class `perl-bug`. Locked the seam for the newly exposed
+April surface in `packages/compositor/test/integration/compose-upstream.test.ts`,
+then added the missing April row keys directly to
+`packages/compositor/test/divergence/adjudications.json`. `adjudications:fanout`
+was not sufficient on its own because the generated ledgers only retain the
+first 40 divergent rows and these April Lauds rows now sit deeper than that
+sample window.
+
+**Citation.**
+
+- `upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm99.txt:3-5`
+- `docs/upstream-issues.md` (`Roman Lauds Psalm 99 half-verse structure is flattened by the Perl render surface`)
+
+**Impact.** The Easter-Octave Lauds Psalm 99 seam is now closed as an
+adjudication sweep rather than a code fix, dropping the Roman unadjudicated
+counts to `282` for `Reduced - 1955` and `193` for `Rubrics 1960 - 1960`
+once the ledgers refresh. The next shared Roman family on the live grouped
+surface is the Easter-Octave Prime post-Martyrologium `Pater Noster`
+guillemet fanout (`2024-04-03` through `2024-04-05` across both Roman
+policies), which should also be an adjudication sweep rather than a new
+engine fix.
 
 ### Open pattern backlog
 

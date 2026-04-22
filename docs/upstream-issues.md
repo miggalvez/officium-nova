@@ -261,11 +261,13 @@ rules.
 **Classification.** `perl-bug`
 
 **Summary.** Under both `Reduced - 1955` and `Rubrics 1960 - 1960`, the
-January Roman Lauds rows for Jan `1`, `6`, `7`, and `13` first diverge
-at Psalm 99 line `99:3b`. The compositor preserves the corpus
-half-verse structure `... ‡ ... * ...` while removing the numeric carry
-marker; the Perl comparison surface flattens the same source line to a
-single `*` split.
+Roman Lauds rows first diverge at Psalm 99 line `99:3b` whenever the
+frontier reaches that psalm, including the January cluster (Jan `1`,
+`6`, `7`, `13`) and the Easter-Octave April cluster exposed after the
+Vespers burn-down. The compositor preserves the corpus half-verse
+structure `... ‡ ... * ...` while removing the numeric carry marker;
+the Perl comparison surface flattens the same source line to a single
+`*` split.
 
 **Primary source.**
 `upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm99.txt:3-5`
@@ -290,10 +292,18 @@ source-backed `‡ ... *` half-verse structure from `Psalm99.txt`.
 | Policy | Date | Hour | Row key suffix |
 |---|---|---|---|
 | Reduced - 1955 | 2024-01-01 | Lauds | `2af868c1` |
+| Reduced - 1955 | 2024-04-01 | Lauds | `2af868c1` |
+| Reduced - 1955 | 2024-04-02 | Lauds | `2af868c1` |
 | Reduced - 1955 | 2024-01-06 | Lauds | `2af868c1` |
 | Reduced - 1955 | 2024-01-07 | Lauds | `2af868c1` |
 | Reduced - 1955 | 2024-01-13 | Lauds | `2af868c1` |
 | Rubrics 1960 - 1960 | 2024-01-01 | Lauds | `2af868c1` |
+| Rubrics 1960 - 1960 | 2024-04-01 | Lauds | `2af868c1` |
+| Rubrics 1960 - 1960 | 2024-04-02 | Lauds | `2af868c1` |
+| Rubrics 1960 - 1960 | 2024-04-03 | Lauds | `2af868c1` |
+| Rubrics 1960 - 1960 | 2024-04-04 | Lauds | `2af868c1` |
+| Rubrics 1960 - 1960 | 2024-04-05 | Lauds | `2af868c1` |
+| Rubrics 1960 - 1960 | 2024-04-06 | Lauds | `2af868c1` |
 | Rubrics 1960 - 1960 | 2024-01-06 | Lauds | `2af868c1` |
 | Rubrics 1960 - 1960 | 2024-01-07 | Lauds | `2af868c1` |
 | Rubrics 1960 - 1960 | 2024-01-13 | Lauds | `2af868c1` |
