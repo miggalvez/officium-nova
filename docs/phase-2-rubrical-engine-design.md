@@ -398,8 +398,9 @@ export interface HourStructure {
 export type SlotName =
   | 'invitatory' | 'hymn' | 'psalmody'
   | 'chapter' | 'responsory' | 'versicle'
-  | 'antiphon-ad-benedictus' | 'antiphon-ad-magnificat'
-  | 'antiphon-ad-nunc-dimittis'
+  | 'antiphon-ad-benedictus' | 'canticle-ad-benedictus'
+  | 'antiphon-ad-magnificat' | 'canticle-ad-magnificat'
+  | 'antiphon-ad-nunc-dimittis' | 'canticle-ad-nunc-dimittis'
   | 'oration' | 'commemoration-antiphons'
   | 'commemoration-versicles' | 'commemoration-orations'
   | 'suffragium' | 'preces'

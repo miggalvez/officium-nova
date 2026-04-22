@@ -397,6 +397,70 @@ function composePrimeMartyrologySection(args: ComposeSlotArgs): Section | undefi
   );
 }
 
+function composeLucanCanticleSection(args: ComposeSlotArgs): Section | undefined {
+  if (!isLucanCanticleSlot(args.slot) || args.content.kind !== 'single-ref') {
+    return undefined;
+  }
+
+  const perLanguage = new Map<string, readonly TextContent[]>();
+  for (const language of args.options.languages) {
+    const resolved = resolveReference(args.corpus, args.content.ref, {
+      languages: [language],
+      langfb: args.options.langfb,
+      dayOfWeek: args.context.dayOfWeek,
+      date: args.context.date,
+      season: args.context.season,
+      version: args.context.version,
+      modernStyleMonthday: args.context.version.handle.includes('1960'),
+      ...(args.onWarning ? { onWarning: args.onWarning } : {})
+    });
+    const section = resolved[language];
+    if (!section || section.selectorMissing) {
+      continue;
+    }
+
+    const gloriaOmittiturReplacement = resolveGloriaOmittiturReplacement({
+      directives: args.directives,
+      corpus: args.corpus,
+      language,
+      langfb: args.options.langfb,
+      context: args.context,
+      maxDepth: MAX_DEFERRED_DEPTH,
+      ...(args.onWarning ? { onWarning: args.onWarning } : {})
+    });
+    const expanded = expandDeferredNodes(withPsalmGloriaPatri(section.content), {
+      index: args.corpus,
+      language,
+      langfb: args.options.langfb,
+      season: args.context.season,
+      seen: new Set(),
+      maxDepth: MAX_DEFERRED_DEPTH,
+      ...(args.onWarning ? { onWarning: args.onWarning } : {})
+    });
+    const flattened = flattenConditionals(expanded, args.context);
+    const transformed = applyDirectives(args.slot, flattened, {
+      hour: args.hour,
+      directives: args.directives,
+      gloriaOmittiturReplacement
+    });
+
+    const bucket = [...formatLucanCanticleContent(transformed)];
+    const repeatedAntiphon = resolveRepeatedCanticleAntiphon(args, language);
+    if (repeatedAntiphon.length > 0) {
+      appendContentWithBoundary(bucket, repeatedAntiphon);
+    }
+    if (bucket.length > 0) {
+      perLanguage.set(language, Object.freeze(bucket));
+    }
+  }
+
+  if (perLanguage.size === 0) {
+    return undefined;
+  }
+
+  return emitSection(args.slot, perLanguage, referenceKey(args.content.ref));
+}
+
 function nextMartyrologyDate(date: string): MartyrologyDateParts {
   const current = new Date(`${date}T00:00:00Z`);
   current.setUTCDate(current.getUTCDate() + 1);
@@ -513,6 +577,46 @@ function formatPrimeMartyrologyContent(content: readonly TextContent[]): TextCon
   }
 
   return bucket;
+}
+
+function formatLucanCanticleContent(content: readonly TextContent[]): readonly TextContent[] {
+  const bucket: TextContent[] = [];
+  let splitTitle = false;
+
+  for (const node of content) {
+    if (!splitTitle && node.type === 'text') {
+      const parts = splitLucanCanticleTitle(node.value);
+      if (parts) {
+        bucket.push({ type: 'text', value: parts.title });
+        bucket.push({ type: 'separator' });
+        bucket.push({ type: 'text', value: parts.citation });
+        bucket.push({ type: 'separator' });
+        splitTitle = true;
+        continue;
+      }
+    }
+
+    bucket.push(node);
+    if (node.type === 'text') {
+      bucket.push({ type: 'separator' });
+    }
+  }
+
+  return Object.freeze(bucket);
+}
+
+function splitLucanCanticleTitle(
+  text: string
+): { readonly title: string; readonly citation: string } | undefined {
+  const match = text.trim().match(/^\((.+?)\s+\*\s+(.+)\)$/u);
+  if (!match?.[1] || !match[2]) {
+    return undefined;
+  }
+
+  return {
+    title: match[1].trim(),
+    citation: match[2].trim()
+  };
 }
 
 function appendPrimeMartyrologyTail(
@@ -840,6 +944,11 @@ function composeSlot(args: ComposeSlotArgs): Section | undefined {
   const primeMartyrology = composePrimeMartyrologySection(args);
   if (primeMartyrology) {
     return primeMartyrology;
+  }
+
+  const lucanCanticle = composeLucanCanticleSection(args);
+  if (lucanCanticle) {
+    return lucanCanticle;
   }
 
   const effectiveContent = directiveDrivenSlotContent(args) ?? args.content;
@@ -1515,6 +1624,81 @@ function normalizeRepeatedAntiphonContent(
 
 function normalizeRepeatedAntiphonText(text: string): string {
   return text.replace(/\s*[*‡†]\s*/gu, ' ').replace(/\s{2,}/gu, ' ').trim();
+}
+
+function resolveRepeatedCanticleAntiphon(
+  args: ComposeSlotArgs,
+  language: string
+): readonly TextContent[] {
+  const antiphonSlot = lucanCanticleAntiphonSlot(args.slot);
+  if (!antiphonSlot) {
+    return [];
+  }
+
+  const content = args.structure.slots[antiphonSlot];
+  if (!content) {
+    return [];
+  }
+
+  const ref = taggedReferencesFrom(args.hour, antiphonSlot, content)[0]?.ref;
+  if (!ref) {
+    return [];
+  }
+
+  const resolved = resolveReference(args.corpus, ref, {
+    languages: [language],
+    langfb: args.options.langfb,
+    dayOfWeek: args.context.dayOfWeek,
+    date: args.context.date,
+    season: args.context.season,
+    version: args.context.version,
+    modernStyleMonthday: args.context.version.handle.includes('1960'),
+    ...(args.onWarning ? { onWarning: args.onWarning } : {})
+  });
+  const section = resolved[language];
+  if (!section || section.selectorMissing) {
+    return [];
+  }
+
+  const expanded = expandDeferredNodes(section.content, {
+    index: args.corpus,
+    language,
+    langfb: args.options.langfb,
+    season: args.context.season,
+    seen: new Set(),
+    maxDepth: MAX_DEFERRED_DEPTH,
+    ...(args.onWarning ? { onWarning: args.onWarning } : {})
+  });
+  const flattened = flattenConditionals(expanded, args.context);
+  const transformed = applyDirectives(
+    antiphonSlot,
+    markAntiphonFirstText(flattened),
+    {
+      hour: args.hour,
+      directives: args.directives
+    }
+  );
+
+  return normalizeRepeatedAntiphonContent(transformed);
+}
+
+function isLucanCanticleSlot(slot: SlotName): boolean {
+  return (
+    slot === 'canticle-ad-benedictus' ||
+    slot === 'canticle-ad-magnificat' ||
+    slot === 'canticle-ad-nunc-dimittis'
+  );
+}
+
+function lucanCanticleAntiphonSlot(
+  slot: SlotName
+): 'antiphon-ad-benedictus' | 'antiphon-ad-magnificat' | 'antiphon-ad-nunc-dimittis' | undefined {
+  return (
+    slot === 'canticle-ad-benedictus' ? 'antiphon-ad-benedictus'
+    : slot === 'canticle-ad-magnificat' ? 'antiphon-ad-magnificat'
+    : slot === 'canticle-ad-nunc-dimittis' ? 'antiphon-ad-nunc-dimittis'
+    : undefined
+  );
 }
 
 function normalizeOpeningPsalmodyAntiphonContent(

@@ -533,6 +533,56 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
     }
   }, 240_000);
 
+  it('renders Easter Octave Vespers Magnificat and its repeated antiphon before the oration', async () => {
+    const expectedCanticleOpening = [
+      normalizeLatin('Canticum B. Mariæ Virginis'),
+      normalizeLatin('Luc. 1:46-55'),
+      normalizeLatin('1:46 Magníficat + * ánima mea Dóminum.')
+    ] as const;
+    const expectedRepeatedAntiphon = normalizeLatin(
+      'Vidéte manus meas et pedes meos, quia ego ipse sum, allelúja, allelúja.'
+    );
+
+    for (const version of ['Reduced - 1955', 'Rubrics 1960 - 1960'] as const) {
+      const { engine, resolvedCorpus } = await createHarness(version);
+      const summary = engine.resolveDayOfficeSummary('2024-04-02');
+      const vespers = composeHour({
+        corpus: resolvedCorpus.index,
+        summary,
+        version: engine.version,
+        hour: 'vespers',
+        options: { languages: ['Latin'] }
+      });
+
+      const slotOrder = vespers.sections.map((section) => section.slot);
+      const canticleIndex = slotOrder.indexOf('canticle-ad-magnificat');
+      expect(
+        canticleIndex,
+        `${version} Vespers should expose Magnificat between the antiphon and the oration`
+      ).toBeGreaterThan(slotOrder.indexOf('antiphon-ad-magnificat'));
+      expect(
+        canticleIndex,
+        `${version} Vespers should place Magnificat before the oration`
+      ).toBeLessThan(slotOrder.indexOf('oration'));
+
+      const canticleLines = sectionTexts(vespers, 'canticle-ad-magnificat').map(normalizeLatin);
+      const canticle = vespers.sections.find((section) => section.slot === 'canticle-ad-magnificat');
+      expect(canticle, `${version} Vespers should expose a Magnificat section`).toBeDefined();
+      expect(
+        canticleLines.slice(0, expectedCanticleOpening.length),
+        `${version} Vespers should open the Magnificat section with the source-backed heading and first verse`
+      ).toEqual(expectedCanticleOpening);
+      expect(
+        canticle?.lines.at(-1)?.marker,
+        `${version} Vespers should keep the Ant. marker on the repeated Magnificat antiphon`
+      ).toBe('Ant.');
+      expect(
+        canticleLines.at(-1),
+        `${version} Vespers should repeat the Magnificat antiphon after the canticle`
+      ).toBe(expectedRepeatedAntiphon);
+    }
+  }, 240_000);
+
   it('renders July 9 Matins benedictions line-by-line and emits the Te Deum replacement responsory only once', async () => {
     const { engine, resolvedCorpus } = await createHarness('Rubrics 1960 - 1960');
 
@@ -1446,7 +1496,14 @@ function psalmodyTexts(
 
 function sectionTexts(
   composed: ReturnType<typeof composeHour>,
-  slot: 'chapter' | 'responsory' | 'versicle' | 'oration' | 'conclusion' | 'martyrology'
+  slot:
+    | 'chapter'
+    | 'responsory'
+    | 'versicle'
+    | 'oration'
+    | 'conclusion'
+    | 'martyrology'
+    | 'canticle-ad-magnificat'
 ): readonly string[] {
   const section = composed.sections.find((candidate) => candidate.slot === slot);
   expect(section, `${composed.hour} is missing the ${slot} section`).toBeDefined();

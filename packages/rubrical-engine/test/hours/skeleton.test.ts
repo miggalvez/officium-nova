@@ -68,6 +68,7 @@ describe('loadOrdinariumSkeleton', () => {
     expect(names).toContain('psalmody');
     expect(names).toContain('chapter');
     expect(names).toContain('antiphon-ad-benedictus');
+    expect(names).toContain('canticle-ad-benedictus');
     expect(names).toContain('preces');
     expect(names).toContain('oration');
     expect(names).toContain('suffragium');
@@ -133,11 +134,20 @@ describe('mapHeaderToSlots (regression — Codex P1 #1)', () => {
     expect(mapHeaderToSlots('Capitulum Versus')).toEqual(['chapter', 'versicle']);
   });
 
-  it('keeps canticle headings as single antiphon slots', async () => {
+  it('expands canticle headings into antiphon + canticle slots', async () => {
     const { mapHeaderToSlots } = await import('../../src/hours/skeleton.js');
-    expect(mapHeaderToSlots('Canticum: Benedictus')).toEqual(['antiphon-ad-benedictus']);
-    expect(mapHeaderToSlots('Canticum: Magnificat')).toEqual(['antiphon-ad-magnificat']);
-    expect(mapHeaderToSlots('Canticum: Nunc dimittis')).toEqual(['antiphon-ad-nunc-dimittis']);
+    expect(mapHeaderToSlots('Canticum: Benedictus')).toEqual([
+      'antiphon-ad-benedictus',
+      'canticle-ad-benedictus'
+    ]);
+    expect(mapHeaderToSlots('Canticum: Magnificat')).toEqual([
+      'antiphon-ad-magnificat',
+      'canticle-ad-magnificat'
+    ]);
+    expect(mapHeaderToSlots('Canticum: Nunc dimittis')).toEqual([
+      'antiphon-ad-nunc-dimittis',
+      'canticle-ad-nunc-dimittis'
+    ]);
   });
 });
 

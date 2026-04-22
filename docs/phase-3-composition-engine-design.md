@@ -150,10 +150,11 @@ type ComposedRun =
 ```
 
 `SectionType` enumerates the classifications the emit layer assigns per
-slot (psalm, antiphon, hymn, versicle, responsory, oration, rubric,
-heading, commemoration, preces, suffragium, te-deum, lectio-brevis,
-benedictio, invitatory, conclusion, other). The list grows as 3d adds
-`benedictio`.
+slot (psalm, canticle, antiphon, hymn, versicle, responsory, oration,
+rubric, heading, commemoration, preces, suffragium, te-deum,
+lectio-brevis, benedictio, invitatory, conclusion, other). The list
+grows as 3d adds `benedictio` and the Easter-Octave Vespers tranche adds
+typed Lucan canticle sections.
 
 `HeadingDescriptor` is currently metadata-only — it describes Nocturn and
 Lesson boundaries in Matins output without materialising a textual line.
@@ -348,6 +349,10 @@ carries a gap that blocks composition parity. The two live examples
 - Matins-commemoration unblock — the "Lauds/Vespers only" assumption in
   `occurrence/resolver.ts` and the `attachCommemorationSlots` guard in
   `hours/apply-rule-set.ts` lift to a `policy.commemoratesAtHour` hook.
+- Lucan canticle slots — `#Canticum: Benedictus/Magnificat/Nunc dimittis`
+  now map to paired antiphon + canticle slots so Phase 3 can emit the
+  fixed Psalm231 / Psalm232 / Psalm233 bodies before the later-block
+  oration boundary.
 
 Any future cross-package edit requires a design-doc update and an ADR.
 
@@ -816,7 +821,7 @@ Where Perl uses mutation-heavy globals, Phase 3 returns a fresh
 | `Section` | A slot-level group of rendered lines with a single `SectionType`. |
 | `ComposedLine` | A single rendered line with optional marker and per-language run arrays. |
 | `ComposedRun` | The minimum typed fragment of a rendered line (text, rubric, citation, or unresolved-* placeholder). |
-| `SlotName` | Phase 2 slot identifier (e.g., `hymn`, `psalmody`, `antiphon-ad-benedictus`). |
+| `SlotName` | Phase 2 slot identifier (e.g., `hymn`, `psalmody`, `antiphon-ad-benedictus`, `canticle-ad-magnificat`). |
 | `HourDirective` | Phase 2 post-transform directive (e.g., `omit-alleluia`). See §7. |
 | `Divergence ledger` | Auto-generated `.md` file listing per-row mismatches vs Perl. See ADR-011. |
 | `Adjudications sidecar` | Hand-maintained `adjudications.json` storing per-row classifications. See ADR-011. |

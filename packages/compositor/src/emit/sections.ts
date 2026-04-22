@@ -35,6 +35,10 @@ export function sectionTypeFor(slot: SlotName): SectionType {
     case 'antiphon-ad-magnificat':
     case 'antiphon-ad-nunc-dimittis':
       return 'antiphon';
+    case 'canticle-ad-benedictus':
+    case 'canticle-ad-magnificat':
+    case 'canticle-ad-nunc-dimittis':
+      return 'canticle';
     case 'oration':
       return 'oration';
     case 'lectio-brevis':

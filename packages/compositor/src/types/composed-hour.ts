@@ -3,6 +3,7 @@ import type { HourName } from '@officium-novum/rubrical-engine';
 
 export type SectionType =
   | 'psalm'
+  | 'canticle'
   | 'antiphon'
   | 'chapter'
   | 'hymn'

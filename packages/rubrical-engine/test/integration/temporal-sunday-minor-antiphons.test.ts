@@ -193,6 +193,53 @@ describeIfUpstream('temporal Sunday minor-hour antiphon ownership', () => {
   );
 
   it(
+    'keeps Easter Octave Vespers Magnificat between the proper antiphon and the oration',
+    async () => {
+      const engines = await loadEngines([
+        'Reduced - 1955',
+        'Rubrics 1960 - 1960'
+      ]);
+
+      for (const handle of ['Reduced - 1955', 'Rubrics 1960 - 1960'] as const) {
+        const engine = engines.get(handle);
+        expect(engine, `${handle} engine`).toBeDefined();
+        if (!engine) {
+          continue;
+        }
+
+        for (const date of ['2024-04-01', '2024-04-02'] as const) {
+          const vespers = engine.resolveDayOfficeSummary(date).hours.vespers;
+          expect(vespers, `${handle} ${date} Vespers`).toBeDefined();
+          if (!vespers) {
+            continue;
+          }
+
+          const slotOrder = Object.keys(vespers.slots as Record<string, unknown>);
+          const canticleIndex = slotOrder.indexOf('canticle-ad-magnificat');
+          expect(
+            canticleIndex,
+            `${handle} ${date} Vespers should expose a Magnificat canticle slot`
+          ).toBeGreaterThanOrEqual(0);
+          expect(
+            canticleIndex,
+            `${handle} ${date} Vespers should place Magnificat after the antiphon ad Magnificat`
+          ).toBeGreaterThan(slotOrder.indexOf('antiphon-ad-magnificat'));
+          expect(
+            canticleIndex,
+            `${handle} ${date} Vespers should place Magnificat before the oration`
+          ).toBeLessThan(slotOrder.indexOf('oration'));
+
+          expectSingleRef(
+            vespers.slots['canticle-ad-magnificat'],
+            'horas/Latin/Psalterium/Psalmorum/Psalm232:__preamble'
+          );
+        }
+      }
+    },
+    240_000
+  );
+
+  it(
     'replaces the Easter Octave Prime and minor-hour later block with inherited Versum 2',
     async () => {
       const engines = await loadEngines([
@@ -479,7 +526,7 @@ function expectEmptySlot(slot: ReturnType<typeof slotAt>) {
 }
 
 function expectSingleRef(
-  slot: ReturnType<typeof slotAt>,
+  slot: { readonly kind: string; readonly ref?: { readonly path: string; readonly section: string } } | undefined,
   expected: string
 ) {
   expect(slot?.kind).toBe('single-ref');
