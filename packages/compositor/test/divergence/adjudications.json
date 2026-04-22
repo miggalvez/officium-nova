@@ -6702,7 +6702,8 @@
     "class": "rendering-difference",
     "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Rubricae.txt:1-2 — the corpus rubric carries guillemets around both `Pater Noster` and `Et ne nos indúcas in tentatiónem:`. Perl strips them while the compositor preserves them; both are surface renderings of the same rubric sentence, not a liturgical-content disagreement.",
     "notes": "Prime post-Martyrologium Easter-Octave seam under Reduced 1955. After the structural Prime fixes, the remaining stable divergence is only Perl stripping the corpus guillemets from the inherited `[Pater secreto]` rubric.",
-    "resolvedAt": "2026-04-21"
+    "resolvedAt": "2026-04-21",
+    "commitSha": "f1fecef"
   },
   "Reduced - 1955/2024-04-02/Compline/5dc10d20": {
     "policy": "Reduced - 1955",
@@ -6725,7 +6726,8 @@
     "class": "rendering-difference",
     "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Rubricae.txt:1-2 — the corpus rubric carries guillemets around both `Pater Noster` and `Et ne nos indúcas in tentatiónem:`. Perl strips them while the compositor preserves them; both are surface renderings of the same rubric sentence, not a liturgical-content disagreement.",
     "notes": "Prime post-Martyrologium Easter-Octave seam under Reduced 1955. After the structural Prime fixes, the remaining stable divergence is only Perl stripping the corpus guillemets from the inherited `[Pater secreto]` rubric.",
-    "resolvedAt": "2026-04-21"
+    "resolvedAt": "2026-04-21",
+    "commitSha": "f1fecef"
   },
   "Reduced - 1955/2024-04-03/Compline/5dc10d20": {
     "policy": "Reduced - 1955",
@@ -9340,7 +9342,8 @@
     "class": "rendering-difference",
     "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Rubricae.txt:1-2 — the corpus rubric carries guillemets around both `Pater Noster` and `Et ne nos indúcas in tentatiónem:`. Perl strips them while the compositor preserves them; both are surface renderings of the same rubric sentence, not a liturgical-content disagreement.",
     "notes": "Prime post-Martyrologium Easter-Octave seam under Rubrics 1960. After the structural Prime fixes, the remaining stable divergence is only Perl stripping the corpus guillemets from the inherited `[Pater secreto]` rubric.",
-    "resolvedAt": "2026-04-21"
+    "resolvedAt": "2026-04-21",
+    "commitSha": "f1fecef"
   },
   "Rubrics 1960 - 1960/2024-04-02/Compline/57de2841": {
     "policy": "Rubrics 1960 - 1960",
@@ -9363,7 +9366,8 @@
     "class": "rendering-difference",
     "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Rubricae.txt:1-2 — the corpus rubric carries guillemets around both `Pater Noster` and `Et ne nos indúcas in tentatiónem:`. Perl strips them while the compositor preserves them; both are surface renderings of the same rubric sentence, not a liturgical-content disagreement.",
     "notes": "Prime post-Martyrologium Easter-Octave seam under Rubrics 1960. After the structural Prime fixes, the remaining stable divergence is only Perl stripping the corpus guillemets from the inherited `[Pater secreto]` rubric.",
-    "resolvedAt": "2026-04-21"
+    "resolvedAt": "2026-04-21",
+    "commitSha": "f1fecef"
   },
   "Rubrics 1960 - 1960/2024-04-03/Compline/57de2841": {
     "policy": "Rubrics 1960 - 1960",
