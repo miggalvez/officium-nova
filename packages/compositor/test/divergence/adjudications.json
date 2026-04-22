@@ -6705,6 +6705,18 @@
     "resolvedAt": "2026-04-21",
     "commitSha": "f1fecef"
   },
+  "Reduced - 1955/2024-04-01/Lauds/2af868c1": {
+    "policy": "Reduced - 1955",
+    "date": "2024-04-01",
+    "hour": "Lauds",
+    "firstExpected": "99:3 Pópulus ejus, et oves páscuæ ejus: * introíte portas ejus in confessióne, átria ejus in hymnis: confitémini illi.",
+    "firstActual": "99:3 Pópulus ejus, et oves páscuæ ejus: ‡ introíte portas ejus in confessióne, * átria ejus in hymnis: confitémini illi.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm99.txt:3-5 — the psalm corpus explicitly encodes 99:3b as `Pópulus ejus, et oves páscuæ ejus: ‡ (4a) introíte portas ejus in confessióne, * átria ejus in hymnis: confitémini illi.` The compositor preserves that half-verse structure while removing the numeric carry marker; the Perl comparison surface flattens the same line to a single `*` split.",
+    "notes": "Fanout of the Roman Lauds Psalm 99 half-verse family after the Easter-Octave Vespers burn-down exposed the same source-backed `‡ ... *` seam on April octave Lauds.",
+    "resolvedAt": "2026-04-22",
+    "commitSha": "7508fb4"
+  },
   "Reduced - 1955/2024-04-02/Compline/5dc10d20": {
     "policy": "Reduced - 1955",
     "date": "2024-04-02",
@@ -6728,6 +6740,18 @@
     "notes": "Prime post-Martyrologium Easter-Octave seam under Reduced 1955. After the structural Prime fixes, the remaining stable divergence is only Perl stripping the corpus guillemets from the inherited `[Pater secreto]` rubric.",
     "resolvedAt": "2026-04-21",
     "commitSha": "f1fecef"
+  },
+  "Reduced - 1955/2024-04-02/Lauds/2af868c1": {
+    "policy": "Reduced - 1955",
+    "date": "2024-04-02",
+    "hour": "Lauds",
+    "firstExpected": "99:3 Pópulus ejus, et oves páscuæ ejus: * introíte portas ejus in confessióne, átria ejus in hymnis: confitémini illi.",
+    "firstActual": "99:3 Pópulus ejus, et oves páscuæ ejus: ‡ introíte portas ejus in confessióne, * átria ejus in hymnis: confitémini illi.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm99.txt:3-5 — the psalm corpus explicitly encodes 99:3b as `Pópulus ejus, et oves páscuæ ejus: ‡ (4a) introíte portas ejus in confessióne, * átria ejus in hymnis: confitémini illi.` The compositor preserves that half-verse structure while removing the numeric carry marker; the Perl comparison surface flattens the same line to a single `*` split.",
+    "notes": "Fanout of the Roman Lauds Psalm 99 half-verse family after the Easter-Octave Vespers burn-down exposed the same source-backed `‡ ... *` seam on April octave Lauds.",
+    "resolvedAt": "2026-04-22",
+    "commitSha": "7508fb4"
   },
   "Reduced - 1955/2024-04-03/Compline/5dc10d20": {
     "policy": "Reduced - 1955",
@@ -9345,6 +9369,18 @@
     "resolvedAt": "2026-04-21",
     "commitSha": "f1fecef"
   },
+  "Rubrics 1960 - 1960/2024-04-01/Lauds/2af868c1": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-04-01",
+    "hour": "Lauds",
+    "firstExpected": "99:3 Pópulus ejus, et oves páscuæ ejus: * introíte portas ejus in confessióne, átria ejus in hymnis: confitémini illi.",
+    "firstActual": "99:3 Pópulus ejus, et oves páscuæ ejus: ‡ introíte portas ejus in confessióne, * átria ejus in hymnis: confitémini illi.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm99.txt:3-5 — the psalm corpus explicitly encodes 99:3b as `Pópulus ejus, et oves páscuæ ejus: ‡ (4a) introíte portas ejus in confessióne, * átria ejus in hymnis: confitémini illi.` The compositor preserves that half-verse structure while removing the numeric carry marker; the Perl comparison surface flattens the same line to a single `*` split.",
+    "notes": "Fanout of the Roman Lauds Psalm 99 half-verse family after the Easter-Octave Vespers burn-down exposed the same source-backed `‡ ... *` seam on April octave Lauds.",
+    "resolvedAt": "2026-04-22",
+    "commitSha": "7508fb4"
+  },
   "Rubrics 1960 - 1960/2024-04-02/Compline/57de2841": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2024-04-02",
@@ -9369,6 +9405,18 @@
     "resolvedAt": "2026-04-21",
     "commitSha": "f1fecef"
   },
+  "Rubrics 1960 - 1960/2024-04-02/Lauds/2af868c1": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-04-02",
+    "hour": "Lauds",
+    "firstExpected": "99:3 Pópulus ejus, et oves páscuæ ejus: * introíte portas ejus in confessióne, átria ejus in hymnis: confitémini illi.",
+    "firstActual": "99:3 Pópulus ejus, et oves páscuæ ejus: ‡ introíte portas ejus in confessióne, * átria ejus in hymnis: confitémini illi.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm99.txt:3-5 — the psalm corpus explicitly encodes 99:3b as `Pópulus ejus, et oves páscuæ ejus: ‡ (4a) introíte portas ejus in confessióne, * átria ejus in hymnis: confitémini illi.` The compositor preserves that half-verse structure while removing the numeric carry marker; the Perl comparison surface flattens the same line to a single `*` split.",
+    "notes": "Fanout of the Roman Lauds Psalm 99 half-verse family after the Easter-Octave Vespers burn-down exposed the same source-backed `‡ ... *` seam on April octave Lauds.",
+    "resolvedAt": "2026-04-22",
+    "commitSha": "7508fb4"
+  },
   "Rubrics 1960 - 1960/2024-04-03/Compline/57de2841": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2024-04-03",
@@ -9380,6 +9428,18 @@
     "notes": "Pattern affects every Compline row across every policy and date. This single entry is representative; the full row-key fan-out is a follow-up bulk-populate task (see ADJUDICATION_LOG.md).",
     "resolvedAt": "2026-04-18",
     "commitSha": "bfb3c52"
+  },
+  "Rubrics 1960 - 1960/2024-04-03/Lauds/2af868c1": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-04-03",
+    "hour": "Lauds",
+    "firstExpected": "99:3 Pópulus ejus, et oves páscuæ ejus: * introíte portas ejus in confessióne, átria ejus in hymnis: confitémini illi.",
+    "firstActual": "99:3 Pópulus ejus, et oves páscuæ ejus: ‡ introíte portas ejus in confessióne, * átria ejus in hymnis: confitémini illi.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm99.txt:3-5 — the psalm corpus explicitly encodes 99:3b as `Pópulus ejus, et oves páscuæ ejus: ‡ (4a) introíte portas ejus in confessióne, * átria ejus in hymnis: confitémini illi.` The compositor preserves that half-verse structure while removing the numeric carry marker; the Perl comparison surface flattens the same line to a single `*` split.",
+    "notes": "Fanout of the Roman Lauds Psalm 99 half-verse family after the Easter-Octave Vespers burn-down exposed the same source-backed `‡ ... *` seam on April octave Lauds.",
+    "resolvedAt": "2026-04-22",
+    "commitSha": "7508fb4"
   },
   "Rubrics 1960 - 1960/2024-04-04/Compline/57de2841": {
     "policy": "Rubrics 1960 - 1960",
@@ -9393,6 +9453,18 @@
     "resolvedAt": "2026-04-18",
     "commitSha": "bfb3c52"
   },
+  "Rubrics 1960 - 1960/2024-04-04/Lauds/2af868c1": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-04-04",
+    "hour": "Lauds",
+    "firstExpected": "99:3 Pópulus ejus, et oves páscuæ ejus: * introíte portas ejus in confessióne, átria ejus in hymnis: confitémini illi.",
+    "firstActual": "99:3 Pópulus ejus, et oves páscuæ ejus: ‡ introíte portas ejus in confessióne, * átria ejus in hymnis: confitémini illi.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm99.txt:3-5 — the psalm corpus explicitly encodes 99:3b as `Pópulus ejus, et oves páscuæ ejus: ‡ (4a) introíte portas ejus in confessióne, * átria ejus in hymnis: confitémini illi.` The compositor preserves that half-verse structure while removing the numeric carry marker; the Perl comparison surface flattens the same line to a single `*` split.",
+    "notes": "Fanout of the Roman Lauds Psalm 99 half-verse family after the Easter-Octave Vespers burn-down exposed the same source-backed `‡ ... *` seam on April octave Lauds.",
+    "resolvedAt": "2026-04-22",
+    "commitSha": "7508fb4"
+  },
   "Rubrics 1960 - 1960/2024-04-05/Compline/57de2841": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2024-04-05",
@@ -9405,6 +9477,18 @@
     "resolvedAt": "2026-04-18",
     "commitSha": "bfb3c52"
   },
+  "Rubrics 1960 - 1960/2024-04-05/Lauds/2af868c1": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-04-05",
+    "hour": "Lauds",
+    "firstExpected": "99:3 Pópulus ejus, et oves páscuæ ejus: * introíte portas ejus in confessióne, átria ejus in hymnis: confitémini illi.",
+    "firstActual": "99:3 Pópulus ejus, et oves páscuæ ejus: ‡ introíte portas ejus in confessióne, * átria ejus in hymnis: confitémini illi.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm99.txt:3-5 — the psalm corpus explicitly encodes 99:3b as `Pópulus ejus, et oves páscuæ ejus: ‡ (4a) introíte portas ejus in confessióne, * átria ejus in hymnis: confitémini illi.` The compositor preserves that half-verse structure while removing the numeric carry marker; the Perl comparison surface flattens the same line to a single `*` split.",
+    "notes": "Fanout of the Roman Lauds Psalm 99 half-verse family after the Easter-Octave Vespers burn-down exposed the same source-backed `‡ ... *` seam on April octave Lauds.",
+    "resolvedAt": "2026-04-22",
+    "commitSha": "7508fb4"
+  },
   "Rubrics 1960 - 1960/2024-04-06/Compline/57de2841": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2024-04-06",
@@ -9416,6 +9500,18 @@
     "notes": "Pattern affects every Compline row across every policy and date. This single entry is representative; the full row-key fan-out is a follow-up bulk-populate task (see ADJUDICATION_LOG.md).",
     "resolvedAt": "2026-04-18",
     "commitSha": "bfb3c52"
+  },
+  "Rubrics 1960 - 1960/2024-04-06/Lauds/2af868c1": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-04-06",
+    "hour": "Lauds",
+    "firstExpected": "99:3 Pópulus ejus, et oves páscuæ ejus: * introíte portas ejus in confessióne, átria ejus in hymnis: confitémini illi.",
+    "firstActual": "99:3 Pópulus ejus, et oves páscuæ ejus: ‡ introíte portas ejus in confessióne, * átria ejus in hymnis: confitémini illi.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm99.txt:3-5 — the psalm corpus explicitly encodes 99:3b as `Pópulus ejus, et oves páscuæ ejus: ‡ (4a) introíte portas ejus in confessióne, * átria ejus in hymnis: confitémini illi.` The compositor preserves that half-verse structure while removing the numeric carry marker; the Perl comparison surface flattens the same line to a single `*` split.",
+    "notes": "Fanout of the Roman Lauds Psalm 99 half-verse family after the Easter-Octave Vespers burn-down exposed the same source-backed `‡ ... *` seam on April octave Lauds.",
+    "resolvedAt": "2026-04-22",
+    "commitSha": "7508fb4"
   },
   "Rubrics 1960 - 1960/2024-04-07/Compline/57de2841": {
     "policy": "Rubrics 1960 - 1960",

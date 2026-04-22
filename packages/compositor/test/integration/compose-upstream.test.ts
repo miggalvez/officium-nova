@@ -657,6 +657,41 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
     }
   }, 240_000);
 
+  it('keeps the source-backed Psalm 99 half-verse structure in Easter Octave Lauds', async () => {
+    const expectedHalfVerse = normalizeLatin(
+      '99:3 Pópulus ejus, et oves páscuæ ejus: ‡ introíte portas ejus in confessióne, * átria ejus in hymnis: confitémini illi.'
+    );
+    const flattenedHalfVerse = normalizeLatin(
+      '99:3 Pópulus ejus, et oves páscuæ ejus: * introíte portas ejus in confessióne, átria ejus in hymnis: confitémini illi.'
+    );
+    const dates = {
+      'Reduced - 1955': '2024-04-01',
+      'Rubrics 1960 - 1960': '2024-04-02'
+    } as const;
+
+    for (const version of ['Reduced - 1955', 'Rubrics 1960 - 1960'] as const) {
+      const { engine, resolvedCorpus } = await createHarness(version);
+      const summary = engine.resolveDayOfficeSummary(dates[version]);
+      const lauds = composeHour({
+        corpus: resolvedCorpus.index,
+        summary,
+        version: engine.version,
+        hour: 'lauds',
+        options: { languages: ['Latin'], joinLaudsToMatins: false }
+      });
+
+      const lines = psalmodyTexts(lauds).map(normalizeLatin);
+      expect(
+        lines,
+        `${version} Lauds should preserve the corpus half-verse marker at Psalm 99:3`
+      ).toContain(expectedHalfVerse);
+      expect(
+        lines,
+        `${version} Lauds should not flatten the Psalm 99 half-verse boundary to a single * split`
+      ).not.toContain(flattenedHalfVerse);
+    }
+  }, 240_000);
+
   it('renders July 9 Matins benedictions line-by-line and emits the Te Deum replacement responsory only once', async () => {
     const { engine, resolvedCorpus } = await createHarness('Rubrics 1960 - 1960');
 
