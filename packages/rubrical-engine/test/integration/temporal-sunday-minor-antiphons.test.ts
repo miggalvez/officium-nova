@@ -169,6 +169,30 @@ describeIfUpstream('temporal Sunday minor-hour antiphon ownership', () => {
   );
 
   it(
+    'keeps Easter Octave Lauds and Vespers on proper paschal antiphons even when minor hours omit theirs',
+    async () => {
+      const engines = await loadEngines([
+        'Reduced - 1955',
+        'Rubrics 1960 - 1960'
+      ]);
+
+      for (const handle of ['Reduced - 1955', 'Rubrics 1960 - 1960'] as const) {
+        const engine = engines.get(handle);
+        expect(engine, `${handle} engine`).toBeDefined();
+        if (!engine) {
+          continue;
+        }
+
+        for (const date of ['2024-04-01', '2024-04-02'] as const) {
+          expectMajorHour(psalmodyAt(engine, date, 'lauds'), 'horas/Latin/Tempora/Pasc0-0:Ant Laudes');
+          expectMajorHour(psalmodyAt(engine, date, 'vespers'), 'horas/Latin/Tempora/Pasc0-0:Ant Vespera');
+        }
+      }
+    },
+    240_000
+  );
+
+  it(
     'replaces the Easter Octave Prime and minor-hour later block with inherited Versum 2',
     async () => {
       const engines = await loadEngines([
@@ -371,7 +395,7 @@ function loadScriptureTransferTables() {
 function psalmodyAt(
   engine: RubricalEngine,
   date: string,
-  hour: 'prime' | 'terce' | 'sext' | 'none'
+  hour: 'lauds' | 'vespers' | 'prime' | 'terce' | 'sext' | 'none'
 ): readonly PsalmAssignment[] {
   const slot = engine.resolveDayOfficeSummary(date).hours[hour]?.slots.psalmody;
   expect(slot?.kind).toBe('psalmody');
@@ -409,6 +433,26 @@ function expectMinorHourWithoutAntiphon(
     Array.from({ length: selectors.length }, () => null)
   );
   expect(psalms.map((entry) => entry.psalmRef.selector)).toEqual(selectors);
+}
+
+function expectMajorHour(
+  psalms: readonly PsalmAssignment[],
+  antiphonSection: string
+) {
+  expect(psalms).toHaveLength(5);
+  expect(
+    psalms.map((entry) =>
+      entry.antiphonRef
+        ? `${entry.antiphonRef.path}:${entry.antiphonRef.section}${entry.antiphonRef.selector ? `:${entry.antiphonRef.selector}` : ''}`
+        : '-'
+    )
+  ).toEqual([
+    `${antiphonSection}:1`,
+    `${antiphonSection}:2`,
+    `${antiphonSection}:3`,
+    `${antiphonSection}:4`,
+    `${antiphonSection}:5`
+  ]);
 }
 
 function expectVersum2LaterBlock(

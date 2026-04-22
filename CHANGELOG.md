@@ -14,6 +14,7 @@ The `@officium-novum/compositor` package turns a `DayOfficeSummary` + Phase-1-re
 
 Newest tranche first:
 
+- **2026-04-22.** Closed the shared Roman Easter-Octave major-hour paschal antiphon routing seam by keeping `Minores sine Antiphona` scoped to Prime/Terce/Sext/None instead of stripping Lauds/Vespers proper antiphon refs inherited from `Pasc0-0`. The next repeated unadjudicated family is the shared Roman Easter-Octave Vespers Magnificat/oration boundary seam; Lauds now falls into the already-classified Psalm 99 half-verse Perl-bug lane.
 - **2026-04-21.** Closed the shared Roman Prime post-Martyrologium secret `Pater Noster` guillemet seam as a rendering-difference adjudication sweep, backed by a focused Easter-Octave Prime upstream test. The next repeated family is the shared Roman Easter-Octave major-hour paschal antiphon routing seam, first surfacing at Vespers and immediately adjacent at Lauds.
 - **2026-04-21.** Closed the shared Roman Easter-Octave Prime `De Officio Capituli` seam by teaching the parser/rubrical-engine/compositor heading path to split conditional Ordinarium headings into real synthetic sections and typed slots. The next repeated family is the shared Roman Prime post-Martyrologium secret `Pater Noster` guillemet seam.
 - **2026-04-21.** Closed the shared Roman Easter-Octave opening-antiphon, `Capitulum Versum 2`, one-alone wrapper, Prime ordinary-oration, and Prime Martyrologium handoff/lunar-heading seams. The next repeated family is the Prime Martyrologium body-formatting seam (`_` / `v.` / `r.` / `Mobile.txt`).

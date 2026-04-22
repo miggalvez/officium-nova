@@ -314,10 +314,6 @@ function decoratePsalmodyAssignments(
     return assignments;
   }
 
-  if (input.hourRules.minorHoursSineAntiphona) {
-    return assignments;
-  }
-
   if (input.hour === 'lauds' || input.hour === 'vespers') {
     const antiphons = resolveMajorHourAntiphonRefs(properFiles, input);
     if (antiphons.length === 0) {
@@ -339,6 +335,10 @@ function decoratePsalmodyAssignments(
     input.hour === 'sext' ||
     input.hour === 'none'
   ) {
+    if (input.hourRules.minorHoursSineAntiphona) {
+      return assignments;
+    }
+
     const antiphon = resolveMinorHourAntiphonRef(properFiles, input);
     if (!antiphon) {
       return assignments;
