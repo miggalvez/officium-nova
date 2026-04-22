@@ -165,6 +165,11 @@ function resolveSlot(
     return primeMartyrology;
   }
 
+  const lucanCanticle = resolveLucanCanticle(slot.name);
+  if (lucanCanticle) {
+    return lucanCanticle;
+  }
+
   const properRef = findProperReference(properFiles, slot, input.hour);
   const communeRef = properRef ? undefined : findCommuneReference(input, slot);
   if (input.hour === 'compline' && slot.name === 'lectio-brevis') {
@@ -235,6 +240,26 @@ function resolvePrimeMartyrology(
   }
 
   return { kind: 'prime-martyrology' };
+}
+
+function resolveLucanCanticle(slotName: SlotName): SlotContent | undefined {
+  const psalmNumber =
+    slotName === 'canticle-ad-benedictus' ? '231'
+    : slotName === 'canticle-ad-magnificat' ? '232'
+    : slotName === 'canticle-ad-nunc-dimittis' ? '233'
+    : undefined;
+
+  if (!psalmNumber) {
+    return undefined;
+  }
+
+  return {
+    kind: 'single-ref',
+    ref: {
+      path: `horas/Latin/Psalterium/Psalmorum/Psalm${psalmNumber}`,
+      section: '__preamble'
+    }
+  };
 }
 
 function resolveFeastFile(

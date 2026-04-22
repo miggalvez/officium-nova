@@ -1484,7 +1484,7 @@ adjacent at Lauds.
 
 ### 2026-04-22 — Pattern: Easter-Octave major-hour paschal antiphon routing (engine-bug)
 
-**Commit.** `pending tranche commit`
+**Commit.** `f7a5e46`
 
 **Ledger signal.** The next shared Roman family after the Prime
 post-Martyrologium guillemet adjudication was the Easter-Octave
@@ -1530,6 +1530,52 @@ to a new repeated structural boundary at line `95`: Perl expects
 `Canticum B. Mariæ Virginis`, and the compositor currently emits the
 office collect instead. The next shared Roman unadjudicated family is
 therefore the Easter-Octave Vespers Magnificat/oration boundary seam.
+
+### 2026-04-22 — Pattern: Easter-Octave Vespers Magnificat / oration boundary (engine-bug)
+
+**Commit.** `pending tranche commit`
+
+**Ledger signal.** After the Easter-Octave major-hour paschal antiphon
+fix, both Roman policies on `2024-04-01` / `2024-04-02` Vespers first
+diverged at line `95`: Perl expected `Canticum B. Mariæ Virginis`,
+while the compositor jumped directly from `Ant. Vidéte manus meas...`
+to the office collect.
+
+**Root cause.** Cross-package structural gap, not a date-specific Vespers
+quirk. `#Canticum: Magnificat` in `Ordinarium/Vespera.txt` only mapped to
+`antiphon-ad-magnificat`, so Phase 2 had no typed slot carrying the
+Magnificat body itself. Phase 3 therefore had no faithful source-backed
+way to emit the Lucan canticle and its repeated antiphon before the
+later-block oration seam.
+
+**Resolution.** Class `engine-bug`. Locked the seam first in:
+
+- `packages/rubrical-engine/test/hours/skeleton.test.ts`
+- `packages/rubrical-engine/test/integration/temporal-sunday-minor-antiphons.test.ts`
+- `packages/compositor/test/integration/compose-upstream.test.ts`
+
+Then fixed only the owning structural layers:
+
+- `SlotName` now includes `canticle-ad-benedictus`,
+  `canticle-ad-magnificat`, and `canticle-ad-nunc-dimittis`.
+- `#Canticum:` headings now map to paired antiphon + canticle slots.
+- Phase 2 resolves those canticle slots to Psalm231 / Psalm232 / Psalm233
+  `__preamble` refs.
+- Phase 3 composes the Lucan canticle body, appends `Glória Patri`,
+  and repeats the sibling canticle antiphon after the canticle block.
+
+**Citation.**
+
+- `upstream/web/www/horas/Ordinarium/Vespera.txt:23-27`
+- `upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm232.txt:1-11`
+- `docs/adr/013-phase-3-lucan-canticle-slots.md`
+
+**Impact.** The shared Roman Easter-Octave Vespers Magnificat boundary is
+closed. The live frontier now lands one seam later on the same rows:
+`2024-04-01` / `2024-04-02` Vespers line `110` in both Roman policies now
+expects `V. Dómine, exáudi oratiónem meam.` while the compositor jumps
+straight to the collect. The next shared Roman family is therefore the
+Easter-Octave Vespers oration-prelude seam.
 
 ### Open pattern backlog
 

@@ -269,13 +269,13 @@ export function mapHeaderToSlots(header: string): readonly SlotName[] {
   }
   if (/^Canticum/u.test(normalized)) {
     if (/Benedictus/u.test(normalized)) {
-      return ['antiphon-ad-benedictus'];
+      return ['antiphon-ad-benedictus', 'canticle-ad-benedictus'];
     }
     if (/Magnificat/u.test(normalized)) {
-      return ['antiphon-ad-magnificat'];
+      return ['antiphon-ad-magnificat', 'canticle-ad-magnificat'];
     }
     if (/Nunc dimittis/u.test(normalized)) {
-      return ['antiphon-ad-nunc-dimittis'];
+      return ['antiphon-ad-nunc-dimittis', 'canticle-ad-nunc-dimittis'];
     }
   }
 

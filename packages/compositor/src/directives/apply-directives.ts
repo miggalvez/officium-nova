@@ -100,7 +100,7 @@ function omitGloriaPatri(
   content: readonly TextContent[],
   replacement: readonly TextContent[] = DEFAULT_GLORIA_OMITTITUR_REPLACEMENT
 ): readonly TextContent[] {
-  if (slot !== 'psalmody') return content;
+  if (slot !== 'psalmody' && !isCanticleSlot(slot)) return content;
 
   let end = content.length;
   while (end > 0 && content[end - 1]!.type === 'separator') {
@@ -281,6 +281,14 @@ function isAntiphonSlot(slot: SlotName): boolean {
     slot === 'antiphon-ad-benedictus' ||
     slot === 'antiphon-ad-magnificat' ||
     slot === 'antiphon-ad-nunc-dimittis'
+  );
+}
+
+function isCanticleSlot(slot: SlotName): boolean {
+  return (
+    slot === 'canticle-ad-benedictus' ||
+    slot === 'canticle-ad-magnificat' ||
+    slot === 'canticle-ad-nunc-dimittis'
   );
 }
 
