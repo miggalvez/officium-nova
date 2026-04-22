@@ -1341,6 +1341,110 @@ falls straight into the first notice text without the source-backed
 therefore the Prime Martyrologium body-formatting seam, not the
 post-oration handoff.
 
+### 2026-04-21 — Pattern: Easter-Octave Prime Martyrologium responsorial body-formatting (engine-bug)
+
+**Commit.** `pending tranche commit`
+
+**Ledger signal.** After the Prime Martyrologium handoff + lunar-heading
+fix above, the shared Roman weekday Prime rows (`2024-04-01` through at
+least `2024-04-03` in both `Reduced - 1955` and
+`Rubrics 1960 - 1960`) stopped at the first Martyrologium body line.
+Perl expected the separator `_` and the responsorial stream of
+`v.` / `r.` Martyrologium lines, while the compositor flattened the
+next-day file into ordinary text lines and silently dropped the source
+separator.
+
+**Root cause.** Phase 2 ownership was already correct: Prime had the
+typed `martyrology` slot and the correct next-day file selection.
+The remaining bug lived entirely in Phase 3:
+
+- `composePrimeMartyrologySection()` expanded the file body but left it
+  as plain `text` nodes, so the source-backed responsorial `v.` / `r.`
+  shape from `specprima.pl` never materialized.
+- the generic section emitter only surfaced `separator` nodes as `_`
+  lines for hymn slots, so the Martyrologium underscore line was lost
+  even when the source carried it.
+
+**Resolution.** Class `engine-bug`. The owning Phase 3 seam was fixed
+without touching Phase 2:
+
+- the Prime Martyrologium body now rewrites the next-day file into the
+  same responsorial shape as upstream `specprima.pl`: first line `v.`,
+  following notice lines `r.`, with the source underscore preserved as
+  its own emitted line.
+- `emit/sections.ts` now surfaces `separator` nodes as `_` lines for
+  the `martyrology` slot, matching the existing hymn treatment.
+- coverage was locked first in
+  `packages/compositor/test/compose.test.ts` and then against the live
+  corpus in `packages/compositor/test/integration/compose-upstream.test.ts`.
+
+**Citation.**
+
+- `upstream/web/cgi-bin/horas/specials/specprima.pl:188-225`
+- `upstream/web/www/horas/Latin/Martyrologium1955R/04-03.txt:1-4`
+
+**Impact.** The shared Roman Prime Martyrologium body-formatting family
+is closed. The repeated weekday Prime rows on `2024-04-01` through
+`2024-04-03` in both Roman policies now advance to the later shared
+post-Martyrologium seam: Perl expects `V. Deus in adjutórium meum
+inténde.` while the compositor currently emits nothing after
+`Pretiósa`.
+
+### 2026-04-21 — Pattern: Easter-Octave Prime `De Officio Capituli` structural split (engine-bug)
+
+**Commit.** `pending tranche commit`
+
+**Ledger signal.** After the Prime Martyrologium body-formatting fix,
+the repeated Roman weekday Prime rows (`2024-04-01` through at least
+`2024-04-03` in both `Reduced - 1955` and `Rubrics 1960 - 1960`) now
+stopped immediately after `Pretiósa`. Perl continued with `V. Deus in
+adjutórium meum inténde.`, while the compositor emitted nothing after
+the Martyrologium tail.
+
+**Root cause.** The owning bug was structural, with one shared heading
+extraction seam underneath it:
+
+- `horas/Ordinarium/Prima.txt` encodes the post-Martyrologium block as
+  `(rubrica 1960) #De Officio Capituli`, i.e. a heading nested inside a
+  conditional wrapper rather than a bare top-level `#Heading`.
+- Both the Phase 2 Ordinarium skeleton walker and the Phase 3
+  heading-backed reference resolver only split top-level heading nodes,
+  so neither layer recognized `De Officio Capituli` as its own
+  synthetic section.
+- Prime's Martyrologium is already a special Phase 2/3 path composed
+  from the next-day Martyrologium file, so the unsplit Ordinarium tail
+  was not accidentally emitted elsewhere; it simply disappeared.
+
+**Resolution.** Class `engine-bug`. Fixed at the reusable heading seam
+and then flowed through the owning layers:
+
+- `packages/parser/src/parser/heading-sections.ts` now materializes
+  synthetic heading sections from legacy `#Heading` streams even when
+  the heading lives inside a conditional wrapper.
+- `packages/rubrical-engine/src/hours/skeleton.ts` now consumes those
+  synthetic heading sections, exposing a typed Prime
+  `de-officio-capituli` slot between `martyrology` and
+  `lectio-brevis`.
+- `packages/compositor/src/resolve/reference-resolver.ts` now uses the
+  same helper for heading-backed `Ordinarium/*` references, so the new
+  slot resolves without bespoke Prime logic.
+- Coverage was locked before the fix in
+  `packages/rubrical-engine/test/integration/temporal-sunday-minor-antiphons.test.ts`
+  and `packages/compositor/test/integration/compose-upstream.test.ts`.
+
+**Citation.**
+
+- `upstream/web/www/horas/Ordinarium/Prima.txt:63-78`
+- `upstream/web/www/horas/Latin/Psalterium/Common/Prayers.txt:138-150`
+
+**Impact.** The shared Roman Easter-Octave Prime `De Officio Capituli`
+family is closed. On `2024-04-01` and `2024-04-02` in both Roman
+policies, the first divergence now lands later at line `90`: Perl
+expects `Pater Noster dicitur secreto usque ad Et ne nos indúcas in
+tentatiónem:`, while the compositor emits the source-backed guillemeted
+rubric `« Pater Noster » dicitur secreto usque ad « Et ne nos indúcas
+in tentatiónem: »`.
+
 ### Open pattern backlog
 
 The following families remain open and have not yet received their own
@@ -1361,15 +1465,16 @@ chronological entry:
   (`upstream/.../Common/Prayers.txt:52`) confirms this is a glyph-level
   rendering choice, not a selection bug. Preliminary class:
   `rendering-difference`.
-- **Easter Octave Prime Martyrologium body-formatting seam** — after the
-  handoff + lunar-heading fix above, the repeated Roman weekday Prime
-  rows (`2024-04-01` through at least `2024-04-03`, both
-  `Reduced - 1955` and `Rubrics 1960 - 1960`) now first diverge on the
-  first Martyrologium body line. Perl expects the separator `_` and the
-  source-backed `v.` / `r.` alternation from `specprima.pl`, while the
-  compositor currently flattens the Martyrologium file into ordinary
-  text lines and skips the `Mobile.txt` / separator choreography.
-  Preliminary class: shared Roman Phase 3 composition bug.
+- **Prime post-Martyrologium secret `Pater Noster` guillemets** — after
+  the `De Officio Capituli` structural split above, the repeated Roman
+  weekday Prime rows (`2024-04-01` and `2024-04-02` in both
+  `Reduced - 1955` and `Rubrics 1960 - 1960`) now first diverge at
+  `Pater Noster dicitur secreto usque ad Et ne nos indúcas in
+  tentatiónem:` versus the compositor's source-backed `« Pater Noster »
+  dicitur secreto usque ad « Et ne nos indúcas in tentatiónem: »`.
+  Corpus source (`upstream/.../Common/Rubricae.txt:1-2`) carries the
+  guillemets already seen in the Matins rendering-difference family, so
+  the provisional class is `rendering-difference`.
 
 The Compline benediction-verb issue is already adjudicated in
 [ADR-012](../../../../docs/adr/012-compline-benediction-verb.md) and is

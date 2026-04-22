@@ -23,6 +23,8 @@ export function sectionTypeFor(slot: SlotName): SectionType {
       return 'psalm';
     case 'martyrology':
       return 'martyrology';
+    case 'de-officio-capituli':
+      return 'other';
     case 'chapter':
       return 'chapter';
     case 'responsory':
@@ -222,11 +224,9 @@ function linesFromContent(
         break;
       case 'separator':
         flush();
-        // For hymn slots, surface the stanza break as a literal `_` line —
-        // the legacy Perl renderer emits an underscore-only line between
-        // stanzas. The corpus carries these separators as `_` source lines
-        // which Phase 1 converts to `{type: 'separator'}` nodes.
-        if (slot === 'hymn') {
+        // Hymns and Prime Martyrology both render corpus separator nodes as
+        // literal underscore-only lines in the legacy stream.
+        if (slot === 'hymn' || slot === 'martyrology') {
           lines.push(singleRunLine(language, undefined, { type: 'text', value: '_' }));
         }
         break;

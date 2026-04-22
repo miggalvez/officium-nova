@@ -373,7 +373,7 @@ function composePrimeMartyrologySection(args: ComposeSlotArgs): Section | undefi
       continue;
     }
 
-    const bucket = resolvePrimeMartyrologyFile(path, language, nextDate, args);
+    const bucket = formatPrimeMartyrologyContent(resolvePrimeMartyrologyFile(path, language, nextDate, args));
     appendPrimeMartyrologyTail(bucket, language, args, 'Conclmart');
     if (!shouldSkipPretiosa(args.summary)) {
       appendPrimeMartyrologyTail(bucket, language, args, 'Pretiosa');
@@ -486,6 +486,33 @@ function resolvePrimeMartyrologyFile(
   });
   const flattened = flattenConditionals(expanded, args.context);
   return appendMoonLabel(flattened, moonLabelForDate(nextDate, language));
+}
+
+function formatPrimeMartyrologyContent(content: readonly TextContent[]): TextContent[] {
+  const bucket: TextContent[] = [];
+  let marker: 'v.' | 'r.' = 'v.';
+  for (const node of content) {
+    if (node.type === 'separator') {
+      bucket.push(node);
+      marker = 'r.';
+      continue;
+    }
+
+    if (node.type === 'text') {
+      bucket.push({
+        type: 'verseMarker',
+        marker,
+        text: node.value
+      });
+      marker = 'r.';
+      continue;
+    }
+
+    bucket.push(node);
+    marker = 'r.';
+  }
+
+  return bucket;
 }
 
 function appendPrimeMartyrologyTail(

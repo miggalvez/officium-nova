@@ -417,6 +417,9 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
     const expectedHeading = normalizeLatin(
       'Tértio Nonas Aprílis Luna vicésima tértia Anno Dómini 2024'
     );
+    const expectedFirstNotice = normalizeLatin(
+      'Romæ natális beáti Xysti Primi, Papæ et Mártyris; qui, tempóribus Hadriáni Imperatóris, summa cum laude rexit Ecclésiam, ac demum, sub Antoníno Pio, ut sibi Christum lucrifáceret, libénter mortem sustínuit temporálem.'
+    );
     const expectedConclmart = normalizeLatin(
       'Et álibi aliórum plurimórum sanctórum Mártyrum et Confessórum, atque sanctárum Vírginum.'
     );
@@ -444,6 +447,20 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
         martyrologyLines[0],
         `${version} Prime should open the Martyrologium tail with the next day's lunar-date heading`
       ).toBe(expectedHeading);
+      const martyrology = prime.sections.find((section) => section.slot === 'martyrology');
+      expect(martyrology, `${version} Prime should expose a Martyrologium section`).toBeDefined();
+      expect(
+        renderLatinText(martyrology!.lines[1]!),
+        `${version} Prime should preserve the separator line before the Martyrologium notices`
+      ).toBe('_');
+      expect(
+        martyrology!.lines[2]!.marker,
+        `${version} Prime should emit the Martyrologium notices as responsorial ` + '`r.`' + ` lines`
+      ).toBe('r.');
+      expect(
+        normalizeLatin(renderLatinText(martyrology!.lines[2]!)),
+        `${version} Prime should keep the first Martyrologium notice after the separator`
+      ).toBe(expectedFirstNotice);
       expect(
         martyrologyLines,
         `${version} Prime should include the common Martyrologium conclusion`
@@ -452,6 +469,40 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
         martyrologyLines,
         `${version} Prime should continue from the Martyrologium into Pretiosa`
       ).toContain(expectedPretiosa);
+    }
+  }, 240_000);
+
+  it('renders De Officio Capituli immediately after the Easter Octave Prime Martyrologium', async () => {
+    const expectedOpening = normalizeLatin('Deus in adjutórium meum inténde.');
+
+    for (const version of ['Reduced - 1955', 'Rubrics 1960 - 1960'] as const) {
+      const { engine, resolvedCorpus } = await createHarness(version);
+      const summary = engine.resolveDayOfficeSummary('2024-04-02');
+      const prime = composeHour({
+        corpus: resolvedCorpus.index,
+        summary,
+        version: engine.version,
+        hour: 'prime',
+        options: { languages: ['Latin'] }
+      });
+
+      const slotOrder = prime.sections.map((section) => section.slot);
+      const capituliIndex = slotOrder.indexOf('de-officio-capituli');
+      expect(
+        capituliIndex,
+        `${version} Prime should continue into De Officio Capituli after the Martyrologium`
+      ).toBeGreaterThan(slotOrder.indexOf('martyrology'));
+
+      const capituli = prime.sections.find((section) => section.slot === 'de-officio-capituli');
+      expect(capituli, `${version} Prime should expose a De Officio Capituli section`).toBeDefined();
+      expect(
+        capituli!.lines[0]!.marker,
+        `${version} Prime should keep the versicle marker on Deus in adjutorium`
+      ).toBe('V.');
+      expect(
+        normalizeLatin(renderLatinText(capituli!.lines[0]!)),
+        `${version} Prime should open De Officio Capituli with Deus in adjutorium`
+      ).toBe(expectedOpening);
     }
   }, 240_000);
 
@@ -1368,7 +1419,7 @@ function psalmodyTexts(
 
 function sectionTexts(
   composed: ReturnType<typeof composeHour>,
-  slot: 'chapter' | 'responsory' | 'versicle' | 'oration' | 'conclusion'
+  slot: 'chapter' | 'responsory' | 'versicle' | 'oration' | 'conclusion' | 'martyrology'
 ): readonly string[] {
   const section = composed.sections.find((candidate) => candidate.slot === slot);
   expect(section, `${composed.hour} is missing the ${slot} section`).toBeDefined();
