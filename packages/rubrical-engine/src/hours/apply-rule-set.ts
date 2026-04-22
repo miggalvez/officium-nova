@@ -1,4 +1,7 @@
-import type { ParsedFile } from '@officium-novum/parser';
+import type {
+  ParsedFile,
+  TextContent
+} from '@officium-novum/parser';
 
 import { conditionMatches } from '../internal/conditions.js';
 import { resolveOfficeFile } from '../internal/content.js';
@@ -27,6 +30,8 @@ import type { OrdinariumSkeleton, SkeletonSlot } from './skeleton.js';
 import { resolveRuleReferenceFiles } from '../rules/resolve-vide-ex.js';
 
 const COMMON_PRAYERS_PATH = 'horas/Latin/Psalterium/Common/Prayers';
+const PSALMI_MAJOR = 'horas/Latin/Psalterium/Psalmi/Psalmi major';
+const PSALMORUM_ROOT = 'horas/Latin/Psalterium/Psalmorum';
 
 export interface ApplyRuleSetInput {
   readonly hour: HourName;
@@ -341,6 +346,7 @@ function decoratePsalmodyAssignments(
 
   if (input.hour === 'lauds' || input.hour === 'vespers') {
     const antiphons = resolveMajorHourAntiphonRefs(properFiles, input);
+    const properPsalmRefs = resolveMajorHourPsalmRefs(properFiles, input, assignments.length);
     if (antiphons.length === 0) {
       return assignments;
     }
@@ -348,7 +354,12 @@ function decoratePsalmodyAssignments(
       antiphons[index]
         ? {
             ...assignment,
-            antiphonRef: antiphons[index]
+            antiphonRef: antiphons[index],
+            ...(properPsalmRefs[index] && isGenericMajorHourPsalmRef(assignment.psalmRef)
+              ? {
+                  psalmRef: properPsalmRefs[index]
+                }
+              : {})
           }
         : assignment
     );
@@ -412,6 +423,164 @@ function resolveMajorHourAntiphonRefs(
     section: header,
     selector: String(index + 1)
   }));
+}
+
+function resolveMajorHourPsalmRefs(
+  files: readonly ParsedFile[],
+  input: ApplyRuleSetInput,
+  count: number
+): readonly TextReference[] {
+  const headers =
+    input.hour === 'lauds' ? ['Ant Laudes']
+    : (input as InternalVespersAwareInput).__vespersSide === 'second' ?
+      ['Ant Vespera 3', 'Ant Vespera']
+    : ['Ant Vespera'];
+
+  for (const header of headers) {
+    for (const file of files) {
+      const section = file.sections.find((entry) => entry.header === header);
+      if (!section) {
+        continue;
+      }
+      const refs = extractMajorHourPsalmRefs(
+        section.content,
+        count,
+        input,
+        header,
+        new Set([`${file.path}:${header}`])
+      );
+      if (refs.length > 0) {
+        return refs;
+      }
+    }
+  }
+
+  return [];
+}
+
+function extractMajorHourPsalmRefs(
+  content: readonly TextContent[],
+  count: number,
+  input: ApplyRuleSetInput,
+  currentHeader: string,
+  visited: ReadonlySet<string>
+): readonly TextReference[] {
+  const refs: TextReference[] = [];
+
+  for (const node of content) {
+    if (node.type === 'conditional') {
+      refs.push(
+        ...extractMajorHourPsalmRefs(
+          node.content,
+          count - refs.length,
+          input,
+          currentHeader,
+          visited
+        )
+      );
+      if (refs.length >= count) {
+        break;
+      }
+      continue;
+    }
+
+    if (
+      node.type === 'reference' &&
+      node.ref.path &&
+      node.ref.substitutions.length === 0
+    ) {
+      const targetHeader = node.ref.section ?? currentHeader;
+      const visitKey = `${node.ref.path}:${targetHeader}`;
+      if (visited.has(visitKey)) {
+        continue;
+      }
+
+      try {
+        const file = resolveOfficeFile(input.corpus, node.ref.path);
+        const section = file.sections.find((entry) => entry.header === targetHeader);
+        if (!section) {
+          continue;
+        }
+
+        const nextVisited = new Set(visited);
+        nextVisited.add(visitKey);
+        refs.push(
+          ...extractMajorHourPsalmRefs(
+            section.content,
+            count - refs.length,
+            input,
+            targetHeader,
+            nextVisited
+          )
+        );
+        if (refs.length >= count) {
+          break;
+        }
+      } catch {
+        continue;
+      }
+
+      continue;
+    }
+
+    if (node.type === 'psalmRef') {
+      refs.push({
+        path: `${PSALMORUM_ROOT}/Psalm${node.psalmNumber}`,
+        section: '__preamble',
+        selector: String(node.psalmNumber)
+      });
+      if (refs.length >= count) {
+        break;
+      }
+      continue;
+    }
+
+    if (node.type !== 'text') {
+      continue;
+    }
+
+    const [, psalmSpec] = splitPsalmTaggedTextRow(node.value);
+    if (!psalmSpec) {
+      continue;
+    }
+
+    refs.push(psalmTokenReference(psalmSpec));
+    if (refs.length >= count) {
+      break;
+    }
+  }
+
+  return Object.freeze(refs);
+}
+
+function isGenericMajorHourPsalmRef(ref: TextReference): boolean {
+  return ref.path === PSALMI_MAJOR;
+}
+
+function splitPsalmTaggedTextRow(
+  value: string
+): readonly [string | undefined, string | undefined] {
+  const [textRaw, psalmSpecRaw] = value.split(';;', 2);
+  const text = textRaw?.trim();
+  const psalmSpec = psalmSpecRaw?.trim();
+  return [text && text !== '_' ? text : undefined, psalmSpec];
+}
+
+function psalmTokenReference(token: string): TextReference {
+  const match = token.match(/^\[?(\d+)\]?(?:\(([^)]+)\))?$/u);
+  const psalmNumber = match?.[1];
+  if (!psalmNumber) {
+    return {
+      path: PSALMI_MAJOR,
+      section: token
+    };
+  }
+
+  return {
+    path: `${PSALMORUM_ROOT}/Psalm${psalmNumber}`,
+    section: '__preamble',
+    selector: token
+  };
 }
 
 function resolveCommuneAntiphonRefs(

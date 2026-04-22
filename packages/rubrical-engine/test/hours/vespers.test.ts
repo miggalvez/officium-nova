@@ -54,6 +54,21 @@ Erat subditus;;112
 Et mater ejus;;113
 `.trim();
 
+const CHRISTMAS_SECOND_VESPERS_FILE = `
+[Rank]
+In Nativitate Domini;;Duplex I Classis;;6.9
+
+[Rule]
+Psalmi Dominica
+
+[Ant Vespera 3]
+Tecum princípium;;109
+Redemptiónem;;110
+Exórtum est;;111
+Apud Dóminum;;129
+De fructu;;131
+`.trim();
+
 function setup() {
   const corpus = new TestOfficeTextIndex();
   corpus.add('horas/Ordinarium/Vespera.txt', ORDINARIUM_VESPERA);
@@ -271,6 +286,49 @@ describe('structureVespers', () => {
         selector: '1'
       });
       expect(psalmody.psalms[4]?.antiphonRef?.section).toBe('Ant Vespera');
+    }
+  });
+
+  it('derives second-Vespers psalm refs from proper Ant Vespera 3 psalm numbers', () => {
+    const { corpus, skeleton } = setup();
+    corpus.add('horas/Latin/Sancti/12-25.txt', CHRISTMAS_SECOND_VESPERS_FILE);
+    const celeb: Celebration = {
+      feastRef: { path: 'Sancti/12-25', id: 'Sancti/12-25', title: '12-25' },
+      rank: { name: 'I', classSymbol: 'I', weight: 1000 },
+      source: 'sanctoral'
+    };
+    const celebrationRules: CelebrationRuleSet = {
+      ...rules(),
+      festumDomini: true
+    };
+    const hourRules = deriveHourRuleSet(celeb, celebrationRules, 'vespers');
+
+    const result = structureVespers({
+      skeleton,
+      celebration: celeb,
+      commemorations: [],
+      celebrationRules,
+      hourRules,
+      temporal: {
+        ...temporal('2024-12-25', 'Nat25', 3),
+        season: 'christmastide'
+      },
+      policy: rubrics1960Policy,
+      corpus,
+      __vespersSide: 'second'
+    } as Parameters<typeof structureVespers>[0]);
+
+    const psalmody = result.hour.slots.psalmody;
+    expect(psalmody?.kind).toBe('psalmody');
+    if (psalmody?.kind === 'psalmody') {
+      expect(psalmody.psalms[3]?.psalmRef.path).toBe(
+        'horas/Latin/Psalterium/Psalmorum/Psalm129'
+      );
+      expect(psalmody.psalms[3]?.antiphonRef).toEqual({
+        path: 'horas/Latin/Sancti/12-25',
+        section: 'Ant Vespera 3',
+        selector: '4'
+      });
     }
   });
 });
