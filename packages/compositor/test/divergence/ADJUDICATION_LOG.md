@@ -1482,6 +1482,55 @@ Roman structural frontier is the Easter-Octave major-hour paschal
 antiphon routing lane, first visible at Vespers and immediately
 adjacent at Lauds.
 
+### 2026-04-22 — Pattern: Easter-Octave major-hour paschal antiphon routing (engine-bug)
+
+**Commit.** `pending tranche commit`
+
+**Ledger signal.** The next shared Roman family after the Prime
+post-Martyrologium guillemet adjudication was the Easter-Octave
+Lauds/Vespers lead-antiphon seam. On `2024-04-01` in both
+`Reduced - 1955` and `Rubrics 1960 - 1960`, Vespers line `6` expected
+`Ant. Angelus autem Dómini * descéndit de cælo...` while the compositor
+emitted the Sunday psalter `Ant. Dixit Dóminus * Dómino meo...`;
+Lauds line `6` expected the same paschal antiphon while the compositor
+emitted `Ant. Allelúja, * Dóminus regnávit...`.
+
+**Root cause.** Phase 2 structure bug at a reusable psalmody-decoration
+seam, not a compositor text-ordering problem. The Easter-Octave rules in
+`Pasc0-*` correctly say `ex Pasc0-0` and `Minores sine Antiphona`.
+The engine already inherited `Pasc0-0` for major-hour proper sections,
+but `decoratePsalmodyAssignments()` returned early on
+`minorHoursSineAntiphona` before it reached the Lauds/Vespers branch.
+That leaked a minor-hour-only omission into major hours and dropped the
+five proper `Ant Laudes` / `Ant Vespera` refs entirely, so Phase 3 fell
+back to the psalter's Sunday major-hour antiphons.
+
+**Resolution.** Class `engine-bug`. Locked the seam first in
+`packages/rubrical-engine/test/integration/temporal-sunday-minor-antiphons.test.ts`
+with focused `2024-04-01` / `2024-04-02` Lauds/Vespers expectations for
+both Roman policies, then fixed only the owning Phase 2 layer:
+
+- `Minores sine Antiphona` now short-circuits antiphon decoration only
+  for Prime / Terce / Sext / None.
+- Lauds and Vespers continue to attach inherited
+  `horas/Latin/Tempora/Pasc0-0:Ant Laudes` and `:Ant Vespera` refs while
+  keeping the same Day0 psalm table underneath.
+
+**Citation.**
+
+- `upstream/web/www/horas/Latin/Tempora/Pasc0-0.txt:15-16`
+- `upstream/web/www/horas/Latin/Tempora/Pasc0-0.txt:99-103`
+- `upstream/web/www/horas/Latin/Tempora/Pasc0-1.txt:4-10`
+- `upstream/web/www/horas/Latin/Tempora/Pasc0-2.txt:4-10`
+
+**Impact.** The shared Roman Easter-Octave major-hour paschal antiphon
+family is closed. Lauds now moves directly to the already-classified
+Psalm 99 half-verse Perl-bug seam at line `23`, while Vespers advances
+to a new repeated structural boundary at line `95`: Perl expects
+`Canticum B. Mariæ Virginis`, and the compositor currently emits the
+office collect instead. The next shared Roman unadjudicated family is
+therefore the Easter-Octave Vespers Magnificat/oration boundary seam.
+
 ### Open pattern backlog
 
 The following families remain open and have not yet received their own
