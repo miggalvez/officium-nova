@@ -417,6 +417,9 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
     const expectedHeading = normalizeLatin(
       'Tértio Nonas Aprílis Luna vicésima tértia Anno Dómini 2024'
     );
+    const expectedFirstNotice = normalizeLatin(
+      'Romæ natális beáti Xysti Primi, Papæ et Mártyris; qui, tempóribus Hadriáni Imperatóris, summa cum laude rexit Ecclésiam, ac demum, sub Antoníno Pio, ut sibi Christum lucrifáceret, libénter mortem sustínuit temporálem.'
+    );
     const expectedConclmart = normalizeLatin(
       'Et álibi aliórum plurimórum sanctórum Mártyrum et Confessórum, atque sanctárum Vírginum.'
     );
@@ -444,6 +447,20 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
         martyrologyLines[0],
         `${version} Prime should open the Martyrologium tail with the next day's lunar-date heading`
       ).toBe(expectedHeading);
+      const martyrology = prime.sections.find((section) => section.slot === 'martyrology');
+      expect(martyrology, `${version} Prime should expose a Martyrologium section`).toBeDefined();
+      expect(
+        renderLatinText(martyrology!.lines[1]!),
+        `${version} Prime should preserve the separator line before the Martyrologium notices`
+      ).toBe('_');
+      expect(
+        martyrology!.lines[2]!.marker,
+        `${version} Prime should emit the Martyrologium notices as responsorial ` + '`r.`' + ` lines`
+      ).toBe('r.');
+      expect(
+        normalizeLatin(renderLatinText(martyrology!.lines[2]!)),
+        `${version} Prime should keep the first Martyrologium notice after the separator`
+      ).toBe(expectedFirstNotice);
       expect(
         martyrologyLines,
         `${version} Prime should include the common Martyrologium conclusion`
@@ -1368,7 +1385,7 @@ function psalmodyTexts(
 
 function sectionTexts(
   composed: ReturnType<typeof composeHour>,
-  slot: 'chapter' | 'responsory' | 'versicle' | 'oration' | 'conclusion'
+  slot: 'chapter' | 'responsory' | 'versicle' | 'oration' | 'conclusion' | 'martyrology'
 ): readonly string[] {
   const section = composed.sections.find((candidate) => candidate.slot === slot);
   expect(section, `${composed.hour} is missing the ${slot} section`).toBeDefined();

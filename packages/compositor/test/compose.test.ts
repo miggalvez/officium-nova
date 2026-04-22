@@ -1262,6 +1262,69 @@ describe('composeHour', () => {
     );
   });
 
+  it('formats weekday Prime Martyrologium bodies as responsorial lines with separators', () => {
+    const corpus = new InMemoryTextIndex();
+    corpus.addFile(
+      makeFile('horas/Latin/Martyrologium1955R/04-03', '__preamble', [
+        { type: 'text', value: 'Tértio Nonas Aprílis' },
+        { type: 'separator' },
+        { type: 'text', value: 'Romæ natális beáti Xysti Primi, Papæ et Mártyris.' },
+        { type: 'text', value: 'Tauroménii, in Sicília, sancti Pancrátii Epíscopi.' }
+      ])
+    );
+    corpus.addFile(
+      makeFile('horas/Latin/Psalterium/Common/Prayers', 'Conclmart', [
+        {
+          type: 'verseMarker',
+          marker: 'V.',
+          text: 'Et álibi aliórum plurimórum sanctórum Mártyrum.'
+        }
+      ])
+    );
+
+    const reduced1955Version: ResolvedVersion = {
+      ...stubVersion,
+      handle: 'Reduced - 1955' as never
+    };
+    const hour: HourStructure = {
+      hour: 'prime',
+      slots: {
+        martyrology: {
+          kind: 'prime-martyrology'
+        }
+      },
+      directives: []
+    };
+
+    const composed = composeHour({
+      corpus,
+      summary: buildSummary(hour, {
+        version: reduced1955Version,
+        date: '2024-04-02'
+      }),
+      version: reduced1955Version,
+      hour: 'prime',
+      options: { languages: ['Latin'] }
+    });
+
+    const martyrology = composed.sections.find((section) => section.slot === 'martyrology');
+    expect(martyrology?.slot).toBe('martyrology');
+    expect(martyrology!.lines[0]!.marker).toBe('v.');
+    expect(renderRuns(martyrology!.lines[0]!, 'Latin')).toBe(
+      'Tértio Nonas Aprílis Luna vicésima tértia Anno Dómini 2024'
+    );
+    expect(renderRuns(martyrology!.lines[1]!, 'Latin')).toBe('_');
+    expect(martyrology!.lines[2]!.marker).toBe('r.');
+    expect(renderRuns(martyrology!.lines[2]!, 'Latin')).toBe(
+      'Romæ natális beáti Xysti Primi, Papæ et Mártyris.'
+    );
+    expect(martyrology!.lines[3]!.marker).toBe('r.');
+    expect(renderRuns(martyrology!.lines[3]!, 'Latin')).toBe(
+      'Tauroménii, in Sicília, sancti Pancrátii Epíscopi.'
+    );
+    expect(martyrology!.lines[4]!.marker).toBe('V.');
+  });
+
   it('avoids duplicating the civil date in the English Martyrologium moon label', () => {
     const corpus = new InMemoryTextIndex();
     corpus.addFile(
