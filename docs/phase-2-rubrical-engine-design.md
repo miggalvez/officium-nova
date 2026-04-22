@@ -396,28 +396,32 @@ export interface HourStructure {
 }
 
 export type SlotName =
+  | 'incipit'
   | 'invitatory' | 'hymn' | 'psalmody'
+  | 'martyrology' | 'de-officio-capituli'
   | 'chapter' | 'responsory' | 'versicle'
   | 'antiphon-ad-benedictus' | 'canticle-ad-benedictus'
   | 'antiphon-ad-magnificat' | 'canticle-ad-magnificat'
   | 'antiphon-ad-nunc-dimittis' | 'canticle-ad-nunc-dimittis'
-  | 'oration' | 'commemoration-antiphons'
+  | 'oration' | 'lectio-brevis' | 'benedictio'
+  | 'commemoration-antiphons'
   | 'commemoration-versicles' | 'commemoration-orations'
-  | 'suffragium' | 'preces'
-  | 'doxology-variant' | 'conclusion';
+  | 'suffragium' | 'preces' | 'final-antiphon-bvm'
+  | 'doxology-variant' | 'te-deum' | 'conclusion';
 
 export type SlotContent =
-  | { kind: 'single-ref'; ref: TextReference }
+  | { kind: 'single-ref'; ref: TextReference; hymnOverride?: HymnOverrideMeta }
   | { kind: 'ordered-refs'; refs: readonly TextReference[] }
   | { kind: 'psalmody'; psalms: readonly PsalmAssignment[] }
-  | { kind: 'conditional'; choices: readonly ConditionalChoice[] }
-  | { kind: 'empty' };             // explicitly suppressed slot
+  | { kind: 'prime-martyrology' }
+  | { kind: 'empty' } // explicitly suppressed slot
+  | { kind: 'matins-invitatorium'; source: InvitatoriumSource }
+  | { kind: 'matins-nocturns'; nocturns: readonly NocturnPlan[] }
+  | { kind: 'te-deum'; decision: 'say' | 'replace-with-responsory' | 'omit' };
 
 export interface PsalmAssignment {
-  readonly psalmRef: TextReference;    // resolves to the psalm text
-  readonly antiphonRef?: TextReference;// antiphon before/after
-  readonly toneHint?: string;          // Gregorian tone marker
-  readonly isGradual?: boolean;        // for Compline / Office of the Dead
+  readonly psalmRef: TextReference;     // resolves to the psalm text
+  readonly antiphonRef?: TextReference; // antiphon before/after
 }
 
 export interface TextReference {
@@ -430,22 +434,54 @@ export interface TextReference {
   readonly selector?: string;
 }
 
+export interface HymnOverrideMeta {
+  readonly mode: 'merge' | 'shift';
+  readonly hymnKey: string;
+  readonly source: 'overlay';
+}
+
 export type HourDirective =
   | 'omit-gloria-patri'              // e.g. Triduum
   | 'omit-alleluia'                  // Septuagesima onward
   | 'add-alleluia'                   // Paschal Time
+  | 'add-versicle-alleluia'
   | 'preces-feriales'                // ferial preces at Lauds/Vespers
   | 'preces-dominicales'             // Sunday preces at Prime/Compline
   | 'suffragium-of-the-saints'       // outside privileged seasons
   | 'omit-suffragium'                // within privileged seasons or on feasts
-  | 'festal-psalter'                 // use festal psalms not ferial
-  | 'festal-antiphons'               // doubles use the feast's own antiphons
-  | 'proper-of-the-season'           // ferial psalter, proper antiphons
-  | 'omit-hymn-prime-passiontide'
   | 'genuflection-at-oration'        // Ember Wednesdays etc.
   | 'short-chapter-only'             // e.g. during Triduum
-  | 'octave-commemoration-mode';
+  | 'dirge-vespers'
+  | 'dirge-lauds';
+
+export type ComplineSource =
+  | { kind: 'vespers-winner'; celebration: Celebration }
+  | { kind: 'ordinary' }
+  | { kind: 'triduum-special'; dayName: string };
+
+export interface HourStructure {
+  readonly hour: HourName;
+  readonly source?: ComplineSource; // Compline-only concurrence source
+  readonly slots: Readonly<Partial<Record<SlotName, SlotContent>>>;
+  readonly directives: readonly HourDirective[];
+}
 ```
+
+This slot map is the canonical Phase 2 contract and should track the exported
+types in `packages/rubrical-engine/src/types/hour-structure.ts`, not an earlier
+planning sketch. Phase 2 remains complete for the Roman scope as a decision
+layer, but the Phase 3 burn-down showed that the schema was not frozen: bounded
+structural additions still surfaced when the compositor reached real source
+families that needed richer seams than the initial model exposed.
+
+The Roman 3h work widened the schema in exactly that way without reopening the
+Phase 2 occurrence/concurrence/transfer architecture. Recent additions included
+`incipit`, `martyrology`, `de-officio-capituli`, `lectio-brevis`,
+`benedictio`, Matins-specific rich slots (`matins-invitatorium`,
+`matins-nocturns`, `te-deum`), and Lucan canticle slots for Lauds/Vespers/
+Compline. See ADR-013 for the canticle-slot decision and the changelog entries
+for the Prime Martyrology / `De Officio Capituli` / Matins-benediction
+follow-up work.
 
 ### 4.3 Input Configuration — Version as Primary Identifier
 
