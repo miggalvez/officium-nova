@@ -37,12 +37,14 @@ export interface ExpandPsalmWrapperArgs {
 }
 
 /**
- * Build the Perl-compatible `Psalmus N [index]` heading line for a psalm
- * reference. The psalm number is extracted in priority order:
+ * Build the Perl-compatible `Psalmus N [index]` / `Canticum N [index]`
+ * heading line for a psalmody reference. The heading is extracted in
+ * priority order:
  *
- *   1. Direct path match — the reference's `path` ends in `/Psalm<N>`.
- *   2. Selector-embedded psalm number — selectors like `"118(1-16)"`.
- *   3. Resolved-content verse prefix — expanded psalms carry `N:M` prefixes.
+ *   1. Resolved-content canticle title — e.g. `(Canticum Annæ * ...)`.
+ *   2. Direct path match — the reference's `path` ends in `/Psalm<N>`.
+ *   3. Selector-embedded psalm number — selectors like `"118(1-16)"`.
+ *   4. Resolved-content verse prefix — expanded psalms carry `N:M` prefixes.
  */
 export function buildPsalmHeading(
   ref: TextReference,
@@ -50,6 +52,11 @@ export function buildPsalmHeading(
   psalmIndex: number
 ): string | undefined {
   const selector = ref.selector?.trim();
+
+  const canticleTitle = extractCanticleTitleFromContent(expandedContent);
+  if (canticleTitle) {
+    return `${canticleTitle} [${psalmIndex}]`;
+  }
 
   const pathMatch = ref.path.match(/\/Psalm(\d+)(?:\.txt)?$/u);
   const directPsalm = pathMatch?.[1];
@@ -67,6 +74,24 @@ export function buildPsalmHeading(
         ? `(${tokenRange})`
         : '';
   return `Psalmus ${psalmNumber}${rangeSuffix} [${psalmIndex}]`;
+}
+
+export function replaceLeadingCanticleTitleWithCitation(
+  content: readonly TextContent[]
+): readonly TextContent[] {
+  const first = content[0];
+  if (first?.type !== 'text') {
+    return content;
+  }
+  const titleLine = parseCanticleTitleLine(first.value);
+  if (!titleLine) return content;
+  if (titleLine.citation) {
+    const rest = content.slice(1);
+    const boundary: TextContent = { type: 'separator' };
+    const contentRest = rest[0]?.type === 'separator' ? rest : [boundary, ...rest];
+    return [{ ...first, value: titleLine.citation }, ...contentRest];
+  }
+  return content.slice(1);
 }
 
 export function containsInlinePsalmRefs(content: readonly TextContent[]): boolean {
@@ -143,7 +168,7 @@ export function appendExpandedPsalmWrapper(
         { type: 'separator' }
       ]);
     }
-    appendContentWithBoundary(target, psalmBody);
+    appendContentWithBoundary(target, replaceLeadingCanticleTitleWithCitation(psalmBody));
     const trailingAntiphon =
       args.suppressTrailingAntiphon ? undefined : node.antiphon?.trim();
     if (trailingAntiphon) {
@@ -235,6 +260,11 @@ function buildInlinePsalmHeading(
   expandedContent: readonly TextContent[],
   psalmIndex: number
 ): string | undefined {
+  const canticleTitle = extractCanticleTitleFromContent(expandedContent);
+  if (canticleTitle) {
+    return `${canticleTitle} [${psalmIndex}]`;
+  }
+
   const inlinePsalmNumber =
     Number.isFinite(node.psalmNumber) && node.psalmNumber > 0 ? String(node.psalmNumber) : undefined;
   const psalmNumber = inlinePsalmNumber ?? extractPsalmNumberFromContent(expandedContent);
@@ -242,6 +272,28 @@ function buildInlinePsalmHeading(
     return undefined;
   }
   return `Psalmus ${psalmNumber} [${psalmIndex}]`;
+}
+
+function extractCanticleTitleFromContent(content: readonly TextContent[]): string | undefined {
+  for (const node of content) {
+    if (node.type !== 'text') continue;
+    const title = extractCanticleTitleFromText(node.value);
+    if (title) return title;
+    if (node.value.trim().length > 0) return undefined;
+  }
+  return undefined;
+}
+
+function extractCanticleTitleFromText(text: string): string | undefined {
+  return parseCanticleTitleLine(text)?.title;
+}
+
+function parseCanticleTitleLine(text: string): { readonly title: string; readonly citation?: string } | undefined {
+  const match = text.match(/^\s*\((Canticum(?:\s+[^*)]+?)?)(?:\s*\*\s*([^)]+))?\)\s*$/u);
+  const title = match?.[1]?.replace(/\s+/gu, ' ').trim();
+  if (!title) return undefined;
+  const citation = match?.[2]?.replace(/\s+/gu, ' ').trim();
+  return citation ? { title, citation } : { title };
 }
 
 function splitLeadingPsalmAntiphon(
