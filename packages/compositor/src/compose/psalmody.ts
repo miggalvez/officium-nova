@@ -190,7 +190,7 @@ export function normalizeRepeatedAntiphonContent(
 }
 
 export function normalizeRepeatedAntiphonText(text: string): string {
-  return text.replace(/\s*[*‡†]\s*/gu, ' ').replace(/\s{2,}/gu, ' ').trim();
+  return text.replace(/\s*;;.*$/u, '').replace(/\s*[*‡†]\s*/gu, ' ').replace(/\s{2,}/gu, ' ').trim();
 }
 
 export function normalizeOpeningPsalmodyAntiphonContent(

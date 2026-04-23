@@ -44,6 +44,11 @@ export interface ExpandMatinsPsalmWrapperArgs {
   readonly onWarning?: (warning: ComposeWarning) => void;
 }
 
+interface PsalmVerseBoundary {
+  readonly number: number;
+  readonly suffix?: string;
+}
+
 export function buildPsalmHeading(
   ref: TextReference,
   expandedContent: readonly TextContent[],
@@ -300,7 +305,7 @@ export function slicePsalmContentByVerseRange(
 
   const start = parsePsalmVerseBoundary(match[1]);
   const end = parsePsalmVerseBoundary(match[2]);
-  if (start === undefined || end === undefined || start > end) {
+  if (start === undefined || end === undefined || comparePsalmVerseBoundary(start, end) > 0) {
     return content;
   }
 
@@ -311,14 +316,13 @@ export function slicePsalmContentByVerseRange(
       continue;
     }
 
-    const verseMatch = /^\s*\d+:(\d+)/u.exec(node.value);
-    if (!verseMatch?.[1]) {
+    const verse = parsePsalmVerseLabel(node.value);
+    if (!verse) {
       out.push(node);
       continue;
     }
 
-    const verse = Number.parseInt(verseMatch[1], 10);
-    if (verse >= start && verse <= end) {
+    if (comparePsalmVerseBoundary(verse, start) >= 0 && comparePsalmVerseBoundary(verse, end) <= 0) {
       out.push(node);
     }
   }
@@ -551,14 +555,39 @@ function extractInlinePsalmRange(text: string | undefined): string | undefined {
   return match[1].replace(/['"]/gu, '').replace(/\s*-\s*/gu, '-').trim();
 }
 
-function parsePsalmVerseBoundary(boundary: string): number | undefined {
-  const match = /^\s*(\d+)/u.exec(boundary);
+function parsePsalmVerseBoundary(boundary: string): PsalmVerseBoundary | undefined {
+  const match = /^\s*(\d+)([a-z])?/iu.exec(boundary);
   if (!match?.[1]) {
     return undefined;
   }
 
   const value = Number.parseInt(match[1], 10);
-  return Number.isFinite(value) ? value : undefined;
+  if (!Number.isFinite(value)) {
+    return undefined;
+  }
+
+  const suffix = match[2]?.toLowerCase();
+  return suffix ? { number: value, suffix } : { number: value };
+}
+
+function parsePsalmVerseLabel(line: string): PsalmVerseBoundary | undefined {
+  const match = /^\s*\d+:(\d+[a-z]?)/iu.exec(line);
+  return match?.[1] ? parsePsalmVerseBoundary(match[1]) : undefined;
+}
+
+function comparePsalmVerseBoundary(left: PsalmVerseBoundary, right: PsalmVerseBoundary): number {
+  if (left.number !== right.number) {
+    return left.number - right.number;
+  }
+  return suffixRank(left.suffix) - suffixRank(right.suffix);
+}
+
+function suffixRank(suffix: string | undefined): number {
+  if (!suffix) {
+    return 0;
+  }
+  const charCode = suffix.charCodeAt(0);
+  return Number.isFinite(charCode) ? charCode : 0;
 }
 
 function resolvePairedAntiphonRange(
