@@ -187,4 +187,47 @@ describe('minor hour structurers', () => {
       }
     });
   });
+
+  it('uses the Holy Week later blocks for Monday through Wednesday minor hours', () => {
+    const { corpus, version } = setup();
+    const skeleton = loadOrdinariumSkeleton('sext', version, corpus);
+    const celeb = celebration('Tempora/Quad6-2');
+    const hourRules = deriveHourRuleSet(celeb, rules(), 'sext');
+
+    const result = structureSext({
+      skeleton,
+      celebration: celeb,
+      commemorations: [],
+      celebrationRules: rules(),
+      hourRules,
+      temporal: {
+        ...temporal('2024-03-26', 'Quad6-2', 2),
+        season: 'lent'
+      },
+      policy: rubrics1960Policy,
+      corpus
+    });
+
+    expect(result.hour.slots.chapter).toEqual({
+      kind: 'single-ref',
+      ref: {
+        path: 'horas/Latin/Psalterium/Special/Minor Special',
+        section: 'Quad5 Sexta'
+      }
+    });
+    expect(result.hour.slots.responsory).toEqual({
+      kind: 'single-ref',
+      ref: {
+        path: 'horas/Latin/Psalterium/Special/Minor Special',
+        section: 'Responsory breve Quad5 Sexta'
+      }
+    });
+    expect(result.hour.slots.versicle).toEqual({
+      kind: 'single-ref',
+      ref: {
+        path: 'horas/Latin/Psalterium/Special/Minor Special',
+        section: 'Versum Quad5 Sexta'
+      }
+    });
+  });
 });

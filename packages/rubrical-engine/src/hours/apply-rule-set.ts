@@ -36,6 +36,7 @@ const COMMON_PRAYERS_PATH = 'horas/Latin/Psalterium/Common/Prayers';
 const PSALMI_MAJOR = 'horas/Latin/Psalterium/Psalmi/Psalmi major';
 const PSALMORUM_ROOT = 'horas/Latin/Psalterium/Psalmorum';
 const MAJOR_SPECIAL_PATH = 'horas/Latin/Psalterium/Special/Major Special';
+const HOLY_WEEK_MON_WED_KEYS = new Set(['Quad6-1', 'Quad6-2', 'Quad6-3']);
 
 export interface ApplyRuleSetInput {
   readonly hour: HourName;
@@ -1139,6 +1140,11 @@ function minorHourFerialLaterBlockFallbackSection(
     return undefined;
   }
 
+  const holyWeekMonWedSection = minorHourHolyWeekMonWedLaterBlockSection(input.hour, slot);
+  if (HOLY_WEEK_MON_WED_KEYS.has(input.temporal.dayName) && holyWeekMonWedSection) {
+    return holyWeekMonWedSection;
+  }
+
   switch (input.hour) {
     case 'prime':
       switch (slot) {
@@ -1181,6 +1187,49 @@ function minorHourFerialLaterBlockFallbackSection(
           return 'Responsory breve Feria Nona';
         case 'versicle':
           return 'Versum Feria Nona';
+        default:
+          return undefined;
+      }
+    default:
+      return undefined;
+  }
+}
+
+function minorHourHolyWeekMonWedLaterBlockSection(
+  hour: HourName,
+  slot: SlotName
+): string | undefined {
+  switch (hour) {
+    case 'terce':
+      switch (slot) {
+        case 'chapter':
+          return 'Quad5 Tertia';
+        case 'responsory':
+          return 'Responsory breve Quad5 Tertia';
+        case 'versicle':
+          return 'Versum Quad5 Tertia';
+        default:
+          return undefined;
+      }
+    case 'sext':
+      switch (slot) {
+        case 'chapter':
+          return 'Quad5 Sexta';
+        case 'responsory':
+          return 'Responsory breve Quad5 Sexta';
+        case 'versicle':
+          return 'Versum Quad5 Sexta';
+        default:
+          return undefined;
+      }
+    case 'none':
+      switch (slot) {
+        case 'chapter':
+          return 'Quad5 Nona';
+        case 'responsory':
+          return 'Responsory breve Quad5 Nona';
+        case 'versicle':
+          return 'Versum Quad5 Nona';
         default:
           return undefined;
       }

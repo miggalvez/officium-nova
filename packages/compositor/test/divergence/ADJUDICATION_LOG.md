@@ -2540,6 +2540,39 @@ the repeated ferial Prime checkpoints.
 classified, leaving the live Roman frontier centered on Holy Week
 chapter selection and proper-feast short-responsory separators.
 
+### 2026-04-24 — Pattern: Holy Week minor hours use Quad5 later blocks (mixed fix)
+
+**Commit.** pending
+
+**Ledger signal.** Holy Week Monday through Wednesday `Terce`, `Sext`,
+and `None` were falling back to the ordinary feria later blocks, so the
+compositor first diverged at `Jer 17:14`, `Rom 13:8`, and
+`1 Pet 1:17-19` where Perl surfaced the Holy Week `Quad5` chapters.
+
+**Root cause.** `Minor Special.txt` has dedicated `Quad5
+Tertia`/`Sexta`/`Nona` chapter, responsory, and versicle sections for
+these late-Lent minor hours. The simplified Roman fallback selector knew
+about ordinary feria blocks but did not map `Quad6-1`, `Quad6-2`, and
+`Quad6-3` onto those Holy Week `Quad5` sections.
+
+**Resolution.** Fixed in Phase 2 hour structuring. The minor-hour
+fallback selector now routes Holy Week Monday through Wednesday
+`Terce`/`Sext`/`None` to the `Quad5` chapter, short-responsory, and
+versicle sections. The source-backed rows then advance to the familiar
+Perl underscore separator before the `R.br.` line, so representative
+`perl-bug` adjudications were added for that exposed render-surface seam.
+
+**Citation.**
+
+- `upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:381-410`
+- `upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:430-461`
+- `upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:477-506`
+
+**Impact.** The Holy Week minor-hour chapter selection bug is closed for
+both simplified Roman policies. The residual first divergence on those
+rows is explicitly classified as the same source-backed short-responsory
+separator issue handled in earlier tranches.
+
 ### Open pattern backlog
 
 The following families remain open and have not yet received their own

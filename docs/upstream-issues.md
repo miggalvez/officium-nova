@@ -1201,6 +1201,45 @@ pnpm -C packages/compositor compare:phase-3-perl -- --version "Rubrics 1960 - 19
 | Reduced - 1955 | 2024-02-14 | Prime | `6081a8cc` |
 | Rubrics 1960 - 1960 | 2024-02-14 | Prime | `b7853e49` |
 
+### 2026-04-24 — Holy Week minor-hour `Quad5` short responsories gain underscore separators after source-backed fallback
+
+**Classification.** `perl-bug` for the remaining separator rows after
+the Phase 2 fallback fix.
+
+**Summary.** Holy Week Monday through Wednesday `Terce`, `Sext`, and
+`None` now use the source-backed `Quad5` later blocks from
+`Minor Special.txt`. Once the chapter selection is fixed, the remaining
+first divergence is the Perl render surface inserting an underscore-only
+line before the `R.br.` short responsory.
+
+**Primary source.**
+`upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:381-410,430-461,477-506`
+
+The source carries `Quad5 Tertia`, `Quad5 Sexta`, and `Quad5 Nona`
+chapter sections plus their matching `Responsory breve Quad5 ...` and
+`Versum Quad5 ...` sections. The short responsory begins directly with
+`R.br.`; no underscore-only separator precedes it.
+
+**Reproduction.**
+Run:
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Reduced - 1955" --date 2024-03-25 --hour Tertia
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Reduced - 1955" --date 2024-03-25 --hour Sexta
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Rubrics 1960 - 1960" --date 2024-03-25 --hour Nona
+```
+
+**Affected stable divergence-row keys.**
+
+| Policy | Date | Hour | Row key suffix |
+|---|---|---|---|
+| Reduced - 1955 | 2024-03-25 | Terce | `cedac887` |
+| Reduced - 1955 | 2024-03-25 | Sext | `3acfd479` |
+| Reduced - 1955 | 2024-03-25 | None | `2071fc88` |
+| Rubrics 1960 - 1960 | 2024-03-25 | Terce | `cedac887` |
+| Rubrics 1960 - 1960 | 2024-03-25 | Sext | `3acfd479` |
+| Rubrics 1960 - 1960 | 2024-03-25 | None | `2071fc88` |
+
 ## See also
 
 - [ADR-011 — Phase 3 divergence adjudication](./adr/011-phase-3-divergence-adjudication.md)
