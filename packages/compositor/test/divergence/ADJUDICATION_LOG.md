@@ -2089,6 +2089,45 @@ from `493` to `460`. The next live frontier is now `Reduced - 1955` Mar
 `Rubrics 1960 - 1960` Ash Wednesday Lauds later-block boundary (`Rom
 13:12-13` vs `Ant. Cum jejunátis...`).
 
+### 2026-04-24 — Pattern: weekday `Psalmi Dominica` feasts use Sunday Lauds I (engine-bug + fanout)
+
+**Commit.** pending tranche commit
+
+**Ledger signal.** The next shared Roman frontier was St Joseph on Mar
+`19` Lauds under both `Reduced - 1955` and `Rubrics 1960 - 1960`: Perl
+opened the psalmody with `Psalmus 92 [1]`, while the compositor opened
+with penitential `Psalmus 50 [1]`.
+
+**Root cause.** This was a Phase 2 psalmody-selection bug. The St Joseph
+source rule says `Psalmi Dominica`, which the file-format contract defines
+as the Sunday psalm scheme. The engine already used Sunday weekday `Day0`
+selection for the row, but `laudsReferences()` still treated the Lenten
+date as penitential and chose `Day0 Laudes2`. Explicit `Psalmi Dominica`
+on a weekday feast should force the Sunday Lauds I table; ordinary
+Lenten Sundays continue to use their penitential source where appropriate.
+
+**Resolution.** Fixed in Phase 2. `selectPsalmodyRoman1960()` now carries
+whether the Sunday scheme came from the explicit `Psalmi Dominica` rule,
+and Lauds suppresses the penitential-table override only for that explicit
+rule. Added a shared Roman integration regression in
+`packages/rubrical-engine/test/integration/temporal-sunday-minor-antiphons.test.ts`
+for `2024-03-19` Lauds. The targeted compare now advances both Roman
+rows to the already-adjudicated Psalm 99 half-verse family; a full-ledger
+fanout added those two row keys to `adjudications.json`.
+
+**Citation.**
+
+- `upstream/web/www/horas/Latin/Sancti/03-19.txt:9-13`
+- `docs/file-format-specification.md:634`
+
+**Impact.** The wrong `Psalmus 50 [1]` frontier is closed for both Roman
+policies. Unadjudicated counts drop to `251` for `Reduced - 1955` and
+`186` for `Rubrics 1960 - 1960` after the exposed Psalm 99 rows fan out.
+The next live frontiers are now `Reduced - 1955` Mar `28` Lauds Triduum
+conclusion (`Christus factus est...` vs `V. Dómine, exáudi...`) and
+`Rubrics 1960 - 1960` Ash Wednesday Lauds later-block boundary (`Rom
+13:12-13` vs `Ant. Cum jejunátis...`).
+
 ### Open pattern backlog
 
 The following families remain open and have not yet received their own

@@ -107,6 +107,35 @@ describeIfUpstream('temporal Sunday minor-hour antiphon ownership', () => {
   );
 
   it(
+    'keeps weekday feasts with Psalmi Dominica on Sunday Lauds I instead of penitential Lauds II',
+    async () => {
+      const engines = await loadEngines([
+        'Reduced - 1955',
+        'Rubrics 1960 - 1960'
+      ]);
+
+      for (const handle of ['Reduced - 1955', 'Rubrics 1960 - 1960'] as const) {
+        const engine = engines.get(handle);
+        expect(engine, `${handle} engine`).toBeDefined();
+        if (!engine) {
+          continue;
+        }
+
+        const lauds = psalmodyAt(engine, '2024-03-19', 'lauds');
+        expectMajorHour(lauds, 'horas/Latin/Sancti/03-19:Ant Laudes');
+        expect(lauds.map((entry) => `${entry.psalmRef.section}:${entry.psalmRef.selector}`)).toEqual([
+          'Day0 Laudes1:1',
+          'Day0 Laudes1:2',
+          'Day0 Laudes1:3',
+          'Day0 Laudes1:4',
+          'Day0 Laudes1:5'
+        ]);
+      }
+    },
+    240_000
+  );
+
+  it(
     'keeps Easter Octave minor hours on the dominica psalm table while omitting the opening antiphon',
     async () => {
       const engines = await loadEngines([
