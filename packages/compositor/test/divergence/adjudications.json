@@ -8173,6 +8173,54 @@
     "resolvedAt": "2026-04-19",
     "commitSha": "bfb3c52"
   },
+  "Reduced - 1955/2024-06-29/None/623717e4": {
+    "policy": "Reduced - 1955",
+    "date": "2024-06-29",
+    "hour": "None",
+    "firstExpected": "_",
+    "firstActual": "R.br. Nimis honoráti sunt * Amíci tui, Deus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Commune/C1.txt:307-317 and upstream/web/www/horas/Latin/Sancti/06-29.txt:274-276 — the feast supplies a proper None chapter and inherits [Responsory Breve Nona] beginning R.br. Nimis honoráti sunt * Amíci tui, Deus. The compositor emits that source-backed block while the Perl comparison surface leaves an underscore separator at the first divergence.",
+    "notes": "Representative entry for the shared Roman Ss Peter and Paul proper minor-hour later-block family where Perl keeps the weekday Prime chapter or an underscore separator instead of the source-backed office proper and apostle common responsories.",
+    "resolvedAt": "2026-04-24",
+    "commitSha": "pending"
+  },
+  "Reduced - 1955/2024-06-29/Prime/4e634936": {
+    "policy": "Reduced - 1955",
+    "date": "2024-06-29",
+    "hour": "Prime",
+    "firstExpected": "1 Tim. 1:17",
+    "firstActual": "Act 12:11",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/06-29.txt:265-267 — the Ss Peter and Paul office explicitly supplies [Lectio Prima] with citation Act 12:11, so the compositor emits the proper Prime lesson instead of the weekday 1 Tim. 1:17 chapter retained by the Perl comparison surface.",
+    "notes": "Representative entry for the shared Roman Ss Peter and Paul proper minor-hour later-block family where Perl keeps the weekday Prime chapter or an underscore separator instead of the source-backed office proper and apostle common responsories.",
+    "resolvedAt": "2026-04-24",
+    "commitSha": "pending"
+  },
+  "Reduced - 1955/2024-06-29/Sext/5e6c5f39": {
+    "policy": "Reduced - 1955",
+    "date": "2024-06-29",
+    "hour": "Sext",
+    "firstExpected": "_",
+    "firstActual": "R.br. Constítues eos príncipes * Super omnem terram.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Commune/C1.txt:294-305 and upstream/web/www/horas/Latin/Sancti/06-29.txt:269-272 — the feast supplies a proper Sext chapter and inherits [Responsory Breve Sexta] beginning R.br. Constítues eos príncipes * Super omnem terram. The compositor emits that source-backed block while the Perl comparison surface leaves an underscore separator at the first divergence.",
+    "notes": "Representative entry for the shared Roman Ss Peter and Paul proper minor-hour later-block family where Perl keeps the weekday Prime chapter or an underscore separator instead of the source-backed office proper and apostle common responsories.",
+    "resolvedAt": "2026-04-24",
+    "commitSha": "pending"
+  },
+  "Reduced - 1955/2024-06-29/Terce/a05eee1c": {
+    "policy": "Reduced - 1955",
+    "date": "2024-06-29",
+    "hour": "Terce",
+    "firstExpected": "_",
+    "firstActual": "R.br. In omnem terram * Exívit sonus eórum.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Commune/C1.txt:286-292 and upstream/web/www/horas/Latin/Sancti/06-29.txt:278-281 — the feast inherits the apostle common later-block surface, including [Responsory Breve Tertia] beginning R.br. In omnem terram * Exívit sonus eórum. The compositor emits that source-backed block while the Perl comparison surface leaves an underscore separator at the first divergence.",
+    "notes": "Representative entry for the shared Roman Ss Peter and Paul proper minor-hour later-block family where Perl keeps the weekday Prime chapter or an underscore separator instead of the source-backed office proper and apostle common responsories.",
+    "resolvedAt": "2026-04-24",
+    "commitSha": "pending"
+  },
   "Reduced - 1955/2024-06-29/Vespers/22de27ef": {
     "policy": "Reduced - 1955",
     "date": "2024-06-29",
@@ -11873,6 +11921,54 @@
     "notes": "Representative entry for the Rubrics 1960 Lauds Psalm 99 half-verse family where the corpus keeps a `‡ ... *` structure and Perl flattens it to a single `*` boundary.",
     "resolvedAt": "2026-04-19",
     "commitSha": "bfb3c52"
+  },
+  "Rubrics 1960 - 1960/2024-06-29/None/623717e4": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-06-29",
+    "hour": "None",
+    "firstExpected": "_",
+    "firstActual": "R.br. Nimis honoráti sunt * Amíci tui, Deus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Commune/C1.txt:307-317 and upstream/web/www/horas/Latin/Sancti/06-29.txt:274-276 — the feast supplies a proper None chapter and inherits [Responsory Breve Nona] beginning R.br. Nimis honoráti sunt * Amíci tui, Deus. The compositor emits that source-backed block while the Perl comparison surface leaves an underscore separator at the first divergence.",
+    "notes": "Representative entry for the shared Roman Ss Peter and Paul proper minor-hour later-block family where Perl keeps the weekday Prime chapter or an underscore separator instead of the source-backed office proper and apostle common responsories.",
+    "resolvedAt": "2026-04-24",
+    "commitSha": "pending"
+  },
+  "Rubrics 1960 - 1960/2024-06-29/Prime/4e634936": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-06-29",
+    "hour": "Prime",
+    "firstExpected": "1 Tim. 1:17",
+    "firstActual": "Act 12:11",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/06-29.txt:265-267 — the Ss Peter and Paul office explicitly supplies [Lectio Prima] with citation Act 12:11, so the compositor emits the proper Prime lesson instead of the weekday 1 Tim. 1:17 chapter retained by the Perl comparison surface.",
+    "notes": "Representative entry for the shared Roman Ss Peter and Paul proper minor-hour later-block family where Perl keeps the weekday Prime chapter or an underscore separator instead of the source-backed office proper and apostle common responsories.",
+    "resolvedAt": "2026-04-24",
+    "commitSha": "pending"
+  },
+  "Rubrics 1960 - 1960/2024-06-29/Sext/5e6c5f39": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-06-29",
+    "hour": "Sext",
+    "firstExpected": "_",
+    "firstActual": "R.br. Constítues eos príncipes * Super omnem terram.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Commune/C1.txt:294-305 and upstream/web/www/horas/Latin/Sancti/06-29.txt:269-272 — the feast supplies a proper Sext chapter and inherits [Responsory Breve Sexta] beginning R.br. Constítues eos príncipes * Super omnem terram. The compositor emits that source-backed block while the Perl comparison surface leaves an underscore separator at the first divergence.",
+    "notes": "Representative entry for the shared Roman Ss Peter and Paul proper minor-hour later-block family where Perl keeps the weekday Prime chapter or an underscore separator instead of the source-backed office proper and apostle common responsories.",
+    "resolvedAt": "2026-04-24",
+    "commitSha": "pending"
+  },
+  "Rubrics 1960 - 1960/2024-06-29/Terce/a05eee1c": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-06-29",
+    "hour": "Terce",
+    "firstExpected": "_",
+    "firstActual": "R.br. In omnem terram * Exívit sonus eórum.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Commune/C1.txt:286-292 and upstream/web/www/horas/Latin/Sancti/06-29.txt:278-281 — the feast inherits the apostle common later-block surface, including [Responsory Breve Tertia] beginning R.br. In omnem terram * Exívit sonus eórum. The compositor emits that source-backed block while the Perl comparison surface leaves an underscore separator at the first divergence.",
+    "notes": "Representative entry for the shared Roman Ss Peter and Paul proper minor-hour later-block family where Perl keeps the weekday Prime chapter or an underscore separator instead of the source-backed office proper and apostle common responsories.",
+    "resolvedAt": "2026-04-24",
+    "commitSha": "pending"
   },
   "Rubrics 1960 - 1960/2024-06-29/Vespers/22de27ef": {
     "policy": "Rubrics 1960 - 1960",

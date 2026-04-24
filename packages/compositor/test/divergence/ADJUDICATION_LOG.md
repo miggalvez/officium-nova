@@ -2667,6 +2667,36 @@ then recorded the eight simplified Roman row adjudications in
 **Impact.** Eight more proper-feast minor-hour rows are now classified
 as source-backed Perl render-surface bugs.
 
+### 2026-04-24 — Pattern: Ss Peter and Paul proper minor-hour later blocks are skipped by Perl (perl-bug)
+
+**Commit.** pending
+
+**Ledger signal.** On Jun `29`, both simplified Roman policies first
+diverge in Prime when Perl keeps the weekday `1 Tim. 1:17` citation
+instead of the Ss Peter and Paul `Act 12:11` lesson. Terce, Sext, and
+None then diverge at Perl's `_` separator where the compositor emits the
+apostle common's proper short responsories.
+
+**Root cause.** The Ss Peter and Paul office has explicit minor-hour
+later-block material: a proper `[Lectio Prima]`, proper Sext/None
+chapters, and inherited apostle-common `[Responsory Breve Tertia]`,
+`[Responsory Breve Sexta]`, `[Responsory Breve Nona]`, and matching
+versicles. The compositor emits those source-backed sections; Perl's
+rendered comparison surface does not.
+
+**Resolution.** Class `perl-bug`. Added an upstream integration
+regression for the Ss Peter and Paul Prime and Terce/Sext/None later
+blocks, then recorded the eight simplified Roman row adjudications in
+`adjudications.json`.
+
+**Citation.**
+
+- `upstream/web/www/horas/Latin/Sancti/06-29.txt:265-276`
+- `upstream/web/www/horas/Latin/Commune/C1.txt:286-317`
+
+**Impact.** Eight more proper-feast minor-hour rows are now classified
+as source-backed Perl render-surface bugs.
+
 ### Open pattern backlog
 
 The following families remain open and have not yet received their own
