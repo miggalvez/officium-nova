@@ -1568,6 +1568,32 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
     }
   }, 240_000);
 
+  it('applies seasonal Paschal doxology to 1955 fallback minor-hour hymns', async () => {
+    const { engine, resolvedCorpus } = await createHarness('Reduced - 1955');
+
+    for (const date of ['2024-04-07', '2024-05-19'] as const) {
+      const summary = engine.resolveDayOfficeSummary(date);
+      for (const [hour, firstLine] of [
+        ['prime', 'Deo Patri sit glória,'],
+        ['terce', 'Deo Patri sit glória,'],
+        ['sext', 'Deo Patri sit glória,'],
+        ['none', 'Deo Patri sit glória,']
+      ] as const) {
+        const composed = composeHour({
+          corpus: resolvedCorpus.index,
+          summary,
+          version: engine.version,
+          hour,
+          options: { languages: ['Latin'] }
+        });
+
+        expect(normalizeLatin(firstLineOfLastHymnStanza(composed)), `${date} ${hour} hymn doxology`).toBe(
+          normalizeLatin(firstLine)
+        );
+      }
+    }
+  }, 240_000);
+
   it('renders 1955 January minor-hour explicit antiphons with shortened openings and full closing repeats', async () => {
     const { engine, resolvedCorpus } = await createHarness('Reduced - 1955');
 
@@ -2084,6 +2110,45 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
           normalizeLatin(expected)
         );
       }
+    }
+  }, 240_000);
+
+  it('keeps the 1960 Tridentinum Paschal Prime antiphon on later Sundays', async () => {
+    const { engine, resolvedCorpus } = await createHarness('Rubrics 1960 - 1960');
+
+    for (const date of ['2024-06-16', '2024-06-30', '2024-09-08', '2024-09-15', '2024-10-06'] as const) {
+      const summary = engine.resolveDayOfficeSummary(date);
+      const composed = composeHour({
+        corpus: resolvedCorpus.index,
+        summary,
+        version: engine.version,
+        hour: 'prime',
+        options: { languages: ['Latin'] }
+      });
+
+      expect(normalizeLatin(firstPsalmodyAntiphon(composed)), `${date} Prime antiphon`).toBe(
+        normalizeLatin('Allelúja, * allelúja, allelúja')
+      );
+    }
+  }, 240_000);
+
+  it('emits the source-backed 1955 Vespers conclusion bridge after the collect', async () => {
+    const { engine, resolvedCorpus } = await createHarness('Reduced - 1955');
+
+    for (const date of ['2024-03-19', '2024-09-08', '2024-09-15', '2024-12-08', '2024-12-27'] as const) {
+      const summary = engine.resolveDayOfficeSummary(date);
+      const composed = composeHour({
+        corpus: resolvedCorpus.index,
+        summary,
+        version: engine.version,
+        hour: 'vespers',
+        options: { languages: ['Latin'] }
+      });
+
+      expect(sectionTexts(composed, 'conclusion').slice(0, 2), `${date} Vespers conclusion`).toEqual([
+        'Dómine, exáudi oratiónem meam.',
+        'Et clamor meus ad te véniat.'
+      ]);
     }
   }, 240_000);
 
