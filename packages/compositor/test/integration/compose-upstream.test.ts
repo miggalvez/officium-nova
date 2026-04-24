@@ -1911,6 +1911,34 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
     }
   }, 240_000);
 
+  it('renders Lenten ferial Vespers source-backed full opening antiphons', async () => {
+    const cases = [
+      ['2024-02-14', 'Beáti omnes * qui timent Dóminum.'],
+      ['2024-03-25', 'Inclinávit Dóminus * aurem suam mihi.'],
+      ['2024-03-26', 'Qui hábitas in cælis, * miserére nobis.'],
+      ['2024-03-27', 'Beáti omnes * qui timent Dóminum.']
+    ] as const;
+
+    for (const version of ['Reduced - 1955', 'Rubrics 1960 - 1960'] as const) {
+      const { engine, resolvedCorpus } = await createHarness(version);
+
+      for (const [date, expected] of cases) {
+        const summary = engine.resolveDayOfficeSummary(date);
+        const composed = composeHour({
+          corpus: resolvedCorpus.index,
+          summary,
+          version: engine.version,
+          hour: 'vespers',
+          options: { languages: ['Latin'] }
+        });
+
+        expect(normalizeLatin(firstPsalmodyAntiphon(composed)), `${version} ${date} Vespers antiphon`).toBe(
+          normalizeLatin(expected)
+        );
+      }
+    }
+  }, 240_000);
+
   it('keeps January Roman Vespers later-block headings on the source-backed proper and Psalm116 refs', async () => {
     for (const version of ['Reduced - 1955', 'Rubrics 1960 - 1960'] as const) {
       const { engine, resolvedCorpus } = await createHarness(version);

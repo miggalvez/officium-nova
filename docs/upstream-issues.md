@@ -24,6 +24,49 @@ entry here and re-run the adjudication harness.
 
 ## Current entries
 
+### 2026-04-24 — Roman Lenten Vespers opening antiphons are shortened or over-marked by the Perl render surface
+
+**Classification.** `perl-bug`
+
+**Summary.** Under the simplified Roman policies, several Lenten ferial
+Vespers rows expose source-backed full opening antiphons from
+`Psalmi major`. The Perl render surface either abbreviates those
+openings to incipits under `Reduced - 1955` or appends an unsupported
+trailing `‡` under `Rubrics 1960 - 1960`.
+
+**Primary source.**
+
+- `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:37`
+- `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:58`
+- `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:79`
+
+These weekday Vespers rows carry the full antiphons `Inclinávit
+Dóminus * aurem suam mihi.`, `Qui hábitas in cælis, * miserére nobis.`,
+and `Beáti omnes * qui timent Dóminum.`. None carries an additional
+trailing continuation marker after the complete antiphon.
+
+**Reproduction.**
+Run:
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --hour Vespers
+```
+
+Then inspect the affected Lenten Vespers rows. The compositor preserves
+the source-backed antiphons; Perl shortens or over-marks them.
+
+**Affected stable divergence-row keys.**
+
+| Policy | Date | Hour | Row key suffix |
+|---|---|---|---|
+| Reduced - 1955 | 2024-02-14 | Vespers | `55b74284` |
+| Reduced - 1955 | 2024-03-25 | Vespers | `96dd74f0` |
+| Reduced - 1955 | 2024-03-26 | Vespers | `19479180` |
+| Reduced - 1955 | 2024-03-27 | Vespers | `55b74284` |
+| Reduced - 1955 | 2024-11-05 | Vespers | `19479180` |
+| Rubrics 1960 - 1960 | 2024-02-14 | Vespers | `cc3c00d8` |
+| Rubrics 1960 - 1960 | 2024-03-27 | Vespers | `cc3c00d8` |
+
 ### 2026-04-24 — Reduced 1955 commemorated Lourdes doxology is carried into Quinquagesima Sunday hymns by the Perl render surface
 
 **Classification.** `perl-bug`

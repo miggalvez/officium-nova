@@ -6501,6 +6501,17 @@
     "resolvedAt": "2026-04-24",
     "commitSha": "4dd9d33"
   },
+  "Reduced - 1955/2024-02-14/Vespers/55b74284": {
+    "policy": "Reduced - 1955",
+    "date": "2024-02-14",
+    "hour": "Vespers",
+    "firstExpected": "Ant. Beáti omnes. ‡",
+    "firstActual": "Ant. Beáti omnes * qui timent Dóminum.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:79 — the weekday Vespers source row carries the full opening antiphon `Beáti omnes * qui timent Dóminum.` without an extra trailing continuation marker. The compositor preserves that corpus text; the Perl comparison surface abbreviates it to an incipit under Reduced 1955 and appends an unsupported trailing `‡` under Rubrics 1960.",
+    "notes": "Representative entry for the Roman Lenten ferial Vespers antiphon surface family where Perl abbreviates source-backed weekday Vespers openings or adds an unsupported trailing continuation marker.",
+    "resolvedAt": "2026-04-24"
+  },
   "Reduced - 1955/2024-02-18/Compline/5dc10d20": {
     "policy": "Reduced - 1955",
     "date": "2024-02-18",
@@ -7101,6 +7112,17 @@
     "resolvedAt": "2026-04-24",
     "commitSha": "895eada"
   },
+  "Reduced - 1955/2024-03-25/Vespers/96dd74f0": {
+    "policy": "Reduced - 1955",
+    "date": "2024-03-25",
+    "hour": "Vespers",
+    "firstExpected": "Ant. Inclinávit Dóminus.",
+    "firstActual": "Ant. Inclinávit Dóminus * aurem suam mihi.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:37 — the weekday Vespers source row carries the full opening antiphon `Inclinávit Dóminus * aurem suam mihi.`. The compositor preserves that corpus text; the Perl comparison surface abbreviates it to an incipit.",
+    "notes": "Representative entry for the Roman Lenten ferial Vespers antiphon surface family where Perl abbreviates source-backed weekday Vespers openings or adds an unsupported trailing continuation marker.",
+    "resolvedAt": "2026-04-24"
+  },
   "Reduced - 1955/2024-03-26/Compline/5dc10d20": {
     "policy": "Reduced - 1955",
     "date": "2024-03-26",
@@ -7172,6 +7194,17 @@
     "notes": "Representative entry for the Holy Week Quad5 minor-hour short-responsory separator family exposed by the fallback fix.",
     "resolvedAt": "2026-04-24",
     "commitSha": "895eada"
+  },
+  "Reduced - 1955/2024-03-26/Vespers/19479180": {
+    "policy": "Reduced - 1955",
+    "date": "2024-03-26",
+    "hour": "Vespers",
+    "firstExpected": "Ant. Qui hábitas in cælis.",
+    "firstActual": "Ant. Qui hábitas in cælis, * miserére nobis.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:58 — the weekday Vespers source row carries the full opening antiphon `Qui hábitas in cælis, * miserére nobis.`. The compositor preserves that corpus text; the Perl comparison surface abbreviates it to an incipit.",
+    "notes": "Representative entry for the Roman Lenten ferial Vespers antiphon surface family where Perl abbreviates source-backed weekday Vespers openings or adds an unsupported trailing continuation marker.",
+    "resolvedAt": "2026-04-24"
   },
   "Reduced - 1955/2024-03-27/Compline/5dc10d20": {
     "policy": "Reduced - 1955",
@@ -7256,6 +7289,17 @@
     "notes": "Representative entry for the Holy Week Quad5 minor-hour short-responsory separator family exposed by the fallback fix.",
     "resolvedAt": "2026-04-24",
     "commitSha": "895eada"
+  },
+  "Reduced - 1955/2024-03-27/Vespers/55b74284": {
+    "policy": "Reduced - 1955",
+    "date": "2024-03-27",
+    "hour": "Vespers",
+    "firstExpected": "Ant. Beáti omnes. ‡",
+    "firstActual": "Ant. Beáti omnes * qui timent Dóminum.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:79 — the weekday Vespers source row carries the full opening antiphon `Beáti omnes * qui timent Dóminum.` without an extra trailing continuation marker. The compositor preserves that corpus text; the Perl comparison surface abbreviates it to an incipit under Reduced 1955 and appends an unsupported trailing `‡` under Rubrics 1960.",
+    "notes": "Representative entry for the Roman Lenten ferial Vespers antiphon surface family where Perl abbreviates source-backed weekday Vespers openings or adds an unsupported trailing continuation marker.",
+    "resolvedAt": "2026-04-24"
   },
   "Reduced - 1955/2024-03-28/Compline/fa4d64f6": {
     "policy": "Reduced - 1955",
@@ -8685,6 +8729,17 @@
     "resolvedAt": "2026-04-24",
     "commitSha": "4dd9d33"
   },
+  "Reduced - 1955/2024-11-05/Vespers/19479180": {
+    "policy": "Reduced - 1955",
+    "date": "2024-11-05",
+    "hour": "Vespers",
+    "firstExpected": "Ant. Qui hábitas in cælis.",
+    "firstActual": "Ant. Qui hábitas in cælis, * miserére nobis.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:58 — the weekday Vespers source row carries the full opening antiphon `Qui hábitas in cælis, * miserére nobis.`. The compositor preserves that corpus text; the Perl comparison surface abbreviates it to an incipit.",
+    "notes": "Representative entry for the Roman Lenten ferial Vespers antiphon surface family where Perl abbreviates source-backed weekday Vespers openings or adds an unsupported trailing continuation marker.",
+    "resolvedAt": "2026-04-24"
+  },
   "Reduced - 1955/2024-11-08/Compline/5dc10d20": {
     "policy": "Reduced - 1955",
     "date": "2024-11-08",
@@ -10017,6 +10072,17 @@
     "resolvedAt": "2026-04-24",
     "commitSha": "4dd9d33"
   },
+  "Rubrics 1960 - 1960/2024-02-14/Vespers/cc3c00d8": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-02-14",
+    "hour": "Vespers",
+    "firstExpected": "Ant. Beáti omnes * qui timent Dóminum. ‡",
+    "firstActual": "Ant. Beáti omnes * qui timent Dóminum.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:79 — the weekday Vespers source row carries the full opening antiphon `Beáti omnes * qui timent Dóminum.` without an extra trailing continuation marker. The compositor preserves that corpus text; the Perl comparison surface abbreviates it to an incipit under Reduced 1955 and appends an unsupported trailing `‡` under Rubrics 1960.",
+    "notes": "Representative entry for the Roman Lenten ferial Vespers antiphon surface family where Perl abbreviates source-backed weekday Vespers openings or adds an unsupported trailing continuation marker.",
+    "resolvedAt": "2026-04-24"
+  },
   "Rubrics 1960 - 1960/2024-02-18/Compline/57de2841": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2024-02-18",
@@ -10820,6 +10886,17 @@
     "notes": "Representative entry for the Holy Week Quad5 minor-hour short-responsory separator family exposed by the fallback fix.",
     "resolvedAt": "2026-04-24",
     "commitSha": "895eada"
+  },
+  "Rubrics 1960 - 1960/2024-03-27/Vespers/cc3c00d8": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-03-27",
+    "hour": "Vespers",
+    "firstExpected": "Ant. Beáti omnes * qui timent Dóminum. ‡",
+    "firstActual": "Ant. Beáti omnes * qui timent Dóminum.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:79 — the weekday Vespers source row carries the full opening antiphon `Beáti omnes * qui timent Dóminum.` without an extra trailing continuation marker. The compositor preserves that corpus text; the Perl comparison surface abbreviates it to an incipit under Reduced 1955 and appends an unsupported trailing `‡` under Rubrics 1960.",
+    "notes": "Representative entry for the Roman Lenten ferial Vespers antiphon surface family where Perl abbreviates source-backed weekday Vespers openings or adds an unsupported trailing continuation marker.",
+    "resolvedAt": "2026-04-24"
   },
   "Rubrics 1960 - 1960/2024-03-28/Compline/fa4d64f6": {
     "policy": "Rubrics 1960 - 1960",

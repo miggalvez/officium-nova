@@ -2573,6 +2573,37 @@ both simplified Roman policies. The residual first divergence on those
 rows is explicitly classified as the same source-backed short-responsory
 separator issue handled in earlier tranches.
 
+### 2026-04-24 — Pattern: Roman Lenten Vespers opening antiphon surface is shortened or over-marked by Perl (perl-bug)
+
+**Commit.** pending
+
+**Ledger signal.** The next visible Vespers rows on Ash Wednesday and
+Holy Week Monday through Wednesday show the compositor preserving full
+weekday Vespers antiphons such as `Beáti omnes * qui timent Dóminum.`
+and `Inclinávit Dóminus * aurem suam mihi.`, while Perl either shortens
+the same row to an incipit under `Reduced - 1955` or appends an
+unsupported trailing `‡` under `Rubrics 1960 - 1960`.
+
+**Root cause.** The Phase 2 refs and Phase 3 emission are source-backed.
+The owning `Psalmi major` weekday rows carry the full antiphon text and
+do not carry a trailing continuation marker after the complete antiphon.
+
+**Resolution.** Class `perl-bug`. Added a focused upstream integration
+regression for the exposed Lenten ferial Vespers openings, then added
+representative adjudications for the Reduced 1955 incipit rows and the
+Rubrics 1960 unsupported-marker rows. `adjudications:fanout` propagated
+the matching `Qui hábitas...` signature to a later weekday row.
+
+**Citation.**
+
+- `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:37`
+- `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:58`
+- `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:79`
+
+**Impact.** Seven source-backed Vespers rows are now classified as Perl
+render-surface bugs, narrowing the Roman Vespers frontier without
+changing compositor behavior.
+
 ### Open pattern backlog
 
 The following families remain open and have not yet received their own
