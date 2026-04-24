@@ -2573,6 +2573,161 @@ both simplified Roman policies. The residual first divergence on those
 rows is explicitly classified as the same source-backed short-responsory
 separator issue handled in earlier tranches.
 
+### 2026-04-24 — Pattern: Roman Lenten Vespers opening antiphon surface is shortened or over-marked by Perl (perl-bug)
+
+**Commit.** `0b6eac7`
+
+**Ledger signal.** The next visible Vespers rows on Ash Wednesday and
+Holy Week Monday through Wednesday show the compositor preserving full
+weekday Vespers antiphons such as `Beáti omnes * qui timent Dóminum.`
+and `Inclinávit Dóminus * aurem suam mihi.`, while Perl either shortens
+the same row to an incipit under `Reduced - 1955` or appends an
+unsupported trailing `‡` under `Rubrics 1960 - 1960`.
+
+**Root cause.** The Phase 2 refs and Phase 3 emission are source-backed.
+The owning `Psalmi major` weekday rows carry the full antiphon text and
+do not carry a trailing continuation marker after the complete antiphon.
+
+**Resolution.** Class `perl-bug`. Added a focused upstream integration
+regression for the exposed Lenten ferial Vespers openings, then added
+representative adjudications for the Reduced 1955 incipit rows and the
+Rubrics 1960 unsupported-marker rows. `adjudications:fanout` propagated
+the matching `Qui hábitas...` signature to a later weekday row.
+
+**Citation.**
+
+- `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:37`
+- `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:58`
+- `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:79`
+
+**Impact.** Seven source-backed Vespers rows are now classified as Perl
+render-surface bugs, narrowing the Roman Vespers frontier without
+changing compositor behavior.
+
+### 2026-04-24 — Pattern: St Joseph proper minor-hour later blocks are skipped by Perl (perl-bug)
+
+**Commit.** `a5a065c`
+
+**Ledger signal.** On Mar `19`, both simplified Roman policies first
+diverge in Prime when Perl keeps the weekday `1 Tim. 1:17` citation
+instead of the St Joseph `Sap 10:10` lesson. Terce, Sext, and None then
+diverge at Perl's `_` separator where the compositor emits the office's
+proper short responsories.
+
+**Root cause.** The St Joseph office has explicit minor-hour later-block
+material: `[Lectio Prima]`, `[Responsory Breve Tertia]`,
+`[Capitulum Sexta]`, `[Responsory Breve Sexta]`, `[Capitulum Nona]`,
+`[Responsory Breve Nona]`, and the matching versicles. The compositor
+emits those source-backed sections; Perl's rendered comparison surface
+does not.
+
+**Resolution.** Class `perl-bug`. Added an upstream integration
+regression for the St Joseph Prime and Terce/Sext/None later blocks,
+then recorded the eight simplified Roman row adjudications in
+`adjudications.json`.
+
+**Citation.**
+
+- `upstream/web/www/horas/Latin/Sancti/03-19.txt:261-274`
+- `upstream/web/www/horas/Latin/Sancti/03-19.txt:276-290`
+- `upstream/web/www/horas/Latin/Sancti/03-19.txt:292-306`
+
+**Impact.** Eight proper-feast minor-hour rows are now classified as
+source-backed Perl render-surface bugs.
+
+### 2026-04-24 — Pattern: Nativity of St John the Baptist proper minor-hour later blocks are skipped by Perl (perl-bug)
+
+**Commit.** `72166fd`
+
+**Ledger signal.** On Jun `24`, both simplified Roman policies first
+diverge in Prime when Perl keeps the weekday `1 Tim. 1:17` citation
+instead of the Nativity office's `Isa 49:7` lesson. Terce, Sext, and
+None then diverge at Perl's `_` separator where the compositor emits the
+office's proper short responsories.
+
+**Root cause.** The Nativity of St John the Baptist office has explicit
+minor-hour later-block material: `[Lectio Prima]`,
+`[Responsory Breve Tertia]`, `[Capitulum Sexta]`,
+`[Responsory Breve Sexta]`, `[Capitulum Nona]`,
+`[Responsory Breve Nona]`, and the matching versicles. The compositor
+emits those source-backed sections; Perl's rendered comparison surface
+does not.
+
+**Resolution.** Class `perl-bug`. Added an upstream integration
+regression for the Nativity Prime and Terce/Sext/None later blocks,
+then recorded the eight simplified Roman row adjudications in
+`adjudications.json`.
+
+**Citation.**
+
+- `upstream/web/www/horas/Latin/Sancti/06-24.txt:332-345`
+- `upstream/web/www/horas/Latin/Sancti/06-24.txt:347-361`
+- `upstream/web/www/horas/Latin/Sancti/06-24.txt:363-376`
+
+**Impact.** Eight more proper-feast minor-hour rows are now classified
+as source-backed Perl render-surface bugs.
+
+### 2026-04-24 — Pattern: Ss Peter and Paul proper minor-hour later blocks are skipped by Perl (perl-bug)
+
+**Commit.** `81889c1`
+
+**Ledger signal.** On Jun `29`, both simplified Roman policies first
+diverge in Prime when Perl keeps the weekday `1 Tim. 1:17` citation
+instead of the Ss Peter and Paul `Act 12:11` lesson. Terce, Sext, and
+None then diverge at Perl's `_` separator where the compositor emits the
+apostle common's proper short responsories.
+
+**Root cause.** The Ss Peter and Paul office has explicit minor-hour
+later-block material: a proper `[Lectio Prima]`, proper Sext/None
+chapters, and inherited apostle-common `[Responsory Breve Tertia]`,
+`[Responsory Breve Sexta]`, `[Responsory Breve Nona]`, and matching
+versicles. The compositor emits those source-backed sections; Perl's
+rendered comparison surface does not.
+
+**Resolution.** Class `perl-bug`. Added an upstream integration
+regression for the Ss Peter and Paul Prime and Terce/Sext/None later
+blocks, then recorded the eight simplified Roman row adjudications in
+`adjudications.json`.
+
+**Citation.**
+
+- `upstream/web/www/horas/Latin/Sancti/06-29.txt:265-276`
+- `upstream/web/www/horas/Latin/Commune/C1.txt:286-317`
+
+**Impact.** Eight more proper-feast minor-hour rows are now classified
+as source-backed Perl render-surface bugs.
+
+### 2026-04-24 — Pattern: Precious Blood proper minor-hour later blocks are skipped by Perl (perl-bug)
+
+**Commit.** `38773c0`
+
+**Ledger signal.** On Jul `1`, both simplified Roman policies first
+diverge in Prime when Perl keeps the weekday `1 Tim. 1:17` citation
+instead of the Precious Blood office's `Heb 9:19-20` lesson. Terce,
+Sext, and None then diverge at Perl's `_` separator where the compositor
+emits the office's proper short responsories.
+
+**Root cause.** The Precious Blood office has explicit minor-hour
+later-block material: `[Lectio Prima]`, `[Responsory Breve Tertia]`,
+`[Capitulum Sexta]`, `[Responsory Breve Sexta]`, `[Capitulum Nona]`,
+`[Responsory Breve Nona]`, and the matching versicles. The compositor
+emits those source-backed sections; Perl's rendered comparison surface
+does not.
+
+**Resolution.** Class `perl-bug`. Added an upstream integration
+regression for the Precious Blood Prime and Terce/Sext/None later
+blocks, then recorded the eight simplified Roman row adjudications in
+`adjudications.json`.
+
+**Citation.**
+
+- `upstream/web/www/horas/Latin/Sancti/07-01.txt:369-385`
+- `upstream/web/www/horas/Latin/Sancti/07-01.txt:387-401`
+- `upstream/web/www/horas/Latin/Sancti/07-01.txt:403-416`
+
+**Impact.** Eight more proper-feast minor-hour rows are now classified
+as source-backed Perl render-surface bugs.
+
 ### Open pattern backlog
 
 The following families remain open and have not yet received their own

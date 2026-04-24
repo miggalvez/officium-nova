@@ -1719,6 +1719,154 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
     }
   }, 240_000);
 
+  it('renders St Joseph proper minor-hour later blocks from the office source', async () => {
+    for (const version of ['Reduced - 1955', 'Rubrics 1960 - 1960'] as const) {
+      const { engine, resolvedCorpus } = await createHarness(version);
+      const summary = engine.resolveDayOfficeSummary('2024-03-19');
+
+      const prime = composeHour({
+        corpus: resolvedCorpus.index,
+        summary,
+        version: engine.version,
+        hour: 'prime',
+        options: { languages: ['Latin'] }
+      });
+      expect(sectionTexts(prime, 'chapter').map((line) => normalizeLatin(line).trim()), `${version} Prime chapter`).toContain(
+        normalizeLatin('Sap 10:10')
+      );
+
+      for (const [hour, expected] of [
+        ['terce', 'Constítuit eum * Dóminum domus suæ.'],
+        ['sext', 'Magna est glória ejus * In salutári tuo.'],
+        ['none', 'Justus germinábit * Sicut lílium.']
+      ] as const) {
+        const composed = composeHour({
+          corpus: resolvedCorpus.index,
+          summary,
+          version: engine.version,
+          hour,
+          options: { languages: ['Latin'] }
+        });
+
+        const responsory = firstMarkedSectionLine(composed, 'responsory', 'R.br.');
+        expect(normalizeLatin(renderLatinText(responsory)), `${version} ${hour} responsory`).toBe(
+          normalizeLatin(expected)
+        );
+      }
+    }
+  }, 240_000);
+
+  it('renders the Nativity of St John the Baptist proper minor-hour later blocks from the office source', async () => {
+    for (const version of ['Reduced - 1955', 'Rubrics 1960 - 1960'] as const) {
+      const { engine, resolvedCorpus } = await createHarness(version);
+      const summary = engine.resolveDayOfficeSummary('2024-06-24');
+
+      const prime = composeHour({
+        corpus: resolvedCorpus.index,
+        summary,
+        version: engine.version,
+        hour: 'prime',
+        options: { languages: ['Latin'] }
+      });
+      expect(sectionTexts(prime, 'chapter').map((line) => normalizeLatin(line).trim()), `${version} Prime chapter`).toContain(
+        normalizeLatin('Isa 49:7')
+      );
+
+      for (const [hour, expected] of [
+        ['terce', 'Fuit homo * Missus a Deo.'],
+        ['sext', 'Inter natos mulíerum * Non surréxit major.'],
+        ['none', 'Elísabeth Zacharíæ * Magnum virum génuit.']
+      ] as const) {
+        const composed = composeHour({
+          corpus: resolvedCorpus.index,
+          summary,
+          version: engine.version,
+          hour,
+          options: { languages: ['Latin'] }
+        });
+
+        const responsory = firstMarkedSectionLine(composed, 'responsory', 'R.br.');
+        expect(normalizeLatin(renderLatinText(responsory)), `${version} ${hour} responsory`).toBe(
+          normalizeLatin(expected)
+        );
+      }
+    }
+  }, 240_000);
+
+  it('renders Ss Peter and Paul proper minor-hour later blocks from the office source', async () => {
+    for (const version of ['Reduced - 1955', 'Rubrics 1960 - 1960'] as const) {
+      const { engine, resolvedCorpus } = await createHarness(version);
+      const summary = engine.resolveDayOfficeSummary('2024-06-29');
+
+      const prime = composeHour({
+        corpus: resolvedCorpus.index,
+        summary,
+        version: engine.version,
+        hour: 'prime',
+        options: { languages: ['Latin'] }
+      });
+      expect(sectionTexts(prime, 'chapter').map((line) => normalizeLatin(line).trim()), `${version} Prime chapter`).toContain(
+        normalizeLatin('Act 12:11')
+      );
+
+      for (const [hour, expected] of [
+        ['terce', 'In omnem terram * Exívit sonus eórum.'],
+        ['sext', 'Constítues eos príncipes * Super omnem terram.'],
+        ['none', 'Nimis honoráti sunt * Amíci tui, Deus.']
+      ] as const) {
+        const composed = composeHour({
+          corpus: resolvedCorpus.index,
+          summary,
+          version: engine.version,
+          hour,
+          options: { languages: ['Latin'] }
+        });
+
+        const responsory = firstMarkedSectionLine(composed, 'responsory', 'R.br.');
+        expect(normalizeLatin(renderLatinText(responsory)), `${version} ${hour} responsory`).toBe(
+          normalizeLatin(expected)
+        );
+      }
+    }
+  }, 240_000);
+
+  it('renders Precious Blood proper minor-hour later blocks from the office source', async () => {
+    for (const version of ['Reduced - 1955', 'Rubrics 1960 - 1960'] as const) {
+      const { engine, resolvedCorpus } = await createHarness(version);
+      const summary = engine.resolveDayOfficeSummary('2024-07-01');
+
+      const prime = composeHour({
+        corpus: resolvedCorpus.index,
+        summary,
+        version: engine.version,
+        hour: 'prime',
+        options: { languages: ['Latin'] }
+      });
+      expect(sectionTexts(prime, 'chapter').map((line) => normalizeLatin(line).trim()), `${version} Prime chapter`).toContain(
+        normalizeLatin('Heb 9:19-20')
+      );
+
+      for (const [hour, expected] of [
+        ['terce', 'Redemísti nos, Dómine, * In sánguine tuo.'],
+        ['sext', 'Sanguis Jesu Christi Fílii Dei * Emúndat nos.'],
+        ['none', 'Christus diléxit nos, et lavit nos * In sánguine suo.']
+      ] as const) {
+        const composed = composeHour({
+          corpus: resolvedCorpus.index,
+          summary,
+          version: engine.version,
+          hour,
+          options: { languages: ['Latin'] }
+        });
+
+        const responsory = firstMarkedSectionLine(composed, 'responsory', 'R.br.');
+        expect(normalizeLatin(renderLatinText(responsory)), `${version} ${hour} responsory`).toBe(
+          normalizeLatin(expected)
+        );
+      }
+    }
+  }, 240_000);
+
   it('renders Jan 14 Sunday Tridentinum minor-hour antiphons from the keyed psalter surface', async () => {
     for (const [version, expectations] of [
       [
@@ -1908,6 +2056,34 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
       expect(normalizeLatin(firstPsalmodyAntiphon(composed)), `${date} Lauds opening antiphon`).toBe(
         normalizeLatin(expected)
       );
+    }
+  }, 240_000);
+
+  it('renders Lenten ferial Vespers source-backed full opening antiphons', async () => {
+    const cases = [
+      ['2024-02-14', 'Beáti omnes * qui timent Dóminum.'],
+      ['2024-03-25', 'Inclinávit Dóminus * aurem suam mihi.'],
+      ['2024-03-26', 'Qui hábitas in cælis, * miserére nobis.'],
+      ['2024-03-27', 'Beáti omnes * qui timent Dóminum.']
+    ] as const;
+
+    for (const version of ['Reduced - 1955', 'Rubrics 1960 - 1960'] as const) {
+      const { engine, resolvedCorpus } = await createHarness(version);
+
+      for (const [date, expected] of cases) {
+        const summary = engine.resolveDayOfficeSummary(date);
+        const composed = composeHour({
+          corpus: resolvedCorpus.index,
+          summary,
+          version: engine.version,
+          hour: 'vespers',
+          options: { languages: ['Latin'] }
+        });
+
+        expect(normalizeLatin(firstPsalmodyAntiphon(composed)), `${version} ${date} Vespers antiphon`).toBe(
+          normalizeLatin(expected)
+        );
+      }
     }
   }, 240_000);
 
@@ -2143,6 +2319,7 @@ function firstPsalmodyAntiphon(
 ): string {
   const antiphonLine = psalmodyAntiphonLines(composed)[0];
   expect(antiphonLine, `${composed.hour} is missing the opening antiphon line`).toBeDefined();
+  expect(antiphonLine?.marker, `${composed.hour} opening antiphon marker`).toBe('Ant.');
   return antiphonLine ? renderLatinText(antiphonLine) : '';
 }
 
@@ -2176,6 +2353,18 @@ function sectionTexts(
   const section = composed.sections.find((candidate) => candidate.slot === slot);
   expect(section, `${composed.hour} is missing the ${slot} section`).toBeDefined();
   return section?.lines.map(renderLatinText).filter((line) => line !== '_') ?? [];
+}
+
+function firstMarkedSectionLine(
+  composed: ReturnType<typeof composeHour>,
+  slot: 'responsory',
+  marker: 'R.br.'
+) {
+  const section = composed.sections.find((candidate) => candidate.slot === slot);
+  expect(section, `${composed.hour} is missing the ${slot} section`).toBeDefined();
+  const line = section?.lines.find((candidate) => candidate.marker === marker);
+  expect(line, `${composed.hour} ${slot} is missing ${marker} marker`).toBeDefined();
+  return line!;
 }
 
 function psalmodyAntiphonLines(

@@ -24,6 +24,218 @@ entry here and re-run the adjudication harness.
 
 ## Current entries
 
+### 2026-04-24 — Roman Precious Blood minor-hour proper later blocks are skipped by the Perl render surface
+
+**Classification.** `perl-bug`
+
+**Summary.** Under both simplified Roman policies on Jul `1`, the
+compositor emits the Precious Blood office's source-backed Prime lesson
+and Terce/Sext/None short-responsory later blocks from `Sancti/07-01`.
+The Perl render surface keeps the weekday Prime citation `1 Tim. 1:17`
+and leaves `_` at the first divergence for Terce, Sext, and None.
+
+**Primary source.**
+
+- `upstream/web/www/horas/Latin/Sancti/07-01.txt:369-385`
+- `upstream/web/www/horas/Latin/Sancti/07-01.txt:387-401`
+- `upstream/web/www/horas/Latin/Sancti/07-01.txt:403-416`
+
+These sections explicitly provide `[Lectio Prima]`, the proper short
+responsories, and the matching versicles.
+
+**Reproduction.**
+Run:
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --date 2024-07-01
+```
+
+Then inspect Prime, Terce, Sext, and None for `Reduced - 1955` and
+`Rubrics 1960 - 1960`.
+
+**Affected stable divergence-row keys.**
+
+| Policy | Date | Hour | Row key suffix |
+|---|---|---|---|
+| Reduced - 1955 | 2024-07-01 | Prime | `cb113d79` |
+| Reduced - 1955 | 2024-07-01 | Terce | `314c39f4` |
+| Reduced - 1955 | 2024-07-01 | Sext | `71abd048` |
+| Reduced - 1955 | 2024-07-01 | None | `3032e01a` |
+| Rubrics 1960 - 1960 | 2024-07-01 | Prime | `cb113d79` |
+| Rubrics 1960 - 1960 | 2024-07-01 | Terce | `314c39f4` |
+| Rubrics 1960 - 1960 | 2024-07-01 | Sext | `71abd048` |
+| Rubrics 1960 - 1960 | 2024-07-01 | None | `3032e01a` |
+
+### 2026-04-24 — Roman Ss Peter and Paul minor-hour proper later blocks are skipped by the Perl render surface
+
+**Classification.** `perl-bug`
+
+**Summary.** Under both simplified Roman policies on Jun `29`, the
+compositor emits Ss Peter and Paul's source-backed Prime lesson and
+Terce/Sext/None short-responsory later blocks from `Sancti/06-29` and
+the apostle common. The Perl render surface keeps the weekday Prime
+citation `1 Tim. 1:17` and leaves `_` at the first divergence for
+Terce, Sext, and None.
+
+**Primary source.**
+
+- `upstream/web/www/horas/Latin/Sancti/06-29.txt:265-276`
+- `upstream/web/www/horas/Latin/Commune/C1.txt:286-317`
+
+These sections explicitly provide `[Lectio Prima]`, the proper/common
+short responsories, and the matching versicles.
+
+**Reproduction.**
+Run:
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --date 2024-06-29
+```
+
+Then inspect Prime, Terce, Sext, and None for `Reduced - 1955` and
+`Rubrics 1960 - 1960`.
+
+**Affected stable divergence-row keys.**
+
+| Policy | Date | Hour | Row key suffix |
+|---|---|---|---|
+| Reduced - 1955 | 2024-06-29 | Prime | `4e634936` |
+| Reduced - 1955 | 2024-06-29 | Terce | `a05eee1c` |
+| Reduced - 1955 | 2024-06-29 | Sext | `5e6c5f39` |
+| Reduced - 1955 | 2024-06-29 | None | `623717e4` |
+| Rubrics 1960 - 1960 | 2024-06-29 | Prime | `4e634936` |
+| Rubrics 1960 - 1960 | 2024-06-29 | Terce | `a05eee1c` |
+| Rubrics 1960 - 1960 | 2024-06-29 | Sext | `5e6c5f39` |
+| Rubrics 1960 - 1960 | 2024-06-29 | None | `623717e4` |
+
+### 2026-04-24 — Roman Nativity of St John the Baptist minor-hour proper later blocks are skipped by the Perl render surface
+
+**Classification.** `perl-bug`
+
+**Summary.** Under both simplified Roman policies on Jun `24`, the
+compositor emits the Nativity of St John the Baptist's source-backed
+Prime lesson and Terce/Sext/None short-responsory later blocks from
+`Sancti/06-24`. The Perl render surface keeps the weekday Prime citation
+`1 Tim. 1:17` and leaves `_` at the first divergence for Terce, Sext,
+and None.
+
+**Primary source.**
+
+- `upstream/web/www/horas/Latin/Sancti/06-24.txt:332-345`
+- `upstream/web/www/horas/Latin/Sancti/06-24.txt:347-361`
+- `upstream/web/www/horas/Latin/Sancti/06-24.txt:363-376`
+
+These sections explicitly provide `[Lectio Prima]`, the proper short
+responsories, and the matching versicles.
+
+**Reproduction.**
+Run:
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --date 2024-06-24
+```
+
+Then inspect Prime, Terce, Sext, and None for `Reduced - 1955` and
+`Rubrics 1960 - 1960`.
+
+**Affected stable divergence-row keys.**
+
+| Policy | Date | Hour | Row key suffix |
+|---|---|---|---|
+| Reduced - 1955 | 2024-06-24 | Prime | `5ab1fcd3` |
+| Reduced - 1955 | 2024-06-24 | Terce | `cfa0892a` |
+| Reduced - 1955 | 2024-06-24 | Sext | `5c546e7a` |
+| Reduced - 1955 | 2024-06-24 | None | `070067f2` |
+| Rubrics 1960 - 1960 | 2024-06-24 | Prime | `5ab1fcd3` |
+| Rubrics 1960 - 1960 | 2024-06-24 | Terce | `cfa0892a` |
+| Rubrics 1960 - 1960 | 2024-06-24 | Sext | `5c546e7a` |
+| Rubrics 1960 - 1960 | 2024-06-24 | None | `070067f2` |
+
+### 2026-04-24 — Roman St Joseph minor-hour proper later blocks are skipped by the Perl render surface
+
+**Classification.** `perl-bug`
+
+**Summary.** Under both simplified Roman policies on Mar `19`, the
+compositor emits St Joseph's source-backed Prime lesson and
+Terce/Sext/None short-responsory later blocks from `Sancti/03-19`.
+The Perl render surface keeps the weekday Prime citation `1 Tim. 1:17`
+and leaves `_` at the first divergence for Terce, Sext, and None.
+
+**Primary source.**
+
+- `upstream/web/www/horas/Latin/Sancti/03-19.txt:261-274`
+- `upstream/web/www/horas/Latin/Sancti/03-19.txt:276-290`
+- `upstream/web/www/horas/Latin/Sancti/03-19.txt:292-306`
+
+These sections explicitly provide `[Lectio Prima]`, the proper short
+responsories, and the matching versicles.
+
+**Reproduction.**
+Run:
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --date 2024-03-19
+```
+
+Then inspect Prime, Terce, Sext, and None for `Reduced - 1955` and
+`Rubrics 1960 - 1960`.
+
+**Affected stable divergence-row keys.**
+
+| Policy | Date | Hour | Row key suffix |
+|---|---|---|---|
+| Reduced - 1955 | 2024-03-19 | Prime | `5c63239e` |
+| Reduced - 1955 | 2024-03-19 | Terce | `b7f4a70f` |
+| Reduced - 1955 | 2024-03-19 | Sext | `4da84a30` |
+| Reduced - 1955 | 2024-03-19 | None | `80a4cecd` |
+| Rubrics 1960 - 1960 | 2024-03-19 | Prime | `5c63239e` |
+| Rubrics 1960 - 1960 | 2024-03-19 | Terce | `b7f4a70f` |
+| Rubrics 1960 - 1960 | 2024-03-19 | Sext | `4da84a30` |
+| Rubrics 1960 - 1960 | 2024-03-19 | None | `80a4cecd` |
+
+### 2026-04-24 — Roman Lenten Vespers opening antiphons are shortened or over-marked by the Perl render surface
+
+**Classification.** `perl-bug`
+
+**Summary.** Under the simplified Roman policies, several Lenten ferial
+Vespers rows expose source-backed full opening antiphons from
+`Psalmi major`. The Perl render surface either abbreviates those
+openings to incipits under `Reduced - 1955` or appends an unsupported
+trailing `‡` under `Rubrics 1960 - 1960`.
+
+**Primary source.**
+
+- `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:37`
+- `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:58`
+- `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:79`
+
+These weekday Vespers rows carry the full antiphons `Inclinávit
+Dóminus * aurem suam mihi.`, `Qui hábitas in cælis, * miserére nobis.`,
+and `Beáti omnes * qui timent Dóminum.`. None carries an additional
+trailing continuation marker after the complete antiphon.
+
+**Reproduction.**
+Run:
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --hour Vespers
+```
+
+Then inspect the affected Lenten Vespers rows. The compositor preserves
+the source-backed antiphons; Perl shortens or over-marks them.
+
+**Affected stable divergence-row keys.**
+
+| Policy | Date | Hour | Row key suffix |
+|---|---|---|---|
+| Reduced - 1955 | 2024-02-14 | Vespers | `55b74284` |
+| Reduced - 1955 | 2024-03-25 | Vespers | `96dd74f0` |
+| Reduced - 1955 | 2024-03-26 | Vespers | `19479180` |
+| Reduced - 1955 | 2024-03-27 | Vespers | `55b74284` |
+| Reduced - 1955 | 2024-11-05 | Vespers | `19479180` |
+| Rubrics 1960 - 1960 | 2024-02-14 | Vespers | `cc3c00d8` |
+| Rubrics 1960 - 1960 | 2024-03-27 | Vespers | `cc3c00d8` |
+
 ### 2026-04-24 — Reduced 1955 commemorated Lourdes doxology is carried into Quinquagesima Sunday hymns by the Perl render surface
 
 **Classification.** `perl-bug`
