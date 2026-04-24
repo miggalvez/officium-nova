@@ -14,6 +14,15 @@ The `@officium-novum/compositor` package turns a `DayOfficeSummary` + Phase-1-re
 
 Newest tranche first:
 
+- **2026-04-24.** Closed the next shared Roman source-backed `perl-bug`
+  adjudication sweep without changing compositor behavior. Focused upstream
+  regressions now lock Lenten ferial Vespers opening antiphons and the
+  proper-feast minor-hour later blocks for St Joseph, the Nativity of St John
+  the Baptist, Ss Peter and Paul, and the Precious Blood. `adjudications.json`,
+  `ADJUDICATION_LOG.md`, and `docs/upstream-issues.md` now classify those
+  1955/1960 rows as Perl render-surface bugs where the corpus supplies full
+  antiphons, proper Prime lessons, or `R.br.` short-responsory blocks but the
+  Perl comparison surface abbreviates, over-marks, or leaves `_`.
 - **2026-04-24.** Closed the Roman Ascension Vespers conclusion alleluia seam in Phase 3. The 1955/1960 major-hour conclusion wrapper now uses `Benedicamus Domino1` only during the Easter octave (`Pasc0-*`), matching the legacy helper's Roman scope, so Ascension Vespers returns to the ordinary `Benedicámus Dómino.` while Easter-octave Vespers keeps the double-alleluia dismissal.
 - **2026-04-24.** Closed the Paschaltide minor-hour short-responsory underscore family as a source-backed Perl-render adjudication. Ascension and Pentecost source files explicitly carry the `R.br.` responsory blocks for Terce/Sext/None; the compositor keeps those source-backed later blocks while Perl's rendered comparison surface leaves `_` at the first divergence. `adjudications.json` now classifies the exposed Reduced 1955 Ascension Terce/Sext/None rows and Rubrics 1960 Pentecost Sext/None rows.
 - **2026-04-24.** Closed the Paschaltide bare `Deo grátias` chapter-response seam in Phase 3. The ordinary `$Deo gratias` macro from `Common/Prayers` remains unseasoned under the chapter `add-alleluia` transform, matching the source and Perl's explicit `Deo gratias` bypass while leaving explicit Paschaltide dismissal sections such as `Benedicamus Domino1` untouched. The targeted Ascension / Pentecost reduced-1955 and 1960 probes now advance past `R. Deo grátias.` to the next short-responsory, hymn-doxology, or conclusion seams.
