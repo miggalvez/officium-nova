@@ -658,22 +658,21 @@ function extractTriduumPrayerPrelude(content: readonly TextContent[]): readonly 
       continue;
     }
 
-    const firstVerse = node.content.find((item) => item.type === 'verseMarker');
-    if (
-      firstVerse?.type !== 'verseMarker' ||
-      !firstVerse.text.includes('Christus factus est pro nobis')
-    ) {
+    const psalmIndex = node.content.findIndex((item) => item.type === 'psalmInclude');
+    const prelude = node.content.slice(0, psalmIndex >= 0 ? psalmIndex : node.content.length);
+    const hasVerse = prelude.some((item) => item.type === 'verseMarker');
+    const hasPater = prelude.some(
+      (item) => item.type === 'formulaRef' && item.name === 'Pater noster'
+    );
+    if (!hasVerse || !hasPater) {
       continue;
     }
 
-    const prelude: TextContent[] = [];
-    for (const item of node.content) {
-      if (item.type === 'separator' || item.type === 'psalmInclude') {
-        break;
-      }
-      prelude.push(item);
+    let end = prelude.length;
+    while (prelude[end - 1]?.type === 'separator') {
+      end--;
     }
-    return prelude;
+    return prelude.slice(0, end);
   }
 
   return [];

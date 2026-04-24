@@ -325,7 +325,10 @@ function normalizeContractedMarkerText(text: string): string {
 }
 
 function normalizeRubricText(text: string): string {
-  return text.replace('secunda «Domine, exaudi» omittitur', 'secunda Domine, exaudi omittitur');
+  return text.replace(
+    /sec(?:u|ú)nda\s+«D(?:o|ó)mine,\s+ex(?:a|á)udi»\s+omittitur/giu,
+    'secunda Domine, exaudi omittitur'
+  );
 }
 
 function renderGabcHeaderText(
