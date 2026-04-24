@@ -982,14 +982,17 @@ function seasonalFallbackDoxologyVariant(
   temporal: TemporalContext
 ): string | undefined {
   const dayName = temporal.dayName;
-  const dayOfMonth = Number.parseInt(temporal.date.slice(-2), 10);
 
   if (/^Nat/iu.test(dayName)) {
+    const dayOfMonth = Number.parseInt(temporal.date.slice(-2), 10);
     return dayOfMonth >= 6 && dayOfMonth < 13 ? 'Epi' : 'Nat';
   }
 
-  if (/^Epi[01]/iu.test(dayName) && dayOfMonth < 14) {
-    return 'Epi';
+  if (/^Epi[01]/iu.test(dayName)) {
+    const dayOfMonth = Number.parseInt(temporal.date.slice(-2), 10);
+    if (dayOfMonth < 14) {
+      return 'Epi';
+    }
   }
 
   if (
