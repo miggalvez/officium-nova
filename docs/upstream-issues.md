@@ -24,6 +24,48 @@ entry here and re-run the adjudication harness.
 
 ## Current entries
 
+### 2026-04-24 — Roman Precious Blood minor-hour proper later blocks are skipped by the Perl render surface
+
+**Classification.** `perl-bug`
+
+**Summary.** Under both simplified Roman policies on Jul `1`, the
+compositor emits the Precious Blood office's source-backed Prime lesson
+and Terce/Sext/None short-responsory later blocks from `Sancti/07-01`.
+The Perl render surface keeps the weekday Prime citation `1 Tim. 1:17`
+and leaves `_` at the first divergence for Terce, Sext, and None.
+
+**Primary source.**
+
+- `upstream/web/www/horas/Latin/Sancti/07-01.txt:369-385`
+- `upstream/web/www/horas/Latin/Sancti/07-01.txt:387-401`
+- `upstream/web/www/horas/Latin/Sancti/07-01.txt:403-416`
+
+These sections explicitly provide `[Lectio Prima]`, the proper short
+responsories, and the matching versicles.
+
+**Reproduction.**
+Run:
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --date 2024-07-01
+```
+
+Then inspect Prime, Terce, Sext, and None for `Reduced - 1955` and
+`Rubrics 1960 - 1960`.
+
+**Affected stable divergence-row keys.**
+
+| Policy | Date | Hour | Row key suffix |
+|---|---|---|---|
+| Reduced - 1955 | 2024-07-01 | Prime | `cb113d79` |
+| Reduced - 1955 | 2024-07-01 | Terce | `314c39f4` |
+| Reduced - 1955 | 2024-07-01 | Sext | `71abd048` |
+| Reduced - 1955 | 2024-07-01 | None | `3032e01a` |
+| Rubrics 1960 - 1960 | 2024-07-01 | Prime | `cb113d79` |
+| Rubrics 1960 - 1960 | 2024-07-01 | Terce | `314c39f4` |
+| Rubrics 1960 - 1960 | 2024-07-01 | Sext | `71abd048` |
+| Rubrics 1960 - 1960 | 2024-07-01 | None | `3032e01a` |
+
 ### 2026-04-24 — Roman Ss Peter and Paul minor-hour proper later blocks are skipped by the Perl render surface
 
 **Classification.** `perl-bug`

@@ -8353,6 +8353,54 @@
     "resolvedAt": "2026-04-19",
     "commitSha": "bfb3c52"
   },
+  "Reduced - 1955/2024-07-01/None/3032e01a": {
+    "policy": "Reduced - 1955",
+    "date": "2024-07-01",
+    "hour": "None",
+    "firstExpected": "_",
+    "firstActual": "R.br. Christus diléxit nos, et lavit nos * In sánguine suo.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/07-01.txt:403-416 — the Precious Blood office explicitly supplies [Capitulum Nona], [Responsory Breve Nona], and [Versum Nona], beginning R.br. Christus diléxit nos, et lavit nos * In sánguine suo. The compositor emits that source-backed later block while the Perl comparison surface leaves an underscore separator at the first divergence.",
+    "notes": "Representative entry for the shared Roman Precious Blood proper minor-hour later-block family where Perl keeps the weekday Prime chapter or an underscore separator instead of the source-backed office proper.",
+    "resolvedAt": "2026-04-24",
+    "commitSha": "pending"
+  },
+  "Reduced - 1955/2024-07-01/Prime/cb113d79": {
+    "policy": "Reduced - 1955",
+    "date": "2024-07-01",
+    "hour": "Prime",
+    "firstExpected": "1 Tim. 1:17",
+    "firstActual": "Heb 9:19-20",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/07-01.txt:369-371 — the Precious Blood office explicitly supplies [Lectio Prima] with citation Heb 9:19-20, so the compositor emits the proper Prime lesson instead of the weekday 1 Tim. 1:17 chapter retained by the Perl comparison surface.",
+    "notes": "Representative entry for the shared Roman Precious Blood proper minor-hour later-block family where Perl keeps the weekday Prime chapter or an underscore separator instead of the source-backed office proper.",
+    "resolvedAt": "2026-04-24",
+    "commitSha": "pending"
+  },
+  "Reduced - 1955/2024-07-01/Sext/71abd048": {
+    "policy": "Reduced - 1955",
+    "date": "2024-07-01",
+    "hour": "Sext",
+    "firstExpected": "_",
+    "firstActual": "R.br. Sanguis Jesu Christi Fílii Dei * Emúndat nos.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/07-01.txt:387-401 — the Precious Blood office explicitly supplies [Capitulum Sexta], [Responsory Breve Sexta], and [Versum Sexta], beginning R.br. Sanguis Jesu Christi Fílii Dei * Emúndat nos. The compositor emits that source-backed later block while the Perl comparison surface leaves an underscore separator at the first divergence.",
+    "notes": "Representative entry for the shared Roman Precious Blood proper minor-hour later-block family where Perl keeps the weekday Prime chapter or an underscore separator instead of the source-backed office proper.",
+    "resolvedAt": "2026-04-24",
+    "commitSha": "pending"
+  },
+  "Reduced - 1955/2024-07-01/Terce/314c39f4": {
+    "policy": "Reduced - 1955",
+    "date": "2024-07-01",
+    "hour": "Terce",
+    "firstExpected": "_",
+    "firstActual": "R.br. Redemísti nos, Dómine, * In sánguine tuo.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/07-01.txt:376-385 — the Precious Blood office explicitly supplies [Responsory Breve Tertia], beginning R.br. Redemísti nos, Dómine, * In sánguine tuo., plus the matching versicle. The compositor emits that source-backed later block while the Perl comparison surface leaves an underscore separator at the first divergence.",
+    "notes": "Representative entry for the shared Roman Precious Blood proper minor-hour later-block family where Perl keeps the weekday Prime chapter or an underscore separator instead of the source-backed office proper.",
+    "resolvedAt": "2026-04-24",
+    "commitSha": "pending"
+  },
   "Reduced - 1955/2024-07-06/Compline/5dc10d20": {
     "policy": "Reduced - 1955",
     "date": "2024-07-06",
@@ -12101,6 +12149,54 @@
     "notes": "Representative entry for the Rubrics 1960 Lauds Psalm 99 half-verse family where the corpus keeps a `‡ ... *` structure and Perl flattens it to a single `*` boundary.",
     "resolvedAt": "2026-04-19",
     "commitSha": "bfb3c52"
+  },
+  "Rubrics 1960 - 1960/2024-07-01/None/3032e01a": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-07-01",
+    "hour": "None",
+    "firstExpected": "_",
+    "firstActual": "R.br. Christus diléxit nos, et lavit nos * In sánguine suo.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/07-01.txt:403-416 — the Precious Blood office explicitly supplies [Capitulum Nona], [Responsory Breve Nona], and [Versum Nona], beginning R.br. Christus diléxit nos, et lavit nos * In sánguine suo. The compositor emits that source-backed later block while the Perl comparison surface leaves an underscore separator at the first divergence.",
+    "notes": "Representative entry for the shared Roman Precious Blood proper minor-hour later-block family where Perl keeps the weekday Prime chapter or an underscore separator instead of the source-backed office proper.",
+    "resolvedAt": "2026-04-24",
+    "commitSha": "pending"
+  },
+  "Rubrics 1960 - 1960/2024-07-01/Prime/cb113d79": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-07-01",
+    "hour": "Prime",
+    "firstExpected": "1 Tim. 1:17",
+    "firstActual": "Heb 9:19-20",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/07-01.txt:369-371 — the Precious Blood office explicitly supplies [Lectio Prima] with citation Heb 9:19-20, so the compositor emits the proper Prime lesson instead of the weekday 1 Tim. 1:17 chapter retained by the Perl comparison surface.",
+    "notes": "Representative entry for the shared Roman Precious Blood proper minor-hour later-block family where Perl keeps the weekday Prime chapter or an underscore separator instead of the source-backed office proper.",
+    "resolvedAt": "2026-04-24",
+    "commitSha": "pending"
+  },
+  "Rubrics 1960 - 1960/2024-07-01/Sext/71abd048": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-07-01",
+    "hour": "Sext",
+    "firstExpected": "_",
+    "firstActual": "R.br. Sanguis Jesu Christi Fílii Dei * Emúndat nos.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/07-01.txt:387-401 — the Precious Blood office explicitly supplies [Capitulum Sexta], [Responsory Breve Sexta], and [Versum Sexta], beginning R.br. Sanguis Jesu Christi Fílii Dei * Emúndat nos. The compositor emits that source-backed later block while the Perl comparison surface leaves an underscore separator at the first divergence.",
+    "notes": "Representative entry for the shared Roman Precious Blood proper minor-hour later-block family where Perl keeps the weekday Prime chapter or an underscore separator instead of the source-backed office proper.",
+    "resolvedAt": "2026-04-24",
+    "commitSha": "pending"
+  },
+  "Rubrics 1960 - 1960/2024-07-01/Terce/314c39f4": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-07-01",
+    "hour": "Terce",
+    "firstExpected": "_",
+    "firstActual": "R.br. Redemísti nos, Dómine, * In sánguine tuo.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/07-01.txt:376-385 — the Precious Blood office explicitly supplies [Responsory Breve Tertia], beginning R.br. Redemísti nos, Dómine, * In sánguine tuo., plus the matching versicle. The compositor emits that source-backed later block while the Perl comparison surface leaves an underscore separator at the first divergence.",
+    "notes": "Representative entry for the shared Roman Precious Blood proper minor-hour later-block family where Perl keeps the weekday Prime chapter or an underscore separator instead of the source-backed office proper.",
+    "resolvedAt": "2026-04-24",
+    "commitSha": "pending"
   },
   "Rubrics 1960 - 1960/2024-07-06/Compline/57de2841": {
     "policy": "Rubrics 1960 - 1960",
