@@ -8101,6 +8101,54 @@
     "resolvedAt": "2026-04-19",
     "commitSha": "bfb3c52"
   },
+  "Reduced - 1955/2024-06-24/None/070067f2": {
+    "policy": "Reduced - 1955",
+    "date": "2024-06-24",
+    "hour": "None",
+    "firstExpected": "_",
+    "firstActual": "R.br. Elísabeth Zacharíæ * Magnum virum génuit.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/06-24.txt:363-376 — the Nativity office explicitly supplies [Capitulum Nona], [Responsory Breve Nona], and [Versum Nona], beginning R.br. Elísabeth Zacharíæ * Magnum virum génuit. The compositor emits that source-backed later block while the Perl comparison surface leaves an underscore separator at the first divergence.",
+    "notes": "Representative entry for the shared Roman Nativity of St John the Baptist proper minor-hour later-block family where Perl keeps the weekday Prime chapter or an underscore separator instead of the source-backed office proper.",
+    "resolvedAt": "2026-04-24",
+    "commitSha": "pending"
+  },
+  "Reduced - 1955/2024-06-24/Prime/5ab1fcd3": {
+    "policy": "Reduced - 1955",
+    "date": "2024-06-24",
+    "hour": "Prime",
+    "firstExpected": "1 Tim. 1:17",
+    "firstActual": "Isa 49:7",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/06-24.txt:332-334 — the Nativity of St John the Baptist office explicitly supplies [Lectio Prima] with citation Isa 49:7, so the compositor emits the proper Prime lesson instead of the weekday 1 Tim. 1:17 chapter retained by the Perl comparison surface.",
+    "notes": "Representative entry for the shared Roman Nativity of St John the Baptist proper minor-hour later-block family where Perl keeps the weekday Prime chapter or an underscore separator instead of the source-backed office proper.",
+    "resolvedAt": "2026-04-24",
+    "commitSha": "pending"
+  },
+  "Reduced - 1955/2024-06-24/Sext/5c546e7a": {
+    "policy": "Reduced - 1955",
+    "date": "2024-06-24",
+    "hour": "Sext",
+    "firstExpected": "_",
+    "firstActual": "R.br. Inter natos mulíerum * Non surréxit major.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/06-24.txt:347-361 — the Nativity office explicitly supplies [Capitulum Sexta], [Responsory Breve Sexta], and [Versum Sexta], beginning R.br. Inter natos mulíerum * Non surréxit major. The compositor emits that source-backed later block while the Perl comparison surface leaves an underscore separator at the first divergence.",
+    "notes": "Representative entry for the shared Roman Nativity of St John the Baptist proper minor-hour later-block family where Perl keeps the weekday Prime chapter or an underscore separator instead of the source-backed office proper.",
+    "resolvedAt": "2026-04-24",
+    "commitSha": "pending"
+  },
+  "Reduced - 1955/2024-06-24/Terce/cfa0892a": {
+    "policy": "Reduced - 1955",
+    "date": "2024-06-24",
+    "hour": "Terce",
+    "firstExpected": "_",
+    "firstActual": "R.br. Fuit homo * Missus a Deo.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/06-24.txt:336-345 — the Nativity office explicitly supplies [Responsory Breve Tertia], beginning R.br. Fuit homo * Missus a Deo., plus the matching versicle. The compositor emits that source-backed later block while the Perl comparison surface leaves an underscore separator at the first divergence.",
+    "notes": "Representative entry for the shared Roman Nativity of St John the Baptist proper minor-hour later-block family where Perl keeps the weekday Prime chapter or an underscore separator instead of the source-backed office proper.",
+    "resolvedAt": "2026-04-24",
+    "commitSha": "pending"
+  },
   "Reduced - 1955/2024-06-29/Compline/5dc10d20": {
     "policy": "Reduced - 1955",
     "date": "2024-06-29",
@@ -11754,6 +11802,54 @@
     "resolvedAt": "2026-04-19",
     "commitSha": "bfb3c52"
   },
+  "Rubrics 1960 - 1960/2024-06-24/None/070067f2": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-06-24",
+    "hour": "None",
+    "firstExpected": "_",
+    "firstActual": "R.br. Elísabeth Zacharíæ * Magnum virum génuit.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/06-24.txt:363-376 — the Nativity office explicitly supplies [Capitulum Nona], [Responsory Breve Nona], and [Versum Nona], beginning R.br. Elísabeth Zacharíæ * Magnum virum génuit. The compositor emits that source-backed later block while the Perl comparison surface leaves an underscore separator at the first divergence.",
+    "notes": "Representative entry for the shared Roman Nativity of St John the Baptist proper minor-hour later-block family where Perl keeps the weekday Prime chapter or an underscore separator instead of the source-backed office proper.",
+    "resolvedAt": "2026-04-24",
+    "commitSha": "pending"
+  },
+  "Rubrics 1960 - 1960/2024-06-24/Prime/5ab1fcd3": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-06-24",
+    "hour": "Prime",
+    "firstExpected": "1 Tim. 1:17",
+    "firstActual": "Isa 49:7",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/06-24.txt:332-334 — the Nativity of St John the Baptist office explicitly supplies [Lectio Prima] with citation Isa 49:7, so the compositor emits the proper Prime lesson instead of the weekday 1 Tim. 1:17 chapter retained by the Perl comparison surface.",
+    "notes": "Representative entry for the shared Roman Nativity of St John the Baptist proper minor-hour later-block family where Perl keeps the weekday Prime chapter or an underscore separator instead of the source-backed office proper.",
+    "resolvedAt": "2026-04-24",
+    "commitSha": "pending"
+  },
+  "Rubrics 1960 - 1960/2024-06-24/Sext/5c546e7a": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-06-24",
+    "hour": "Sext",
+    "firstExpected": "_",
+    "firstActual": "R.br. Inter natos mulíerum * Non surréxit major.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/06-24.txt:347-361 — the Nativity office explicitly supplies [Capitulum Sexta], [Responsory Breve Sexta], and [Versum Sexta], beginning R.br. Inter natos mulíerum * Non surréxit major. The compositor emits that source-backed later block while the Perl comparison surface leaves an underscore separator at the first divergence.",
+    "notes": "Representative entry for the shared Roman Nativity of St John the Baptist proper minor-hour later-block family where Perl keeps the weekday Prime chapter or an underscore separator instead of the source-backed office proper.",
+    "resolvedAt": "2026-04-24",
+    "commitSha": "pending"
+  },
+  "Rubrics 1960 - 1960/2024-06-24/Terce/cfa0892a": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-06-24",
+    "hour": "Terce",
+    "firstExpected": "_",
+    "firstActual": "R.br. Fuit homo * Missus a Deo.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/06-24.txt:336-345 — the Nativity office explicitly supplies [Responsory Breve Tertia], beginning R.br. Fuit homo * Missus a Deo., plus the matching versicle. The compositor emits that source-backed later block while the Perl comparison surface leaves an underscore separator at the first divergence.",
+    "notes": "Representative entry for the shared Roman Nativity of St John the Baptist proper minor-hour later-block family where Perl keeps the weekday Prime chapter or an underscore separator instead of the source-backed office proper.",
+    "resolvedAt": "2026-04-24",
+    "commitSha": "pending"
+  },
   "Rubrics 1960 - 1960/2024-06-29/Compline/57de2841": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2024-06-29",
@@ -13205,5 +13301,17 @@
     "notes": "Representative entry for the Rubrics 1960 Lauds Psalm 99 half-verse family where the corpus keeps a `‡ ... *` structure and Perl flattens it to a single `*` boundary.",
     "resolvedAt": "2026-04-19",
     "commitSha": "bfb3c52"
+  },
+  "undefined": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-06-24",
+    "hour": "None",
+    "firstExpected": "_",
+    "firstActual": "R.br. Elísabeth Zacharíæ * Magnum virum génuit.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/06-24.txt:363-376 — the Nativity office explicitly supplies , , and , beginning . The compositor emits that source-backed later block while the Perl comparison surface leaves an underscore separator at the first divergence.",
+    "notes": "Representative entry for the shared Roman Nativity of St John the Baptist proper minor-hour later-block family where Perl keeps the weekday Prime chapter or an underscore separator instead of the source-backed office proper.",
+    "resolvedAt": "2026-04-24",
+    "commitSha": "pending"
   }
 }

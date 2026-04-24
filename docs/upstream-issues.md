@@ -24,6 +24,49 @@ entry here and re-run the adjudication harness.
 
 ## Current entries
 
+### 2026-04-24 — Roman Nativity of St John the Baptist minor-hour proper later blocks are skipped by the Perl render surface
+
+**Classification.** `perl-bug`
+
+**Summary.** Under both simplified Roman policies on Jun `24`, the
+compositor emits the Nativity of St John the Baptist's source-backed
+Prime lesson and Terce/Sext/None short-responsory later blocks from
+`Sancti/06-24`. The Perl render surface keeps the weekday Prime citation
+`1 Tim. 1:17` and leaves `_` at the first divergence for Terce, Sext,
+and None.
+
+**Primary source.**
+
+- `upstream/web/www/horas/Latin/Sancti/06-24.txt:332-345`
+- `upstream/web/www/horas/Latin/Sancti/06-24.txt:347-361`
+- `upstream/web/www/horas/Latin/Sancti/06-24.txt:363-376`
+
+These sections explicitly provide `[Lectio Prima]`, the proper short
+responsories, and the matching versicles.
+
+**Reproduction.**
+Run:
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --date 2024-06-24
+```
+
+Then inspect Prime, Terce, Sext, and None for `Reduced - 1955` and
+`Rubrics 1960 - 1960`.
+
+**Affected stable divergence-row keys.**
+
+| Policy | Date | Hour | Row key suffix |
+|---|---|---|---|
+| Reduced - 1955 | 2024-06-24 | Prime | `5ab1fcd3` |
+| Reduced - 1955 | 2024-06-24 | Terce | `cfa0892a` |
+| Reduced - 1955 | 2024-06-24 | Sext | `5c546e7a` |
+| Reduced - 1955 | 2024-06-24 | None | `070067f2` |
+| Rubrics 1960 - 1960 | 2024-06-24 | Prime | `5ab1fcd3` |
+| Rubrics 1960 - 1960 | 2024-06-24 | Terce | `cfa0892a` |
+| Rubrics 1960 - 1960 | 2024-06-24 | Sext | `5c546e7a` |
+| Rubrics 1960 - 1960 | 2024-06-24 | None | `070067f2` |
+
 ### 2026-04-24 — Roman St Joseph minor-hour proper later blocks are skipped by the Perl render surface
 
 **Classification.** `perl-bug`
