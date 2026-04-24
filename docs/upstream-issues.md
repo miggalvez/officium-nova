@@ -24,6 +24,52 @@ entry here and re-run the adjudication harness.
 
 ## Current entries
 
+### 2026-04-24 — Reduced 1955 commemorated Lourdes doxology is carried into Quinquagesima Sunday hymns by the Perl render surface
+
+**Classification.** `perl-bug`
+
+**Summary.** Under `Reduced - 1955` on Feb `11`, the winning office is
+Quinquagesima Sunday and Lourdes is only commemorated. The compositor
+therefore keeps the ordinary Matins and minor-hour hymn endings. The
+Perl render surface nevertheless substitutes the Lourdes `Doxology=Nat`
+line `Jesu, tibi sit glória,` into Matins, Prime, Terce, Sext, and None.
+
+**Primary source.**
+
+- `upstream/web/www/horas/Help/Rubrics/1955.txt:219-222`
+- `upstream/web/www/horas/Help/Rubrics/1955.txt:116-123,129-137,141-147,150-158`
+- `upstream/web/www/horas/Latin/Sancti/02-11.txt:10-15`
+- `upstream/web/www/horas/Latin/Psalterium/Special/Matutinum Special.txt:165-174`
+- `upstream/web/www/horas/Latin/Psalterium/Special/Prima Special.txt:102-111`
+- `upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:657-707`
+
+The 1955 changes say commemorated feasts no longer contribute a special
+hymn doxology in the Office, outside the named January / Ascensiontide
+exception days. Feb `11` is not one of those exceptions, so the
+commemorated Lourdes `Doxology=Nat` rule should not overwrite the
+ordinary Sunday and minor-hour hymn endings.
+
+**Reproduction.**
+Run:
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Reduced - 1955" --date 2024-02-11 --no-write-docs
+```
+
+Matins and the minor hours first diverge on the doxology line, with Perl
+expecting `Jesu, tibi sit glória,` and the compositor preserving the
+source-backed ordinary endings.
+
+**Affected stable divergence-row keys.**
+
+| Policy | Date | Hour | Row key suffix |
+|---|---|---|---|
+| Reduced - 1955 | 2024-02-11 | Matins | `b241f834` |
+| Reduced - 1955 | 2024-02-11 | Prime | `36739df3` |
+| Reduced - 1955 | 2024-02-11 | Terce | `b241f834` |
+| Reduced - 1955 | 2024-02-11 | Sext | `b241f834` |
+| Reduced - 1955 | 2024-02-11 | None | `b241f834` |
+
 ### 2026-04-24 — Reduced 1955 major-hour opening antiphons are truncated to incipits by the Perl render surface
 
 **Classification.** `perl-bug`

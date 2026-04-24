@@ -2224,7 +2224,7 @@ exposed `Rubrics 1960 - 1960` Ash Wednesday minor-hour psalmody boundary.
 
 ### 2026-04-24 — Pattern: Reduced 1955 Sunday minor-hour later blocks use Minor Special (mixed fix + fanout)
 
-**Commit.** pending tranche commit
+**Commit.** `7ca4874`
 
 **Ledger signal.** The next Reduced 1955 frontier was Jan `28`
 Terce/Sext/None. Before the fix, those rows matched through psalmody and
@@ -2266,6 +2266,51 @@ classifications. Overall Phase 3 unadjudicated rows drop from `453` to
 `426`. The next live frontier is now the Reduced 1955 Feb `11` Matins /
 minor-hour doxology family and the Rubrics 1960 Ash Wednesday minor-hour
 psalmody boundary.
+
+### 2026-04-24 — Pattern: Reduced 1955 commemorated Lourdes doxology is not carried into Sunday hymns (perl-bug)
+
+**Commit.** pending tranche commit
+
+**Ledger signal.** The next Reduced 1955 frontier was Feb `11`
+Quinquagesima Sunday. Matins, Prime, Terce, Sext, and None all first
+diverged on the final hymn stanza: Perl substituted the Lourdes /
+Nativity doxology `Jesu, tibi sit glória,` while the compositor kept the
+ordinary Sunday / minor-hour closes (`Præsta, Pater piíssime,` or `Deo
+Patri sit glória,`).
+
+**Root cause.** This is a legacy render-surface drift, not a remaining
+Phase 2 or Phase 3 selection bug. `Sancti/02-11` does carry
+`Doxology=Nat`, but under Reduced 1955 the day's winning office is
+Quinquagesima Sunday and Lourdes is only an occurrence-impeded
+commemoration. The 1955 changes explicitly say commemorated feasts no
+longer have a special hymn doxology in the Office except the named
+January / Ascensiontide exception days, and Feb `11` is not in that
+exception set.
+
+**Resolution.** Class `perl-bug`. No code change is needed. Focused
+regressions now lock the source-backed boundary: Phase 2 does not attach
+a `doxology-variant` slot to the 1955 Feb `11` fallback minor-hour hymns,
+and Phase 3 renders the ordinary Matins / minor-hour hymn endings rather
+than importing the commemorated Lourdes `Nat` doxology.
+
+**Citation.**
+
+- `upstream/web/www/horas/Help/Rubrics/1955.txt:116-123`
+- `upstream/web/www/horas/Help/Rubrics/1955.txt:129-137`
+- `upstream/web/www/horas/Help/Rubrics/1955.txt:141-147`
+- `upstream/web/www/horas/Help/Rubrics/1955.txt:150-158`
+- `upstream/web/www/horas/Help/Rubrics/1955.txt:219-222`
+- `upstream/web/www/horas/Latin/Sancti/02-11.txt:10-15`
+- `upstream/web/www/horas/Latin/Psalterium/Special/Matutinum Special.txt:165-174`
+- `upstream/web/www/horas/Latin/Psalterium/Special/Prima Special.txt:102-111`
+- `upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:657-707`
+
+**Impact.** Reduced 1955 divergent-hour totals remain `458/488`, but
+the unadjudicated count drops from `222` to `217` after classifying the
+five Feb `11` Matins / minor-hour rows. Overall Phase 3 unadjudicated
+rows drop from `426` to `421`. The next live frontier is the Rubrics
+1960 Ash Wednesday Prime antiphon / psalmody boundary and the remaining
+Reduced 1955 Ash Wednesday minor-hour psalmody rows.
 
 ### Open pattern backlog
 

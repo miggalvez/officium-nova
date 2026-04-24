@@ -1361,6 +1361,35 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
     }
   }, 240_000);
 
+  it('keeps the commemorated Lourdes doxology off 1955 Quinquagesima Sunday hymns', async () => {
+    const { engine, resolvedCorpus } = await createHarness('Reduced - 1955');
+    const summary = engine.resolveDayOfficeSummary('2024-02-11');
+    expect(summary.celebration.feastRef.path).toBe('Tempora/Quadp3-0');
+    expect(summary.commemorations.some((commemoration) => commemoration.feastRef.path === 'Sancti/02-11')).toBe(
+      true
+    );
+
+    for (const [hour, firstLine] of [
+      ['matins', 'Præsta, Pater piíssime,'],
+      ['prime', 'Deo Patri sit glória,'],
+      ['terce', 'Præsta, Pater piíssime,'],
+      ['sext', 'Præsta, Pater piíssime,'],
+      ['none', 'Præsta, Pater piíssime,']
+    ] as const) {
+      const composed = composeHour({
+        corpus: resolvedCorpus.index,
+        summary,
+        version: engine.version,
+        hour,
+        options: { languages: ['Latin'] }
+      });
+
+      expect(normalizeLatin(firstLineOfLastHymnStanza(composed)), `${hour} hymn doxology`).toBe(
+        normalizeLatin(firstLine)
+      );
+    }
+  }, 240_000);
+
   it('renders 1955 January minor-hour explicit antiphons with shortened openings and full closing repeats', async () => {
     const { engine, resolvedCorpus } = await createHarness('Reduced - 1955');
 
