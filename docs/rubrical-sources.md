@@ -67,9 +67,32 @@ Compiled and supporting:
 
 - [Cum Nostra Hac Aetate (1955 reductions)](https://www.divinumofficium.com/www/horas/Help/Rubrics/1955.txt) — the entire governing text
 
+## Secondary Cross-Check Sources
+
+These sources can help find mistakes or fill practical test matrices, but they
+do not outrank the source hierarchy above. Use them as corroborating evidence,
+not as the sole basis for adjudicating a divergence.
+
+### `1962ordo.today`
+
+- Source: [1962 Ordo](https://1962ordo.today/)
+- Scope: `rubrics-1960` / 1962 Roman liturgical books only.
+- Useful fields: daily Mass/Office selection, class, color,
+  commemorations, occurrence/concurrence notes, and practical Breviary
+  guidance.
+- Limits: not applicable to `divino-afflatu` or `reduced-1955`; may include
+  United States, SSPX, local, votive, or pastoral notes that must not be folded
+  into the general Roman fixture surface unless explicitly modeled.
+- Fixture home:
+  [`packages/rubrical-engine/test/fixtures/external/1962ordo-today`](../packages/rubrical-engine/test/fixtures/external/1962ordo-today/README.md).
+
 ## Maintenance Notes
 
 - When policy support changes, update this file, [README.md](../README.md), and [AGENTS.md](../AGENTS.md) together.
 - When a new policy is implemented, add its direct-links subsection above. The upstream [rubrics index](https://www.divinumofficium.com/www/horas/Help/rubrics.html) remains authoritative; if it gains new documents for a policy we already ship, refresh the matching subsection.
 - The authoritative repo mapping from `VersionHandle` to policy family is [`packages/rubrical-engine/src/version/policy-map.ts`](../packages/rubrical-engine/src/version/policy-map.ts).
 - This file is a source index, not an adjudication shortcut. Divergence resolution still requires citations from the governing rubrical text or an Ordo source, not just a link to the index page.
+- Secondary cross-check sources may be cited for investigation context, but an
+  `engine-bug`, `perl-bug`, or `ordo-ambiguous` adjudication still needs the
+  governing rubrical text, a published Ordo Recitandi, an in-repo ADR, or a
+  dispositive corpus line per ADR-011.

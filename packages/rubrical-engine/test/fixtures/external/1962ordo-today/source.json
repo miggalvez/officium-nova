@@ -1,0 +1,42 @@
+{
+  "source": "1962ordo.today",
+  "sourceUrl": "https://1962ordo.today/",
+  "status": "secondary-cross-check",
+  "policyScope": [
+    "rubrics-1960"
+  ],
+  "contentScope": [
+    "daily Mass selection",
+    "Divine Office and Breviary guidance",
+    "class",
+    "color",
+    "commemorations",
+    "occurrence and concurrence notes"
+  ],
+  "limits": [
+    "not a primary Ordo Recitandi authority",
+    "not applicable to divino-afflatu",
+    "not applicable to reduced-1955",
+    "local, United States, SSPX, votive, and pastoral reminder notes must stay separate from the general Roman fixture surface"
+  ],
+  "capturePolicy": {
+    "retrieval": "manual or scripted extraction with source URL and retrieval date recorded in each yearly fixture",
+    "stableFields": [
+      "date",
+      "celebrationTitle",
+      "class",
+      "color",
+      "commemorations",
+      "officeNotes",
+      "massNotes"
+    ],
+    "excludedUnlessModeled": [
+      "local feast notes",
+      "United States notes",
+      "SSPX institute notes",
+      "votive Mass options",
+      "pastoral reminders"
+    ]
+  },
+  "fixtures": []
+}

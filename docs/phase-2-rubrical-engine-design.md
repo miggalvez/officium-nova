@@ -1638,6 +1638,12 @@ Validation is where the engine is proved correct. It is as much work as implemen
 
 See `docs/rubrical-sources.md` for the project's canonical index of the external source families and their current `VersionHandle` / policy-family mapping.
 
+Online calendars and ordos that are not themselves published Ordo Recitandi
+books may still be useful as secondary cross-checks. The current fixture home
+for `1962ordo.today` is
+`packages/rubrical-engine/test/fixtures/external/1962ordo-today`; it is scoped
+to `rubrics-1960` investigation and must not be treated as primary authority.
+
 ### 19.2 Test Surfaces
 
 **Unit tests** — one per exported function in `temporal/`, `sanctoral/`, `occurrence/`, etc. Each operates on small inputs: a single date, a small candidate list, a specific policy. Target coverage: 100% of branches in `policy/*.ts`; ≥95% in the resolvers.
