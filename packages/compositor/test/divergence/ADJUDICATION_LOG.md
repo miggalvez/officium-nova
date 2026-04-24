@@ -2352,6 +2352,35 @@ rises from `44.1` to `46.5`, and Rubrics 1960 rises from `46.2` to
 `48.6`. Overall unadjudicated rows remain `421`; the tranche burned down
 a structural blocker rather than a row-classification family.
 
+### 2026-04-24 — Pattern: Roman Vespers Psalm 115 half-verse structure (perl-bug)
+
+**Commit.** pending
+
+**Ledger signal.** After the Ash Wednesday minor-hour psalmody fix, the
+next repeated shared Roman adjudication family was Psalm `115:7` in
+Vespers. It surfaces on Mar `30`, May `30`, Jun `29`, and Nov `1` under
+both Reduced 1955 and Rubrics 1960: Perl flattens the verse to a single
+`*` divider, while the compositor preserves the source's `‡ ... *`
+half-verse boundary.
+
+**Root cause.** This is the already-known Roman half-verse render-surface
+family on a newly exposed psalm line, not a remaining Phase 2 or Phase 3
+selection bug. `Psalm115.txt` explicitly carries a dagger before the
+normal asterisk split in verse `115:7b`.
+
+**Resolution.** Class `perl-bug`. No code change is needed. A focused
+upstream regression now locks the source-backed Vespers rendering, and
+`adjudications.json` records the eight affected Reduced 1955 / Rubrics
+1960 row keys with the shared `c3e5bb37` suffix.
+
+**Citation.**
+
+- `upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm115.txt:7`
+
+**Impact.** Eight Roman Vespers rows move from `unadjudicated` to
+`perl-bug`. The tranche continues the existing half-verse adjudication
+policy documented in `docs/upstream-issues.md`.
+
 ### Open pattern backlog
 
 The following families remain open and have not yet received their own

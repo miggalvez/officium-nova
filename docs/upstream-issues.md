@@ -1002,8 +1002,8 @@ source-backed short `Vísita, quǽsumus...` block (compositor).
 **Summary.** Across Roman `1955` and `1960` rows, the compositor
 preserves source-backed half-verse structure (`‡ ... *`) while Perl
 flattens those same lines to single-asterisk boundaries. This now
-surfaces as a repeated family on Psalms `62`, `4`, `124`, `114`, and
-late-surfacing `99` rows under `Rubrics 1960 - 1960`.
+surfaces as a repeated family on Psalms `62`, `4`, `124`, `114`, `115`,
+and late-surfacing `99` rows under the Roman policies.
 
 **Primary source.**
 
@@ -1011,6 +1011,7 @@ late-surfacing `99` rows under `Rubrics 1960 - 1960`.
 - `upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm4.txt:5`
 - `upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm124.txt:2`
 - `upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm114.txt:5`
+- `upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm115.txt:7`
 - `upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm99.txt:3-5`
 
 Each cited source line carries an explicit `‡` before the `*` split.
@@ -1020,6 +1021,7 @@ Run:
 
 ```bash
 pnpm -C packages/compositor compare:phase-3-perl -- --version "Reduced - 1955" --date 2024-03-30 --hour Matins
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Reduced - 1955" --date 2024-05-30 --hour Vespers
 pnpm -C packages/compositor compare:phase-3-perl -- --version "Rubrics 1960 - 1960" --date 2024-01-28 --hour Lauds
 pnpm -C packages/compositor compare:phase-3-perl -- --version "Rubrics 1960 - 1960" --date 2024-03-26 --hour Vespers
 ```
@@ -1032,11 +1034,19 @@ stays source-backed.
 | Policy | Date | Hour | Row key suffix |
 |---|---|---|---|
 | Reduced - 1955 | 2024-03-30 | Matins | `89cb274b` |
+| Reduced - 1955 | 2024-03-30 | Vespers | `c3e5bb37` |
+| Reduced - 1955 | 2024-05-30 | Vespers | `c3e5bb37` |
+| Reduced - 1955 | 2024-06-29 | Vespers | `c3e5bb37` |
+| Reduced - 1955 | 2024-11-01 | Vespers | `c3e5bb37` |
 | Rubrics 1960 - 1960 | 2024-01-28 | Lauds | `9fbc4e11` |
 | Rubrics 1960 - 1960 | 2024-03-30 | Matins | `89cb274b` |
 | Rubrics 1960 - 1960 | 2024-03-26 | Vespers | `b1fc00bf` |
 | Rubrics 1960 - 1960 | 2024-03-25 | Vespers | `839eeb27` |
 | Rubrics 1960 - 1960 | 2024-05-09 | Lauds | `2af868c1` |
+| Rubrics 1960 - 1960 | 2024-03-30 | Vespers | `c3e5bb37` |
+| Rubrics 1960 - 1960 | 2024-05-30 | Vespers | `c3e5bb37` |
+| Rubrics 1960 - 1960 | 2024-06-29 | Vespers | `c3e5bb37` |
+| Rubrics 1960 - 1960 | 2024-11-01 | Vespers | `c3e5bb37` |
 
 ### 2026-04-20 — Divino Afflatu Epiphany-octave Matins still renders a suppressed opener in Perl
 

@@ -799,6 +799,37 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
     }
   }, 240_000);
 
+  it('keeps the source-backed Psalm 115 half-verse structure in Roman Vespers', async () => {
+    const expectedHalfVerse = normalizeLatin(
+      '115:7 Dirupísti víncula mea: ‡ tibi sacrificábo hóstiam laudis, * et nomen Dómini invocábo.'
+    );
+    const flattenedHalfVerse = normalizeLatin(
+      '115:7 Dirupísti víncula mea: * tibi sacrificábo hóstiam laudis, et nomen Dómini invocábo.'
+    );
+
+    for (const version of ['Reduced - 1955', 'Rubrics 1960 - 1960'] as const) {
+      const { engine, resolvedCorpus } = await createHarness(version);
+      const summary = engine.resolveDayOfficeSummary('2024-05-30');
+      const vespers = composeHour({
+        corpus: resolvedCorpus.index,
+        summary,
+        version: engine.version,
+        hour: 'vespers',
+        options: { languages: ['Latin'] }
+      });
+
+      const lines = psalmodyTexts(vespers).map(normalizeLatin);
+      expect(
+        lines,
+        `${version} Vespers should preserve the corpus half-verse marker at Psalm 115:7`
+      ).toContain(expectedHalfVerse);
+      expect(
+        lines,
+        `${version} Vespers should not flatten the Psalm 115 half-verse boundary to a single * split`
+      ).not.toContain(flattenedHalfVerse);
+    }
+  }, 240_000);
+
   it('renders July 9 Matins benedictions line-by-line and emits the Te Deum replacement responsory only once', async () => {
     const { engine, resolvedCorpus } = await createHarness('Rubrics 1960 - 1960');
 
