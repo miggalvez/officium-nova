@@ -238,6 +238,10 @@ function isSuppressed(slot: SlotName, omit: readonly OmittableSlot[]): boolean {
       return omit.includes('suffragium');
     case 'invitatory':
       return omit.includes('invitatorium');
+    case 'final-antiphon-bvm':
+      return omit.includes('antiphona-finalis');
+    case 'conclusion':
+      return omit.includes('conclusion');
     default:
       return false;
   }

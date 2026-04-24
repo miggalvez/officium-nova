@@ -304,6 +304,46 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
     }
   }, 240_000);
 
+  it('keeps the self-contained Triduum Lauds oration without the ordinary major-hour wrapper', async () => {
+    const expectedOpening = [
+      normalizeLatin('Christus factus est pro nobis obédiens usque ad mortem.'),
+      normalizeLatin('secreto'),
+      normalizeLatin(
+        'Pater noster, qui es in cælis, sanctificétur nomen tuum: advéniat regnum tuum: fiat volúntas tua, sicut in cælo et in terra. Panem nostrum cotidiánum da nobis hódie: et dimítte nobis débita nostra, sicut et nos dimíttimus debitóribus nostris: et ne nos indúcas in tentatiónem: sed líbera nos a malo. Amen.'
+      )
+    ] as const;
+
+    for (const version of ['Reduced - 1955', 'Rubrics 1960 - 1960'] as const) {
+      const { engine, resolvedCorpus } = await createHarness(version);
+      const summary = engine.resolveDayOfficeSummary('2024-03-28');
+      const lauds = summary.hours.lauds;
+
+      expect(lauds?.slots.conclusion?.kind, `${version} Triduum Lauds should omit Conclusio`).toBe(
+        'empty'
+      );
+
+      const composed = composeHour({
+        corpus: resolvedCorpus.index,
+        summary,
+        version: engine.version,
+        hour: 'lauds',
+        options: { languages: ['Latin'], joinLaudsToMatins: false }
+      });
+
+      const oration = sectionTexts(composed, 'oration').map(normalizeLatin);
+      expect(oration.slice(0, expectedOpening.length), `${version} should open with the proper Triduum oration`).toEqual(
+        expectedOpening
+      );
+      expect(
+        composed.sections.some((section) => section.slot === 'conclusion'),
+        `${version} should not append the ordinary major-hour conclusion`
+      ).toBe(false);
+      expect(oration).not.toContain(
+        normalizeLatin('Et dato signo a Superiore omnes surgunt et discedunt.')
+      );
+    }
+  }, 240_000);
+
   it('keeps Easter Octave Versum 2 substitutions on Prime and Terce without adding a Paschaltide alleluia tail', async () => {
     const expected = normalizeLatin(
       'Hæc dies * quam fecit Dóminus: exsultémus et lætémur in ea.'

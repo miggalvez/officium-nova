@@ -69,6 +69,9 @@ function majorHourOrationPreludeContent(args: DirectiveSlotContentArgs): SlotCon
   if (!innerRefs) {
     return undefined;
   }
+  if (args.structure.slots.conclusion?.kind === 'empty') {
+    return undefined;
+  }
 
   return {
     kind: 'ordered-refs',

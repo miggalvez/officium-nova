@@ -1811,7 +1811,7 @@ Christmas-octave Vespers fifth-slot/later-block split, starting with Dec
 
 ### 2026-04-22 — Pattern: Christmas-octave Vespers fifth-psalm precedence (engine-bug)
 
-**Commit.** pending tranche commit
+**Commit.** `69156ac`
 
 **Ledger signal.** After the fourth-psalm routing fix, the remaining
 shared Roman Christmas-octave Vespers seam narrowed to Dec `27` in both
@@ -2127,6 +2127,50 @@ The next live frontiers are now `Reduced - 1955` Mar `28` Lauds Triduum
 conclusion (`Christus factus est...` vs `V. Dómine, exáudi...`) and
 `Rubrics 1960 - 1960` Ash Wednesday Lauds later-block boundary (`Rom
 13:12-13` vs `Ant. Cum jejunátis...`).
+
+### 2026-04-24 — Pattern: simplified Roman Triduum Lauds uses the self-contained proper oration (mixed fix)
+
+**Commit.** pending tranche commit
+
+**Ledger signal.** The next Reduced 1955 frontier was Maundy Thursday
+Lauds on Mar `28`: Perl expected the Triduum prayer to begin with
+`Christus factus est pro nobis obédiens usque ad mortem.`, while the
+compositor inserted the ordinary major-hour `V. Dómine, exáudi... /
+Orémus` wrapper before the collect. The same source-backed issue was
+present in the parallel Rubrics 1960 Maundy Thursday Lauds row.
+
+**Root cause.** This was a mixed Phase 2/Phase 3 seam. The Triduum source
+rule explicitly says `Omit ... Conclusion`, but the hour-rule classifier
+did not map `Conclusion` into an omittable slot, so Lauds retained the
+ordinary conclusion shape. Then Phase 3 treated the proper `[Oratio]` as
+an ordinary collect and wrapped it with `Dómine, exáudi... / Orémus`,
+even though `Tempora/Quad6-4:[Oratio]` is already a self-contained
+Triduum prayer block for the simplified Roman forms.
+
+**Resolution.** Fixed in both owning layers. Phase 2 now classifies and
+applies `Omit Conclusion` (and the paired `Antiphona finalis` token) as
+typed hour omissions. Phase 3 now skips the ordinary major-hour collect
+wrapper when the conclusion slot is explicitly empty, restores the
+source-carried `Christus factus... / Pater noster... / aliquantulum
+altius` Triduum prelude from the conditional source block for 1955/1960,
+and filters the Cistercian-only dismissal rubric that Perl does not emit
+for the simplified Roman rows. A focused upstream regression now locks
+Maundy Thursday Lauds for both `Reduced - 1955` and
+`Rubrics 1960 - 1960`.
+
+**Citation.**
+
+- `upstream/web/www/horas/Latin/Tempora/Quad6-4.txt:7-15`
+- `upstream/web/www/horas/Latin/Tempora/Quad6-4.txt:24-41`
+- `upstream/web/www/horas/Latin/Tempora/Quad6-4r.txt:1`
+
+**Impact.** The Mar `28` Lauds row now compares cleanly under both
+simplified Roman policies. Unadjudicated counts drop to `249` for
+`Reduced - 1955` and `184` for `Rubrics 1960 - 1960`. The next live
+frontiers are `Reduced - 1955` Jan `28` Terce one-alone later-block
+collect (`_` vs `Preces pópuli tui...`) and `Rubrics 1960 - 1960` Ash
+Wednesday Lauds later-block boundary (`Rom 13:12-13` vs
+`Ant. Cum jejunátis...`).
 
 ### Open pattern backlog
 
