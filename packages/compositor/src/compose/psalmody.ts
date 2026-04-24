@@ -79,19 +79,17 @@ export function buildPsalmHeading(
 export function replaceLeadingCanticleTitleWithCitation(
   content: readonly TextContent[]
 ): readonly TextContent[] {
-  const first = content[0];
-  if (first?.type !== 'text') {
-    return content;
-  }
-  const titleLine = parseCanticleTitleLine(first.value);
-  if (!titleLine) return content;
+  const titleEntry = findLeadingCanticleTitleLine(content);
+  if (!titleEntry) return content;
+
+  const { index, node, titleLine } = titleEntry;
   if (titleLine.citation) {
-    const rest = content.slice(1);
+    const rest = content.slice(index + 1);
     const boundary: TextContent = { type: 'separator' };
     const contentRest = rest[0]?.type === 'separator' ? rest : [boundary, ...rest];
-    return [{ ...first, value: titleLine.citation }, ...contentRest];
+    return [{ ...node, value: titleLine.citation }, ...contentRest];
   }
-  return content.slice(1);
+  return content.slice(index + 1);
 }
 
 export function containsInlinePsalmRefs(content: readonly TextContent[]): boolean {
@@ -275,20 +273,34 @@ function buildInlinePsalmHeading(
 }
 
 function extractCanticleTitleFromContent(content: readonly TextContent[]): string | undefined {
-  for (const node of content) {
-    if (node.type !== 'text') continue;
-    const title = extractCanticleTitleFromText(node.value);
-    if (title) return title;
+  return findLeadingCanticleTitleLine(content)?.titleLine.title;
+}
+
+function findLeadingCanticleTitleLine(
+  content: readonly TextContent[]
+): LeadingCanticleTitleLine | undefined {
+  for (let index = 0; index < content.length; index += 1) {
+    const node = content[index];
+    if (!node || node.type !== 'text') continue;
+    const titleLine = parseCanticleTitleLine(node.value);
+    if (titleLine) return { index, node, titleLine };
     if (node.value.trim().length > 0) return undefined;
   }
   return undefined;
 }
 
-function extractCanticleTitleFromText(text: string): string | undefined {
-  return parseCanticleTitleLine(text)?.title;
+interface CanticleTitleLine {
+  readonly title: string;
+  readonly citation?: string;
 }
 
-function parseCanticleTitleLine(text: string): { readonly title: string; readonly citation?: string } | undefined {
+interface LeadingCanticleTitleLine {
+  readonly index: number;
+  readonly node: Extract<TextContent, { type: 'text' }>;
+  readonly titleLine: CanticleTitleLine;
+}
+
+function parseCanticleTitleLine(text: string): CanticleTitleLine | undefined {
   const match = text.match(/^\s*\((Canticum(?:\s+[^*)]+?)?)(?:\s*\*\s*([^)]+))?\)\s*$/u);
   const title = match?.[1]?.replace(/\s+/gu, ' ').trim();
   if (!title) return undefined;

@@ -684,7 +684,7 @@ describe('Psalmus N [index] heading emission', () => {
     expect(texts[0]).toBe('Psalmus 118(1-16) [1]');
   });
 
-  it('uses Old Testament canticle titles as headings and preserves the source citation line', () => {
+  it('uses Old Testament canticle titles as headings after leading separators and preserves the citation', () => {
     const corpus = new InMemoryTextIndex();
     corpus.addFile({
       path: 'horas/Latin/Psalterium/Psalmorum/Psalm223.txt',
@@ -694,6 +694,8 @@ describe('Psalmus N [index] heading emission', () => {
           startLine: 1,
           endLine: 2,
           content: [
+            { type: 'separator' },
+            { type: 'text', value: '' },
             { type: 'text', value: '(Canticum Annæ * 3 Reg 2:1-16)' },
             {
               type: 'text',
