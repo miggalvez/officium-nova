@@ -615,16 +615,16 @@ override `Psalmus 116 [5]`.
 | Reduced - 1955 | 2024-01-13 | Vespers | `39846534` |
 | Rubrics 1960 - 1960 | 2024-01-13 | Vespers | `39846534` |
 
-### 2026-04-19 — Rubrics 1960 Jan 14 minor hours gain underscore separators around the short responsory in the Perl render surface
+### 2026-04-19 — Roman Sunday minor hours gain underscore separators around the short responsory in the Perl render surface
 
 **Classification.** `perl-bug`
 
-**Summary.** After the Jan `14` `Rubrics 1960` minor-hour fallback fix,
-`Terce`, `Sext`, and `None` now correctly emit the Sunday chapter,
-short responsory, versicle, and oration. The remaining first divergence
-is a literal `_` line that the Perl comparison surface inserts before
-the short responsory. The source-backed compositor output begins
-directly with the `R.br.` line.
+**Summary.** After the Roman Sunday minor-hour fallback fixes, `Terce`,
+`Sext`, and `None` now correctly emit the Sunday chapter, short
+responsory, versicle, and oration from the source-backed later block.
+The remaining first divergence is a literal `_` line that the Perl
+comparison surface inserts before the short responsory. The source-backed
+compositor output begins directly with the `R.br.` line.
 
 **Primary source.**
 `upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:1-20,36-50,66-80`
@@ -640,6 +640,7 @@ Run:
 pnpm -C packages/compositor compare:phase-3-perl -- --date 2024-01-14 --hour Tertia
 pnpm -C packages/compositor compare:phase-3-perl -- --date 2024-01-14 --hour Sexta
 pnpm -C packages/compositor compare:phase-3-perl -- --date 2024-01-14 --hour Nona
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Reduced - 1955" --date 2024-01-28 --hour Tertia
 ```
 
 Each row now first diverges on `expected="_"` versus the compositor's
@@ -652,6 +653,9 @@ source-backed `R.br.` opening line.
 | Rubrics 1960 - 1960 | 2024-01-14 | Terce | `89c6190b` |
 | Rubrics 1960 - 1960 | 2024-01-14 | Sext | `bc17de3d` |
 | Rubrics 1960 - 1960 | 2024-01-14 | None | `4a1aadd8` |
+| Reduced - 1955 | 2024-01-28 | Terce | `89c6190b` |
+| Reduced - 1955 | 2024-01-28 | Sext | `bc17de3d` |
+| Reduced - 1955 | 2024-01-28 | None | `4a1aadd8` |
 
 ### 2026-04-19 — Reduced 1955 Jan 6/7 minor hours keep the office's proper lesson and short responsories while Perl leaves the later block absent
 

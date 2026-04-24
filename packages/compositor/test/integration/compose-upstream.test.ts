@@ -377,6 +377,70 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
     }
   }, 240_000);
 
+  it('renders Reduced 1955 Sunday minor-hour later blocks and ordinary collect wrapper', async () => {
+    const { engine, resolvedCorpus } = await createHarness('Reduced - 1955');
+    const summary = engine.resolveDayOfficeSummary('2024-01-28');
+    const expectedByHour = {
+      terce: {
+        responsory: normalizeLatin('Inclína cor meum, Deus, * In testimónia tua.'),
+        versicle: [
+          normalizeLatin('Ego dixi: Dómine, miserére mei.'),
+          normalizeLatin('Sana ánimam meam, quia peccávi tibi.')
+        ]
+      },
+      sext: {
+        responsory: normalizeLatin('In ætérnum, Dómine, * Pérmanet verbum tuum.'),
+        versicle: [
+          normalizeLatin('Dóminus regit me, et nihil mihi déerit.'),
+          normalizeLatin('In loco páscuæ ibi me collocávit.')
+        ]
+      },
+      none: {
+        responsory: normalizeLatin('Clamávi in toto corde meo: * Exáudi me, Dómine.'),
+        versicle: [
+          normalizeLatin('Ab occúltis meis munda me, Dómine.'),
+          normalizeLatin('Et ab aliénis parce servo tuo.')
+        ]
+      }
+    } as const;
+    const orationPrelude = [
+      normalizeLatin('Dómine, exáudi oratiónem meam.'),
+      normalizeLatin('Et clamor meus ad te véniat.'),
+      normalizeLatin('Orémus.')
+    ] as const;
+    const collect = normalizeLatin(
+      'Preces pópuli tui, quǽsumus, Dómine, cleménter exáudi: ut, qui juste pro peccátis nostris afflígimur, pro tui nóminis glória misericórditer liberémur.'
+    );
+    const minorHourConclusion = [
+      normalizeLatin('Dómine, exáudi oratiónem meam.'),
+      normalizeLatin('Et clamor meus ad te véniat.'),
+      normalizeLatin('Benedicámus Dómino.'),
+      normalizeLatin('Deo grátias.'),
+      normalizeLatin('Fidélium ánimæ per misericórdiam Dei requiéscant in pace.'),
+      normalizeLatin('Amen.')
+    ] as const;
+
+    for (const [hour, expected] of Object.entries(expectedByHour) as Array<
+      [keyof typeof expectedByHour, (typeof expectedByHour)[keyof typeof expectedByHour]]
+    >) {
+      const composed = composeHour({
+        corpus: resolvedCorpus.index,
+        summary,
+        version: engine.version,
+        hour,
+        options: { languages: ['Latin'] }
+      });
+
+      expect(sectionTexts(composed, 'responsory').map(normalizeLatin)[0]).toBe(expected.responsory);
+      expect(sectionTexts(composed, 'versicle').map(normalizeLatin)).toEqual(expected.versicle);
+      expect(sectionTexts(composed, 'oration').map(normalizeLatin).slice(0, orationPrelude.length)).toEqual(
+        orationPrelude
+      );
+      expect(sectionTexts(composed, 'oration').map(normalizeLatin)[orationPrelude.length]).toBe(collect);
+      expect(sectionTexts(composed, 'conclusion').map(normalizeLatin)).toEqual(minorHourConclusion);
+    }
+  }, 240_000);
+
   it('wraps Easter Octave one-alone Roman minor-hour orations with the source-backed prelude and conclusion lines', async () => {
     const orationPrelude = [
       normalizeLatin('Dómine, exáudi oratiónem meam.'),
@@ -1755,6 +1819,11 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
   it('keeps Jan 14 1960 minor hours in chapter-responsory-versicle-oration order after psalmody', async () => {
     const { engine, resolvedCorpus } = await createHarness('Rubrics 1960 - 1960');
     const summary = engine.resolveDayOfficeSummary('2024-01-14');
+    const orationPrelude = [
+      normalizeLatin('Dómine, exáudi oratiónem meam.'),
+      normalizeLatin('Et clamor meus ad te véniat.'),
+      normalizeLatin('Orémus.')
+    ] as const;
 
     for (const [hour, chapterCitation, versicleOpening] of [
       ['terce', '1 Joann. 4:16', 'Ego dixi: Dómine, miserére mei.'],
@@ -1786,10 +1855,16 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
         `${hour} versicle opening`
       ).toBe(versicleOpening);
       expect(
-        sectionTexts(composed, 'oration')[0]?.trim(),
+        sectionTexts(composed, 'oration').map(normalizeLatin).slice(0, orationPrelude.length),
         `${hour} oration opening`
+      ).toEqual(orationPrelude);
+      expect(
+        sectionTexts(composed, 'oration').map(normalizeLatin)[orationPrelude.length],
+        `${hour} collect`
       ).toBe(
-        'Omnípotens sempitérne Deus, qui cæléstia simul et terréna moderáris: supplicatiónes pópuli tui cleménter exáudi; et pacem tuam nostris concéde tempóribus.'
+        normalizeLatin(
+          'Omnípotens sempitérne Deus, qui cæléstia simul et terréna moderáris: supplicatiónes pópuli tui cleménter exáudi; et pacem tuam nostris concéde tempóribus.'
+        )
       );
     }
   }, 240_000);

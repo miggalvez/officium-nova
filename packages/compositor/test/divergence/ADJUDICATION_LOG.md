@@ -2174,7 +2174,7 @@ Wednesday Lauds later-block boundary (`Rom 13:12-13` vs
 
 ### 2026-04-24 — Pattern: 1960 Ash Wednesday Lauds ferial later block, preces, and collect (mixed fix)
 
-**Commit.** pending tranche commit
+**Commit.** `dc80bbd`
 
 **Ledger signal.** The next Rubrics 1960 frontier was Ash Wednesday
 Lauds on Feb `14`. After the canticle-heading fix, the row first
@@ -2221,6 +2221,51 @@ divergent hours from `455/488` to `454/488` and unadjudicated rows from
 frontiers are `Reduced - 1955` Jan `28` Terce/Sext/None one-alone
 later-block collect (`_` vs `Preces pópuli tui...`) and the newly
 exposed `Rubrics 1960 - 1960` Ash Wednesday minor-hour psalmody boundary.
+
+### 2026-04-24 — Pattern: Reduced 1955 Sunday minor-hour later blocks use Minor Special (mixed fix + fanout)
+
+**Commit.** pending tranche commit
+
+**Ledger signal.** The next Reduced 1955 frontier was Jan `28`
+Terce/Sext/None. Before the fix, those rows matched through psalmody and
+the proper chapter, then jumped directly to the temporal collect
+(`Preces pópuli tui...`) where Perl still had the Sunday short
+responsory / versicle stream.
+
+**Root cause.** This was a mixed seam. Phase 2 already had a 1960-only
+fallback for Sunday minor-hour later blocks whose text does not live in
+`Ordinarium/Minor#Capitulum Responsorium Versus`; Reduced 1955 needed
+the same `Psalterium/Special/Minor Special` Sunday fallback. Phase 3 also
+only restored the `Dómine, exáudi... / Orémus` collect wrapper for the
+Easter-Octave one-alone shape, so ordinary Terce/Sext/None collects were
+emitted as bare collect bodies with no minor-hour conclusion block.
+
+**Resolution.** Fixed in both owning layers. Phase 2 now resolves
+Reduced 1955 Sunday Terce/Sext/None responsory and versicle slots from
+the same `Minor Special` sections used by 1960. Phase 3 now wraps
+simplified Roman Terce/Sext/None collects with `Dómine, exáudi... /
+Orémus` and emits the ordinary minor-hour conclusion block. The refreshed
+compare then moved Jan `28` Terce/Sext/None onto the already
+source-backed separator disagreement (`_` vs `R.br.`), so new
+`perl-bug` sidecar entries plus fanout classify the matching Reduced
+1955 rows rather than adding separator lines absent from the source.
+
+**Citation.**
+
+- `upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:1-20`
+- `upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:36-50`
+- `upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:66-80`
+- `upstream/web/www/horas/Ordinarium/Minor.txt:21-34`
+- `upstream/web/www/horas/Latin/Psalterium/Common/Prayers.txt:82-90`
+- `upstream/web/www/horas/Latin/Psalterium/Common/Prayers.txt:306-307`
+
+**Impact.** Reduced 1955 divergent-hour totals remain `458/488`, but
+the unadjudicated count drops from `249` to `222` after the three
+representative Jan `28` rows and fanout add `27` source-backed
+classifications. Overall Phase 3 unadjudicated rows drop from `453` to
+`426`. The next live frontier is now the Reduced 1955 Feb `11` Matins /
+minor-hour doxology family and the Rubrics 1960 Ash Wednesday minor-hour
+psalmody boundary.
 
 ### Open pattern backlog
 

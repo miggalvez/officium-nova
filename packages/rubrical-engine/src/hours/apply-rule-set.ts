@@ -1059,12 +1059,15 @@ function minorHourLaterBlockFallbackReference(
   input: ApplyRuleSetInput,
   slot: SlotName
 ): TextReference | undefined {
-  // Jan 14 1960 checkpoint: Sunday ordinary post-psalmody minor-hour text
+  // Jan 14 1960 / Jan 28 1955 checkpoint: Sunday ordinary post-psalmody minor-hour text
   // does not live on `Ordinarium/Minor#Capitulum Responsorium Versus`; that
   // heading is only the empty wrapper. When no office file supplies these
-  // slots, Rubrics 1960 falls back to the Sunday later-block sections in
+  // slots, the simplified Roman policies fall back to the Sunday later-block sections in
   // `Psalterium/Special/Minor Special`.
-  if (input.policy.name !== 'rubrics-1960' || input.temporal.dayOfWeek !== 0) {
+  if (
+    (input.policy.name !== 'rubrics-1960' && input.policy.name !== 'reduced-1955') ||
+    input.temporal.dayOfWeek !== 0
+  ) {
     return undefined;
   }
 

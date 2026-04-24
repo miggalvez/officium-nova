@@ -33,6 +33,11 @@ export function directiveDrivenSlotContent(args: DirectiveSlotContentArgs): Slot
     return oneAloneWrapper;
   }
 
+  const minorHourWrapper = minorHourOrationWrapperContent(args);
+  if (minorHourWrapper) {
+    return minorHourWrapper;
+  }
+
   if (args.slot === 'preces') {
     const content = precesDirectiveContent(args.hour, args.directives);
     if (!content) {
@@ -265,6 +270,64 @@ function oneAloneMinorHourWrapperContent(args: DirectiveSlotContentArgs): SlotCo
   }
 
   return undefined;
+}
+
+function minorHourOrationWrapperContent(args: DirectiveSlotContentArgs): SlotContent | undefined {
+  if (!usesMinorHourOrationWrapper(args)) {
+    return undefined;
+  }
+
+  if (args.slot === 'oration') {
+    const innerRefs = refsForWrappedOration(args.content);
+    if (!innerRefs) {
+      return undefined;
+    }
+
+    return {
+      kind: 'ordered-refs',
+      refs: [
+        commonPrayerRef('Domine exaudi'),
+        commonPrayerRef('Oremus'),
+        ...innerRefs
+      ]
+    };
+  }
+
+  return {
+    kind: 'ordered-refs',
+    refs: [
+      commonPrayerRef('Domine exaudi'),
+      commonPrayerRef('Benedicamus Domino'),
+      commonPrayerRef('Fidelium animae')
+    ]
+  };
+}
+
+function usesMinorHourOrationWrapper(args: DirectiveSlotContentArgs): boolean {
+  if (
+    (args.hour !== 'terce' && args.hour !== 'sext' && args.hour !== 'none') ||
+    (args.slot !== 'oration' && args.slot !== 'conclusion')
+  ) {
+    return false;
+  }
+
+  if (!args.context.version.handle.includes('1955') && !args.context.version.handle.includes('1960')) {
+    return false;
+  }
+
+  if (args.slot === 'conclusion') {
+    return isMinorHourConclusionContent(args.content);
+  }
+
+  return refsForWrappedOration(args.content) !== undefined;
+}
+
+function isMinorHourConclusionContent(content: SlotContent): boolean {
+  return (
+    content.kind === 'single-ref' &&
+    content.ref.path === 'horas/Ordinarium/Minor' &&
+    content.ref.section === 'Conclusio'
+  );
 }
 
 function usesOneAloneMinorHourWrapper(args: DirectiveSlotContentArgs): boolean {
