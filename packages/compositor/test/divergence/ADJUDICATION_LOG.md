@@ -2479,6 +2479,100 @@ post-octave case.
 compare now advances past the conclusion dismissal under both simplified
 Roman policies.
 
+### 2026-04-24 — Pattern: Roman ferial minor-hour short responsories gain underscore separators in Perl (perl-bug)
+
+**Commit.** 4dd9d33
+
+**Ledger signal.** After the ferial later-block fallback was restored,
+Ash Wednesday and the repeated ferial checkpoints now reach their
+source-backed `Terce`/`Sext`/`None` short responsories. The remaining
+first divergence is Perl's literal `_` line before the `R.br.` opening,
+while the compositor begins with the source section's responsory text.
+
+**Root cause.** The Phase 2 refs are now correct. `Minor Special.txt`
+contains `[Responsory breve Feria Tertia]`, `[Responsory breve Feria
+Sexta]`, and `[Responsory breve Feria Nona]` directly, with their
+`R.br.` openings and following versicle sections. It does not contain
+underscore-only separator lines before those responsories.
+
+**Resolution.** Class `perl-bug`. Added representative adjudications for
+both simplified Roman policies and all three ferial minor-hour
+responsory openings; `adjudications:fanout` extends the same source
+classification to matching later ledger rows.
+
+**Citation.**
+
+- `upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:91-101`
+- `upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:116-125`
+- `upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:140-149`
+
+**Impact.** The newly exposed ferial short-responsory separator family is
+classified as the same Perl render-surface issue already recorded for
+Sunday and Paschaltide later blocks.
+
+### 2026-04-24 — Pattern: Roman ferial Prime later block is source-backed against Perl surface drift (perl-bug)
+
+**Commit.** da7166b
+
+**Ledger signal.** Once the ferial Prime fallback is active, the
+simplified Roman policies expose two Prime variants of the same
+source-backed seam. In Reduced 1955, Perl inserts `R. Deo grátias.`
+before the Prime responsory; in Rubrics 1960, Perl keeps the Sunday
+`1 Tim. 1:17` chapter where the compositor emits the ferial `Zach 8:19`
+chapter.
+
+**Root cause.** The restored Prime refs point to `Prima Special`, whose
+`[Feria]` section carries `Zach 8:19` and whose `[Responsory]` section
+begins directly with `R.br. Christe, Fili Dei vivi...`. There is no
+`$Deo gratias` marker in the Prime `[Feria]` source block.
+
+**Resolution.** Class `perl-bug`. Added representative adjudications for
+the Reduced 1955 implicit-`Deo gratias` row and the Rubrics 1960 Sunday
+chapter row; `adjudications:fanout` applies those stable signatures to
+the repeated ferial Prime checkpoints.
+
+**Citation.**
+
+- `upstream/web/www/horas/Latin/Psalterium/Special/Prima Special.txt:1-7`
+- `upstream/web/www/horas/Latin/Psalterium/Special/Prima Special.txt:45-59`
+
+**Impact.** The largest remaining Prime source-backed family is now
+classified, leaving the live Roman frontier centered on Holy Week
+chapter selection and proper-feast short-responsory separators.
+
+### 2026-04-24 — Pattern: Holy Week minor hours use Quad5 later blocks (mixed fix)
+
+**Commit.** 895eada
+
+**Ledger signal.** Holy Week Monday through Wednesday `Terce`, `Sext`,
+and `None` were falling back to the ordinary feria later blocks, so the
+compositor first diverged at `Jer 17:14`, `Rom 13:8`, and
+`1 Pet 1:17-19` where Perl surfaced the Holy Week `Quad5` chapters.
+
+**Root cause.** `Minor Special.txt` has dedicated `Quad5
+Tertia`/`Sexta`/`Nona` chapter, responsory, and versicle sections for
+these late-Lent minor hours. The simplified Roman fallback selector knew
+about ordinary feria blocks but did not map `Quad6-1`, `Quad6-2`, and
+`Quad6-3` onto those Holy Week `Quad5` sections.
+
+**Resolution.** Fixed in Phase 2 hour structuring. The minor-hour
+fallback selector now routes Holy Week Monday through Wednesday
+`Terce`/`Sext`/`None` to the `Quad5` chapter, short-responsory, and
+versicle sections. The source-backed rows then advance to the familiar
+Perl underscore separator before the `R.br.` line, so representative
+`perl-bug` adjudications were added for that exposed render-surface seam.
+
+**Citation.**
+
+- `upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:381-410`
+- `upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:430-461`
+- `upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:477-506`
+
+**Impact.** The Holy Week minor-hour chapter selection bug is closed for
+both simplified Roman policies. The residual first divergence on those
+rows is explicitly classified as the same source-backed short-responsory
+separator issue handled in earlier tranches.
+
 ### Open pattern backlog
 
 The following families remain open and have not yet received their own

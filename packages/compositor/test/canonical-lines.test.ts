@@ -801,6 +801,51 @@ describe('Psalmus N [index] heading emission', () => {
     expect(texts[0]).toBe('Psalmus 118(1-16) [1]');
   });
 
+  it('strips source quote markers from psalm range headings', () => {
+    const corpus = new InMemoryTextIndex();
+    corpus.addFile({
+      path: 'horas/Latin/Psalterium/Psalmorum/Psalm18.txt',
+      sections: [
+        {
+          header: '__preamble',
+          startLine: 1,
+          endLine: 1,
+          content: [{ type: 'text', value: 'Cæli enárrant glóriam Dei...' }]
+        }
+      ]
+    });
+
+    const hour: HourStructure = {
+      hour: 'prime',
+      slots: {
+        psalmody: {
+          kind: 'psalmody',
+          psalms: [
+            {
+              psalmRef: {
+                path: 'horas/Latin/Psalterium/Psalmorum/Psalm18',
+                section: '__preamble',
+                selector: "18(2-'7b')"
+              }
+            }
+          ]
+        }
+      },
+      directives: []
+    };
+
+    const composed = composeHour({
+      corpus,
+      summary: buildSummary(hour),
+      version: stubVersion,
+      hour: 'prime',
+      options: { languages: ['Latin'] }
+    });
+
+    const texts = lineTexts(composed, 'psalmody', 'Latin');
+    expect(texts[0]).toBe('Psalmus 18(2-7b) [1]');
+  });
+
   it('uses Old Testament canticle titles as headings after leading separators and preserves the citation', () => {
     const corpus = new InMemoryTextIndex();
     corpus.addFile({

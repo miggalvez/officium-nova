@@ -144,4 +144,90 @@ describe('minor hour structurers', () => {
     expect(result.hour.slots['commemoration-antiphons']).toBeUndefined();
     expect(result.hour.slots['commemoration-versicles']).toBeUndefined();
   });
+
+  it('falls back to ferial minor-hour later blocks for temporal weekdays', () => {
+    const { corpus, version } = setup();
+    const skeleton = loadOrdinariumSkeleton('terce', version, corpus);
+    const celeb = celebration('Tempora/Quadp3-3');
+    const hourRules = deriveHourRuleSet(celeb, rules(), 'terce');
+
+    const result = structureTerce({
+      skeleton,
+      celebration: celeb,
+      commemorations: [],
+      celebrationRules: rules(),
+      hourRules,
+      temporal: {
+        ...temporal('2024-02-14', 'Quadp3-3', 3),
+        season: 'lent'
+      },
+      policy: rubrics1960Policy,
+      corpus
+    });
+
+    expect(result.hour.slots.chapter).toEqual({
+      kind: 'single-ref',
+      ref: {
+        path: 'horas/Latin/Psalterium/Special/Minor Special',
+        section: 'Feria Tertia'
+      }
+    });
+    expect(result.hour.slots.responsory).toEqual({
+      kind: 'single-ref',
+      ref: {
+        path: 'horas/Latin/Psalterium/Special/Minor Special',
+        section: 'Responsory breve Feria Tertia'
+      }
+    });
+    expect(result.hour.slots.versicle).toEqual({
+      kind: 'single-ref',
+      ref: {
+        path: 'horas/Latin/Psalterium/Special/Minor Special',
+        section: 'Versum Feria Tertia'
+      }
+    });
+  });
+
+  it('uses the Holy Week later blocks for Monday through Wednesday minor hours', () => {
+    const { corpus, version } = setup();
+    const skeleton = loadOrdinariumSkeleton('sext', version, corpus);
+    const celeb = celebration('Tempora/Quad6-2');
+    const hourRules = deriveHourRuleSet(celeb, rules(), 'sext');
+
+    const result = structureSext({
+      skeleton,
+      celebration: celeb,
+      commemorations: [],
+      celebrationRules: rules(),
+      hourRules,
+      temporal: {
+        ...temporal('2024-03-26', 'Quad6-2', 2),
+        season: 'lent'
+      },
+      policy: rubrics1960Policy,
+      corpus
+    });
+
+    expect(result.hour.slots.chapter).toEqual({
+      kind: 'single-ref',
+      ref: {
+        path: 'horas/Latin/Psalterium/Special/Minor Special',
+        section: 'Quad5 Sexta'
+      }
+    });
+    expect(result.hour.slots.responsory).toEqual({
+      kind: 'single-ref',
+      ref: {
+        path: 'horas/Latin/Psalterium/Special/Minor Special',
+        section: 'Responsory breve Quad5 Sexta'
+      }
+    });
+    expect(result.hour.slots.versicle).toEqual({
+      kind: 'single-ref',
+      ref: {
+        path: 'horas/Latin/Psalterium/Special/Minor Special',
+        section: 'Versum Quad5 Sexta'
+      }
+    });
+  });
 });

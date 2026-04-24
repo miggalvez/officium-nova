@@ -69,11 +69,15 @@ export function buildPsalmHeading(
     directPsalm && selector ? selector.match(/^\d+\(([^)]+)\)$/u)?.[1] : undefined;
   const rangeSuffix =
     directPsalm && selector && /^\d+-\d+$/u.test(selector)
-      ? `(${selector})`
+      ? `(${normalizePsalmRangeDisplay(selector)})`
       : tokenRange
-        ? `(${tokenRange})`
+        ? `(${normalizePsalmRangeDisplay(tokenRange)})`
         : '';
   return `Psalmus ${psalmNumber}${rangeSuffix} [${psalmIndex}]`;
+}
+
+function normalizePsalmRangeDisplay(range: string): string {
+  return range.replace(/['\s]/gu, '');
 }
 
 export function replaceLeadingCanticleTitleWithCitation(

@@ -36,6 +36,7 @@ const COMMON_PRAYERS_PATH = 'horas/Latin/Psalterium/Common/Prayers';
 const PSALMI_MAJOR = 'horas/Latin/Psalterium/Psalmi/Psalmi major';
 const PSALMORUM_ROOT = 'horas/Latin/Psalterium/Psalmorum';
 const MAJOR_SPECIAL_PATH = 'horas/Latin/Psalterium/Special/Major Special';
+const HOLY_WEEK_MON_WED_KEYS = new Set(['Quad6-1', 'Quad6-2', 'Quad6-3']);
 
 export interface ApplyRuleSetInput {
   readonly hour: HourName;
@@ -1064,25 +1065,31 @@ function minorHourLaterBlockFallbackReference(
   // heading is only the empty wrapper. When no office file supplies these
   // slots, the simplified Roman policies fall back to the Sunday later-block sections in
   // `Psalterium/Special/Minor Special`.
-  if (
-    (input.policy.name !== 'rubrics-1960' && input.policy.name !== 'reduced-1955') ||
-    input.temporal.dayOfWeek !== 0
-  ) {
+  if (input.policy.name !== 'rubrics-1960' && input.policy.name !== 'reduced-1955') {
     return undefined;
   }
 
-  const section = minorHourLaterBlockFallbackSection(input.hour, slot);
+  const section =
+    input.temporal.dayOfWeek === 0
+      ? minorHourSundayLaterBlockFallbackSection(input.hour, slot)
+      : minorHourFerialLaterBlockFallbackSection(input, slot);
   if (!section) {
     return undefined;
   }
 
   return {
-    path: 'horas/Latin/Psalterium/Special/Minor Special',
+    path: minorHourLaterBlockFallbackPath(input.hour, input.temporal.dayOfWeek),
     section
   };
 }
 
-function minorHourLaterBlockFallbackSection(
+function minorHourLaterBlockFallbackPath(hour: HourName, dayOfWeek: number): string {
+  return hour === 'prime' && dayOfWeek !== 0
+    ? 'horas/Latin/Psalterium/Special/Prima Special'
+    : 'horas/Latin/Psalterium/Special/Minor Special';
+}
+
+function minorHourSundayLaterBlockFallbackSection(
   hour: HourName,
   slot: SlotName
 ): string | undefined {
@@ -1117,6 +1124,112 @@ function minorHourLaterBlockFallbackSection(
           return 'Responsory breve Dominica Nona';
         case 'versicle':
           return 'Versum Dominica Nona';
+        default:
+          return undefined;
+      }
+    default:
+      return undefined;
+  }
+}
+
+function minorHourFerialLaterBlockFallbackSection(
+  input: ApplyRuleSetInput,
+  slot: SlotName
+): string | undefined {
+  if (input.celebration.source !== 'temporal' || input.celebration.kind) {
+    return undefined;
+  }
+
+  const holyWeekMonWedSection = minorHourHolyWeekMonWedLaterBlockSection(input.hour, slot);
+  if (HOLY_WEEK_MON_WED_KEYS.has(input.temporal.dayName) && holyWeekMonWedSection) {
+    return holyWeekMonWedSection;
+  }
+
+  switch (input.hour) {
+    case 'prime':
+      switch (slot) {
+        case 'chapter':
+          return 'Feria';
+        case 'responsory':
+          return 'Responsory';
+        case 'versicle':
+          return 'Versum';
+        default:
+          return undefined;
+      }
+    case 'terce':
+      switch (slot) {
+        case 'chapter':
+          return 'Feria Tertia';
+        case 'responsory':
+          return 'Responsory breve Feria Tertia';
+        case 'versicle':
+          return 'Versum Feria Tertia';
+        default:
+          return undefined;
+      }
+    case 'sext':
+      switch (slot) {
+        case 'chapter':
+          return 'Feria Sexta';
+        case 'responsory':
+          return 'Responsory breve Feria Sexta';
+        case 'versicle':
+          return 'Versum Feria Sexta';
+        default:
+          return undefined;
+      }
+    case 'none':
+      switch (slot) {
+        case 'chapter':
+          return 'Feria Nona';
+        case 'responsory':
+          return 'Responsory breve Feria Nona';
+        case 'versicle':
+          return 'Versum Feria Nona';
+        default:
+          return undefined;
+      }
+    default:
+      return undefined;
+  }
+}
+
+function minorHourHolyWeekMonWedLaterBlockSection(
+  hour: HourName,
+  slot: SlotName
+): string | undefined {
+  switch (hour) {
+    case 'terce':
+      switch (slot) {
+        case 'chapter':
+          return 'Quad5 Tertia';
+        case 'responsory':
+          return 'Responsory breve Quad5 Tertia';
+        case 'versicle':
+          return 'Versum Quad5 Tertia';
+        default:
+          return undefined;
+      }
+    case 'sext':
+      switch (slot) {
+        case 'chapter':
+          return 'Quad5 Sexta';
+        case 'responsory':
+          return 'Responsory breve Quad5 Sexta';
+        case 'versicle':
+          return 'Versum Quad5 Sexta';
+        default:
+          return undefined;
+      }
+    case 'none':
+      switch (slot) {
+        case 'chapter':
+          return 'Quad5 Nona';
+        case 'responsory':
+          return 'Responsory breve Quad5 Nona';
+        case 'versicle':
+          return 'Versum Quad5 Nona';
         default:
           return undefined;
       }

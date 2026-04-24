@@ -1125,6 +1125,121 @@ The affected rows first diverge at `secreto` (Perl) vs `Nocturnus I`
 |---|---|---|---|
 | Divino Afflatu - 1954 | 2024-01-06 | Matins | `e66d7177` |
 
+### 2026-04-24 — Roman ferial minor-hour short responsories gain underscore separators in the Perl render surface
+
+**Classification.** `perl-bug`
+
+**Summary.** After the Roman ferial minor-hour fallback fix, `Terce`,
+`Sext`, and `None` now correctly emit the feria chapter, short
+responsory, and versicle from `Minor Special.txt`. The remaining first
+divergence is a literal `_` line that the Perl comparison surface
+inserts before the short responsory. The source-backed compositor output
+begins directly with the `R.br.` line.
+
+**Primary source.**
+`upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:91-101,116-125,140-149`
+
+These ferial later-block sections contain the `R.br.` short responsory
+and versicle directly. They do not contain underscore-only separator
+lines before the responsory.
+
+**Reproduction.**
+Run:
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Reduced - 1955" --date 2024-02-14 --hour Tertia
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Reduced - 1955" --date 2024-02-14 --hour Sexta
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Reduced - 1955" --date 2024-02-14 --hour Nona
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Rubrics 1960 - 1960" --date 2024-02-14 --hour Tertia
+```
+
+Each row now first diverges on `expected="_"` versus the compositor's
+source-backed `R.br.` opening line.
+
+**Affected stable divergence-row keys.**
+
+| Policy | Date | Hour | Row key suffix |
+|---|---|---|---|
+| Reduced - 1955 | 2024-02-14 | Terce | `9d0c4734` |
+| Reduced - 1955 | 2024-02-14 | Sext | `c92f80b2` |
+| Reduced - 1955 | 2024-02-14 | None | `1ab5e32c` |
+| Rubrics 1960 - 1960 | 2024-02-14 | Terce | `9d0c4734` |
+| Rubrics 1960 - 1960 | 2024-02-14 | Sext | `c92f80b2` |
+| Rubrics 1960 - 1960 | 2024-02-14 | None | `1ab5e32c` |
+
+### 2026-04-24 — Roman ferial Prime later blocks drift from `Prima Special` in the Perl render surface
+
+**Classification.** `perl-bug`
+
+**Summary.** The source-backed ferial Prime fallback uses
+`Prima Special:Feria` for the chapter and `Prima Special:Responsory` for
+the short responsory. Reduced 1955 Perl inserts an implicit
+`R. Deo grátias.` before the responsory even though the Prime source
+chapter has no `$Deo gratias` marker. Rubrics 1960 Perl keeps the Sunday
+Prime citation (`1 Tim. 1:17`) where the source-backed feria chapter is
+`Zach 8:19`.
+
+**Primary source.**
+`upstream/web/www/horas/Latin/Psalterium/Special/Prima Special.txt:1-7,45-59`
+
+The source separates `[Dominica]` from `[Feria]`, gives `[Feria]` the
+`Zach 8:19` chapter, and begins `[Responsory]` directly with
+`R.br. Christe, Fili Dei vivi...`.
+
+**Reproduction.**
+Run:
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Reduced - 1955" --date 2024-02-14 --hour Prima
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Rubrics 1960 - 1960" --date 2024-02-14 --hour Prima
+```
+
+**Affected stable divergence-row keys.**
+
+| Policy | Date | Hour | Row key suffix |
+|---|---|---|---|
+| Reduced - 1955 | 2024-02-14 | Prime | `6081a8cc` |
+| Rubrics 1960 - 1960 | 2024-02-14 | Prime | `b7853e49` |
+
+### 2026-04-24 — Holy Week minor-hour `Quad5` short responsories gain underscore separators after source-backed fallback
+
+**Classification.** `perl-bug` for the remaining separator rows after
+the Phase 2 fallback fix.
+
+**Summary.** Holy Week Monday through Wednesday `Terce`, `Sext`, and
+`None` now use the source-backed `Quad5` later blocks from
+`Minor Special.txt`. Once the chapter selection is fixed, the remaining
+first divergence is the Perl render surface inserting an underscore-only
+line before the `R.br.` short responsory.
+
+**Primary source.**
+`upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:381-410,430-461,477-506`
+
+The source carries `Quad5 Tertia`, `Quad5 Sexta`, and `Quad5 Nona`
+chapter sections plus their matching `Responsory breve Quad5 ...` and
+`Versum Quad5 ...` sections. The short responsory begins directly with
+`R.br.`; no underscore-only separator precedes it.
+
+**Reproduction.**
+Run:
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Reduced - 1955" --date 2024-03-25 --hour Tertia
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Reduced - 1955" --date 2024-03-25 --hour Sexta
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Rubrics 1960 - 1960" --date 2024-03-25 --hour Nona
+```
+
+**Affected stable divergence-row keys.**
+
+| Policy | Date | Hour | Row key suffix |
+|---|---|---|---|
+| Reduced - 1955 | 2024-03-25 | Terce | `cedac887` |
+| Reduced - 1955 | 2024-03-25 | Sext | `3acfd479` |
+| Reduced - 1955 | 2024-03-25 | None | `2071fc88` |
+| Rubrics 1960 - 1960 | 2024-03-25 | Terce | `cedac887` |
+| Rubrics 1960 - 1960 | 2024-03-25 | Sext | `3acfd479` |
+| Rubrics 1960 - 1960 | 2024-03-25 | None | `2071fc88` |
+
 ## See also
 
 - [ADR-011 — Phase 3 divergence adjudication](./adr/011-phase-3-divergence-adjudication.md)
