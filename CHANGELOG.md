@@ -14,6 +14,7 @@ The `@officium-novum/compositor` package turns a `DayOfficeSummary` + Phase-1-re
 
 Newest tranche first:
 
+- **2026-04-24.** Closed the next five Phase 3 tranche slices across the Paschal minor-hour and major-hour conclusion frontier. Phase 2 now supplies seasonal Paschal/Ascension/Pentecost doxology variants to fallback minor-hour hymns when no proper doxology is declared, focused compositor regressions lock the 1955 Paschal fallback surface, the Rubrics 1960 residual Paschal doxology rows are adjudicated as Perl render-surface bugs, the 1960 `Tridentinum` Sunday Prime Paschal antiphon rows are classified from `Psalmi minor`, and selected 1955/1960 Vespers post-collect `Dómine, exáudi` bridge rows are recorded in the sidecar and upstream issue log.
 - **2026-04-24.** Closed the next shared Roman source-backed `perl-bug`
   adjudication sweep without changing compositor behavior. Focused upstream
   regressions now lock Lenten ferial Vespers opening antiphons and the

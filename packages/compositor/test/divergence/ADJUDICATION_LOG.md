@@ -2728,6 +2728,81 @@ blocks, then recorded the eight simplified Roman row adjudications in
 **Impact.** Eight more proper-feast minor-hour rows are now classified
 as source-backed Perl render-surface bugs.
 
+### 2026-04-24 — Pattern: seasonal Paschal fallback-hymn doxologies reach Roman minor hours (engine-bug fixed plus perl-bug residuals)
+
+**Commit.** `pending`
+
+**Ledger signal.** The Paschal Sunday rows exposed fallback minor-hour
+hymns whose final stanza stayed on the ordinary `Præsta, Pater
+piíssime,` or `Ejúsque soli Fílio,` source instead of the seasonal
+Paschal doxology.
+
+**Root cause.** Phase 2 already attached explicit proper `Doxology=`
+variants to fallback minor-hour hymns, but it did not supply the
+seasonal Paschal / Ascension / Pentecost variant when no proper office
+file declared one. The compositor therefore had no `doxology-variant`
+slot to consume.
+
+**Resolution.** Class `engine-bug`, fixed in
+`packages/rubrical-engine/src/hours/apply-rule-set.ts`: fallback
+minor-hour hymns now receive the same seasonal doxology family already
+used by major-hour hymn wrapping. The remaining Rubrics 1960 rows where
+Perl retains the ordinary stanza are classified as `perl-bug` because
+the source-backed Paschal stanza is now attached and emitted.
+
+**Citation.** `upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:29-34`.
+
+**Impact.** The 1955 Paschal doxology seam now advances to later
+psalmody / later-block rows, and seven Rubrics 1960 residual doxology
+rows are now classified as source-backed Perl render-surface bugs.
+
+### 2026-04-24 — Pattern: 1960 Tridentinum Sunday Prime Paschal antiphon (perl-bug)
+
+**Commit.** `pending`
+
+**Ledger signal.** Five Rubrics 1960 Sunday Prime rows show Perl's
+older full `Dominica` antiphon at the first divergence, while the
+compositor emits the `Tridentinum` row's simpler Paschal `Allelúja, *
+allelúja, allelúja` antiphon.
+
+**Root cause.** The 1960 psalm-table source for Sunday Prime is the
+`Tridentinum` keyed row, and that row explicitly carries
+`Prima Dominica=Allelúja, * allelúja, allelúja;;53,117,118(1-16),118(17-32)`.
+The compositor preserves that keyed source; Perl's rendered comparison
+surface uses the older `Prima` / `Dominica` antiphon text.
+
+**Resolution.** Class `perl-bug`. Added an upstream integration
+regression for the repeated 1960 Sunday Prime antiphon surface and
+recorded the five row adjudications in `adjudications.json`.
+
+**Citation.** `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:218`.
+
+**Impact.** Five more Rubrics 1960 Sunday Prime rows are now classified
+as source-backed Perl render-surface bugs.
+
+### 2026-04-24 — Pattern: Roman Vespers post-collect conclusion bridge is skipped by Perl (perl-bug)
+
+**Commit.** `pending`
+
+**Ledger signal.** Selected Reduced 1955 Vespers rows and one Rubrics
+1960 row reach the post-collect boundary where Perl stops at `_` while
+the compositor continues with `V. Dómine, exáudi oratiónem meam.`.
+
+**Root cause.** `Psalterium/Common/Prayers` supplies the shared
+`Domine exaudi` pair after the collect. The compositor emits that
+source-backed conclusion bridge for the major-hour conclusion slot;
+Perl's rendered comparison surface leaves the boundary as an underscore
+on these rows.
+
+**Resolution.** Class `perl-bug`. Added an upstream integration
+regression for the 1955 Vespers conclusion bridge and recorded the six
+row adjudications in `adjudications.json`.
+
+**Citation.** `upstream/web/www/horas/Latin/Psalterium/Common/Prayers.txt:79-86`.
+
+**Impact.** Six Vespers conclusion rows are now classified as
+source-backed Perl render-surface bugs.
+
 ### Open pattern backlog
 
 The following families remain open and have not yet received their own

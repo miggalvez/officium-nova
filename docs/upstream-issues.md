@@ -24,6 +24,116 @@ entry here and re-run the adjudication harness.
 
 ## Current entries
 
+### 2026-04-24 — Roman Paschaltide fallback minor-hour hymn doxologies retain ordinary endings in the Perl render surface
+
+**Classification.** `perl-bug`
+
+**Summary.** Once fallback minor-hour hymns receive the same seasonal
+Paschal / Ascension / Pentecost doxology family as major-hour hymns,
+the Rubrics 1960 Paschal Sunday rows emit the source-backed seasonal
+stanza. The Perl render surface keeps the ordinary fallback hymn ending
+on these rows.
+
+**Primary source.**
+
+`upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:29-34`
+
+This section supplies the Paschal doxology beginning `Deo Patri sit
+glória` and continuing with the risen-Son stanza.
+
+**Reproduction.**
+Run:
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --date 2024-04-07 --date 2024-05-19
+```
+
+Then inspect Prime, Terce, Sext, and None for `Rubrics 1960 - 1960`.
+
+**Affected stable divergence-row keys.**
+
+| Policy | Date | Hour | Row key suffix |
+|---|---|---|---|
+| Rubrics 1960 - 1960 | 2024-04-07 | Prime | `7859a9fb` |
+| Rubrics 1960 - 1960 | 2024-04-07 | Terce | `dcdd92bf` |
+| Rubrics 1960 - 1960 | 2024-04-07 | Sext | `dcdd92bf` |
+| Rubrics 1960 - 1960 | 2024-04-07 | None | `dcdd92bf` |
+| Rubrics 1960 - 1960 | 2024-05-19 | Prime | `7859a9fb` |
+| Rubrics 1960 - 1960 | 2024-05-19 | Sext | `dcdd92bf` |
+| Rubrics 1960 - 1960 | 2024-05-19 | None | `dcdd92bf` |
+
+### 2026-04-24 — Rubrics 1960 Sunday Prime uses the older Dominica antiphon instead of the Tridentinum row
+
+**Classification.** `perl-bug`
+
+**Summary.** The Rubrics 1960 Sunday Prime psalm-table source is the
+`Tridentinum` row, whose antiphon is `Allelúja, * allelúja, allelúja`.
+The compositor emits that source-backed antiphon, while the Perl render
+surface uses the older full `Dominica` antiphon.
+
+**Primary source.**
+
+`upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:218`
+
+This row explicitly begins
+`Prima Dominica=Allelúja, * allelúja, allelúja;;53,117,118(1-16),118(17-32)`.
+
+**Reproduction.**
+Run:
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --date 2024-06-16 --date 2024-06-30 --date 2024-09-08 --date 2024-09-15 --date 2024-10-06
+```
+
+Then inspect Prime for `Rubrics 1960 - 1960`.
+
+**Affected stable divergence-row keys.**
+
+| Policy | Date | Hour | Row key suffix |
+|---|---|---|---|
+| Rubrics 1960 - 1960 | 2024-06-16 | Prime | `e3d07cc1` |
+| Rubrics 1960 - 1960 | 2024-06-30 | Prime | `e3d07cc1` |
+| Rubrics 1960 - 1960 | 2024-09-08 | Prime | `e3d07cc1` |
+| Rubrics 1960 - 1960 | 2024-09-15 | Prime | `e3d07cc1` |
+| Rubrics 1960 - 1960 | 2024-10-06 | Prime | `e3d07cc1` |
+
+### 2026-04-24 — Roman Vespers post-collect `Dómine, exáudi` bridge is skipped by the Perl render surface
+
+**Classification.** `perl-bug`
+
+**Summary.** Selected simplified Roman Vespers rows reach the
+post-collect conclusion boundary where the compositor continues with
+the source-backed `Dómine, exáudi oratiónem meam` bridge. The Perl
+render surface stops at `_` on those rows.
+
+**Primary source.**
+
+`upstream/web/www/horas/Latin/Psalterium/Common/Prayers.txt:79-86`
+
+This section supplies the `Domine exaudi` versicle and response used
+after the Vespers collect.
+
+**Reproduction.**
+Run:
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --date 2024-03-19 --date 2024-09-08 --date 2024-09-15 --date 2024-12-08 --date 2024-12-27
+```
+
+Then inspect Vespers for `Reduced - 1955`; Dec `27` also exposes the
+same row under `Rubrics 1960 - 1960`.
+
+**Affected stable divergence-row keys.**
+
+| Policy | Date | Hour | Row key suffix |
+|---|---|---|---|
+| Reduced - 1955 | 2024-03-19 | Vespers | `843b6667` |
+| Reduced - 1955 | 2024-09-08 | Vespers | `843b6667` |
+| Reduced - 1955 | 2024-09-15 | Vespers | `843b6667` |
+| Reduced - 1955 | 2024-12-08 | Vespers | `843b6667` |
+| Reduced - 1955 | 2024-12-27 | Vespers | `843b6667` |
+| Rubrics 1960 - 1960 | 2024-12-27 | Vespers | `843b6667` |
+
 ### 2026-04-24 — Roman Precious Blood minor-hour proper later blocks are skipped by the Perl render surface
 
 **Classification.** `perl-bug`
