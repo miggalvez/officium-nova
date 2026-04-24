@@ -2448,7 +2448,7 @@ and Ascension Vespers now exposes the ordinary conclusion boundary.
 
 ### 2026-04-24 — Pattern: Roman Ascension Vespers conclusion keeps ordinary Benedicamus (engine-bug)
 
-**Commit.** pending
+**Commit.** 1be1aeb
 
 **Ledger signal.** After the Paschaltide short-responsory adjudication
 sweep, the next shared Roman Vespers seam was the Ascension conclusion.
