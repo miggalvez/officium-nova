@@ -478,17 +478,37 @@ function resolvePsalmiMinorAntiphon(
       ? resolveDominicalTridentinumAntiphon(index, path, wantedKey)
       : undefined;
   const keyed = dominical ?? selectKeyedTextContent(section.content, wantedKey);
-  const firstText = keyed?.find((node) => node.type === 'text');
-  if (!firstText || firstText.type !== 'text') {
+  const firstText = firstTextValue(keyed);
+  if (firstText === undefined) {
     return undefined;
   }
   const antiphon = section.header === 'Tridentinum'
-    ? firstText.value.split(';;', 1)[0]?.trim()
-    : firstText.value.trim();
-  if (!antiphon) {
+    ? firstText.split(';;', 1)[0]?.trim()
+    : firstText.trim();
+  if (!antiphon || antiphon === '_') {
     return undefined;
   }
   return Object.freeze([{ type: 'text', value: antiphon }]);
+}
+
+function firstTextValue(content: readonly TextContent[] | undefined): string | undefined {
+  if (!content) {
+    return undefined;
+  }
+
+  for (const node of content) {
+    if (node.type === 'text') {
+      return node.value;
+    }
+    if (node.type === 'conditional') {
+      const nested = firstTextValue(node.content);
+      if (nested !== undefined) {
+        return nested;
+      }
+    }
+  }
+
+  return undefined;
 }
 
 function resolveDominicalTridentinumAntiphon(

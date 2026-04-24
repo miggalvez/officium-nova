@@ -433,6 +433,47 @@ describe('resolveReference', () => {
     expect(rendered).toContain('24:1 Ad te Domine levavi');
   });
 
+  it('extracts weekday minor-hour antiphons through conditional wrappers', () => {
+    const index = new InMemoryTextIndex();
+    index.addFile({
+      path: 'horas/Latin/Psalterium/Psalmi/Psalmi minor.txt',
+      sections: [
+        {
+          header: 'Tertia',
+          content: [
+            {
+              type: 'conditional',
+              condition: {
+                expression: {
+                  type: 'not',
+                  inner: { type: 'match', subject: 'rubrica', predicate: 'praedicatorum' }
+                }
+              },
+              content: [{ type: 'text', value: 'Feria IV = Misericórdia tua, * Dómine.' }],
+              scope: { backwardLines: 0, forwardMode: 'line' }
+            }
+          ],
+          startLine: 1,
+          endLine: 1
+        }
+      ]
+    });
+
+    const resolved = resolveReference(
+      index,
+      {
+        path: 'horas/Latin/Psalterium/Psalmi/Psalmi minor',
+        section: 'Tertia',
+        selector: 'Feria IV#antiphon'
+      },
+      { languages: ['Latin'] }
+    );
+
+    expect(resolved.Latin?.content).toEqual([
+      { type: 'text', value: 'Misericórdia tua, * Dómine.' }
+    ]);
+  });
+
   it('selects weekday-keyed Compline psalmody from the Completorium section', () => {
     const index = new InMemoryTextIndex();
     index.addFile({

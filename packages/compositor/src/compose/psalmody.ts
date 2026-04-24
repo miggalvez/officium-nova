@@ -380,6 +380,6 @@ function isWeekdayMinorPsalmiMinorRef(ref: TextReference): boolean {
       ref.section === 'Tertia' ||
       ref.section === 'Sexta' ||
       ref.section === 'Nona') &&
-    Boolean(ref.selector?.match(/^Feria\s+(?:II|III|IV|V|VI)(?:#antiphon)?$/u))
+    Boolean(ref.selector?.match(/^Feria\s+(?:II|III|IV|V|VI|VII)(?:#antiphon)?$/u))
   );
 }

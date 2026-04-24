@@ -208,7 +208,7 @@ function resolveWeekdayMinorHourAssignments(
   return Object.freeze(
     tokens.map((token, index): PsalmAssignment => ({
       psalmRef: psalmTokenReference(token),
-      ...(index === 0 && row.antiphon
+      ...(index === 0 && hasTextualAntiphon(row.antiphon)
         ? {
             antiphonRef: {
               path: PSALMI_MINOR,
@@ -219,6 +219,11 @@ function resolveWeekdayMinorHourAssignments(
         : {})
     }))
   );
+}
+
+function hasTextualAntiphon(value: string | undefined): boolean {
+  const trimmed = value?.trim();
+  return trimmed !== undefined && trimmed.length > 0 && trimmed !== '_';
 }
 
 function isBracketedPsalmToken(token: string): boolean {
@@ -515,12 +520,16 @@ function findKeyedRow(
 
 function findSequentialKeyedRow(
   content: readonly TextContent[],
-  selector: string
+  selector: string,
+  continuation: readonly TextContent[] = []
 ): { readonly antiphon?: string; readonly psalmSpec?: string } | undefined {
   for (let index = 0; index < content.length; index += 1) {
     const node = content[index];
     if (node?.type === 'conditional') {
-      const nested = findSequentialKeyedRow(node.content, selector);
+      const nested = findSequentialKeyedRow(node.content, selector, [
+        ...content.slice(index + 1),
+        ...continuation
+      ]);
       if (nested) {
         return nested;
       }
@@ -539,7 +548,7 @@ function findSequentialKeyedRow(
     }
     return {
       antiphon: match[2]?.trim(),
-      psalmSpec: nextTextValue(content, index + 1)
+      psalmSpec: nextTextValue(content, index + 1) ?? nextTextValue(continuation, 0)
     };
   }
   return undefined;
