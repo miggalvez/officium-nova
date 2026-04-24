@@ -2314,7 +2314,7 @@ Reduced 1955 Ash Wednesday minor-hour psalmody rows.
 
 ### 2026-04-24 — Pattern: Ash Wednesday Roman ferial minor-hour psalmody rows split into source-backed units (mixed fix)
 
-**Commit.** pending
+**Commit.** a60990d
 
 **Ledger signal.** The live Roman frontier after the Feb `11` doxology
 tranche was Ash Wednesday Prime/Terce/Sext/None. Reduced 1955 and
@@ -2354,7 +2354,7 @@ a structural blocker rather than a row-classification family.
 
 ### 2026-04-24 — Pattern: Roman Vespers Psalm 115 half-verse structure (perl-bug)
 
-**Commit.** pending
+**Commit.** 0667a64
 
 **Ledger signal.** After the Ash Wednesday minor-hour psalmody fix, the
 next repeated shared Roman adjudication family was Psalm `115:7` in
@@ -2380,6 +2380,39 @@ upstream regression now locks the source-backed Vespers rendering, and
 **Impact.** Eight Roman Vespers rows move from `unadjudicated` to
 `perl-bug`. The tranche continues the existing half-verse adjudication
 policy documented in `docs/upstream-issues.md`.
+
+### 2026-04-24 — Pattern: Paschaltide bare Deo gratias chapter responses stay unseasoned (engine-bug)
+
+**Commit.** pending
+
+**Ledger signal.** The next shared Roman compositor seam was the bare
+`R. Deo grátias.` chapter response in Paschaltide. It surfaced on
+Reduced 1955 Ascension Terce/Sext/None/Vespers and on Rubrics 1960
+Ascension Vespers plus Pentecost Sext/None: the compositor added a
+single `allelúja`, while Perl left the bare response unchanged.
+
+**Root cause.** This was a Phase 3 directive-transform bug. The source
+`[Deo gratias]` macro is a bare `R. Deo grátias.`, while explicit
+Paschaltide dismissal text lives separately in `[Benedicamus Domino1]`.
+The legacy renderer also bypasses ordinary formula post-processing when
+the item is `Deo gratias`. Our generic chapter `add-alleluia` transform
+was treating that bare response as the chapter's final seasonable text.
+
+**Resolution.** Fixed in Phase 3. `add-alleluia` now leaves chapter
+content unchanged when its final substantive node is the bare
+`R. Deo grátias.` response, while retaining the existing antiphon and
+psalmody-specific behavior. A directive unit test and an upstream
+integration test cover the Ascension/Pentecost reduced-1955 and 1960
+surface.
+
+**Citation.**
+
+- `upstream/web/www/horas/Latin/Psalterium/Common/Prayers.txt:160-166`
+- `upstream/web/cgi-bin/horas/horas.pl:429-430`
+
+**Impact.** No adjudication was needed. The targeted May `9` and May
+`19` probes now advance past the bare chapter-response seam to the next
+short-responsory, hymn-doxology, or conclusion boundaries.
 
 ### Open pattern backlog
 

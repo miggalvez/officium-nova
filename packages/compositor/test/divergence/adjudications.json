@@ -7147,7 +7147,7 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm115.txt:7 — the source line explicitly encodes Psalm 115:7b as `Dirupísti víncula mea: ‡ (8) tibi sacrificábo hóstiam laudis, * et nomen Dómini invocábo.` The compositor preserves that half-verse structure while Perl flattens it to a single `*` boundary.",
     "notes": "Psalm 115 Vespers half-verse family; the same source-backed `‡ ... *` seam appears on Holy Saturday, Corpus Christi, SS Peter and Paul, and All Saints Vespers under both simplified Roman policies.",
     "resolvedAt": "2026-04-24",
-    "commitSha": "pending"
+    "commitSha": "0667a64"
   },
   "Reduced - 1955/2024-03-31/Compline/5dc10d20": {
     "policy": "Reduced - 1955",
@@ -7591,7 +7591,7 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm115.txt:7 — the source line explicitly encodes Psalm 115:7b as `Dirupísti víncula mea: ‡ (8) tibi sacrificábo hóstiam laudis, * et nomen Dómini invocábo.` The compositor preserves that half-verse structure while Perl flattens it to a single `*` boundary.",
     "notes": "Psalm 115 Vespers half-verse family; the same source-backed `‡ ... *` seam appears on Holy Saturday, Corpus Christi, SS Peter and Paul, and All Saints Vespers under both simplified Roman policies.",
     "resolvedAt": "2026-04-24",
-    "commitSha": "pending"
+    "commitSha": "0667a64"
   },
   "Reduced - 1955/2024-06-16/Compline/5dc10d20": {
     "policy": "Reduced - 1955",
@@ -7795,7 +7795,7 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm115.txt:7 — the source line explicitly encodes Psalm 115:7b as `Dirupísti víncula mea: ‡ (8) tibi sacrificábo hóstiam laudis, * et nomen Dómini invocábo.` The compositor preserves that half-verse structure while Perl flattens it to a single `*` boundary.",
     "notes": "Psalm 115 Vespers half-verse family; the same source-backed `‡ ... *` seam appears on Holy Saturday, Corpus Christi, SS Peter and Paul, and All Saints Vespers under both simplified Roman policies.",
     "resolvedAt": "2026-04-24",
-    "commitSha": "pending"
+    "commitSha": "0667a64"
   },
   "Reduced - 1955/2024-06-30/Compline/5dc10d20": {
     "policy": "Reduced - 1955",
@@ -8347,7 +8347,7 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm115.txt:7 — the source line explicitly encodes Psalm 115:7b as `Dirupísti víncula mea: ‡ (8) tibi sacrificábo hóstiam laudis, * et nomen Dómini invocábo.` The compositor preserves that half-verse structure while Perl flattens it to a single `*` boundary.",
     "notes": "Psalm 115 Vespers half-verse family; the same source-backed `‡ ... *` seam appears on Holy Saturday, Corpus Christi, SS Peter and Paul, and All Saints Vespers under both simplified Roman policies.",
     "resolvedAt": "2026-04-24",
-    "commitSha": "pending"
+    "commitSha": "0667a64"
   },
   "Reduced - 1955/2024-11-05/Compline/5dc10d20": {
     "policy": "Reduced - 1955",
@@ -10255,7 +10255,7 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm115.txt:7 — the source line explicitly encodes Psalm 115:7b as `Dirupísti víncula mea: ‡ (8) tibi sacrificábo hóstiam laudis, * et nomen Dómini invocábo.` The compositor preserves that half-verse structure while Perl flattens it to a single `*` boundary.",
     "notes": "Psalm 115 Vespers half-verse family; the same source-backed `‡ ... *` seam appears on Holy Saturday, Corpus Christi, SS Peter and Paul, and All Saints Vespers under both simplified Roman policies.",
     "resolvedAt": "2026-04-24",
-    "commitSha": "pending"
+    "commitSha": "0667a64"
   },
   "Rubrics 1960 - 1960/2024-03-31/Compline/57de2841": {
     "policy": "Rubrics 1960 - 1960",
@@ -10735,7 +10735,7 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm115.txt:7 — the source line explicitly encodes Psalm 115:7b as `Dirupísti víncula mea: ‡ (8) tibi sacrificábo hóstiam laudis, * et nomen Dómini invocábo.` The compositor preserves that half-verse structure while Perl flattens it to a single `*` boundary.",
     "notes": "Psalm 115 Vespers half-verse family; the same source-backed `‡ ... *` seam appears on Holy Saturday, Corpus Christi, SS Peter and Paul, and All Saints Vespers under both simplified Roman policies.",
     "resolvedAt": "2026-04-24",
-    "commitSha": "pending"
+    "commitSha": "0667a64"
   },
   "Rubrics 1960 - 1960/2024-06-16/Compline/57de2841": {
     "policy": "Rubrics 1960 - 1960",
@@ -10927,7 +10927,7 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm115.txt:7 — the source line explicitly encodes Psalm 115:7b as `Dirupísti víncula mea: ‡ (8) tibi sacrificábo hóstiam laudis, * et nomen Dómini invocábo.` The compositor preserves that half-verse structure while Perl flattens it to a single `*` boundary.",
     "notes": "Psalm 115 Vespers half-verse family; the same source-backed `‡ ... *` seam appears on Holy Saturday, Corpus Christi, SS Peter and Paul, and All Saints Vespers under both simplified Roman policies.",
     "resolvedAt": "2026-04-24",
-    "commitSha": "pending"
+    "commitSha": "0667a64"
   },
   "Rubrics 1960 - 1960/2024-06-30/Compline/57de2841": {
     "policy": "Rubrics 1960 - 1960",
@@ -11731,7 +11731,7 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm115.txt:7 — the source line explicitly encodes Psalm 115:7b as `Dirupísti víncula mea: ‡ (8) tibi sacrificábo hóstiam laudis, * et nomen Dómini invocábo.` The compositor preserves that half-verse structure while Perl flattens it to a single `*` boundary.",
     "notes": "Psalm 115 Vespers half-verse family; the same source-backed `‡ ... *` seam appears on Holy Saturday, Corpus Christi, SS Peter and Paul, and All Saints Vespers under both simplified Roman policies.",
     "resolvedAt": "2026-04-24",
-    "commitSha": "pending"
+    "commitSha": "0667a64"
   },
   "Rubrics 1960 - 1960/2024-11-05/Compline/57de2841": {
     "policy": "Rubrics 1960 - 1960",

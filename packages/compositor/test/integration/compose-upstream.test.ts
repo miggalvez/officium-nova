@@ -764,6 +764,38 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
     }
   }, 240_000);
 
+  it('keeps bare Deo gratias chapter responses unseasoned in Paschaltide', async () => {
+    const cases = [
+      ['Reduced - 1955', '2024-05-09', 'terce'],
+      ['Reduced - 1955', '2024-05-09', 'sext'],
+      ['Reduced - 1955', '2024-05-09', 'none'],
+      ['Reduced - 1955', '2024-05-09', 'vespers'],
+      ['Rubrics 1960 - 1960', '2024-05-09', 'vespers'],
+      ['Rubrics 1960 - 1960', '2024-05-19', 'sext'],
+      ['Rubrics 1960 - 1960', '2024-05-19', 'none']
+    ] as const;
+
+    for (const [version, date, hour] of cases) {
+      const { engine, resolvedCorpus } = await createHarness(version);
+      const summary = engine.resolveDayOfficeSummary(date);
+      const composed = composeHour({
+        corpus: resolvedCorpus.index,
+        summary,
+        version: engine.version,
+        hour,
+        options: { languages: ['Latin'] }
+      });
+
+      const chapterLines = sectionTexts(composed, 'chapter').map(normalizeLatin);
+      expect(chapterLines, `${version} ${date} ${hour} chapter`).toContain(
+        normalizeLatin('Deo grátias.')
+      );
+      expect(chapterLines, `${version} ${date} ${hour} chapter`).not.toContain(
+        normalizeLatin('Deo grátias, allelúja.')
+      );
+    }
+  }, 240_000);
+
   it('keeps the source-backed Psalm 99 half-verse structure in Easter Octave Lauds', async () => {
     const expectedHalfVerse = normalizeLatin(
       '99:3 Pópulus ejus, et oves páscuæ ejus: ‡ introíte portas ejus in confessióne, * átria ejus in hymnis: confitémini illi.'
