@@ -14,6 +14,10 @@ The `@officium-novum/compositor` package turns a `DayOfficeSummary` + Phase-1-re
 
 Newest tranche first:
 
+- **2026-04-25.** Backfilled the current tranche set's Phase 3
+  adjudication-log provenance anchors. The Passiontide Sunday
+  later-block, Passiontide responsory-Gloria omission, and Passiontide
+  feast-scope entries now cite the commits that landed them.
 - **2026-04-25.** Narrowed the Passiontide minor-hour responsory Gloria
   omission directive to Offices of the Season. Sanctoral feasts that fall
   in Passiontide, such as St Joseph, now keep their source-backed

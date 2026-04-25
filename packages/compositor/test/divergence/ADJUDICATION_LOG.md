@@ -3088,7 +3088,7 @@ half-verse rendering, or proper later-block adjudications.
 
 ### 2026-04-25 — Pattern: Passiontide Sunday minor hours use `Quad5` later blocks (engine-bug)
 
-**Commit.** `pending`
+**Commit.** `75ed011`
 
 **Ledger signal.** Reduced 1955 and Rubrics 1960 Passion Sunday and
 Palm Sunday Terce/Sext/None rows reached the later-block seam with
@@ -3116,7 +3116,7 @@ responsory surface.
 
 ### 2026-04-25 — Pattern: Passiontide minor-hour responsories omit `Gloria Patri` (engine-bug)
 
-**Commit.** `pending`
+**Commit.** `e42b915`
 
 **Ledger signal.** After the Passiontide later-block routing fix, Roman
 Passiontide minor-hour rows reached the short-responsory `&Gloria`
@@ -3145,7 +3145,7 @@ the family-level row movement.
 
 ### 2026-04-25 — Pattern: Passiontide feast responsories retain `Gloria Patri` (engine-bug)
 
-**Commit.** `pending`
+**Commit.** `e60438a`
 
 **Ledger signal.** After adding the Passiontide responsory-Gloria
 directive, the St Joseph minor-hour rows under Reduced 1955 exposed the
