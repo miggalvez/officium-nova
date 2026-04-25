@@ -22,6 +22,38 @@ anchor.
 
 ## Entries
 
+### 2026-04-25 — Pattern: simplified Roman Advent minor-hour responsory/versicle fallbacks (engine-bug, fixed)
+
+**Commit.** `pending`
+
+**Ledger signal.** Advent Sundays Dec `1`, Dec `15`, and Dec `22` under
+Reduced 1955 and Rubrics 1960 first diverged at Terce, Sext, and None
+short responsories. The compositor fell through to ordinary Sunday
+minor-hour responsories (`Inclína cor meum`, `In ætérnum`, `Clamávi`),
+while the source/Perl surface expected the seasonal Advent responsories
+(`Veni ad liberándum nos`, `Osténde nobis`, `Super te, Jerúsalem`).
+After the responsory fix, the same rows exposed temporal-office
+versicles; those also belong to the seasonal `Minor Special` `Adv`
+sections.
+
+**Root cause.** `Psalterium/Special/Minor Special` contains dedicated
+`Responsory breve Adv Tertia/Sexta/Nona` and
+`Versum Adv Tertia/Sexta/Nona` sections. The simplified Roman fallback
+selector already knew about ordinary Sunday, Lent, and Passiontide
+minor-hour later blocks, but not the Advent seasonal seam.
+
+**Resolution.** Class `engine-bug`, fixed in Phase 2 hour structuring.
+`minorHourLaterBlockFallbackReference` now selects Advent seasonal
+responsories for temporal Advent minor hours, and
+`minorHourLaterBlockOverrideReference` uses the matching Advent
+versicles even when the temporal office has a generic `Versum` section.
+
+**Citation.** `upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:154-238`
+
+**Impact.** Eighteen simplified Roman divergent hours collapse:
+Reduced 1955 drops from `110` to `101` unadjudicated rows and Rubrics
+1960 drops from `80` to `71`.
+
 ### 2026-04-25 — Pattern: Rubrics 1960 Marian Matins Nativity-doxology punctuation (perl-bug)
 
 **Commit.** `pending`

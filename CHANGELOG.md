@@ -14,6 +14,11 @@ The `@officium-novum/compositor` package turns a `DayOfficeSummary` + Phase-1-re
 
 Newest tranche first:
 
+- **2026-04-25.** Closed the simplified Roman Advent minor-hour
+  responsory/versicle fallback seam. Reduced 1955 and Rubrics 1960 now
+  route Advent temporal Terce, Sext, and None later blocks through the
+  source-backed `Minor Special` `Adv` responsories and versicles,
+  collapsing nine divergent hours in each simplified Roman ledger.
 - **2026-04-25.** Classified the Rubrics 1960 Marian Matins
   Nativity-doxology punctuation family. Three rows now cite
   `Psalterium/Doxologies:[Nat]`, whose `Cum Patre et almo Spíritu,`
