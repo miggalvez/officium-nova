@@ -118,6 +118,17 @@ describe('deriveSeasonalDirectives1960', () => {
     expect(directives.has('omit-gloria-patri')).toBe(false);
   });
 
+  it('keeps Passiontide feast responsories from inheriting the seasonal Gloria omission', () => {
+    const directives = deriveSeasonalDirectives1960({
+      hour: 'terce',
+      celebration: celebration('Sancti/03-19', 'sanctoral'),
+      celebrationRules: celebrationRules(),
+      hourRules: hourRules('terce'),
+      temporal: temporal('Quad5-2', 'passiontide', 2)
+    });
+    expect(directives.has('omit-responsory-gloria')).toBe(false);
+  });
+
   it('emits omit-suffragium for Lauds under 1960', () => {
     const directives = deriveSeasonalDirectives1960({
       hour: 'lauds',

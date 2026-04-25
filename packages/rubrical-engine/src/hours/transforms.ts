@@ -50,6 +50,7 @@ export function deriveSeasonalDirectives1960(
     directives.add('short-chapter-only');
   }
   if (
+    isOfficeOfSeason(params.celebration) &&
     temporal.season === 'passiontide' &&
     (hour === 'prime' || hour === 'terce' || hour === 'sext' || hour === 'none')
   ) {

@@ -3143,6 +3143,32 @@ and the Passiontide responsory sources in
 both Reduced 1955 and Rubrics 1960; the full ledger regeneration records
 the family-level row movement.
 
+### 2026-04-25 — Pattern: Passiontide feast responsories retain `Gloria Patri` (engine-bug)
+
+**Commit.** `pending`
+
+**Ledger signal.** After adding the Passiontide responsory-Gloria
+directive, the St Joseph minor-hour rows under Reduced 1955 exposed the
+inverse seam: Perl and the source-backed feast office retained
+`V. Glória Patri...`, while the compositor emitted `Gloria omittitur`.
+
+**Root cause.** The new Phase 2 directive was keyed only to the
+Passiontide season and minor-hour name. It therefore leaked from
+temporal Passiontide ferias and Sundays into sanctoral feast offices
+occurring during Passiontide.
+
+**Resolution.** Class `engine-bug`. Phase 2 now emits
+`omit-responsory-gloria` only when the winning celebration is a temporal
+Office of the Season. Sanctoral feasts in Passiontide keep their
+ordinary responsory Gloria.
+
+**Citation.** `upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:391-493`
+for the temporal Passiontide responsory omission seam; St Joseph uses
+its sanctoral office instead of inheriting that seasonal omission.
+
+**Impact.** St Joseph Terce reaches exact line-stream parity while the
+Passion Sunday temporal row remains exact.
+
 ### Open pattern backlog
 
 The following families remain open and have not yet received their own

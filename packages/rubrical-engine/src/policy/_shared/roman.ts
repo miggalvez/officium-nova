@@ -102,12 +102,12 @@ export function deriveSeasonalDirectivesRomanPre1960(
     directives.add('omit-gloria-patri');
     directives.add('short-chapter-only');
   }
-  if (temporal.season === 'passiontide' && MINOR_HOURS.has(hour)) {
-    directives.add('omit-responsory-gloria');
-  }
-
   const ferialDay =
     celebration.source === 'temporal' && !celebration.kind && !celebration.vigil;
+
+  if (ferialDay && temporal.season === 'passiontide' && MINOR_HOURS.has(hour)) {
+    directives.add('omit-responsory-gloria');
+  }
 
   if (
     ferialDay &&

@@ -14,6 +14,12 @@ The `@officium-novum/compositor` package turns a `DayOfficeSummary` + Phase-1-re
 
 Newest tranche first:
 
+- **2026-04-25.** Narrowed the Passiontide minor-hour responsory Gloria
+  omission directive to Offices of the Season. Sanctoral feasts that fall
+  in Passiontide, such as St Joseph, now keep their source-backed
+  responsory `Gloria Patri`, while temporal Passiontide minor hours still
+  emit `Gloria omittitur`; the refreshed ledgers drop unadjudicated rows
+  to `141` for Reduced 1955 and `107` for Rubrics 1960.
 - **2026-04-25.** Closed the Roman Passiontide minor-hour short-responsory
   Gloria omission seam. Phase 2 now emits a typed
   `omit-responsory-gloria` directive for Passiontide minor hours, and
