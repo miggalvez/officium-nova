@@ -14,6 +14,14 @@ The `@officium-novum/compositor` package turns a `DayOfficeSummary` + Phase-1-re
 
 Newest tranche first:
 
+- **2026-04-25.** Closed the simplified Roman Triduum Vespers
+  `Prelude Vespera` seam in Phase 3. The compositor now prepends the
+  source-backed Holy Thursday / Good Friday Vespers suppression notice
+  for Reduced 1955 and Rubrics 1960, then continues into ordinary
+  Triduum Vespers psalmody. Good Friday Vespers now advances to the
+  already-documented Psalm `115:7` half-verse Perl-render seam, and the
+  newly exposed row keys are recorded as fanout of that `perl-bug`
+  family.
 - **2026-04-24.** Closed the simplified Roman Triduum minor-hour
   ordinary-short-reading leak as a mixed Phase 2 / Phase 3 fix. The
   1955/1960 `Omit ... Capitulum Lectio ... De Officium Capituli` rule

@@ -2845,6 +2845,39 @@ unadjudicated counts dropped to `144` for Reduced 1955 and `108` for
 Rubrics 1960, with the remaining Triduum Vespers suppression notices
 left as their own open family.
 
+### 2026-04-25 — Pattern: simplified Roman Triduum Vespers `Prelude Vespera` notices (mixed fix)
+
+**Commit.** `pending`
+
+**Ledger signal.** Reduced 1955 and Rubrics 1960 Good Friday Vespers
+were blocked at line `1`: Perl opened with the Triduum
+`Prelude Vespera` suppression notice, while the compositor started
+directly at the ordinary Vespers antiphon.
+
+**Root cause.** `Quad6-4` and `Quad6-5` both carry a conditioned
+`[Prelude Vespera] (rubrica 1955 aut rubrica 196)` notice. Phase 2 was
+already selecting the correct Triduum celebration, but Phase 3 had no
+source seam for pre-pending the special Vespers prelude before ordinary
+psalmody. Once the compositor emits that prelude, the remaining Good
+Friday first divergence moves to the already-adjudicated Psalm 115
+half-verse render surface.
+
+**Resolution.** Mixed fix. The compositor now resolves and prepends the
+Triduum `Prelude Vespera` section for simplified Roman Vespers while
+continuing into the ordinary office psalmody. The two newly exposed
+Good Friday Vespers rows are recorded as fanout of the existing Psalm
+115 `perl-bug` family.
+
+**Citation.**
+
+- `upstream/web/www/horas/Latin/Tempora/Quad6-4.txt:16-18`
+- `upstream/web/www/horas/Latin/Tempora/Quad6-5.txt:12-14`
+- `upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm115.txt:7`
+
+**Impact.** The Triduum Vespers suppression-notice blocker is closed.
+Good Friday Vespers now advances to a source-backed Psalm 115
+half-verse adjudication under both simplified Roman policies.
+
 ### Open pattern backlog
 
 The following families remain open and have not yet received their own
