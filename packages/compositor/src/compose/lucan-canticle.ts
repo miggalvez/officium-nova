@@ -21,8 +21,7 @@ import {
   normalizeRepeatedAntiphonContent,
   withPsalmGloriaPatri
 } from './psalmody.js';
-
-const MAX_DEFERRED_DEPTH = 8;
+import { MAX_DEFERRED_DEPTH, referenceKey } from './shared.js';
 
 export interface LucanCanticleComposeArgs {
   readonly slot: SlotName;
@@ -224,8 +223,4 @@ function refsFromSlotContent(content: SlotContent): readonly TextReference[] {
     default:
       return [];
   }
-}
-
-function referenceKey(ref: TextReference): string {
-  return `${ref.path}#${ref.section}${ref.selector ? `:${ref.selector}` : ''}`;
 }

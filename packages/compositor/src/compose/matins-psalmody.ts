@@ -12,8 +12,7 @@ import { resolveReference } from '../resolve/reference-resolver.js';
 import type { ComposeOptions, ComposeWarning } from '../types/composed-hour.js';
 import { appendContentWithBoundary } from './content-boundary.js';
 import { resolveGloriaOmittiturReplacement } from './gloria-omittitur.js';
-
-const MAX_DEFERRED_DEPTH = 8;
+import { MAX_DEFERRED_DEPTH } from './shared.js';
 const GLORIA_PATRI_MACRO: Extract<TextContent, { type: 'macroRef' }> = {
   type: 'macroRef',
   name: 'Gloria'

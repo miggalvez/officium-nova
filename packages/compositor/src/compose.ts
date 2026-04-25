@@ -34,6 +34,7 @@ import {
   splitLeadingPsalmAntiphon,
   withPsalmGloriaPatri
 } from './compose/psalmody.js';
+import { MAX_DEFERRED_DEPTH, referenceKey } from './compose/shared.js';
 import {
   composeTriduumSpecialComplineSection,
   composeTriduumSuppressedVespersSection
@@ -45,8 +46,6 @@ import { flattenConditionals } from './flatten/index.js';
 import { expandDeferredNodes } from './resolve/expand-deferred-nodes.js';
 import { resolveReference } from './resolve/reference-resolver.js';
 import type { ComposedHour, ComposeOptions, ComposeWarning, Section } from './types/composed-hour.js';
-
-const MAX_DEFERRED_DEPTH = 8;
 
 export interface ComposeInput {
   readonly corpus: TextIndex;
@@ -659,10 +658,6 @@ function isSimplifiedTriduumOration(args: ComposeSlotArgs, ref: TextReference): 
     (ref.section === 'Oratio' || ref.section === 'Oratio 2') &&
     /\/Tempora\/Quad6-[456]r?$/u.test(ref.path)
   );
-}
-
-function referenceKey(ref: TextReference): string {
-  return `${ref.path}#${ref.section}${ref.selector ? `:${ref.selector}` : ''}`;
 }
 
 function buildConditionContext(

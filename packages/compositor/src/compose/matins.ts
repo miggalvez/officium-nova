@@ -45,8 +45,7 @@ import {
   slicePsalmContentByVerseRange,
   withPsalmGloriaPatri
 } from './matins-psalmody.js';
-
-const MAX_DEFERRED_DEPTH = 8;
+import { MAX_DEFERRED_DEPTH } from './shared.js';
 
 /**
  * Canonical path to the Te Deum hymn in the DO corpus. Used only when the

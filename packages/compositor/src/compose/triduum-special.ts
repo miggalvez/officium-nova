@@ -15,8 +15,7 @@ import { resolveReference } from '../resolve/reference-resolver.js';
 import type { ComposeOptions, ComposeWarning, Section } from '../types/composed-hour.js';
 import { appendContentWithBoundary } from './content-boundary.js';
 import { resolveGloriaOmittiturReplacement } from './gloria-omittitur.js';
-
-const MAX_DEFERRED_DEPTH = 8;
+import { MAX_DEFERRED_DEPTH, referenceKey } from './shared.js';
 
 interface ComposeTriduumSuppressedVespersArgs {
   readonly hour: HourName;
@@ -223,8 +222,4 @@ function resolveFlatSection(
   }
 
   return perLanguage;
-}
-
-function referenceKey(ref: TextReference): string {
-  return `${ref.path}#${ref.section}${ref.selector ? `:${ref.selector}` : ''}`;
 }
