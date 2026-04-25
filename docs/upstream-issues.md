@@ -1635,6 +1635,41 @@ pnpm -C packages/compositor compare:phase-3-perl -- --version "Rubrics 1960 - 19
 | Rubrics 1960 - 1960 | 2024-03-25 | Sext | `3acfd479` |
 | Rubrics 1960 - 1960 | 2024-03-25 | None | `2071fc88` |
 
+### 2026-04-25 — Reduced 1955 Lent weekday minor-hour antiphons are abbreviated to incipits in the Perl render surface
+
+**Classification.** `perl-bug`
+
+**Summary.** After the compositor began routing Lent weekday minor-hour
+antiphons through the seasonal `Psalmi minor:[Quad]` table, the Reduced
+1955 Perl surface still abbreviates Terce, Sext, and None antiphons to
+incipit-only lines. The source-backed compositor output carries the full
+antiphon text from the seasonal table.
+
+**Primary source.**
+`upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:154-163`
+
+The `[Quad]` table carries the full `Advenérunt nobis * ...`,
+`Commendémus nosmetípsos * ...`, and `Per arma justítiæ * ...`
+antiphons. It does not contain incipit-only alternates for the 1955
+surface.
+
+**Reproduction.**
+Run:
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Reduced - 1955" --date 2024-02-24 --hour Tertia
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Reduced - 1955" --date 2024-02-24 --hour Sexta
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Reduced - 1955" --date 2024-02-24 --hour Nona
+```
+
+**Affected stable divergence-row keys.**
+
+| Policy | Date | Hour | Row key suffix |
+|---|---|---|---|
+| Reduced - 1955 | 2024-02-24 | Terce | `50e62c35` |
+| Reduced - 1955 | 2024-02-24 | Sext | `62fa2e12` |
+| Reduced - 1955 | 2024-02-24 | None | `f60c28f2` |
+
 ## See also
 
 - [ADR-011 — Phase 3 divergence adjudication](./adr/011-phase-3-divergence-adjudication.md)

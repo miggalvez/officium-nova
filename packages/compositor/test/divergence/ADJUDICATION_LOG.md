@@ -3259,6 +3259,30 @@ seasonal-antiphon frontier into later chapter/collect seams. Reduced
 the existing incipit-vs-full-antiphon render surface for their own
 adjudication tranche.
 
+### 2026-04-25 — Pattern: Reduced 1955 Lent minor-hour incipit antiphons (perl-bug)
+
+**Commit.** `pending`
+
+**Ledger signal.** After the seasonal Lent weekday antiphon routing fix,
+Reduced 1955 Feb `24` Terce/Sext/None first diverged on the antiphon
+surface. Perl displayed only the incipit (`Advenérunt nobis`,
+`Commendémus nosmetípsos`, `Per arma justítiæ`), while the compositor
+displayed the full antiphon lines from `Psalmi minor:[Quad]`.
+
+**Root cause.** No additional Phase 2 or Phase 3 selection bug is
+involved. The source-backed `Quad` table carries full antiphons for
+Terce, Sext, and None; the 1955 Perl comparison surface abbreviates
+those antiphons to incipit-only display.
+
+**Resolution.** Class `perl-bug`. Added sidecar classifications for the
+three exposed Reduced 1955 Lent Saturday minor-hour rows.
+
+**Citation.** `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:154-163`.
+
+**Impact.** Three Reduced 1955 rows move from `unadjudicated` to
+`perl-bug`. The next Reduced 1955 Feb `24` minor-hour frontier is Prime's
+later-block separator row plus broader Matins/Vespers selection seams.
+
 ### Open pattern backlog
 
 The following families remain open and have not yet received their own

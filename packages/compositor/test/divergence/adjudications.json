@@ -14524,5 +14524,41 @@
     "notes": "Phase 3 adjudication sweep: major-hour conclusion bridge remains source-backed after selected 1955/1960 Vespers collects.",
     "resolvedAt": "2026-04-24",
     "commitSha": "26e2fdd"
+  },
+  "Reduced - 1955/2024-02-24/Terce/50e62c35": {
+    "policy": "Reduced - 1955",
+    "date": "2024-02-24",
+    "hour": "Terce",
+    "firstExpected": "Ant. Advenérunt nobis.",
+    "firstActual": "Ant. Advenérunt nobis * dies pœniténtiæ ad rediménda peccáta, ad salvándas ánimas.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:154-163 — the Lent weekday minor-hour antiphon table carries the full `Advenérunt nobis * dies pœniténtiæ...` antiphon for Terce. The compositor now emits that source-backed text while the 1955 Perl comparison surface abbreviates it to an incipit.",
+    "notes": "Reduced 1955 Lent Saturday minor-hour incipit-vs-full-antiphon surface exposed after the seasonal `Quad` antiphon routing fix.",
+    "resolvedAt": "2026-04-25",
+    "commitSha": "pending"
+  },
+  "Reduced - 1955/2024-02-24/Sext/62fa2e12": {
+    "policy": "Reduced - 1955",
+    "date": "2024-02-24",
+    "hour": "Sext",
+    "firstExpected": "Ant. Commendémus nosmetípsos.",
+    "firstActual": "Ant. Commendémus nosmetípsos * in multa patiéntia, in jejúniis multis, per arma justítiæ.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:154-163 — the Lent weekday minor-hour antiphon table carries the full `Commendémus nosmetípsos * in multa patiéntia...` antiphon for Sext. The compositor now emits that source-backed text while the 1955 Perl comparison surface abbreviates it to an incipit.",
+    "notes": "Reduced 1955 Lent Saturday minor-hour incipit-vs-full-antiphon surface exposed after the seasonal `Quad` antiphon routing fix.",
+    "resolvedAt": "2026-04-25",
+    "commitSha": "pending"
+  },
+  "Reduced - 1955/2024-02-24/None/f60c28f2": {
+    "policy": "Reduced - 1955",
+    "date": "2024-02-24",
+    "hour": "None",
+    "firstExpected": "Ant. Per arma justítiæ.",
+    "firstActual": "Ant. Per arma justítiæ * virtútis Dei commendémus nosmetípsos in multa patiéntia.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:154-163 — the Lent weekday minor-hour antiphon table carries the full `Per arma justítiæ * virtútis Dei...` antiphon for None. The compositor now emits that source-backed text while the 1955 Perl comparison surface abbreviates it to an incipit.",
+    "notes": "Reduced 1955 Lent Saturday minor-hour incipit-vs-full-antiphon surface exposed after the seasonal `Quad` antiphon routing fix.",
+    "resolvedAt": "2026-04-25",
+    "commitSha": "pending"
   }
 }

@@ -14,6 +14,12 @@ The `@officium-novum/compositor` package turns a `DayOfficeSummary` + Phase-1-re
 
 Newest tranche first:
 
+- **2026-04-25.** Classified the Reduced 1955 Lent Saturday minor-hour
+  incipit surface exposed by the seasonal-antiphon routing fix. The
+  `ADJUDICATION_LOG.md`, `adjudications.json`, and upstream issue log
+  now cite `Psalmi minor:[Quad]` for the source-backed full Terce,
+  Sext, and None antiphons while preserving Perl's incipit-only 1955
+  output as a comparison-surface bug.
 - **2026-04-25.** Closed the Lent weekday minor-hour antiphon routing
   seam for the shared Roman policies. Weekday temporal ferias in Lent
   and Passiontide now keep the ordinary weekday psalm distribution while
