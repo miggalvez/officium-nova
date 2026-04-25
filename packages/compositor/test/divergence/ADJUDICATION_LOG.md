@@ -2965,6 +2965,38 @@ before falling back to the generic feria sections.
 chapter mismatch, improving the policy average prefix from `48.1` to
 `48.3` and dropping Rubrics 1960 unadjudicated rows from `98` to `97`.
 
+### 2026-04-25 — Pattern: Roman ferial preces limited to appointed weekdays (engine-bug)
+
+**Commit.** `TBD-tranche-1`
+
+**Ledger signal.** Rubrics 1960 major-hour rows for St Joseph, Holy
+Monday/Tuesday, and the Immaculate Conception reached a boundary where
+Perl continued with the ordinary `Dómine, exáudi` bridge, while the
+compositor inserted the ferial-preces `Kýrie, eléison...` block.
+
+**Root cause.** Phase 2 emitted `preces-feriales` too broadly whenever
+the season was Advent, Lent, Passiontide, or an Ember day, using
+`!festumDomini` as a rough ferial proxy. Under the governing 1960
+rubrics, preces are said only in Offices of the Season, and then only
+at Lauds/Vespers on Wednesdays and Fridays of Advent/Lent/Passiontide,
+with the specified Ember-day exceptions. The pre-1960 Roman helper had
+the same broad seasonal shape against the 1955 help text.
+
+**Resolution.** Class `engine-bug`. Phase 2 now requires a temporal
+Office of the Season and the appointed weekday/Ember shape before
+emitting `preces-feriales`; it no longer emits these preces for
+sanctoral feasts or Monday/Tuesday Passiontide ferias.
+
+**Citation.**
+
+- `upstream/web/www/horas/Help/Rubrics/Breviary 1960.html:358-364`
+- `upstream/web/www/horas/Help/Rubrics/1955.txt:270-276`
+
+**Impact.** Rubrics 1960 unadjudicated rows drop from `97` to `95`.
+The affected major-hour rows now advance to existing source-backed
+families such as the post-collect `Dómine, exáudi` bridge, psalm
+half-verse rendering, or proper later-block adjudications.
+
 ### Open pattern backlog
 
 The following families remain open and have not yet received their own

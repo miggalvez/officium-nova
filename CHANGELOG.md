@@ -14,6 +14,13 @@ The `@officium-novum/compositor` package turns a `DayOfficeSummary` + Phase-1-re
 
 Newest tranche first:
 
+- **2026-04-25.** Narrowed Roman ferial-preces directive emission to the
+  source-backed weekday scope. Rubrics 1960 now emits Lauds/Vespers preces
+  only for Offices of the Season on Wednesdays and Fridays of Advent, Lent,
+  and Passiontide, plus the specified Ember-day shape; the pre-1960 Roman
+  path follows the parallel 1955 help text. This removes the erroneous
+  `Kýrie...` preces block from 1960 feast and Holy Week Monday/Tuesday
+  major-hour rows, dropping Rubrics 1960 unadjudicated rows to `95`.
 - **2026-04-25.** Closed the Rubrics 1960 Holy Week Lauds `Quad5`
   later-block seam in Phase 2. The 1960 major-hour fallback now prefers
   Passiontide Monday-Wednesday `Major Special` sections (`Quad5 Laudes`,
