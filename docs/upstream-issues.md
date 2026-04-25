@@ -156,6 +156,11 @@ Then inspect Prime on the affected dates under `Reduced - 1955` and
 | Reduced - 1955 | 2024-05-09, 2024-05-19, 2024-05-30, 2024-08-15, 2024-09-29, 2024-11-01, 2024-12-08, 2024-12-24 | Prime | `1f932f3a`, `9c18c7ac`, `ebd3ffa2`, `68a6aa15`, `93d19f1b`, `d2312ee1`, `269de10f`, `17defeec` |
 | Rubrics 1960 - 1960 | 2024-09-29, 2024-11-01, 2024-12-24 | Prime | `93d19f1b`, `d2312ee1`, `17defeec` |
 
+**Additional fanout.** Reduced 1955 Christmas Day (`2024-12-25`) Prime
+has the same shape: `upstream/web/www/horas/Latin/Sancti/12-25.txt:382-384`
+supplies `[Lectio Prima]` as `Heb 1:11-12`, while the Perl comparison
+surface keeps `1 Tim. 1:17`. Stable row key suffix: `6b6365d6`.
+
 ### 2026-04-25 — Rubrics 1960 Marian Matins doxology inserts an unsupported comma after `Patre`
 
 **Classification.** `perl-bug`

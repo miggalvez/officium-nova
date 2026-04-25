@@ -3566,6 +3566,27 @@ eight visible Reduced 1955 Christmas-octave minor-hour antiphon rows.
 `perl-bug`. Matins and major-hour Christmas-octave rows remain separate
 frontiers.
 
+### 2026-04-25 — Pattern: Reduced 1955 Christmas Day proper Prime lesson (perl-bug)
+
+**Commit.** `pending`
+
+**Ledger signal.** Reduced 1955 Dec `25` Prime first diverged at the
+Prime chapter citation: Perl kept the ordinary `1 Tim. 1:17`, while the
+compositor emitted `Heb 1:11-12`.
+
+**Root cause.** Christmas Day supplies a proper `[Lectio Prima]` section
+with the `Heb 1:11-12` citation. The compositor follows the proper
+office source; the Perl comparison surface falls back to the ordinary
+Prime chapter.
+
+**Resolution.** Class `perl-bug`. Added the Christmas Day Reduced 1955
+row as a fanout of the already-established proper Prime lesson family.
+
+**Citation.** `upstream/web/www/horas/Latin/Sancti/12-25.txt:382-384`.
+
+**Impact.** One Reduced 1955 Prime row moves from `unadjudicated` to
+`perl-bug`.
+
 ## See also
 
 - [ADR-011 — Divergence adjudication protocol](../../../../docs/adr/011-phase-3-divergence-adjudication.md)

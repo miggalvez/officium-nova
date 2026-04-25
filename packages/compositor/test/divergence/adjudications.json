@@ -10297,6 +10297,18 @@
     "resolvedAt": "2026-04-19",
     "commitSha": "bfb3c52"
   },
+  "Reduced - 1955/2024-12-25/Prime/6b6365d6": {
+    "policy": "Reduced - 1955",
+    "date": "2024-12-25",
+    "hour": "Prime",
+    "firstExpected": "1 Tim. 1:17",
+    "firstActual": "Heb 1:11-12",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/12-25.txt:382-384 supplies Christmas Day `[Lectio Prima]` as `Heb 1:11-12`; the compositor follows that source-backed Prime lesson while the Reduced 1955 Perl comparison surface keeps the ordinary `1 Tim. 1:17` chapter.",
+    "notes": "Fanout of the simplified Roman proper Prime lesson comparison-surface family to Christmas Day Reduced 1955.",
+    "resolvedAt": "2026-04-25",
+    "commitSha": "pending"
+  },
   "Reduced - 1955/2024-12-26/Compline/5dc10d20": {
     "policy": "Reduced - 1955",
     "date": "2024-12-26",
