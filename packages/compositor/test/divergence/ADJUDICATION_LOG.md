@@ -24,7 +24,7 @@ anchor.
 
 ### 2026-04-25 — Pattern: proper Prime lessons keep office `[Lectio Prima]` (perl-bug)
 
-**Commit.** `pending`
+**Commit.** `34d6dc1`
 
 **Ledger signal.** Several high feast Prime rows under Reduced 1955
 and Rubrics 1960 first diverge at the Prime chapter citation. Perl
@@ -58,7 +58,7 @@ source-backed `perl-bug` without changing compositor behavior.
 
 ### 2026-04-25 — Pattern: simplified Roman Advent minor-hour responsory/versicle fallbacks (engine-bug, fixed)
 
-**Commit.** `pending`
+**Commit.** `be31b80`
 
 **Ledger signal.** Advent Sundays Dec `1`, Dec `15`, and Dec `22` under
 Reduced 1955 and Rubrics 1960 first diverged at Terce, Sext, and None
@@ -90,7 +90,7 @@ Reduced 1955 drops from `110` to `101` unadjudicated rows and Rubrics
 
 ### 2026-04-25 — Pattern: Rubrics 1960 Marian Matins Nativity-doxology punctuation (perl-bug)
 
-**Commit.** `pending`
+**Commit.** `0a9db53`
 
 **Ledger signal.** Rubrics 1960 Matins rows on Jul `6`, Aug `22`, and
 Sep `12` first diverge inside the Marian Nativity doxology. Perl shows
@@ -112,7 +112,7 @@ source-backed `perl-bug` without changing compositor behavior.
 
 ### 2026-04-25 — Pattern: Rubrics 1960 Lent Saturday minor-hour collect wrapper fanout (perl-bug)
 
-**Commit.** `pending`
+**Commit.** `b109589`
 
 **Ledger signal.** Rubrics 1960 Feb `24` Terce, Sext, and None now
 reach the same minor-hour collect boundary already classified for the
@@ -141,7 +141,7 @@ source-backed `perl-bug` without changing compositor behavior.
 
 ### 2026-04-25 — Pattern: Ash Wednesday minor hours take seasonal `Quad` antiphons (perl-bug)
 
-**Commit.** `pending`
+**Commit.** `47fcf5a`
 
 **Ledger signal.** After the seasonal minor-hour routing fix, Ash
 Wednesday Prime, Terce, Sext, and None under both simplified Roman
