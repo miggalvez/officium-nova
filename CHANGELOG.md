@@ -14,6 +14,14 @@ The `@officium-novum/compositor` package turns a `DayOfficeSummary` + Phase-1-re
 
 Newest tranche first:
 
+- **2026-04-25.** Completed an existing-adjudication fanout sweep over
+  the current expanded Phase 3 ledgers. The sidecar now classifies 14
+  rows that exactly match already-cited source-backed `perl-bug`
+  families: Holy Thursday Psalm `115:7` Vespers half-verse rendering,
+  Reduced 1955 Low Sunday `Psalmi minor` Prime/minor-hour surfaces, and
+  Rubrics 1960 Christmas-octave fallback-hymn doxology substitutions.
+  Live unadjudicated rows drop to `138` for Reduced 1955 and `98` for
+  Rubrics 1960.
 - **2026-04-25.** Closed the simplified Roman Triduum Vespers
   `Prelude Vespera` seam in Phase 3. The compositor now prepends the
   source-backed Holy Thursday / Good Friday Vespers suppression notice

@@ -2878,6 +2878,36 @@ Good Friday Vespers rows are recorded as fanout of the existing Psalm
 Good Friday Vespers now advances to a source-backed Psalm 115
 half-verse adjudication under both simplified Roman policies.
 
+### 2026-04-25 — Pattern: existing source-backed adjudication fanout sweep (perl-bug)
+
+**Commit.** `pending`
+
+**Ledger signal.** The expanded live ledger still contained exact
+first-divergence signatures already classified in earlier source-backed
+families: the Psalm 115 Vespers half-verse seam on Holy Thursday, the
+Reduced 1955 Low Sunday Prime/minor-hour `Psalmi minor` antiphon
+surface, and the Rubrics 1960 Christmas-octave fallback-hymn doxology
+surface on Dec 26-27.
+
+**Root cause.** No new Phase 2 or Phase 3 behavior was implicated.
+These rows are exact fanout of previously cited source seams where the
+compositor follows the corpus and Perl's rendered surface abbreviates,
+flattens, or leaves an unsubstituted fallback stanza.
+
+**Resolution.** Class `perl-bug`. Ran the sidecar fanout workflow
+against the expanded current ledgers and recorded the 14 missing row
+keys in `adjudications.json`.
+
+**Citation.**
+
+- `upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm115.txt:7`
+- `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:17-19,33-35,49-51,218,227-231`
+- `upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:1-20`
+
+**Impact.** Total unadjudicated rows drop from `271` to `257`:
+Reduced 1955 moves from `143` to `138`, and Rubrics 1960 moves from
+`107` to `98`.
+
 ### Open pattern backlog
 
 The following families remain open and have not yet received their own
