@@ -361,6 +361,62 @@ describe('composeHour', () => {
     ]);
   });
 
+  it('removes responsory Gloria repetition when Sicut erat is parsed as text', () => {
+    const corpus = new InMemoryTextIndex();
+    corpus.addFile(
+      makeFileMulti('horas/Latin/Psalterium/Special/Minor Special', [
+        {
+          header: 'Quad Tertia',
+          content: [{ type: 'text', value: 'Fratres: hortámur vos.' }]
+        },
+        {
+          header: 'Responsory breve Quad Tertia',
+          content: [
+            { type: 'verseMarker', marker: 'R.br.', text: 'Ipse liberávit me' },
+            { type: 'text', value: 'R. Sicut erat in princípio, et nunc, et semper.' },
+            { type: 'verseMarker', marker: 'R.', text: 'Ipse liberávit me' }
+          ]
+        }
+      ])
+    );
+
+    const hour: HourStructure = {
+      hour: 'terce',
+      slots: {
+        chapter: {
+          kind: 'single-ref',
+          ref: {
+            path: 'horas/Latin/Psalterium/Special/Minor Special',
+            section: 'Quad Tertia'
+          }
+        },
+        responsory: {
+          kind: 'single-ref',
+          ref: {
+            path: 'horas/Latin/Psalterium/Special/Minor Special',
+            section: 'Responsory breve Quad Tertia'
+          }
+        }
+      },
+      directives: []
+    };
+
+    const composed = composeHour({
+      corpus,
+      summary: buildSummary(hour),
+      version: stubVersion,
+      hour: 'terce',
+      options: { languages: ['Latin'] }
+    });
+
+    const responsory = composed.sections.find((section) => section.slot === 'responsory');
+    expect(responsory?.lines.map((line) => renderRuns(line, 'Latin'))).toEqual([
+      '_',
+      'Ipse liberávit me',
+      'Ipse liberávit me'
+    ]);
+  });
+
   it('injects Sunday Compline preces from the special corpus section when the slot is empty', () => {
     const corpus = new InMemoryTextIndex();
     corpus.addFile(

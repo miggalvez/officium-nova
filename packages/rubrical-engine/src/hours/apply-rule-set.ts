@@ -233,6 +233,10 @@ function minorHourLaterBlockOverrideReference(
   input: ApplyRuleSetInput,
   slot: SlotName
 ): TextReference | undefined {
+  if (input.policy.name !== 'rubrics-1960' && input.policy.name !== 'reduced-1955') {
+    return undefined;
+  }
+
   if (slot !== 'versicle') {
     return undefined;
   }
@@ -1280,7 +1284,11 @@ function minorHourQuadragesimaLaterBlockSection(
     return undefined;
   }
 
-  if (input.temporal.dayName === 'Quad5-0' || input.temporal.dayName === 'Quad6-0') {
+  if (
+    /^Quad5-/u.test(input.temporal.dayName) ||
+    input.temporal.dayName === 'Quad6-0' ||
+    HOLY_WEEK_MON_WED_KEYS.has(input.temporal.dayName)
+  ) {
     return minorHourHolyWeekMonWedLaterBlockSection(input.hour, slot);
   }
 

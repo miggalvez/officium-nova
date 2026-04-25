@@ -214,6 +214,54 @@ describeIfUpstream('temporal Sunday minor-hour antiphon ownership', () => {
   );
 
   it(
+    'keeps Passion Week ferial minor-hour later blocks on the source-backed Quad5 responsories',
+    async () => {
+      const engines = await loadEngines([
+        'Reduced - 1955',
+        'Rubrics 1960 - 1960'
+      ]);
+
+      for (const handle of ['Reduced - 1955', 'Rubrics 1960 - 1960'] as const) {
+        const engine = engines.get(handle);
+        expect(engine, `${handle} engine`).toBeDefined();
+        if (!engine) {
+          continue;
+        }
+
+        const cases = [
+          {
+            hour: 'terce',
+            chapter: 'horas/Latin/Psalterium/Special/Minor Special:Quad5 Tertia',
+            responsory: 'horas/Latin/Psalterium/Special/Minor Special:Responsory breve Quad5 Tertia',
+            versicle: 'horas/Latin/Psalterium/Special/Minor Special:Versum Quad5 Tertia'
+          },
+          {
+            hour: 'sext',
+            chapter: 'horas/Latin/Psalterium/Special/Minor Special:Quad5 Sexta',
+            responsory: 'horas/Latin/Psalterium/Special/Minor Special:Responsory breve Quad5 Sexta',
+            versicle: 'horas/Latin/Psalterium/Special/Minor Special:Versum Quad5 Sexta'
+          },
+          {
+            hour: 'none',
+            chapter: 'horas/Latin/Psalterium/Special/Minor Special:Quad5 Nona',
+            responsory: 'horas/Latin/Psalterium/Special/Minor Special:Responsory breve Quad5 Nona',
+            versicle: 'horas/Latin/Psalterium/Special/Minor Special:Versum Quad5 Nona'
+          }
+        ] as const;
+
+        for (const date of ['2024-03-20', '2024-03-23'] as const) {
+          for (const entry of cases) {
+            expectSingleRef(slotAt(engine, date, entry.hour, 'chapter'), entry.chapter);
+            expectSingleRef(slotAt(engine, date, entry.hour, 'responsory'), entry.responsory);
+            expectSingleRef(slotAt(engine, date, entry.hour, 'versicle'), entry.versicle);
+          }
+        }
+      }
+    },
+    240_000
+  );
+
+  it(
     'keeps festal Sunday Prime on Prima Festis when Psalmi Dominica combines with proper minor-hour antiphons',
     async () => {
       const engines = await loadEngines([

@@ -216,26 +216,40 @@ function normalizeResponsoryGloria(
     return content;
   }
 
+  let changed = false;
   const out: TextContent[] = [];
   for (let index = 0; index < content.length; index += 1) {
     const node = content[index]!;
     if (node.type === 'conditional') {
-      out.push({
-        ...node,
-        content: [...normalizeResponsoryGloria(args, node.content)]
-      });
+      const normalizedContent = normalizeResponsoryGloria(args, node.content);
+      if (normalizedContent !== node.content) {
+        changed = true;
+        out.push({
+          ...node,
+          content: [...normalizedContent]
+        });
+      } else {
+        out.push(node);
+      }
       continue;
     }
-    if (
-      node.type === 'verseMarker' &&
-      /^r\.?$/iu.test(node.marker.trim()) &&
-      /^sicut erat\b/iu.test(node.text.trim())
-    ) {
+    if (isResponsorySicutEratNode(node)) {
+      changed = true;
       continue;
     }
     out.push(node);
   }
-  return Object.freeze(out);
+  return changed ? Object.freeze(out) : content;
+}
+
+function isResponsorySicutEratNode(node: TextContent): boolean {
+  if (node.type === 'verseMarker') {
+    return /^r\.?$/iu.test(node.marker.trim()) && /^sicut erat\b/iu.test(node.text.trim());
+  }
+  if (node.type === 'text') {
+    return /^r\.\s*sicut erat\b/iu.test(node.value.trim());
+  }
+  return false;
 }
 
 function withMinorHourLaterBlockSeparator(
