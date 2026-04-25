@@ -22,6 +22,40 @@ anchor.
 
 ## Entries
 
+### 2026-04-25 — Pattern: Ash Wednesday minor hours take seasonal `Quad` antiphons (perl-bug)
+
+**Commit.** `pending`
+
+**Ledger signal.** After the seasonal minor-hour routing fix, Ash
+Wednesday Prime, Terce, Sext, and None under both simplified Roman
+policies now first diverge at the opening antiphon. Perl keeps the
+ordinary Wednesday psalter antiphons (`Misericórdia tua`,
+`Deus ádjuvat me`, `In Deo sperávi`, `Deus meus`), while the compositor
+emits the Lenten `Quad` antiphons (`Vivo ego`, `Advenérunt nobis`,
+`Commendémus nosmetípsos`, `Per arma justítiæ`).
+
+**Root cause.** Ash Wednesday is a Wednesday in Quadragesima. The
+ordinary weekday rows in `Psalmi minor` still govern the psalm
+distribution, but the seasonal `[Quad]` table supplies the minor-hour
+antiphons for these Lenten ferias.
+
+**Resolution.** Class `perl-bug`. Recorded the eight Reduced 1955 /
+Rubrics 1960 Ash Wednesday minor-hour row keys in `adjudications.json`
+with citations to both the ordinary Wednesday rows and the seasonal
+`[Quad]` antiphon table.
+
+**Citation.**
+
+- `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:8`
+- `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:24`
+- `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:40`
+- `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:56`
+- `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:158-163`
+
+**Impact.** Eight newly exposed Ash Wednesday rows move from
+`unadjudicated` to source-backed `perl-bug` without changing compositor
+behavior.
+
 ### 2026-04-18 — 3h kickoff: baseline regeneration
 
 **Commit.** `8cc3de1`

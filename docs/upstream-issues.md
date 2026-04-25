@@ -24,6 +24,40 @@ entry here and re-run the adjudication harness.
 
 ## Current entries
 
+### 2026-04-25 — Simplified Roman Ash Wednesday minor hours keep ordinary Wednesday antiphons
+
+**Classification.** `perl-bug`
+
+**Summary.** On Ash Wednesday, Officium Novum keeps the ordinary
+Wednesday minor-hour psalm distribution but takes the opening antiphons
+from the seasonal `Quad` table. The Perl comparison surface keeps the
+ordinary Wednesday antiphons at Prime, Terce, Sext, and None.
+
+**Primary source.**
+
+- `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:8`
+- `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:24`
+- `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:40`
+- `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:56`
+- `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:158-163`
+
+**Reproduction.**
+Run:
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --date 2024-02-14
+```
+
+Then inspect Prime, Terce, Sext, and None under `Reduced - 1955` and
+`Rubrics 1960 - 1960`.
+
+**Affected stable divergence-row key groups.**
+
+| Policy | Date | Hours | Row key suffixes |
+|---|---|---|---|
+| Reduced - 1955 | 2024-02-14 | Prime/Terce/Sext/None | `45afba84`, `be96b56d`, `90328e34`, `0d70a971` |
+| Rubrics 1960 - 1960 | 2024-02-14 | Prime/Terce/Sext/None | `936f4c9a`, `869834f0`, `65ecf20b`, `4ba829b4` |
+
 ### 2026-04-25 — Simplified Roman minor hours skip the source-backed collect wrapper
 
 **Classification.** `perl-bug`

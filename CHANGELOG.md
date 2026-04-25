@@ -14,6 +14,11 @@ The `@officium-novum/compositor` package turns a `DayOfficeSummary` + Phase-1-re
 
 Newest tranche first:
 
+- **2026-04-25.** Classified the Ash Wednesday seasonal `Quad`
+  minor-hour antiphon fallout exposed by the latest routing fix. Both
+  simplified Roman policies now cite `Psalmi minor:[Quad]` for the
+  source-backed Prime, Terce, Sext, and None antiphons, leaving Perl's
+  ordinary Wednesday antiphons recorded as a comparison-surface bug.
 - **2026-04-25.** Extended the Reduced 1955 ferial Prime later-block
   adjudication across the live 2024 frontier. Eight Prime rows now cite
   `Prima Special` for the source-backed absence of an implicit
