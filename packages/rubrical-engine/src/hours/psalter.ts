@@ -228,7 +228,7 @@ function seasonalWeekdayMinorHourAntiphonSection(
     return 'Quad5_';
   }
 
-  if (/^Quad[1-4]-[1-6]/u.test(params.temporal.dayName)) {
+  if (/^Quad(?:p3-[3-6]|[1-4]-[1-6])/u.test(params.temporal.dayName)) {
     return 'Quad';
   }
 
