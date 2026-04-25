@@ -2965,6 +2965,40 @@ before falling back to the generic feria sections.
 chapter mismatch, improving the policy average prefix from `48.1` to
 `48.3` and dropping Rubrics 1960 unadjudicated rows from `98` to `97`.
 
+### 2026-04-25 — Pattern: Matins proper-hymn doxology variants (mixed fix)
+
+**Commit.** `TBD-tranche-3`
+
+**Ledger signal.** Reduced 1955 Marian Matins rows for July `06`,
+August `22`, September `08`, and September `12` diverged in the final
+hymn doxology stanza: Perl and the source-backed variant read
+`Cum Patre et almo Spíritu,`, while the compositor retained the common
+hymn source line `Cum Patre, et almo Spíritu`.
+
+**Root cause.** Phase 2 Matins planning already detected a feast hymn
+with `celebrationRules.doxologyVariant`, but `structureMatins` dropped
+that variant when converting the rich Matins plan into generic
+`HourStructure` slots. Phase 3 Matins composition also had no Matins
+equivalent of the major-hour hymn doxology replacement path, so the
+proper common hymn's default stanza survived unchanged.
+
+**Resolution.** Class `engine-bug`. Phase 2 now carries a festal Matins
+`doxology-variant` slot into `HourStructure`, and Phase 3 consumes it
+when composing the Matins hymn by replacing the final hymn doxology
+stanza with the variant section.
+
+**Citation.**
+
+- `upstream/web/www/horas/Latin/Sancti/08-22.txt:7-10`
+- `upstream/web/www/horas/Latin/Commune/C11.txt:102-105`
+- `upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:1-5`
+
+**Impact.** The targeted Reduced 1955 `2024-08-22` probe now advances
+past the `Cum Patre...` doxology seam to the later Matins antiphon
+selection boundary. The full progress report remains `132` Reduced 1955
+and `93` Rubrics 1960 unadjudicated rows, because the fixed doxology
+family exposed later unadjudicated seams in the same hours.
+
 ### 2026-04-25 — Pattern: existing `Dómine, exáudi` Vespers bridge fanout (perl-bug)
 
 **Commit.** `TBD-tranche-2`

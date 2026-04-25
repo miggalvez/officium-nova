@@ -14,6 +14,14 @@ The `@officium-novum/compositor` package turns a `DayOfficeSummary` + Phase-1-re
 
 Newest tranche first:
 
+- **2026-04-25.** Carried feast Matins hymn doxology variants across the
+  Phase 2/Phase 3 boundary. Proper Matins hymns such as the Reduced 1955
+  Marian common now surface a `doxology-variant` slot when the winning office
+  declares `Doxology=Nat`, and Matins composition replaces the final hymn
+  stanza with the source-backed `Psalterium/Doxologies` variant. The old
+  `Cum Patre, et almo Spíritu` blocker now advances to later Matins/antiphon
+  seams; the full progress report remains `132` Reduced 1955 and `93` Rubrics
+  1960 unadjudicated rows.
 - **2026-04-25.** Fanned out the existing Roman Vespers
   post-collect `Dómine, exáudi` adjudication onto the Rubrics 1960
   rows newly exposed by the ferial-preces fix. St Joseph and Immaculate
