@@ -14,6 +14,13 @@ The `@officium-novum/compositor` package turns a `DayOfficeSummary` + Phase-1-re
 
 Newest tranche first:
 
+- **2026-04-25.** Closed the Rubrics 1960 Holy Week Lauds `Quad5`
+  later-block seam in Phase 2. The 1960 major-hour fallback now prefers
+  Passiontide Monday-Wednesday `Major Special` sections (`Quad5 Laudes`,
+  `Hymnus Quad5 Laudes`, `Quad5 Versum 2`) before the generic feria
+  sections, moving Holy Monday Lauds past `Rom 13:12-13` onto the next
+  later-block boundary and dropping Rubrics 1960 unadjudicated rows to
+  `97`.
 - **2026-04-25.** Closed the Reduced 1955 Lenten Sunday Matins
   seasonal-versicle seam in Phase 2. Matins planning now uses
   `Psalmi matutinum` seasonal Sunday versicle sections such as

@@ -2937,6 +2937,34 @@ rendering family, and the six newly exposed row keys were fanned out in
 
 **Impact.** Reduced 1955 unadjudicated rows drop from `138` to `132`.
 
+### 2026-04-25 — Pattern: Rubrics 1960 Holy Week Lauds `Quad5` later block (engine-bug)
+
+**Commit.** `pending`
+
+**Ledger signal.** Rubrics 1960 Holy Week Lauds rows on Mar 25-27
+reached the later-block boundary where Perl selected the Passiontide
+`Jer 11:19` chapter from `Major Special`, while the engine still used
+the generic ferial `Rom 13:12-13` chapter.
+
+**Root cause.** The 1960 major-hour fallback already routed ordinary
+ferias through `Psalterium/Special/Major Special`, but it did not
+special-case Holy Week Monday-Wednesday before choosing the generic
+`Feria Laudes` / weekday hymn / `Feria Versum 2` sections. The source
+has dedicated `Quad5 Laudes`, `Hymnus Quad5 Laudes`, and
+`Quad5 Versum 2` sections for this family.
+
+**Resolution.** Class `engine-bug`. Major-hour fallback now prefers the
+Holy Week `Quad5` Lauds/Vespers later-block sections for Monday-Wednesday
+before falling back to the generic feria sections.
+
+**Citation.**
+
+- `upstream/web/www/horas/Latin/Psalterium/Special/Major Special.txt:1181-1310`
+
+**Impact.** The Rubrics 1960 Holy Monday Lauds row advances past the
+chapter mismatch, improving the policy average prefix from `48.1` to
+`48.3` and dropping Rubrics 1960 unadjudicated rows from `98` to `97`.
+
 ### Open pattern backlog
 
 The following families remain open and have not yet received their own
