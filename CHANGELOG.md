@@ -14,6 +14,12 @@ The `@officium-novum/compositor` package turns a `DayOfficeSummary` + Phase-1-re
 
 Newest tranche first:
 
+- **2026-04-25.** Closed the Lent weekday minor-hour antiphon routing
+  seam for the shared Roman policies. Weekday temporal ferias in Lent
+  and Passiontide now keep the ordinary weekday psalm distribution while
+  taking their first antiphons from the source-backed seasonal
+  `Psalmi minor` tables (`Quad` / `Quad5_`), and Phase 3's
+  `#antiphon` selector support now covers those keyed seasonal sections.
 - **2026-04-25.** Classified the shared Roman minor-hour collect-wrapper
   frontier exposed by the later-block work. Forty Reduced 1955 / Rubrics
   1960 Terce/Sext/None rows now cite the source-backed

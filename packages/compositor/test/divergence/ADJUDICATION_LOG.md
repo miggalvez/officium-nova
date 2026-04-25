@@ -3226,6 +3226,39 @@ Terce/Sext/None rows and regenerated the ledgers.
 Reduced 1955 unadjudicated rows drop from `141` to `121`; Rubrics 1960
 drops from `107` to `87`.
 
+### 2026-04-25 — Pattern: Lent weekday minor-hour antiphon routing (engine-bug)
+
+**Commit.** `pending`
+
+**Ledger signal.** The 2024 Lent Saturday rows for the shared Roman
+policies exposed ordinary Saturday minor-hour antiphons at Prime,
+Terce, Sext, and None (`Exaltáre`, `Clamor meus`, `Dómine, Deus meus`,
+`Ne tacúeris`) where Perl expected the seasonal Lent minor-hour
+antiphons (`Vivo ego`, `Advenérunt nobis`, `Commendémus nosmetípsos`,
+`Per arma justítiæ`).
+
+**Root cause.** Phase 2 correctly retained the weekday psalm
+distribution, but it carried the ordinary weekday row's antiphon across
+the Phase 2 / Phase 3 boundary. The source keeps the Lent and
+Passiontide weekday minor-hour antiphons in keyed seasonal sections of
+`Psalmi minor` (`[Quad]` and `[Quad5_]`), separate from the ordinary
+weekday psalm rows.
+
+**Resolution.** Class `engine-bug`. Weekday temporal ferias in Lent and
+Passiontide now overlay the first minor-hour antiphon from the seasonal
+`Psalmi minor` table while preserving the ordinary weekday psalms. Phase
+3 also treats those keyed seasonal sections as `#antiphon`-selectable
+sources, so the rendered line is the antiphon text rather than the raw
+`1 = ...` keyed row.
+
+**Citation.** `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:1-56,154-167`.
+
+**Impact.** Rubrics 1960 Feb `24` Prime/Terce/Sext/None move past the
+seasonal-antiphon frontier into later chapter/collect seams. Reduced
+1955 Prime advances to a later separator seam; Terce/Sext/None expose
+the existing incipit-vs-full-antiphon render surface for their own
+adjudication tranche.
+
 ### Open pattern backlog
 
 The following families remain open and have not yet received their own
