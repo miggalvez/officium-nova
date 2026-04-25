@@ -403,6 +403,45 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
     }
   }, 240_000);
 
+  it('prepends simplified Triduum Vespers suppression notices before the psalmody office', async () => {
+    const expectedByDate = {
+      '2024-03-28': normalizeLatin(
+        'Vesperæ ab iis qui Missæ vespertinæ in Cena Domini intersunt, hodie non dicuntur.'
+      ),
+      '2024-03-29': normalizeLatin(
+        'Vesperæ ab iis qui solemni Actioni liturgicæ postmeridianæ intersunt, hodie non dicuntur.'
+      )
+    } as const;
+
+    for (const version of ['Reduced - 1955', 'Rubrics 1960 - 1960'] as const) {
+      const { engine, resolvedCorpus } = await createHarness(version);
+
+      for (const date of ['2024-03-28', '2024-03-29'] as const) {
+        const summary = engine.resolveDayOfficeSummary(date);
+        const composed = composeHour({
+          corpus: resolvedCorpus.index,
+          summary,
+          version: engine.version,
+          hour: 'vespers',
+          options: { languages: ['Latin'] }
+        });
+        const lines = canonicalLatinLines(composed);
+
+        expect(lines[0], `${version} ${date} Vespers should open with the suppression notice`).toBe(
+          expectedByDate[date]
+        );
+        expect(
+          composed.sections.map((section) => section.slot).slice(0, 2),
+          `${version} ${date} Vespers should prepend Prelude Vespera before ordinary psalmody`
+        ).toEqual(['vespers-suppression', 'psalmody']);
+        expect(
+          lines.some((line) => line.includes(normalizeLatin('Cálicem * salutáris accípiam'))),
+          `${version} ${date} Vespers should continue into the ordinary Triduum antiphon`
+        ).toBe(true);
+      }
+    }
+  }, 240_000);
+
   it('keeps Easter Octave Versum 2 substitutions on Prime and Terce without adding a Paschaltide alleluia tail', async () => {
     const expected = normalizeLatin(
       'Hæc dies * quam fecit Dóminus: exsultémus et lætémur in ea.'

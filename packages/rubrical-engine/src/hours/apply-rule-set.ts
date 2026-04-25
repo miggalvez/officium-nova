@@ -1301,7 +1301,11 @@ function majorHourLaterBlockFallbackReference(
     return undefined;
   }
 
-  const section = majorHourLaterBlockFallbackSection(input.hour, slot, input.temporal.dayOfWeek);
+  const section =
+    (HOLY_WEEK_MON_WED_KEYS.has(input.temporal.dayName)
+      ? majorHourHolyWeekMonWedLaterBlockSection(input.hour, slot)
+      : undefined) ??
+    majorHourLaterBlockFallbackSection(input.hour, slot, input.temporal.dayOfWeek);
   if (!section) {
     return undefined;
   }
@@ -1337,6 +1341,38 @@ function majorHourLaterBlockFallbackSection(
           return `Hymnus Day${dayOfWeek} Vespera`;
         case 'versicle':
           return 'Feria Versum 3';
+        default:
+          return undefined;
+      }
+    default:
+      return undefined;
+  }
+}
+
+function majorHourHolyWeekMonWedLaterBlockSection(
+  hour: HourName,
+  slot: SlotName
+): string | undefined {
+  switch (hour) {
+    case 'lauds':
+      switch (slot) {
+        case 'chapter':
+          return 'Quad5 Laudes';
+        case 'hymn':
+          return 'Hymnus Quad5 Laudes';
+        case 'versicle':
+          return 'Quad5 Versum 2';
+        default:
+          return undefined;
+      }
+    case 'vespers':
+      switch (slot) {
+        case 'chapter':
+          return 'Quad5 Vespera';
+        case 'hymn':
+          return 'Hymnus Quad5 Vespera';
+        case 'versicle':
+          return 'Quad5 Versum 3';
         default:
           return undefined;
       }

@@ -34,16 +34,18 @@ import {
   splitLeadingPsalmAntiphon,
   withPsalmGloriaPatri
 } from './compose/psalmody.js';
+import { MAX_DEFERRED_DEPTH, referenceKey } from './compose/shared.js';
+import {
+  composeTriduumSpecialComplineSection,
+  composeTriduumSuppressedVespersSection
+} from './compose/triduum-special.js';
 import { applyDirectives } from './directives/index.js';
 import { isWholeAntiphonSlot, markAntiphonFirstText } from './emit/antiphon-marker.js';
-import { emitConfiguredSection } from './emit/sections.js';
-import { flattenConditionals } from './flatten/index.js';
 import { emitSection } from './emit/index.js';
+import { flattenConditionals } from './flatten/index.js';
 import { expandDeferredNodes } from './resolve/expand-deferred-nodes.js';
 import { resolveReference } from './resolve/reference-resolver.js';
 import type { ComposedHour, ComposeOptions, ComposeWarning, Section } from './types/composed-hour.js';
-
-const MAX_DEFERRED_DEPTH = 8;
 
 export interface ComposeInput {
   readonly corpus: TextIndex;
@@ -88,6 +90,18 @@ export function composeHour(input: ComposeInput): ComposedHour {
   const onWarning = (warning: ComposeWarning): void => {
     warnings.push(warning);
   };
+
+  const suppressedVespers = composeTriduumSuppressedVespersSection({
+    hour: input.hour,
+    summary: input.summary,
+    corpus: input.corpus,
+    options: input.options,
+    context,
+    onWarning
+  });
+  if (suppressedVespers) {
+    sections.push(suppressedVespers);
+  }
 
   const specialCompline = composeTriduumSpecialComplineSection({
     hour: input.hour,
@@ -185,134 +199,6 @@ export function composeHour(input: ComposeInput): ComposedHour {
     sections: Object.freeze(sections),
     warnings: Object.freeze(warnings)
   });
-}
-
-interface ComposeTriduumSpecialComplineArgs {
-  readonly hour: HourName;
-  readonly structure: HourStructure;
-  readonly summary: DayOfficeSummary;
-  readonly corpus: TextIndex;
-  readonly options: ComposeOptions;
-  readonly context: ConditionEvalContext;
-  readonly onWarning?: (warning: ComposeWarning) => void;
-}
-
-function composeTriduumSpecialComplineSection(
-  args: ComposeTriduumSpecialComplineArgs
-): Section | undefined {
-  if (args.hour !== 'compline' || args.structure.source?.kind !== 'triduum-special') {
-    return undefined;
-  }
-
-  const ref: TextReference = {
-    path: `horas/Latin/${args.summary.celebration.feastRef.path}`,
-    section: 'Special Completorium'
-  };
-  const resolved = resolveReference(args.corpus, ref, {
-    languages: args.options.languages,
-    langfb: args.options.langfb,
-    dayOfWeek: args.context.dayOfWeek,
-    date: args.context.date,
-    season: args.context.season,
-    version: args.context.version,
-    modernStyleMonthday: args.context.version.handle.includes('1960'),
-    ...(args.onWarning ? { onWarning: args.onWarning } : {})
-  });
-
-  const perLanguage = new Map<string, readonly TextContent[]>();
-  for (const lang of args.options.languages) {
-    const section = resolved[lang];
-    if (!section) {
-      continue;
-    }
-    if (section.selectorMissing) {
-      perLanguage.set(
-        lang,
-        Object.freeze([
-          {
-            type: 'rubric',
-            value: `(Section missing: ${ref.section})`
-          } satisfies TextContent
-        ])
-      );
-      continue;
-    }
-    const bucket: TextContent[] = [];
-    const gloriaOmittiturReplacement = resolveGloriaOmittiturReplacement({
-      directives: args.structure.directives,
-      corpus: args.corpus,
-      language: lang,
-      langfb: args.options.langfb,
-      context: args.context,
-      maxDepth: MAX_DEFERRED_DEPTH,
-      ...(args.onWarning ? { onWarning: args.onWarning } : {})
-    });
-    const sourceNodes = flattenConditionals(section.content, args.context);
-    for (const node of sourceNodes) {
-      if (node.type === 'separator') {
-        bucket.push({
-          type: 'gabcNotation',
-          notation: {
-            kind: 'header',
-            notation: '',
-            text: '_'
-          }
-        });
-        continue;
-      }
-
-      if (node.type === 'psalmInclude') {
-        appendContentWithBoundary(bucket, [
-          {
-            type: 'gabcNotation',
-            notation: {
-              kind: 'header',
-              notation: '',
-              text: `Psalmus ${node.psalmNumber} [${node.psalmNumber}]`
-            }
-          }
-        ]);
-      }
-
-      const expanded = expandDeferredNodes([node], {
-        index: args.corpus,
-        language: lang,
-        langfb: args.options.langfb,
-        season: args.context.season,
-        seen: new Set(),
-        maxDepth: MAX_DEFERRED_DEPTH,
-        ...(args.onWarning ? { onWarning: args.onWarning } : {})
-      });
-      const flattened = flattenConditionals(expanded, args.context);
-      // The Triduum uses a single `Special Completorium` source block rather
-      // than the ordinary slot lattice. We still run the psalmody-style
-      // normalizer/directive pass so inline psalm text canonicalizes the same
-      // way as ordinary Compline while bypassing the ordinary short reading.
-      const transformed = applyDirectives('psalmody', flattened, {
-        hour: args.hour,
-        directives: args.structure.directives,
-        gloriaOmittiturReplacement
-      });
-      appendContentWithBoundary(bucket, transformed);
-    }
-    if (bucket.length > 0) {
-      perLanguage.set(lang, Object.freeze(bucket));
-    }
-  }
-
-  if (perLanguage.size === 0) {
-    return undefined;
-  }
-
-  return emitConfiguredSection(
-    {
-      slot: 'psalmody',
-      sectionSlot: 'special-compline',
-      sectionType: 'other'
-    },
-    perLanguage,
-    referenceKey(ref)
-  );
 }
 
 /**
@@ -772,10 +658,6 @@ function isSimplifiedTriduumOration(args: ComposeSlotArgs, ref: TextReference): 
     (ref.section === 'Oratio' || ref.section === 'Oratio 2') &&
     /\/Tempora\/Quad6-[456]r?$/u.test(ref.path)
   );
-}
-
-function referenceKey(ref: TextReference): string {
-  return `${ref.path}#${ref.section}${ref.selector ? `:${ref.selector}` : ''}`;
 }
 
 function buildConditionContext(

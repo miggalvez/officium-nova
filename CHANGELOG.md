@@ -14,6 +14,37 @@ The `@officium-novum/compositor` package turns a `DayOfficeSummary` + Phase-1-re
 
 Newest tranche first:
 
+- **2026-04-25.** Closed the Rubrics 1960 Holy Week Lauds `Quad5`
+  later-block seam in Phase 2. The 1960 major-hour fallback now prefers
+  Passiontide Monday-Wednesday `Major Special` sections (`Quad5 Laudes`,
+  `Hymnus Quad5 Laudes`, `Quad5 Versum 2`) before the generic feria
+  sections, moving Holy Monday Lauds past `Rom 13:12-13` onto the next
+  later-block boundary and dropping Rubrics 1960 unadjudicated rows to
+  `97`.
+- **2026-04-25.** Closed the Reduced 1955 Lenten Sunday Matins
+  seasonal-versicle seam in Phase 2. Matins planning now uses
+  `Psalmi matutinum` seasonal Sunday versicle sections such as
+  `Quad 1 Versum` and `Quad5 1 Versum` before falling back to the
+  ordinary `Day0` psalter versicle. The affected Lenten/Passiontide
+  Sunday Matins rows now advance to the already-adjudicated
+  `Pater Noster` guillemet rendering family, dropping Reduced 1955
+  unadjudicated rows to `132`.
+- **2026-04-25.** Completed an existing-adjudication fanout sweep over
+  the current expanded Phase 3 ledgers. The sidecar now classifies 14
+  rows that exactly match already-cited source-backed `perl-bug`
+  families: Holy Thursday Psalm `115:7` Vespers half-verse rendering,
+  Reduced 1955 Low Sunday `Psalmi minor` Prime/minor-hour surfaces, and
+  Rubrics 1960 Christmas-octave fallback-hymn doxology substitutions.
+  Live unadjudicated rows drop to `138` for Reduced 1955 and `98` for
+  Rubrics 1960.
+- **2026-04-25.** Closed the simplified Roman Triduum Vespers
+  `Prelude Vespera` seam in Phase 3. The compositor now prepends the
+  source-backed Holy Thursday / Good Friday Vespers suppression notice
+  for Reduced 1955 and Rubrics 1960, then continues into ordinary
+  Triduum Vespers psalmody. Good Friday Vespers now advances to the
+  already-documented Psalm `115:7` half-verse Perl-render seam, and the
+  newly exposed row keys are recorded as fanout of that `perl-bug`
+  family.
 - **2026-04-24.** Closed the simplified Roman Triduum minor-hour
   ordinary-short-reading leak as a mixed Phase 2 / Phase 3 fix. The
   1955/1960 `Omit ... Capitulum Lectio ... De Officium Capituli` rule

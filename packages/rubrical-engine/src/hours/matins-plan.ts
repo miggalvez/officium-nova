@@ -281,6 +281,16 @@ function buildNocturnVersicle(
     };
   }
 
+  const seasonalSundayVersicle = seasonalSundayMatinsVersicleSection(input, nocturnIndex);
+  if (seasonalSundayVersicle) {
+    return {
+      reference: {
+        path: PSALTERIUM_MATINS_CONTENT_PATH,
+        section: seasonalSundayVersicle
+      }
+    };
+  }
+
   const versicleSelector = versicleSelectorForNocturn(
     psalteriumDaySection,
     nocturnIndex,
@@ -313,6 +323,24 @@ function buildNocturnVersicle(
       section: 'Psalmi cum lectionibus'
     }
   };
+}
+
+function seasonalSundayMatinsVersicleSection(
+  input: Pick<BuildMatinsPlanInput, 'temporal'>,
+  nocturnIndex: 1 | 2 | 3
+): string | undefined {
+  if (input.temporal.dayOfWeek !== 0) {
+    return undefined;
+  }
+
+  switch (input.temporal.season) {
+    case 'lent':
+      return `Quad ${nocturnIndex} Versum`;
+    case 'passiontide':
+      return `Quad5 ${nocturnIndex} Versum`;
+    default:
+      return undefined;
+  }
 }
 
 function buildResponsory(

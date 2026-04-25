@@ -6537,6 +6537,18 @@
     "resolvedAt": "2026-04-24",
     "commitSha": "dfbe3fe"
   },
+  "Reduced - 1955/2024-02-18/Matins/29ec2a3d": {
+    "policy": "Reduced - 1955",
+    "date": "2024-02-18",
+    "hour": "Matins",
+    "firstExpected": "Pater Noster dicitur secreto usque ad Et ne nos indúcas in tentatiónem:",
+    "firstActual": "« Pater Noster » dicitur secreto usque ad « Et ne nos indúcas in tentatiónem: »",
+    "class": "rendering-difference",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Rubricae.txt:1-2 — the corpus rubric carries guillemets around both `Pater Noster` and `Et ne nos indúcas in tentatiónem:`. Perl strips them while the compositor preserves them; both are surface renderings of the same rubric sentence, not a liturgical-content disagreement.",
+    "notes": "Representative entry for the Roman Matins pre-lesson guillemet family under Reduced 1955. Fan out to all 1955 Matins rows with the same first-divergence text.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "379dd72"
+  },
   "Reduced - 1955/2024-02-18/Prime/2e28d92b": {
     "policy": "Reduced - 1955",
     "date": "2024-02-18",
@@ -6608,6 +6620,18 @@
     "notes": "Representative entry for the Reduced 1955 major-hour full-antiphon opening family where Perl abbreviates source-backed antiphons to incipits.",
     "resolvedAt": "2026-04-24",
     "commitSha": "dfbe3fe"
+  },
+  "Reduced - 1955/2024-02-25/Matins/29ec2a3d": {
+    "policy": "Reduced - 1955",
+    "date": "2024-02-25",
+    "hour": "Matins",
+    "firstExpected": "Pater Noster dicitur secreto usque ad Et ne nos indúcas in tentatiónem:",
+    "firstActual": "« Pater Noster » dicitur secreto usque ad « Et ne nos indúcas in tentatiónem: »",
+    "class": "rendering-difference",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Rubricae.txt:1-2 — the corpus rubric carries guillemets around both `Pater Noster` and `Et ne nos indúcas in tentatiónem:`. Perl strips them while the compositor preserves them; both are surface renderings of the same rubric sentence, not a liturgical-content disagreement.",
+    "notes": "Representative entry for the Roman Matins pre-lesson guillemet family under Reduced 1955. Fan out to all 1955 Matins rows with the same first-divergence text.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "379dd72"
   },
   "Reduced - 1955/2024-02-25/None/4a1aadd8": {
     "policy": "Reduced - 1955",
@@ -6693,6 +6717,18 @@
     "resolvedAt": "2026-04-24",
     "commitSha": "dfbe3fe"
   },
+  "Reduced - 1955/2024-03-03/Matins/29ec2a3d": {
+    "policy": "Reduced - 1955",
+    "date": "2024-03-03",
+    "hour": "Matins",
+    "firstExpected": "Pater Noster dicitur secreto usque ad Et ne nos indúcas in tentatiónem:",
+    "firstActual": "« Pater Noster » dicitur secreto usque ad « Et ne nos indúcas in tentatiónem: »",
+    "class": "rendering-difference",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Rubricae.txt:1-2 — the corpus rubric carries guillemets around both `Pater Noster` and `Et ne nos indúcas in tentatiónem:`. Perl strips them while the compositor preserves them; both are surface renderings of the same rubric sentence, not a liturgical-content disagreement.",
+    "notes": "Representative entry for the Roman Matins pre-lesson guillemet family under Reduced 1955. Fan out to all 1955 Matins rows with the same first-divergence text.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "379dd72"
+  },
   "Reduced - 1955/2024-03-03/None/4a1aadd8": {
     "policy": "Reduced - 1955",
     "date": "2024-03-03",
@@ -6777,6 +6813,18 @@
     "resolvedAt": "2026-04-24",
     "commitSha": "dfbe3fe"
   },
+  "Reduced - 1955/2024-03-10/Matins/29ec2a3d": {
+    "policy": "Reduced - 1955",
+    "date": "2024-03-10",
+    "hour": "Matins",
+    "firstExpected": "Pater Noster dicitur secreto usque ad Et ne nos indúcas in tentatiónem:",
+    "firstActual": "« Pater Noster » dicitur secreto usque ad « Et ne nos indúcas in tentatiónem: »",
+    "class": "rendering-difference",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Rubricae.txt:1-2 — the corpus rubric carries guillemets around both `Pater Noster` and `Et ne nos indúcas in tentatiónem:`. Perl strips them while the compositor preserves them; both are surface renderings of the same rubric sentence, not a liturgical-content disagreement.",
+    "notes": "Representative entry for the Roman Matins pre-lesson guillemet family under Reduced 1955. Fan out to all 1955 Matins rows with the same first-divergence text.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "379dd72"
+  },
   "Reduced - 1955/2024-03-10/None/4a1aadd8": {
     "policy": "Reduced - 1955",
     "date": "2024-03-10",
@@ -6860,6 +6908,18 @@
     "notes": "Representative entry for the Reduced 1955 major-hour full-antiphon opening family where Perl abbreviates source-backed antiphons to incipits.",
     "resolvedAt": "2026-04-24",
     "commitSha": "dfbe3fe"
+  },
+  "Reduced - 1955/2024-03-17/Matins/29ec2a3d": {
+    "policy": "Reduced - 1955",
+    "date": "2024-03-17",
+    "hour": "Matins",
+    "firstExpected": "Pater Noster dicitur secreto usque ad Et ne nos indúcas in tentatiónem:",
+    "firstActual": "« Pater Noster » dicitur secreto usque ad « Et ne nos indúcas in tentatiónem: »",
+    "class": "rendering-difference",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Rubricae.txt:1-2 — the corpus rubric carries guillemets around both `Pater Noster` and `Et ne nos indúcas in tentatiónem:`. Perl strips them while the compositor preserves them; both are surface renderings of the same rubric sentence, not a liturgical-content disagreement.",
+    "notes": "Representative entry for the Roman Matins pre-lesson guillemet family under Reduced 1955. Fan out to all 1955 Matins rows with the same first-divergence text.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "379dd72"
   },
   "Reduced - 1955/2024-03-17/None/4a1aadd8": {
     "policy": "Reduced - 1955",
@@ -7015,7 +7075,7 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Prayers.txt:79-86 - the source-backed Domine exaudi section supplies V. Domine, exaudi orationem meam and R. Et clamor meus ad te veniat after the Vespers collect; the compositor emits that bridge while the Perl comparison surface stops at `_` on these rows.",
     "notes": "Phase 3 adjudication sweep: major-hour conclusion bridge remains source-backed after selected 1955/1960 Vespers collects.",
     "resolvedAt": "2026-04-24",
-    "commitSha": "pending"
+    "commitSha": "26e2fdd"
   },
   "Reduced - 1955/2024-03-24/Compline/5dc10d20": {
     "policy": "Reduced - 1955",
@@ -7040,6 +7100,18 @@
     "notes": "Representative entry for the Reduced 1955 major-hour full-antiphon opening family where Perl abbreviates source-backed antiphons to incipits.",
     "resolvedAt": "2026-04-24",
     "commitSha": "dfbe3fe"
+  },
+  "Reduced - 1955/2024-03-24/Matins/29ec2a3d": {
+    "policy": "Reduced - 1955",
+    "date": "2024-03-24",
+    "hour": "Matins",
+    "firstExpected": "Pater Noster dicitur secreto usque ad Et ne nos indúcas in tentatiónem:",
+    "firstActual": "« Pater Noster » dicitur secreto usque ad « Et ne nos indúcas in tentatiónem: »",
+    "class": "rendering-difference",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Rubricae.txt:1-2 — the corpus rubric carries guillemets around both `Pater Noster` and `Et ne nos indúcas in tentatiónem:`. Perl strips them while the compositor preserves them; both are surface renderings of the same rubric sentence, not a liturgical-content disagreement.",
+    "notes": "Representative entry for the Roman Matins pre-lesson guillemet family under Reduced 1955. Fan out to all 1955 Matins rows with the same first-divergence text.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "379dd72"
   },
   "Reduced - 1955/2024-03-24/None/4a1aadd8": {
     "policy": "Reduced - 1955",
@@ -7389,6 +7461,18 @@
     "resolvedAt": "2026-04-20",
     "commitSha": "610a0cf"
   },
+  "Reduced - 1955/2024-03-28/Vespers/c3e5bb37": {
+    "policy": "Reduced - 1955",
+    "date": "2024-03-28",
+    "hour": "Vespers",
+    "firstExpected": "115:7 Dirupísti víncula mea: * tibi sacrificábo hóstiam laudis, et nomen Dómini invocábo.",
+    "firstActual": "115:7 Dirupísti víncula mea: ‡ tibi sacrificábo hóstiam laudis, * et nomen Dómini invocábo.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm115.txt:7 — the source line explicitly encodes Psalm 115:7b as `Dirupísti víncula mea: ‡ (8) tibi sacrificábo hóstiam laudis, * et nomen Dómini invocábo.` The compositor preserves that half-verse structure while Perl flattens it to a single `*` boundary.",
+    "notes": "Fanout of the Psalm 115 Vespers half-verse family after the Triduum `Prelude Vespera` prelude fix advanced Good Friday Vespers into the already-known source-backed psalm seam.",
+    "resolvedAt": "2026-04-25",
+    "commitSha": "cece022"
+  },
   "Reduced - 1955/2024-03-29/Compline/fa4d64f6": {
     "policy": "Reduced - 1955",
     "date": "2024-03-29",
@@ -7412,6 +7496,18 @@
     "notes": "Shared Roman Triduum `Pater totum secreto` Matins family after the structural `Limit Benedictiones Oratio` fix. With the `rubrica ...` formula-path bug fixed, the compositor now emits the same single full `Pater noster` per nocturn as Perl; the remaining row signature is only the guillemet rendering difference on the rubric line.",
     "resolvedAt": "2026-04-20",
     "commitSha": "610a0cf"
+  },
+  "Reduced - 1955/2024-03-29/Vespers/c3e5bb37": {
+    "policy": "Reduced - 1955",
+    "date": "2024-03-29",
+    "hour": "Vespers",
+    "firstExpected": "115:7 Dirupísti víncula mea: * tibi sacrificábo hóstiam laudis, et nomen Dómini invocábo.",
+    "firstActual": "115:7 Dirupísti víncula mea: ‡ tibi sacrificábo hóstiam laudis, * et nomen Dómini invocábo.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm115.txt:7 — the source line explicitly encodes Psalm 115:7b as `Dirupísti víncula mea: ‡ (8) tibi sacrificábo hóstiam laudis, * et nomen Dómini invocábo.` The compositor preserves that half-verse structure while Perl flattens it to a single `*` boundary.",
+    "notes": "Fanout of the Psalm 115 Vespers half-verse family after the Triduum `Prelude Vespera` prelude fix advanced Good Friday Vespers into the already-known source-backed psalm seam.",
+    "resolvedAt": "2026-04-25",
+    "commitSha": "ab9a302"
   },
   "Reduced - 1955/2024-03-30/Compline/89cb274b": {
     "policy": "Reduced - 1955",
@@ -7712,6 +7808,54 @@
     "notes": "Representative entry for the Reduced 1955 Compline cross-glyph family. Fan out to all matching 1955 Compline rows with the same first-divergence text.",
     "resolvedAt": "2026-04-19",
     "commitSha": "bfb3c52"
+  },
+  "Reduced - 1955/2024-04-07/None/f178bdcc": {
+    "policy": "Reduced - 1955",
+    "date": "2024-04-07",
+    "hour": "None",
+    "firstExpected": "Ant. Allelúja.",
+    "firstActual": "Ant. Allelúja, * fáciem tuam, Dómine, illúmina super servum tuum, allelúja, allelúja.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:17-19,33-35,49-51 and 227-231 — the Sunday keyed minor-hour sections `[Tertia]`, `[Sexta]`, and `[Nona]` carry the full antiphons `deduc me...`, `tuus sum ego...`, and `fáciem tuam...`, while the `Tridentinum` Sunday rows remain only the psalm-table source. The compositor now materializes that source-backed Sunday antiphon surface; the Perl comparison surface collapses these openings to generic `Ant. Allelúja.`.",
+    "notes": "Representative entry for the Reduced 1955 Jan 14 Sunday keyed `Psalmi minor` family where the source-backed full minor-hour antiphons are flattened by Perl to generic `Ant. Allelúja.` openings.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "379dd72"
+  },
+  "Reduced - 1955/2024-04-07/Prime/5531f29c": {
+    "policy": "Reduced - 1955",
+    "date": "2024-04-07",
+    "hour": "Prime",
+    "firstExpected": "Psalmus 117 [1]",
+    "firstActual": "Psalmus 53 [1]",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:218 — the `Tridentinum` Sunday Prime row explicitly lists `53,117,118(1-16),118(17-32)`. The compositor therefore keeps Psalm 53 ahead of Psalm 117 on Jan 14 Prime, while the Perl comparison surface skips directly to Psalm 117.",
+    "notes": "Representative entry for the Roman Jan 14 Sunday Prime psalm-table family where the source-backed `Tridentinum` row begins with Psalm 53 before Psalm 117.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "379dd72"
+  },
+  "Reduced - 1955/2024-04-07/Sext/5e2b4bef": {
+    "policy": "Reduced - 1955",
+    "date": "2024-04-07",
+    "hour": "Sext",
+    "firstExpected": "Ant. Allelúja.",
+    "firstActual": "Ant. Allelúja, * tuus sum ego, salvum me fac, Dómine, allelúja, allelúja.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:17-19,33-35,49-51 and 227-231 — the Sunday keyed minor-hour sections `[Tertia]`, `[Sexta]`, and `[Nona]` carry the full antiphons `deduc me...`, `tuus sum ego...`, and `fáciem tuam...`, while the `Tridentinum` Sunday rows remain only the psalm-table source. The compositor now materializes that source-backed Sunday antiphon surface; the Perl comparison surface collapses these openings to generic `Ant. Allelúja.`.",
+    "notes": "Representative entry for the Reduced 1955 Jan 14 Sunday keyed `Psalmi minor` family where the source-backed full minor-hour antiphons are flattened by Perl to generic `Ant. Allelúja.` openings.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "379dd72"
+  },
+  "Reduced - 1955/2024-04-07/Terce/50fad344": {
+    "policy": "Reduced - 1955",
+    "date": "2024-04-07",
+    "hour": "Terce",
+    "firstExpected": "Ant. Allelúja.",
+    "firstActual": "Ant. Allelúja, * deduc me, Dómine, in sémitam mandatórum tuórum, allelúja, allelúja.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:17-19,33-35,49-51 and 227-231 — the Sunday keyed minor-hour sections `[Tertia]`, `[Sexta]`, and `[Nona]` carry the full antiphons `deduc me...`, `tuus sum ego...`, and `fáciem tuam...`, while the `Tridentinum` Sunday rows remain only the psalm-table source. The compositor now materializes that source-backed Sunday antiphon surface; the Perl comparison surface collapses these openings to generic `Ant. Allelúja.`.",
+    "notes": "Representative entry for the Reduced 1955 Jan 14 Sunday keyed `Psalmi minor` family where the source-backed full minor-hour antiphons are flattened by Perl to generic `Ant. Allelúja.` openings.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "379dd72"
   },
   "Reduced - 1955/2024-04-07/Vespers/22de27ef": {
     "policy": "Reduced - 1955",
@@ -8587,7 +8731,7 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Prayers.txt:79-86 - the source-backed Domine exaudi section supplies V. Domine, exaudi orationem meam and R. Et clamor meus ad te veniat after the Vespers collect; the compositor emits that bridge while the Perl comparison surface stops at `_` on these rows.",
     "notes": "Phase 3 adjudication sweep: major-hour conclusion bridge remains source-backed after selected 1955/1960 Vespers collects.",
     "resolvedAt": "2026-04-24",
-    "commitSha": "pending"
+    "commitSha": "26e2fdd"
   },
   "Reduced - 1955/2024-09-12/Compline/5dc10d20": {
     "policy": "Reduced - 1955",
@@ -8695,7 +8839,7 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Prayers.txt:79-86 - the source-backed Domine exaudi section supplies V. Domine, exaudi orationem meam and R. Et clamor meus ad te veniat after the Vespers collect; the compositor emits that bridge while the Perl comparison surface stops at `_` on these rows.",
     "notes": "Phase 3 adjudication sweep: major-hour conclusion bridge remains source-backed after selected 1955/1960 Vespers collects.",
     "resolvedAt": "2026-04-24",
-    "commitSha": "pending"
+    "commitSha": "26e2fdd"
   },
   "Reduced - 1955/2024-09-29/Compline/5dc10d20": {
     "policy": "Reduced - 1955",
@@ -9187,7 +9331,7 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Prayers.txt:79-86 - the source-backed Domine exaudi section supplies V. Domine, exaudi orationem meam and R. Et clamor meus ad te veniat after the Vespers collect; the compositor emits that bridge while the Perl comparison surface stops at `_` on these rows.",
     "notes": "Phase 3 adjudication sweep: major-hour conclusion bridge remains source-backed after selected 1955/1960 Vespers collects.",
     "resolvedAt": "2026-04-24",
-    "commitSha": "pending"
+    "commitSha": "26e2fdd"
   },
   "Reduced - 1955/2024-12-15/Compline/5dc10d20": {
     "policy": "Reduced - 1955",
@@ -9571,7 +9715,7 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Prayers.txt:79-86 - the source-backed Domine exaudi section supplies V. Domine, exaudi orationem meam and R. Et clamor meus ad te veniat after the Vespers collect; the compositor emits that bridge while the Perl comparison surface stops at `_` on these rows.",
     "notes": "Phase 3 adjudication sweep: major-hour conclusion bridge remains source-backed after selected 1955/1960 Vespers collects.",
     "resolvedAt": "2026-04-24",
-    "commitSha": "pending"
+    "commitSha": "26e2fdd"
   },
   "Rubrics 1960 - 1960/2024-01-01/Compline/57de2841": {
     "policy": "Rubrics 1960 - 1960",
@@ -11229,6 +11373,18 @@
     "resolvedAt": "2026-04-20",
     "commitSha": "610a0cf"
   },
+  "Rubrics 1960 - 1960/2024-03-28/Vespers/c3e5bb37": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-03-28",
+    "hour": "Vespers",
+    "firstExpected": "115:7 Dirupísti víncula mea: * tibi sacrificábo hóstiam laudis, et nomen Dómini invocábo.",
+    "firstActual": "115:7 Dirupísti víncula mea: ‡ tibi sacrificábo hóstiam laudis, * et nomen Dómini invocábo.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm115.txt:7 — the source line explicitly encodes Psalm 115:7b as `Dirupísti víncula mea: ‡ (8) tibi sacrificábo hóstiam laudis, * et nomen Dómini invocábo.` The compositor preserves that half-verse structure while Perl flattens it to a single `*` boundary.",
+    "notes": "Fanout of the Psalm 115 Vespers half-verse family after the Triduum `Prelude Vespera` prelude fix advanced Good Friday Vespers into the already-known source-backed psalm seam.",
+    "resolvedAt": "2026-04-25",
+    "commitSha": "cece022"
+  },
   "Rubrics 1960 - 1960/2024-03-29/Compline/fa4d64f6": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2024-03-29",
@@ -11252,6 +11408,18 @@
     "notes": "Shared Roman Triduum `Pater totum secreto` Matins family after the structural `Limit Benedictiones Oratio` fix. With the `rubrica ...` formula-path bug fixed, the compositor now emits the same single full `Pater noster` per nocturn as Perl; the remaining row signature is only the guillemet rendering difference on the rubric line.",
     "resolvedAt": "2026-04-20",
     "commitSha": "610a0cf"
+  },
+  "Rubrics 1960 - 1960/2024-03-29/Vespers/c3e5bb37": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-03-29",
+    "hour": "Vespers",
+    "firstExpected": "115:7 Dirupísti víncula mea: * tibi sacrificábo hóstiam laudis, et nomen Dómini invocábo.",
+    "firstActual": "115:7 Dirupísti víncula mea: ‡ tibi sacrificábo hóstiam laudis, * et nomen Dómini invocábo.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm115.txt:7 — the source line explicitly encodes Psalm 115:7b as `Dirupísti víncula mea: ‡ (8) tibi sacrificábo hóstiam laudis, * et nomen Dómini invocábo.` The compositor preserves that half-verse structure while Perl flattens it to a single `*` boundary.",
+    "notes": "Fanout of the Psalm 115 Vespers half-verse family after the Triduum `Prelude Vespera` prelude fix advanced Good Friday Vespers into the already-known source-backed psalm seam.",
+    "resolvedAt": "2026-04-25",
+    "commitSha": "ab9a302"
   },
   "Rubrics 1960 - 1960/2024-03-30/Compline/89cb274b": {
     "policy": "Rubrics 1960 - 1960",
@@ -11527,7 +11695,7 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:29-34 - the Paschal doxology source begins Deo Patri sit gloria and continues Et Filio, qui a mortuis; the compositor now attaches that seasonal variant to fallback minor-hour hymns while the Perl comparison surface retains the ordinary fallback stanza.",
     "notes": "Phase 2/3 fix plus adjudication: seasonal Paschal fallback-hymn doxology now reaches minor-hour fallback hymns; residual Perl rows keep the non-seasonal stanza.",
     "resolvedAt": "2026-04-24",
-    "commitSha": "pending"
+    "commitSha": "26e2fdd"
   },
   "Rubrics 1960 - 1960/2024-04-07/Prime/7859a9fb": {
     "policy": "Rubrics 1960 - 1960",
@@ -11539,7 +11707,7 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:29-34 - the Paschal doxology source begins Deo Patri sit gloria and continues Et Filio, qui a mortuis; the compositor now attaches that seasonal variant to fallback minor-hour hymns while the Perl comparison surface retains the ordinary fallback stanza.",
     "notes": "Phase 2/3 fix plus adjudication: seasonal Paschal fallback-hymn doxology now reaches minor-hour fallback hymns; residual Perl rows keep the non-seasonal stanza.",
     "resolvedAt": "2026-04-24",
-    "commitSha": "pending"
+    "commitSha": "26e2fdd"
   },
   "Rubrics 1960 - 1960/2024-04-07/Sext/dcdd92bf": {
     "policy": "Rubrics 1960 - 1960",
@@ -11551,7 +11719,7 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:29-34 - the Paschal doxology source begins Deo Patri sit gloria and continues Et Filio, qui a mortuis; the compositor now attaches that seasonal variant to fallback minor-hour hymns while the Perl comparison surface retains the ordinary fallback stanza.",
     "notes": "Phase 2/3 fix plus adjudication: seasonal Paschal fallback-hymn doxology now reaches minor-hour fallback hymns; residual Perl rows keep the non-seasonal stanza.",
     "resolvedAt": "2026-04-24",
-    "commitSha": "pending"
+    "commitSha": "26e2fdd"
   },
   "Rubrics 1960 - 1960/2024-04-07/Terce/dcdd92bf": {
     "policy": "Rubrics 1960 - 1960",
@@ -11563,7 +11731,7 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:29-34 - the Paschal doxology source begins Deo Patri sit gloria and continues Et Filio, qui a mortuis; the compositor now attaches that seasonal variant to fallback minor-hour hymns while the Perl comparison surface retains the ordinary fallback stanza.",
     "notes": "Phase 2/3 fix plus adjudication: seasonal Paschal fallback-hymn doxology now reaches minor-hour fallback hymns; residual Perl rows keep the non-seasonal stanza.",
     "resolvedAt": "2026-04-24",
-    "commitSha": "pending"
+    "commitSha": "26e2fdd"
   },
   "Rubrics 1960 - 1960/2024-05-09/Compline/57de2841": {
     "policy": "Rubrics 1960 - 1960",
@@ -11695,7 +11863,7 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:29-34 - the Paschal doxology source begins Deo Patri sit gloria and continues Et Filio, qui a mortuis; the compositor now attaches that seasonal variant to fallback minor-hour hymns while the Perl comparison surface retains the ordinary fallback stanza.",
     "notes": "Phase 2/3 fix plus adjudication: seasonal Paschal fallback-hymn doxology now reaches minor-hour fallback hymns; residual Perl rows keep the non-seasonal stanza.",
     "resolvedAt": "2026-04-24",
-    "commitSha": "pending"
+    "commitSha": "26e2fdd"
   },
   "Rubrics 1960 - 1960/2024-05-19/Prime/7859a9fb": {
     "policy": "Rubrics 1960 - 1960",
@@ -11707,7 +11875,7 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:29-34 - the Paschal doxology source begins Deo Patri sit gloria and continues Et Filio, qui a mortuis; the compositor now attaches that seasonal variant to fallback minor-hour hymns while the Perl comparison surface retains the ordinary fallback stanza.",
     "notes": "Phase 2/3 fix plus adjudication: seasonal Paschal fallback-hymn doxology now reaches minor-hour fallback hymns; residual Perl rows keep the non-seasonal stanza.",
     "resolvedAt": "2026-04-24",
-    "commitSha": "pending"
+    "commitSha": "26e2fdd"
   },
   "Rubrics 1960 - 1960/2024-05-19/Sext/ac7cdff5": {
     "policy": "Rubrics 1960 - 1960",
@@ -11731,7 +11899,7 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:29-34 - the Paschal doxology source begins Deo Patri sit gloria and continues Et Filio, qui a mortuis; the compositor now attaches that seasonal variant to fallback minor-hour hymns while the Perl comparison surface retains the ordinary fallback stanza.",
     "notes": "Phase 2/3 fix plus adjudication: seasonal Paschal fallback-hymn doxology now reaches minor-hour fallback hymns; residual Perl rows keep the non-seasonal stanza.",
     "resolvedAt": "2026-04-24",
-    "commitSha": "pending"
+    "commitSha": "26e2fdd"
   },
   "Rubrics 1960 - 1960/2024-05-19/Vespers/39846534": {
     "policy": "Rubrics 1960 - 1960",
@@ -11947,7 +12115,7 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:218 - the 1960 Tridentinum Sunday Prime row explicitly begins Prima Dominica=Alleluja, * alleluja, alleluja;;53,117,118(1-16),118(17-32). The compositor preserves that source-backed antiphon while the Perl comparison surface uses the older full Dominica antiphon.",
     "notes": "Phase 3 adjudication sweep: 1960 Tridentinum Sunday Prime antiphon source is the Tridentinum row, not the older Prima keyed antiphon.",
     "resolvedAt": "2026-04-24",
-    "commitSha": "pending"
+    "commitSha": "26e2fdd"
   },
   "Rubrics 1960 - 1960/2024-06-16/Sext/bc17de3d": {
     "policy": "Rubrics 1960 - 1960",
@@ -12283,7 +12451,7 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:218 - the 1960 Tridentinum Sunday Prime row explicitly begins Prima Dominica=Alleluja, * alleluja, alleluja;;53,117,118(1-16),118(17-32). The compositor preserves that source-backed antiphon while the Perl comparison surface uses the older full Dominica antiphon.",
     "notes": "Phase 3 adjudication sweep: 1960 Tridentinum Sunday Prime antiphon source is the Tridentinum row, not the older Prima keyed antiphon.",
     "resolvedAt": "2026-04-24",
-    "commitSha": "pending"
+    "commitSha": "26e2fdd"
   },
   "Rubrics 1960 - 1960/2024-06-30/Sext/bc17de3d": {
     "policy": "Rubrics 1960 - 1960",
@@ -12703,7 +12871,7 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:218 - the 1960 Tridentinum Sunday Prime row explicitly begins Prima Dominica=Alleluja, * alleluja, alleluja;;53,117,118(1-16),118(17-32). The compositor preserves that source-backed antiphon while the Perl comparison surface uses the older full Dominica antiphon.",
     "notes": "Phase 3 adjudication sweep: 1960 Tridentinum Sunday Prime antiphon source is the Tridentinum row, not the older Prima keyed antiphon.",
     "resolvedAt": "2026-04-24",
-    "commitSha": "pending"
+    "commitSha": "26e2fdd"
   },
   "Rubrics 1960 - 1960/2024-09-08/Sext/bc17de3d": {
     "policy": "Rubrics 1960 - 1960",
@@ -12871,7 +13039,7 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:218 - the 1960 Tridentinum Sunday Prime row explicitly begins Prima Dominica=Alleluja, * alleluja, alleluja;;53,117,118(1-16),118(17-32). The compositor preserves that source-backed antiphon while the Perl comparison surface uses the older full Dominica antiphon.",
     "notes": "Phase 3 adjudication sweep: 1960 Tridentinum Sunday Prime antiphon source is the Tridentinum row, not the older Prima keyed antiphon.",
     "resolvedAt": "2026-04-24",
-    "commitSha": "pending"
+    "commitSha": "26e2fdd"
   },
   "Rubrics 1960 - 1960/2024-09-15/Sext/bc17de3d": {
     "policy": "Rubrics 1960 - 1960",
@@ -13027,7 +13195,7 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:218 - the 1960 Tridentinum Sunday Prime row explicitly begins Prima Dominica=Alleluja, * alleluja, alleluja;;53,117,118(1-16),118(17-32). The compositor preserves that source-backed antiphon while the Perl comparison surface uses the older full Dominica antiphon.",
     "notes": "Phase 3 adjudication sweep: 1960 Tridentinum Sunday Prime antiphon source is the Tridentinum row, not the older Prima keyed antiphon.",
     "resolvedAt": "2026-04-24",
-    "commitSha": "pending"
+    "commitSha": "26e2fdd"
   },
   "Rubrics 1960 - 1960/2024-10-06/Sext/bc17de3d": {
     "policy": "Rubrics 1960 - 1960",
@@ -13689,6 +13857,54 @@
     "resolvedAt": "2026-04-19",
     "commitSha": "bfb3c52"
   },
+  "Rubrics 1960 - 1960/2024-12-26/None/318cf47a": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-12-26",
+    "hour": "None",
+    "firstExpected": "Præsta, Pater piíssime,",
+    "firstActual": "Jesu, tibi sit glória,",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-06.txt:4-8 and upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:1-20 and upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:664-672 and docs/phase-2-rubrical-engine-design.md:1469 — the Roman January offices set `Doxology=Epi` or a local `[Doxology]`, and fallback hymn resolution is supposed to substitute the seasonal stanza from `Psalterium/Doxologies` in place of the default `Præsta, Pater piíssime,` close. The compositor follows that source-backed rule; the Perl comparison surface retains the unsubstituted fallback stanza.",
+    "notes": "Representative entry for the Rubrics 1960 January Terce/Sext/None fallback-hymn doxology family where the default `Præsta, Pater piíssime,` close is replaced by the Christmas or Epiphany stanza required by the winning office.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "379dd72"
+  },
+  "Rubrics 1960 - 1960/2024-12-26/Prime/c52cc2ef": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-12-26",
+    "hour": "Prime",
+    "firstExpected": "Deo Patri sit glória,",
+    "firstActual": "Jesu, tibi sit glória,",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-06.txt:4-8 and upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:1-20 and upstream/web/www/horas/Latin/Psalterium/Special/Prima Special.txt:100-109 and docs/phase-2-rubrical-engine-design.md:1469 — the Roman January offices set `Doxology=Epi` or a local `[Doxology]`, and fallback hymn resolution is supposed to substitute the seasonal stanza from `Psalterium/Doxologies` in place of the default `Deo Patri sit glória,` close. The compositor follows that source-backed rule; the Perl comparison surface retains the unsubstituted fallback stanza.",
+    "notes": "Representative entry for the Rubrics 1960 January Prime fallback-hymn doxology family where the default `Deo Patri sit glória,` close is replaced by the Christmas or Epiphany stanza required by the winning office.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "379dd72"
+  },
+  "Rubrics 1960 - 1960/2024-12-26/Sext/318cf47a": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-12-26",
+    "hour": "Sext",
+    "firstExpected": "Præsta, Pater piíssime,",
+    "firstActual": "Jesu, tibi sit glória,",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-06.txt:4-8 and upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:1-20 and upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:664-672 and docs/phase-2-rubrical-engine-design.md:1469 — the Roman January offices set `Doxology=Epi` or a local `[Doxology]`, and fallback hymn resolution is supposed to substitute the seasonal stanza from `Psalterium/Doxologies` in place of the default `Præsta, Pater piíssime,` close. The compositor follows that source-backed rule; the Perl comparison surface retains the unsubstituted fallback stanza.",
+    "notes": "Representative entry for the Rubrics 1960 January Terce/Sext/None fallback-hymn doxology family where the default `Præsta, Pater piíssime,` close is replaced by the Christmas or Epiphany stanza required by the winning office.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "379dd72"
+  },
+  "Rubrics 1960 - 1960/2024-12-26/Terce/318cf47a": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-12-26",
+    "hour": "Terce",
+    "firstExpected": "Præsta, Pater piíssime,",
+    "firstActual": "Jesu, tibi sit glória,",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-06.txt:4-8 and upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:1-20 and upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:664-672 and docs/phase-2-rubrical-engine-design.md:1469 — the Roman January offices set `Doxology=Epi` or a local `[Doxology]`, and fallback hymn resolution is supposed to substitute the seasonal stanza from `Psalterium/Doxologies` in place of the default `Præsta, Pater piíssime,` close. The compositor follows that source-backed rule; the Perl comparison surface retains the unsubstituted fallback stanza.",
+    "notes": "Representative entry for the Rubrics 1960 January Terce/Sext/None fallback-hymn doxology family where the default `Præsta, Pater piíssime,` close is replaced by the Christmas or Epiphany stanza required by the winning office.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "379dd72"
+  },
   "Rubrics 1960 - 1960/2024-12-27/Compline/57de2841": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2024-12-27",
@@ -13713,6 +13929,54 @@
     "resolvedAt": "2026-04-19",
     "commitSha": "bfb3c52"
   },
+  "Rubrics 1960 - 1960/2024-12-27/None/318cf47a": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-12-27",
+    "hour": "None",
+    "firstExpected": "Præsta, Pater piíssime,",
+    "firstActual": "Jesu, tibi sit glória,",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-06.txt:4-8 and upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:1-20 and upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:664-672 and docs/phase-2-rubrical-engine-design.md:1469 — the Roman January offices set `Doxology=Epi` or a local `[Doxology]`, and fallback hymn resolution is supposed to substitute the seasonal stanza from `Psalterium/Doxologies` in place of the default `Præsta, Pater piíssime,` close. The compositor follows that source-backed rule; the Perl comparison surface retains the unsubstituted fallback stanza.",
+    "notes": "Representative entry for the Rubrics 1960 January Terce/Sext/None fallback-hymn doxology family where the default `Præsta, Pater piíssime,` close is replaced by the Christmas or Epiphany stanza required by the winning office.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "379dd72"
+  },
+  "Rubrics 1960 - 1960/2024-12-27/Prime/c52cc2ef": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-12-27",
+    "hour": "Prime",
+    "firstExpected": "Deo Patri sit glória,",
+    "firstActual": "Jesu, tibi sit glória,",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-06.txt:4-8 and upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:1-20 and upstream/web/www/horas/Latin/Psalterium/Special/Prima Special.txt:100-109 and docs/phase-2-rubrical-engine-design.md:1469 — the Roman January offices set `Doxology=Epi` or a local `[Doxology]`, and fallback hymn resolution is supposed to substitute the seasonal stanza from `Psalterium/Doxologies` in place of the default `Deo Patri sit glória,` close. The compositor follows that source-backed rule; the Perl comparison surface retains the unsubstituted fallback stanza.",
+    "notes": "Representative entry for the Rubrics 1960 January Prime fallback-hymn doxology family where the default `Deo Patri sit glória,` close is replaced by the Christmas or Epiphany stanza required by the winning office.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "379dd72"
+  },
+  "Rubrics 1960 - 1960/2024-12-27/Sext/318cf47a": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-12-27",
+    "hour": "Sext",
+    "firstExpected": "Præsta, Pater piíssime,",
+    "firstActual": "Jesu, tibi sit glória,",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-06.txt:4-8 and upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:1-20 and upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:664-672 and docs/phase-2-rubrical-engine-design.md:1469 — the Roman January offices set `Doxology=Epi` or a local `[Doxology]`, and fallback hymn resolution is supposed to substitute the seasonal stanza from `Psalterium/Doxologies` in place of the default `Præsta, Pater piíssime,` close. The compositor follows that source-backed rule; the Perl comparison surface retains the unsubstituted fallback stanza.",
+    "notes": "Representative entry for the Rubrics 1960 January Terce/Sext/None fallback-hymn doxology family where the default `Præsta, Pater piíssime,` close is replaced by the Christmas or Epiphany stanza required by the winning office.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "379dd72"
+  },
+  "Rubrics 1960 - 1960/2024-12-27/Terce/318cf47a": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-12-27",
+    "hour": "Terce",
+    "firstExpected": "Præsta, Pater piíssime,",
+    "firstActual": "Jesu, tibi sit glória,",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-06.txt:4-8 and upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:1-20 and upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:664-672 and docs/phase-2-rubrical-engine-design.md:1469 — the Roman January offices set `Doxology=Epi` or a local `[Doxology]`, and fallback hymn resolution is supposed to substitute the seasonal stanza from `Psalterium/Doxologies` in place of the default `Præsta, Pater piíssime,` close. The compositor follows that source-backed rule; the Perl comparison surface retains the unsubstituted fallback stanza.",
+    "notes": "Representative entry for the Rubrics 1960 January Terce/Sext/None fallback-hymn doxology family where the default `Præsta, Pater piíssime,` close is replaced by the Christmas or Epiphany stanza required by the winning office.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "379dd72"
+  },
   "Rubrics 1960 - 1960/2024-12-27/Vespers/843b6667": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2024-12-27",
@@ -13723,6 +13987,6 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Prayers.txt:79-86 - the source-backed Domine exaudi section supplies V. Domine, exaudi orationem meam and R. Et clamor meus ad te veniat after the Vespers collect; the compositor emits that bridge while the Perl comparison surface stops at `_` on these rows.",
     "notes": "Phase 3 adjudication sweep: major-hour conclusion bridge remains source-backed after selected 1955/1960 Vespers collects.",
     "resolvedAt": "2026-04-24",
-    "commitSha": "pending"
+    "commitSha": "26e2fdd"
   }
 }

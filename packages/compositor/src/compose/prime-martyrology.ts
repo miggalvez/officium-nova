@@ -14,8 +14,8 @@ import { expandDeferredNodes } from '../resolve/expand-deferred-nodes.js';
 import { resolveReference } from '../resolve/reference-resolver.js';
 import type { ComposeOptions, ComposeWarning, Section } from '../types/composed-hour.js';
 import { appendContentWithBoundary } from './content-boundary.js';
+import { MAX_DEFERRED_DEPTH } from './shared.js';
 
-const MAX_DEFERRED_DEPTH = 8;
 const COMMON_PRAYERS_PATH = 'horas/Latin/Psalterium/Common/Prayers';
 const LATIN_MOON_ORDINALS = [
   'prima',

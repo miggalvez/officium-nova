@@ -14,8 +14,7 @@ import { expandDeferredNodes } from '../resolve/expand-deferred-nodes.js';
 import { resolveReference } from '../resolve/reference-resolver.js';
 import type { ComposeOptions, ComposeWarning } from '../types/composed-hour.js';
 import { appendContentWithBoundary } from './content-boundary.js';
-
-const MAX_DEFERRED_DEPTH = 8;
+import { MAX_DEFERRED_DEPTH } from './shared.js';
 
 export interface MajorHourHymnArgs {
   readonly slot: string;

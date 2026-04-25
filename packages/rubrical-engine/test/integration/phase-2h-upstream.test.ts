@@ -267,6 +267,29 @@ describeIfReady('Phase 2h DA/1955 upstream matrix', () => {
       }
     });
 
+    const holyMonday = roman1960.resolveDayOfficeSummary('2024-03-25');
+    expect(holyMonday.hours.lauds?.slots.chapter).toEqual({
+      kind: 'single-ref',
+      ref: {
+        path: 'horas/Latin/Psalterium/Special/Major Special',
+        section: 'Quad5 Laudes'
+      }
+    });
+    expect(holyMonday.hours.lauds?.slots.hymn).toEqual({
+      kind: 'single-ref',
+      ref: {
+        path: 'horas/Latin/Psalterium/Special/Major Special',
+        section: 'Hymnus Quad5 Laudes'
+      }
+    });
+    expect(holyMonday.hours.lauds?.slots.versicle).toEqual({
+      kind: 'single-ref',
+      ref: {
+        path: 'horas/Latin/Psalterium/Special/Major Special',
+        section: 'Quad5 Versum 2'
+      }
+    });
+
     const emberSaturday = roman1960.resolveDayOfficeSummary('2024-02-24');
     const emberPsalmody = emberSaturday.hours.matins?.slots.psalmody;
     expect(emberPsalmody?.kind).toBe('matins-nocturns');

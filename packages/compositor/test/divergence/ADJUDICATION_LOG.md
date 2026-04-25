@@ -2730,7 +2730,7 @@ as source-backed Perl render-surface bugs.
 
 ### 2026-04-24 — Pattern: seasonal Paschal fallback-hymn doxologies reach Roman minor hours (engine-bug fixed plus perl-bug residuals)
 
-**Commit.** `pending`
+**Commit.** `26e2fdd`
 
 **Ledger signal.** The Paschal Sunday rows exposed fallback minor-hour
 hymns whose final stanza stayed on the ordinary `Præsta, Pater
@@ -2758,7 +2758,7 @@ rows are now classified as source-backed Perl render-surface bugs.
 
 ### 2026-04-24 — Pattern: 1960 Tridentinum Sunday Prime Paschal antiphon (perl-bug)
 
-**Commit.** `pending`
+**Commit.** `26e2fdd`
 
 **Ledger signal.** Five Rubrics 1960 Sunday Prime rows show Perl's
 older full `Dominica` antiphon at the first divergence, while the
@@ -2782,7 +2782,7 @@ as source-backed Perl render-surface bugs.
 
 ### 2026-04-24 — Pattern: Roman Vespers post-collect conclusion bridge is skipped by Perl (perl-bug)
 
-**Commit.** `pending`
+**Commit.** `26e2fdd`
 
 **Ledger signal.** Selected Reduced 1955 Vespers rows and one Rubrics
 1960 row reach the post-collect boundary where Perl stops at `_` while
@@ -2805,7 +2805,7 @@ source-backed Perl render-surface bugs.
 
 ### 2026-04-24 — Pattern: simplified Roman Triduum minor hours omit ordinary later blocks and use the proper oration (mixed fix)
 
-**Commit.** `pending`
+**Commit.** `26e2fdd`
 
 **Ledger signal.** Reduced 1955 and Rubrics 1960 Prime/Terce/Sext/None
 rows on Mar 28-30 reached the minor-hour later-block boundary where
@@ -2844,6 +2844,126 @@ now advance past the ordinary short-reading leak. The live
 unadjudicated counts dropped to `144` for Reduced 1955 and `108` for
 Rubrics 1960, with the remaining Triduum Vespers suppression notices
 left as their own open family.
+
+### 2026-04-25 — Pattern: simplified Roman Triduum Vespers `Prelude Vespera` notices (mixed fix)
+
+**Commit.** `ab9a302`
+
+**Ledger signal.** Reduced 1955 and Rubrics 1960 Good Friday Vespers
+were blocked at line `1`: Perl opened with the Triduum
+`Prelude Vespera` suppression notice, while the compositor started
+directly at the ordinary Vespers antiphon.
+
+**Root cause.** `Quad6-4` and `Quad6-5` both carry a conditioned
+`[Prelude Vespera] (rubrica 1955 aut rubrica 196)` notice. Phase 2 was
+already selecting the correct Triduum celebration, but Phase 3 had no
+source seam for pre-pending the special Vespers prelude before ordinary
+psalmody. Once the compositor emits that prelude, the remaining Good
+Friday first divergence moves to the already-adjudicated Psalm 115
+half-verse render surface.
+
+**Resolution.** Mixed fix. The compositor now resolves and prepends the
+Triduum `Prelude Vespera` section for simplified Roman Vespers while
+continuing into the ordinary office psalmody. The two newly exposed
+Good Friday Vespers rows are recorded as fanout of the existing Psalm
+115 `perl-bug` family.
+
+**Citation.**
+
+- `upstream/web/www/horas/Latin/Tempora/Quad6-4.txt:16-18`
+- `upstream/web/www/horas/Latin/Tempora/Quad6-5.txt:12-14`
+- `upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm115.txt:7`
+
+**Impact.** The Triduum Vespers suppression-notice blocker is closed.
+Good Friday Vespers now advances to a source-backed Psalm 115
+half-verse adjudication under both simplified Roman policies.
+
+### 2026-04-25 — Pattern: existing source-backed adjudication fanout sweep (perl-bug)
+
+**Commit.** `cece022`
+
+**Ledger signal.** The expanded live ledger still contained exact
+first-divergence signatures already classified in earlier source-backed
+families: the Psalm 115 Vespers half-verse seam on Holy Thursday, the
+Reduced 1955 Low Sunday Prime/minor-hour `Psalmi minor` antiphon
+surface, and the Rubrics 1960 Christmas-octave fallback-hymn doxology
+surface on Dec 26-27.
+
+**Root cause.** No new Phase 2 or Phase 3 behavior was implicated.
+These rows are exact fanout of previously cited source seams where the
+compositor follows the corpus and Perl's rendered surface abbreviates,
+flattens, or leaves an unsubstituted fallback stanza.
+
+**Resolution.** Class `perl-bug`. Ran the sidecar fanout workflow
+against the expanded current ledgers and recorded the 14 missing row
+keys in `adjudications.json`.
+
+**Citation.**
+
+- `upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm115.txt:7`
+- `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:17-19,33-35,49-51,218,227-231`
+- `upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:1-20`
+
+**Impact.** Total unadjudicated rows drop from `271` to `257`:
+Reduced 1955 moves from `143` to `138`, and Rubrics 1960 moves from
+`107` to `98`.
+
+### 2026-04-25 — Pattern: Reduced 1955 Lenten Sunday Matins seasonal versicles (engine-bug)
+
+**Commit.** `9060874`
+
+**Ledger signal.** Reduced 1955 Lenten and Passiontide Sunday Matins
+rows first diverged at the first-nocturn versicle: Perl used the
+seasonal Lenten/Passiontide `Psalmi matutinum` versicle, while the
+engine handed Phase 3 the ordinary `Day0` psalter versicle.
+
+**Root cause.** Phase 2 Matins planning only looked for feast-owned
+`Nocturn N Versum` sections, then fell back to the ordinary psalter day
+section. The corpus has reusable seasonal Sunday versicle sections
+(`Quad 1 Versum`, `Quad5 1 Versum`, etc.) in
+`Psalmi matutinum`, and those must win before the ordinary `Day0`
+fallback.
+
+**Resolution.** Class `engine-bug`. The Matins plan now routes Sunday
+Matins versicles in Lent and Passiontide through the seasonal
+`Psalmi matutinum` sections by nocturn index. The exposed rows then
+advance to the already-adjudicated Matins `Pater Noster` guillemet
+rendering family, and the six newly exposed row keys were fanned out in
+`adjudications.json`.
+
+**Citation.**
+
+- `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:225-235`
+
+**Impact.** Reduced 1955 unadjudicated rows drop from `138` to `132`.
+
+### 2026-04-25 — Pattern: Rubrics 1960 Holy Week Lauds `Quad5` later block (engine-bug)
+
+**Commit.** `2823f84`
+
+**Ledger signal.** Rubrics 1960 Holy Week Lauds rows on Mar 25-27
+reached the later-block boundary where Perl selected the Passiontide
+`Jer 11:19` chapter from `Major Special`, while the engine still used
+the generic ferial `Rom 13:12-13` chapter.
+
+**Root cause.** The 1960 major-hour fallback already routed ordinary
+ferias through `Psalterium/Special/Major Special`, but it did not
+special-case Holy Week Monday-Wednesday before choosing the generic
+`Feria Laudes` / weekday hymn / `Feria Versum 2` sections. The source
+has dedicated `Quad5 Laudes`, `Hymnus Quad5 Laudes`, and
+`Quad5 Versum 2` sections for this family.
+
+**Resolution.** Class `engine-bug`. Major-hour fallback now prefers the
+Holy Week `Quad5` Lauds/Vespers later-block sections for Monday-Wednesday
+before falling back to the generic feria sections.
+
+**Citation.**
+
+- `upstream/web/www/horas/Latin/Psalterium/Special/Major Special.txt:1181-1310`
+
+**Impact.** The Rubrics 1960 Holy Monday Lauds row advances past the
+chapter mismatch, improving the policy average prefix from `48.1` to
+`48.3` and dropping Rubrics 1960 unadjudicated rows from `98` to `97`.
 
 ### Open pattern backlog
 
