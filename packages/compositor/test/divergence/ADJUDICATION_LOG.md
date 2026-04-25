@@ -2908,6 +2908,35 @@ keys in `adjudications.json`.
 Reduced 1955 moves from `143` to `138`, and Rubrics 1960 moves from
 `107` to `98`.
 
+### 2026-04-25 — Pattern: Reduced 1955 Lenten Sunday Matins seasonal versicles (engine-bug)
+
+**Commit.** `pending`
+
+**Ledger signal.** Reduced 1955 Lenten and Passiontide Sunday Matins
+rows first diverged at the first-nocturn versicle: Perl used the
+seasonal Lenten/Passiontide `Psalmi matutinum` versicle, while the
+engine handed Phase 3 the ordinary `Day0` psalter versicle.
+
+**Root cause.** Phase 2 Matins planning only looked for feast-owned
+`Nocturn N Versum` sections, then fell back to the ordinary psalter day
+section. The corpus has reusable seasonal Sunday versicle sections
+(`Quad 1 Versum`, `Quad5 1 Versum`, etc.) in
+`Psalmi matutinum`, and those must win before the ordinary `Day0`
+fallback.
+
+**Resolution.** Class `engine-bug`. The Matins plan now routes Sunday
+Matins versicles in Lent and Passiontide through the seasonal
+`Psalmi matutinum` sections by nocturn index. The exposed rows then
+advance to the already-adjudicated Matins `Pater Noster` guillemet
+rendering family, and the six newly exposed row keys were fanned out in
+`adjudications.json`.
+
+**Citation.**
+
+- `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:225-235`
+
+**Impact.** Reduced 1955 unadjudicated rows drop from `138` to `132`.
+
 ### Open pattern backlog
 
 The following families remain open and have not yet received their own

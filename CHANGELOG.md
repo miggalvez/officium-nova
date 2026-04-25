@@ -14,6 +14,14 @@ The `@officium-novum/compositor` package turns a `DayOfficeSummary` + Phase-1-re
 
 Newest tranche first:
 
+- **2026-04-25.** Closed the Reduced 1955 Lenten Sunday Matins
+  seasonal-versicle seam in Phase 2. Matins planning now uses
+  `Psalmi matutinum` seasonal Sunday versicle sections such as
+  `Quad 1 Versum` and `Quad5 1 Versum` before falling back to the
+  ordinary `Day0` psalter versicle. The affected Lenten/Passiontide
+  Sunday Matins rows now advance to the already-adjudicated
+  `Pater Noster` guillemet rendering family, dropping Reduced 1955
+  unadjudicated rows to `132`.
 - **2026-04-25.** Completed an existing-adjudication fanout sweep over
   the current expanded Phase 3 ledgers. The sidecar now classifies 14
   rows that exactly match already-cited source-backed `perl-bug`

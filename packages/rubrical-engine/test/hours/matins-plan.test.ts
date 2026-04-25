@@ -99,6 +99,45 @@ describe('buildMatinsPlan', () => {
     expect(result.plan.nocturnPlan[0]?.versicle.reference.selector).toBe('14');
   });
 
+  it('uses seasonal Sunday Matins versicles in Lent and Passiontide', () => {
+    const corpus = new TestOfficeTextIndex();
+    corpus.add('horas/Latin/Tempora/Quad1-0.txt', adventSundayMatinsSections());
+    corpus.add('horas/Latin/Tempora/Quad5-0.txt', adventSundayMatinsSections());
+    corpus.add(
+      'horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt',
+      psalteriumMatinsSections()
+    );
+
+    const lenten = buildMatinsPlanWithWarnings({
+      celebration: celebration('Tempora/Quad1-0', 'I-privilegiata-sundays', 'temporal'),
+      celebrationRules: baseRules(),
+      commemorations: [],
+      hourRules: HOUR_RULES,
+      temporal: temporal('2024-02-18', 'Quad1-0', 'lent', 'I-privilegiata-sundays'),
+      policy: rubrics1960Policy,
+      corpus
+    });
+
+    const passiontide = buildMatinsPlanWithWarnings({
+      celebration: celebration('Tempora/Quad5-0', 'I-privilegiata-sundays', 'temporal'),
+      celebrationRules: baseRules(),
+      commemorations: [],
+      hourRules: HOUR_RULES,
+      temporal: temporal('2024-03-17', 'Quad5-0', 'passiontide', 'I-privilegiata-sundays'),
+      policy: rubrics1960Policy,
+      corpus
+    });
+
+    expect(lenten.plan.nocturnPlan[0]?.versicle.reference).toEqual({
+      path: 'horas/Latin/Psalterium/Psalmi/Psalmi matutinum',
+      section: 'Quad 1 Versum'
+    });
+    expect(passiontide.plan.nocturnPlan[0]?.versicle.reference).toEqual({
+      path: 'horas/Latin/Psalterium/Psalmi/Psalmi matutinum',
+      section: 'Quad5 1 Versum'
+    });
+  });
+
   it('uses the ordinary Sunday Matins hymn from Matutinum Special before April', () => {
     const corpus = new TestOfficeTextIndex();
     corpus.add('horas/Latin/Tempora/Epi2-0.txt', adventSundayMatinsSections());
@@ -521,6 +560,14 @@ function psalteriumMatinsSections(): string {
     'Ant 8;;8',
     'Ant 9;;9',
     'V. Versus III',
-    'R. Responsum III'
+    'R. Responsum III',
+    '',
+    '[Quad 1 Versum]',
+    'V. Ipse liberávit me de láqueo venántium.',
+    'R. Et a verbo áspero.',
+    '',
+    '[Quad5 1 Versum]',
+    'V. Érue a frámea, Deus, ánimam meam.',
+    'R. Et de manu canis únicam meam.'
   ].join('\n');
 }
