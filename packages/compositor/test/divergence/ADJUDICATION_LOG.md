@@ -3543,6 +3543,29 @@ are left for separate tranches.
 `perl-bug`, narrowing the Marian common frontier to Matins, versicles,
 and unrelated Vespers selection rows.
 
+### 2026-04-25 — Pattern: Reduced 1955 Christmas-octave minor-hour antiphons (perl-bug)
+
+**Commit.** `pending`
+
+**Ledger signal.** Reduced 1955 Dec `26` and Dec `27` Prime, Terce,
+Sext, and None rows first diverged on ordinary psalter antiphons versus
+the proper antiphons for St Stephen and St John in the Christmas octave.
+
+**Root cause.** The proper offices declare `Antiphonas horas` and supply
+their own antiphon sets. The compositor follows those source-backed
+proper antiphons; the Reduced 1955 Perl comparison surface remains on
+ordinary psalter antiphons for these minor-hour rows.
+
+**Resolution.** Class `perl-bug`. Added sidecar classifications for the
+eight visible Reduced 1955 Christmas-octave minor-hour antiphon rows.
+
+**Citation.** `upstream/web/www/horas/Latin/Sancti/12-26.txt:9-14,149-157`;
+`upstream/web/www/horas/Latin/Sancti/12-27.txt:9-13,140-148`.
+
+**Impact.** Eight Reduced 1955 rows move from `unadjudicated` to
+`perl-bug`. Matins and major-hour Christmas-octave rows remain separate
+frontiers.
+
 ## See also
 
 - [ADR-011 — Divergence adjudication protocol](../../../../docs/adr/011-phase-3-divergence-adjudication.md)

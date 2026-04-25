@@ -24,6 +24,35 @@ entry here and re-run the adjudication harness.
 
 ## Current entries
 
+### 2026-04-25 — Reduced 1955 Christmas-octave minor-hour antiphons fall back to the psalter
+
+**Classification.** `perl-bug`
+
+**Summary.** On Dec `26` and Dec `27`, the Reduced 1955 comparison
+surface keeps ordinary psalter antiphons at Prime, Terce, Sext, and
+None. Officium Novum emits the proper antiphons for St Stephen and St
+John.
+
+**Primary source.**
+
+- `upstream/web/www/horas/Latin/Sancti/12-26.txt:9-14,149-157`
+- `upstream/web/www/horas/Latin/Sancti/12-27.txt:9-13,140-148`
+
+**Reproduction.**
+Run:
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Reduced - 1955" --max-doc-rows 500
+```
+
+Then inspect Prime, Terce, Sext, and None on Dec `26` and Dec `27`.
+
+**Affected stable divergence-row keys.**
+
+| Policy | Dates | Hours | Row key suffixes |
+|---|---|---|---|
+| Reduced - 1955 | 2024-12-26, 2024-12-27 | Prime, Terce, Sext, None | `bfa62558`, `ae87e061`, `011b4616`, `d69e79a7`, `abc3d2ca`, `c2ac1c81`, `17c3b847`, `5cee32b6` |
+
 ### 2026-04-25 — Simplified Roman Marian common antiphons fall back to the psalter
 
 **Classification.** `perl-bug`

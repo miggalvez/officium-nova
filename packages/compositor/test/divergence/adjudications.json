@@ -10333,6 +10333,18 @@
     "resolvedAt": "2026-04-24",
     "commitSha": "029a6fd"
   },
+  "Reduced - 1955/2024-12-26/None/d69e79a7": {
+    "policy": "Reduced - 1955",
+    "date": "2024-12-26",
+    "hour": "None",
+    "firstExpected": "Ant. Invocábimus.",
+    "firstActual": "Ant. Ecce vídeo.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/12-26.txt:9-14 and upstream/web/www/horas/Latin/Sancti/12-27.txt:9-13 declare `Antiphonas horas`; upstream/web/www/horas/Latin/Sancti/12-26.txt:149-157 and upstream/web/www/horas/Latin/Sancti/12-27.txt:140-148 supply the proper Christmas-octave minor-hour antiphon set used by the compositor. The Reduced 1955 Perl comparison surface keeps ordinary psalter antiphons instead.",
+    "notes": "Reduced 1955 Christmas-octave proper minor-hour antiphon family for St Stephen and St John. Major-hour and Matins rows remain separate frontiers.",
+    "resolvedAt": "2026-04-25",
+    "commitSha": "pending"
+  },
   "Reduced - 1955/2024-12-26/Prime/36739df3": {
     "policy": "Reduced - 1955",
     "date": "2024-12-26",
@@ -10345,6 +10357,30 @@
     "resolvedAt": "2026-04-24",
     "commitSha": "029a6fd"
   },
+  "Reduced - 1955/2024-12-26/Prime/bfa62558": {
+    "policy": "Reduced - 1955",
+    "date": "2024-12-26",
+    "hour": "Prime",
+    "firstExpected": "Ant. In loco páscuæ.",
+    "firstActual": "Ant. Lapidavérunt Stéphanum.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/12-26.txt:9-14 and upstream/web/www/horas/Latin/Sancti/12-27.txt:9-13 declare `Antiphonas horas`; upstream/web/www/horas/Latin/Sancti/12-26.txt:149-157 and upstream/web/www/horas/Latin/Sancti/12-27.txt:140-148 supply the proper Christmas-octave minor-hour antiphon set used by the compositor. The Reduced 1955 Perl comparison surface keeps ordinary psalter antiphons instead.",
+    "notes": "Reduced 1955 Christmas-octave proper minor-hour antiphon family for St Stephen and St John. Major-hour and Matins rows remain separate frontiers.",
+    "resolvedAt": "2026-04-25",
+    "commitSha": "pending"
+  },
+  "Reduced - 1955/2024-12-26/Sext/011b4616": {
+    "policy": "Reduced - 1955",
+    "date": "2024-12-26",
+    "hour": "Sext",
+    "firstExpected": "Ant. Memor esto.",
+    "firstActual": "Ant. Adhǽsit ánima mea.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/12-26.txt:9-14 and upstream/web/www/horas/Latin/Sancti/12-27.txt:9-13 declare `Antiphonas horas`; upstream/web/www/horas/Latin/Sancti/12-26.txt:149-157 and upstream/web/www/horas/Latin/Sancti/12-27.txt:140-148 supply the proper Christmas-octave minor-hour antiphon set used by the compositor. The Reduced 1955 Perl comparison surface keeps ordinary psalter antiphons instead.",
+    "notes": "Reduced 1955 Christmas-octave proper minor-hour antiphon family for St Stephen and St John. Major-hour and Matins rows remain separate frontiers.",
+    "resolvedAt": "2026-04-25",
+    "commitSha": "pending"
+  },
   "Reduced - 1955/2024-12-26/Sext/b241f834": {
     "policy": "Reduced - 1955",
     "date": "2024-12-26",
@@ -10356,6 +10392,18 @@
     "notes": "Representative entry for the Reduced 1955 Dec 26/27 Christmas-octave doxology family where Perl imports the Nativity Jesu, tibi sit glória stanza into the St Stephen/St John fallback hymn even though the office source carries no local Doxology=Nat directive.",
     "resolvedAt": "2026-04-24",
     "commitSha": "029a6fd"
+  },
+  "Reduced - 1955/2024-12-26/Terce/ae87e061": {
+    "policy": "Reduced - 1955",
+    "date": "2024-12-26",
+    "hour": "Terce",
+    "firstExpected": "Ant. Quam bonus. ‡",
+    "firstActual": "Ant. Lápides torréntis.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/12-26.txt:9-14 and upstream/web/www/horas/Latin/Sancti/12-27.txt:9-13 declare `Antiphonas horas`; upstream/web/www/horas/Latin/Sancti/12-26.txt:149-157 and upstream/web/www/horas/Latin/Sancti/12-27.txt:140-148 supply the proper Christmas-octave minor-hour antiphon set used by the compositor. The Reduced 1955 Perl comparison surface keeps ordinary psalter antiphons instead.",
+    "notes": "Reduced 1955 Christmas-octave proper minor-hour antiphon family for St Stephen and St John. Major-hour and Matins rows remain separate frontiers.",
+    "resolvedAt": "2026-04-25",
+    "commitSha": "pending"
   },
   "Reduced - 1955/2024-12-26/Terce/b241f834": {
     "policy": "Reduced - 1955",
@@ -10393,6 +10441,18 @@
     "resolvedAt": "2026-04-19",
     "commitSha": "bfb3c52"
   },
+  "Reduced - 1955/2024-12-27/None/5cee32b6": {
+    "policy": "Reduced - 1955",
+    "date": "2024-12-27",
+    "hour": "None",
+    "firstExpected": "Ant. Misericórdia et véritas.",
+    "firstActual": "Ant. Ecce puer meus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/12-26.txt:9-14 and upstream/web/www/horas/Latin/Sancti/12-27.txt:9-13 declare `Antiphonas horas`; upstream/web/www/horas/Latin/Sancti/12-26.txt:149-157 and upstream/web/www/horas/Latin/Sancti/12-27.txt:140-148 supply the proper Christmas-octave minor-hour antiphon set used by the compositor. The Reduced 1955 Perl comparison surface keeps ordinary psalter antiphons instead.",
+    "notes": "Reduced 1955 Christmas-octave proper minor-hour antiphon family for St Stephen and St John. Major-hour and Matins rows remain separate frontiers.",
+    "resolvedAt": "2026-04-25",
+    "commitSha": "pending"
+  },
   "Reduced - 1955/2024-12-27/None/b241f834": {
     "policy": "Reduced - 1955",
     "date": "2024-12-27",
@@ -10417,6 +10477,30 @@
     "resolvedAt": "2026-04-24",
     "commitSha": "029a6fd"
   },
+  "Reduced - 1955/2024-12-27/Prime/abc3d2ca": {
+    "policy": "Reduced - 1955",
+    "date": "2024-12-27",
+    "hour": "Prime",
+    "firstExpected": "Ant. Ne discédas a me.",
+    "firstActual": "Ant. Valde honorándus est.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/12-26.txt:9-14 and upstream/web/www/horas/Latin/Sancti/12-27.txt:9-13 declare `Antiphonas horas`; upstream/web/www/horas/Latin/Sancti/12-26.txt:149-157 and upstream/web/www/horas/Latin/Sancti/12-27.txt:140-148 supply the proper Christmas-octave minor-hour antiphon set used by the compositor. The Reduced 1955 Perl comparison surface keeps ordinary psalter antiphons instead.",
+    "notes": "Reduced 1955 Christmas-octave proper minor-hour antiphon family for St Stephen and St John. Major-hour and Matins rows remain separate frontiers.",
+    "resolvedAt": "2026-04-25",
+    "commitSha": "pending"
+  },
+  "Reduced - 1955/2024-12-27/Sext/17c3b847": {
+    "policy": "Reduced - 1955",
+    "date": "2024-12-27",
+    "hour": "Sext",
+    "firstExpected": "Ant. Beáti, qui hábitant.",
+    "firstActual": "Ant. Hic est discípulus meus:",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/12-26.txt:9-14 and upstream/web/www/horas/Latin/Sancti/12-27.txt:9-13 declare `Antiphonas horas`; upstream/web/www/horas/Latin/Sancti/12-26.txt:149-157 and upstream/web/www/horas/Latin/Sancti/12-27.txt:140-148 supply the proper Christmas-octave minor-hour antiphon set used by the compositor. The Reduced 1955 Perl comparison surface keeps ordinary psalter antiphons instead.",
+    "notes": "Reduced 1955 Christmas-octave proper minor-hour antiphon family for St Stephen and St John. Major-hour and Matins rows remain separate frontiers.",
+    "resolvedAt": "2026-04-25",
+    "commitSha": "pending"
+  },
   "Reduced - 1955/2024-12-27/Sext/b241f834": {
     "policy": "Reduced - 1955",
     "date": "2024-12-27",
@@ -10440,6 +10524,18 @@
     "notes": "Representative entry for the Reduced 1955 Dec 26/27 Christmas-octave doxology family where Perl imports the Nativity Jesu, tibi sit glória stanza into the St Stephen/St John fallback hymn even though the office source carries no local Doxology=Nat directive.",
     "resolvedAt": "2026-04-24",
     "commitSha": "029a6fd"
+  },
+  "Reduced - 1955/2024-12-27/Terce/c2ac1c81": {
+    "policy": "Reduced - 1955",
+    "date": "2024-12-27",
+    "hour": "Terce",
+    "firstExpected": "Ant. Éxcita, Dómine.",
+    "firstActual": "Ant. Hic est discípulus ille.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/12-26.txt:9-14 and upstream/web/www/horas/Latin/Sancti/12-27.txt:9-13 declare `Antiphonas horas`; upstream/web/www/horas/Latin/Sancti/12-26.txt:149-157 and upstream/web/www/horas/Latin/Sancti/12-27.txt:140-148 supply the proper Christmas-octave minor-hour antiphon set used by the compositor. The Reduced 1955 Perl comparison surface keeps ordinary psalter antiphons instead.",
+    "notes": "Reduced 1955 Christmas-octave proper minor-hour antiphon family for St Stephen and St John. Major-hour and Matins rows remain separate frontiers.",
+    "resolvedAt": "2026-04-25",
+    "commitSha": "pending"
   },
   "Reduced - 1955/2024-12-27/Vespers/843b6667": {
     "policy": "Reduced - 1955",
