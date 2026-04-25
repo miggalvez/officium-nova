@@ -14,6 +14,10 @@ The `@officium-novum/compositor` package turns a `DayOfficeSummary` + Phase-1-re
 
 Newest tranche first:
 
+- **2026-04-25.** Classified the Rubrics 1960 Marian Matins
+  Nativity-doxology punctuation family. Three rows now cite
+  `Psalterium/Doxologies:[Nat]`, whose `Cum Patre et almo Spíritu,`
+  line lacks Perl's inserted comma after `Patre`.
 - **2026-04-25.** Fanned the source-backed minor-hour collect-wrapper
   adjudication onto the Rubrics 1960 Lent Saturday rows exposed after
   the Ash Wednesday seasonal-antiphon pass. Feb `24` Terce, Sext, and

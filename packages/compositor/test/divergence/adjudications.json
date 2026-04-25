@@ -13283,6 +13283,18 @@
     "resolvedAt": "2026-04-18",
     "commitSha": "bfb3c52"
   },
+  "Rubrics 1960 - 1960/2024-07-06/Matins/9d86e50c": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-07-06",
+    "hour": "Matins",
+    "firstExpected": "Cum Patre, et almo Spíritu",
+    "firstActual": "Cum Patre et almo Spíritu,",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:1-5 — the selected Nativity doxology stanza carries `Cum Patre et almo Spíritu,` without a comma after `Patre`. The compositor preserves that source-backed line; the Perl comparison surface inserts an unsupported comma after `Patre` and drops the source comma at the line end.",
+    "notes": "Rubrics 1960 Marian Matins Nativity-doxology punctuation surface; source has no comma after `Patre`.",
+    "resolvedAt": "2026-04-25",
+    "commitSha": "pending"
+  },
   "Rubrics 1960 - 1960/2024-07-06/None/318cf47a": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2024-07-06",
@@ -13463,6 +13475,18 @@
     "resolvedAt": "2026-04-19",
     "commitSha": "bfb3c52"
   },
+  "Rubrics 1960 - 1960/2024-08-22/Matins/9d86e50c": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-08-22",
+    "hour": "Matins",
+    "firstExpected": "Cum Patre, et almo Spíritu",
+    "firstActual": "Cum Patre et almo Spíritu,",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:1-5 — the selected Nativity doxology stanza carries `Cum Patre et almo Spíritu,` without a comma after `Patre`. The compositor preserves that source-backed line; the Perl comparison surface inserts an unsupported comma after `Patre` and drops the source comma at the line end.",
+    "notes": "Rubrics 1960 Marian Matins Nativity-doxology punctuation surface; source has no comma after `Patre`.",
+    "resolvedAt": "2026-04-25",
+    "commitSha": "pending"
+  },
   "Rubrics 1960 - 1960/2024-08-22/None/318cf47a": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2024-08-22",
@@ -13642,6 +13666,18 @@
     "notes": "Pattern affects every Compline row across every policy and date. This single entry is representative; the full row-key fan-out is a follow-up bulk-populate task (see ADJUDICATION_LOG.md).",
     "resolvedAt": "2026-04-18",
     "commitSha": "bfb3c52"
+  },
+  "Rubrics 1960 - 1960/2024-09-12/Matins/9d86e50c": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-09-12",
+    "hour": "Matins",
+    "firstExpected": "Cum Patre, et almo Spíritu",
+    "firstActual": "Cum Patre et almo Spíritu,",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:1-5 — the selected Nativity doxology stanza carries `Cum Patre et almo Spíritu,` without a comma after `Patre`. The compositor preserves that source-backed line; the Perl comparison surface inserts an unsupported comma after `Patre` and drops the source comma at the line end.",
+    "notes": "Rubrics 1960 Marian Matins Nativity-doxology punctuation surface; source has no comma after `Patre`.",
+    "resolvedAt": "2026-04-25",
+    "commitSha": "pending"
   },
   "Rubrics 1960 - 1960/2024-09-12/None/318cf47a": {
     "policy": "Rubrics 1960 - 1960",

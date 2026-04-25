@@ -24,6 +24,34 @@ entry here and re-run the adjudication harness.
 
 ## Current entries
 
+### 2026-04-25 — Rubrics 1960 Marian Matins doxology inserts an unsupported comma after `Patre`
+
+**Classification.** `perl-bug`
+
+**Summary.** Several Rubrics 1960 Marian Matins rows use the
+source-backed Nativity doxology line `Cum Patre et almo Spíritu,`.
+The Perl comparison surface changes the punctuation to
+`Cum Patre, et almo Spíritu`.
+
+**Primary source.**
+
+`upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:1-5`
+
+**Reproduction.**
+Run:
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Rubrics 1960 - 1960" --max-doc-rows 500
+```
+
+Then inspect Matins on Jul `6`, Aug `22`, and Sep `12`.
+
+**Affected stable divergence-row keys.**
+
+| Policy | Dates | Hour | Row key suffix |
+|---|---|---|---|
+| Rubrics 1960 - 1960 | 2024-07-06, 2024-08-22, 2024-09-12 | Matins | `9d86e50c` |
+
 ### 2026-04-25 — Simplified Roman Ash Wednesday minor hours keep ordinary Wednesday antiphons
 
 **Classification.** `perl-bug`

@@ -22,6 +22,28 @@ anchor.
 
 ## Entries
 
+### 2026-04-25 — Pattern: Rubrics 1960 Marian Matins Nativity-doxology punctuation (perl-bug)
+
+**Commit.** `pending`
+
+**Ledger signal.** Rubrics 1960 Matins rows on Jul `6`, Aug `22`, and
+Sep `12` first diverge inside the Marian Nativity doxology. Perl shows
+`Cum Patre, et almo Spíritu`; the compositor emits
+`Cum Patre et almo Spíritu,`.
+
+**Root cause.** The selected `[Nat]` doxology source carries
+`Cum Patre et almo Spíritu,` without a comma after `Patre` and with the
+line-ending comma after `Spíritu`.
+
+**Resolution.** Class `perl-bug`. Added the three Rubrics 1960 Matins
+row keys to `adjudications.json` with the source-backed
+`Psalterium/Doxologies` citation.
+
+**Citation.** `upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:1-5`
+
+**Impact.** Three Rubrics 1960 Matins rows move from `unadjudicated` to
+source-backed `perl-bug` without changing compositor behavior.
+
 ### 2026-04-25 — Pattern: Rubrics 1960 Lent Saturday minor-hour collect wrapper fanout (perl-bug)
 
 **Commit.** `pending`
