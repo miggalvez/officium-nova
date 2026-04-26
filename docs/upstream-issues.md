@@ -24,6 +24,101 @@ entry here and re-run the adjudication harness.
 
 ## Current entries
 
+### 2026-04-25 — Reduced 1955 Christmas-octave minor-hour antiphons fall back to the psalter
+
+**Classification.** `perl-bug`
+
+**Summary.** On Dec `26` and Dec `27`, the Reduced 1955 comparison
+surface keeps ordinary psalter antiphons at Prime, Terce, Sext, and
+None. Officium Novum emits the proper antiphons for St Stephen and St
+John.
+
+**Primary source.**
+
+- `upstream/web/www/horas/Latin/Sancti/12-26.txt:9-14,149-157`
+- `upstream/web/www/horas/Latin/Sancti/12-27.txt:9-13,140-148`
+
+**Reproduction.**
+Run:
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Reduced - 1955" --max-doc-rows 500
+```
+
+Then inspect Prime, Terce, Sext, and None on Dec `26` and Dec `27`.
+
+**Affected stable divergence-row keys.**
+
+| Policy | Dates | Hours | Row key suffixes |
+|---|---|---|---|
+| Reduced - 1955 | 2024-12-26, 2024-12-27 | Prime, Terce, Sext, None | `bfa62558`, `ae87e061`, `011b4616`, `d69e79a7`, `abc3d2ca`, `c2ac1c81`, `17c3b847`, `5cee32b6` |
+
+### 2026-04-25 — Simplified Roman Marian common antiphons fall back to the psalter
+
+**Classification.** `perl-bug`
+
+**Summary.** Several simplified Roman Marian-common rows keep ordinary
+psalter antiphons in the Perl comparison surface. Officium Novum emits
+the C11 Marian common antiphons at the affected Lauds, Vespers, and
+minor-hour rows.
+
+**Primary source.**
+
+- `upstream/web/www/horas/Latin/Sancti/08-22.txt:1-10`
+- `upstream/web/www/horas/Latin/Sancti/09-12.txt:1-17`
+- `upstream/web/www/horas/Latin/Commune/C11.txt:7-10,15-24,251-256`
+- `upstream/web/www/horas/Latin/Commune/C7.txt:9-14,67`
+- `upstream/web/www/horas/Latin/Commune/C6.txt:116-125`
+
+**Reproduction.**
+Run:
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --max-doc-rows 500
+```
+
+Then inspect Reduced 1955 Aug `22` / Sep `12` minor hours and Rubrics
+1960 Sep `12` Lauds / Vespers.
+
+**Affected stable divergence-row keys.**
+
+| Policy | Dates | Hours | Row key suffixes |
+|---|---|---|---|
+| Reduced - 1955 | 2024-08-22, 2024-09-12 | Prime, Terce, Sext, None | `725e1611`, `1a19d166`, `0868e7bf`, `4f6bebb1` |
+| Rubrics 1960 - 1960 | 2024-09-12 | Lauds, Vespers | `6d4720a5`, `a3dcd0af` |
+
+### 2026-04-25 — Simplified Roman Confessor non-pontiff common antiphons fall back to the psalter
+
+**Classification.** `perl-bug`
+
+**Summary.** On Aug `19` and Oct `4`, the Reduced 1955 and Rubrics
+1960 comparison surfaces keep ordinary psalter antiphons at Lauds,
+Prime, Terce, Sext, None, and Vespers. Officium Novum emits the
+source-backed Confessor non-pontiff common antiphons.
+
+**Primary source.**
+
+- `upstream/web/www/horas/Latin/Sancti/08-19.txt:4-9`
+- `upstream/web/www/horas/Latin/Sancti/10-04.txt:4-14`
+- `upstream/web/www/horas/Latin/Commune/C5.txt:9-19`
+
+**Reproduction.**
+Run:
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --max-doc-rows 500
+```
+
+Then inspect Lauds, Prime, Terce, Sext, None, and Vespers on Aug `19`
+and Oct `4` under `Reduced - 1955` and `Rubrics 1960 - 1960`.
+
+**Affected stable divergence-row keys.**
+
+| Policy | Dates | Hours | Row key suffixes |
+|---|---|---|---|
+| Reduced - 1955 | 2024-08-19, 2024-10-04 | Lauds, Prime, Terce, Sext, None, Vespers | `1ac985ea`, `5e2bc918`, `94d8530b`, `ca496847`, `d06b3f15`, `b8382b61`, `30af99f1`, `c9286c91`, `3f0bca99`, `ee83352e`, `ee9cd993`, `7d120c6f` |
+| Rubrics 1960 - 1960 | 2024-08-19, 2024-10-04 | Lauds, Prime, Terce, Sext, None, Vespers | `1ac985ea`, `63c54bc5`, `993822fb`, `5c9ad87e`, `e01745bd`, `b8382b61`, `30af99f1`, `ae30f785`, `f420db38`, `b40640d0`, `21ab0ed2`, `7d120c6f` |
+
 ### 2026-04-25 — Simplified Roman Prime keeps ordinary chapter instead of office `[Lectio Prima]`
 
 **Classification.** `perl-bug`
@@ -60,6 +155,11 @@ Then inspect Prime on the affected dates under `Reduced - 1955` and
 |---|---|---|---|
 | Reduced - 1955 | 2024-05-09, 2024-05-19, 2024-05-30, 2024-08-15, 2024-09-29, 2024-11-01, 2024-12-08, 2024-12-24 | Prime | `1f932f3a`, `9c18c7ac`, `ebd3ffa2`, `68a6aa15`, `93d19f1b`, `d2312ee1`, `269de10f`, `17defeec` |
 | Rubrics 1960 - 1960 | 2024-09-29, 2024-11-01, 2024-12-24 | Prime | `93d19f1b`, `d2312ee1`, `17defeec` |
+
+**Additional fanout.** Reduced 1955 Christmas Day (`2024-12-25`) Prime
+has the same shape: `upstream/web/www/horas/Latin/Sancti/12-25.txt:382-384`
+supplies `[Lectio Prima]` as `Heb 1:11-12`, while the Perl comparison
+surface keeps `1 Tim. 1:17`. Stable row key suffix: `6b6365d6`.
 
 ### 2026-04-25 — Rubrics 1960 Marian Matins doxology inserts an unsupported comma after `Patre`
 

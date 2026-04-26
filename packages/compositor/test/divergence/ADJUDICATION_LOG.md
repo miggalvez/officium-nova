@@ -3484,6 +3484,131 @@ The Compline benediction-verb issue is already adjudicated in
 [ADR-012](../../../../docs/adr/012-compline-benediction-verb.md) and is
 tracked separately from this Phase 3 per-pattern backlog.
 
+### 2026-04-25 — Pattern: Simplified Roman Confessor non-pontiff common antiphons (perl-bug)
+
+**Commit.** `90c34b9`
+
+**Ledger signal.** Reduced 1955 and Rubrics 1960 rows for Aug `19`
+and Oct `4` first diverged at Lauds, Prime, Terce, Sext, None, and
+Vespers antiphons. Perl kept the ordinary psalter antiphons while the
+compositor used the Confessor non-pontiff common antiphons.
+
+**Root cause.** The day offices explicitly point to `vide C5`, and
+`Commune/C5` declares `Antiphonas horas` with the common antiphon set.
+The compositor is following the source-backed common; the legacy Perl
+comparison surface remains on the ordinary psalter antiphons for these
+simplified Roman rows.
+
+**Resolution.** Class `perl-bug`. Added sidecar classifications for the
+24 Reduced 1955 / Rubrics 1960 non-Matins rows. The adjacent Matins
+invitatory rows remain unclassified because they follow a separate
+invitatory path.
+
+**Citation.** `upstream/web/www/horas/Latin/Sancti/08-19.txt:4-9`;
+`upstream/web/www/horas/Latin/Sancti/10-04.txt:4-14`;
+`upstream/web/www/horas/Latin/Commune/C5.txt:9-19`.
+
+**Impact.** Twenty-four simplified Roman rows move from
+`unadjudicated` to `perl-bug`. The next frontier still includes the
+separate Aug `19` / Oct `4` Matins invitatory rows and the broader
+Marian/common-antiphon families.
+
+### 2026-04-25 — Pattern: Simplified Roman Marian common antiphons (perl-bug)
+
+**Commit.** `38800ac`
+
+**Ledger signal.** Reduced 1955 Aug `22` and Sep `12` minor-hour rows,
+plus Rubrics 1960 Sep `12` Lauds and Vespers, first diverged on
+ordinary psalter antiphons versus Marian common antiphons such as
+`Dum esset Rex`, `Læva ejus`, `Nigra sum`, and `Speciósa`.
+
+**Root cause.** The affected offices route to the Marian common C11,
+whose rule declares `Antiphonas horas`. The common supplies the Marian
+antiphon set directly or by reference to C6/C7. The compositor follows
+those source-backed common antiphons; the legacy Perl comparison
+surface remains on ordinary psalter antiphons for these simplified
+Roman rows.
+
+**Resolution.** Class `perl-bug`. Added sidecar classifications for ten
+visible Marian-common antiphon rows. Matins and minor-hour versicle rows
+are left for separate tranches.
+
+**Citation.** `upstream/web/www/horas/Latin/Sancti/08-22.txt:1-10`;
+`upstream/web/www/horas/Latin/Sancti/09-12.txt:1-17`;
+`upstream/web/www/horas/Latin/Commune/C11.txt:7-10,15-24,251-256`;
+`upstream/web/www/horas/Latin/Commune/C7.txt:9-14,67`;
+`upstream/web/www/horas/Latin/Commune/C6.txt:116-125`.
+
+**Impact.** Ten simplified Roman rows move from `unadjudicated` to
+`perl-bug`, narrowing the Marian common frontier to Matins, versicles,
+and unrelated Vespers selection rows.
+
+### 2026-04-25 — Pattern: Reduced 1955 Christmas-octave minor-hour antiphons (perl-bug)
+
+**Commit.** `41452e7`
+
+**Ledger signal.** Reduced 1955 Dec `26` and Dec `27` Prime, Terce,
+Sext, and None rows first diverged on ordinary psalter antiphons versus
+the proper antiphons for St Stephen and St John in the Christmas octave.
+
+**Root cause.** The proper offices declare `Antiphonas horas` and supply
+their own antiphon sets. The compositor follows those source-backed
+proper antiphons; the Reduced 1955 Perl comparison surface remains on
+ordinary psalter antiphons for these minor-hour rows.
+
+**Resolution.** Class `perl-bug`. Added sidecar classifications for the
+eight visible Reduced 1955 Christmas-octave minor-hour antiphon rows.
+
+**Citation.** `upstream/web/www/horas/Latin/Sancti/12-26.txt:9-14,149-157`;
+`upstream/web/www/horas/Latin/Sancti/12-27.txt:9-13,140-148`.
+
+**Impact.** Eight Reduced 1955 rows move from `unadjudicated` to
+`perl-bug`. Matins and major-hour Christmas-octave rows remain separate
+frontiers.
+
+### 2026-04-25 — Pattern: Reduced 1955 Christmas Day proper Prime lesson (perl-bug)
+
+**Commit.** `c4e98df`
+
+**Ledger signal.** Reduced 1955 Dec `25` Prime first diverged at the
+Prime chapter citation: Perl kept the ordinary `1 Tim. 1:17`, while the
+compositor emitted `Heb 1:11-12`.
+
+**Root cause.** Christmas Day supplies a proper `[Lectio Prima]` section
+with the `Heb 1:11-12` citation. The compositor follows the proper
+office source; the Perl comparison surface falls back to the ordinary
+Prime chapter.
+
+**Resolution.** Class `perl-bug`. Added the Christmas Day Reduced 1955
+row as a fanout of the already-established proper Prime lesson family.
+
+**Citation.** `upstream/web/www/horas/Latin/Sancti/12-25.txt:382-384`.
+
+**Impact.** One Reduced 1955 Prime row moves from `unadjudicated` to
+`perl-bug`.
+
+### 2026-04-25 — Pattern: Simplified Roman Precious Blood Matins bracketed hymn letter (rendering-difference)
+
+**Commit.** `ba2cda0`
+
+**Ledger signal.** Reduced 1955 and Rubrics 1960 Jul `1` Matins first
+diverged in the Precious Blood Matins hymn line: Perl rendered
+`Imbre aquárum víndice,` while the compositor preserved
+`Imbr[e] aquárum víndice,`.
+
+**Root cause.** The source hymn line carries the bracketed-letter form
+`Imbr[e]`. Perl expands that editorial spelling to `Imbre`; the
+compositor preserves the corpus token. The office and hymn selection
+are the same.
+
+**Resolution.** Class `rendering-difference`. Added sidecar
+classifications for the two simplified Roman Jul `1` Matins rows.
+
+**Citation.** `upstream/web/www/horas/Latin/Sancti/07-01.txt:78-80`.
+
+**Impact.** Two simplified Roman Matins rows move from `unadjudicated`
+to `rendering-difference`.
+
 ## See also
 
 - [ADR-011 — Divergence adjudication protocol](../../../../docs/adr/011-phase-3-divergence-adjudication.md)
