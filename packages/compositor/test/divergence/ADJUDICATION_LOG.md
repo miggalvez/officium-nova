@@ -3771,6 +3771,32 @@ source-backed guillemeted `Pater secreto` line.
 Matins frontier to whatever later row surfaces remain after this
 punctuation-only family.
 
+### 2026-04-26 — Pattern: Remaining Roman Matins pre-lesson guillemets (rendering-difference)
+
+**Commit.** `e7b3145`
+
+**Ledger signal.** The expanded live frontier still showed the same
+pre-lesson `Pater Noster` guillemet signature on additional Reduced
+1955 and Rubrics 1960 Matins rows, including summer, November, and
+early-Advent offices. The first divergent lines are identical to the
+already-adjudicated Roman Matins family.
+
+**Root cause.** Same source-backed rendering surface as the earlier
+Matins guillemet entries: `[Pater secreto]` in
+`Psalterium/Common/Rubricae.txt` carries guillemets around both rubric
+phrases. Perl strips those punctuation marks in its rendered comparison
+surface; the compositor preserves the corpus text.
+
+**Resolution.** Class `rendering-difference`. Added the eight remaining
+visible shared-Roman Matins row keys with this exact first-divergence
+signature as fanout of the established family.
+
+**Citation.** `upstream/web/www/horas/Latin/Psalterium/Common/Rubricae.txt:1-2`.
+
+**Impact.** Eight additional Roman Matins rows move from
+`unadjudicated` to `rendering-difference`, clearing the repeated
+pre-lesson guillemet surface from the visible shared-Roman frontier.
+
 ## See also
 
 - [ADR-011 — Divergence adjudication protocol](../../../../docs/adr/011-phase-3-divergence-adjudication.md)

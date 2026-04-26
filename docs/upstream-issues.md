@@ -1507,6 +1507,12 @@ source-backed `[Pater secreto]` guillemet surface on Dec `15` and Dec
 `22` under both simplified Roman policies. Stable row key suffix:
 `29ec2a3d`.
 
+**Additional fanout.** A later expanded-ledger pass found the remaining
+visible shared-Roman Matins rows with the same exact first-divergence
+signature: Reduced 1955 Jun `20`, Jul `6`, Nov `5`, Nov `8`, and Dec
+`1`; Rubrics 1960 Nov `5`, Nov `8`, and Dec `1`. Stable row key suffix:
+`29ec2a3d`.
+
 ### 2026-04-22 — Roman Easter-Octave Prime preserves the corpus guillemets around `Pater Noster`
 
 **Classification.** `rendering-difference`
