@@ -9091,6 +9091,18 @@
     "resolvedAt": "2026-04-19",
     "commitSha": "bfb3c52"
   },
+  "Reduced - 1955/2024-08-15/Vespers/bb24a4f0": {
+    "policy": "Reduced - 1955",
+    "date": "2024-08-15",
+    "hour": "Vespers",
+    "firstExpected": "Prima stropha sequentis hymni dicitur flexis genibus.",
+    "firstActual": "O prima, Virgo, pródita",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/08-15.txt:6-17 and upstream/web/www/horas/Latin/Commune/C11.txt:26-28 — the Assumption office declares `ex C11` but supplies its own `[Hymnus Vespera]`, beginning `O prima, Virgo, pródita`. The compositor emits that source-backed proper hymn; the Perl comparison surface retains the Marian common's kneeling-rubric opening from C11.",
+    "notes": "Assumption Vespers hymn-inheritance surface: proper hymn text remains source-backed even though Perl exposes the common Marian opening rubric.",
+    "resolvedAt": "2026-04-26",
+    "commitSha": "current-tranche"
+  },
   "Reduced - 1955/2024-08-19/Compline/5dc10d20": {
     "policy": "Reduced - 1955",
     "date": "2024-08-19",
@@ -14206,6 +14218,18 @@
     "notes": "Representative entry for the Rubrics 1960 Roman January Vespers second-psalm heading family where the source-backed Day0 sequence keeps Psalm 110 in the second slot. Fan out to matching 1960 rows with the same first-divergence pair.",
     "resolvedAt": "2026-04-19",
     "commitSha": "bfb3c52"
+  },
+  "Rubrics 1960 - 1960/2024-08-15/Vespers/bb24a4f0": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-08-15",
+    "hour": "Vespers",
+    "firstExpected": "Prima stropha sequentis hymni dicitur flexis genibus.",
+    "firstActual": "O prima, Virgo, pródita",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/08-15.txt:6-17 and upstream/web/www/horas/Latin/Commune/C11.txt:26-28 — the Assumption office declares `ex C11` but supplies its own `[Hymnus Vespera]`, beginning `O prima, Virgo, pródita`. The compositor emits that source-backed proper hymn; the Perl comparison surface retains the Marian common's kneeling-rubric opening from C11.",
+    "notes": "Assumption Vespers hymn-inheritance surface: proper hymn text remains source-backed even though Perl exposes the common Marian opening rubric.",
+    "resolvedAt": "2026-04-26",
+    "commitSha": "current-tranche"
   },
   "Rubrics 1960 - 1960/2024-08-19/Compline/57de2841": {
     "policy": "Rubrics 1960 - 1960",

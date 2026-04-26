@@ -14,6 +14,7 @@ The `@officium-novum/compositor` package turns a `DayOfficeSummary` + Phase-1-re
 
 Newest tranche first:
 
+- **2026-04-26.** Classified the shared Roman Assumption Vespers hymn-inheritance surface. Aug `15` Vespers now cites the Assumption proper `[Hymnus Vespera]` beginning `O prima, Virgo, pródita`, documenting Perl's retained Marian-common kneeling-rubric opening as a comparison-surface bug.
 - **2026-04-26.** Closed the Pentecost Terce hymn-routing seam for Reduced 1955 and Rubrics 1960. Phase 2 now routes Pentecost Sunday Terce to the source-backed `Minor Special:[Hymnus Pasc7 Tertia]`, including the first-stanza kneeling rubric and Veni Creator hymn, instead of falling back to ordinary `Hymnus Tertia`.
 - **2026-04-26.** Review follow-up: hardened Paschaltide alleluia handling for legacy psalm payloads and parenthetical variants, and made Confessor `mtv` Matins hymn-variant detection work when `mtv` starts its own rule line.
 - **2026-04-26.** Fixed the Paschaltide `add-alleluia` idempotence seam for parenthetical source tails. Psalmody antiphon rows such as Annunciation `Missus est... (Allelúja.);;109` no longer receive an extra appended `, allelúja.` when the source already carries the parenthetical alleluia.

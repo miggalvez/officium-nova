@@ -22,6 +22,34 @@ anchor.
 
 ## Entries
 
+### 2026-04-26 — Pattern: Assumption Vespers proper hymn vs Marian common rubric (perl-bug)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** Reduced 1955 and Rubrics 1960 Aug `15` Vespers
+first diverged inside the hymn. Perl expects the Marian common rubric
+`Prima stropha sequentis hymni dicitur flexis genibus.`, while the
+compositor opens the proper Assumption hymn at `O prima, Virgo,
+pródita`.
+
+**Root cause.** `Sancti/08-15` declares `ex C11` but also supplies its
+own `[Hymnus Vespera]`. The proper hymn source begins `O prima, Virgo,
+pródita`; the Marian common C11 source separately carries the generic
+first-stanza kneeling rubric before `Ave maris stella`. The Perl
+comparison surface exposes the common opening rubric at this boundary
+even though the winning proper source owns the hymn text.
+
+**Resolution.** Class `perl-bug`. Added the two simplified Roman Aug
+`15` Vespers row keys to document the source-backed proper hymn
+selection while leaving the compositor output unchanged.
+
+**Citation.** `upstream/web/www/horas/Latin/Sancti/08-15.txt:6-17` and
+`upstream/web/www/horas/Latin/Commune/C11.txt:26-28`.
+
+**Impact.** Two shared Roman Vespers rows move from `unadjudicated` to
+`perl-bug`, clearing this Assumption hymn-inheritance surface from the
+visible frontier.
+
 ### 2026-04-26 — Pattern: Pentecost Terce uses `Hymnus Pasc7 Tertia` (engine-bug fixed)
 
 **Commit.** Current tranche commit.

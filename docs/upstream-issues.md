@@ -24,6 +24,38 @@ entry here and re-run the adjudication harness.
 
 ## Current entries
 
+### 2026-04-26 — Assumption Vespers proper hymn is masked by the Marian common rubric in Perl
+
+**Classification.** `perl-bug`
+
+**Summary.** On Aug `15`, the simplified Roman Perl comparison surface
+opens Vespers hymn comparison at the C11 Marian common kneeling rubric
+instead of the proper Assumption hymn. Officium Novum emits the winning
+office's own `[Hymnus Vespera]`, beginning `O prima, Virgo, pródita`.
+
+**Primary source.**
+`upstream/web/www/horas/Latin/Sancti/08-15.txt:6-17` and
+`upstream/web/www/horas/Latin/Commune/C11.txt:26-28`
+
+`Sancti/08-15` declares `ex C11` but also supplies a proper
+`[Hymnus Vespera]`; C11 separately carries the generic Marian hymn
+rubric before `Ave maris stella`.
+
+**Reproduction.**
+Run:
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Reduced - 1955" --date 2024-08-15 --hour Vespera
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Rubrics 1960 - 1960" --date 2024-08-15 --hour Vespera
+```
+
+**Affected stable divergence-row keys.**
+
+| Policy | Date | Hour | Row key suffix |
+|---|---|---|---|
+| Reduced - 1955 | 2024-08-15 | Vespers | `bb24a4f0` |
+| Rubrics 1960 - 1960 | 2024-08-15 | Vespers | `bb24a4f0` |
+
 ### 2026-04-25 — Reduced 1955 Christmas-octave minor-hour antiphons fall back to the psalter
 
 **Classification.** `perl-bug`
