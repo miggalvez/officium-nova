@@ -14,6 +14,7 @@ The `@officium-novum/compositor` package turns a `DayOfficeSummary` + Phase-1-re
 
 Newest tranche first:
 
+- **2026-04-26.** Classified the shared Roman proper first-Vespers fifth-psalm override family. Jul `1` and Sep `29` Vespers now cite the offices' explicit `Psalm5 Vespera=116` rules, documenting Perl's retained `Vespera3` fifth psalm headings as comparison-surface bugs.
 - **2026-04-26.** Fanned the source-backed Confessor C5 common-antiphon adjudication onto the four Matins rows exposed by the inherited-invitatory and hymn-variant fixes. Aug `19` and Oct `4` Matins now cite the same `vide C5` / `Antiphonas horas` source trail as the already-classified non-Matins hours, dropping unadjudicated rows by two in each simplified Roman ledger.
 - **2026-04-26.** Closed the simplified Roman Confessor C5 Matins hymn-variant seam in Phase 2. Post-1955 C4/C5 Matins planning now follows the source-backed `Hymnus1 Matutinum` section selected by the legacy `checkmtv` rule, so Aug `19` and Oct `4` move past `Hac die lætus méruit suprémos` and expose the next C5 psalmody-antiphon frontier. The refreshed ledgers keep the same unadjudicated row counts while improving the simplified Roman average matching prefix.
 - **2026-04-26.** Classified the simplified Roman All Saints minor-hour versicle-slot family. Nov `1` Terce, Sext, and None now cite `Sancti/11-01` plus `Commune/C3` for the source-backed generic `[Versum 1]` after the proper short responsory blocks.

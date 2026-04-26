@@ -3951,6 +3951,35 @@ versicle surface while leaving the compositor's source-backed `[Versum
 **Impact.** Six simplified Roman rows move from `unadjudicated` to
 `perl-bug`, narrowing the shared All Saints minor-hour frontier.
 
+### 2026-04-26 — Pattern: proper first-Vespers fifth psalm override remains Psalm 116 (perl-bug)
+
+**Commit.** `5110115`
+
+**Ledger signal.** Reduced 1955 and Rubrics 1960 Jul `1` Vespers first
+diverged at the fifth psalm heading with Perl expecting `Psalmus 147
+[5]` while the compositor emitted `Psalmus 116 [5]`. The same pattern
+appeared on Sep `29`, where Perl expected `Psalmus 137 [5]` and the
+compositor again emitted `Psalmus 116 [5]`.
+
+**Root cause.** This is not a Vespers psalm-selection defect. The
+winning proper offices explicitly set `Psalm5 Vespera=116`. Jul `1`
+also carries `Psalm5 Vespera3=147`, and Sep `29` carries `Psalm5
+Vespera3=137`; those alternate third-Vespers headings are what Perl's
+comparison surface retains in the first-Vespers row. The source-backed
+first-Vespers fifth slot remains Psalm `116`.
+
+**Resolution.** Class `perl-bug`. Added the four simplified Roman row
+keys for Jul `1` and Sep `29` Vespers to document the source-backed
+`Psalm5 Vespera=116` override.
+
+**Citation.** `upstream/web/www/horas/Latin/Sancti/07-01.txt:11-18`,
+`upstream/web/www/horas/Latin/Sancti/09-29.txt:11-16`, and
+`upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:15-20`.
+
+**Impact.** Four shared Roman Vespers rows move from `unadjudicated` to
+`perl-bug`, clearing this proper first-Vespers fifth-psalm override
+family from the visible frontier.
+
 ## See also
 
 - [ADR-011 — Divergence adjudication protocol](../../../../docs/adr/011-phase-3-divergence-adjudication.md)

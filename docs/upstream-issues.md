@@ -1289,6 +1289,45 @@ override `Psalmus 116 [5]`.
 | Reduced - 1955 | 2024-01-13 | Vespers | `39846534` |
 | Rubrics 1960 - 1960 | 2024-01-13 | Vespers | `39846534` |
 
+### 2026-04-26 — Roman proper first Vespers loses the Psalm 116 override in the Perl render surface
+
+**Classification.** `perl-bug`
+
+**Summary.** `Reduced - 1955` and `Rubrics 1960 - 1960` Jul `1` and
+Sep `29` Vespers first diverge at the fifth psalm heading. The
+compositor emits the source-backed `Psalmus 116 [5]`; the Perl
+comparison surface instead keeps the alternate heading (`Psalmus 147
+[5]` for Jul `1`, `Psalmus 137 [5]` for Sep `29`).
+
+**Primary source.**
+
+- `upstream/web/www/horas/Latin/Sancti/07-01.txt:11-18`
+- `upstream/web/www/horas/Latin/Sancti/09-29.txt:11-16`
+- `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:15-20`
+
+These sources establish that both offices explicitly set `Psalm5
+Vespera=116`, while their separate `Psalm5 Vespera3` values are `147`
+and `137`.
+
+**Reproduction.**
+Run:
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --hour Vespers
+```
+
+Then inspect the Jul `1` and Sep `29` Roman Vespers rows in the
+corresponding divergence ledgers.
+
+**Affected stable divergence-row keys.**
+
+| Policy | Date | Hour | Row key suffix |
+|---|---|---|---|
+| Reduced - 1955 | 2024-07-01 | Vespers | `bdb4bf6d` |
+| Rubrics 1960 - 1960 | 2024-07-01 | Vespers | `bdb4bf6d` |
+| Reduced - 1955 | 2024-09-29 | Vespers | `d312260f` |
+| Rubrics 1960 - 1960 | 2024-09-29 | Vespers | `d312260f` |
+
 ### 2026-04-19 — Roman Sunday minor hours gain underscore separators around the short responsory in the Perl render surface
 
 **Classification.** `perl-bug`

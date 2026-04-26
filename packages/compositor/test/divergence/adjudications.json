@@ -8995,6 +8995,18 @@
     "resolvedAt": "2026-04-24",
     "commitSha": "38773c0"
   },
+  "Reduced - 1955/2024-07-01/Vespers/bdb4bf6d": {
+    "policy": "Reduced - 1955",
+    "date": "2024-07-01",
+    "hour": "Vespers",
+    "firstExpected": "Psalmus 147 [5]",
+    "firstActual": "Psalmus 116 [5]",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/07-01.txt:11-18 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:15-20 — the Precious Blood office explicitly sets `Psalm5 Vespera=116`, so the source-backed first-Vespers fifth heading is `Psalmus 116 [5]` rather than the Vespera3 heading `Psalmus 147 [5]` retained by the Perl comparison surface.",
+    "notes": "Representative entry for the shared Roman proper first-Vespers fifth-psalm override family.",
+    "resolvedAt": "2026-04-26",
+    "commitSha": "5110115"
+  },
   "Reduced - 1955/2024-07-06/Compline/5dc10d20": {
     "policy": "Reduced - 1955",
     "date": "2024-07-06",
@@ -9522,6 +9534,18 @@
     "notes": "Prime proper-lesson row where the office source supplies `[Lectio Prima]` but the Perl comparison surface keeps the ordinary Prime chapter.",
     "resolvedAt": "2026-04-25",
     "commitSha": "34d6dc1"
+  },
+  "Reduced - 1955/2024-09-29/Vespers/d312260f": {
+    "policy": "Reduced - 1955",
+    "date": "2024-09-29",
+    "hour": "Vespers",
+    "firstExpected": "Psalmus 137 [5]",
+    "firstActual": "Psalmus 116 [5]",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/09-29.txt:11-16 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:15-20 — the Dedication of St Michael office explicitly sets `Psalm5 Vespera=116`, so the source-backed first-Vespers fifth heading is `Psalmus 116 [5]` rather than the Vespera3 heading `Psalmus 137 [5]` retained by the Perl comparison surface.",
+    "notes": "Representative entry for the shared Roman proper first-Vespers fifth-psalm override family.",
+    "resolvedAt": "2026-04-26",
+    "commitSha": "5110115"
   },
   "Reduced - 1955/2024-10-04/Compline/5dc10d20": {
     "policy": "Reduced - 1955",
@@ -13979,6 +14003,18 @@
     "resolvedAt": "2026-04-24",
     "commitSha": "38773c0"
   },
+  "Rubrics 1960 - 1960/2024-07-01/Vespers/bdb4bf6d": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-07-01",
+    "hour": "Vespers",
+    "firstExpected": "Psalmus 147 [5]",
+    "firstActual": "Psalmus 116 [5]",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/07-01.txt:11-18 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:15-20 — the Precious Blood office explicitly sets `Psalm5 Vespera=116`, so the source-backed first-Vespers fifth heading is `Psalmus 116 [5]` rather than the Vespera3 heading `Psalmus 147 [5]` retained by the Perl comparison surface.",
+    "notes": "Representative entry for the shared Roman proper first-Vespers fifth-psalm override family.",
+    "resolvedAt": "2026-04-26",
+    "commitSha": "5110115"
+  },
   "Rubrics 1960 - 1960/2024-07-06/Compline/57de2841": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2024-07-06",
@@ -14698,6 +14734,18 @@
     "notes": "Prime proper-lesson row where the office source supplies `[Lectio Prima]` but the Perl comparison surface keeps the ordinary Prime chapter.",
     "resolvedAt": "2026-04-25",
     "commitSha": "34d6dc1"
+  },
+  "Rubrics 1960 - 1960/2024-09-29/Vespers/d312260f": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-09-29",
+    "hour": "Vespers",
+    "firstExpected": "Psalmus 137 [5]",
+    "firstActual": "Psalmus 116 [5]",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/09-29.txt:11-16 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:15-20 — the Dedication of St Michael office explicitly sets `Psalm5 Vespera=116`, so the source-backed first-Vespers fifth heading is `Psalmus 116 [5]` rather than the Vespera3 heading `Psalmus 137 [5]` retained by the Perl comparison surface.",
+    "notes": "Representative entry for the shared Roman proper first-Vespers fifth-psalm override family.",
+    "resolvedAt": "2026-04-26",
+    "commitSha": "5110115"
   },
   "Rubrics 1960 - 1960/2024-10-04/Compline/57de2841": {
     "policy": "Rubrics 1960 - 1960",
