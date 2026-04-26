@@ -22,6 +22,32 @@ anchor.
 
 ## Entries
 
+### 2026-04-26 — Pattern: Pentecost Terce uses `Hymnus Pasc7 Tertia` (engine-bug fixed)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** Reduced 1955 and Rubrics 1960 May `19` Terce first
+diverged at the hymn: Perl opened with `Prima stropha hymni sequentis
+dicitur flexibus genibus.`, while the compositor opened with ordinary
+`Nunc, Sancte, nobis, Spíritus,`.
+
+**Root cause.** The source-backed Pentecost Terce hymn lives in
+`Psalterium/Special/Minor Special` as `[Hymnus Pasc7 Tertia]`, including
+the kneeling first-stanza rubric and `Veni Creator`. Phase 2's
+minor-hour hymn fallback always selected the ordinary `[Hymnus Tertia]`
+for Terce, so Phase 3 never received the Pentecost-specific source.
+
+**Resolution.** Fixed. The minor-hour fallback now routes Pentecost
+Sunday Terce (`Pasc7-0`) to `[Hymnus Pasc7 Tertia]` for both simplified
+Roman policies, while other Terce fallbacks continue to use ordinary
+`[Hymnus Tertia]`. The January hymn-routing integration test now locks
+the Pentecost Terce hymn and its `Pent` doxology slot.
+
+**Citation.** `upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:616-647`.
+
+**Impact.** The two simplified Roman May `19` Terce rows reach exact
+parity and leave the unadjudicated frontier.
+
 ### 2026-04-26 — Pattern: simplified Roman Confessor C5 Matins antiphons (perl-bug)
 
 **Commit.** `94bdfc9`

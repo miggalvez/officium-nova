@@ -201,7 +201,7 @@ function resolveSlot(
     communeRef ??
     majorHourLaterBlockFallbackReference(input, slot.name) ??
     minorHourLaterBlockFallbackReference(input, slot.name) ??
-    ordinariumFallbackReference(input.skeleton, slot);
+    ordinariumFallbackReference(input, slot);
 
   if (!ref) {
     warnings.push({
@@ -1051,10 +1051,11 @@ function seasonalFallbackDoxologyVariant(
 }
 
 function ordinariumFallbackReference(
-  skeleton: OrdinariumSkeleton,
+  input: ApplyRuleSetInput,
   slot: SkeletonSlot
 ): TextReference {
-  const minorHourSpecial = minorHourSpecialFallbackReference(skeleton.hour, slot.name);
+  const skeleton = input.skeleton;
+  const minorHourSpecial = minorHourSpecialFallbackReference(input, slot.name);
   if (minorHourSpecial) {
     return minorHourSpecial;
   }
@@ -1097,13 +1098,14 @@ function complineSpecialFallbackReference(
 }
 
 function minorHourSpecialFallbackReference(
-  hour: HourName,
+  input: ApplyRuleSetInput,
   slot: SlotName
 ): TextReference | undefined {
   if (slot !== 'hymn') {
     return undefined;
   }
 
+  const hour = input.hour;
   switch (hour) {
     case 'prime':
       return {
@@ -1111,6 +1113,12 @@ function minorHourSpecialFallbackReference(
         section: 'Hymnus Prima'
       };
     case 'terce':
+      if (input.temporal.dayName === 'Pasc7-0') {
+        return {
+          path: 'horas/Latin/Psalterium/Special/Minor Special',
+          section: 'Hymnus Pasc7 Tertia'
+        };
+      }
       return {
         path: 'horas/Latin/Psalterium/Special/Minor Special',
         section: 'Hymnus Tertia'

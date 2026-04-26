@@ -97,6 +97,31 @@ describeIfUpstream('January hymn routing regressions', () => {
       }
       expectNoDoxologyVariant(reduced, '2024-02-18', 'prime');
       expectNoDoxologyVariant(roman1960, '2024-02-18', 'prime');
+
+      expectMinorHourHymn(
+        reduced,
+        '2024-05-19',
+        'terce',
+        'horas/Latin/Psalterium/Special/Minor Special:Hymnus Pasc7 Tertia'
+      );
+      expectMinorHourHymn(
+        roman1960,
+        '2024-05-19',
+        'terce',
+        'horas/Latin/Psalterium/Special/Minor Special:Hymnus Pasc7 Tertia'
+      );
+      expectMinorHourDoxology(
+        reduced,
+        '2024-05-19',
+        'terce',
+        'horas/Latin/Psalterium/Doxologies:Pent'
+      );
+      expectMinorHourDoxology(
+        roman1960,
+        '2024-05-19',
+        'terce',
+        'horas/Latin/Psalterium/Doxologies:Pent'
+      );
     },
     240_000
   );
