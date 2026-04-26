@@ -3609,6 +3609,33 @@ classifications for the two simplified Roman Jul `1` Matins rows.
 **Impact.** Two simplified Roman Matins rows move from `unadjudicated`
 to `rendering-difference`.
 
+### 2026-04-25 — Pattern: Reduced 1955 weekday psalter antiphon marker surface (perl-bug)
+
+**Commit.** `dd1bd71`
+
+**Ledger signal.** Reduced 1955 Jun `20` Terce and Vespers first
+diverged on weekday psalter antiphons: Perl emitted abbreviated
+incipits with a trailing `‡`, while the compositor emitted the
+source-backed antiphon surfaces.
+
+**Root cause.** The psalter source rows do not carry a final
+continuation marker. Terce comes from `Psalmi minor:Feria V`, and
+Vespers comes from `Psalmi major` with the full `Ecce quam bonum...`
+antiphon. The compositor preserves those source rows; the Reduced 1955
+Perl comparison surface abbreviates and over-marks them.
+
+**Resolution.** Class `perl-bug`. Added a focused upstream regression
+for the Reduced 1955 Jun `20` Terce/Vespers openings, plus sidecar
+classifications for the two visible row keys. The companion Rubrics
+1960 full-text marker rows were already classified.
+
+**Citation.** `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:26`;
+`upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:100`.
+
+**Impact.** Two Reduced 1955 rows move from `unadjudicated` to
+`perl-bug`, narrowing the weekday psalter-antiphon marker family without
+changing compositor behavior.
+
 ## See also
 
 - [ADR-011 — Divergence adjudication protocol](../../../../docs/adr/011-phase-3-divergence-adjudication.md)

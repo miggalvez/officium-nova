@@ -1529,6 +1529,28 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
     }
   }, 240_000);
 
+  it('renders Reduced 1955 weekday psalter antiphons without Perl-only trailing markers', async () => {
+    const { engine, resolvedCorpus } = await createHarness('Reduced - 1955');
+    const summary = engine.resolveDayOfficeSummary('2024-06-20');
+
+    for (const [hour, expected] of [
+      ['terce', 'Quam bonus.'],
+      ['vespers', 'Ecce quam bonum * et quam jucúndum habitáre fratres in unum.']
+    ] as const) {
+      const composed = composeHour({
+        corpus: resolvedCorpus.index,
+        summary,
+        version: engine.version,
+        hour,
+        options: { languages: ['Latin'] }
+      });
+
+      expect(normalizeLatin(firstPsalmodyAntiphon(composed)), `${hour} opening antiphon`).toBe(
+        normalizeLatin(expected)
+      );
+    }
+  }, 240_000);
+
   it('removes bare carry-over markers from January 7 Matins psalmody across the Roman families', async () => {
     for (const version of PHASE_3_ROMAN_HANDLES) {
       const { engine, resolvedCorpus } = await createHarness(version);
