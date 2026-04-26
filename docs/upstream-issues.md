@@ -24,6 +24,34 @@ entry here and re-run the adjudication harness.
 
 ## Current entries
 
+### 2026-04-26 — Saturday Office BVM Prime lesson is ignored in Perl
+
+**Classification.** `perl-bug`
+
+**Summary.** On Reduced 1955 Jul `6`, the Saturday Office of the BVM
+uses its Marian common Prime lesson `Sir 24:19-20`. Perl's comparison
+surface keeps the ordinary Prime chapter `1 Tim. 1:17`.
+
+**Primary source.**
+`upstream/web/www/horas/Latin/Commune/C10.txt:93-94` and
+`upstream/web/www/horas/Latin/Commune/C11.txt:313-315`
+
+C10's `[Lectio Prima]` delegates to C11, and C11 supplies the explicit
+Prime lesson citation plus text.
+
+**Reproduction.**
+Run:
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Reduced - 1955" --date 2024-07-06 --hour Prima
+```
+
+**Affected stable divergence-row keys.**
+
+| Policy | Date | Hour | Row key suffix |
+|---|---|---|---|
+| Reduced - 1955 | 2024-07-06 | Prime | `52ef3e73` |
+
 ### 2026-04-26 — Saturday Office BVM psalter antiphons are abbreviated in Perl
 
 **Classification.** `perl-bug`

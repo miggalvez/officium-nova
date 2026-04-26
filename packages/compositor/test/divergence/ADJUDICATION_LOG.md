@@ -22,6 +22,31 @@ anchor.
 
 ## Entries
 
+### 2026-04-26 — Pattern: Saturday Office BVM Prime proper lesson (perl-bug)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** Reduced 1955 Jul `6` Prime advanced to the office's
+proper Prime lesson after the condition-gated C10 antiphon fix. Perl
+expects the ordinary Prime chapter `1 Tim. 1:17`, while the compositor
+emits `Sir 24:19-20`.
+
+**Root cause.** The Saturday Office of the BVM source owns Prime's
+little chapter through C10's `[Lectio Prima]` delegation to the Marian
+common C11. Perl's comparison surface keeps the ordinary Prime chapter
+at this boundary.
+
+**Resolution.** Class `perl-bug`. The compositor already follows the
+winning office source, so the row is recorded as a source-backed Perl
+comparison-surface defect.
+
+**Citation.** `upstream/web/www/horas/Latin/Commune/C10.txt:93-94` and
+`upstream/web/www/horas/Latin/Commune/C11.txt:313-315`.
+
+**Impact.** The Reduced 1955 Jul `6` Prime row moves from
+`unadjudicated` to classified, leaving the Saturday Office BVM frontier
+on Vespers/concurrence rather than Prime lesson selection.
+
 ### 2026-04-26 — Pattern: Saturday Office BVM conditioned antiphons and psalter incipits (mixed fix + adjudication)
 
 **Commit.** Current tranche commit.

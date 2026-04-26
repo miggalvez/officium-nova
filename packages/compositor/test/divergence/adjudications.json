@@ -9043,6 +9043,18 @@
     "resolvedAt": "2026-04-26",
     "commitSha": "current-tranche"
   },
+  "Reduced - 1955/2024-07-06/Prime/52ef3e73": {
+    "policy": "Reduced - 1955",
+    "date": "2024-07-06",
+    "hour": "Prime",
+    "firstExpected": "1 Tim. 1:17",
+    "firstActual": "Sir 24:19-20",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Commune/C10.txt:93-94 and upstream/web/www/horas/Latin/Commune/C11.txt:313-315 — the Saturday Office of the BVM delegates `[Lectio Prima]` to C11, whose source-backed Prime lesson is `Sir 24:19-20`. The Perl comparison surface keeps the ordinary Prime chapter `1 Tim. 1:17`.",
+    "notes": "Reduced 1955 Saturday Office BVM proper Prime lesson row exposed after condition-gated C10 antiphons were suppressed.",
+    "resolvedAt": "2026-04-26",
+    "commitSha": "current-tranche"
+  },
   "Reduced - 1955/2024-07-06/None/6039460d": {
     "policy": "Reduced - 1955",
     "date": "2024-07-06",
