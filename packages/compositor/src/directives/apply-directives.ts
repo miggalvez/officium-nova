@@ -190,6 +190,8 @@ function isSicutEratNode(node: TextContent): boolean {
 // --------------------------------------------------------------------------
 
 const ALLELUIA_TAIL_RX = /,?\s*allel[úu](?:j|i)?a(?:,?\s*allel[úu](?:j|i)?a)*\.?\s*$/iu;
+const ALLELUIA_PRESENT_TAIL_RX =
+  /allel[úu](?:j|i)?a(?:,?\s*allel[úu](?:j|i)?a)*\.?\)?\s*$/iu;
 
 function omitAlleluia(_slot: SlotName, content: readonly TextContent[]): readonly TextContent[] {
   return Object.freeze(
@@ -233,7 +235,7 @@ function addVersicleAlleluia(
   for (let i = out.length - 1; i >= 0; i--) {
     const node = out[i]!;
     if (node.type === 'verseMarker') {
-      if (ALLELUIA_TAIL_RX.test(node.text)) return Object.freeze(out);
+      if (hasAlleluiaTail(node.text)) return Object.freeze(out);
       out[i] = {
         type: 'verseMarker',
         marker: node.marker,
@@ -253,12 +255,12 @@ function appendAlleluiaToLastText(
   for (let i = out.length - 1; i >= 0; i--) {
     const node = out[i]!;
     if (node.type === 'text') {
-      if (ALLELUIA_TAIL_RX.test(node.value)) return Object.freeze(out);
+      if (hasAlleluiaTail(node.value)) return Object.freeze(out);
       out[i] = { type: 'text', value: `${node.value.replace(/\.?\s*$/u, '')}${suffix}` };
       return Object.freeze(out);
     }
     if (node.type === 'verseMarker') {
-      if (ALLELUIA_TAIL_RX.test(node.text)) return Object.freeze(out);
+      if (hasAlleluiaTail(node.text)) return Object.freeze(out);
       out[i] = {
         type: 'verseMarker',
         marker: node.marker,
@@ -276,7 +278,7 @@ function appendAlleluiaToPsalmodyAntiphons(
   let changed = false;
   const out = content.map((node) => {
     if (node.type === 'text' && isAntiphonLine(node.value)) {
-      if (ALLELUIA_TAIL_RX.test(node.value)) {
+      if (hasAlleluiaTail(node.value)) {
         return node;
       }
       changed = true;
@@ -290,7 +292,7 @@ function appendAlleluiaToPsalmodyAntiphons(
       node.type === 'verseMarker' &&
       (node.marker === 'Ant.' || isAntiphonLine(node.text))
     ) {
-      if (ALLELUIA_TAIL_RX.test(node.text)) {
+      if (hasAlleluiaTail(node.text)) {
         return node;
       }
       changed = true;
@@ -305,6 +307,10 @@ function appendAlleluiaToPsalmodyAntiphons(
   });
 
   return changed ? Object.freeze(out) : content;
+}
+
+function hasAlleluiaTail(value: string): boolean {
+  return ALLELUIA_PRESENT_TAIL_RX.test(value.replace(/;;.*$/u, ''));
 }
 
 function endsWithBareDeoGratias(content: readonly TextContent[]): boolean {

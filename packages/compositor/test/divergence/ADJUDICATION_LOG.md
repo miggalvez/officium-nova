@@ -4008,6 +4008,33 @@ and `upstream/web/www/horas/Latin/Commune/C11.txt:67-69,307-339`.
 **Impact.** Two Reduced 1955 rows move from `unadjudicated` to
 `perl-bug`, narrowing the live Marian minor-hour frontier.
 
+### 2026-04-26 — Pattern: Paschaltide add-alleluia skips parenthetical alleluia tails (engine-bug fixed)
+
+**Commit.** `5c82b7f`
+
+**Ledger signal.** Reduced 1955 Apr `7` Vespers first diverged at the
+Annunciation antiphon `Missus est... (Allelúja.)`. Perl kept the source
+parenthetical alleluia, while the compositor appended an additional
+Paschaltide `, allelúja.` tail.
+
+**Root cause.** The Phase 3 `add-alleluia` directive was idempotent for
+plain trailing `allelúja` text, but not for antiphon source rows whose
+alleluia already appeared inside a final parenthetical. In psalmody
+antiphon refs the source row can still carry a `;;psalm` payload when
+the directive runs, so the tail check also missed parenthetical
+alleluia before that payload.
+
+**Resolution.** Fixed. The directive layer now checks for an existing
+alleluia tail after ignoring any legacy `;;psalm` payload and recognizes
+final parenthetical `(Allelúja.)` as already alleluia-bearing. A focused
+directive regression covers the `Ant.` marker plus `;;109` source shape.
+
+**Citation.** `upstream/web/www/horas/Latin/Sancti/03-25.txt:19-23`.
+
+**Impact.** The Apr `7` Reduced 1955 Vespers row advances past the
+duplicate-alleluia compositor bug to the next Annunciation Vespers
+antiphon-selection seam.
+
 ## See also
 
 - [ADR-011 — Divergence adjudication protocol](../../../../docs/adr/011-phase-3-divergence-adjudication.md)

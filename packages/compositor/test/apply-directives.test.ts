@@ -142,6 +142,14 @@ describe('applyDirectives — omit-alleluia / add-alleluia', () => {
     expect(out).toEqual(content);
   });
 
+  it('is idempotent when alleluia is present inside a parenthetical tail', () => {
+    const content: TextContent[] = [
+      { type: 'verseMarker', marker: 'Ant.', text: 'Missus est * Gábriel Angelus. (Allelúja.);;109' }
+    ];
+    const out = run('psalmody', content, ['add-alleluia']);
+    expect(out).toEqual(content);
+  });
+
   it('does not append alleluia when a chapter slot is carrying an Ant. substitution', () => {
     const content: TextContent[] = [
       {
