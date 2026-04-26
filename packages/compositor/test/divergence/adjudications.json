@@ -8995,6 +8995,18 @@
     "resolvedAt": "2026-04-24",
     "commitSha": "38773c0"
   },
+  "Reduced - 1955/2024-07-01/Vespers/bdb4bf6d": {
+    "policy": "Reduced - 1955",
+    "date": "2024-07-01",
+    "hour": "Vespers",
+    "firstExpected": "Psalmus 147 [5]",
+    "firstActual": "Psalmus 116 [5]",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/07-01.txt:11-18 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:15-20 — the Precious Blood office explicitly sets `Psalm5 Vespera=116`, so the source-backed first-Vespers fifth heading is `Psalmus 116 [5]` rather than the Vespera3 heading `Psalmus 147 [5]` retained by the Perl comparison surface.",
+    "notes": "Representative entry for the shared Roman proper first-Vespers fifth-psalm override family.",
+    "resolvedAt": "2026-04-26",
+    "commitSha": "5110115"
+  },
   "Reduced - 1955/2024-07-06/Compline/5dc10d20": {
     "policy": "Reduced - 1955",
     "date": "2024-07-06",
@@ -9102,6 +9114,18 @@
     "notes": "Shared Reduced 1955 / Rubrics 1960 Confessor non-pontiff common-antiphon family. Matins invitatory rows are intentionally left unclassified because they follow a different inherited invitatory path.",
     "resolvedAt": "2026-04-25",
     "commitSha": "90c34b9"
+  },
+  "Reduced - 1955/2024-08-19/Matins/2bbb208c": {
+    "policy": "Reduced - 1955",
+    "date": "2024-08-19",
+    "hour": "Matins",
+    "firstExpected": "Ant. Dóminus de cælo * prospéxit super fílios hóminum.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/08-19.txt:4-9 and upstream/web/www/horas/Latin/Sancti/10-04.txt:4-14 point the offices to `vide C5`; upstream/web/www/horas/Latin/Commune/C5.txt:9-19 declares `Antiphonas horas` and supplies the Confessor non-pontiff Matins antiphons used by the compositor. The Perl comparison surface keeps ordinary psalter antiphons for these simplified Roman rows instead.",
+    "notes": "Matins fanout of the shared Reduced 1955 / Rubrics 1960 Confessor non-pontiff common-antiphon family, exposed after the C5 inherited-invitatory and hymn-variant engine fixes.",
+    "resolvedAt": "2026-04-26",
+    "commitSha": "94bdfc9"
   },
   "Reduced - 1955/2024-08-19/None/d06b3f15": {
     "policy": "Reduced - 1955",
@@ -9282,6 +9306,30 @@
     "notes": "Representative entry for the Roman Jan 14 Sunday Prime psalm-table family where the source-backed `Tridentinum` row begins with Psalm 53 before Psalm 117.",
     "resolvedAt": "2026-04-19",
     "commitSha": "bfb3c52"
+  },
+  "Reduced - 1955/2024-09-08/Sext/3da503ad": {
+    "policy": "Reduced - 1955",
+    "date": "2024-09-08",
+    "hour": "Sext",
+    "firstExpected": "V. Elégit eam Deus, et præelégit eam.",
+    "firstActual": "V. Natívitas est hódie sanctæ Maríæ Vírginis.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/09-08.txt:10-15,24-26,140-147 and upstream/web/www/horas/Latin/Commune/C11.txt:67-69,307-339 — the Nativity of the BVM office supplies its own `[Versum 1]` (`Natívitas est hódie...`) and aliases `[Versum 2]` / `[Versum 3]` back to it. The compositor emits that feast-proper versicle while the Perl comparison surface shifts to a Marian-common Sext versicle.",
+    "notes": "Reduced 1955 Nativity of the BVM minor-hour versicle slot; source keeps the feast-proper `Natívitas est hódie...` versicle for Terce/Sext.",
+    "resolvedAt": "2026-04-26",
+    "commitSha": "c3ad33b"
+  },
+  "Reduced - 1955/2024-09-08/Terce/45abc077": {
+    "policy": "Reduced - 1955",
+    "date": "2024-09-08",
+    "hour": "Terce",
+    "firstExpected": "V. Adjuvábit eam Deus vultu suo.",
+    "firstActual": "V. Natívitas est hódie sanctæ Maríæ Vírginis.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/09-08.txt:10-15,24-26,140-147 and upstream/web/www/horas/Latin/Commune/C11.txt:67-69,307-339 — the Nativity of the BVM office supplies its own `[Versum 1]` (`Natívitas est hódie...`) and aliases `[Versum 2]` / `[Versum 3]` back to it. The compositor emits that feast-proper versicle while the Perl comparison surface shifts to a Marian-common Terce versicle.",
+    "notes": "Reduced 1955 Nativity of the BVM minor-hour versicle slot; source keeps the feast-proper `Natívitas est hódie...` versicle for Terce/Sext.",
+    "resolvedAt": "2026-04-26",
+    "commitSha": "c3ad33b"
   },
   "Reduced - 1955/2024-09-08/Vespers/22de27ef": {
     "policy": "Reduced - 1955",
@@ -9511,6 +9559,18 @@
     "resolvedAt": "2026-04-25",
     "commitSha": "34d6dc1"
   },
+  "Reduced - 1955/2024-09-29/Vespers/d312260f": {
+    "policy": "Reduced - 1955",
+    "date": "2024-09-29",
+    "hour": "Vespers",
+    "firstExpected": "Psalmus 137 [5]",
+    "firstActual": "Psalmus 116 [5]",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/09-29.txt:11-16 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:15-20 — the Dedication of St Michael office explicitly sets `Psalm5 Vespera=116`, so the source-backed first-Vespers fifth heading is `Psalmus 116 [5]` rather than the Vespera3 heading `Psalmus 137 [5]` retained by the Perl comparison surface.",
+    "notes": "Representative entry for the shared Roman proper first-Vespers fifth-psalm override family.",
+    "resolvedAt": "2026-04-26",
+    "commitSha": "5110115"
+  },
   "Reduced - 1955/2024-10-04/Compline/5dc10d20": {
     "policy": "Reduced - 1955",
     "date": "2024-10-04",
@@ -9534,6 +9594,18 @@
     "notes": "Shared Reduced 1955 / Rubrics 1960 Confessor non-pontiff common-antiphon family. Matins invitatory rows are intentionally left unclassified because they follow a different inherited invitatory path.",
     "resolvedAt": "2026-04-25",
     "commitSha": "90c34b9"
+  },
+  "Reduced - 1955/2024-10-04/Matins/88adb0ee": {
+    "policy": "Reduced - 1955",
+    "date": "2024-10-04",
+    "hour": "Matins",
+    "firstExpected": "Ant. Suscitávit Dóminus * testimónium in Jacob: et legem pósuit in Israël.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/08-19.txt:4-9 and upstream/web/www/horas/Latin/Sancti/10-04.txt:4-14 point the offices to `vide C5`; upstream/web/www/horas/Latin/Commune/C5.txt:9-19 declares `Antiphonas horas` and supplies the Confessor non-pontiff Matins antiphons used by the compositor. The Perl comparison surface keeps ordinary psalter antiphons for these simplified Roman rows instead.",
+    "notes": "Matins fanout of the shared Reduced 1955 / Rubrics 1960 Confessor non-pontiff common-antiphon family, exposed after the C5 inherited-invitatory and hymn-variant engine fixes.",
+    "resolvedAt": "2026-04-26",
+    "commitSha": "94bdfc9"
   },
   "Reduced - 1955/2024-10-04/None/ee9cd993": {
     "policy": "Reduced - 1955",
@@ -13955,6 +14027,18 @@
     "resolvedAt": "2026-04-24",
     "commitSha": "38773c0"
   },
+  "Rubrics 1960 - 1960/2024-07-01/Vespers/bdb4bf6d": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-07-01",
+    "hour": "Vespers",
+    "firstExpected": "Psalmus 147 [5]",
+    "firstActual": "Psalmus 116 [5]",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/07-01.txt:11-18 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:15-20 — the Precious Blood office explicitly sets `Psalm5 Vespera=116`, so the source-backed first-Vespers fifth heading is `Psalmus 116 [5]` rather than the Vespera3 heading `Psalmus 147 [5]` retained by the Perl comparison surface.",
+    "notes": "Representative entry for the shared Roman proper first-Vespers fifth-psalm override family.",
+    "resolvedAt": "2026-04-26",
+    "commitSha": "5110115"
+  },
   "Rubrics 1960 - 1960/2024-07-06/Compline/57de2841": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2024-07-06",
@@ -14146,6 +14230,18 @@
     "notes": "Shared Reduced 1955 / Rubrics 1960 Confessor non-pontiff common-antiphon family. Matins invitatory rows are intentionally left unclassified because they follow a different inherited invitatory path.",
     "resolvedAt": "2026-04-25",
     "commitSha": "90c34b9"
+  },
+  "Rubrics 1960 - 1960/2024-08-19/Matins/2bbb208c": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-08-19",
+    "hour": "Matins",
+    "firstExpected": "Ant. Dóminus de cælo * prospéxit super fílios hóminum.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/08-19.txt:4-9 and upstream/web/www/horas/Latin/Sancti/10-04.txt:4-14 point the offices to `vide C5`; upstream/web/www/horas/Latin/Commune/C5.txt:9-19 declares `Antiphonas horas` and supplies the Confessor non-pontiff Matins antiphons used by the compositor. The Perl comparison surface keeps ordinary psalter antiphons for these simplified Roman rows instead.",
+    "notes": "Matins fanout of the shared Reduced 1955 / Rubrics 1960 Confessor non-pontiff common-antiphon family, exposed after the C5 inherited-invitatory and hymn-variant engine fixes.",
+    "resolvedAt": "2026-04-26",
+    "commitSha": "94bdfc9"
   },
   "Rubrics 1960 - 1960/2024-08-19/None/e01745bd": {
     "policy": "Rubrics 1960 - 1960",
@@ -14663,6 +14759,18 @@
     "resolvedAt": "2026-04-25",
     "commitSha": "34d6dc1"
   },
+  "Rubrics 1960 - 1960/2024-09-29/Vespers/d312260f": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-09-29",
+    "hour": "Vespers",
+    "firstExpected": "Psalmus 137 [5]",
+    "firstActual": "Psalmus 116 [5]",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/09-29.txt:11-16 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:15-20 — the Dedication of St Michael office explicitly sets `Psalm5 Vespera=116`, so the source-backed first-Vespers fifth heading is `Psalmus 116 [5]` rather than the Vespera3 heading `Psalmus 137 [5]` retained by the Perl comparison surface.",
+    "notes": "Representative entry for the shared Roman proper first-Vespers fifth-psalm override family.",
+    "resolvedAt": "2026-04-26",
+    "commitSha": "5110115"
+  },
   "Rubrics 1960 - 1960/2024-10-04/Compline/57de2841": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2024-10-04",
@@ -14686,6 +14794,18 @@
     "notes": "Shared Reduced 1955 / Rubrics 1960 Confessor non-pontiff common-antiphon family. Matins invitatory rows are intentionally left unclassified because they follow a different inherited invitatory path.",
     "resolvedAt": "2026-04-25",
     "commitSha": "90c34b9"
+  },
+  "Rubrics 1960 - 1960/2024-10-04/Matins/88adb0ee": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-10-04",
+    "hour": "Matins",
+    "firstExpected": "Ant. Suscitávit Dóminus * testimónium in Jacob: et legem pósuit in Israël.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/08-19.txt:4-9 and upstream/web/www/horas/Latin/Sancti/10-04.txt:4-14 point the offices to `vide C5`; upstream/web/www/horas/Latin/Commune/C5.txt:9-19 declares `Antiphonas horas` and supplies the Confessor non-pontiff Matins antiphons used by the compositor. The Perl comparison surface keeps ordinary psalter antiphons for these simplified Roman rows instead.",
+    "notes": "Matins fanout of the shared Reduced 1955 / Rubrics 1960 Confessor non-pontiff common-antiphon family, exposed after the C5 inherited-invitatory and hymn-variant engine fixes.",
+    "resolvedAt": "2026-04-26",
+    "commitSha": "94bdfc9"
   },
   "Rubrics 1960 - 1960/2024-10-04/None/21ab0ed2": {
     "policy": "Rubrics 1960 - 1960",

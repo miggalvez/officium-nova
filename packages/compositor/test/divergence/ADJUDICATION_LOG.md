@@ -22,6 +22,69 @@ anchor.
 
 ## Entries
 
+### 2026-04-26 — Pattern: simplified Roman Confessor C5 Matins antiphons (perl-bug)
+
+**Commit.** `94bdfc9`
+
+**Ledger signal.** After the inherited-invitatory and hymn-variant
+fixes, the Reduced 1955 and Rubrics 1960 Matins rows for Aug `19` and
+Oct `4` first diverge at the opening Matins antiphon. Perl keeps the
+ordinary psalter antiphons (`Dóminus de cælo...` or
+`Suscitávit Dóminus...`), while the compositor emits the Confessor
+non-pontiff common antiphon `Beátus vir...`.
+
+**Root cause.** Same source-backed Perl comparison-surface bug as the
+already-classified C5 non-Matins antiphon rows. The day offices point to
+`vide C5`, and `Commune/C5` declares `Antiphonas horas`; after C5's
+inherited Matins sections are visible, the Matins antiphons belong to
+the same C5 common-antiphon family.
+
+**Resolution.** Class `perl-bug`. Added four Matins row keys as fanout
+of the Simplified Roman Confessor non-pontiff common-antiphon family.
+
+**Citation.** `upstream/web/www/horas/Latin/Sancti/08-19.txt:4-9`;
+`upstream/web/www/horas/Latin/Sancti/10-04.txt:4-14`;
+`upstream/web/www/horas/Latin/Commune/C5.txt:9-19`;
+`upstream/web/www/horas/Latin/Commune/C4.txt:106-115`.
+
+**Impact.** Four Matins rows move from `unadjudicated` to
+source-backed `perl-bug`: two under Reduced 1955 and two under Rubrics
+1960.
+
+### 2026-04-26 — Pattern: simplified Roman Confessor C5 Matins hymn variant (engine-bug, fixed)
+
+**Commit.** `6682b44`
+
+**Ledger signal.** Reduced 1955 and Rubrics 1960 Matins rows for
+Aug `19` and Oct `4` first diverged inside the Confessor hymn. Perl
+selected `Hac die lætus méruit suprémos`; the compositor selected the
+unmodified C4/C5 line `Hac die lætus méruit beátas`.
+
+**Root cause.** This was a Phase 2 Matins-planning bug. The C5 offices
+point to `vide C5`; `Commune/C5` inherits C4 through a preamble, and
+C4 provides both `[Hymnus Matutinum]` and `[Hymnus1 Matutinum]`.
+Legacy `specmatins.pl` applies `checkmtv` for 1955/1960 C4/C5 offices,
+which appends `1` to the Matins hymn section name when the proper
+office does not define its own Matins hymn.
+
+**Resolution.** Fixed in Phase 2. Matins planning now prefers
+`Hymnus1 Matutinum` for post-Cum Nostra Hac Aetate C4/C5 inherited
+Confessor offices, while preserving the ordinary `Hymnus Matutinum`
+fallback if the variant section is absent or if the proper office owns
+its Matins hymn.
+
+**Citation.** `upstream/web/cgi-bin/horas/specmatins.pl:150-158`;
+`upstream/web/cgi-bin/horas/specials.pl:532-539`;
+`upstream/web/www/horas/Latin/Sancti/08-19.txt:4-9`;
+`upstream/web/www/horas/Latin/Sancti/10-04.txt:4-14`;
+`upstream/web/www/horas/Latin/Commune/C5.txt:1-12`;
+`upstream/web/www/horas/Latin/Commune/C4.txt:94-99`.
+
+**Impact.** The four simplified Roman C5 Matins rows move past the
+hymn-variant mismatch and now expose the separate C5 psalmody-antiphon
+frontier. Unadjudicated row counts remain unchanged; average matching
+prefix improves for Reduced 1955 and Rubrics 1960.
+
 ### 2026-04-25 — Pattern: proper Prime lessons keep office `[Lectio Prima]` (perl-bug)
 
 **Commit.** `34d6dc1`
@@ -3887,6 +3950,90 @@ versicle surface while leaving the compositor's source-backed `[Versum
 
 **Impact.** Six simplified Roman rows move from `unadjudicated` to
 `perl-bug`, narrowing the shared All Saints minor-hour frontier.
+
+### 2026-04-26 — Pattern: proper first-Vespers fifth psalm override remains Psalm 116 (perl-bug)
+
+**Commit.** `5110115`
+
+**Ledger signal.** Reduced 1955 and Rubrics 1960 Jul `1` Vespers first
+diverged at the fifth psalm heading with Perl expecting `Psalmus 147
+[5]` while the compositor emitted `Psalmus 116 [5]`. The same pattern
+appeared on Sep `29`, where Perl expected `Psalmus 137 [5]` and the
+compositor again emitted `Psalmus 116 [5]`.
+
+**Root cause.** This is not a Vespers psalm-selection defect. The
+winning proper offices explicitly set `Psalm5 Vespera=116`. Jul `1`
+also carries `Psalm5 Vespera3=147`, and Sep `29` carries `Psalm5
+Vespera3=137`; those alternate third-Vespers headings are what Perl's
+comparison surface retains in the first-Vespers row. The source-backed
+first-Vespers fifth slot remains Psalm `116`.
+
+**Resolution.** Class `perl-bug`. Added the four simplified Roman row
+keys for Jul `1` and Sep `29` Vespers to document the source-backed
+`Psalm5 Vespera=116` override.
+
+**Citation.** `upstream/web/www/horas/Latin/Sancti/07-01.txt:11-18`,
+`upstream/web/www/horas/Latin/Sancti/09-29.txt:11-16`, and
+`upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:15-20`.
+
+**Impact.** Four shared Roman Vespers rows move from `unadjudicated` to
+`perl-bug`, clearing this proper first-Vespers fifth-psalm override
+family from the visible frontier.
+
+### 2026-04-26 — Pattern: Nativity of the BVM minor-hour versicle slot (perl-bug)
+
+**Commit.** `c3ad33b`
+
+**Ledger signal.** Reduced 1955 Sep `8` Terce and Sext first diverged
+at the post-responsory versicle. Perl expected `V. Adjuvábit eam Deus
+vultu suo.` at Terce and `V. Elégit eam Deus, et præelégit eam.` at
+Sext, while the compositor emitted `V. Natívitas est hódie sanctæ Maríæ
+Vírginis.` in both slots.
+
+**Root cause.** `Sancti/09-08` routes the Nativity of the BVM through
+C11, sets `Antiphonas horas`, and supplies its own `[Versum 1]` with
+the feast-proper Nativity versicle. The same file aliases `[Versum 2]`
+and `[Versum 3]` back to `[Versum 1]`. The Marian common's generic
+versicles remain available in C11, but the winning feast source owns the
+Sep `8` minor-hour versicle slot.
+
+**Resolution.** Class `perl-bug`. Added the two Reduced 1955 Sep `8`
+Terce/Sext row keys to document the Perl comparison surface's shifted
+Marian-common versicles while leaving the compositor's source-backed
+feast-proper versicle unchanged.
+
+**Citation.** `upstream/web/www/horas/Latin/Sancti/09-08.txt:10-15,24-26,140-147`
+and `upstream/web/www/horas/Latin/Commune/C11.txt:67-69,307-339`.
+
+**Impact.** Two Reduced 1955 rows move from `unadjudicated` to
+`perl-bug`, narrowing the live Marian minor-hour frontier.
+
+### 2026-04-26 — Pattern: Paschaltide add-alleluia skips parenthetical alleluia tails (engine-bug fixed)
+
+**Commit.** `5c82b7f`
+
+**Ledger signal.** Reduced 1955 Apr `7` Vespers first diverged at the
+Annunciation antiphon `Missus est... (Allelúja.)`. Perl kept the source
+parenthetical alleluia, while the compositor appended an additional
+Paschaltide `, allelúja.` tail.
+
+**Root cause.** The Phase 3 `add-alleluia` directive was idempotent for
+plain trailing `allelúja` text, but not for antiphon source rows whose
+alleluia already appeared inside a final parenthetical. In psalmody
+antiphon refs the source row can still carry a `;;psalm` payload when
+the directive runs, so the tail check also missed parenthetical
+alleluia before that payload.
+
+**Resolution.** Fixed. The directive layer now checks for an existing
+alleluia tail after ignoring any legacy `;;psalm` payload and recognizes
+final parenthetical `(Allelúja.)` as already alleluia-bearing. A focused
+directive regression covers the `Ant.` marker plus `;;109` source shape.
+
+**Citation.** `upstream/web/www/horas/Latin/Sancti/03-25.txt:19-23`.
+
+**Impact.** The Apr `7` Reduced 1955 Vespers row advances past the
+duplicate-alleluia compositor bug to the next Annunciation Vespers
+antiphon-selection seam.
 
 ## See also
 

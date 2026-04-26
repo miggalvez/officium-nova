@@ -87,13 +87,45 @@ Then inspect Reduced 1955 Aug `22` / Sep `12` minor hours and Rubrics
 | Reduced - 1955 | 2024-08-22, 2024-09-12 | Prime, Terce, Sext, None | `725e1611`, `1a19d166`, `0868e7bf`, `4f6bebb1` |
 | Rubrics 1960 - 1960 | 2024-09-12 | Lauds, Vespers | `6d4720a5`, `a3dcd0af` |
 
+### 2026-04-26 — Reduced 1955 Nativity of the BVM minor hours shift from the feast versicle in the Perl render surface
+
+**Classification.** `perl-bug`
+
+**Summary.** Reduced 1955 Sep `8` Terce and Sext show Marian-common
+versicles in the Perl comparison surface. Officium Novum emits the
+Nativity office's source-backed `V. Natívitas est hódie sanctæ Maríæ
+Vírginis.` versicle.
+
+**Primary source.**
+
+- `upstream/web/www/horas/Latin/Sancti/09-08.txt:10-15,24-26,140-147`
+- `upstream/web/www/horas/Latin/Commune/C11.txt:67-69,307-339`
+
+These sources establish that the feast supplies `[Versum 1]` and aliases
+its later versicle slots back to that feast-proper text.
+
+**Reproduction.**
+Run:
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --date 2024-09-08
+```
+
+Then inspect Reduced 1955 Terce and Sext.
+
+**Affected stable divergence-row keys.**
+
+| Policy | Date | Hours | Row key suffixes |
+|---|---|---|---|
+| Reduced - 1955 | 2024-09-08 | Terce, Sext | `45abc077`, `3da503ad` |
+
 ### 2026-04-25 — Simplified Roman Confessor non-pontiff common antiphons fall back to the psalter
 
 **Classification.** `perl-bug`
 
 **Summary.** On Aug `19` and Oct `4`, the Reduced 1955 and Rubrics
-1960 comparison surfaces keep ordinary psalter antiphons at Lauds,
-Prime, Terce, Sext, None, and Vespers. Officium Novum emits the
+1960 comparison surfaces keep ordinary psalter antiphons at Matins,
+Lauds, Prime, Terce, Sext, None, and Vespers. Officium Novum emits the
 source-backed Confessor non-pontiff common antiphons.
 
 **Primary source.**
@@ -109,15 +141,16 @@ Run:
 pnpm -C packages/compositor compare:phase-3-perl -- --max-doc-rows 500
 ```
 
-Then inspect Lauds, Prime, Terce, Sext, None, and Vespers on Aug `19`
-and Oct `4` under `Reduced - 1955` and `Rubrics 1960 - 1960`.
+Then inspect Matins, Lauds, Prime, Terce, Sext, None, and Vespers on
+Aug `19` and Oct `4` under `Reduced - 1955` and
+`Rubrics 1960 - 1960`.
 
 **Affected stable divergence-row keys.**
 
 | Policy | Dates | Hours | Row key suffixes |
 |---|---|---|---|
-| Reduced - 1955 | 2024-08-19, 2024-10-04 | Lauds, Prime, Terce, Sext, None, Vespers | `1ac985ea`, `5e2bc918`, `94d8530b`, `ca496847`, `d06b3f15`, `b8382b61`, `30af99f1`, `c9286c91`, `3f0bca99`, `ee83352e`, `ee9cd993`, `7d120c6f` |
-| Rubrics 1960 - 1960 | 2024-08-19, 2024-10-04 | Lauds, Prime, Terce, Sext, None, Vespers | `1ac985ea`, `63c54bc5`, `993822fb`, `5c9ad87e`, `e01745bd`, `b8382b61`, `30af99f1`, `ae30f785`, `f420db38`, `b40640d0`, `21ab0ed2`, `7d120c6f` |
+| Reduced - 1955 | 2024-08-19, 2024-10-04 | Matins, Lauds, Prime, Terce, Sext, None, Vespers | `2bbb208c`, `1ac985ea`, `5e2bc918`, `94d8530b`, `ca496847`, `d06b3f15`, `b8382b61`, `88adb0ee`, `30af99f1`, `c9286c91`, `3f0bca99`, `ee83352e`, `ee9cd993`, `7d120c6f` |
+| Rubrics 1960 - 1960 | 2024-08-19, 2024-10-04 | Matins, Lauds, Prime, Terce, Sext, None, Vespers | `2bbb208c`, `1ac985ea`, `63c54bc5`, `993822fb`, `5c9ad87e`, `e01745bd`, `b8382b61`, `88adb0ee`, `30af99f1`, `ae30f785`, `f420db38`, `b40640d0`, `21ab0ed2`, `7d120c6f` |
 
 ### 2026-04-25 — Simplified Roman Prime keeps ordinary chapter instead of office `[Lectio Prima]`
 
@@ -1287,6 +1320,45 @@ override `Psalmus 116 [5]`.
 | Reduced - 1955 | 2024-01-06 | Vespers | `39846534` |
 | Reduced - 1955 | 2024-01-13 | Vespers | `39846534` |
 | Rubrics 1960 - 1960 | 2024-01-13 | Vespers | `39846534` |
+
+### 2026-04-26 — Roman proper first Vespers loses the Psalm 116 override in the Perl render surface
+
+**Classification.** `perl-bug`
+
+**Summary.** `Reduced - 1955` and `Rubrics 1960 - 1960` Jul `1` and
+Sep `29` Vespers first diverge at the fifth psalm heading. The
+compositor emits the source-backed `Psalmus 116 [5]`; the Perl
+comparison surface instead keeps the alternate heading (`Psalmus 147
+[5]` for Jul `1`, `Psalmus 137 [5]` for Sep `29`).
+
+**Primary source.**
+
+- `upstream/web/www/horas/Latin/Sancti/07-01.txt:11-18`
+- `upstream/web/www/horas/Latin/Sancti/09-29.txt:11-16`
+- `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:15-20`
+
+These sources establish that both offices explicitly set `Psalm5
+Vespera=116`, while their separate `Psalm5 Vespera3` values are `147`
+and `137`.
+
+**Reproduction.**
+Run:
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --hour Vespers
+```
+
+Then inspect the Jul `1` and Sep `29` Roman Vespers rows in the
+corresponding divergence ledgers.
+
+**Affected stable divergence-row keys.**
+
+| Policy | Date | Hour | Row key suffix |
+|---|---|---|---|
+| Reduced - 1955 | 2024-07-01 | Vespers | `bdb4bf6d` |
+| Rubrics 1960 - 1960 | 2024-07-01 | Vespers | `bdb4bf6d` |
+| Reduced - 1955 | 2024-09-29 | Vespers | `d312260f` |
+| Rubrics 1960 - 1960 | 2024-09-29 | Vespers | `d312260f` |
 
 ### 2026-04-19 — Roman Sunday minor hours gain underscore separators around the short responsory in the Perl render surface
 

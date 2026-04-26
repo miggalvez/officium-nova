@@ -190,6 +190,8 @@ function isSicutEratNode(node: TextContent): boolean {
 // --------------------------------------------------------------------------
 
 const ALLELUIA_TAIL_RX = /,?\s*allel[úu](?:j|i)?a(?:,?\s*allel[úu](?:j|i)?a)*\.?\s*$/iu;
+const ALLELUIA_PRESENT_TAIL_RX =
+  /allel[úu](?:j|i)?a(?:,?\s*allel[úu](?:j|i)?a)*[\s.)]*$/iu;
 
 function omitAlleluia(_slot: SlotName, content: readonly TextContent[]): readonly TextContent[] {
   return Object.freeze(
@@ -233,11 +235,11 @@ function addVersicleAlleluia(
   for (let i = out.length - 1; i >= 0; i--) {
     const node = out[i]!;
     if (node.type === 'verseMarker') {
-      if (ALLELUIA_TAIL_RX.test(node.text)) return Object.freeze(out);
+      if (hasAlleluiaTail(node.text)) return Object.freeze(out);
       out[i] = {
         type: 'verseMarker',
         marker: node.marker,
-        text: `${node.text.replace(/\.?\s*$/u, '')}, allelúja, allelúja.`
+        text: appendSuffixBeforeLegacyPayload(node.text, ', allelúja, allelúja.')
       };
       return Object.freeze(out);
     }
@@ -253,16 +255,16 @@ function appendAlleluiaToLastText(
   for (let i = out.length - 1; i >= 0; i--) {
     const node = out[i]!;
     if (node.type === 'text') {
-      if (ALLELUIA_TAIL_RX.test(node.value)) return Object.freeze(out);
-      out[i] = { type: 'text', value: `${node.value.replace(/\.?\s*$/u, '')}${suffix}` };
+      if (hasAlleluiaTail(node.value)) return Object.freeze(out);
+      out[i] = { type: 'text', value: appendSuffixBeforeLegacyPayload(node.value, suffix) };
       return Object.freeze(out);
     }
     if (node.type === 'verseMarker') {
-      if (ALLELUIA_TAIL_RX.test(node.text)) return Object.freeze(out);
+      if (hasAlleluiaTail(node.text)) return Object.freeze(out);
       out[i] = {
         type: 'verseMarker',
         marker: node.marker,
-        text: `${node.text.replace(/\.?\s*$/u, '')}${suffix}`
+        text: appendSuffixBeforeLegacyPayload(node.text, suffix)
       };
       return Object.freeze(out);
     }
@@ -276,13 +278,13 @@ function appendAlleluiaToPsalmodyAntiphons(
   let changed = false;
   const out = content.map((node) => {
     if (node.type === 'text' && isAntiphonLine(node.value)) {
-      if (ALLELUIA_TAIL_RX.test(node.value)) {
+      if (hasAlleluiaTail(node.value)) {
         return node;
       }
       changed = true;
       return {
         type: 'text',
-        value: `${node.value.replace(/\.?\s*$/u, '')}, allelúja.`
+        value: appendSuffixBeforeLegacyPayload(node.value, ', allelúja.')
       } satisfies TextContent;
     }
 
@@ -290,14 +292,14 @@ function appendAlleluiaToPsalmodyAntiphons(
       node.type === 'verseMarker' &&
       (node.marker === 'Ant.' || isAntiphonLine(node.text))
     ) {
-      if (ALLELUIA_TAIL_RX.test(node.text)) {
+      if (hasAlleluiaTail(node.text)) {
         return node;
       }
       changed = true;
       return {
         type: 'verseMarker',
         marker: node.marker,
-        text: `${node.text.replace(/\.?\s*$/u, '')}, allelúja.`
+        text: appendSuffixBeforeLegacyPayload(node.text, ', allelúja.')
       } satisfies TextContent;
     }
 
@@ -305,6 +307,17 @@ function appendAlleluiaToPsalmodyAntiphons(
   });
 
   return changed ? Object.freeze(out) : content;
+}
+
+function hasAlleluiaTail(value: string): boolean {
+  return ALLELUIA_PRESENT_TAIL_RX.test(value.replace(/;;.*$/u, ''));
+}
+
+function appendSuffixBeforeLegacyPayload(value: string, suffix: string): string {
+  const match = /^(?<text>.*?)(?<payload>;;.*)?$/u.exec(value);
+  const text = match?.groups?.text ?? value;
+  const payload = match?.groups?.payload ?? '';
+  return `${text.replace(/\.?\s*$/u, '')}${suffix}${payload}`;
 }
 
 function endsWithBareDeoGratias(content: readonly TextContent[]): boolean {
