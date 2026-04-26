@@ -22,6 +22,116 @@ anchor.
 
 ## Entries
 
+### 2026-04-26 — Pattern: Saturday Office BVM Prime proper lesson (perl-bug)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** Reduced 1955 Jul `6` Prime advanced to the office's
+proper Prime lesson after the condition-gated C10 antiphon fix. Perl
+expects the ordinary Prime chapter `1 Tim. 1:17`, while the compositor
+emits `Sir 24:19-20`.
+
+**Root cause.** The Saturday Office of the BVM source owns Prime's
+little chapter through C10's `[Lectio Prima]` delegation to the Marian
+common C11. Perl's comparison surface keeps the ordinary Prime chapter
+at this boundary.
+
+**Resolution.** Class `perl-bug`. The compositor already follows the
+winning office source, so the row is recorded as a source-backed Perl
+comparison-surface defect.
+
+**Citation.** `upstream/web/www/horas/Latin/Commune/C10.txt:93-94` and
+`upstream/web/www/horas/Latin/Commune/C11.txt:313-315`.
+
+**Impact.** The Reduced 1955 Jul `6` Prime row moves from
+`unadjudicated` to classified, leaving the Saturday Office BVM frontier
+on Vespers/concurrence rather than Prime lesson selection.
+
+### 2026-04-26 — Pattern: Saturday Office BVM conditioned antiphons and psalter incipits (mixed fix + adjudication)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** Reduced 1955 Jul `6` Lauds and minor hours first
+opened on bare psalm headings because Phase 2 had attached inactive C10
+antiphon refs. After the fix, those rows advance to Perl's abbreviated
+psalter antiphon incipits (`Fílii Sion.`, `Clamor meus.`, `Dómine, Deus
+meus.`, `Ne tacúeris Deus.`) versus the compositor's full source-backed
+Saturday psalter antiphons.
+
+**Root cause.** C10's `[Ant Laudes]` section is gated to `rubrica
+tridentina`, but the antiphon-reference lookup only checked for header
+presence. Under Reduced 1955 the C10 section should not be active, so
+the Saturday psalter tables own the antiphons.
+
+**Resolution.** Fixed the antiphon lookup to respect section conditions
+and to treat an inactive proper/common antiphon section as blocking
+later inherited fallbacks. Added Reduced 1955 row adjudications for the
+source-backed psalter-antiphon incipit surface that is exposed after the
+fix.
+
+**Citation.** `upstream/web/www/horas/Latin/Commune/C10.txt:7-13,57-58`,
+`upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:128`,
+and `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:29-30,45-46,61-62`.
+
+**Impact.** The Saturday Office BVM Lauds/minor-hour blocker advances
+from missing-antiphon engine behavior to classified source-backed
+incipit differences, narrowing the Reduced 1955 Jul `6` frontier to the
+remaining Vespers/concurrence row.
+
+### 2026-04-26 — Pattern: Assumption Vespers proper hymn vs Marian common rubric (perl-bug)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** Reduced 1955 and Rubrics 1960 Aug `15` Vespers
+first diverged inside the hymn. Perl expects the Marian common rubric
+`Prima stropha sequentis hymni dicitur flexis genibus.`, while the
+compositor opens the proper Assumption hymn at `O prima, Virgo,
+pródita`.
+
+**Root cause.** `Sancti/08-15` declares `ex C11` but also supplies its
+own `[Hymnus Vespera]`. The proper hymn source begins `O prima, Virgo,
+pródita`; the Marian common C11 source separately carries the generic
+first-stanza kneeling rubric before `Ave maris stella`. The Perl
+comparison surface exposes the common opening rubric at this boundary
+even though the winning proper source owns the hymn text.
+
+**Resolution.** Class `perl-bug`. Added the two simplified Roman Aug
+`15` Vespers row keys to document the source-backed proper hymn
+selection while leaving the compositor output unchanged.
+
+**Citation.** `upstream/web/www/horas/Latin/Sancti/08-15.txt:6-17` and
+`upstream/web/www/horas/Latin/Commune/C11.txt:26-28`.
+
+**Impact.** Two shared Roman Vespers rows move from `unadjudicated` to
+`perl-bug`, clearing this Assumption hymn-inheritance surface from the
+visible frontier.
+
+### 2026-04-26 — Pattern: Pentecost Terce uses `Hymnus Pasc7 Tertia` (engine-bug fixed)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** Reduced 1955 and Rubrics 1960 May `19` Terce first
+diverged at the hymn: Perl opened with `Prima stropha hymni sequentis
+dicitur flexibus genibus.`, while the compositor opened with ordinary
+`Nunc, Sancte, nobis, Spíritus,`.
+
+**Root cause.** The source-backed Pentecost Terce hymn lives in
+`Psalterium/Special/Minor Special` as `[Hymnus Pasc7 Tertia]`, including
+the kneeling first-stanza rubric and `Veni Creator`. Phase 2's
+minor-hour hymn fallback always selected the ordinary `[Hymnus Tertia]`
+for Terce, so Phase 3 never received the Pentecost-specific source.
+
+**Resolution.** Fixed. The minor-hour fallback now routes Pentecost
+Sunday Terce (`Pasc7-0`) to `[Hymnus Pasc7 Tertia]` for both simplified
+Roman policies, while other Terce fallbacks continue to use ordinary
+`[Hymnus Tertia]`. The January hymn-routing integration test now locks
+the Pentecost Terce hymn and its `Pent` doxology slot.
+
+**Citation.** `upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:616-647`.
+
+**Impact.** The two simplified Roman May `19` Terce rows reach exact
+parity and leave the unadjudicated frontier.
+
 ### 2026-04-26 — Pattern: simplified Roman Confessor C5 Matins antiphons (perl-bug)
 
 **Commit.** `94bdfc9`

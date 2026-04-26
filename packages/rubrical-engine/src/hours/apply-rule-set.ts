@@ -201,7 +201,7 @@ function resolveSlot(
     communeRef ??
     majorHourLaterBlockFallbackReference(input, slot.name) ??
     minorHourLaterBlockFallbackReference(input, slot.name) ??
-    ordinariumFallbackReference(input.skeleton, slot);
+    ordinariumFallbackReference(input, slot);
 
   if (!ref) {
     warnings.push({
@@ -486,30 +486,32 @@ function resolveMajorHourAntiphonRefs(
   files: readonly ParsedFile[],
   input: ApplyRuleSetInput
 ): readonly TextReference[] {
+  const conditionContext = majorHourPsalmConditionContext(input);
   const headers =
     input.hour === 'lauds' ? ['Ant Laudes']
     : (input as InternalVespersAwareInput).__vespersSide === 'second' ?
       ['Ant Vespera 3', 'Ant Vespera']
     : ['Ant Vespera'];
-  const match = files.find((file) =>
-    headers.some((header) => file.sections.some((section) => section.header === header))
-  );
+  const match = findFirstAntiphonSectionFile(files, headers, conditionContext);
   if (!match) {
     return resolveCommuneAntiphonRefs(
       input,
       input.hour === 'lauds' ? 'Ant Laudes' : 'Ant Vespera'
     );
   }
+  if (!match.active) {
+    return [];
+  }
 
   const header = headers.find((candidate) =>
-    match.sections.some((section) => section.header === candidate)
+    findMajorHourPsalmSection(match.file, candidate, conditionContext)
   );
   if (!header) {
     return [];
   }
 
   return Array.from({ length: 5 }, (_, index) => ({
-    path: match.path.replace(/\.txt$/u, ''),
+    path: match.file.path.replace(/\.txt$/u, ''),
     section: header,
     selector: String(index + 1)
   }));
@@ -796,6 +798,25 @@ function findMajorHourPsalmSection(
   return fallback;
 }
 
+function findFirstAntiphonSectionFile(
+  files: readonly ParsedFile[],
+  headers: readonly string[],
+  conditionContext: ConditionEvalContext | undefined
+): { readonly file: ParsedFile; readonly active: boolean } | undefined {
+  for (const file of files) {
+    if (!headers.some((header) => file.sections.some((section) => section.header === header))) {
+      continue;
+    }
+
+    return {
+      file,
+      active: headers.some((header) => findMajorHourPsalmSection(file, header, conditionContext))
+    };
+  }
+
+  return undefined;
+}
+
 function stripsPsalmPayloads(
   content: readonly TextContent[],
   conditionContext: ConditionEvalContext | undefined
@@ -894,7 +915,8 @@ function resolveMinorHourAntiphonRef(
     return undefined;
   }
 
-  const match = files.find((file) => file.sections.some((section) => section.header === 'Ant Laudes'));
+  const conditionContext = majorHourPsalmConditionContext(input);
+  const match = findFirstAntiphonSectionFile(files, ['Ant Laudes'], conditionContext);
   const selector =
     input.hour === 'prime' ||
     input.hour === 'terce' ||
@@ -905,16 +927,19 @@ function resolveMinorHourAntiphonRef(
   if (!selector) {
     return undefined;
   }
-  if (match) {
+  if (match?.active) {
     return {
-      path: match.path.replace(/\.txt$/u, ''),
+      path: match.file.path.replace(/\.txt$/u, ''),
       section: 'Ant Laudes',
       selector
     };
   }
+  if (match) {
+    return undefined;
+  }
 
   const communeFile = resolveCommuneFile(input);
-  if (!communeFile || !communeFile.sections.some((section) => section.header === 'Ant Laudes')) {
+  if (!communeFile || !findMajorHourPsalmSection(communeFile, 'Ant Laudes', conditionContext)) {
     return undefined;
   }
 
@@ -1051,10 +1076,11 @@ function seasonalFallbackDoxologyVariant(
 }
 
 function ordinariumFallbackReference(
-  skeleton: OrdinariumSkeleton,
+  input: ApplyRuleSetInput,
   slot: SkeletonSlot
 ): TextReference {
-  const minorHourSpecial = minorHourSpecialFallbackReference(skeleton.hour, slot.name);
+  const skeleton = input.skeleton;
+  const minorHourSpecial = minorHourSpecialFallbackReference(input, slot.name);
   if (minorHourSpecial) {
     return minorHourSpecial;
   }
@@ -1097,13 +1123,14 @@ function complineSpecialFallbackReference(
 }
 
 function minorHourSpecialFallbackReference(
-  hour: HourName,
+  input: ApplyRuleSetInput,
   slot: SlotName
 ): TextReference | undefined {
   if (slot !== 'hymn') {
     return undefined;
   }
 
+  const hour = input.hour;
   switch (hour) {
     case 'prime':
       return {
@@ -1111,6 +1138,12 @@ function minorHourSpecialFallbackReference(
         section: 'Hymnus Prima'
       };
     case 'terce':
+      if (input.temporal.dayName === 'Pasc7-0') {
+        return {
+          path: 'horas/Latin/Psalterium/Special/Minor Special',
+          section: 'Hymnus Pasc7 Tertia'
+        };
+      }
       return {
         path: 'horas/Latin/Psalterium/Special/Minor Special',
         section: 'Hymnus Tertia'

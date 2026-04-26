@@ -9031,6 +9031,66 @@
     "resolvedAt": "2026-04-26",
     "commitSha": "e7b3145"
   },
+  "Reduced - 1955/2024-07-06/Lauds/7c222668": {
+    "policy": "Reduced - 1955",
+    "date": "2024-07-06",
+    "hour": "Lauds",
+    "firstExpected": "Ant. Fílii Sion.",
+    "firstActual": "Ant. Fílii Sion * exsúltent in Rege suo.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Commune/C10.txt:7-13,57-58 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:128 — the Saturday Office of the BVM does not activate C10's Tridentine-only `[Ant Laudes]` under Reduced 1955, so Lauds falls back to the Saturday psalter antiphon `Fílii Sion * exsúltent in Rege suo.`. The Perl comparison surface abbreviates that source-backed antiphon to its incipit.",
+    "notes": "Reduced 1955 Saturday Office BVM psalter-antiphon incipit surface after condition-gated C10 antiphons were suppressed.",
+    "resolvedAt": "2026-04-26",
+    "commitSha": "current-tranche"
+  },
+  "Reduced - 1955/2024-07-06/Prime/52ef3e73": {
+    "policy": "Reduced - 1955",
+    "date": "2024-07-06",
+    "hour": "Prime",
+    "firstExpected": "1 Tim. 1:17",
+    "firstActual": "Sir 24:19-20",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Commune/C10.txt:93-94 and upstream/web/www/horas/Latin/Commune/C11.txt:313-315 — the Saturday Office of the BVM delegates `[Lectio Prima]` to C11, whose source-backed Prime lesson is `Sir 24:19-20`. The Perl comparison surface keeps the ordinary Prime chapter `1 Tim. 1:17`.",
+    "notes": "Reduced 1955 Saturday Office BVM proper Prime lesson row exposed after condition-gated C10 antiphons were suppressed.",
+    "resolvedAt": "2026-04-26",
+    "commitSha": "current-tranche"
+  },
+  "Reduced - 1955/2024-07-06/None/6039460d": {
+    "policy": "Reduced - 1955",
+    "date": "2024-07-06",
+    "hour": "None",
+    "firstExpected": "Ant. Ne tacúeris Deus.",
+    "firstActual": "Ant. Ne tacúeris Deus, * quia sermónibus ódii circumdedérunt me.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Commune/C10.txt:7-13,57-58 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:61-62 — the Saturday Office of the BVM does not activate C10's Tridentine-only `[Ant Laudes]` under Reduced 1955, so None falls back to the Saturday psalter antiphon `Ne tacúeris Deus, * quia sermónibus ódii circumdedérunt me.`. The Perl comparison surface abbreviates that source-backed antiphon to its incipit.",
+    "notes": "Reduced 1955 Saturday Office BVM psalter-antiphon incipit surface after condition-gated C10 antiphons were suppressed.",
+    "resolvedAt": "2026-04-26",
+    "commitSha": "current-tranche"
+  },
+  "Reduced - 1955/2024-07-06/Sext/58da5074": {
+    "policy": "Reduced - 1955",
+    "date": "2024-07-06",
+    "hour": "Sext",
+    "firstExpected": "Ant. Dómine, Deus meus.",
+    "firstActual": "Ant. Dómine, Deus meus * magnificátus es veheménter.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Commune/C10.txt:7-13,57-58 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:45-46 — the Saturday Office of the BVM does not activate C10's Tridentine-only `[Ant Laudes]` under Reduced 1955, so Sext falls back to the Saturday psalter antiphon `Dómine, Deus meus * magnificátus es veheménter.`. The Perl comparison surface abbreviates that source-backed antiphon to its incipit.",
+    "notes": "Reduced 1955 Saturday Office BVM psalter-antiphon incipit surface after condition-gated C10 antiphons were suppressed.",
+    "resolvedAt": "2026-04-26",
+    "commitSha": "current-tranche"
+  },
+  "Reduced - 1955/2024-07-06/Terce/c7252790": {
+    "policy": "Reduced - 1955",
+    "date": "2024-07-06",
+    "hour": "Terce",
+    "firstExpected": "Ant. Clamor meus.",
+    "firstActual": "Ant. Clamor meus, * Dómine, ad te pervéniat: non avértas fáciem tuam a me.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Commune/C10.txt:7-13,57-58 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:29-30 — the Saturday Office of the BVM does not activate C10's Tridentine-only `[Ant Laudes]` under Reduced 1955, so Terce falls back to the Saturday psalter antiphon `Clamor meus, * Dómine, ad te pervéniat: non avértas fáciem tuam a me.`. The Perl comparison surface abbreviates that source-backed antiphon to its incipit.",
+    "notes": "Reduced 1955 Saturday Office BVM psalter-antiphon incipit surface after condition-gated C10 antiphons were suppressed.",
+    "resolvedAt": "2026-04-26",
+    "commitSha": "current-tranche"
+  },
   "Reduced - 1955/2024-08-15/Compline/5dc10d20": {
     "policy": "Reduced - 1955",
     "date": "2024-08-15",
@@ -9090,6 +9150,18 @@
     "notes": "Representative entry for the Reduced 1955 Roman January Vespers second-psalm heading family where the source-backed Day0 sequence keeps Psalm 110 in the second slot. Fan out to matching 1955 rows with the same first-divergence pair.",
     "resolvedAt": "2026-04-19",
     "commitSha": "bfb3c52"
+  },
+  "Reduced - 1955/2024-08-15/Vespers/bb24a4f0": {
+    "policy": "Reduced - 1955",
+    "date": "2024-08-15",
+    "hour": "Vespers",
+    "firstExpected": "Prima stropha sequentis hymni dicitur flexis genibus.",
+    "firstActual": "O prima, Virgo, pródita",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/08-15.txt:6-17 and upstream/web/www/horas/Latin/Commune/C11.txt:26-28 — the Assumption office declares `ex C11` but supplies its own `[Hymnus Vespera]`, beginning `O prima, Virgo, pródita`. The compositor emits that source-backed proper hymn; the Perl comparison surface retains the Marian common's kneeling-rubric opening from C11.",
+    "notes": "Assumption Vespers hymn-inheritance surface: proper hymn text remains source-backed even though Perl exposes the common Marian opening rubric.",
+    "resolvedAt": "2026-04-26",
+    "commitSha": "current-tranche"
   },
   "Reduced - 1955/2024-08-19/Compline/5dc10d20": {
     "policy": "Reduced - 1955",
@@ -14206,6 +14278,18 @@
     "notes": "Representative entry for the Rubrics 1960 Roman January Vespers second-psalm heading family where the source-backed Day0 sequence keeps Psalm 110 in the second slot. Fan out to matching 1960 rows with the same first-divergence pair.",
     "resolvedAt": "2026-04-19",
     "commitSha": "bfb3c52"
+  },
+  "Rubrics 1960 - 1960/2024-08-15/Vespers/bb24a4f0": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-08-15",
+    "hour": "Vespers",
+    "firstExpected": "Prima stropha sequentis hymni dicitur flexis genibus.",
+    "firstActual": "O prima, Virgo, pródita",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/08-15.txt:6-17 and upstream/web/www/horas/Latin/Commune/C11.txt:26-28 — the Assumption office declares `ex C11` but supplies its own `[Hymnus Vespera]`, beginning `O prima, Virgo, pródita`. The compositor emits that source-backed proper hymn; the Perl comparison surface retains the Marian common's kneeling-rubric opening from C11.",
+    "notes": "Assumption Vespers hymn-inheritance surface: proper hymn text remains source-backed even though Perl exposes the common Marian opening rubric.",
+    "resolvedAt": "2026-04-26",
+    "commitSha": "current-tranche"
   },
   "Rubrics 1960 - 1960/2024-08-19/Compline/57de2841": {
     "policy": "Rubrics 1960 - 1960",

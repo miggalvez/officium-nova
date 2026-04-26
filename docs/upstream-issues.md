@@ -24,6 +24,99 @@ entry here and re-run the adjudication harness.
 
 ## Current entries
 
+### 2026-04-26 — Saturday Office BVM Prime lesson is ignored in Perl
+
+**Classification.** `perl-bug`
+
+**Summary.** On Reduced 1955 Jul `6`, the Saturday Office of the BVM
+uses its Marian common Prime lesson `Sir 24:19-20`. Perl's comparison
+surface keeps the ordinary Prime chapter `1 Tim. 1:17`.
+
+**Primary source.**
+`upstream/web/www/horas/Latin/Commune/C10.txt:93-94` and
+`upstream/web/www/horas/Latin/Commune/C11.txt:313-315`
+
+C10's `[Lectio Prima]` delegates to C11, and C11 supplies the explicit
+Prime lesson citation plus text.
+
+**Reproduction.**
+Run:
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Reduced - 1955" --date 2024-07-06 --hour Prima
+```
+
+**Affected stable divergence-row keys.**
+
+| Policy | Date | Hour | Row key suffix |
+|---|---|---|---|
+| Reduced - 1955 | 2024-07-06 | Prime | `52ef3e73` |
+
+### 2026-04-26 — Saturday Office BVM psalter antiphons are abbreviated in Perl
+
+**Classification.** `perl-bug`
+
+**Summary.** On Reduced 1955 Jul `6`, after inactive C10 antiphons are
+correctly ignored, Lauds and the minor hours use the Saturday psalter
+antiphons. Perl abbreviates those antiphons to incipits, while Officium
+Novum emits the full source-backed antiphon text.
+
+**Primary source.**
+`upstream/web/www/horas/Latin/Commune/C10.txt:7-13,57-58`,
+`upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:128`,
+and `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:29-30,45-46,61-62`
+
+**Reproduction.**
+Run:
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Reduced - 1955" --date 2024-07-06 --hour Laudes
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Reduced - 1955" --date 2024-07-06 --hour Tertia
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Reduced - 1955" --date 2024-07-06 --hour Sexta
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Reduced - 1955" --date 2024-07-06 --hour Nona
+```
+
+**Affected stable divergence-row keys.**
+
+| Policy | Date | Hour | Row key suffix |
+|---|---|---|---|
+| Reduced - 1955 | 2024-07-06 | Lauds | `7c222668` |
+| Reduced - 1955 | 2024-07-06 | Terce | `c7252790` |
+| Reduced - 1955 | 2024-07-06 | Sext | `58da5074` |
+| Reduced - 1955 | 2024-07-06 | None | `6039460d` |
+
+### 2026-04-26 — Assumption Vespers proper hymn is masked by the Marian common rubric in Perl
+
+**Classification.** `perl-bug`
+
+**Summary.** On Aug `15`, the simplified Roman Perl comparison surface
+opens Vespers hymn comparison at the C11 Marian common kneeling rubric
+instead of the proper Assumption hymn. Officium Novum emits the winning
+office's own `[Hymnus Vespera]`, beginning `O prima, Virgo, pródita`.
+
+**Primary source.**
+`upstream/web/www/horas/Latin/Sancti/08-15.txt:6-17` and
+`upstream/web/www/horas/Latin/Commune/C11.txt:26-28`
+
+`Sancti/08-15` declares `ex C11` but also supplies a proper
+`[Hymnus Vespera]`; C11 separately carries the generic Marian hymn
+rubric before `Ave maris stella`.
+
+**Reproduction.**
+Run:
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Reduced - 1955" --date 2024-08-15 --hour Vespera
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Rubrics 1960 - 1960" --date 2024-08-15 --hour Vespera
+```
+
+**Affected stable divergence-row keys.**
+
+| Policy | Date | Hour | Row key suffix |
+|---|---|---|---|
+| Reduced - 1955 | 2024-08-15 | Vespers | `bb24a4f0` |
+| Rubrics 1960 - 1960 | 2024-08-15 | Vespers | `bb24a4f0` |
+
 ### 2026-04-25 — Reduced 1955 Christmas-octave minor-hour antiphons fall back to the psalter
 
 **Classification.** `perl-bug`
