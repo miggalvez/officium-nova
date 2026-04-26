@@ -281,6 +281,8 @@ function invitatorySource(
   switch (selector) {
     case 'Adventus':
       return { section: 'Invit Adv', weekdayKeyed: false };
+    case 'Adventus3':
+      return { section: 'Invit Adv3', weekdayKeyed: false };
     case 'Quadragesima':
       return { section: 'Invit Quad', weekdayKeyed: false };
     case 'Passio':

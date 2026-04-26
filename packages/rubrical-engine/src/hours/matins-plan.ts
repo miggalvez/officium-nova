@@ -575,7 +575,9 @@ function versicleSelectorForNocturn(
 
   const startLine =
     totalNocturns === 1 && antiphonCount > 3
-      ? versicleLines.at(-1)
+      ? section.header === 'Adv 0 Ant Matutinum'
+        ? versicleLines[0]
+        : versicleLines.at(-1)
       : versicleLines[nocturnIndex - 1];
   return startLine ? String(startLine) : undefined;
 }
@@ -698,6 +700,12 @@ function resolvePsalteriumMatinsDaySection(
 ): ParsedFile['sections'][number] | undefined {
   try {
     const file = resolveOfficeFile(input.corpus, PSALTERIUM_MATINS_PATH);
+    if (input.temporal.season === 'advent' && input.temporal.dayOfWeek === 0) {
+      const adventSunday = findSection([file], 'Adv 0 Ant Matutinum', input)?.section;
+      if (adventSunday) {
+        return adventSunday;
+      }
+    }
     return findSection([file], `Day${input.temporal.dayOfWeek}`, input)?.section;
   } catch {
     return undefined;
@@ -743,6 +751,9 @@ function toResponsoryIndex(
 function invitatoriumSeasonSection(temporal: TemporalContext): string {
   switch (temporal.season) {
     case 'advent':
+      if (/^Adv[34]-/u.test(temporal.dayName)) {
+        return 'Adventus3';
+      }
       return 'Adventus';
     case 'christmastide':
       return 'Nativitatis';

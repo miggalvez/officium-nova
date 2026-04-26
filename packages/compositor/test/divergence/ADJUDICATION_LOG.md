@@ -3609,6 +3609,138 @@ classifications for the two simplified Roman Jul `1` Matins rows.
 **Impact.** Two simplified Roman Matins rows move from `unadjudicated`
 to `rendering-difference`.
 
+### 2026-04-25 — Pattern: Reduced 1955 weekday psalter antiphon marker surface (perl-bug)
+
+**Commit.** `dd1bd71`
+
+**Ledger signal.** Reduced 1955 Jun `20` Terce and Vespers first
+diverged on weekday psalter antiphons: Perl emitted abbreviated
+incipits with a trailing `‡`, while the compositor emitted the
+source-backed antiphon surfaces.
+
+**Root cause.** The psalter source rows do not carry a final
+continuation marker. Terce comes from `Psalmi minor:Feria V`, and
+Vespers comes from `Psalmi major` with the full `Ecce quam bonum...`
+antiphon. The compositor preserves those source rows; the Reduced 1955
+Perl comparison surface abbreviates and over-marks them.
+
+**Resolution.** Class `perl-bug`. Added a focused upstream regression
+for the Reduced 1955 Jun `20` Terce/Vespers openings, plus sidecar
+classifications for the two visible row keys. The companion Rubrics
+1960 full-text marker rows were already classified.
+
+**Citation.** `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:26`;
+`upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:100`.
+
+**Impact.** Two Reduced 1955 rows move from `unadjudicated` to
+`perl-bug`, narrowing the weekday psalter-antiphon marker family without
+changing compositor behavior.
+
+### 2026-04-26 — Pattern: Simplified Roman late-Advent Matins invitatory selector (engine-bug fixed)
+
+**Commit.** `1b2c012`
+
+**Ledger signal.** Reduced 1955 and Rubrics 1960 Dec `15` and Dec `22`
+Matins first diverged inside the invitatory: Perl emitted
+`Prope est jam Dóminus, * Veníte, adorémus.`, while the compositor used
+the generic Advent `Regem ventúrum Dóminum...` antiphon.
+
+**Root cause.** Phase 2 emitted only the broad `Adventus` seasonal
+selector for every Advent Matins invitatory. The corpus distinguishes
+early Advent (`Invit Adv`) from the third/fourth Sunday surface
+(`Invit Adv3`).
+
+**Resolution.** Fixed. Phase 2 now emits the late-Advent selector for
+`Adv3-*` and `Adv4-*` temporal days, and Phase 3 maps that selector to
+`Matutinum Special:[Invit Adv3]`. A focused upstream composition
+regression locks the simplified Roman Dec `15` / Dec `22` Matins
+opening.
+
+**Citation.** `upstream/web/www/horas/Latin/Psalterium/Special/Matutinum Special.txt:36-40`.
+
+**Impact.** Four simplified Roman Matins rows advance past the
+invitatory seam to the next psalmody antiphon frontier.
+
+### 2026-04-26 — Pattern: Simplified Roman Advent Sunday Matins psalter antiphons (engine-bug fixed)
+
+**Commit.** `92abe09`
+
+**Ledger signal.** After the late-Advent invitatory selector fix,
+Reduced 1955 and Rubrics 1960 Dec `15` and Dec `22` Matins reached the
+first nocturn psalmody and diverged on ordinary Sunday `Day0` antiphons
+such as `Beátus vir...` instead of the Advent Sunday `Véniet ecce
+Rex...` antiphon.
+
+**Root cause.** Phase 2 always resolved the Matins psalter fallback from
+`Psalmi matutinum:Day{weekday}`. Advent Sundays have their own
+source-backed seasonal table, `Adv 0 Ant Matutinum`, which owns the
+Matins psalm-antiphon set.
+
+**Resolution.** Fixed. Advent Sundays now select
+`Psalmi matutinum:[Adv 0 Ant Matutinum]` before falling back to the
+ordinary weekday table. A focused upstream composition regression locks
+the Dec `15` / Dec `22` simplified Roman Matins opening antiphon surface.
+
+**Citation.** `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:137-157`.
+
+**Impact.** Four simplified Roman Matins rows advance past the first
+nocturn antiphon seam to later Matins boundaries.
+
+### 2026-04-26 — Pattern: Simplified Roman Advent Sunday one-nocturn Matins versicle (engine-bug fixed)
+
+**Commit.** `70e9c17`
+
+**Ledger signal.** After the Advent Sunday Matins antiphon fix, Rubrics
+1960 Dec `15` and Dec `22` Matins first diverged at the nocturn
+versicle: Perl expected `Ex Sion spécies decóris ejus.`, while the
+compositor emitted the final embedded Advent versicle
+`Egrediétur Dóminus de loco sancto suo.` Reduced 1955 exposed the same
+source seam immediately before its next `Pater Noster` transition.
+
+**Root cause.** The generic one-nocturn selector took the final
+embedded versicle when a psalter section had more than three antiphons.
+For `Adv 0 Ant Matutinum`, the one-nocturn simplified Roman shape still
+uses the first embedded versicle pair following the first three Advent
+Sunday antiphons.
+
+**Resolution.** Fixed. `Adv 0 Ant Matutinum` now selects its first
+embedded versicle pair for one-nocturn Matins while preserving the
+generic final-versicle behavior for other sections. The upstream
+composition regression now locks both the Advent Sunday antiphon and the
+`Ex Sion...` versicle surface.
+
+**Citation.** `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:137-152`.
+
+**Impact.** Four simplified Roman Matins rows advance past the Advent
+Sunday versicle seam to the next pre-lesson transition.
+
+### 2026-04-26 — Pattern: Psalter-Matins embedded versicle responses (compositor-bug fixed)
+
+**Commit.** `3f1fda3`
+
+**Ledger signal.** After the Advent Sunday versicle selector fix,
+Reduced 1955 Dec `15` and Rubrics 1960 Dec `15` Matins reached the
+paired `Ex Sion...` versicle but diverged on the following line: Perl
+expected `R. Deus noster maniféste véniet.`, while the compositor
+continued directly to the pre-lesson `Pater Noster` transition.
+
+**Root cause.** The compositor already had a Matins helper that appends
+the response line after a selected psalter `V.` node, matching the
+source's embedded V./R. pair layout. That helper was hard-coded to the
+ordinary Sunday `Day0` table, so the newly selected Advent Sunday
+`Adv 0 Ant Matutinum` table emitted only the `V.` line.
+
+**Resolution.** Fixed. Psalter-Matins versicle selectors now use the
+same response-extension path for any `Psalmi matutinum` section with an
+integer selector. The upstream composition regression now asserts both
+the Advent Sunday `V.` and `R.` lines.
+
+**Citation.** `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:140-142`.
+
+**Impact.** Four simplified Roman Matins rows advance past the
+source-backed Advent Sunday V./R. pair to the pre-lesson Pater Noster
+rendering surface.
+
 ## See also
 
 - [ADR-011 — Divergence adjudication protocol](../../../../docs/adr/011-phase-3-divergence-adjudication.md)

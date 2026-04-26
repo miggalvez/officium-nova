@@ -8575,6 +8575,30 @@
     "notes": "Roman minor-hour collect-wrapper fanout for Terce/Sext/None rows exposed after later-block fixes.",
     "resolvedAt": "2026-04-25"
   },
+  "Reduced - 1955/2024-06-20/Terce/e1b9c6d0": {
+    "policy": "Reduced - 1955",
+    "date": "2024-06-20",
+    "hour": "Terce",
+    "firstExpected": "Ant. Quam bonus. ‡",
+    "firstActual": "Ant. Quam bonus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:26 — the weekday minor-hour row carries `Feria V = Quam bonus * Israël Deus, his, qui recto sunt corde.` without a trailing `‡`; the compositor preserves the source-backed incipit surface while the Reduced 1955 Perl comparison surface appends an unsupported marker.",
+    "notes": "Reduced 1955 weekday psalter antiphon surface where Perl abbreviates or over-marks source-backed psalter text; companion Rubrics 1960 full-text marker rows are already classified.",
+    "resolvedAt": "2026-04-25",
+    "commitSha": "dd1bd71"
+  },
+  "Reduced - 1955/2024-06-20/Vespers/3bf979aa": {
+    "policy": "Reduced - 1955",
+    "date": "2024-06-20",
+    "hour": "Vespers",
+    "firstExpected": "Ant. Ecce quam bonum. ‡",
+    "firstActual": "Ant. Ecce quam bonum * et quam jucúndum habitáre fratres in unum.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:100 — the psalter-major row carries `Ecce quam bonum * et quam jucúndum habitáre fratres in unum.` without a trailing `‡`; the compositor preserves that source-backed full antiphon while the Reduced 1955 Perl comparison surface abbreviates it and appends an unsupported marker.",
+    "notes": "Reduced 1955 weekday psalter antiphon surface where Perl abbreviates or over-marks source-backed psalter text; companion Rubrics 1960 full-text marker rows are already classified.",
+    "resolvedAt": "2026-04-25",
+    "commitSha": "dd1bd71"
+  },
   "Reduced - 1955/2024-06-24/Compline/5dc10d20": {
     "policy": "Reduced - 1955",
     "date": "2024-06-24",

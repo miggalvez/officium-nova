@@ -14,6 +14,12 @@ The `@officium-novum/compositor` package turns a `DayOfficeSummary` + Phase-1-re
 
 Newest tranche first:
 
+- **2026-04-26.** Review follow-up: limited the `Adv 0 Ant Matutinum` first-versicle shortcut to one-nocturn Matins. Three-nocturn Advent fallback offices now keep their per-nocturn psalter versicle selectors.
+- **2026-04-26.** Fixed the psalter-Matins versicle response materializer for non-`Day0` psalter tables. Advent Sunday Matins now emits the full `Ex Sion... / Deus noster...` V./R. pair before the pre-lesson Pater Noster transition.
+- **2026-04-26.** Fixed the Advent Sunday one-nocturn Matins versicle selector. Simplified Roman Dec `15` and Dec `22` Matins now take the first embedded `Ex Sion... / Deus noster...` versicle pair from `Adv 0 Ant Matutinum` instead of the final `Egrediétur...` pair.
+- **2026-04-26.** Closed the simplified Roman Advent Sunday Matins psalter-antiphon seam. Advent Sundays now use `Psalmi matutinum:[Adv 0 Ant Matutinum]` instead of ordinary `Day0`, moving Dec `15` and Dec `22` Matins to the next later-block frontier.
+- **2026-04-26.** Closed the simplified Roman late-Advent Matins invitatory selector seam. The third and fourth Sundays of Advent now use the source-backed `Matutinum Special:[Invit Adv3]` antiphon (`Prope est jam Dóminus...`) before advancing to the next Matins psalmody frontier.
+- **2026-04-25.** Classified the Reduced 1955 weekday psalter antiphon marker/incipit surface on Jun `20`. Terce and Vespers now cite the psalter minor/major source rows that carry no final `‡`, matching the already-classified Rubrics 1960 marker family without changing compositor behavior.
 - **2026-04-25.** Classified the simplified Roman Precious Blood Matins bracketed-letter rendering family. Reduced 1955 and Rubrics 1960 Jul `1` now cite the source hymn's `Imbr[e] aquárum víndice,` spelling as a rendering difference from Perl's expanded `Imbre` form.
 - **2026-04-25.** Fanned the proper Prime lesson adjudication onto Reduced 1955 Christmas Day. Dec `25` Prime now cites `Sancti/12-25:[Lectio Prima]` for `Heb 1:11-12` instead of leaving Perl's ordinary `1 Tim. 1:17` fallback unclassified.
 - **2026-04-25.** Classified the Reduced 1955 Christmas-octave minor-hour antiphon family. Dec `26` and Dec `27` Prime, Terce, Sext, and None now cite the proper offices' `Antiphonas horas` rules and source antiphon sets instead of leaving Perl's ordinary-psalter fallback unadjudicated.

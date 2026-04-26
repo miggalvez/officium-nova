@@ -1180,6 +1180,68 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
     }
   }, 240_000);
 
+  it('uses the late-Advent Invit Adv3 antiphon on the third and fourth Sundays', async () => {
+    for (const version of ['Reduced - 1955', 'Rubrics 1960 - 1960'] as const) {
+      const { engine, resolvedCorpus } = await createHarness(version);
+
+      for (const date of ['2024-12-15', '2024-12-22'] as const) {
+        const summary = engine.resolveDayOfficeSummary(date);
+        const matins = summary.hours.matins;
+        expect(matins).toBeDefined();
+        if (!matins) continue;
+
+        expect(matins.slots.invitatory?.kind).toBe('matins-invitatorium');
+        if (matins.slots.invitatory?.kind === 'matins-invitatorium') {
+          expect(matins.slots.invitatory.source.kind).toBe('season');
+        }
+
+        const composed = composeHour({
+          corpus: resolvedCorpus.index,
+          summary,
+          version: engine.version,
+          hour: 'matins',
+          options: { languages: ['Latin'] }
+        });
+        const invitatory = composed.sections.find((section) => section.slot === 'invitatory');
+        const invitatoryLines = invitatory?.lines.map(renderLatinText) ?? [];
+        expect(invitatoryLines[0], `${version} ${date} Matins invitatory`).toBe(
+          'Prope est jam Dóminus, * Veníte, adorémus.'
+        );
+      }
+    }
+  }, 240_000);
+
+  it('uses the Advent Sunday Matins psalter antiphons instead of ordinary Day0', async () => {
+    for (const version of ['Reduced - 1955', 'Rubrics 1960 - 1960'] as const) {
+      const { engine, resolvedCorpus } = await createHarness(version);
+
+      for (const date of ['2024-12-15', '2024-12-22'] as const) {
+        const summary = engine.resolveDayOfficeSummary(date);
+        const composed = composeHour({
+          corpus: resolvedCorpus.index,
+          summary,
+          version: engine.version,
+          hour: 'matins',
+          options: { languages: ['Latin'] }
+        });
+
+        const expected =
+          version === 'Reduced - 1955'
+            ? 'Véniet ecce Rex.'
+            : 'Véniet ecce Rex * excélsus cum potestáte magna ad salvándas gentes, allelúja.';
+        expect(normalizeLatin(firstPsalmodyAntiphon(composed)), `${version} ${date} Matins psalmody`).toBe(
+          normalizeLatin(expected)
+        );
+        expect(canonicalLatinLines(composed), `${version} ${date} Matins Advent versicle`).toContain(
+          normalizeLatin('Ex Sion spécies decóris ejus.')
+        );
+        expect(canonicalLatinLines(composed), `${version} ${date} Matins Advent versicle response`).toContain(
+          normalizeLatin('Deus noster maniféste véniet.')
+        );
+      }
+    }
+  }, 240_000);
+
   it('applies the January 28 Invit2 feast materialization before the hymn across the Roman families', async () => {
     for (const version of PHASE_3_ROMAN_HANDLES) {
       const { engine, resolvedCorpus } = await createHarness(version);
@@ -1526,6 +1588,28 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
           expected.map(normalizeLatin)
         );
       }
+    }
+  }, 240_000);
+
+  it('renders Reduced 1955 weekday psalter antiphons without Perl-only trailing markers', async () => {
+    const { engine, resolvedCorpus } = await createHarness('Reduced - 1955');
+    const summary = engine.resolveDayOfficeSummary('2024-06-20');
+
+    for (const [hour, expected] of [
+      ['terce', 'Quam bonus.'],
+      ['vespers', 'Ecce quam bonum * et quam jucúndum habitáre fratres in unum.']
+    ] as const) {
+      const composed = composeHour({
+        corpus: resolvedCorpus.index,
+        summary,
+        version: engine.version,
+        hour,
+        options: { languages: ['Latin'] }
+      });
+
+      expect(normalizeLatin(firstPsalmodyAntiphon(composed)), `${hour} opening antiphon`).toBe(
+        normalizeLatin(expected)
+      );
     }
   }, 240_000);
 

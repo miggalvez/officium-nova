@@ -296,6 +296,39 @@ Then inspect the affected rows in `rubrics-1960-2024.md`.
 | Rubrics 1960 - 1960 | 2024-06-20 | Vespers | `2eac8bef` |
 | Rubrics 1960 - 1960 | 2024-11-08 | Lauds | `d64d0218` |
 
+### 2026-04-25 — Reduced 1955 abbreviates and over-marks weekday psalter antiphons
+
+**Classification.** `perl-bug`
+
+**Summary.** The Reduced 1955 Jun `20` Terce and Vespers rows expose
+the same psalter-antiphon source seam as the already-classified Rubrics
+1960 trailing-marker rows. Perl abbreviates the source-backed antiphons
+and appends `‡`; the compositor preserves the source text.
+
+**Primary source.**
+
+- `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:26`
+- `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:100`
+
+The source rows carry the weekday Terce `Quam bonus...` antiphon and
+the Vespers `Ecce quam bonum...` antiphon without a final continuation
+marker.
+
+**Reproduction.**
+Run:
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Reduced - 1955" --date 2024-06-20 --hour Tertia
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Reduced - 1955" --date 2024-06-20 --hour Vespera
+```
+
+**Affected stable divergence-row keys.**
+
+| Policy | Date | Hour | Row key suffix |
+|---|---|---|---|
+| Reduced - 1955 | 2024-06-20 | Terce | `e1b9c6d0` |
+| Reduced - 1955 | 2024-06-20 | Vespers | `3bf979aa` |
+
 ### 2026-04-24 — Roman Paschaltide fallback minor-hour hymn doxologies retain ordinary endings in the Perl render surface
 
 **Classification.** `perl-bug`
