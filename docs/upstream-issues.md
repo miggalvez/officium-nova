@@ -24,6 +24,39 @@ entry here and re-run the adjudication harness.
 
 ## Current entries
 
+### 2026-04-26 — Saturday Office BVM psalter antiphons are abbreviated in Perl
+
+**Classification.** `perl-bug`
+
+**Summary.** On Reduced 1955 Jul `6`, after inactive C10 antiphons are
+correctly ignored, Lauds and the minor hours use the Saturday psalter
+antiphons. Perl abbreviates those antiphons to incipits, while Officium
+Novum emits the full source-backed antiphon text.
+
+**Primary source.**
+`upstream/web/www/horas/Latin/Commune/C10.txt:7-13,57-58`,
+`upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:128`,
+and `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:29-30,45-46,61-62`
+
+**Reproduction.**
+Run:
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Reduced - 1955" --date 2024-07-06 --hour Laudes
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Reduced - 1955" --date 2024-07-06 --hour Tertia
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Reduced - 1955" --date 2024-07-06 --hour Sexta
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Reduced - 1955" --date 2024-07-06 --hour Nona
+```
+
+**Affected stable divergence-row keys.**
+
+| Policy | Date | Hour | Row key suffix |
+|---|---|---|---|
+| Reduced - 1955 | 2024-07-06 | Lauds | `7c222668` |
+| Reduced - 1955 | 2024-07-06 | Terce | `c7252790` |
+| Reduced - 1955 | 2024-07-06 | Sext | `58da5074` |
+| Reduced - 1955 | 2024-07-06 | None | `6039460d` |
+
 ### 2026-04-26 — Assumption Vespers proper hymn is masked by the Marian common rubric in Perl
 
 **Classification.** `perl-bug`

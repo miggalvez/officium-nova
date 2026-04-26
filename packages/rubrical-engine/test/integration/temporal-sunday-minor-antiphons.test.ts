@@ -401,6 +401,69 @@ describeIfUpstream('temporal Sunday minor-hour antiphon ownership', () => {
   );
 
   it(
+    'ignores condition-gated Saturday Office BVM antiphon sections outside their rubrics',
+    async () => {
+      const engines = await loadEngines([
+        'Reduced - 1955',
+        'Rubrics 1960 - 1960'
+      ]);
+
+      for (const handle of ['Reduced - 1955', 'Rubrics 1960 - 1960'] as const) {
+        const engine = engines.get(handle);
+        expect(engine, `${handle} engine`).toBeDefined();
+        if (!engine) {
+          continue;
+        }
+
+        expect(psalmodyAt(engine, '2024-07-06', 'lauds').map((entry) => entry.antiphonRef ?? null)).toEqual([
+          null,
+          null,
+          null,
+          null,
+          null
+        ]);
+        expectMinorHour(
+          psalmodyAt(engine, '2024-07-06', 'prime'),
+          'horas/Latin/Psalterium/Psalmi/Psalmi minor:Prima:Sabbato#antiphon',
+          [
+          '93(1-11)',
+          '93(12-23)',
+          '107'
+          ]
+        );
+        expectMinorHour(
+          psalmodyAt(engine, '2024-07-06', 'terce'),
+          'horas/Latin/Psalterium/Psalmi/Psalmi minor:Tertia:Sabbato#antiphon',
+          [
+          '101(2-13)',
+          '101(14-23)',
+          '101(24-29)'
+          ]
+        );
+        expectMinorHour(
+          psalmodyAt(engine, '2024-07-06', 'sext'),
+          'horas/Latin/Psalterium/Psalmi/Psalmi minor:Sexta:Sabbato#antiphon',
+          [
+          '103(1-12)',
+          '103(13-23)',
+          '103(24-35)'
+          ]
+        );
+        expectMinorHour(
+          psalmodyAt(engine, '2024-07-06', 'none'),
+          'horas/Latin/Psalterium/Psalmi/Psalmi minor:Nona:Sabbato#antiphon',
+          [
+          '108(2-13)',
+          '108(14-21)',
+          '108(22-31)'
+          ]
+        );
+      }
+    },
+    240_000
+  );
+
+  it(
     'keeps weekday feasts with Psalmi Dominica on Sunday Lauds I instead of penitential Lauds II',
     async () => {
       const engines = await loadEngines([

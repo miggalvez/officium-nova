@@ -22,6 +22,37 @@ anchor.
 
 ## Entries
 
+### 2026-04-26 — Pattern: Saturday Office BVM conditioned antiphons and psalter incipits (mixed fix + adjudication)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** Reduced 1955 Jul `6` Lauds and minor hours first
+opened on bare psalm headings because Phase 2 had attached inactive C10
+antiphon refs. After the fix, those rows advance to Perl's abbreviated
+psalter antiphon incipits (`Fílii Sion.`, `Clamor meus.`, `Dómine, Deus
+meus.`, `Ne tacúeris Deus.`) versus the compositor's full source-backed
+Saturday psalter antiphons.
+
+**Root cause.** C10's `[Ant Laudes]` section is gated to `rubrica
+tridentina`, but the antiphon-reference lookup only checked for header
+presence. Under Reduced 1955 the C10 section should not be active, so
+the Saturday psalter tables own the antiphons.
+
+**Resolution.** Fixed the antiphon lookup to respect section conditions
+and to treat an inactive proper/common antiphon section as blocking
+later inherited fallbacks. Added Reduced 1955 row adjudications for the
+source-backed psalter-antiphon incipit surface that is exposed after the
+fix.
+
+**Citation.** `upstream/web/www/horas/Latin/Commune/C10.txt:7-13,57-58`,
+`upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:128`,
+and `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:29-30,45-46,61-62`.
+
+**Impact.** The Saturday Office BVM Lauds/minor-hour blocker advances
+from missing-antiphon engine behavior to classified source-backed
+incipit differences, narrowing the Reduced 1955 Jul `6` frontier to the
+remaining Vespers/concurrence row.
+
 ### 2026-04-26 — Pattern: Assumption Vespers proper hymn vs Marian common rubric (perl-bug)
 
 **Commit.** Current tranche commit.

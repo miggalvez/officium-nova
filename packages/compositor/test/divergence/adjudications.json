@@ -9031,6 +9031,54 @@
     "resolvedAt": "2026-04-26",
     "commitSha": "e7b3145"
   },
+  "Reduced - 1955/2024-07-06/Lauds/7c222668": {
+    "policy": "Reduced - 1955",
+    "date": "2024-07-06",
+    "hour": "Lauds",
+    "firstExpected": "Ant. Fílii Sion.",
+    "firstActual": "Ant. Fílii Sion * exsúltent in Rege suo.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Commune/C10.txt:7-13,57-58 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:128 — the Saturday Office of the BVM does not activate C10's Tridentine-only `[Ant Laudes]` under Reduced 1955, so Lauds falls back to the Saturday psalter antiphon `Fílii Sion * exsúltent in Rege suo.`. The Perl comparison surface abbreviates that source-backed antiphon to its incipit.",
+    "notes": "Reduced 1955 Saturday Office BVM psalter-antiphon incipit surface after condition-gated C10 antiphons were suppressed.",
+    "resolvedAt": "2026-04-26",
+    "commitSha": "current-tranche"
+  },
+  "Reduced - 1955/2024-07-06/None/6039460d": {
+    "policy": "Reduced - 1955",
+    "date": "2024-07-06",
+    "hour": "None",
+    "firstExpected": "Ant. Ne tacúeris Deus.",
+    "firstActual": "Ant. Ne tacúeris Deus, * quia sermónibus ódii circumdedérunt me.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Commune/C10.txt:7-13,57-58 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:61-62 — the Saturday Office of the BVM does not activate C10's Tridentine-only `[Ant Laudes]` under Reduced 1955, so None falls back to the Saturday psalter antiphon `Ne tacúeris Deus, * quia sermónibus ódii circumdedérunt me.`. The Perl comparison surface abbreviates that source-backed antiphon to its incipit.",
+    "notes": "Reduced 1955 Saturday Office BVM psalter-antiphon incipit surface after condition-gated C10 antiphons were suppressed.",
+    "resolvedAt": "2026-04-26",
+    "commitSha": "current-tranche"
+  },
+  "Reduced - 1955/2024-07-06/Sext/58da5074": {
+    "policy": "Reduced - 1955",
+    "date": "2024-07-06",
+    "hour": "Sext",
+    "firstExpected": "Ant. Dómine, Deus meus.",
+    "firstActual": "Ant. Dómine, Deus meus * magnificátus es veheménter.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Commune/C10.txt:7-13,57-58 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:45-46 — the Saturday Office of the BVM does not activate C10's Tridentine-only `[Ant Laudes]` under Reduced 1955, so Sext falls back to the Saturday psalter antiphon `Dómine, Deus meus * magnificátus es veheménter.`. The Perl comparison surface abbreviates that source-backed antiphon to its incipit.",
+    "notes": "Reduced 1955 Saturday Office BVM psalter-antiphon incipit surface after condition-gated C10 antiphons were suppressed.",
+    "resolvedAt": "2026-04-26",
+    "commitSha": "current-tranche"
+  },
+  "Reduced - 1955/2024-07-06/Terce/c7252790": {
+    "policy": "Reduced - 1955",
+    "date": "2024-07-06",
+    "hour": "Terce",
+    "firstExpected": "Ant. Clamor meus.",
+    "firstActual": "Ant. Clamor meus, * Dómine, ad te pervéniat: non avértas fáciem tuam a me.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Commune/C10.txt:7-13,57-58 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:29-30 — the Saturday Office of the BVM does not activate C10's Tridentine-only `[Ant Laudes]` under Reduced 1955, so Terce falls back to the Saturday psalter antiphon `Clamor meus, * Dómine, ad te pervéniat: non avértas fáciem tuam a me.`. The Perl comparison surface abbreviates that source-backed antiphon to its incipit.",
+    "notes": "Reduced 1955 Saturday Office BVM psalter-antiphon incipit surface after condition-gated C10 antiphons were suppressed.",
+    "resolvedAt": "2026-04-26",
+    "commitSha": "current-tranche"
+  },
   "Reduced - 1955/2024-08-15/Compline/5dc10d20": {
     "policy": "Reduced - 1955",
     "date": "2024-08-15",
