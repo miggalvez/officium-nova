@@ -22,6 +22,40 @@ anchor.
 
 ## Entries
 
+### 2026-04-26 — Pattern: simplified Roman Confessor C5 Matins hymn variant (engine-bug, fixed)
+
+**Commit.** `6682b44`
+
+**Ledger signal.** Reduced 1955 and Rubrics 1960 Matins rows for
+Aug `19` and Oct `4` first diverged inside the Confessor hymn. Perl
+selected `Hac die lætus méruit suprémos`; the compositor selected the
+unmodified C4/C5 line `Hac die lætus méruit beátas`.
+
+**Root cause.** This was a Phase 2 Matins-planning bug. The C5 offices
+point to `vide C5`; `Commune/C5` inherits C4 through a preamble, and
+C4 provides both `[Hymnus Matutinum]` and `[Hymnus1 Matutinum]`.
+Legacy `specmatins.pl` applies `checkmtv` for 1955/1960 C4/C5 offices,
+which appends `1` to the Matins hymn section name when the proper
+office does not define its own Matins hymn.
+
+**Resolution.** Fixed in Phase 2. Matins planning now prefers
+`Hymnus1 Matutinum` for post-Cum Nostra Hac Aetate C4/C5 inherited
+Confessor offices, while preserving the ordinary `Hymnus Matutinum`
+fallback if the variant section is absent or if the proper office owns
+its Matins hymn.
+
+**Citation.** `upstream/web/cgi-bin/horas/specmatins.pl:150-158`;
+`upstream/web/cgi-bin/horas/specials.pl:532-539`;
+`upstream/web/www/horas/Latin/Sancti/08-19.txt:4-9`;
+`upstream/web/www/horas/Latin/Sancti/10-04.txt:4-14`;
+`upstream/web/www/horas/Latin/Commune/C5.txt:1-12`;
+`upstream/web/www/horas/Latin/Commune/C4.txt:94-99`.
+
+**Impact.** The four simplified Roman C5 Matins rows move past the
+hymn-variant mismatch and now expose the separate C5 psalmody-antiphon
+frontier. Unadjudicated row counts remain unchanged; average matching
+prefix improves for Reduced 1955 and Rubrics 1960.
+
 ### 2026-04-25 — Pattern: proper Prime lessons keep office `[Lectio Prima]` (perl-bug)
 
 **Commit.** `34d6dc1`

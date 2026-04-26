@@ -1,10 +1,12 @@
 import { describe, expect, it } from 'vitest';
 
 import {
+  asVersionHandle,
   buildMatinsPlanWithWarnings,
   type Celebration,
   type CelebrationRuleSet,
   type HourRuleSet,
+  type ResolvedVersion,
   type TemporalContext
 } from '../../src/index.js';
 import { TestOfficeTextIndex } from '../helpers.js';
@@ -228,6 +230,47 @@ describe('buildMatinsPlan', () => {
     }
   });
 
+  it('uses the post-Cum Nostra Hac Aetate Confessor hymn variant for inherited C5 Matins', () => {
+    const corpus = new TestOfficeTextIndex();
+    corpus.add(
+      'horas/Latin/Sancti/08-19.txt',
+      ['[Rule]', 'vide C5;', '', '[Lectio1]', 'Text'].join('\n')
+    );
+    corpus.add(
+      'horas/Latin/Commune/C5.txt',
+      ['@Commune/C4', '', '[Rule]', 'Psalmi Dominica', 'Antiphonas horas'].join('\n')
+    );
+    corpus.add(
+      'horas/Latin/Commune/C4.txt',
+      [
+        '[Hymnus Matutinum]',
+        'Hac die lætus méruit beátas',
+        '',
+        '[Hymnus1 Matutinum]',
+        'Hac die lætus méruit suprémos'
+      ].join('\n')
+    );
+
+    const result = buildMatinsPlanWithWarnings({
+      celebration: celebration('Sancti/08-19', 'III', 'sanctoral'),
+      celebrationRules: baseRules(),
+      commemorations: [],
+      hourRules: HOUR_RULES,
+      temporal: temporal('2024-08-19', 'Pent10-1', 'time-after-pentecost', 'IV'),
+      policy: rubrics1960Policy,
+      corpus,
+      version: version1960()
+    });
+
+    expect(result.plan.hymn).toEqual({
+      kind: 'feast',
+      reference: {
+        path: 'horas/Latin/Commune/C5',
+        section: 'Hymnus1 Matutinum'
+      }
+    });
+  });
+
   it('honors forced Te Deum override on an otherwise ferial day', () => {
     const corpus = new TestOfficeTextIndex();
     corpus.add('horas/Latin/Tempora/Pent07-2.txt', ferialMatinsSections());
@@ -342,6 +385,16 @@ function baseRules(): CelebrationRuleSet {
     unaAntiphona: false,
     unmapped: [],
     hourScopedDirectives: []
+  };
+}
+
+function version1960(): ResolvedVersion {
+  return {
+    handle: asVersionHandle('Rubrics 1960 - 1960'),
+    kalendar: '1960',
+    transfer: '1960',
+    stransfer: '1960',
+    policy: rubrics1960Policy
   };
 }
 

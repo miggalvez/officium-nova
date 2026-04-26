@@ -244,7 +244,14 @@ function buildHymnSource(
     return { kind: 'suppressed' };
   }
 
-  const match = findSection(feastFiles, 'Hymnus Matutinum', input);
+  const preferredHeader = shouldUseFirstConfessorMatinsHymn(input, feastFiles)
+    ? 'Hymnus1 Matutinum'
+    : 'Hymnus Matutinum';
+  const match =
+    findSection(feastFiles, preferredHeader, input) ??
+    (preferredHeader === 'Hymnus1 Matutinum'
+      ? findSection(feastFiles, 'Hymnus Matutinum', input)
+      : undefined);
   if (match) {
     return {
       kind: 'feast',
@@ -262,6 +269,38 @@ function buildHymnSource(
     kind: 'ordinary',
     reference: ordinaryMatinsHymnReference(input)
   };
+}
+
+function shouldUseFirstConfessorMatinsHymn(
+  input: Pick<BuildMatinsPlanInput, 'temporal' | 'version'>,
+  feastFiles: readonly ParsedFile[]
+): boolean {
+  const officeFile = feastFiles[0];
+  if (!officeFile) {
+    return false;
+  }
+
+  const officeFileIsConfessorCommon = /\/Commune\/C[45]/u.test(officeFile.path);
+  if (!officeFileIsConfessorCommon && findSection([officeFile], 'Hymnus Matutinum', input)) {
+    return false;
+  }
+
+  const ruleText = collectRuleText(officeFile);
+  const postCumNostraHacAetate =
+    /1955|196/u.test(input.version?.handle ?? '') || /;\s*mtv\b/iu.test(ruleText);
+  if (!postCumNostraHacAetate) {
+    return false;
+  }
+
+  return /C[45]/iu.test(ruleText) || feastFiles.some((file) => /\/Commune\/C[45]/u.test(file.path));
+}
+
+function collectRuleText(file: ParsedFile): string {
+  return file.sections
+    .filter((section) => section.header === 'Rule')
+    .flatMap((section) => section.rules ?? [])
+    .map((directive) => directive.raw)
+    .join('\n');
 }
 
 function buildNocturnVersicle(

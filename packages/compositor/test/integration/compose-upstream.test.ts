@@ -1263,6 +1263,13 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
             section: 'Invit'
           });
         }
+        expect(matins.slots.hymn?.kind).toBe('single-ref');
+        if (matins.slots.hymn?.kind === 'single-ref') {
+          expect(matins.slots.hymn.ref).toMatchObject({
+            path: 'horas/Latin/Commune/C5',
+            section: 'Hymnus1 Matutinum'
+          });
+        }
 
         const composed = composeHour({
           corpus: resolvedCorpus.index,
@@ -1275,6 +1282,9 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
         const invitatoryLines = invitatory?.lines.map(renderLatinText) ?? [];
         expect(invitatoryLines[0], `${version} ${date} Matins invitatory`).toBe(
           'Regem Confessórum Dóminum, * Veníte, adorémus.'
+        );
+        expect(canonicalLatinLines(composed), `${version} ${date} Confessor hymn variant`).toContain(
+          normalizeLatin('Hac die lætus méruit suprémos')
         );
       }
     }
