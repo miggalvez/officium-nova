@@ -3636,6 +3636,31 @@ classifications for the two visible row keys. The companion Rubrics
 `perl-bug`, narrowing the weekday psalter-antiphon marker family without
 changing compositor behavior.
 
+### 2026-04-26 — Pattern: Simplified Roman late-Advent Matins invitatory selector (engine-bug fixed)
+
+**Commit.** `1b2c012`
+
+**Ledger signal.** Reduced 1955 and Rubrics 1960 Dec `15` and Dec `22`
+Matins first diverged inside the invitatory: Perl emitted
+`Prope est jam Dóminus, * Veníte, adorémus.`, while the compositor used
+the generic Advent `Regem ventúrum Dóminum...` antiphon.
+
+**Root cause.** Phase 2 emitted only the broad `Adventus` seasonal
+selector for every Advent Matins invitatory. The corpus distinguishes
+early Advent (`Invit Adv`) from the third/fourth Sunday surface
+(`Invit Adv3`).
+
+**Resolution.** Fixed. Phase 2 now emits the late-Advent selector for
+`Adv3-*` and `Adv4-*` temporal days, and Phase 3 maps that selector to
+`Matutinum Special:[Invit Adv3]`. A focused upstream composition
+regression locks the simplified Roman Dec `15` / Dec `22` Matins
+opening.
+
+**Citation.** `upstream/web/www/horas/Latin/Psalterium/Special/Matutinum Special.txt:36-40`.
+
+**Impact.** Four simplified Roman Matins rows advance past the
+invitatory seam to the next psalmody antiphon frontier.
+
 ## See also
 
 - [ADR-011 — Divergence adjudication protocol](../../../../docs/adr/011-phase-3-divergence-adjudication.md)

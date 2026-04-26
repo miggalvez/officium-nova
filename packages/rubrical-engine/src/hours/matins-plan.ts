@@ -743,6 +743,9 @@ function toResponsoryIndex(
 function invitatoriumSeasonSection(temporal: TemporalContext): string {
   switch (temporal.season) {
     case 'advent':
+      if (/^Adv[34]-/u.test(temporal.dayName)) {
+        return 'Adventus3';
+      }
       return 'Adventus';
     case 'christmastide':
       return 'Nativitatis';
