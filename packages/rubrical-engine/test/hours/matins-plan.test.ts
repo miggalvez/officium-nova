@@ -95,8 +95,46 @@ describe('buildMatinsPlan', () => {
     expect(result.plan.nocturnPlan[0]?.versicle.reference.path).toBe(
       'horas/Latin/Psalterium/Psalmi/Psalmi matutinum'
     );
-    expect(result.plan.nocturnPlan[0]?.versicle.reference.section).toBe('Day0');
-    expect(result.plan.nocturnPlan[0]?.versicle.reference.selector).toBe('14');
+    expect(result.plan.nocturnPlan[0]?.versicle.reference.section).toBe('Adv 0 Ant Matutinum');
+    expect(result.plan.nocturnPlan[0]?.versicle.reference.selector).toBe('4');
+  });
+
+  it('keeps Advent Sunday Matins psalter versicles per-nocturn for 3-nocturn offices', () => {
+    const corpus = new TestOfficeTextIndex();
+    corpus.add('horas/Latin/Sancti/12-15.txt', adventSundayMatinsSections());
+    corpus.add(
+      'horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt',
+      psalteriumMatinsSections()
+    );
+
+    const result = buildMatinsPlanWithWarnings({
+      celebration: celebration('Sancti/12-15', 'I', 'sanctoral'),
+      celebrationRules: baseRules(),
+      commemorations: [],
+      hourRules: HOUR_RULES,
+      temporal: temporal('2024-12-15', 'Adv3-0', 'advent', 'I-privilegiata-sundays'),
+      policy: rubrics1960Policy,
+      corpus
+    });
+
+    expect(result.plan.nocturns).toBe(3);
+    expect(result.plan.nocturnPlan.map((nocturn) => nocturn.versicle.reference)).toEqual([
+      {
+        path: 'horas/Latin/Psalterium/Psalmi/Psalmi matutinum',
+        section: 'Adv 0 Ant Matutinum',
+        selector: '4'
+      },
+      {
+        path: 'horas/Latin/Psalterium/Psalmi/Psalmi matutinum',
+        section: 'Adv 0 Ant Matutinum',
+        selector: '9'
+      },
+      {
+        path: 'horas/Latin/Psalterium/Psalmi/Psalmi matutinum',
+        section: 'Adv 0 Ant Matutinum',
+        selector: '14'
+      }
+    ]);
   });
 
   it('uses seasonal Sunday Matins versicles in Lent and Passiontide', () => {
@@ -568,6 +606,23 @@ function psalteriumMatinsSections(): string {
     '',
     '[Quad5 1 Versum]',
     'V. Érue a frámea, Deus, ánimam meam.',
-    'R. Et de manu canis únicam meam.'
+    'R. Et de manu canis únicam meam.',
+    '',
+    '[Adv 0 Ant Matutinum]',
+    'Adv Ant 1;;1',
+    'Adv Ant 2;;2',
+    'Adv Ant 3;;3',
+    'V. Adv Versus I',
+    'R. Adv Responsum I',
+    'Adv Ant 4;;8',
+    'Adv Ant 5;;9',
+    'Adv Ant 6;;9',
+    'V. Adv Versus II',
+    'R. Adv Responsum II',
+    'Adv Ant 7;;9',
+    'Adv Ant 8;;9',
+    'Adv Ant 9;;10',
+    'V. Adv Versus III',
+    'R. Adv Responsum III'
   ].join('\n');
 }

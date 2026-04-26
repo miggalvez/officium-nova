@@ -14,6 +14,7 @@ The `@officium-novum/compositor` package turns a `DayOfficeSummary` + Phase-1-re
 
 Newest tranche first:
 
+- **2026-04-26.** Review follow-up: limited the `Adv 0 Ant Matutinum` first-versicle shortcut to one-nocturn Matins. Three-nocturn Advent fallback offices now keep their per-nocturn psalter versicle selectors.
 - **2026-04-26.** Fixed the psalter-Matins versicle response materializer for non-`Day0` psalter tables. Advent Sunday Matins now emits the full `Ex Sion... / Deus noster...` V./R. pair before the pre-lesson Pater Noster transition.
 - **2026-04-26.** Fixed the Advent Sunday one-nocturn Matins versicle selector. Simplified Roman Dec `15` and Dec `22` Matins now take the first embedded `Ex Sion... / Deus noster...` versicle pair from `Adv 0 Ant Matutinum` instead of the final `Egrediétur...` pair.
 - **2026-04-26.** Closed the simplified Roman Advent Sunday Matins psalter-antiphon seam. Advent Sundays now use `Psalmi matutinum:[Adv 0 Ant Matutinum]` instead of ordinary `Day0`, moving Dec `15` and Dec `22` Matins to the next later-block frontier.
