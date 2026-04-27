@@ -22,6 +22,39 @@ anchor.
 
 ## Entries
 
+### 2026-04-27 — Pattern: Easter Saturday Prime Mobile Martyrology rollover (engine-bug fix + rendering fanout)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** Reduced 1955 and Rubrics 1960 Easter Saturday Prime
+(`2024-04-06`) diverged in the Martyrology body: Perl emitted the
+versioned Mobile notice `Domínica in Albis in Octáva Paschæ.`, while
+the compositor fell straight into the dated April 7 Martyrology file.
+
+**Root cause.** The preceding Easter Sunday tranche taught Phase 3 to
+read `Martyrologium*/Mobile.txt` for Easter-octave Prime, but the key
+rollover still naively advanced `Pasc0-6` to nonexistent `Pasc0-7`.
+Upstream uses `Pasc1-0` for the next day's Low Sunday notice, and
+`specprima.pl` inserts that non-high-day Mobile notice after the dated
+Martyrology heading separator rather than before the heading.
+
+**Resolution.** Phase 3 now rolls `Pasc0-6` to `Pasc1-0` and keeps the
+two Mobile insertion modes distinct: `Pasc0-1` is prepended as the high
+Easter notice, while `Pasc1-0` is inserted after the next-day dated
+Martyrology heading separator.
+
+**Citation.**
+
+- `upstream/web/www/horas/Latin/Martyrologium1960/Mobile.txt:31-32`
+- `upstream/web/www/horas/Latin/Martyrologium1955R/Mobile.txt:31-32`
+- `upstream/web/cgi-bin/horas/specials/specprima.pl:160-170`
+- `upstream/web/cgi-bin/horas/specials/specprima.pl:219-222`
+
+**Impact.** The two Easter Saturday Prime rows advance to the already
+documented Prime post-Martyrologium `Pater Noster` guillemet rendering
+family, dropping Reduced 1955 and Rubrics 1960 under the Phase 3
+sign-off threshold.
+
 ### 2026-04-27 — Pattern: Easter Sunday Prime psalm override and Mobile Martyrology (engine-bug fix + rendering fanout)
 
 **Commit.** Current tranche commit.

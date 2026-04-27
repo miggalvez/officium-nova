@@ -8429,6 +8429,17 @@
     "resolvedAt": "2026-04-22",
     "commitSha": "790134e"
   },
+  "Reduced - 1955/2024-04-06/Prime/29ec2a3d": {
+    "policy": "Reduced - 1955",
+    "date": "2024-04-06",
+    "hour": "Prime",
+    "firstExpected": "Pater Noster dicitur secreto usque ad Et ne nos indúcas in tentatiónem:",
+    "firstActual": "« Pater Noster » dicitur secreto usque ad « Et ne nos indúcas in tentatiónem: »",
+    "class": "rendering-difference",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Rubricae.txt:1-2 — the corpus rubric carries guillemets around both `Pater Noster` and `Et ne nos indúcas in tentatiónem:`. Perl strips them while the compositor preserves them; both are surface renderings of the same rubric sentence, not a liturgical-content disagreement.",
+    "notes": "Fanout of the Prime post-Martyrologium Easter-Octave guillemet seam after the Mobile.txt Low Sunday rollover advanced Easter Saturday Prime to the inherited `[Pater secreto]` rubric.",
+    "resolvedAt": "2026-04-27"
+  },
   "Reduced - 1955/2024-04-05/Vespers/a214ae73": {
     "policy": "Reduced - 1955",
     "date": "2024-04-05",
@@ -13766,6 +13777,17 @@
     "notes": "Fanout of the already-classified Roman Prime post-Martyrologium Easter-Octave guillemet family after the newly exposed Apr 3-5 Prime rows surfaced under Rubrics 1960.",
     "resolvedAt": "2026-04-22",
     "commitSha": "790134e"
+  },
+  "Rubrics 1960 - 1960/2024-04-06/Prime/29ec2a3d": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-04-06",
+    "hour": "Prime",
+    "firstExpected": "Pater Noster dicitur secreto usque ad Et ne nos indúcas in tentatiónem:",
+    "firstActual": "« Pater Noster » dicitur secreto usque ad « Et ne nos indúcas in tentatiónem: »",
+    "class": "rendering-difference",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Rubricae.txt:1-2 — the corpus rubric carries guillemets around both `Pater Noster` and `Et ne nos indúcas in tentatiónem:`. Perl strips them while the compositor preserves them; both are surface renderings of the same rubric sentence, not a liturgical-content disagreement.",
+    "notes": "Fanout of the Prime post-Martyrologium Easter-Octave guillemet seam after the Mobile.txt Low Sunday rollover advanced Easter Saturday Prime to the inherited `[Pater secreto]` rubric.",
+    "resolvedAt": "2026-04-27"
   },
   "Rubrics 1960 - 1960/2024-04-06/Compline/57de2841": {
     "policy": "Rubrics 1960 - 1960",

@@ -90,12 +90,15 @@ export function composePrimeMartyrologySection(
       continue;
     }
 
-    const bucket = [
-      ...formatPrimeMobileMartyrologyContent(
-        resolvePrimeMobileMartyrologyContent(language, args)
-      ),
-      ...formatPrimeMartyrologyContent(resolvePrimeMartyrologyFile(path, language, nextDate, args))
-    ];
+    const mobileKey = nextMobileMartyrologyKey(args.summary.temporal.dayName);
+    const mobile = resolvePrimeMobileMartyrologyContent(language, mobileKey, args);
+    const martyrology = formatPrimeMartyrologyContent(
+      resolvePrimeMartyrologyFile(path, language, nextDate, args)
+    );
+    const bucket =
+      mobileKey === 'Pasc0-1'
+        ? [...formatPrimePrependedMobileMartyrologyContent(mobile), ...martyrology]
+        : insertPrimeMobileMartyrologyContent(martyrology, mobile);
     appendPrimeMartyrologyTail(bucket, language, args, 'Conclmart');
     if (!shouldSkipPretiosa(args.summary)) {
       appendPrimeMartyrologyTail(bucket, language, args, 'Pretiosa');
@@ -174,9 +177,9 @@ function primeMartyrologyCandidates(
 
 function resolvePrimeMobileMartyrologyContent(
   language: string,
+  key: string | undefined,
   args: PrimeMartyrologyComposeArgs
 ): readonly TextContent[] {
-  const key = nextMobileMartyrologyKey(args.summary.temporal.dayName);
   if (!key) {
     return [];
   }
@@ -228,7 +231,8 @@ function resolvePrimeMobileMartyrologyContent(
 function nextMobileMartyrologyKey(dayName: string): string | undefined {
   const easterOctave = /^Pasc0-([0-6])$/u.exec(dayName);
   if (easterOctave) {
-    return `Pasc0-${Number(easterOctave[1]) + 1}`;
+    const day = Number(easterOctave[1]);
+    return day === 6 ? 'Pasc1-0' : `Pasc0-${day + 1}`;
   }
 
   return undefined;
@@ -334,7 +338,7 @@ function formatPrimeMartyrologyContent(content: readonly TextContent[]): TextCon
   return bucket;
 }
 
-function formatPrimeMobileMartyrologyContent(content: readonly TextContent[]): TextContent[] {
+function formatPrimePrependedMobileMartyrologyContent(content: readonly TextContent[]): TextContent[] {
   if (content.length === 0) {
     return [];
   }
@@ -351,6 +355,36 @@ function formatPrimeMobileMartyrologyContent(content: readonly TextContent[]): T
           : node
     ),
     { type: 'separator' }
+  ];
+}
+
+function insertPrimeMobileMartyrologyContent(
+  martyrology: readonly TextContent[],
+  mobile: readonly TextContent[]
+): TextContent[] {
+  if (mobile.length === 0) {
+    return [...martyrology];
+  }
+
+  const insertion = mobile.map(
+    (node): TextContent =>
+      node.type === 'text'
+        ? {
+            type: 'verseMarker',
+            marker: 'r.',
+            text: node.value
+          }
+        : node
+  );
+  const separatorIndex = martyrology.findIndex((node) => node.type === 'separator');
+  if (separatorIndex === -1) {
+    return [...martyrology, ...insertion];
+  }
+
+  return [
+    ...martyrology.slice(0, separatorIndex + 1),
+    ...insertion,
+    ...martyrology.slice(separatorIndex + 1)
   ];
 }
 

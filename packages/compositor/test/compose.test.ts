@@ -1548,11 +1548,20 @@ describe('composeHour', () => {
   it('prepends Easter Mobile.txt notices before the next-day Prime Martyrologium file', () => {
     const corpus = new InMemoryTextIndex();
     corpus.addFile(
-      makeFile('horas/Latin/Martyrologium1960/Mobile', 'Pasc0-1', [
+      makeFileMulti('horas/Latin/Martyrologium1960/Mobile', [
         {
-          type: 'text',
-          value:
-            'Hac die quam fecit Dóminus, Solémnitas solemnitátum et Pascha nostrum: Resurréctio Salvatóris nostri Jesu Christi secúndum carnem.'
+          header: 'Pasc0-1',
+          content: [
+            {
+              type: 'text',
+              value:
+                'Hac die quam fecit Dóminus, Solémnitas solemnitátum et Pascha nostrum: Resurréctio Salvatóris nostri Jesu Christi secúndum carnem.'
+            }
+          ]
+        },
+        {
+          header: 'Pasc1-0',
+          content: [{ type: 'text', value: 'Domínica in Albis in Octáva Paschæ.' }]
         }
       ])
     );
@@ -1561,6 +1570,13 @@ describe('composeHour', () => {
         { type: 'text', value: 'Kaléndis Aprílis' },
         { type: 'separator' },
         { type: 'text', value: 'Romæ pássio sanctæ Theodóræ.' }
+      ])
+    );
+    corpus.addFile(
+      makeFile('horas/Latin/Martyrologium1960/04-07', '__preamble', [
+        { type: 'text', value: 'Séptimo Idus Aprílis' },
+        { type: 'separator' },
+        { type: 'text', value: 'In Africa sancti Epiphánii Epíscopi.' }
       ])
     );
 
@@ -1595,6 +1611,25 @@ describe('composeHour', () => {
     expect(martyrology!.lines[2]!.marker).toBe('v.');
     expect(renderRuns(martyrology!.lines[2]!, 'Latin')).toBe(
       'Kaléndis Aprílis Luna vicésima prima Anno Dómini 2024'
+    );
+
+    const saturday = composeHour({
+      corpus,
+      summary: buildSummary(hour, {
+        date: '2024-04-06',
+        dayName: 'Pasc0-6'
+      }),
+      version: stubVersion,
+      hour: 'prime',
+      options: { languages: ['Latin'] }
+    });
+    const saturdayMartyrology = saturday.sections.find((section) => section.slot === 'martyrology');
+    expect(renderRuns(saturdayMartyrology!.lines[0]!, 'Latin')).toBe(
+      'Séptimo Idus Aprílis Luna vicésima séptima Anno Dómini 2024'
+    );
+    expect(renderRuns(saturdayMartyrology!.lines[1]!, 'Latin')).toBe('_');
+    expect(renderRuns(saturdayMartyrology!.lines[2]!, 'Latin')).toBe(
+      'Domínica in Albis in Octáva Paschæ.'
     );
   });
 
