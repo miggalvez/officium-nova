@@ -22,6 +22,54 @@ anchor.
 
 ## Entries
 
+### 2026-04-27 — Pattern: Major-hour psalm-tie alignment for sparsely tagged `[Ant Laudes]` / `[Ant Vespera]` sections (engine-bug, fixed)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** Holy Saturday Lauds (`2024-03-30`) under all three
+Roman policies opened with `Canticum Ezechiæ [1]` instead of
+`Psalmus 50 [1]`, and slot `[4]` showed `Canticum Moysis` (the Day6
+psalter default) instead of the source-overridden `Canticum
+Ezechiæ`. Holy Saturday's `[Ant Laudes]` block is the only Lauds
+section in the corpus where most antiphon lines lack a `;;NNN` psalm
+tie but one — `A porta ínferi … ;;222` — does, so the misalignment
+only surfaced on this date.
+
+**Root cause.** `extractMajorHourPsalmRefs` packed `psalmRef` and
+`text;;NNN` nodes into a *dense* array and skipped untagged text
+antiphons, then `decoratePsalmodyAssignments` consumed
+`properPsalmRefs[index]` *positionally* against the antiphon list. For
+Holy Saturday, only one node carried a tie, so the dense array was
+length 1 and the only override `Ps 222 (Cant Ezechiæ)` landed on slot
+0 instead of slot 3. Slot 3 then kept the Day6 Laudes2 default
+`Cant Moysis (Ps 226)` from the psalter scheme.
+
+**Resolution.** Phase 2 now produces a position-aligned sparse array:
+each visible antiphon-bearing node (text with substantive content or a
+`psalmRef`) contributes one slot. Untagged antiphon text yields
+`undefined`, leaving the psalter day's default psalm in place;
+`;;NNN`-tagged text and `psalmRef` nodes push the explicit override.
+Conditional and reference subtrees keep their existing recursive
+expansion. The caller's truthiness check on `properPsalmRefs[index]`
+already handled `undefined`, so no caller change was needed beyond
+the type widening.
+
+**Citation.**
+
+- `upstream/web/www/horas/Latin/Tempora/Quad6-6.txt:176-182`
+  ([Ant Laudes] with the lone `;;222` tie on the fourth antiphon)
+- `upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm222.txt`
+  (Cant Ezechiæ, the source-overridden Lauds canticle)
+- `packages/rubrical-engine/src/hours/apply-rule-set.ts:663-770`
+  (`extractMajorHourPsalmRefs` + `isAntiphonLikeText`)
+
+**Impact.** All three Holy Saturday Lauds rows close to exact match
+under Reduced 1955 and Rubrics 1960; Divino Afflatu advances to the
+already-classified DA Triduum Lauds `_` vs `50:3a Miserére mei`
+rendering-difference family at line 114. Net unadjudicated drop:
+Divino Afflatu `2 → 1`, Reduced 1955 `4 → 3`, Rubrics 1960 `7 → 6`,
+total `13 → 10`.
+
 ### 2026-04-27 — Pattern: 1960 Lent ferial Lauds / Vespers later-block fallback (engine-bug, fixed)
 
 **Commit.** Current tranche commit.

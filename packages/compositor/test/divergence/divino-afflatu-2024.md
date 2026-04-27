@@ -15,7 +15,7 @@ This file tracks the current **legacy Perl rendered Hour vs compositor** compari
 - Divergent hours: `496`
 - Divergent dates: `62`
 - Best matching prefix before divergence: `136` lines
-- Average matching prefix before divergence: `4.8` lines
+- Average matching prefix before divergence: `5.0` lines
 - Divergence breakdown by hour:
   - `Matins`: `62/62`
   - `Lauds`: `62/62`
@@ -26,9 +26,9 @@ This file tracks the current **legacy Perl rendered Hour vs compositor** compari
   - `Vespers`: `62/62`
   - `Compline`: `62/62`
 - Adjudication breakdown (see `adjudications.json` and ADR-011):
-  - `unadjudicated`: `2`
+  - `unadjudicated`: `1`
   - `perl-bug`: `421`
-  - `rendering-difference`: `73`
+  - `rendering-difference`: `74`
 
 ## Sample mismatches
 
@@ -203,7 +203,7 @@ This file tracks the current **legacy Perl rendered Hour vs compositor** compari
 | 2024-03-29 | Vespers | 118 | 118 | 11 | 12 | 115:7 Dirupísti víncula mea: * tibi sacrificábo hóstiam laudis, et nomen Dómini invocábo. | 115:7 Dirupísti víncula mea: ‡ tibi sacrificábo hóstiam laudis, * et nomen Dómini invocábo. | perl-bug | upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm115.txt:7 — the source line explicitly encodes Psalm 115:7b as `Dirupísti víncula mea: ‡ (8) tibi sacrificábo hóstiam laudis, * et nomen Dómini invocábo.` The compositor preserves that half-verse structure while Perl flattens it to a single `*` boundary. |
 | 2024-03-29 | Compline | 79 | 78 | 5 | 6 | Psalmus 4 [5] | Psalmus 4 [4] | perl-bug | upstream/web/cgi-bin/horas/horasscripts.pl:638 + officium.pl:186 — Perl emits the bracketed psalm-slot index from the global counters `$psalmnum1`/`$psalmnum2`, which are initialized once per officium.pl load and only re-zeroed inside `psalmi()`. The DA Triduum `Special Completorium` bypasses `psalmi()` (the `[Special Completorium]` block replaces the `#Psalmi` slot directly), so the counter retains the value left over from the first invocation of `collect_units` in `packages/compositor/test/fixtures/officium-content-snapshot.pl:74-103`. The harness calls `collect_units` once per language without resetting the counter, so the Latin pass starts at the post-English counter (4 for DA Maundy/Good Friday) and renders Psalm 4 as `[5]`. The compositor's `[4]` reflects the psalm number doubling as the bracket label in `packages/compositor/src/compose/triduum-special.ts:309`. Both renderings preserve the same `Psalmus 4` heading and identical psalm verses; the bracket index is a non-authoritative display counter that the source does not prescribe. |
 | 2024-03-30 | Matins | 286 | 276 | 0 | 1 | secreto | Nocturnus I | perl-bug | upstream/web/www/horas/Latin/Sancti/01-06.txt:4-8 — the Epiphany Rule explicitly says `Omit ad Matutinum Incipit Invitatorium Hymnus`, so Matins opens directly at the nocturn heading. The compositor preserves that source-backed omission while the Perl comparison surface still emits the suppressed pre-lesson opener. |
-| 2024-03-30 | Lauds | 140 | 184 | 4 | 5 | Psalmus 50 [1] | Canticum Ezechiæ [1] | unadjudicated |  |
+| 2024-03-30 | Lauds | 140 | 138 | 113 | 114 | _ | 50:3a Miserére mei, Deus, * secúndum magnam misericórdiam tuam. | rendering-difference | upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm50.txt:1 — the Psalm 50 corpus encodes verse 3a as `Miserére mei, Deus, * secúndum magnam misericórdiam tuam.` The compositor preserves that source-backed first-verse rendering with the inline 50:3a numeric marker; the Perl comparison surface omits that line entirely (renders blank `_`) on DA Triduum Lauds and minor hours after the source-backed silent prayers. |
 | 2024-03-30 | Prime | 80 | 78 | 53 | 54 | _ | 50:3a Miserére mei, Deus, * secúndum magnam misericórdiam tuam. | rendering-difference | upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm50.txt:1 — the Psalm 50 corpus encodes verse 3a as `Miserére mei, Deus, * secúndum magnam misericórdiam tuam.` The compositor preserves that source-backed first-verse rendering with the inline 50:3a numeric marker; the Perl comparison surface omits that line entirely (renders blank `_`) on DA Triduum Lauds and minor hours after the source-backed silent prayers. |
 | 2024-03-30 | Terce | 88 | 86 | 61 | 62 | _ | 50:3a Miserére mei, Deus, * secúndum magnam misericórdiam tuam. | rendering-difference | upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm50.txt:1 — the Psalm 50 corpus encodes verse 3a as `Miserére mei, Deus, * secúndum magnam misericórdiam tuam.` The compositor preserves that source-backed first-verse rendering with the inline 50:3a numeric marker; the Perl comparison surface omits that line entirely (renders blank `_`) on DA Triduum Lauds and minor hours after the source-backed silent prayers. |
 | 2024-03-30 | Sext | 88 | 86 | 61 | 62 | _ | 50:3a Miserére mei, Deus, * secúndum magnam misericórdiam tuam. | rendering-difference | upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm50.txt:1 — the Psalm 50 corpus encodes verse 3a as `Miserére mei, Deus, * secúndum magnam misericórdiam tuam.` The compositor preserves that source-backed first-verse rendering with the inline 50:3a numeric marker; the Perl comparison surface omits that line entirely (renders blank `_`) on DA Triduum Lauds and minor hours after the source-backed silent prayers. |
