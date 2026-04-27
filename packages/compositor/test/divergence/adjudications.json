@@ -16060,5 +16060,17 @@
     "notes": "Rubrics 1960 Advent Vespers later-block frontier; source-backed Advent versicle/antiphon material remains in the corpus.",
     "resolvedAt": "2026-04-26",
     "commitSha": "pending"
+  },
+  "Rubrics 1960 - 1960/2024-11-08/Vespers/c057106b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-11-08",
+    "hour": "Vespers",
+    "firstExpected": "Ant. Dómine, * probásti me et cognovísti me. ‡",
+    "firstActual": "Ant. Dómine, * probásti me et cognovísti me.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:121 — the Friday Vespers psalter row carries `Domine, * probasti me et cognovisti me.;;138(1-13)` without a trailing continuation marker. The compositor preserves the source row while the Perl comparison surface appends an unsupported trailing `‡`.",
+    "notes": "Fanout of the already-documented Rubrics 1960 unsupported trailing-continuation-marker antiphon family.",
+    "resolvedAt": "2026-04-26",
+    "commitSha": "pending"
   }
 }

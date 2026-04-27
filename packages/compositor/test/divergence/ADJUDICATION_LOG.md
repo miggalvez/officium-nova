@@ -4199,6 +4199,28 @@ Vespers row keys to the sidecar.
 **Impact.** Three Rubrics 1960 rows move from `unadjudicated` to
 `perl-bug`, narrowing the visible Advent Vespers frontier.
 
+### 2026-04-26 — Pattern: Rubrics 1960 Nov 8 Vespers trailing marker fanout (perl-bug)
+
+**Commit.** Pending in tranche commit.
+
+**Ledger signal.** Rubrics 1960 Nov `8` Vespers first diverged on the
+Friday psalter antiphon: Perl expected `Ant. Dómine, * probásti me et
+cognovísti me. ‡`, while the compositor emitted the same text without
+the trailing marker.
+
+**Root cause.** `Psalmi major:[Day5 Vespera]` carries `Dómine, *
+probásti me et cognovísti me.;;138(1-13)` with no final `‡`. This is the
+same unsupported trailing-continuation-marker comparison-surface family
+already documented for Rubrics 1960.
+
+**Resolution.** Class `perl-bug`. Added the Rubrics 1960 Nov `8` Vespers
+row key to the sidecar as fanout of that family.
+
+**Citation.** `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:121`.
+
+**Impact.** One Rubrics 1960 row moves from `unadjudicated` to
+`perl-bug`.
+
 ## See also
 
 - [ADR-011 — Divergence adjudication protocol](../../../../docs/adr/011-phase-3-divergence-adjudication.md)
