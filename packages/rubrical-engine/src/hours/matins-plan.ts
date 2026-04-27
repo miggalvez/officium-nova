@@ -474,15 +474,38 @@ function collectMatinsAntiphons(
   readonly reference: TextReference;
   readonly psalmRef?: PsalmAssignment;
 }[] {
-  const feastMatch = findSection(feastFiles, 'Ant Matutinum', input);
-  const section = feastMatch?.section ?? psalteriumDaySection;
-  if (!section) {
+  const feastMatches = findSections(feastFiles, 'Ant Matutinum', input);
+  for (const match of feastMatches) {
+    const sourcePath = match.file.path.replace(/\.txt$/u, '');
+    const entries = collectMatinsAntiphonEntriesFromSection(
+      match.section,
+      sourcePath,
+      input
+    );
+    if (entries.length > 0) {
+      return entries;
+    }
+  }
+
+  if (!psalteriumDaySection) {
     return [];
   }
 
-  const sourcePath = feastMatch
-    ? feastMatch.file.path.replace(/\.txt$/u, '')
-    : PSALTERIUM_MATINS_CONTENT_PATH;
+  return collectMatinsAntiphonEntriesFromSection(
+    psalteriumDaySection,
+    PSALTERIUM_MATINS_CONTENT_PATH,
+    input
+  );
+}
+
+function collectMatinsAntiphonEntriesFromSection(
+  section: ParsedFile['sections'][number],
+  sourcePath: string,
+  input: BuildMatinsPlanInput
+): readonly {
+  readonly reference: TextReference;
+  readonly psalmRef?: PsalmAssignment;
+}[] {
   const entries: Array<{ readonly reference: TextReference; readonly psalmRef?: PsalmAssignment }> = [];
   const visibleContent = input.version
     ? flattenVisibleMatinsAntiphonContent(section.content, input)
@@ -520,6 +543,49 @@ function collectMatinsAntiphons(
   }
 
   return entries;
+}
+
+function findSections(
+  files: readonly ParsedFile[],
+  header: string,
+  input: Pick<BuildMatinsPlanInput, 'temporal' | 'version'>
+): readonly SectionMatch[] {
+  if (files.length === 0) {
+    return [];
+  }
+
+  const date = normalizeDateInput(input.temporal.date);
+  const matches: SectionMatch[] = [];
+
+  for (const file of files) {
+    for (const section of file.sections) {
+      if (section.header !== header) {
+        continue;
+      }
+
+      if (!section.condition) {
+        matches.push({ file, section });
+        continue;
+      }
+
+      if (!input.version) {
+        continue;
+      }
+
+      if (
+        conditionMatches(section.condition, {
+          date,
+          dayOfWeek: input.temporal.dayOfWeek,
+          season: input.temporal.season,
+          version: input.version
+        })
+      ) {
+        matches.push({ file, section });
+      }
+    }
+  }
+
+  return matches;
 }
 
 function flattenVisibleMatinsAntiphonContent(

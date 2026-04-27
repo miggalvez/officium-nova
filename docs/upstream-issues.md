@@ -2324,17 +2324,17 @@ pnpm -C packages/compositor compare:phase-3-perl -- --version "Rubrics 1960 - 19
 |---|---|---|---|
 | Rubrics 1960 - 1960 | 2024-02-24 | Vespers | `b047f132` |
 
-### 2026-04-27 — Reduced 1955 Easter-Octave Thursday Matins opens with the full source antiphon
+### 2026-04-27 — Reduced 1955 Easter-Octave weekday Matins opens with the full source antiphon
 
 **Classification.** `perl-bug`
 
-**Summary.** On Reduced 1955 `2024-04-04`, Easter Octave Thursday
-Matins continues to use Easter Sunday's `[Ant Matutinum]` block, whose
-source carries the full antiphon `Ego sum qui sum, * et consílium meum
-non est cum ímpiis, sed in lege Dómini volúntas mea est, allelúja.`
-The compositor preserves that source text. The Perl comparison surface
-abbreviates the antiphon to incipit-only `Ant. Ego sum qui sum.` on
-subsequent Easter Octave days.
+**Summary.** On Reduced 1955 Easter Octave weekday Matins, the
+weekday offices continue to use Easter Sunday's `[Ant Matutinum]`
+block, whose source carries the full antiphon `Ego sum qui sum, * et
+consílium meum non est cum ímpiis, sed in lege Dómini volúntas mea
+est, allelúja.` The compositor preserves that source text. The Perl
+comparison surface abbreviates the antiphon to incipit-only
+`Ant. Ego sum qui sum.` on several subsequent Easter Octave days.
 
 **Primary source.**
 `upstream/web/www/horas/Latin/Tempora/Pasc0-0.txt:60`
@@ -2349,7 +2349,10 @@ pnpm -C packages/compositor compare:phase-3-perl -- --version "Reduced - 1955" -
 
 | Policy | Date | Hour | Row key suffix |
 |---|---|---|---|
+| Reduced - 1955 | 2024-04-03 | Matins | `570ca05e` |
 | Reduced - 1955 | 2024-04-04 | Matins | `570ca05e` |
+| Reduced - 1955 | 2024-04-05 | Matins | `570ca05e` |
+| Reduced - 1955 | 2024-04-06 | Matins | `570ca05e` |
 
 ### 2026-04-27 — Reduced 1955 Low Sunday Lauds preserves the source-backed proper paschal antiphon
 

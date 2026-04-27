@@ -8205,6 +8205,17 @@
     "resolvedAt": "2026-04-22",
     "commitSha": "7508fb4"
   },
+  "Reduced - 1955/2024-04-02/Matins/29ec2a3d": {
+    "policy": "Reduced - 1955",
+    "date": "2024-04-02",
+    "hour": "Matins",
+    "firstExpected": "Pater Noster dicitur secreto usque ad Et ne nos indúcas in tentatiónem:",
+    "firstActual": "« Pater Noster » dicitur secreto usque ad « Et ne nos indúcas in tentatiónem: »",
+    "class": "rendering-difference",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Rubricae.txt:1-2 — the corpus rubric carries guillemets around both `Pater Noster` and `Et ne nos indúcas in tentatiónem:`. Perl strips them while the compositor preserves them; both are surface renderings of the same rubric sentence, not a liturgical-content disagreement.",
+    "notes": "Fanout of the Roman Matins pre-lesson Pater Noster guillemet rendering family after the Easter Octave weekday Matins inherited-antiphon seam advanced to the pre-lesson transition.",
+    "resolvedAt": "2026-04-27"
+  },
   "Reduced - 1955/2024-04-02/Prime/29ec2a3d": {
     "policy": "Reduced - 1955",
     "date": "2024-04-02",
@@ -8240,6 +8251,29 @@
     "notes": "Representative entry for the Reduced 1955 major-hour full-antiphon opening family where Perl abbreviates source-backed antiphons to incipits.",
     "resolvedAt": "2026-04-24",
     "commitSha": "dfbe3fe"
+  },
+  "Reduced - 1955/2024-04-03/Matins/29ec2a3d": {
+    "policy": "Reduced - 1955",
+    "date": "2024-04-03",
+    "hour": "Matins",
+    "firstExpected": "Pater Noster dicitur secreto usque ad Et ne nos indúcas in tentatiónem:",
+    "firstActual": "« Pater Noster » dicitur secreto usque ad « Et ne nos indúcas in tentatiónem: »",
+    "class": "rendering-difference",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Rubricae.txt:1-2 — the corpus rubric carries guillemets around both `Pater Noster` and `Et ne nos indúcas in tentatiónem:`. Perl strips them while the compositor preserves them; both are surface renderings of the same rubric sentence, not a liturgical-content disagreement.",
+    "notes": "Fanout of the Roman Matins pre-lesson Pater Noster guillemet rendering family after the Easter Octave weekday Matins inherited-antiphon seam advanced to the pre-lesson transition.",
+    "resolvedAt": "2026-04-27"
+  },
+  "Reduced - 1955/2024-04-03/Matins/570ca05e": {
+    "policy": "Reduced - 1955",
+    "date": "2024-04-03",
+    "hour": "Matins",
+    "firstExpected": "Ant. Ego sum qui sum.",
+    "firstActual": "Ant. Ego sum qui sum, * et consílium meum non est cum ímpiis, sed in lege Dómini volúntas mea est, allelúja.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Tempora/Pasc0-0.txt:60 — Easter Sunday Ant Matutinum carries the full antiphon `Ego sum qui sum, * et consílium meum non est cum ímpiis, sed in lege Dómini volúntas mea est, allelúja.`. The compositor preserves that source-backed antiphon on inherited Easter Octave weekday Matins; the Perl comparison surface abbreviates it to the incipit-only `Ant. Ego sum qui sum` on these days.",
+    "notes": "Fanout of the Reduced 1955 Easter Octave Matins full-antiphon source surface exposed after the inherited Ant Matutinum planner seam was fixed.",
+    "resolvedAt": "2026-04-27",
+    "commitSha": "8a2f1f7"
   },
   "Reduced - 1955/2024-04-03/Prime/29ec2a3d": {
     "policy": "Reduced - 1955",
@@ -8349,6 +8383,29 @@
     "resolvedAt": "2026-04-24",
     "commitSha": "dfbe3fe"
   },
+  "Reduced - 1955/2024-04-05/Matins/29ec2a3d": {
+    "policy": "Reduced - 1955",
+    "date": "2024-04-05",
+    "hour": "Matins",
+    "firstExpected": "Pater Noster dicitur secreto usque ad Et ne nos indúcas in tentatiónem:",
+    "firstActual": "« Pater Noster » dicitur secreto usque ad « Et ne nos indúcas in tentatiónem: »",
+    "class": "rendering-difference",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Rubricae.txt:1-2 — the corpus rubric carries guillemets around both `Pater Noster` and `Et ne nos indúcas in tentatiónem:`. Perl strips them while the compositor preserves them; both are surface renderings of the same rubric sentence, not a liturgical-content disagreement.",
+    "notes": "Fanout of the Roman Matins pre-lesson Pater Noster guillemet rendering family after the Easter Octave weekday Matins inherited-antiphon seam advanced to the pre-lesson transition.",
+    "resolvedAt": "2026-04-27"
+  },
+  "Reduced - 1955/2024-04-05/Matins/570ca05e": {
+    "policy": "Reduced - 1955",
+    "date": "2024-04-05",
+    "hour": "Matins",
+    "firstExpected": "Ant. Ego sum qui sum.",
+    "firstActual": "Ant. Ego sum qui sum, * et consílium meum non est cum ímpiis, sed in lege Dómini volúntas mea est, allelúja.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Tempora/Pasc0-0.txt:60 — Easter Sunday Ant Matutinum carries the full antiphon `Ego sum qui sum, * et consílium meum non est cum ímpiis, sed in lege Dómini volúntas mea est, allelúja.`. The compositor preserves that source-backed antiphon on inherited Easter Octave weekday Matins; the Perl comparison surface abbreviates it to the incipit-only `Ant. Ego sum qui sum` on these days.",
+    "notes": "Fanout of the Reduced 1955 Easter Octave Matins full-antiphon source surface exposed after the inherited Ant Matutinum planner seam was fixed.",
+    "resolvedAt": "2026-04-27",
+    "commitSha": "8a2f1f7"
+  },
   "Reduced - 1955/2024-04-05/Prime/29ec2a3d": {
     "policy": "Reduced - 1955",
     "date": "2024-04-05",
@@ -8396,6 +8453,29 @@
     "notes": "Representative entry for the Reduced 1955 major-hour full-antiphon opening family where Perl abbreviates source-backed antiphons to incipits.",
     "resolvedAt": "2026-04-24",
     "commitSha": "dfbe3fe"
+  },
+  "Reduced - 1955/2024-04-06/Matins/29ec2a3d": {
+    "policy": "Reduced - 1955",
+    "date": "2024-04-06",
+    "hour": "Matins",
+    "firstExpected": "Pater Noster dicitur secreto usque ad Et ne nos indúcas in tentatiónem:",
+    "firstActual": "« Pater Noster » dicitur secreto usque ad « Et ne nos indúcas in tentatiónem: »",
+    "class": "rendering-difference",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Rubricae.txt:1-2 — the corpus rubric carries guillemets around both `Pater Noster` and `Et ne nos indúcas in tentatiónem:`. Perl strips them while the compositor preserves them; both are surface renderings of the same rubric sentence, not a liturgical-content disagreement.",
+    "notes": "Fanout of the Roman Matins pre-lesson Pater Noster guillemet rendering family after the Easter Octave weekday Matins inherited-antiphon seam advanced to the pre-lesson transition.",
+    "resolvedAt": "2026-04-27"
+  },
+  "Reduced - 1955/2024-04-06/Matins/570ca05e": {
+    "policy": "Reduced - 1955",
+    "date": "2024-04-06",
+    "hour": "Matins",
+    "firstExpected": "Ant. Ego sum qui sum.",
+    "firstActual": "Ant. Ego sum qui sum, * et consílium meum non est cum ímpiis, sed in lege Dómini volúntas mea est, allelúja.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Tempora/Pasc0-0.txt:60 — Easter Sunday Ant Matutinum carries the full antiphon `Ego sum qui sum, * et consílium meum non est cum ímpiis, sed in lege Dómini volúntas mea est, allelúja.`. The compositor preserves that source-backed antiphon on inherited Easter Octave weekday Matins; the Perl comparison surface abbreviates it to the incipit-only `Ant. Ego sum qui sum` on these days.",
+    "notes": "Fanout of the Reduced 1955 Easter Octave Matins full-antiphon source surface exposed after the inherited Ant Matutinum planner seam was fixed.",
+    "resolvedAt": "2026-04-27",
+    "commitSha": "8a2f1f7"
   },
   "Reduced - 1955/2024-04-07/Compline/5dc10d20": {
     "policy": "Reduced - 1955",
@@ -13489,6 +13569,17 @@
     "resolvedAt": "2026-04-22",
     "commitSha": "7508fb4"
   },
+  "Rubrics 1960 - 1960/2024-04-02/Matins/29ec2a3d": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-04-02",
+    "hour": "Matins",
+    "firstExpected": "Pater Noster dicitur secreto usque ad Et ne nos indúcas in tentatiónem:",
+    "firstActual": "« Pater Noster » dicitur secreto usque ad « Et ne nos indúcas in tentatiónem: »",
+    "class": "rendering-difference",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Rubricae.txt:1-2 — the corpus rubric carries guillemets around both `Pater Noster` and `Et ne nos indúcas in tentatiónem:`. Perl strips them while the compositor preserves them; both are surface renderings of the same rubric sentence, not a liturgical-content disagreement.",
+    "notes": "Fanout of the Roman Matins pre-lesson Pater Noster guillemet rendering family after the Easter Octave weekday Matins inherited-antiphon seam advanced to the pre-lesson transition.",
+    "resolvedAt": "2026-04-27"
+  },
   "Rubrics 1960 - 1960/2024-04-02/Prime/29ec2a3d": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2024-04-02",
@@ -13524,6 +13615,17 @@
     "notes": "Fanout of the Roman Lauds Psalm 99 half-verse family after the Easter-Octave Vespers burn-down exposed the same source-backed `‡ ... *` seam on April octave Lauds.",
     "resolvedAt": "2026-04-22",
     "commitSha": "7508fb4"
+  },
+  "Rubrics 1960 - 1960/2024-04-03/Matins/29ec2a3d": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-04-03",
+    "hour": "Matins",
+    "firstExpected": "Pater Noster dicitur secreto usque ad Et ne nos indúcas in tentatiónem:",
+    "firstActual": "« Pater Noster » dicitur secreto usque ad « Et ne nos indúcas in tentatiónem: »",
+    "class": "rendering-difference",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Rubricae.txt:1-2 — the corpus rubric carries guillemets around both `Pater Noster` and `Et ne nos indúcas in tentatiónem:`. Perl strips them while the compositor preserves them; both are surface renderings of the same rubric sentence, not a liturgical-content disagreement.",
+    "notes": "Fanout of the Roman Matins pre-lesson Pater Noster guillemet rendering family after the Easter Octave weekday Matins inherited-antiphon seam advanced to the pre-lesson transition.",
+    "resolvedAt": "2026-04-27"
   },
   "Rubrics 1960 - 1960/2024-04-03/Prime/29ec2a3d": {
     "policy": "Rubrics 1960 - 1960",
@@ -13609,6 +13711,17 @@
     "resolvedAt": "2026-04-22",
     "commitSha": "7508fb4"
   },
+  "Rubrics 1960 - 1960/2024-04-05/Matins/29ec2a3d": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-04-05",
+    "hour": "Matins",
+    "firstExpected": "Pater Noster dicitur secreto usque ad Et ne nos indúcas in tentatiónem:",
+    "firstActual": "« Pater Noster » dicitur secreto usque ad « Et ne nos indúcas in tentatiónem: »",
+    "class": "rendering-difference",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Rubricae.txt:1-2 — the corpus rubric carries guillemets around both `Pater Noster` and `Et ne nos indúcas in tentatiónem:`. Perl strips them while the compositor preserves them; both are surface renderings of the same rubric sentence, not a liturgical-content disagreement.",
+    "notes": "Fanout of the Roman Matins pre-lesson Pater Noster guillemet rendering family after the Easter Octave weekday Matins inherited-antiphon seam advanced to the pre-lesson transition.",
+    "resolvedAt": "2026-04-27"
+  },
   "Rubrics 1960 - 1960/2024-04-05/Prime/29ec2a3d": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2024-04-05",
@@ -13644,6 +13757,17 @@
     "notes": "Fanout of the Roman Lauds Psalm 99 half-verse family after the Easter-Octave Vespers burn-down exposed the same source-backed `‡ ... *` seam on April octave Lauds.",
     "resolvedAt": "2026-04-22",
     "commitSha": "7508fb4"
+  },
+  "Rubrics 1960 - 1960/2024-04-06/Matins/29ec2a3d": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-04-06",
+    "hour": "Matins",
+    "firstExpected": "Pater Noster dicitur secreto usque ad Et ne nos indúcas in tentatiónem:",
+    "firstActual": "« Pater Noster » dicitur secreto usque ad « Et ne nos indúcas in tentatiónem: »",
+    "class": "rendering-difference",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Rubricae.txt:1-2 — the corpus rubric carries guillemets around both `Pater Noster` and `Et ne nos indúcas in tentatiónem:`. Perl strips them while the compositor preserves them; both are surface renderings of the same rubric sentence, not a liturgical-content disagreement.",
+    "notes": "Fanout of the Roman Matins pre-lesson Pater Noster guillemet rendering family after the Easter Octave weekday Matins inherited-antiphon seam advanced to the pre-lesson transition.",
+    "resolvedAt": "2026-04-27"
   },
   "Rubrics 1960 - 1960/2024-04-07/Compline/57de2841": {
     "policy": "Rubrics 1960 - 1960",

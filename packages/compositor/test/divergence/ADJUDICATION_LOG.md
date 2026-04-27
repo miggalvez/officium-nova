@@ -22,6 +22,42 @@ anchor.
 
 ## Entries
 
+### 2026-04-27 — Pattern: Easter Octave inherited Matins antiphons (engine-bug fix + adjudication fanout)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** Reduced 1955 and Rubrics 1960 Easter Octave
+weekday Matins rows on Apr `02`, `03`, `05`, and `06` were stopping
+before their inherited Easter Sunday psalmody. The first divergence
+was the Easter Sunday antiphon expected by Perl while the compositor
+had already advanced to the nocturn versicle.
+
+**Root cause.** The parser now resolves the `@Tempora/Pasc0-0::...`
+empty-section form correctly, but the Matins planner still chose the
+local weekday `[Ant Matutinum]` overlay as the only antiphon source.
+That overlay contains a reference plus local V/R lines, not concrete
+antiphon rows, so the planner produced an empty psalmody plan instead
+of falling through to the inherited `Pasc0-0` antiphons.
+
+**Resolution.** `collectMatinsAntiphons` now scans visible
+`[Ant Matutinum]` candidates in precedence order and uses the first
+section that yields concrete antiphon/psalm assignments; reference-only
+overlays may still own the versicle seam, but they no longer suppress
+the inherited antiphons. Added focused planner coverage for the
+`Pasc0-2` overlay shape.
+
+**Citation.**
+`upstream/web/www/horas/Latin/Tempora/Pasc0-2.txt:18-24` and
+`upstream/web/www/horas/Latin/Tempora/Pasc0-0.txt:60-63`.
+
+**Impact.** Rubrics 1960 drops from `16` to `12` unadjudicated rows.
+Reduced 1955 drops from `16` to `12` after the newly exposed Apr
+`03`/`05`/`06` incipit-vs-full rows are classified as fanout of the
+already documented Reduced 1955 Easter Octave Matins antiphon
+`perl-bug` family. The Apr `02` rows in both simplified Roman policies
+advance to the existing pre-lesson `Pater Noster` guillemet rendering
+family.
+
 ### 2026-04-27 — Pattern: parser `@PATH::sub` empty-section reference (parser-bug, fixed)
 
 **Commit.** Current tranche commit.
