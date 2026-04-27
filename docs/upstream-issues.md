@@ -24,6 +24,42 @@ entry here and re-run the adjudication harness.
 
 ## Current entries
 
+### 2026-04-27 — DA All Saints Compline applies anticipated Office of the Dead modifications without a Compline section
+
+**Classification.** `perl-bug`
+
+**Summary.** Under Divino Afflatu, Sancti `11-02.txt` gates `No prima
+Vespera` to `(rubrica 1955 aut rubrica 1960)`, so First Vespers of
+All Souls is anticipated on Nov 1 evening. The Office of the Dead is
+built on `Commune/C9`, which contains Matins, Lauds, and Vespers
+slots but no Compline section. Compline of Nov 1 evening should
+therefore be of the day (All Saints) — the Office of the Dead simply
+has no Compline rubrics to apply. The Perl render surface instead
+applies the 11-02 Rule `Omit Incipit Hymnus Capitulum Lectio Preces
+Commemoratio Suffragium` modifications and the `Special Conclusio`
+treatment to Compline, producing a hybrid that begins directly at the
+Confiteor, inserts `Réquiem ætérnam` V/R after each psalm, and ends
+with the proper-of-the-dead conclusion — a rendering with no corpus
+authority for Compline.
+
+**Primary source.**
+`upstream/web/www/horas/Latin/Sancti/11-02.txt:7-19` and
+`upstream/web/www/horas/Latin/Commune/C9.txt`. C9 has no `[Compline]`
+or `[Ant Completorium]` / `[Hymnus Completorium]` slot; 11-02 inherits
+from C9 (`ex C9`).
+
+**Reproduction.**
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Divino Afflatu - 1954" --date 2024-11-01 --hour Compline --debug-window 60
+```
+
+**Affected stable divergence-row keys.**
+
+| Policy | Date | Hour | Row key suffix |
+|---|---|---|---|
+| Divino Afflatu - 1954 | 2024-11-01 | Compline | `7018ef26` |
+
 ### 2026-04-27 — DA Triduum Special Compline `Psalmus N` heading bracket leaks across language passes
 
 **Classification.** `perl-bug`

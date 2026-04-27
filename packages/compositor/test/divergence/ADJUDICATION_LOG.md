@@ -22,6 +22,46 @@ anchor.
 
 ## Entries
 
+### 2026-04-27 — Pattern: DA All Saints Compline → anticipated Office of the Dead Compline hybrid (perl-bug, classified)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** Divino Afflatu Nov 1 Compline (`2024-11-01`)
+diverged starting at line 1: the compositor opened with the standard
+Compline `[Lectio brevis]` Extra Chorum rubric, while Perl jumped
+directly to the Confiteor and rendered each psalm with `Réquiem
+ætérnam` V/R plus a closing `Conclusio specialis` block — a Compline
+flavoured for the Office of the Dead.
+
+**Root cause.** Under DA, the Sancti `11-02.txt` Rule
+`(rubrica 1955 aut rubrica 1960) No prima Vespera` is gated out, so
+First Vespers of All Souls is anticipated on Nov 1 evening. The
+Office of the Dead is built on `Commune/C9` which contains Matins,
+Lauds, and Vespers slots — but **no Compline section**. Compline that
+follows the anticipated First Vespers is therefore Compline of the
+day (All Saints), as the compositor emits. Perl appears to apply the
+Office-of-the-Dead `Omit Incipit Hymnus Capitulum Lectio Preces
+Commemoratio Suffragium` rule and the `Special Conclusio` modification
+to Compline regardless, producing a hybrid Compline that has no
+corpus authority.
+
+**Resolution.** Classify as `perl-bug`. The compositor's All Saints
+Compline is source-correct under DA: the Office of the Dead does not
+include Compline, so an anticipated Office-of-the-Dead First Vespers
+cannot drag Compline modifications with it. Reduced 1955 and Rubrics
+1960 already gate `No prima Vespera` true and avoid the anticipation
+entirely, so neither policy exhibits the divergence on Nov 1.
+
+**Citation.**
+
+- `upstream/web/www/horas/Latin/Sancti/11-02.txt:7-19`
+- `upstream/web/www/horas/Latin/Commune/C9.txt` (no Compline slots)
+
+**Impact.** Net unadjudicated drop: Divino Afflatu from `3` to `2`,
+total from `15` to `14`. Holy Saturday Lauds canticle order and Holy
+Saturday Vespers heavy-shortening remain as the residual DA
+structural items.
+
 ### 2026-04-27 — Pattern: Marian common Matins antiphon section reference resolution (engine-bug, fixed)
 
 **Commit.** Current tranche commit.
