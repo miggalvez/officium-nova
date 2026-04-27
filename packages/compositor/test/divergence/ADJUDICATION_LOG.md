@@ -22,6 +22,230 @@ anchor.
 
 ## Entries
 
+### 2026-04-27 — Pattern: 1960 Lent ferial Lauds / Vespers later-block fallback (engine-bug, fixed)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** Rubrics 1960 Saturday in week 1 of Lent
+(`2024-02-24`) Lauds emitted the year-round ferial later block —
+`Rom 13:12-13` capitulum, `Auróra jam spargit polum` Saturday Day6
+hymn, `V. Repléti sumus mane misericórdia tua.` versicle — instead of
+the Lent ferial trio: `Isa 58:1` (Clama, ne cesses), `O sol salútis`
+hymn, and `V. Ángelis suis Deus mandávit de te.` versicle.
+
+**Root cause.** Phase 2's `majorHourLaterBlockFallbackReference`
+already routed Holy Week Mon–Wed to `[Quad5 ...]` sections in
+`Major Special.txt`, but had no equivalent branch for the broader
+Lent / Passiontide ferial later block. The generic fallback path
+returned `[Feria Laudes]` / `[Feria Versum 2]` / `[Hymnus Day${dow}
+Laudes]`, which is the year-round non-seasonal ferial set.
+
+**Resolution.** Phase 2 now adds a Lent / Passiontide ferial branch
+that returns the `[Quad ...]` sections (`Quad Laudes`,
+`Hymnus Quad Laudes`, `Quad Versum 2`, `Quad Vespera`,
+`Hymnus Quad Vespera`, `Quad Versum 3`) for chapter / hymn / versicle
+slots respectively, ahead of the year-round generic fallback. Holy
+Week Mon–Wed continues to route to `[Quad5 ...]` first. The branch is
+gated on `policy.name === 'rubrics-1960'`, matching the existing
+Holy-Week branch's policy gate.
+
+**Citation.**
+
+- `upstream/web/www/horas/Latin/Psalterium/Special/Major Special.txt:1045-1180`
+  (Quad Laudes / Quad Vespera / Quad Versum / Hymnus Quad Laudes / Hymnus Quad Vespera)
+- `packages/rubrical-engine/src/hours/apply-rule-set.ts:1450-1497`
+  (majorHourLaterBlockFallbackReference + majorHourLentFerialLaterBlockSection)
+
+**Impact.** Rubrics 1960 `2024-02-24` Lauds is now an exact match
+under the compare harness. Net unadjudicated drop: Rubrics 1960 from
+`8` to `7`, total from `14` to `13`.
+
+### 2026-04-27 — Pattern: DA All Saints Compline → anticipated Office of the Dead Compline hybrid (perl-bug, classified)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** Divino Afflatu Nov 1 Compline (`2024-11-01`)
+diverged starting at line 1: the compositor opened with the standard
+Compline `[Lectio brevis]` Extra Chorum rubric, while Perl jumped
+directly to the Confiteor and rendered each psalm with `Réquiem
+ætérnam` V/R plus a closing `Conclusio specialis` block — a Compline
+flavoured for the Office of the Dead.
+
+**Root cause.** Under DA, the Sancti `11-02.txt` Rule
+`(rubrica 1955 aut rubrica 1960) No prima Vespera` is gated out, so
+First Vespers of All Souls is anticipated on Nov 1 evening. The
+Office of the Dead is built on `Commune/C9` which contains Matins,
+Lauds, and Vespers slots — but **no Compline section**. Compline that
+follows the anticipated First Vespers is therefore Compline of the
+day (All Saints), as the compositor emits. Perl appears to apply the
+Office-of-the-Dead `Omit Incipit Hymnus Capitulum Lectio Preces
+Commemoratio Suffragium` rule and the `Special Conclusio` modification
+to Compline regardless, producing a hybrid Compline that has no
+corpus authority.
+
+**Resolution.** Classify as `perl-bug`. The compositor's All Saints
+Compline is source-correct under DA: the Office of the Dead does not
+include Compline, so an anticipated Office-of-the-Dead First Vespers
+cannot drag Compline modifications with it. Reduced 1955 and Rubrics
+1960 already gate `No prima Vespera` true and avoid the anticipation
+entirely, so neither policy exhibits the divergence on Nov 1.
+
+**Citation.**
+
+- `upstream/web/www/horas/Latin/Sancti/11-02.txt:7-19`
+- `upstream/web/www/horas/Latin/Commune/C9.txt` (no Compline slots)
+
+**Impact.** Net unadjudicated drop: Divino Afflatu from `3` to `2`,
+total from `15` to `14`. Holy Saturday Lauds canticle order and Holy
+Saturday Vespers heavy-shortening remain as the residual DA
+structural items.
+
+### 2026-04-27 — Pattern: Marian common Matins antiphon section reference resolution (engine-bug, fixed)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** Reduced 1955 Marian feasts on `2024-08-22`
+(Immaculate Heart), `2024-09-08` (Nativity BVM), and `2024-09-12`
+(Most Holy Name of Mary) Matins all opened with the wrong antiphon at
+the first Nocturn, e.g. `Ant. In Deo salutáre meum.` instead of
+`Ant. Benedícta tu * in muliéribus, et benedíctus fructus ventris
+tui.` from C11's `[Ant MatutinumBMV]`.
+
+**Root cause.** `Commune/C11.txt`'s `[Ant Matutinum]` body is *not* a
+literal antiphon list — it is three reference nodes:
+
+```
+@:Ant MatutinumBMV:1-3
+@Commune/C6::4-5
+@:Ant MatutinumBMV:4-7
+```
+
+Phase 2's `collectMatinsAntiphonEntriesFromSection` iterates the raw
+section's content and uses `antiphonLineValue` to extract antiphon
+strings. Reference nodes have no literal antiphon value, so the
+function returned an empty list and the engine fell back to the
+psalter day's Matins (`Day4` for an Aug 22 Thursday, etc.). The
+parser-resolved corpus already inlines these references into nine
+`psalmRef` nodes, but Phase 2 reads from the raw corpus by contract.
+
+**Resolution.** When every visible content node in a feast's
+`[Ant Matutinum]` is a reference, Phase 2 now expands those
+same-file or cross-file references in-place against the raw corpus —
+honoring the `lineSelector` range — before walking the antiphon
+lines. The emitted entries still point to the original section
+header so Phase 3's reference resolution against the *resolved*
+corpus continues to surface the inlined antiphon text. The expansion
+intentionally only applies when the section is otherwise empty: feast
+files that mix literal antiphons with references retain their
+existing pre-flatten behaviour.
+
+**Citation.**
+
+- `upstream/web/www/horas/Latin/Commune/C11.txt:111-123`
+- `packages/rubrical-engine/src/hours/matins-plan.ts:617-735`
+  (collectMatinsAntiphonEntriesFromSection +
+  expandSameFileMatinsAntiphonReferences)
+
+**Impact.** All three Reduced 1955 Marian Matins rows advance past
+the antiphon-mismatch frontier to the already-classified Pater Noster
+guillemet rendering family. Three fanout adjudications inherit. Net
+unadjudicated drop: Reduced 1955 from `7` to `4`, total from `18` to
+`15`.
+
+### 2026-04-27 — Pattern: `Omit Suffragium` rule action propagation to shared Roman policy (engine-bug, fixed)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** Reduced 1955 Easter Sunday Vespers (`2024-03-31`)
+diverged at line 116 with the compositor inserting an extra
+`Ant. Crucifíxus surréxit a mórtuis...` antiphon plus collect — the
+post-Vespers Suffragium Paschale that Perl correctly omits.
+
+**Root cause.** Easter Sunday's `[Rule]` (`Tempora/Pasc0-0.txt:7-13`)
+explicitly states `Omit Hymnus Preces Suffragium Commemoratio`. Phase
+2's `parseOmitDirective` correctly pushed `suffragium` to the omit
+list, but the shared Roman policy in
+`packages/rubrical-engine/src/policy/_shared/roman.ts:125-129` decided
+whether to add `suffragium-of-the-saints` based only on
+`celebrationRules.noSuffragium` (the `No suffragium` literal directive)
+and `ferialDay`. With `ferialDay=true` for Easter Sunday (a temporal
+celebration with no `kind`/`vigil`) and `noSuffragium=false` (only the
+literal `No suffragium` directive sets that flag), the policy
+re-injected `suffragium-of-the-saints` for Lauds/Vespers, overriding
+the rule's explicit omit.
+
+**Resolution.** The shared Roman `shouldSaySuffragium` predicate now
+also checks `!hourRules.omit.includes('suffragium')`, so an explicit
+`Omit ... Suffragium` rule action is honored in the policy's directive
+emission. 1960 already omits the suffragium unconditionally for
+Lauds/Vespers via `transforms.ts:71-73` (RI §169), so this fix is
+DA / Reduced 1955 only.
+
+**Citation.**
+
+- `upstream/web/www/horas/Latin/Tempora/Pasc0-0.txt:7-13`
+- `packages/rubrical-engine/src/rules/classify.ts:705-707`
+- `packages/rubrical-engine/src/policy/_shared/roman.ts:125-130`
+
+**Impact.** Reduced 1955 `2024-03-31` Vespers advances past line 115
+without inserting the suffragium block. Net unadjudicated drop:
+Reduced 1955 from `8` to `7`, total from `19` to `18`.
+
+### 2026-04-27 — Pattern: DA Triduum Special Compline `Psalmus N [index]` heading bracket (perl-bug, classified)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** Divino Afflatu Maundy Thursday and Good Friday
+Compline (`2024-03-28`, `2024-03-29`) diverged on the very first
+psalmody heading line: Perl emitted `Psalmus 4 [5]` while the
+compositor emitted `Psalmus 4 [4]`. The same off-by-N progression
+followed through `Psalmus 90 [6]/[90]`, `Psalmus 133 [7]/[133]`, and
+`Psalmus 50 [8]/[50]` later in the rendering — but the compare
+harness only surfaces the first divergent line per Hour, so only the
+opening Psalm 4 row appeared on the ledger.
+
+**Root cause.** Perl emits the bracket from two global counters
+`$psalmnum1` / `$psalmnum2` initialized once per officium.pl load
+(`upstream/web/cgi-bin/horas/officium.pl:186-187`). Those counters are
+re-zeroed inside `psalmi()` (`specials/psalmi.pl:7`), but the DA
+Triduum `Special Completorium` block bypasses `psalmi()` entirely —
+the `[Special Completorium]` source replaces the `#Psalmi` slot
+directly in `Tempora/Quad6-4.txt:210` and `Quad6-5.txt:204`. The Phase
+3 snapshot harness then calls `collect_units` once per language
+without resetting the counters
+(`packages/compositor/test/fixtures/officium-content-snapshot.pl:74-103`),
+so the Latin pass starts at the post-English counter (4 for DA
+Maundy/Good Friday Compline) and renders Psalm 4 as `[5]`. The
+compositor side renders the bracket using the psalm number itself
+(`packages/compositor/src/compose/triduum-special.ts:309`), so its
+heading is `Psalmus 4 [4]` / `Psalmus 90 [90]` / etc.
+
+**Resolution.** Classify as `perl-bug`. The bracket index is a
+non-authoritative display counter that the source never prescribes:
+`Tempora/Quad6-4.txt:220` writes `&psalm(4)`, with no bracket
+specification anywhere in the corpus. Both renderings preserve the
+same `Psalmus 4` heading and the identical psalmody verses; only the
+auxiliary heading counter differs, and only on Triduum Compline where
+both sides are in different non-canonical states.
+
+**Citation.**
+
+- `upstream/web/cgi-bin/horas/horasscripts.pl:638` — `++$psalmnum1` /
+  `++$psalmnum2` global counter increment
+- `upstream/web/cgi-bin/horas/officium.pl:186-187` — counters
+  initialized once per officium.pl load
+- `upstream/web/cgi-bin/horas/specials/psalmi.pl:7` — counters
+  re-zeroed only inside `psalmi()`
+- `upstream/web/www/horas/Latin/Tempora/Quad6-4.txt:210-228` — Maundy
+  Thursday `[Special Completorium]` block bypasses `psalmi()`
+- `packages/compositor/test/fixtures/officium-content-snapshot.pl:74-103` —
+  the snapshot helper invokes `collect_units` per language without
+  resetting `$psalmnum1`/`$psalmnum2`
+
+**Impact.** Both DA Compline rows for `2024-03-28` and `2024-03-29`
+are now classified as `perl-bug`. Divino Afflatu unadjudicated drops
+from `5` to `3`, total unadjudicated drops from `21` to `19`.
+
 ### 2026-04-27 — Pattern: Saturday `Psalmi Dominica` First Vespers psalter day (engine-bug fix + rendering fanout)
 
 **Commit.** Current tranche commit.

@@ -171,7 +171,7 @@ for (const handle of selectedHandles) {
           }
         });
         const actual = normalizeComposedLines(composed, args.language);
-        const mismatch = compareLineArrays(expected, actual);
+        const mismatch = compareLineArrays(expected, actual, { window: args.debugWindow });
         if (mismatch) {
           mismatches.push({
             date,
@@ -218,6 +218,17 @@ for (const handle of selectedHandles) {
     console.log(
       `  ${mismatch.date} ${mismatch.hour} line ${mismatch.firstMismatchIndex + 1}: expected=${expected} actual=${actual}${suffix}`
     );
+    if (args.debugWindow > 0) {
+      const start = (mismatch.contextStart ?? 0) + 1;
+      console.log(`    expected (Perl) context [from line ${start}]:`);
+      for (const line of mismatch.expectedContext ?? []) {
+        console.log(`      ${JSON.stringify(line).slice(0, 220)}`);
+      }
+      console.log(`    actual (compositor) context [from line ${start}]:`);
+      for (const line of mismatch.actualContext ?? []) {
+        console.log(`      ${JSON.stringify(line).slice(0, 220)}`);
+      }
+    }
   }
 
   const classifiedMismatches = mismatches.map((mismatch) => ({
@@ -272,7 +283,8 @@ function parseArgs(argv) {
     langfb: 'English',
     maxReport: 20,
     maxDocRows: 40,
-    writeDocs: true
+    writeDocs: true,
+    debugWindow: 0
   };
 
   for (let index = 0; index < argv.length; index += 1) {
@@ -323,6 +335,11 @@ function parseArgs(argv) {
         break;
       case '--no-write-docs':
         out.writeDocs = false;
+        break;
+      case '--debug-window':
+        if (!next) throw new Error('--debug-window requires a value');
+        out.debugWindow = Number(next);
+        index += 1;
         break;
       default:
         throw new Error(`Unknown argument ${arg}`);
@@ -609,7 +626,7 @@ function decodeHtmlEntities(text) {
   });
 }
 
-function compareLineArrays(expected, actual) {
+function compareLineArrays(expected, actual, options = {}) {
   if (expected.length === actual.length && expected.every((line, index) => line === actual[index])) {
     return null;
   }
@@ -623,12 +640,17 @@ function compareLineArrays(expected, actual) {
     index += 1;
   }
 
+  const window = Math.max(0, options.window ?? 0);
+  const before = Math.max(2, window);
+  const after = Math.max(3, window);
+
   return {
     firstMismatchIndex: index,
     expectedLine: expected[index] ?? null,
     actualLine: actual[index] ?? null,
-    expectedContext: expected.slice(Math.max(0, index - 2), index + 3),
-    actualContext: actual.slice(Math.max(0, index - 2), index + 3)
+    expectedContext: expected.slice(Math.max(0, index - before), index + after),
+    actualContext: actual.slice(Math.max(0, index - before), index + after),
+    contextStart: Math.max(0, index - before)
   };
 }
 

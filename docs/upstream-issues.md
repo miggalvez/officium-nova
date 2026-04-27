@@ -24,6 +24,78 @@ entry here and re-run the adjudication harness.
 
 ## Current entries
 
+### 2026-04-27 — DA All Saints Compline applies anticipated Office of the Dead modifications without a Compline section
+
+**Classification.** `perl-bug`
+
+**Summary.** Under Divino Afflatu, Sancti `11-02.txt` gates `No prima
+Vespera` to `(rubrica 1955 aut rubrica 1960)`, so First Vespers of
+All Souls is anticipated on Nov 1 evening. The Office of the Dead is
+built on `Commune/C9`, which contains Matins, Lauds, and Vespers
+slots but no Compline section. Compline of Nov 1 evening should
+therefore be of the day (All Saints) — the Office of the Dead simply
+has no Compline rubrics to apply. The Perl render surface instead
+applies the 11-02 Rule `Omit Incipit Hymnus Capitulum Lectio Preces
+Commemoratio Suffragium` modifications and the `Special Conclusio`
+treatment to Compline, producing a hybrid that begins directly at the
+Confiteor, inserts `Réquiem ætérnam` V/R after each psalm, and ends
+with the proper-of-the-dead conclusion — a rendering with no corpus
+authority for Compline.
+
+**Primary source.**
+`upstream/web/www/horas/Latin/Sancti/11-02.txt:7-19` and
+`upstream/web/www/horas/Latin/Commune/C9.txt`. C9 has no `[Compline]`
+or `[Ant Completorium]` / `[Hymnus Completorium]` slot; 11-02 inherits
+from C9 (`ex C9`).
+
+**Reproduction.**
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Divino Afflatu - 1954" --date 2024-11-01 --hour Compline --debug-window 60
+```
+
+**Affected stable divergence-row keys.**
+
+| Policy | Date | Hour | Row key suffix |
+|---|---|---|---|
+| Divino Afflatu - 1954 | 2024-11-01 | Compline | `7018ef26` |
+
+### 2026-04-27 — DA Triduum Special Compline `Psalmus N` heading bracket leaks across language passes
+
+**Classification.** `perl-bug`
+
+**Summary.** On Divino Afflatu Maundy Thursday and Good Friday, the
+`[Special Completorium]` block in `Tempora/Quad6-4.txt` /
+`Quad6-5.txt` substitutes for the ordinary `#Psalmi` slot and bypasses
+`psalmi()`. `psalmi()` is the only Perl seam that re-zeroes the global
+`$psalmnum1` / `$psalmnum2` counters that drive the `Psalmus N
+[index]` bracket suffix. The Phase 3 snapshot harness invokes
+`collect_units` once per language without resetting the counters, so
+the second (Latin) pass starts at the post-English counter and
+renders Psalm 4 as `[5]`, Psalm 90 as `[6]`, Psalm 133 as `[7]`, and
+the silent Psalm 50 as `[8]` — all off by `+4` from where they would
+sit if `psalmi()` had run.
+
+**Primary source.**
+`upstream/web/www/horas/Latin/Tempora/Quad6-4.txt:210-228` and
+`upstream/web/www/horas/Latin/Tempora/Quad6-5.txt:204-220`. The corpus
+writes `&psalm(4)`, `&psalm(90)`, `&psalm(133)`, `&psalm(233)`, and
+`&psalm(50)` with no bracket-index specification anywhere in the
+source, so any `[N]` value is purely a Perl rendering artifact.
+
+**Reproduction.**
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Divino Afflatu - 1954" --date 2024-03-28 --hour Compline --debug-window 60
+```
+
+**Affected stable divergence-row keys.**
+
+| Policy | Date | Hour | Row key suffix |
+|---|---|---|---|
+| Divino Afflatu - 1954 | 2024-03-28 | Compline | `004b557c` |
+| Divino Afflatu - 1954 | 2024-03-29 | Compline | `004b557c` |
+
 ### 2026-04-26 — Saturday Office BVM Prime lesson is ignored in Perl
 
 **Classification.** `perl-bug`
