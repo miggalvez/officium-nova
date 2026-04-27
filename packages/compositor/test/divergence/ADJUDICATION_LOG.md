@@ -22,6 +22,191 @@ anchor.
 
 ## Entries
 
+### 2026-04-26 — Pattern: Reduced 1955 Easter-Octave / Low-Sunday paschal antiphon rendering (perl-bug, classified)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** Reduced 1955 Easter Octave Thursday (`2024-04-04`)
+Matins and Low Sunday (`2024-04-07`) Lauds opened with the
+source-backed paschal antiphon while the Perl comparison surface
+collapsed it to either an incipit or a generic triple-alleluia.
+
+**Root cause.** Both rows are surface-rendering disagreements rather
+than liturgical-content disagreements:
+
+- For `2024-04-04` Matins, `Tempora/Pasc0-0.txt:60` carries the full
+  antiphon `Ego sum qui sum, * et consílium meum non est cum
+  ímpiis, sed in lege Dómini volúntas mea est, allelúja.` The
+  compositor preserves that source-backed antiphon; Perl abbreviates
+  it to incipit `Ant. Ego sum qui sum.` on subsequent Easter Octave
+  days.
+- For `2024-04-07` Lauds, `Psalterium/Psalmi/Psalmi major.txt:1-6`
+  Day0 Laudes1 carries the proper Sunday paschal antiphon
+  `Allelúja, * Dóminus regnávit, decórem índuit, allelúja, allelúja.`
+  The compositor emits the source-backed antiphon; Perl substitutes a
+  generic triple-alleluia surface.
+
+**Resolution.** Classified both as `perl-bug` (representative entries)
+with the source citations above. Net unadjudicated drop: Reduced 1955
+from `21` → `19`.
+
+### 2026-04-26 — Pattern: paschal-tide ferial Matins versicle override (engine-bug, fixed)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** Reduced 1955 / Rubrics 1960 Easter-Octave Matins
+for `2024-04-01` (Easter Monday) and `2024-04-04` (Easter Thursday)
+diverged at the third-nocturn-position versicle. The compositor
+emitted the psalter day's default `V. Mirífica Dómine
+misericórdias tuas` / `V. Non amóvit Dóminus oratiónem meam`,
+while Perl emitted `V. Surréxit Dóminus de sepúlcro, allelúja.` from
+`[Pasch 1 Versum]`.
+
+**Root cause.** The seasonal Matins versicle helper introduced in
+the prior tranche only mapped `lent` → `Quad` and `passiontide` →
+`Quad5`. The horas Perl harness gates the same substitution on
+`$name eq 'Pasch'` whenever the winner is from tempora.
+
+**Resolution.** Extended `seasonNameForVersicle` in Phase 2's
+matins-plan to map `eastertide` and `pentecost-octave` → `Pasch`.
+Advent's Sunday Matins still uses the inline versicles inside
+`[Adv 0 Ant Matutinum]`, so it intentionally stays out of the
+helper.
+
+**Citation.**
+`upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:221-298`
+(`[Pasch 0/1/2/3/6 Versum]` sections);
+`upstream/web/cgi-bin/horas/specmatins.pl:252-266` (the seasonal
+substitution loop gated on `$name =~ /^(?:Adv|Quad5?|Pasch)$/`).
+
+**Impact.** Easter Octave Monday and Thursday Matins now match Perl
+through the third-nocturn versicle in both Roman policies. The
+newly exposed pre-lesson `Pater Noster` guillemet rows fan out
+from the existing rendering-difference family. Net unadjudicated
+drop: Reduced 1955 from `22` → `21`, Rubrics 1960 from `22` → `20`.
+
+### 2026-04-26 — Pattern: First Vespers prefers `[Versum 1]` and `[Ant 1]` (engine-bug, fixed)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** Rubrics 1960 `2024-11-08` Vespers (First Vespers
+of Lateran Dedication) and the Saturday-Vespers-of-Sunday family
+diverged at the Vespers V/R and the Magnificat antiphon. The
+compositor consistently picked the Second-Vespers slot
+(`[Versum 3]` / `[Ant 3]`) even when concurrence handed Vespers to
+tomorrow's First Vespers, so the Lateran Dedication V/R came out as
+`Domum tuam, Dómine, decet sanctitúdo` and the Mag antiphon as
+`O quam metuéndus est * locus iste` instead of the First-Vespers
+proper `Hæc est domus Dómini fírmiter ædificáta` and
+`Sanctificávit Dóminus * tabernáculum suum`.
+
+**Root cause.** The `apply-rule-set.ts` slot-name lattice for
+`versicle` and `antiphon-ad-magnificat` ignored
+`__vespersSide`. Both slots returned the Second-Vespers ordering for
+every Vespers call.
+
+**Resolution.** Made the lattice side-aware so First Vespers prefers
+`[Versum 1]` / `[Ant 1]`, with `[Versum 3]` / `[Ant 3]` retained as
+the secondary fallback. Mirrors `getantvers` in
+`upstream/web/cgi-bin/horas/specials.pl:548` (`my $key = $num == 3 ?
+$vespera : $num`).
+
+**Citation.** `upstream/web/cgi-bin/horas/specials.pl:540-588`
+(`getantvers` First-vs-Second Vespers slot mapping);
+`upstream/web/www/horas/Latin/Commune/C8.txt:101-103,391-393`
+(Dedication Vespers Versum 1 vs Versum 3);
+`upstream/web/www/horas/Latin/Commune/C8.txt:105-106,395-396`
+(Dedication Mag antiphon Ant 1 vs Ant 3).
+
+**Impact.** Rubrics 1960 `2024-11-08` Vespers V/R now matches Perl;
+several Saturday-Vespers Magnificat antiphons advance their
+matching prefix. Three new fanout adjudications inherit the
+trailing-`‡` rendering-difference family. Net unadjudicated drop:
+Reduced 1955 from `27` → `22`, Rubrics 1960 from `24` → `22`.
+
+### 2026-04-26 — Pattern: First Vespers of Sunday uses today's Saturday psalter day (engine-bug, fixed)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** Reduced 1955 / Rubrics 1960 Saturday Vespers for
+`2024-02-24` and the wider Saturday-before-Sunday Vespers family
+opened the 1st antiphon at the wrong psalter day. The compositor
+emitted Sunday's `[Day0 Vespera]` antiphon (`Dixit Dóminus * Dómino
+meo: Sede a dextris meis`) on Saturday evening. Perl emitted the
+Saturday `[Day6 Vespera]` antiphon (`Benedíctus Dóminus * suscéptor
+meus et liberátor meus`).
+
+**Root cause.** The Phase 2 engine fed `winner.temporal` into Vespers
+for both Second Vespers (today) and First Vespers (tomorrow). When
+concurrence handed the boundary to tomorrow's celebration, the
+`temporal.dayOfWeek` jumped to Sunday (`0`), and the psalter selector
+routed the psalmody to Sunday's `[Day0 Vespera]` block. The Roman
+1960 rubrics instead key Vespers psalmody off the *evening's*
+day-of-week — Saturday evening always uses Saturday's psalter, even
+when the office is Sunday's First Vespers.
+
+**Resolution.** When `vespersSide === 'first'`, override
+`temporal.dayOfWeek` with today's value so the psalter falls back to
+the correct evening-day (`Day6 Vespera` for Saturday evening,
+`Day5 Vespera` for Friday evening, etc.). The celebration object
+keeps the winner's feast metadata, so proper antiphons / hymns / etc.
+still come from the Sunday office when present.
+
+**Citation.** `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi
+major.txt:142-147` (Day6 Vespera psalter section);
+`upstream/web/cgi-bin/horas/horas.pl` Vespers psalmody flow keys off
+`$dayofweek` (the evening's day) regardless of the celebrated office.
+
+**Impact.** Saturday Vespers for `2024-02-24` (Sat in Lent 1) now
+matches Perl's psalter through the entire 5-psalm block; the
+remaining drift is the existing incipit-vs-full / trailing-`‡`
+rendering family. Rubrics 1960 matching prefix on the Saturday
+moves from `5` lines to `56` lines. Reduced 1955 / Rubrics 1960
+each gain one classified row in this tranche; further Saturday
+Vespers rows (paschaltide `Daya6 Vespera`, BVM Saturday Office, etc.)
+remain to be addressed in follow-up tranches.
+
+### 2026-04-26 — Pattern: ferial 1-nocturn seasonal Matins versicle (engine-bug, fixed)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** Reduced 1955 / Rubrics 1960 Matins for `2024-02-24`
+(Saturday in Lent week 1), `2024-03-25` and `2024-03-26` (Holy Week
+ferials), and `2024-12-24` (Vigil of the Nativity) all diverged deep
+inside Matins (line `224`–`248`) at the third-nocturn-position
+versicle. Perl emitted the seasonal `[Quad N Versum]` /
+`[Quad5 N Versum]` / `[Nat24 Versum]` text while the compositor kept
+the ferial psalter's default versicle (`Exáltent Dóminum in ecclésia
+plebis`, `Deus, ne síleas a me, remítte mihi`, etc.).
+
+**Root cause.** Phase 2 Matins planning only applied the seasonal
+Matins versicle override on Sundays. The horas Perl harness instead
+gates the substitution on `(winner from Tempora) || $name eq 'Nat' ||
+$name eq 'Epi'` and replaces the third-nocturn-position versicle on
+weekdays using `dayofweek2i` (Mon/Thu/Sun → 1, Tue/Fri → 2,
+Wed/Sat → 3). The Vigil of the Nativity (`Dec 24`) further hardcodes
+`[Nat24 Versum]` regardless of weekday or season.
+
+**Resolution.** Generalized the Phase 2 helper to:
+
+- always emit `[Nat24 Versum]` for `Dec 24`;
+- keep per-nocturn `[<name> N Versum]` mapping on Sundays;
+- on temporal-driven 1-nocturn ferial Matins inside Lent or
+  Passiontide, emit `[<name> ${dayOfWeek2i} Versum]`.
+
+**Citation.** `upstream/web/cgi-bin/horas/specmatins.pl:252-266`,
+`upstream/web/cgi-bin/horas/specmatins.pl:412-426`,
+`upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:179-181`
+(Nat24 Versum), `:213-294` (Quad / Quad5 N Versum entries).
+
+**Impact.** Closes the late-Matins versicle drift family for the
+Roman ledgers. Matching prefix advances on the affected dates from
+~248 lines to ~250 lines (the next divergence is the already-
+adjudicated Pater Noster guillemet rendering difference). Seven new
+fanout adjudications inherit the existing Pater Noster
+rendering-difference citation. Net unadjudicated drop: Reduced 1955
+from `32` → `28`, Rubrics 1960 from `28` → `25`.
+
 ### 2026-04-26 — Pattern: Reduced 1955 Christmas-octave Matins first-nocturn versicles (mixed fix + adjudication)
 
 **Commit.** Current tranche commit.

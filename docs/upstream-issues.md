@@ -2272,6 +2272,111 @@ comparison surface leaves the C2/C1 common default hymn endings.
 | Rubrics 1960 - 1960 | 2024-12-26 | Matins | `4956efcc` |
 | Rubrics 1960 - 1960 | 2024-12-27 | Matins | `2e537874` |
 
+### 2026-04-26 — Saturday Vespers `[Day6 Vespera]` opening antiphon is abbreviated in Perl
+
+**Classification.** `perl-bug`
+
+**Summary.** After the Phase 2 fix that keys First Vespers psalmody
+off the evening's day-of-week, Reduced 1955 Saturday Vespers (Sat
+before a privileged Sunday, e.g. `2024-02-24`) emits the source-backed
+`[Day6 Vespera]` opening antiphon `Benedíctus Dóminus * suscéptor meus
+et liberátor meus.` Perl abbreviates it to incipit-only
+`Ant. Benedíctus Dóminus. ‡` on the same comparison surface.
+
+**Primary source.**
+`upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:142-147`
+
+**Reproduction.**
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Reduced - 1955" --date 2024-02-24 --hour Vespera
+```
+
+**Affected stable divergence-row keys.**
+
+| Policy | Date | Hour | Row key suffix |
+|---|---|---|---|
+| Reduced - 1955 | 2024-02-24 | Vespers | `75b87843` |
+
+### 2026-04-26 — Rubrics 1960 Saturday Vespers `[Day6 Vespera]` closing antiphon gains an unsupported trailing `‡`
+
+**Classification.** `perl-bug`
+
+**Summary.** After the Phase 2 fix that keys First Vespers psalmody
+off the evening's day-of-week, Rubrics 1960 Saturday Vespers
+(`2024-02-24`) preserves the source-backed `[Day6 Vespera]` closing
+antiphon `Fidélis Dóminus * in ómnibus verbis suis: et sanctus in
+ómnibus opéribus suis.` without a trailing continuation marker. The
+Perl comparison surface appends an unsupported `‡` to the same line.
+
+**Primary source.**
+`upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:142-147`
+
+**Reproduction.**
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Rubrics 1960 - 1960" --date 2024-02-24 --hour Vespera
+```
+
+**Affected stable divergence-row keys.**
+
+| Policy | Date | Hour | Row key suffix |
+|---|---|---|---|
+| Rubrics 1960 - 1960 | 2024-02-24 | Vespers | `b047f132` |
+
+### 2026-04-27 — Reduced 1955 Easter-Octave Thursday Matins opens with the full source antiphon
+
+**Classification.** `perl-bug`
+
+**Summary.** On Reduced 1955 `2024-04-04`, Easter Octave Thursday
+Matins continues to use Easter Sunday's `[Ant Matutinum]` block, whose
+source carries the full antiphon `Ego sum qui sum, * et consílium meum
+non est cum ímpiis, sed in lege Dómini volúntas mea est, allelúja.`
+The compositor preserves that source text. The Perl comparison surface
+abbreviates the antiphon to incipit-only `Ant. Ego sum qui sum.` on
+subsequent Easter Octave days.
+
+**Primary source.**
+`upstream/web/www/horas/Latin/Tempora/Pasc0-0.txt:60`
+
+**Reproduction.**
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Reduced - 1955" --date 2024-04-04 --hour Matutinum
+```
+
+**Affected stable divergence-row keys.**
+
+| Policy | Date | Hour | Row key suffix |
+|---|---|---|---|
+| Reduced - 1955 | 2024-04-04 | Matins | `570ca05e` |
+
+### 2026-04-27 — Reduced 1955 Low Sunday Lauds preserves the source-backed proper paschal antiphon
+
+**Classification.** `perl-bug`
+
+**Summary.** On Reduced 1955 `2024-04-07` (Low Sunday) Lauds, the
+Day0 `Laudes1` psalter-major source carries the proper Sunday paschal
+antiphon `Allelúja, * Dóminus regnávit, decórem índuit, allelúja,
+allelúja.` The compositor emits that source-backed antiphon. The Perl
+comparison surface substitutes a generic `Ant. Allelúja, * allelúja,
+allelúja.` triple-alleluia incipit, dropping the proper paschal text.
+
+**Primary source.**
+`upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:1-6`
+
+**Reproduction.**
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Reduced - 1955" --date 2024-04-07 --hour Laudes
+```
+
+**Affected stable divergence-row keys.**
+
+| Policy | Date | Hour | Row key suffix |
+|---|---|---|---|
+| Reduced - 1955 | 2024-04-07 | Lauds | `fe825d42` |
+
 ## See also
 
 - [ADR-011 — Phase 3 divergence adjudication](./adr/011-phase-3-divergence-adjudication.md)
