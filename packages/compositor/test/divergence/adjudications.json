@@ -1858,6 +1858,18 @@
     "resolvedAt": "2026-04-19",
     "commitSha": "bfb3c52"
   },
+  "Divino Afflatu - 1954/2024-03-28/Compline/004b557c": {
+    "policy": "Divino Afflatu - 1954",
+    "date": "2024-03-28",
+    "hour": "Compline",
+    "firstExpected": "Psalmus 4 [5]",
+    "firstActual": "Psalmus 4 [4]",
+    "class": "perl-bug",
+    "citation": "upstream/web/cgi-bin/horas/horasscripts.pl:638 + officium.pl:186 — Perl emits the bracketed psalm-slot index from the global counters `$psalmnum1`/`$psalmnum2`, which are initialized once per officium.pl load and only re-zeroed inside `psalmi()`. The DA Triduum `Special Completorium` bypasses `psalmi()` (the `[Special Completorium]` block replaces the `#Psalmi` slot directly), so the counter retains the value left over from the first invocation of `collect_units` in `packages/compositor/test/fixtures/officium-content-snapshot.pl:74-103`. The harness calls `collect_units` once per language without resetting the counter, so the Latin pass starts at the post-English counter (4 for DA Maundy/Good Friday) and renders Psalm 4 as `[5]`. The compositor's `[4]` reflects the psalm number doubling as the bracket label in `packages/compositor/src/compose/triduum-special.ts:309`. Both renderings preserve the same `Psalmus 4` heading and identical psalm verses; the bracket index is a non-authoritative display counter that the source does not prescribe.",
+    "notes": "Fan out to all DA Triduum Special Completorium rows where Perl's bracket counter diverges from the compositor's psalm-number bracket.",
+    "resolvedAt": "2026-04-27",
+    "commitSha": "pending"
+  },
   "Divino Afflatu - 1954/2024-03-28/Lauds/9772c004": {
     "policy": "Divino Afflatu - 1954",
     "date": "2024-03-28",
@@ -1941,6 +1953,18 @@
     "notes": "Fanout of the Psalm 115 half-verse marker family for the DA Triduum Vespers row exposed by the new prelude rubric emit.",
     "resolvedAt": "2026-04-27",
     "commitSha": "5ba3f86"
+  },
+  "Divino Afflatu - 1954/2024-03-29/Compline/004b557c": {
+    "policy": "Divino Afflatu - 1954",
+    "date": "2024-03-29",
+    "hour": "Compline",
+    "firstExpected": "Psalmus 4 [5]",
+    "firstActual": "Psalmus 4 [4]",
+    "class": "perl-bug",
+    "citation": "upstream/web/cgi-bin/horas/horasscripts.pl:638 + officium.pl:186 — Perl emits the bracketed psalm-slot index from the global counters `$psalmnum1`/`$psalmnum2`, which are initialized once per officium.pl load and only re-zeroed inside `psalmi()`. The DA Triduum `Special Completorium` bypasses `psalmi()` (the `[Special Completorium]` block replaces the `#Psalmi` slot directly), so the counter retains the value left over from the first invocation of `collect_units` in `packages/compositor/test/fixtures/officium-content-snapshot.pl:74-103`. The harness calls `collect_units` once per language without resetting the counter, so the Latin pass starts at the post-English counter (4 for DA Maundy/Good Friday) and renders Psalm 4 as `[5]`. The compositor's `[4]` reflects the psalm number doubling as the bracket label in `packages/compositor/src/compose/triduum-special.ts:309`. Both renderings preserve the same `Psalmus 4` heading and identical psalm verses; the bracket index is a non-authoritative display counter that the source does not prescribe.",
+    "notes": "Fan out to all DA Triduum Special Completorium rows where Perl's bracket counter diverges from the compositor's psalm-number bracket.",
+    "resolvedAt": "2026-04-27",
+    "commitSha": "pending"
   },
   "Divino Afflatu - 1954/2024-03-29/Lauds/9772c004": {
     "policy": "Divino Afflatu - 1954",
@@ -8133,6 +8157,17 @@
     "resolvedAt": "2026-04-19",
     "commitSha": "379dd72"
   },
+  "Reduced - 1955/2024-03-31/Prime/29ec2a3d": {
+    "policy": "Reduced - 1955",
+    "date": "2024-03-31",
+    "hour": "Prime",
+    "firstExpected": "Pater Noster dicitur secreto usque ad Et ne nos indúcas in tentatiónem:",
+    "firstActual": "« Pater Noster » dicitur secreto usque ad « Et ne nos indúcas in tentatiónem: »",
+    "class": "rendering-difference",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Rubricae.txt:1-2 — the corpus rubric carries guillemets around both `Pater Noster` and `Et ne nos indúcas in tentatiónem:`. Perl strips them while the compositor preserves them; both are surface renderings of the same rubric sentence, not a liturgical-content disagreement.",
+    "notes": "Fanout of the Prime post-Martyrologium Easter-Octave guillemet seam after the Easter Sunday Prime psalm override and Mobile.txt fixes advanced the row to the inherited `[Pater secreto]` rubric.",
+    "resolvedAt": "2026-04-27"
+  },
   "Reduced - 1955/2024-04-01/Compline/5dc10d20": {
     "policy": "Reduced - 1955",
     "date": "2024-04-01",
@@ -8180,17 +8215,6 @@
     "notes": "Prime post-Martyrologium Easter-Octave seam under Reduced 1955. After the structural Prime fixes, the remaining stable divergence is only Perl stripping the corpus guillemets from the inherited `[Pater secreto]` rubric.",
     "resolvedAt": "2026-04-21",
     "commitSha": "f1fecef"
-  },
-  "Reduced - 1955/2024-03-31/Prime/29ec2a3d": {
-    "policy": "Reduced - 1955",
-    "date": "2024-03-31",
-    "hour": "Prime",
-    "firstExpected": "Pater Noster dicitur secreto usque ad Et ne nos indúcas in tentatiónem:",
-    "firstActual": "« Pater Noster » dicitur secreto usque ad « Et ne nos indúcas in tentatiónem: »",
-    "class": "rendering-difference",
-    "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Rubricae.txt:1-2 — the corpus rubric carries guillemets around both `Pater Noster` and `Et ne nos indúcas in tentatiónem:`. Perl strips them while the compositor preserves them; both are surface renderings of the same rubric sentence, not a liturgical-content disagreement.",
-    "notes": "Fanout of the Prime post-Martyrologium Easter-Octave guillemet seam after the Easter Sunday Prime psalm override and Mobile.txt fixes advanced the row to the inherited `[Pater secreto]` rubric.",
-    "resolvedAt": "2026-04-27"
   },
   "Reduced - 1955/2024-04-02/Compline/5dc10d20": {
     "policy": "Reduced - 1955",
@@ -8429,17 +8453,6 @@
     "resolvedAt": "2026-04-22",
     "commitSha": "790134e"
   },
-  "Reduced - 1955/2024-04-06/Prime/29ec2a3d": {
-    "policy": "Reduced - 1955",
-    "date": "2024-04-06",
-    "hour": "Prime",
-    "firstExpected": "Pater Noster dicitur secreto usque ad Et ne nos indúcas in tentatiónem:",
-    "firstActual": "« Pater Noster » dicitur secreto usque ad « Et ne nos indúcas in tentatiónem: »",
-    "class": "rendering-difference",
-    "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Rubricae.txt:1-2 — the corpus rubric carries guillemets around both `Pater Noster` and `Et ne nos indúcas in tentatiónem:`. Perl strips them while the compositor preserves them; both are surface renderings of the same rubric sentence, not a liturgical-content disagreement.",
-    "notes": "Fanout of the Prime post-Martyrologium Easter-Octave guillemet seam after the Mobile.txt Low Sunday rollover advanced Easter Saturday Prime to the inherited `[Pater secreto]` rubric.",
-    "resolvedAt": "2026-04-27"
-  },
   "Reduced - 1955/2024-04-05/Vespers/a214ae73": {
     "policy": "Reduced - 1955",
     "date": "2024-04-05",
@@ -8498,6 +8511,17 @@
     "notes": "Fanout of the Reduced 1955 Easter Octave Matins full-antiphon source surface exposed after the inherited Ant Matutinum planner seam was fixed.",
     "resolvedAt": "2026-04-27",
     "commitSha": "8a2f1f7"
+  },
+  "Reduced - 1955/2024-04-06/Prime/29ec2a3d": {
+    "policy": "Reduced - 1955",
+    "date": "2024-04-06",
+    "hour": "Prime",
+    "firstExpected": "Pater Noster dicitur secreto usque ad Et ne nos indúcas in tentatiónem:",
+    "firstActual": "« Pater Noster » dicitur secreto usque ad « Et ne nos indúcas in tentatiónem: »",
+    "class": "rendering-difference",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Rubricae.txt:1-2 — the corpus rubric carries guillemets around both `Pater Noster` and `Et ne nos indúcas in tentatiónem:`. Perl strips them while the compositor preserves them; both are surface renderings of the same rubric sentence, not a liturgical-content disagreement.",
+    "notes": "Fanout of the Prime post-Martyrologium Easter-Octave guillemet seam after the Mobile.txt Low Sunday rollover advanced Easter Saturday Prime to the inherited `[Pater secreto]` rubric.",
+    "resolvedAt": "2026-04-27"
   },
   "Reduced - 1955/2024-04-07/Compline/5dc10d20": {
     "policy": "Reduced - 1955",
@@ -13541,6 +13565,17 @@
     "resolvedAt": "2026-04-19",
     "commitSha": "379dd72"
   },
+  "Rubrics 1960 - 1960/2024-03-31/Prime/29ec2a3d": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-03-31",
+    "hour": "Prime",
+    "firstExpected": "Pater Noster dicitur secreto usque ad Et ne nos indúcas in tentatiónem:",
+    "firstActual": "« Pater Noster » dicitur secreto usque ad « Et ne nos indúcas in tentatiónem: »",
+    "class": "rendering-difference",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Rubricae.txt:1-2 — the corpus rubric carries guillemets around both `Pater Noster` and `Et ne nos indúcas in tentatiónem:`. Perl strips them while the compositor preserves them; both are surface renderings of the same rubric sentence, not a liturgical-content disagreement.",
+    "notes": "Fanout of the Prime post-Martyrologium Easter-Octave guillemet seam after the Easter Sunday Prime psalm override and Mobile.txt fixes advanced the row to the inherited `[Pater secreto]` rubric.",
+    "resolvedAt": "2026-04-27"
+  },
   "Rubrics 1960 - 1960/2024-04-01/Compline/57de2841": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2024-04-01",
@@ -13588,17 +13623,6 @@
     "notes": "Prime post-Martyrologium Easter-Octave seam under Rubrics 1960. After the structural Prime fixes, the remaining stable divergence is only Perl stripping the corpus guillemets from the inherited `[Pater secreto]` rubric.",
     "resolvedAt": "2026-04-21",
     "commitSha": "f1fecef"
-  },
-  "Rubrics 1960 - 1960/2024-03-31/Prime/29ec2a3d": {
-    "policy": "Rubrics 1960 - 1960",
-    "date": "2024-03-31",
-    "hour": "Prime",
-    "firstExpected": "Pater Noster dicitur secreto usque ad Et ne nos indúcas in tentatiónem:",
-    "firstActual": "« Pater Noster » dicitur secreto usque ad « Et ne nos indúcas in tentatiónem: »",
-    "class": "rendering-difference",
-    "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Rubricae.txt:1-2 — the corpus rubric carries guillemets around both `Pater Noster` and `Et ne nos indúcas in tentatiónem:`. Perl strips them while the compositor preserves them; both are surface renderings of the same rubric sentence, not a liturgical-content disagreement.",
-    "notes": "Fanout of the Prime post-Martyrologium Easter-Octave guillemet seam after the Easter Sunday Prime psalm override and Mobile.txt fixes advanced the row to the inherited `[Pater secreto]` rubric.",
-    "resolvedAt": "2026-04-27"
   },
   "Rubrics 1960 - 1960/2024-04-02/Compline/57de2841": {
     "policy": "Rubrics 1960 - 1960",
@@ -13789,17 +13813,6 @@
     "resolvedAt": "2026-04-22",
     "commitSha": "790134e"
   },
-  "Rubrics 1960 - 1960/2024-04-06/Prime/29ec2a3d": {
-    "policy": "Rubrics 1960 - 1960",
-    "date": "2024-04-06",
-    "hour": "Prime",
-    "firstExpected": "Pater Noster dicitur secreto usque ad Et ne nos indúcas in tentatiónem:",
-    "firstActual": "« Pater Noster » dicitur secreto usque ad « Et ne nos indúcas in tentatiónem: »",
-    "class": "rendering-difference",
-    "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Rubricae.txt:1-2 — the corpus rubric carries guillemets around both `Pater Noster` and `Et ne nos indúcas in tentatiónem:`. Perl strips them while the compositor preserves them; both are surface renderings of the same rubric sentence, not a liturgical-content disagreement.",
-    "notes": "Fanout of the Prime post-Martyrologium Easter-Octave guillemet seam after the Mobile.txt Low Sunday rollover advanced Easter Saturday Prime to the inherited `[Pater secreto]` rubric.",
-    "resolvedAt": "2026-04-27"
-  },
   "Rubrics 1960 - 1960/2024-04-06/Compline/57de2841": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2024-04-06",
@@ -13833,6 +13846,17 @@
     "class": "rendering-difference",
     "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Rubricae.txt:1-2 — the corpus rubric carries guillemets around both `Pater Noster` and `Et ne nos indúcas in tentatiónem:`. Perl strips them while the compositor preserves them; both are surface renderings of the same rubric sentence, not a liturgical-content disagreement.",
     "notes": "Fanout of the Roman Matins pre-lesson Pater Noster guillemet rendering family after the Easter Octave weekday Matins inherited-antiphon seam advanced to the pre-lesson transition.",
+    "resolvedAt": "2026-04-27"
+  },
+  "Rubrics 1960 - 1960/2024-04-06/Prime/29ec2a3d": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-04-06",
+    "hour": "Prime",
+    "firstExpected": "Pater Noster dicitur secreto usque ad Et ne nos indúcas in tentatiónem:",
+    "firstActual": "« Pater Noster » dicitur secreto usque ad « Et ne nos indúcas in tentatiónem: »",
+    "class": "rendering-difference",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Rubricae.txt:1-2 — the corpus rubric carries guillemets around both `Pater Noster` and `Et ne nos indúcas in tentatiónem:`. Perl strips them while the compositor preserves them; both are surface renderings of the same rubric sentence, not a liturgical-content disagreement.",
+    "notes": "Fanout of the Prime post-Martyrologium Easter-Octave guillemet seam after the Mobile.txt Low Sunday rollover advanced Easter Saturday Prime to the inherited `[Pater secreto]` rubric.",
     "resolvedAt": "2026-04-27"
   },
   "Rubrics 1960 - 1960/2024-04-07/Compline/57de2841": {

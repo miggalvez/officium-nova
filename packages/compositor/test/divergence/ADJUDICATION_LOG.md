@@ -22,6 +22,61 @@ anchor.
 
 ## Entries
 
+### 2026-04-27 — Pattern: DA Triduum Special Compline `Psalmus N [index]` heading bracket (perl-bug, classified)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** Divino Afflatu Maundy Thursday and Good Friday
+Compline (`2024-03-28`, `2024-03-29`) diverged on the very first
+psalmody heading line: Perl emitted `Psalmus 4 [5]` while the
+compositor emitted `Psalmus 4 [4]`. The same off-by-N progression
+followed through `Psalmus 90 [6]/[90]`, `Psalmus 133 [7]/[133]`, and
+`Psalmus 50 [8]/[50]` later in the rendering — but the compare
+harness only surfaces the first divergent line per Hour, so only the
+opening Psalm 4 row appeared on the ledger.
+
+**Root cause.** Perl emits the bracket from two global counters
+`$psalmnum1` / `$psalmnum2` initialized once per officium.pl load
+(`upstream/web/cgi-bin/horas/officium.pl:186-187`). Those counters are
+re-zeroed inside `psalmi()` (`specials/psalmi.pl:7`), but the DA
+Triduum `Special Completorium` block bypasses `psalmi()` entirely —
+the `[Special Completorium]` source replaces the `#Psalmi` slot
+directly in `Tempora/Quad6-4.txt:210` and `Quad6-5.txt:204`. The Phase
+3 snapshot harness then calls `collect_units` once per language
+without resetting the counters
+(`packages/compositor/test/fixtures/officium-content-snapshot.pl:74-103`),
+so the Latin pass starts at the post-English counter (4 for DA
+Maundy/Good Friday Compline) and renders Psalm 4 as `[5]`. The
+compositor side renders the bracket using the psalm number itself
+(`packages/compositor/src/compose/triduum-special.ts:309`), so its
+heading is `Psalmus 4 [4]` / `Psalmus 90 [90]` / etc.
+
+**Resolution.** Classify as `perl-bug`. The bracket index is a
+non-authoritative display counter that the source never prescribes:
+`Tempora/Quad6-4.txt:220` writes `&psalm(4)`, with no bracket
+specification anywhere in the corpus. Both renderings preserve the
+same `Psalmus 4` heading and the identical psalmody verses; only the
+auxiliary heading counter differs, and only on Triduum Compline where
+both sides are in different non-canonical states.
+
+**Citation.**
+
+- `upstream/web/cgi-bin/horas/horasscripts.pl:638` — `++$psalmnum1` /
+  `++$psalmnum2` global counter increment
+- `upstream/web/cgi-bin/horas/officium.pl:186-187` — counters
+  initialized once per officium.pl load
+- `upstream/web/cgi-bin/horas/specials/psalmi.pl:7` — counters
+  re-zeroed only inside `psalmi()`
+- `upstream/web/www/horas/Latin/Tempora/Quad6-4.txt:210-228` — Maundy
+  Thursday `[Special Completorium]` block bypasses `psalmi()`
+- `packages/compositor/test/fixtures/officium-content-snapshot.pl:74-103` —
+  the snapshot helper invokes `collect_units` per language without
+  resetting `$psalmnum1`/`$psalmnum2`
+
+**Impact.** Both DA Compline rows for `2024-03-28` and `2024-03-29`
+are now classified as `perl-bug`. Divino Afflatu unadjudicated drops
+from `5` to `3`, total unadjudicated drops from `21` to `19`.
+
 ### 2026-04-27 — Pattern: Saturday `Psalmi Dominica` First Vespers psalter day (engine-bug fix + rendering fanout)
 
 **Commit.** Current tranche commit.
