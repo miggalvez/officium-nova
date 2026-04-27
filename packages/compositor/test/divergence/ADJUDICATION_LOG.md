@@ -22,6 +22,50 @@ anchor.
 
 ## Entries
 
+### 2026-04-27 — Pattern: Easter Sunday Matins / Lauds prelude rubric (engine-bug, fixed)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** Reduced 1955 / Rubrics 1960 Easter Sunday
+(`2024-03-31`) Matins and Lauds diverged at line 1 — the very first
+rendered line. Perl emitted the source-backed rubric block
+
+> Cum solemnis vigiliæ paschalis celebratio locum obtineat officii
+> nocturni dominicæ Resurrectionis, Matutino ejusdem dominicæ
+> Resurrectionis omisso, statim inter Missarum vigiliæ solemnia, post
+> communionem, cantatur Laudes. Officium dominicæ Resurrectionis
+> prosequitur deínde cum Prima.
+>
+> Qui vero solemni vigiliæ paschali non interfuerunt, tenentur dicere
+> Matutinum et Laudes dominicæ Resurrectionis.
+
+while the compositor opened directly with `V. Domine, lábia +`
+(Matins) or `V. Deus + in adjutórium meum inténde.` (Lauds).
+
+**Root cause.** `Tempora/Pasc0-0.txt` carries
+`[Prelude Matutinum] (rubrica 1955 aut rubrica 1960)` and
+`[Prelude Laudes] @:Prelude Matutinum`. The compositor previously had
+no path to surface those prelude blocks; only the Triduum Vespers /
+Compline siblings were wired.
+
+**Resolution.** Added `composeEasterSundayPreludeSection` in
+`packages/compositor/src/compose/triduum-special.ts` mirroring the
+`composeTriduumSuppressedVespersSection` shape. It fires only on
+`Tempora/Pasc0-0` Matins / Lauds under 1955 / 1960, resolves the
+prelude section, and prepends it as a `rubric` section. The shared
+`resolveFlatSection` helper now converts `separator` nodes into the
+gabc-notation `_` form so the blank line between the two rubric
+sentences renders correctly.
+
+**Citation.** `upstream/web/www/horas/Latin/Tempora/Pasc0-0.txt:111-127`.
+
+**Impact.** Matching prefix on `2024-03-31` advances from `0` → `72`
+(Matins) and `0` → `25` (Lauds) for both Roman policies. The newly
+exposed pre-lesson Pater Noster guillemet and Psalm 99:3 `‡` rows
+fan out from existing rendering-difference / perl-bug families. Net
+unadjudicated drop: Reduced 1955 from `19` → `17`, Rubrics 1960 from
+`20` → `18`.
+
 ### 2026-04-26 — Pattern: Reduced 1955 Easter-Octave / Low-Sunday paschal antiphon rendering (perl-bug, classified)
 
 **Commit.** Current tranche commit.

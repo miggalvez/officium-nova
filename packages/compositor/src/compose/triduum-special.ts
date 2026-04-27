@@ -57,6 +57,57 @@ export function composeTriduumSuppressedVespersSection(
   );
 }
 
+interface ComposeEasterSundayPreludeArgs {
+  readonly hour: HourName;
+  readonly summary: DayOfficeSummary;
+  readonly corpus: TextIndex;
+  readonly options: ComposeOptions;
+  readonly context: ConditionEvalContext;
+  readonly onWarning?: (warning: ComposeWarning) => void;
+}
+
+/**
+ * Easter Sunday Matins / Lauds carry a `[Prelude Matutinum]` /
+ * `[Prelude Laudes]` rubric block under 1955 and 1960 rubrics. The block
+ * notes that Matins of the Resurrection is omitted in favor of the
+ * solemn Paschal Vigil for those who attended, and that those who did
+ * not attend are still bound to recite Matins and Lauds. The legacy
+ * Perl renderer prepends this rubric before the regular Hour content.
+ */
+export function composeEasterSundayPreludeSection(
+  args: ComposeEasterSundayPreludeArgs
+): Section | undefined {
+  if (args.hour !== 'matins' && args.hour !== 'lauds') {
+    return undefined;
+  }
+  if (!args.context.version.handle.match(/(?:1955|1960)/u)) {
+    return undefined;
+  }
+  if (args.summary.celebration.feastRef.path !== 'Tempora/Pasc0-0') {
+    return undefined;
+  }
+
+  const sectionName = args.hour === 'matins' ? 'Prelude Matutinum' : 'Prelude Laudes';
+  const ref: TextReference = {
+    path: `horas/Latin/${args.summary.celebration.feastRef.path}`,
+    section: sectionName
+  };
+  const perLanguage = resolveFlatSection(ref, args);
+  if (perLanguage.size === 0) {
+    return undefined;
+  }
+
+  return emitConfiguredSection(
+    {
+      slot: 'psalmody',
+      sectionSlot: 'paschal-vigil-prelude',
+      sectionType: 'rubric'
+    },
+    perLanguage,
+    referenceKey(ref)
+  );
+}
+
 interface ComposeTriduumSpecialComplineArgs {
   readonly hour: HourName;
   readonly structure: HourStructure;
@@ -187,7 +238,7 @@ export function composeTriduumSpecialComplineSection(
 
 function resolveFlatSection(
   ref: TextReference,
-  args: ComposeTriduumSuppressedVespersArgs
+  args: ComposeTriduumSuppressedVespersArgs | ComposeEasterSundayPreludeArgs
 ): Map<string, readonly TextContent[]> {
   const resolved = resolveReference(args.corpus, ref, {
     languages: args.options.languages,
@@ -216,8 +267,28 @@ function resolveFlatSection(
       ...(args.onWarning ? { onWarning: args.onWarning } : {})
     });
     const flattened = flattenConditionals(expanded, args.context);
-    if (flattened.length > 0) {
-      perLanguage.set(lang, Object.freeze([...flattened]));
+    // The `psalmody` emit slot used by these rubric prelude sections does
+    // not surface raw `separator` nodes as `_` lines. Convert them to the
+    // gabc-notation header form used elsewhere in this file so the
+    // Easter Sunday `[Prelude Matutinum]` / `[Prelude Laudes]` blank
+    // separator between the two rubric sentences renders as `_`.
+    const normalized: TextContent[] = [];
+    for (const node of flattened) {
+      if (node.type === 'separator') {
+        normalized.push({
+          type: 'gabcNotation',
+          notation: {
+            kind: 'header',
+            notation: '',
+            text: '_'
+          }
+        });
+        continue;
+      }
+      normalized.push(node);
+    }
+    if (normalized.length > 0) {
+      perLanguage.set(lang, Object.freeze(normalized));
     }
   }
 
