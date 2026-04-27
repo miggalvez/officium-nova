@@ -22,6 +22,45 @@ anchor.
 
 ## Entries
 
+### 2026-04-27 — Pattern: `Omit Suffragium` rule action propagation to shared Roman policy (engine-bug, fixed)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** Reduced 1955 Easter Sunday Vespers (`2024-03-31`)
+diverged at line 116 with the compositor inserting an extra
+`Ant. Crucifíxus surréxit a mórtuis...` antiphon plus collect — the
+post-Vespers Suffragium Paschale that Perl correctly omits.
+
+**Root cause.** Easter Sunday's `[Rule]` (`Tempora/Pasc0-0.txt:7-13`)
+explicitly states `Omit Hymnus Preces Suffragium Commemoratio`. Phase
+2's `parseOmitDirective` correctly pushed `suffragium` to the omit
+list, but the shared Roman policy in
+`packages/rubrical-engine/src/policy/_shared/roman.ts:125-129` decided
+whether to add `suffragium-of-the-saints` based only on
+`celebrationRules.noSuffragium` (the `No suffragium` literal directive)
+and `ferialDay`. With `ferialDay=true` for Easter Sunday (a temporal
+celebration with no `kind`/`vigil`) and `noSuffragium=false` (only the
+literal `No suffragium` directive sets that flag), the policy
+re-injected `suffragium-of-the-saints` for Lauds/Vespers, overriding
+the rule's explicit omit.
+
+**Resolution.** The shared Roman `shouldSaySuffragium` predicate now
+also checks `!hourRules.omit.includes('suffragium')`, so an explicit
+`Omit ... Suffragium` rule action is honored in the policy's directive
+emission. 1960 already omits the suffragium unconditionally for
+Lauds/Vespers via `transforms.ts:71-73` (RI §169), so this fix is
+DA / Reduced 1955 only.
+
+**Citation.**
+
+- `upstream/web/www/horas/Latin/Tempora/Pasc0-0.txt:7-13`
+- `packages/rubrical-engine/src/rules/classify.ts:705-707`
+- `packages/rubrical-engine/src/policy/_shared/roman.ts:125-130`
+
+**Impact.** Reduced 1955 `2024-03-31` Vespers advances past line 115
+without inserting the suffragium block. Net unadjudicated drop:
+Reduced 1955 from `8` to `7`, total from `19` to `18`.
+
 ### 2026-04-27 — Pattern: DA Triduum Special Compline `Psalmus N [index]` heading bracket (perl-bug, classified)
 
 **Commit.** Current tranche commit.

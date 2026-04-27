@@ -126,7 +126,8 @@ export function deriveSeasonalDirectivesRomanPre1960(
     (hour === 'lauds' || hour === 'vespers') &&
     ferialDay &&
     !privilegedSeason &&
-    !celebrationRules.noSuffragium;
+    !celebrationRules.noSuffragium &&
+    !hourRules.omit.includes('suffragium');
   if (shouldSaySuffragium) {
     directives.add('suffragium-of-the-saints');
   } else if (hour === 'lauds' || hour === 'vespers') {
