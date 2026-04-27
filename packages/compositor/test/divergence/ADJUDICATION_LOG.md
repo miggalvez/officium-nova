@@ -22,6 +22,45 @@ anchor.
 
 ## Entries
 
+### 2026-04-27 — Pattern: DA Triduum Prime silent Credo emit (engine-bug, fixed)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** After the previous tranche surfaced the DA
+Triduum Secreto + Pater + Ave prelude, the Holy Thursday / Good
+Friday / Holy Saturday Prime rows still diverged at line 4 — Perl
+emitted the silent Apostles' Creed `Credo in Deum, Patrem
+omnipoténtem,...`, while the compositor jumped directly to the first
+psalm heading `Psalmus 53 [1]`.
+
+**Root cause.** The Ordinarium `Prima.txt` `#Incipit` block lists
+`$rubrica Secreto`, `$Pater noster`, `$Ave Maria`, `$Credo` in
+that order under the `(deinde dicuntur)` annotation. Under
+Tridentine rubrics (DA), the conditional `(sed rubrica ^Trident
+omittuntur)` keeps all four entries recited even when the Triduum
+files set `Omit Incipit`. The previous tranche emitted the rubric +
+Pater + Ave but stopped short of the Credo.
+
+**Resolution.** Extended `composeDATriduumSecretoSection` to append
+`[Credo]` from `Common/Prayers.txt` when `args.hour === 'prime'`.
+Holy Saturday Vespers (`Tempora/Quad6-6`) is now intentionally
+excluded from the prelude entirely — its 41-line Perl render is
+heavily shortened (likely an anticipation / merge with the Easter
+Vigil cycle) and reintroducing the prelude there would surface a
+new divergent line on a row that originally diverged on a different
+family.
+
+**Citation.**
+- `upstream/web/www/horas/Ordinarium/Prima.txt:3-15` (Prime
+  `#Incipit` block including `$Credo`).
+- `upstream/web/www/horas/Latin/Psalterium/Common/Prayers.txt:16`
+  (Apostles' Creed text).
+
+**Impact.** DA Triduum Prime rows for `2024-03-28` / `03-29` /
+`03-30` close as fanouts of the same source-backed Credo +
+psalm-heading family. Net unadjudicated drop: Divino Afflatu from
+`8` → `5`. Total from `40` → `37`.
+
 ### 2026-04-27 — Pattern: Divino Afflatu Triduum `Secreto` opening rubric + silent prayers (engine-bug, fixed)
 
 **Commit.** Current tranche commit.

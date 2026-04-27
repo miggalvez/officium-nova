@@ -148,6 +148,18 @@ export function composeDATriduumSecretoSection(
     return undefined;
   }
 
+  // Holy Saturday (`Quad6-6`) Vespers has a heavily shortened opening in
+  // the legacy Perl render (only 41 lines expected) — most likely because
+  // the office is anticipated or merged with the Easter Vigil cycle. Do
+  // not prepend the Secreto rubric there so we do not re-introduce a new
+  // mismatch on a row that originally diverged on a different family.
+  if (
+    args.hour === 'vespers' &&
+    /^Tempora\/Quad6-6r?$/u.test(args.summary.celebration.feastRef.path)
+  ) {
+    return undefined;
+  }
+
   const rubricSectionName = args.hour === 'lauds' ? 'Secreto a Laudibus' : 'Secreto';
   const rubricRef: TextReference = {
     path: 'horas/Latin/Psalterium/Common/Rubricae',
@@ -164,6 +176,18 @@ export function composeDATriduumSecretoSection(
     section: 'Ave Maria'
   };
   const avePerLanguage = resolveFlatSection(aveRef, args);
+  // Prime additionally recites the Apostles' Creed silently after the
+  // Pater + Ave under Tridentine rubrics. The Ordinarium `#Incipit` block
+  // for Prime contains `$Credo` which the conditional `(sed rubrica
+  // ^Trident omittuntur)` keeps active under DA. Pull the formula text
+  // from Common/Prayers so the silent recitation is visible to the line
+  // stream.
+  const includeCredo = args.hour === 'prime';
+  const credoRef: TextReference = {
+    path: 'horas/Latin/Psalterium/Common/Prayers',
+    section: 'Credo'
+  };
+  const credoPerLanguage = includeCredo ? resolveFlatSection(credoRef, args) : new Map();
 
   const merged = new Map<string, readonly TextContent[]>();
   for (const lang of args.options.languages) {
@@ -179,6 +203,12 @@ export function composeDATriduumSecretoSection(
     const ave = avePerLanguage.get(lang);
     if (ave) {
       bucket.push(...ave);
+    }
+    if (includeCredo) {
+      const credo = credoPerLanguage.get(lang);
+      if (credo) {
+        bucket.push(...credo);
+      }
     }
     if (bucket.length > 0) {
       merged.set(lang, Object.freeze(bucket));

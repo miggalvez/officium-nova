@@ -1894,6 +1894,18 @@
     "resolvedAt": "2026-04-27",
     "commitSha": "pending"
   },
+  "Divino Afflatu - 1954/2024-03-28/Prime/9772c004": {
+    "policy": "Divino Afflatu - 1954",
+    "date": "2024-03-28",
+    "hour": "Prime",
+    "firstExpected": "_",
+    "firstActual": "50:3a Miserére mei, Deus, * secúndum magnam misericórdiam tuam.",
+    "class": "rendering-difference",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm50.txt:3 — the Psalm 50 corpus encodes verse 3a as `Miserére mei, Deus, * secúndum magnam misericórdiam tuam.` The compositor preserves that source-backed first-verse rendering with the inline 50:3a numeric marker; the Perl comparison surface omits that line entirely (renders blank ) on DA Triduum Lauds and minor hours after the source-backed silent prayers.",
+    "notes": "DA Triduum Lauds / minor-hour rendering family where Perl emits a blank  line where the compositor preserves the source-backed Psalm 50:3a opening verse.",
+    "resolvedAt": "2026-04-27",
+    "commitSha": "pending"
+  },
   "Divino Afflatu - 1954/2024-03-28/Sext/9772c004": {
     "policy": "Divino Afflatu - 1954",
     "date": "2024-03-28",
@@ -1958,6 +1970,18 @@
     "policy": "Divino Afflatu - 1954",
     "date": "2024-03-29",
     "hour": "None",
+    "firstExpected": "_",
+    "firstActual": "50:3a Miserére mei, Deus, * secúndum magnam misericórdiam tuam.",
+    "class": "rendering-difference",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm50.txt:3 — the Psalm 50 corpus encodes verse 3a as `Miserére mei, Deus, * secúndum magnam misericórdiam tuam.` The compositor preserves that source-backed first-verse rendering with the inline 50:3a numeric marker; the Perl comparison surface omits that line entirely (renders blank ) on DA Triduum Lauds and minor hours after the source-backed silent prayers.",
+    "notes": "DA Triduum Lauds / minor-hour rendering family where Perl emits a blank  line where the compositor preserves the source-backed Psalm 50:3a opening verse.",
+    "resolvedAt": "2026-04-27",
+    "commitSha": "pending"
+  },
+  "Divino Afflatu - 1954/2024-03-29/Prime/9772c004": {
+    "policy": "Divino Afflatu - 1954",
+    "date": "2024-03-29",
+    "hour": "Prime",
     "firstExpected": "_",
     "firstActual": "50:3a Miserére mei, Deus, * secúndum magnam misericórdiam tuam.",
     "class": "rendering-difference",
@@ -2042,6 +2066,18 @@
     "policy": "Divino Afflatu - 1954",
     "date": "2024-03-30",
     "hour": "None",
+    "firstExpected": "_",
+    "firstActual": "50:3a Miserére mei, Deus, * secúndum magnam misericórdiam tuam.",
+    "class": "rendering-difference",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm50.txt:3 — the Psalm 50 corpus encodes verse 3a as `Miserére mei, Deus, * secúndum magnam misericórdiam tuam.` The compositor preserves that source-backed first-verse rendering with the inline 50:3a numeric marker; the Perl comparison surface omits that line entirely (renders blank ) on DA Triduum Lauds and minor hours after the source-backed silent prayers.",
+    "notes": "DA Triduum Lauds / minor-hour rendering family where Perl emits a blank  line where the compositor preserves the source-backed Psalm 50:3a opening verse.",
+    "resolvedAt": "2026-04-27",
+    "commitSha": "pending"
+  },
+  "Divino Afflatu - 1954/2024-03-30/Prime/9772c004": {
+    "policy": "Divino Afflatu - 1954",
+    "date": "2024-03-30",
+    "hour": "Prime",
     "firstExpected": "_",
     "firstActual": "50:3a Miserére mei, Deus, * secúndum magnam misericórdiam tuam.",
     "class": "rendering-difference",
