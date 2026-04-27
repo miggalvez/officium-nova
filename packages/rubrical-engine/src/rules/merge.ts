@@ -31,6 +31,7 @@ export interface CelebrationRulePatch {
   readonly quorumFestum?: boolean;
   readonly commemoratio3?: boolean;
   readonly unaAntiphona?: boolean;
+  readonly symbolumAthanasium?: boolean;
   readonly unmapped?: readonly RuleDirective[];
   readonly hourScopedDirectives?: readonly HourScopedDirective[];
 }
@@ -58,6 +59,7 @@ export function mergeFeastRules(
     quorumFestum: patch.quorumFestum ?? base.quorumFestum,
     commemoratio3: patch.commemoratio3 ?? base.commemoratio3,
     unaAntiphona: patch.unaAntiphona ?? base.unaAntiphona,
+    symbolumAthanasium: patch.symbolumAthanasium ?? base.symbolumAthanasium,
     unmapped: patch.unmapped ?? base.unmapped,
     hourScopedDirectives: patch.hourScopedDirectives ?? base.hourScopedDirectives
   });

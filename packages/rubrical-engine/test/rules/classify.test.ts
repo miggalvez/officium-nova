@@ -91,7 +91,7 @@ describe('classifyDirective', () => {
     { line: 'vide Sancti/01-01', target: 'unmapped' },
     { line: 'ex Sancti/12-25m3;', target: 'unmapped' },
     { line: '1 et 2 lectiones', target: 'unmapped' },
-    { line: 'Symbolum Athanasium', target: 'unmapped' }
+    { line: 'Symbolum Athanasium', target: 'celebration', effectKind: 'symbolum-athanasium' }
   ];
 
   for (const entry of cases) {

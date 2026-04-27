@@ -63,6 +63,7 @@ export interface CelebrationRuleSet {
   readonly quorumFestum: boolean;
   readonly commemoratio3: boolean;
   readonly unaAntiphona: boolean;
+  readonly symbolumAthanasium: boolean;
   readonly unmapped: readonly RuleDirective[];
   // Hour-scoped raw directives, bucketed for deriveHourRuleSet.
   readonly hourScopedDirectives: readonly HourScopedDirective[];

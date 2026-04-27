@@ -22,6 +22,75 @@ anchor.
 
 ## Entries
 
+### 2026-04-27 — Pattern: `Symbolum Athanasium` rule directive + direct psalm-file interleave (engine-bug, fixed)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** Trinity Sunday (`2024-05-26`) Prime under Reduced
+1955 and Rubrics 1960 diverged at line 80 with the compositor
+emitting an `Ant. Glória tibi, Trínitas æquális...` antiphon line
+instead of the source-backed `Canticum Quicumque [4]` heading. The
+compositor was missing the Athanasian Creed entirely, jumping from
+the `Psalmus 118(17-32) [3]` slot straight to the closing antiphon.
+A secondary side-effect: when Phase 2's psalter selection appended a
+direct `Psalmorum/Psalm234` reference (the Quicumque), the resolved
+verse text nodes — one per source line, with no separators — got
+concatenated into a single line at emit time because only the
+`psalmRef`/`psalmInclude` expansion path runs `interleaveSeparators`.
+
+**Root cause.** The `Symbolum Athanasium` rule directive
+(`Tempora/Pent01-0.txt:13` and ten other Sunday Tempora files) was
+unmapped in `classifyDirective`, so Phase 2 collected it as an
+unmapped warning and made no adjustment. Perl's
+`specials/psalmi.pl:296-309` pushes Psalm 234 onto Sunday Prime when
+this directive (or its derived seasonal predicate) fires; the
+compositor had no equivalent. Independently, when Phase 2's psalmody
+selection produces a direct `Psalmorum/Psalm<N>` `psalmRef` (rather
+than a `Psalmi major.txt`-keyed assignment whose body itself contains
+nested `psalmRef` content nodes), the per-verse text nodes from
+`Psalm<N>.txt` reach `expandDeferredNodes` already inlined. The
+existing `interleaveSeparators` only fires inside `psalmRef`/
+`psalmInclude` *expansion*, so the directly-resolved body keeps its
+no-separator shape and the line emitter merges all 41 Quicumque
+verses into one paragraph.
+
+**Resolution.** Phase 2's `classifyDirective` recognises
+`Symbolum Athanasium` as a celebration effect, the celebration
+rule-builder records `symbolumAthanasium: true`, and the Roman
+psalter selector appends a direct `Psalmorum/Psalm234` `psalmRef`
+when `hour === 'prime' && temporal.dayOfWeek === 0 &&
+celebrationRules.symbolumAthanasium`. Phase 3's `composeSlot` now
+detects direct psalm-file refs (path matching
+`/Psalterium/Psalmorum/Psalm\d+$/u` with section `__preamble`) and
+runs `interleaveSeparators` on the resolved body before
+`expandDeferredNodes`, so each source-line verse becomes its own
+emitted line. The exported helper preserves the existing
+inside-`psalmRef`-expansion behaviour for refs that go through that
+path.
+
+**Citation.**
+
+- `upstream/web/cgi-bin/horas/specials/psalmi.pl:296-309`
+- `upstream/web/www/horas/Latin/Tempora/Pent01-0.txt:11-19`
+- `upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm234.txt`
+- `packages/rubrical-engine/src/rules/classify.ts:339-360`
+- `packages/rubrical-engine/src/hours/psalter.ts:78-110`
+  (`appendQuicumqueAtPrime`)
+- `packages/compositor/src/compose.ts:437-460` + `:780-792`
+  (`isDirectPsalmFileRef` gate)
+- `packages/compositor/src/resolve/expand-deferred-nodes.ts:282-297`
+  (`interleaveSeparators` exported)
+
+**Impact.** Trinity Sunday Prime under Reduced 1955 and Rubrics 1960
+now emits the source-backed `Canticum Quicumque [4]` heading,
+`Symbolum Athanasium` source line, and one rendered line per
+Quicumque verse. The matching prefix advances from line `80` to line
+`125` for both policies; the divergence point moves to the still-
+unclassified Sunday Prime chapter override (`1 Tim. 1:17` vs the
+feast's `1 Joann. 5:7` — to be addressed in a follow-up tranche).
+Net unadjudicated drop: `0` rows close in this tranche, but the
+prefix advance unblocks the next tranche's chapter-override fix.
+
 ### 2026-04-27 — Pattern: 1960 ferial Lauds / Vespers Benedictus / Magnificat antiphon fallback (engine-bug, fixed)
 
 **Commit.** Current tranche commit.

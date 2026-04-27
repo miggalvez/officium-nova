@@ -279,7 +279,7 @@ function dedupe(values: readonly string[]): readonly string[] {
   return out;
 }
 
-function interleaveSeparators(content: readonly TextContent[]): readonly TextContent[] {
+export function interleaveSeparators(content: readonly TextContent[]): readonly TextContent[] {
   const out: TextContent[] = [];
 
   for (const node of content) {

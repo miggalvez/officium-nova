@@ -32,6 +32,7 @@ interface CelebrationRuleBuilder {
   quorumFestum: boolean;
   commemoratio3: boolean;
   unaAntiphona: boolean;
+  symbolumAthanasium: boolean;
   unmapped: RuleDirective[];
   hourScopedDirectives: HourScopedDirective[];
 }
@@ -115,6 +116,7 @@ export function buildCelebrationRuleSet(
     quorumFestum: builder.quorumFestum,
     commemoratio3: builder.commemoratio3,
     unaAntiphona: builder.unaAntiphona,
+    symbolumAthanasium: builder.symbolumAthanasium,
     unmapped: builder.unmapped,
     hourScopedDirectives: builder.hourScopedDirectives
   });
@@ -146,6 +148,7 @@ function defaultCelebrationRuleBuilder(): CelebrationRuleBuilder {
     quorumFestum: false,
     commemoratio3: false,
     unaAntiphona: false,
+    symbolumAthanasium: false,
     unmapped: [],
     hourScopedDirectives: []
   };
@@ -235,6 +238,9 @@ function applyCelebrationEffect(builder: CelebrationRuleBuilder, effect: Celebra
       break;
     case 'una-antiphona':
       builder.unaAntiphona = true;
+      break;
+    case 'symbolum-athanasium':
+      builder.symbolumAthanasium = true;
       break;
   }
 }
