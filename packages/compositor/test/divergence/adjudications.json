@@ -10981,6 +10981,18 @@
     "resolvedAt": "2026-04-24",
     "commitSha": "029a6fd"
   },
+  "Reduced - 1955/2024-12-26/Vespers/c5793985": {
+    "policy": "Reduced - 1955",
+    "date": "2024-12-26",
+    "hour": "Vespers",
+    "firstExpected": "Ant. De fructu * ventris tui ponam super sedem tuam.",
+    "firstActual": "Act. 6:8",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/12-26.txt:9-14 — the St Stephen feast carries an unconditional [Rule] line `no Psalm5` instructing the engine to omit the 5th Vespers psalm under any policy. The compositor honors that source-backed rule and emits 4 antiphons / 4 psalms before transitioning to the capitulum (`Act. 6:8`). The Perl comparison surface ignores the rule and renders the inherited 5th Christmas Day psalm antiphon `De fructu * ventris tui ponam super sedem tuam.`",
+    "notes": "Representative entry for the St Stephen Vespers `no Psalm5` family where Perl ignores the source-backed rule that limits the Vespers psalmody to 4 psalms.",
+    "resolvedAt": "2026-04-27",
+    "commitSha": "pending"
+  },
   "Reduced - 1955/2024-12-27/Compline/5dc10d20": {
     "policy": "Reduced - 1955",
     "date": "2024-12-27",
@@ -13428,6 +13440,18 @@
     "notes": "Pattern affects every Compline row across every policy and date. This single entry is representative; the full row-key fan-out is a follow-up bulk-populate task (see ADJUDICATION_LOG.md).",
     "resolvedAt": "2026-04-18",
     "commitSha": "bfb3c52"
+  },
+  "Rubrics 1960 - 1960/2024-04-07/Lauds/fe825d42": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-04-07",
+    "hour": "Lauds",
+    "firstExpected": "Ant. Allelúja, * allelúja, allelúja.",
+    "firstActual": "Ant. Allelúja, * Dóminus regnávit, decórem índuit, allelúja, allelúja.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:1-6 — the Day0 Laudes1 psalter source carries the proper Sunday paschal antiphon `Allelúja, * Dóminus regnávit, decórem índuit, allelúja, allelúja.` on Low Sunday Lauds. The compositor emits that source-backed antiphon; the Perl comparison surface collapses the paschal opening to a generic `Ant. Allelúja, * allelúja, allelúja.`.",
+    "notes": "Fanout of the Reduced 1955 Low Sunday Lauds psalter-major paschal antiphon family for the Rubrics 1960 row.",
+    "resolvedAt": "2026-04-27",
+    "commitSha": "pending"
   },
   "Rubrics 1960 - 1960/2024-04-07/None/dcdd92bf": {
     "policy": "Rubrics 1960 - 1960",
@@ -16348,6 +16372,18 @@
     "notes": "Representative entry for the Rubrics 1960 January Terce/Sext/None fallback-hymn doxology family where the default `Præsta, Pater piíssime,` close is replaced by the Christmas or Epiphany stanza required by the winning office.",
     "resolvedAt": "2026-04-19",
     "commitSha": "379dd72"
+  },
+  "Rubrics 1960 - 1960/2024-12-26/Vespers/c5793985": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-12-26",
+    "hour": "Vespers",
+    "firstExpected": "Ant. De fructu * ventris tui ponam super sedem tuam.",
+    "firstActual": "Act. 6:8",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/12-26.txt:9-14 — the St Stephen feast carries an unconditional [Rule] line `no Psalm5` instructing the engine to omit the 5th Vespers psalm under any policy. The compositor honors that source-backed rule and emits 4 antiphons / 4 psalms before transitioning to the capitulum (`Act. 6:8`). The Perl comparison surface ignores the rule and renders the inherited 5th Christmas Day psalm antiphon `De fructu * ventris tui ponam super sedem tuam.`",
+    "notes": "Representative entry for the St Stephen Vespers `no Psalm5` family where Perl ignores the source-backed rule that limits the Vespers psalmody to 4 psalms.",
+    "resolvedAt": "2026-04-27",
+    "commitSha": "pending"
   },
   "Rubrics 1960 - 1960/2024-12-27/Compline/57de2841": {
     "policy": "Rubrics 1960 - 1960",

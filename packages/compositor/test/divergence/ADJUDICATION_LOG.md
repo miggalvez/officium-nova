@@ -22,6 +22,34 @@ anchor.
 
 ## Entries
 
+### 2026-04-27 — Pattern: St Stephen Vespers `no Psalm5` rule (perl-bug, classified)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** Reduced 1955 / Rubrics 1960 `2024-12-26` Vespers
+match Perl through the first 60 lines (4 antiphons + 4 psalms + the
+opening) and then diverge at line 61. The compositor jumps directly
+to the capitulum `Act. 6:8`; Perl emits a 5th antiphon
+`Ant. De fructu * ventris tui ponam super sedem tuam.` plus a 5th
+psalm.
+
+**Root cause.** `upstream/web/www/horas/Latin/Sancti/12-26.txt:9-14`
+carries an unconditional `[Rule]` line `no Psalm5` which instructs
+the engine to omit the 5th Vespers psalm under any policy. The
+compositor honors that source-backed rule and stops Vespers psalmody
+at 4 psalms. The Perl comparison surface ignores the rule and
+inherits the 5th Christmas Day antiphon `De fructu *...` from
+`@Sancti/12-25` along with its psalm.
+
+**Citation.** `upstream/web/www/horas/Latin/Sancti/12-26.txt:9-14`
+(unconditional `no Psalm5` rule).
+
+**Impact.** Two representative `perl-bug` rows classified, one per
+Roman policy. Plus one fanout: Rubrics 1960 `2024-04-07` Lauds Low
+Sunday paschal antiphon now mirrors the existing Reduced 1955 entry.
+Net unadjudicated drop: Reduced 1955 from `17` → `16`, Rubrics 1960
+from `18` → `16`.
+
 ### 2026-04-27 — Pattern: Easter Sunday Matins / Lauds prelude rubric (engine-bug, fixed)
 
 **Commit.** Current tranche commit.
