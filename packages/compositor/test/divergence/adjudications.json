@@ -6642,6 +6642,18 @@
     "resolvedAt": "2026-04-19",
     "commitSha": "379dd72"
   },
+  "Reduced - 1955/2024-02-18/Matins/7ca37aff": {
+    "policy": "Reduced - 1955",
+    "date": "2024-02-18",
+    "hour": "Matins",
+    "firstExpected": "V. Ipse liberávit me de láqueo venántium.",
+    "firstActual": "V. Ángelis suis Deus mandávit de te.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Tempora/Quad1-0.txt:11-12 and upstream/web/www/horas/Latin/Psalterium/Special/Major Special.txt:1124-1179 — the first Sunday of Lent office supplies `[Versum 1]` by delegation to `Quad Versum 2`, which resolves to `V. Angelis suis...`; the compositor follows that source-backed first-nocturn versicle while Perl keeps the previous psalter versicle.",
+    "notes": "Reduced 1955 first-nocturn plain Versum 1 fallback surface after the structural Matins versicle fix.",
+    "resolvedAt": "2026-04-26",
+    "commitSha": "pending"
+  },
   "Reduced - 1955/2024-02-18/Prime/2e28d92b": {
     "policy": "Reduced - 1955",
     "date": "2024-02-18",
@@ -6689,6 +6701,18 @@
     "notes": "Representative entry for the Reduced 1955 major-hour full-antiphon opening family where Perl abbreviates source-backed antiphons to incipits.",
     "resolvedAt": "2026-04-24",
     "commitSha": "dfbe3fe"
+  },
+  "Reduced - 1955/2024-02-24/Matins/29ec2a3d": {
+    "policy": "Reduced - 1955",
+    "date": "2024-02-24",
+    "hour": "Matins",
+    "firstExpected": "Pater Noster dicitur secreto usque ad Et ne nos indúcas in tentatiónem:",
+    "firstActual": "« Pater Noster » dicitur secreto usque ad « Et ne nos indúcas in tentatiónem: »",
+    "class": "rendering-difference",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Rubricae.txt:1-2 — the corpus rubric carries guillemets around both `Pater Noster` and `Et ne nos indúcas in tentatiónem:`. Perl strips them while the compositor preserves them; both are surface renderings of the same rubric sentence, not a liturgical-content disagreement.",
+    "notes": "Representative entry for the Roman Matins pre-lesson guillemet family under Reduced 1955. Fan out to all 1955 Matins rows with the same first-divergence text.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "379dd72"
   },
   "Reduced - 1955/2024-02-24/None/f60c28f2": {
     "policy": "Reduced - 1955",
@@ -7338,6 +7362,18 @@
     "resolvedAt": "2026-04-24",
     "commitSha": "dfbe3fe"
   },
+  "Reduced - 1955/2024-03-25/Matins/29ec2a3d": {
+    "policy": "Reduced - 1955",
+    "date": "2024-03-25",
+    "hour": "Matins",
+    "firstExpected": "Pater Noster dicitur secreto usque ad Et ne nos indúcas in tentatiónem:",
+    "firstActual": "« Pater Noster » dicitur secreto usque ad « Et ne nos indúcas in tentatiónem: »",
+    "class": "rendering-difference",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Rubricae.txt:1-2 — the corpus rubric carries guillemets around both `Pater Noster` and `Et ne nos indúcas in tentatiónem:`. Perl strips them while the compositor preserves them; both are surface renderings of the same rubric sentence, not a liturgical-content disagreement.",
+    "notes": "Representative entry for the Roman Matins pre-lesson guillemet family under Reduced 1955. Fan out to all 1955 Matins rows with the same first-divergence text.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "379dd72"
+  },
   "Reduced - 1955/2024-03-25/None/2071fc88": {
     "policy": "Reduced - 1955",
     "date": "2024-03-25",
@@ -7466,6 +7502,18 @@
     "notes": "Representative entry for the Reduced 1955 major-hour full-antiphon opening family where Perl abbreviates source-backed antiphons to incipits.",
     "resolvedAt": "2026-04-24",
     "commitSha": "dfbe3fe"
+  },
+  "Reduced - 1955/2024-03-26/Matins/29ec2a3d": {
+    "policy": "Reduced - 1955",
+    "date": "2024-03-26",
+    "hour": "Matins",
+    "firstExpected": "Pater Noster dicitur secreto usque ad Et ne nos indúcas in tentatiónem:",
+    "firstActual": "« Pater Noster » dicitur secreto usque ad « Et ne nos indúcas in tentatiónem: »",
+    "class": "rendering-difference",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Rubricae.txt:1-2 — the corpus rubric carries guillemets around both `Pater Noster` and `Et ne nos indúcas in tentatiónem:`. Perl strips them while the compositor preserves them; both are surface renderings of the same rubric sentence, not a liturgical-content disagreement.",
+    "notes": "Representative entry for the Roman Matins pre-lesson guillemet family under Reduced 1955. Fan out to all 1955 Matins rows with the same first-divergence text.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "379dd72"
   },
   "Reduced - 1955/2024-03-26/None/2071fc88": {
     "policy": "Reduced - 1955",
@@ -9043,6 +9091,18 @@
     "resolvedAt": "2026-04-26",
     "commitSha": "current-tranche"
   },
+  "Reduced - 1955/2024-07-06/Matins/1d5e3be7": {
+    "policy": "Reduced - 1955",
+    "date": "2024-07-06",
+    "hour": "Matins",
+    "firstExpected": "V. Exáltent Dóminum in ecclésia plebis.",
+    "firstActual": "V. Diffúsa est grátia in lábiis tuis.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/07-06.txt:15-16 and upstream/web/www/horas/Latin/Commune/C6.txt:260-262 — the July 6 office delegates `[Versum 1]` to the virgin common's `[Versum 2]`, yielding `V. Diffusa est...`; the compositor emits that source-backed common versicle while Perl keeps the previous psalter versicle.",
+    "notes": "Reduced 1955 first-nocturn plain Versum 1 fallback surface after the structural Matins versicle fix.",
+    "resolvedAt": "2026-04-26",
+    "commitSha": "pending"
+  },
   "Reduced - 1955/2024-07-06/Matins/29ec2a3d": {
     "policy": "Reduced - 1955",
     "date": "2024-07-06",
@@ -10249,6 +10309,18 @@
     "resolvedAt": "2026-04-26",
     "commitSha": "e7b3145"
   },
+  "Reduced - 1955/2024-12-01/Matins/4e580c99": {
+    "policy": "Reduced - 1955",
+    "date": "2024-12-01",
+    "hour": "Matins",
+    "firstExpected": "V. Ex Sion spécies decóris ejus.",
+    "firstActual": "V. Roráte, cæli, désuper, et nubes pluant justum.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Tempora/Adv1-0.txt:15-16 and upstream/web/www/horas/Latin/Psalterium/Special/Major Special.txt:1014-1016 — Advent I supplies `[Versum 1]` through `Adv Versum 3`, whose source-backed versicle is `V. Rorate, caeli...`; the compositor emits that office versicle while Perl keeps the prior psalter versicle.",
+    "notes": "Advent Sunday first-nocturn plain Versum 1 fallback surface after the structural Matins versicle fix.",
+    "resolvedAt": "2026-04-26",
+    "commitSha": "pending"
+  },
   "Reduced - 1955/2024-12-01/None/4a1aadd8": {
     "policy": "Reduced - 1955",
     "date": "2024-12-01",
@@ -10596,6 +10668,18 @@
     "notes": "Representative entry for the Reduced 1955 Lauds Psalm 99 half-verse family where the corpus keeps a `‡ ... *` structure and Perl flattens it to a single `*` boundary.",
     "resolvedAt": "2026-04-19",
     "commitSha": "bfb3c52"
+  },
+  "Reduced - 1955/2024-12-24/Matins/29ec2a3d": {
+    "policy": "Reduced - 1955",
+    "date": "2024-12-24",
+    "hour": "Matins",
+    "firstExpected": "Pater Noster dicitur secreto usque ad Et ne nos indúcas in tentatiónem:",
+    "firstActual": "« Pater Noster » dicitur secreto usque ad « Et ne nos indúcas in tentatiónem: »",
+    "class": "rendering-difference",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Rubricae.txt:1-2 — the corpus rubric carries guillemets around both `Pater Noster` and `Et ne nos indúcas in tentatiónem:`. Perl strips them while the compositor preserves them; both are surface renderings of the same rubric sentence, not a liturgical-content disagreement.",
+    "notes": "Representative entry for the Roman Matins pre-lesson guillemet family under Reduced 1955. Fan out to all 1955 Matins rows with the same first-divergence text.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "379dd72"
   },
   "Reduced - 1955/2024-12-24/Prime/17defeec": {
     "policy": "Reduced - 1955",
@@ -11854,6 +11938,18 @@
     "resolvedAt": "2026-04-18",
     "commitSha": "bfb3c52"
   },
+  "Rubrics 1960 - 1960/2024-02-24/Matins/29ec2a3d": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-02-24",
+    "hour": "Matins",
+    "firstExpected": "Pater Noster dicitur secreto usque ad Et ne nos indúcas in tentatiónem:",
+    "firstActual": "« Pater Noster » dicitur secreto usque ad « Et ne nos indúcas in tentatiónem: »",
+    "class": "rendering-difference",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Rubricae.txt:1-2 — the corpus rubric carries guillemets around both `Pater Noster` and `Et ne nos indúcas in tentatiónem:`. Perl strips them while the compositor preserves them; both are surface renderings of the same rubric sentence, not a liturgical-content disagreement.",
+    "notes": "Representative entry for the Roman Matins pre-lesson guillemet family under Rubrics 1960. Fan out to all 1960 Matins rows with the same first-divergence text.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "379dd72"
+  },
   "Rubrics 1960 - 1960/2024-02-24/None/f2474b69": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2024-02-24",
@@ -12606,6 +12702,18 @@
     "notes": "Pattern affects every Compline row across every policy and date. This single entry is representative; the full row-key fan-out is a follow-up bulk-populate task (see ADJUDICATION_LOG.md).",
     "resolvedAt": "2026-04-18",
     "commitSha": "bfb3c52"
+  },
+  "Rubrics 1960 - 1960/2024-03-26/Matins/29ec2a3d": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-03-26",
+    "hour": "Matins",
+    "firstExpected": "Pater Noster dicitur secreto usque ad Et ne nos indúcas in tentatiónem:",
+    "firstActual": "« Pater Noster » dicitur secreto usque ad « Et ne nos indúcas in tentatiónem: »",
+    "class": "rendering-difference",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Rubricae.txt:1-2 — the corpus rubric carries guillemets around both `Pater Noster` and `Et ne nos indúcas in tentatiónem:`. Perl strips them while the compositor preserves them; both are surface renderings of the same rubric sentence, not a liturgical-content disagreement.",
+    "notes": "Representative entry for the Roman Matins pre-lesson guillemet family under Rubrics 1960. Fan out to all 1960 Matins rows with the same first-divergence text.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "379dd72"
   },
   "Rubrics 1960 - 1960/2024-03-26/None/2071fc88": {
     "policy": "Rubrics 1960 - 1960",
@@ -15485,6 +15593,18 @@
     "resolvedAt": "2026-04-26",
     "commitSha": "e7b3145"
   },
+  "Rubrics 1960 - 1960/2024-12-01/Matins/4e580c99": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-12-01",
+    "hour": "Matins",
+    "firstExpected": "V. Ex Sion spécies decóris ejus.",
+    "firstActual": "V. Roráte, cæli, désuper, et nubes pluant justum.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Tempora/Adv1-0.txt:15-16 and upstream/web/www/horas/Latin/Psalterium/Special/Major Special.txt:1014-1016 — Advent I supplies `[Versum 1]` through `Adv Versum 3`, whose source-backed versicle is `V. Rorate, caeli...`; the compositor emits that office versicle while Perl keeps the prior psalter versicle.",
+    "notes": "Advent Sunday first-nocturn plain Versum 1 fallback surface after the structural Matins versicle fix.",
+    "resolvedAt": "2026-04-26",
+    "commitSha": "pending"
+  },
   "Rubrics 1960 - 1960/2024-12-01/None/4a1aadd8": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2024-12-01",
@@ -15869,6 +15989,18 @@
     "resolvedAt": "2026-04-19",
     "commitSha": "bfb3c52"
   },
+  "Rubrics 1960 - 1960/2024-12-24/Matins/29ec2a3d": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-12-24",
+    "hour": "Matins",
+    "firstExpected": "Pater Noster dicitur secreto usque ad Et ne nos indúcas in tentatiónem:",
+    "firstActual": "« Pater Noster » dicitur secreto usque ad « Et ne nos indúcas in tentatiónem: »",
+    "class": "rendering-difference",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Rubricae.txt:1-2 — the corpus rubric carries guillemets around both `Pater Noster` and `Et ne nos indúcas in tentatiónem:`. Perl strips them while the compositor preserves them; both are surface renderings of the same rubric sentence, not a liturgical-content disagreement.",
+    "notes": "Representative entry for the Roman Matins pre-lesson guillemet family under Rubrics 1960. Fan out to all 1960 Matins rows with the same first-divergence text.",
+    "resolvedAt": "2026-04-19",
+    "commitSha": "379dd72"
+  },
   "Rubrics 1960 - 1960/2024-12-24/Prime/17defeec": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2024-12-24",
@@ -15989,6 +16121,18 @@
     "resolvedAt": "2026-04-19",
     "commitSha": "bfb3c52"
   },
+  "Rubrics 1960 - 1960/2024-12-26/Matins/4956efcc": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-12-26",
+    "hour": "Matins",
+    "firstExpected": "Laus et perénnis glória",
+    "firstActual": "Jesu, tibi sit glória,",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:1-5 and upstream/web/www/horas/Latin/Commune/C2.txt:20-45 — the Christmas-octave Matins hymn receives the seasonal Nativity doxology stanza from `Psalterium/Doxologies`; the compositor substitutes that source-backed stanza while Perl leaves the C2 default doxology line.",
+    "notes": "Rubrics 1960 Christmas-octave Matins seasonal-doxology surface exposed by the shared seasonal Matins doxology fix.",
+    "resolvedAt": "2026-04-26",
+    "commitSha": "pending"
+  },
   "Rubrics 1960 - 1960/2024-12-26/None/318cf47a": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2024-12-26",
@@ -16061,6 +16205,18 @@
     "resolvedAt": "2026-04-19",
     "commitSha": "bfb3c52"
   },
+  "Rubrics 1960 - 1960/2024-12-27/Matins/2e537874": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2024-12-27",
+    "hour": "Matins",
+    "firstExpected": "Patri, simúlque Fílio,",
+    "firstActual": "Jesu, tibi sit glória,",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:1-5 and upstream/web/www/horas/Latin/Commune/C1.txt:94-118 — the Christmas-octave Matins hymn receives the seasonal Nativity doxology stanza from `Psalterium/Doxologies`; the compositor substitutes that source-backed stanza while Perl leaves the C1 default doxology line.",
+    "notes": "Rubrics 1960 Christmas-octave Matins seasonal-doxology surface exposed by the shared seasonal Matins doxology fix.",
+    "resolvedAt": "2026-04-26",
+    "commitSha": "pending"
+  },
   "Rubrics 1960 - 1960/2024-12-27/None/318cf47a": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2024-12-27",
@@ -16120,77 +16276,5 @@
     "notes": "Phase 3 adjudication sweep: major-hour conclusion bridge remains source-backed after selected 1955/1960 Vespers collects.",
     "resolvedAt": "2026-04-24",
     "commitSha": "26e2fdd"
-  },
-  "Reduced - 1955/2024-02-18/Matins/7ca37aff": {
-    "policy": "Reduced - 1955",
-    "date": "2024-02-18",
-    "hour": "Matins",
-    "firstExpected": "V. Ipse liberávit me de láqueo venántium.",
-    "firstActual": "V. Ángelis suis Deus mandávit de te.",
-    "class": "perl-bug",
-    "citation": "upstream/web/www/horas/Latin/Tempora/Quad1-0.txt:11-12 and upstream/web/www/horas/Latin/Psalterium/Special/Major Special.txt:1124-1179 — the first Sunday of Lent office supplies `[Versum 1]` by delegation to `Quad Versum 2`, which resolves to `V. Angelis suis...`; the compositor follows that source-backed first-nocturn versicle while Perl keeps the previous psalter versicle.",
-    "notes": "Reduced 1955 first-nocturn plain Versum 1 fallback surface after the structural Matins versicle fix.",
-    "resolvedAt": "2026-04-26",
-    "commitSha": "pending"
-  },
-  "Reduced - 1955/2024-07-06/Matins/1d5e3be7": {
-    "policy": "Reduced - 1955",
-    "date": "2024-07-06",
-    "hour": "Matins",
-    "firstExpected": "V. Exáltent Dóminum in ecclésia plebis.",
-    "firstActual": "V. Diffúsa est grátia in lábiis tuis.",
-    "class": "perl-bug",
-    "citation": "upstream/web/www/horas/Latin/Sancti/07-06.txt:15-16 and upstream/web/www/horas/Latin/Commune/C6.txt:260-262 — the July 6 office delegates `[Versum 1]` to the virgin common's `[Versum 2]`, yielding `V. Diffusa est...`; the compositor emits that source-backed common versicle while Perl keeps the previous psalter versicle.",
-    "notes": "Reduced 1955 first-nocturn plain Versum 1 fallback surface after the structural Matins versicle fix.",
-    "resolvedAt": "2026-04-26",
-    "commitSha": "pending"
-  },
-  "Reduced - 1955/2024-12-01/Matins/4e580c99": {
-    "policy": "Reduced - 1955",
-    "date": "2024-12-01",
-    "hour": "Matins",
-    "firstExpected": "V. Ex Sion spécies decóris ejus.",
-    "firstActual": "V. Roráte, cæli, désuper, et nubes pluant justum.",
-    "class": "perl-bug",
-    "citation": "upstream/web/www/horas/Latin/Tempora/Adv1-0.txt:15-16 and upstream/web/www/horas/Latin/Psalterium/Special/Major Special.txt:1014-1016 — Advent I supplies `[Versum 1]` through `Adv Versum 3`, whose source-backed versicle is `V. Rorate, caeli...`; the compositor emits that office versicle while Perl keeps the prior psalter versicle.",
-    "notes": "Advent Sunday first-nocturn plain Versum 1 fallback surface after the structural Matins versicle fix.",
-    "resolvedAt": "2026-04-26",
-    "commitSha": "pending"
-  },
-  "Rubrics 1960 - 1960/2024-12-01/Matins/4e580c99": {
-    "policy": "Rubrics 1960 - 1960",
-    "date": "2024-12-01",
-    "hour": "Matins",
-    "firstExpected": "V. Ex Sion spécies decóris ejus.",
-    "firstActual": "V. Roráte, cæli, désuper, et nubes pluant justum.",
-    "class": "perl-bug",
-    "citation": "upstream/web/www/horas/Latin/Tempora/Adv1-0.txt:15-16 and upstream/web/www/horas/Latin/Psalterium/Special/Major Special.txt:1014-1016 — Advent I supplies `[Versum 1]` through `Adv Versum 3`, whose source-backed versicle is `V. Rorate, caeli...`; the compositor emits that office versicle while Perl keeps the prior psalter versicle.",
-    "notes": "Advent Sunday first-nocturn plain Versum 1 fallback surface after the structural Matins versicle fix.",
-    "resolvedAt": "2026-04-26",
-    "commitSha": "pending"
-  },
-  "Rubrics 1960 - 1960/2024-12-26/Matins/4956efcc": {
-    "policy": "Rubrics 1960 - 1960",
-    "date": "2024-12-26",
-    "hour": "Matins",
-    "firstExpected": "Laus et perénnis glória",
-    "firstActual": "Jesu, tibi sit glória,",
-    "class": "perl-bug",
-    "citation": "upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:1-5 and upstream/web/www/horas/Latin/Commune/C2.txt:20-45 — the Christmas-octave Matins hymn receives the seasonal Nativity doxology stanza from `Psalterium/Doxologies`; the compositor substitutes that source-backed stanza while Perl leaves the C2 default doxology line.",
-    "notes": "Rubrics 1960 Christmas-octave Matins seasonal-doxology surface exposed by the shared seasonal Matins doxology fix.",
-    "resolvedAt": "2026-04-26",
-    "commitSha": "pending"
-  },
-  "Rubrics 1960 - 1960/2024-12-27/Matins/2e537874": {
-    "policy": "Rubrics 1960 - 1960",
-    "date": "2024-12-27",
-    "hour": "Matins",
-    "firstExpected": "Patri, simúlque Fílio,",
-    "firstActual": "Jesu, tibi sit glória,",
-    "class": "perl-bug",
-    "citation": "upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:1-5 and upstream/web/www/horas/Latin/Commune/C1.txt:94-118 — the Christmas-octave Matins hymn receives the seasonal Nativity doxology stanza from `Psalterium/Doxologies`; the compositor substitutes that source-backed stanza while Perl leaves the C1 default doxology line.",
-    "notes": "Rubrics 1960 Christmas-octave Matins seasonal-doxology surface exposed by the shared seasonal Matins doxology fix.",
-    "resolvedAt": "2026-04-26",
-    "commitSha": "pending"
   }
 }

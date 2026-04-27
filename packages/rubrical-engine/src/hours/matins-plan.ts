@@ -324,12 +324,12 @@ function buildNocturnVersicle(
     };
   }
 
-  const seasonalSundayVersicle = seasonalSundayMatinsVersicleSection(input, nocturnIndex);
-  if (seasonalSundayVersicle) {
+  const seasonalVersicle = seasonalMatinsVersicleSection(input, nocturnIndex, totalNocturns);
+  if (seasonalVersicle) {
     return {
       reference: {
         path: PSALTERIUM_MATINS_CONTENT_PATH,
-        section: seasonalSundayVersicle
+        section: seasonalVersicle
       }
     };
   }
@@ -368,22 +368,60 @@ function buildNocturnVersicle(
   };
 }
 
-function seasonalSundayMatinsVersicleSection(
-  input: Pick<BuildMatinsPlanInput, 'temporal'>,
-  nocturnIndex: 1 | 2 | 3
+function seasonalMatinsVersicleSection(
+  input: Pick<BuildMatinsPlanInput, 'temporal' | 'celebration'>,
+  nocturnIndex: 1 | 2 | 3,
+  totalNocturns: number
 ): string | undefined {
-  if (input.temporal.dayOfWeek !== 0) {
-    return undefined;
+  // Christmas Eve (Vigil of the Nativity): always swap in the Nat24 versicle
+  // override regardless of weekday.
+  if (isChristmasEve(input.temporal.date)) {
+    return 'Nat24 Versum';
   }
 
-  switch (input.temporal.season) {
+  const dayOfWeekNumber = input.temporal.dayOfWeek;
+
+  // Sunday Matins keeps the per-nocturn mapping (e.g. Quad N Versum for
+  // nocturn N on a 9-lesson Sunday).
+  if (dayOfWeekNumber === 0) {
+    const seasonName = seasonNameForVersicle(input.temporal.season);
+    return seasonName ? `${seasonName} ${nocturnIndex} Versum` : undefined;
+  }
+
+  // Weekday seasonal substitution applies only to a temporal-driven 1-nocturn
+  // ferial Matins. The horas Perl harness gates this on the winner being from
+  // tempora and replaces only the third-nocturn-position versicle.
+  if (totalNocturns !== 1) {
+    return undefined;
+  }
+  if (input.celebration.source !== 'temporal') {
+    return undefined;
+  }
+  const seasonName = seasonNameForVersicle(input.temporal.season);
+  if (!seasonName) {
+    return undefined;
+  }
+  const ferialIndex = dayOfWeekNumber <= 3 ? dayOfWeekNumber : dayOfWeekNumber - 3;
+  return `${seasonName} ${ferialIndex} Versum`;
+}
+
+function seasonNameForVersicle(season: TemporalContext['season']): string | undefined {
+  switch (season) {
     case 'lent':
-      return `Quad ${nocturnIndex} Versum`;
+      return 'Quad';
     case 'passiontide':
-      return `Quad5 ${nocturnIndex} Versum`;
+      return 'Quad5';
     default:
       return undefined;
   }
+}
+
+function isChristmasEve(date: string): boolean {
+  const match = /^\d{4}-(\d{2})-(\d{2})/.exec(date);
+  if (!match) {
+    return false;
+  }
+  return match[1] === '12' && match[2] === '24';
 }
 
 function buildResponsory(

@@ -139,6 +139,108 @@ describe('buildMatinsPlan', () => {
     ]);
   });
 
+  it('substitutes seasonal Matins versicle on a Lenten Saturday ferial 1-nocturn', () => {
+    const corpus = new TestOfficeTextIndex();
+    corpus.add('horas/Latin/Tempora/Quad1-6.txt', ferialMatinsSectionsWithoutVersicle());
+    corpus.add(
+      'horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt',
+      psalteriumMatinsSections()
+    );
+
+    // 2024-02-24 was Saturday after Lent 1, ferial 3-lesson Matins.
+    const result = buildMatinsPlanWithWarnings({
+      celebration: celebration('Tempora/Quad1-6', 'IV', 'temporal'),
+      celebrationRules: baseRules(),
+      commemorations: [],
+      hourRules: HOUR_RULES,
+      temporal: temporal('2024-02-24', 'Quad1-6', 'lent', 'IV'),
+      policy: rubrics1960Policy,
+      corpus
+    });
+
+    expect(result.plan.nocturns).toBe(1);
+    expect(result.plan.nocturnPlan[0]?.versicle.reference).toEqual({
+      path: 'horas/Latin/Psalterium/Psalmi/Psalmi matutinum',
+      section: 'Quad 3 Versum'
+    });
+  });
+
+  it('substitutes seasonal Matins versicle on a Passiontide Tuesday ferial 1-nocturn', () => {
+    const corpus = new TestOfficeTextIndex();
+    corpus.add('horas/Latin/Tempora/Quad5-2.txt', ferialMatinsSectionsWithoutVersicle());
+    corpus.add(
+      'horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt',
+      psalteriumMatinsSections()
+    );
+
+    // 2024-03-26 was Tuesday in Holy Week, ferial 3-lesson Matins.
+    const result = buildMatinsPlanWithWarnings({
+      celebration: celebration('Tempora/Quad5-2', 'IV', 'temporal'),
+      celebrationRules: baseRules(),
+      commemorations: [],
+      hourRules: HOUR_RULES,
+      temporal: temporal('2024-03-26', 'Quad5-2', 'passiontide', 'IV'),
+      policy: rubrics1960Policy,
+      corpus
+    });
+
+    expect(result.plan.nocturnPlan[0]?.versicle.reference).toEqual({
+      path: 'horas/Latin/Psalterium/Psalmi/Psalmi matutinum',
+      section: 'Quad5 2 Versum'
+    });
+  });
+
+  it('substitutes Nat24 Versum for the Vigil of Christmas regardless of weekday', () => {
+    const corpus = new TestOfficeTextIndex();
+    corpus.add('horas/Latin/Sancti/12-24.txt', ferialMatinsSectionsWithoutVersicle());
+    corpus.add(
+      'horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt',
+      psalteriumMatinsSections()
+    );
+
+    // 2024-12-24 was Tuesday Christmas Eve.
+    const result = buildMatinsPlanWithWarnings({
+      celebration: celebration('Sancti/12-24', 'I', 'temporal'),
+      celebrationRules: baseRules(),
+      commemorations: [],
+      hourRules: HOUR_RULES,
+      temporal: temporal('2024-12-24', 'Adv4-2', 'advent', 'I'),
+      policy: rubrics1960Policy,
+      corpus
+    });
+
+    expect(result.plan.nocturnPlan[0]?.versicle.reference).toEqual({
+      path: 'horas/Latin/Psalterium/Psalmi/Psalmi matutinum',
+      section: 'Nat24 Versum'
+    });
+  });
+
+  it('does not apply the weekday seasonal Matins versicle to a sanctoral 1-nocturn', () => {
+    const corpus = new TestOfficeTextIndex();
+    corpus.add('horas/Latin/Sancti/03-26.txt', ferialMatinsSectionsWithoutVersicle());
+    corpus.add(
+      'horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt',
+      psalteriumMatinsSections()
+    );
+
+    const result = buildMatinsPlanWithWarnings({
+      celebration: celebration('Sancti/03-26', 'III', 'sanctoral'),
+      celebrationRules: baseRules(),
+      commemorations: [],
+      hourRules: HOUR_RULES,
+      temporal: temporal('2024-03-26', 'Quad5-2', 'passiontide', 'III'),
+      policy: rubrics1960Policy,
+      corpus
+    });
+
+    // The seasonal Quad5 weekday substitution only fires for temporal-driven
+    // celebrations. A sanctoral III-class day instead falls through to the
+    // psalter day section.
+    expect(result.plan.nocturnPlan[0]?.versicle.reference.section).not.toBe(
+      'Quad5 2 Versum'
+    );
+  });
+
   it('uses seasonal Sunday Matins versicles in Lent and Passiontide', () => {
     const corpus = new TestOfficeTextIndex();
     corpus.add('horas/Latin/Tempora/Quad1-0.txt', adventSundayMatinsSections());
@@ -643,6 +745,34 @@ function ferialMatinsSections(): string {
   ].join('\n');
 }
 
+function ferialMatinsSectionsWithoutVersicle(): string {
+  return [
+    '[Invit]',
+    'Invit feriale',
+    '',
+    '[Hymnus Matutinum]',
+    'Hymnus ferialis',
+    '',
+    '[Lectio1]',
+    'Text',
+    '',
+    '[Lectio2]',
+    'Text',
+    '',
+    '[Lectio3]',
+    'Text',
+    '',
+    '[Responsory1]',
+    'Resp',
+    '',
+    '[Responsory2]',
+    'Resp',
+    '',
+    '[Responsory3]',
+    'Resp'
+  ].join('\n');
+}
+
 function adventSundayMatinsSections(): string {
   return [
     '[Lectio1]',
@@ -929,13 +1059,59 @@ function psalteriumMatinsSections(): string {
     'V. Versus III',
     'R. Responsum III',
     '',
+    '[Day2]',
+    'Day2 Ant 1;;1',
+    'Day2 Ant 2;;2',
+    'Day2 Ant 3;;3',
+    'V. Day2 Versus I',
+    'R. Day2 Responsum I',
+    'Day2 Ant 4;;4',
+    'Day2 Ant 5;;5',
+    'Day2 Ant 6;;6',
+    'V. Day2 Versus II',
+    'R. Day2 Responsum II',
+    'Day2 Ant 7;;7',
+    'Day2 Ant 8;;8',
+    'Day2 Ant 9;;9',
+    'V. Day2 Versus III',
+    'R. Day2 Responsum III',
+    '',
+    '[Day6]',
+    'Day6 Ant 1;;1',
+    'Day6 Ant 2;;2',
+    'Day6 Ant 3;;3',
+    'V. Day6 Versus I',
+    'R. Day6 Responsum I',
+    'Day6 Ant 4;;4',
+    'Day6 Ant 5;;5',
+    'Day6 Ant 6;;6',
+    'V. Day6 Versus II',
+    'R. Day6 Responsum II',
+    'Day6 Ant 7;;7',
+    'Day6 Ant 8;;8',
+    'Day6 Ant 9;;9',
+    'V. Day6 Versus III',
+    'R. Day6 Responsum III',
+    '',
     '[Quad 1 Versum]',
     'V. Ipse liberávit me de láqueo venántium.',
     'R. Et a verbo áspero.',
     '',
+    '[Quad 3 Versum]',
+    'V. Scuto circúmdabit te véritas ejus.',
+    'R. Non timébis a timóre noctúrno.',
+    '',
     '[Quad5 1 Versum]',
     'V. Érue a frámea, Deus, ánimam meam.',
     'R. Et de manu canis únicam meam.',
+    '',
+    '[Quad5 2 Versum]',
+    'V. De ore leónis líbera me, Dómine.',
+    'R. Et a córnibus unicórnium humilitátem meam.',
+    '',
+    '[Nat24 Versum]',
+    'V. Hódie sciétis quia véniet Dóminus.',
+    'R. Et mane vidébitis glóriam ejus.',
     '',
     '[Adv 0 Ant Matutinum]',
     'Adv Ant 1;;1',

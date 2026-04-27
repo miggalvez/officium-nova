@@ -22,6 +22,47 @@ anchor.
 
 ## Entries
 
+### 2026-04-26 — Pattern: ferial 1-nocturn seasonal Matins versicle (engine-bug, fixed)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** Reduced 1955 / Rubrics 1960 Matins for `2024-02-24`
+(Saturday in Lent week 1), `2024-03-25` and `2024-03-26` (Holy Week
+ferials), and `2024-12-24` (Vigil of the Nativity) all diverged deep
+inside Matins (line `224`–`248`) at the third-nocturn-position
+versicle. Perl emitted the seasonal `[Quad N Versum]` /
+`[Quad5 N Versum]` / `[Nat24 Versum]` text while the compositor kept
+the ferial psalter's default versicle (`Exáltent Dóminum in ecclésia
+plebis`, `Deus, ne síleas a me, remítte mihi`, etc.).
+
+**Root cause.** Phase 2 Matins planning only applied the seasonal
+Matins versicle override on Sundays. The horas Perl harness instead
+gates the substitution on `(winner from Tempora) || $name eq 'Nat' ||
+$name eq 'Epi'` and replaces the third-nocturn-position versicle on
+weekdays using `dayofweek2i` (Mon/Thu/Sun → 1, Tue/Fri → 2,
+Wed/Sat → 3). The Vigil of the Nativity (`Dec 24`) further hardcodes
+`[Nat24 Versum]` regardless of weekday or season.
+
+**Resolution.** Generalized the Phase 2 helper to:
+
+- always emit `[Nat24 Versum]` for `Dec 24`;
+- keep per-nocturn `[<name> N Versum]` mapping on Sundays;
+- on temporal-driven 1-nocturn ferial Matins inside Lent or
+  Passiontide, emit `[<name> ${dayOfWeek2i} Versum]`.
+
+**Citation.** `upstream/web/cgi-bin/horas/specmatins.pl:252-266`,
+`upstream/web/cgi-bin/horas/specmatins.pl:412-426`,
+`upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:179-181`
+(Nat24 Versum), `:213-294` (Quad / Quad5 N Versum entries).
+
+**Impact.** Closes the late-Matins versicle drift family for the
+Roman ledgers. Matching prefix advances on the affected dates from
+~248 lines to ~250 lines (the next divergence is the already-
+adjudicated Pater Noster guillemet rendering difference). Seven new
+fanout adjudications inherit the existing Pater Noster
+rendering-difference citation. Net unadjudicated drop: Reduced 1955
+from `32` → `28`, Rubrics 1960 from `28` → `25`.
+
 ### 2026-04-26 — Pattern: Reduced 1955 Christmas-octave Matins first-nocturn versicles (mixed fix + adjudication)
 
 **Commit.** Current tranche commit.
