@@ -2377,6 +2377,46 @@ pnpm -C packages/compositor compare:phase-3-perl -- --version "Reduced - 1955" -
 |---|---|---|---|
 | Reduced - 1955 | 2024-04-07 | Lauds | `fe825d42` |
 
+### 2026-04-27 — St Stephen Vespers ignores the source-backed `no Psalm5` rule
+
+**Classification.** `perl-bug`
+
+**Summary.** Both Reduced 1955 and Rubrics 1960 St Stephen Vespers
+(`2024-12-26`) match Perl through the first 60 rendered lines (4
+antiphons + 4 psalms + the opening) and then diverge. The compositor
+honors the unconditional `[Rule]` line `no Psalm5` and transitions to
+the capitulum `Act. 6:8`. The Perl comparison surface ignores the rule
+and inherits the 5th Christmas Day antiphon `De fructu * ventris tui
+ponam super sedem tuam.` plus its psalm.
+
+**Primary source.**
+`upstream/web/www/horas/Latin/Sancti/12-26.txt:9-14`
+
+The St Stephen feast file carries an unconditional `[Rule]` block:
+
+```
+[Rule]
+ex C2a;
+Psalmi Dominica
+Antiphonas horas
+9 lectiones
+no Psalm5
+```
+
+**Reproduction.**
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Reduced - 1955" --date 2024-12-26 --hour Vespera
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Rubrics 1960 - 1960" --date 2024-12-26 --hour Vespera
+```
+
+**Affected stable divergence-row keys.**
+
+| Policy | Date | Hour | Row key suffix |
+|---|---|---|---|
+| Reduced - 1955 | 2024-12-26 | Vespers | `c5793985` |
+| Rubrics 1960 - 1960 | 2024-12-26 | Vespers | `c5793985` |
+
 ## See also
 
 - [ADR-011 — Phase 3 divergence adjudication](./adr/011-phase-3-divergence-adjudication.md)

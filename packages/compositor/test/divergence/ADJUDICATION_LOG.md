@@ -22,6 +22,220 @@ anchor.
 
 ## Entries
 
+### 2026-04-27 — Pattern: parser `@PATH::sub` empty-section reference (parser-bug, fixed)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** Easter Octave weekday Matins (Apr `02`-`06`) for
+both Reduced 1955 and Rubrics 1960 close their feast-file
+`[Ant Matutinum]` block with an inherited substitution reference like
+`@Tempora/Pasc0-0::s/^V\..*//sm`. The intent is to inherit the
+preceding day's antiphon block while stripping its V/R lines. The
+parser previously stored the residual `:` as the literal section
+name (`section: ':'`) which is not a valid section header in any
+file, so the inheritance silently failed and the engine saw an
+[Ant Matutinum] containing only the local V/R lines.
+
+**Root cause.** `parsePathAndSection` in
+`packages/parser/src/parser/directive-parser.ts` parses
+`PATH::` as `{ path: 'PATH', section: ':' }`. After the substitution
+is extracted, the residual carries a stray colon that the trim() call
+preserved.
+
+**Resolution.** Stripped leading colons from the parsed section
+before deciding whether it is empty. The reference now resolves to
+the surrounding section name (the standard `@PATH:SECTION` semantics
+when SECTION is omitted). Added a parser unit test exercising the
+exact `@Tempora/Pasc0-0::s/^V\..*//sm` form. Updated the
+spot-check-validation snapshot whose `warningCount` totals dropped by
+2-3 per affected feast file (fewer unresolved references). All
+existing parser, rubrical-engine, and compositor tests stay green.
+
+**Citation.**
+`upstream/web/www/horas/Latin/Tempora/Pasc0-2.txt:46-50`,
+`upstream/web/www/horas/Latin/Tempora/Pasc0-3.txt`,
+`upstream/web/www/horas/Latin/Tempora/Pasc0-5.txt`, and
+`upstream/web/www/horas/Latin/Tempora/Pasc0-6.txt` (Easter Octave
+weekday `[Ant Matutinum]` blocks using `@Tempora/Pasc0-0::sub`).
+
+**Impact.** This is a foundational parser correctness fix. The
+Easter Octave weekday Matins ledger rows (8 across both Roman
+policies) do not yet close because the compositor still needs
+follow-up work to emit the now-resolved antiphons in the 1-nocturn
+Matins shape. Counted as a non-row-count tranche; the compositor
+follow-up belongs to a subsequent tranche.
+
+### 2026-04-27 — Pattern: DA Triduum Prime silent Credo emit (engine-bug, fixed)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** After the previous tranche surfaced the DA
+Triduum Secreto + Pater + Ave prelude, the Holy Thursday / Good
+Friday / Holy Saturday Prime rows still diverged at line 4 — Perl
+emitted the silent Apostles' Creed `Credo in Deum, Patrem
+omnipoténtem,...`, while the compositor jumped directly to the first
+psalm heading `Psalmus 53 [1]`.
+
+**Root cause.** The Ordinarium `Prima.txt` `#Incipit` block lists
+`$rubrica Secreto`, `$Pater noster`, `$Ave Maria`, `$Credo` in
+that order under the `(deinde dicuntur)` annotation. Under
+Tridentine rubrics (DA), the conditional `(sed rubrica ^Trident
+omittuntur)` keeps all four entries recited even when the Triduum
+files set `Omit Incipit`. The previous tranche emitted the rubric +
+Pater + Ave but stopped short of the Credo.
+
+**Resolution.** Extended `composeDATriduumSecretoSection` to append
+`[Credo]` from `Common/Prayers.txt` when `args.hour === 'prime'`.
+Holy Saturday Vespers (`Tempora/Quad6-6`) is now intentionally
+excluded from the prelude entirely — its 41-line Perl render is
+heavily shortened (likely an anticipation / merge with the Easter
+Vigil cycle) and reintroducing the prelude there would surface a
+new divergent line on a row that originally diverged on a different
+family.
+
+**Citation.**
+- `upstream/web/www/horas/Ordinarium/Prima.txt:3-15` (Prime
+  `#Incipit` block including `$Credo`).
+- `upstream/web/www/horas/Latin/Psalterium/Common/Prayers.txt:16`
+  (Apostles' Creed text).
+
+**Impact.** DA Triduum Prime rows for `2024-03-28` / `03-29` /
+`03-30` close as fanouts of the same source-backed Credo +
+psalm-heading family. Net unadjudicated drop: Divino Afflatu from
+`8` → `5`. Total from `40` → `37`.
+
+### 2026-04-27 — Pattern: Divino Afflatu Triduum `Secreto` opening rubric + silent prayers (engine-bug, fixed)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** Divino Afflatu (`Divino Afflatu - 1954`) Triduum
+hours `2024-03-28` / `2024-03-29` / `2024-03-30` Lauds, Prime,
+Terce, Sext, None, and Vespers all opened at line 1 with the
+silent-recitation rubric:
+
+- Lauds: `Si Matutinum a Laudibus separatur, tunc dicitur secreto:`
+- Other hours: `secreto:`
+
+followed by the full silent `Pater noster` and `Ave Maria`. The
+compositor opened directly with the antiphon / psalm.
+
+**Root cause.** The Triduum feast files (`Tempora/Quad6-{4,5,6}.txt`)
+carry an unconditional `Omit Incipit` rule which strips the entire
+`#Incipit` block. Under Tridentine rubrics (DA), the Ordinarium
+`#Incipit` content
+(`$rubrica Secreto a Laudibus`, `$Pater noster`, `$Ave Maria`) is
+preserved because the conditional `(sed rubrica ^Trident
+omittuntur)` only suppresses them under non-Tridentine rubrics. The
+compositor's omit logic stripped them anyway.
+
+**Resolution.** Added `composeDATriduumSecretoSection` in Phase 3.
+For `Tempora/Quad6-{4,5,6}` Lauds / Prime / Terce / Sext / None /
+Vespers under Divino Afflatu, prepends:
+
+1. `[Secreto a Laudibus]` (Lauds) or `[Secreto]` (other hours) from
+   `Common/Rubricae.txt`.
+2. `[Pater noster]` from `Common/Prayers.txt`.
+3. `[Ave Maria]` from `Common/Prayers.txt`.
+
+The 1955 / 1960 paths are intentionally untouched — those rubrics
+strip the same content via the non-Tridentine omission conditional.
+
+**Citation.**
+- `upstream/web/www/horas/Latin/Psalterium/Common/Rubricae.txt:27-47`
+  (Secreto / Secreto a Laudibus rubric definitions).
+- `upstream/web/www/horas/Latin/Psalterium/Common/Prayers.txt:1-10`
+  (Pater noster / Ave Maria text).
+- `upstream/web/www/horas/Ordinarium/Laudes.txt:3-15` (Ordinarium
+  `#Incipit` block with the `(sed rubrica ^Trident omittuntur)`
+  conditional that gates these recited rubrics under DA).
+
+**Impact.** Best matching prefix on DA Triduum advances from `5` →
+`136` (Lauds 0 → 133, Vespers 0 → 11, minor hours 0 → 61). The
+newly exposed downstream rows are classified from existing
+half-verse `‡` / blank-line rendering families:
+
+- 9 fanout entries for the DA Triduum Lauds / Terce / Sext / None
+  Psalm 50:3a inline-marker rendering family (compositor preserves
+  source-backed `50:3a Miserére mei, Deus, *...`; Perl emits a
+  blank `_` line).
+- 3 fanout entries for the DA Triduum Vespers Psalm 115:7
+  half-verse `‡` family already documented for other dates.
+
+Net unadjudicated drop: Divino Afflatu from `21` → `8` (under
+threshold). Total from `53` → `40`.
+
+### 2026-04-27 — Pattern: St Stephen Vespers `no Psalm5` rule (perl-bug, classified)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** Reduced 1955 / Rubrics 1960 `2024-12-26` Vespers
+match Perl through the first 60 lines (4 antiphons + 4 psalms + the
+opening) and then diverge at line 61. The compositor jumps directly
+to the capitulum `Act. 6:8`; Perl emits a 5th antiphon
+`Ant. De fructu * ventris tui ponam super sedem tuam.` plus a 5th
+psalm.
+
+**Root cause.** `upstream/web/www/horas/Latin/Sancti/12-26.txt:9-14`
+carries an unconditional `[Rule]` line `no Psalm5` which instructs
+the engine to omit the 5th Vespers psalm under any policy. The
+compositor honors that source-backed rule and stops Vespers psalmody
+at 4 psalms. The Perl comparison surface ignores the rule and
+inherits the 5th Christmas Day antiphon `De fructu *...` from
+`@Sancti/12-25` along with its psalm.
+
+**Citation.** `upstream/web/www/horas/Latin/Sancti/12-26.txt:9-14`
+(unconditional `no Psalm5` rule).
+
+**Impact.** Two representative `perl-bug` rows classified, one per
+Roman policy. Plus one fanout: Rubrics 1960 `2024-04-07` Lauds Low
+Sunday paschal antiphon now mirrors the existing Reduced 1955 entry.
+Net unadjudicated drop: Reduced 1955 from `17` → `16`, Rubrics 1960
+from `18` → `16`.
+
+### 2026-04-27 — Pattern: Easter Sunday Matins / Lauds prelude rubric (engine-bug, fixed)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** Reduced 1955 / Rubrics 1960 Easter Sunday
+(`2024-03-31`) Matins and Lauds diverged at line 1 — the very first
+rendered line. Perl emitted the source-backed rubric block
+
+> Cum solemnis vigiliæ paschalis celebratio locum obtineat officii
+> nocturni dominicæ Resurrectionis, Matutino ejusdem dominicæ
+> Resurrectionis omisso, statim inter Missarum vigiliæ solemnia, post
+> communionem, cantatur Laudes. Officium dominicæ Resurrectionis
+> prosequitur deínde cum Prima.
+>
+> Qui vero solemni vigiliæ paschali non interfuerunt, tenentur dicere
+> Matutinum et Laudes dominicæ Resurrectionis.
+
+while the compositor opened directly with `V. Domine, lábia +`
+(Matins) or `V. Deus + in adjutórium meum inténde.` (Lauds).
+
+**Root cause.** `Tempora/Pasc0-0.txt` carries
+`[Prelude Matutinum] (rubrica 1955 aut rubrica 1960)` and
+`[Prelude Laudes] @:Prelude Matutinum`. The compositor previously had
+no path to surface those prelude blocks; only the Triduum Vespers /
+Compline siblings were wired.
+
+**Resolution.** Added `composeEasterSundayPreludeSection` in
+`packages/compositor/src/compose/triduum-special.ts` mirroring the
+`composeTriduumSuppressedVespersSection` shape. It fires only on
+`Tempora/Pasc0-0` Matins / Lauds under 1955 / 1960, resolves the
+prelude section, and prepends it as a `rubric` section. The shared
+`resolveFlatSection` helper now converts `separator` nodes into the
+gabc-notation `_` form so the blank line between the two rubric
+sentences renders correctly.
+
+**Citation.** `upstream/web/www/horas/Latin/Tempora/Pasc0-0.txt:111-127`.
+
+**Impact.** Matching prefix on `2024-03-31` advances from `0` → `72`
+(Matins) and `0` → `25` (Lauds) for both Roman policies. The newly
+exposed pre-lesson Pater Noster guillemet and Psalm 99:3 `‡` rows
+fan out from existing rendering-difference / perl-bug families. Net
+unadjudicated drop: Reduced 1955 from `19` → `17`, Rubrics 1960 from
+`20` → `18`.
+
 ### 2026-04-26 — Pattern: Reduced 1955 Easter-Octave / Low-Sunday paschal antiphon rendering (perl-bug, classified)
 
 **Commit.** Current tranche commit.
