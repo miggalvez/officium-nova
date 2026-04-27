@@ -8049,6 +8049,18 @@
     "resolvedAt": "2026-04-24",
     "commitSha": "dfbe3fe"
   },
+  "Reduced - 1955/2024-04-04/Matins/570ca05e": {
+    "policy": "Reduced - 1955",
+    "date": "2024-04-04",
+    "hour": "Matins",
+    "firstExpected": "Ant. Ego sum qui sum.",
+    "firstActual": "Ant. Ego sum qui sum, * et consílium meum non est cum ímpiis, sed in lege Dómini volúntas mea est, allelúja.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Tempora/Pasc0-0.txt:60 — Easter Sunday Ant Matutinum carries the full antiphon `Ego sum qui sum, * et consílium meum non est cum ímpiis, sed in lege Dómini volúntas mea est, allelúja.`. The compositor preserves that source-backed antiphon on Easter Octave Thursday Matins; the Perl comparison surface abbreviates it to the incipit-only `Ant. Ego sum qui sum.`.",
+    "notes": "Representative entry for the Reduced 1955 Easter-Octave Matins full-antiphon opening family where Perl abbreviates source-backed antiphons to incipits on subsequent days.",
+    "resolvedAt": "2026-04-26",
+    "commitSha": "pending"
+  },
   "Reduced - 1955/2024-04-04/Prime/29ec2a3d": {
     "policy": "Reduced - 1955",
     "date": "2024-04-04",
@@ -8156,6 +8168,18 @@
     "notes": "Representative entry for the Reduced 1955 Compline cross-glyph family. Fan out to all matching 1955 Compline rows with the same first-divergence text.",
     "resolvedAt": "2026-04-19",
     "commitSha": "bfb3c52"
+  },
+  "Reduced - 1955/2024-04-07/Lauds/fe825d42": {
+    "policy": "Reduced - 1955",
+    "date": "2024-04-07",
+    "hour": "Lauds",
+    "firstExpected": "Ant. Allelúja, * allelúja, allelúja.",
+    "firstActual": "Ant. Allelúja, * Dóminus regnávit, decórem índuit, allelúja, allelúja.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:1-6 — the Day0 Laudes1 psalter source carries the proper Sunday paschal antiphon `Allelúja, * Dóminus regnávit, decórem índuit, allelúja, allelúja.` on Low Sunday Lauds. The compositor emits that source-backed antiphon; the Perl comparison surface collapses the paschal opening to a generic `Ant. Allelúja, * allelúja, allelúja.`.",
+    "notes": "Representative entry for the Reduced 1955 Low Sunday Lauds psalter-major paschal antiphon family where Perl substitutes a generic triple-alleluia incipit for the source-backed proper antiphon.",
+    "resolvedAt": "2026-04-26",
+    "commitSha": "pending"
   },
   "Reduced - 1955/2024-04-07/None/f178bdcc": {
     "policy": "Reduced - 1955",

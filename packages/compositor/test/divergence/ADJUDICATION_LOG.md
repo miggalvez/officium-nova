@@ -22,6 +22,34 @@ anchor.
 
 ## Entries
 
+### 2026-04-26 — Pattern: Reduced 1955 Easter-Octave / Low-Sunday paschal antiphon rendering (perl-bug, classified)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** Reduced 1955 Easter Octave Thursday (`2024-04-04`)
+Matins and Low Sunday (`2024-04-07`) Lauds opened with the
+source-backed paschal antiphon while the Perl comparison surface
+collapsed it to either an incipit or a generic triple-alleluia.
+
+**Root cause.** Both rows are surface-rendering disagreements rather
+than liturgical-content disagreements:
+
+- For `2024-04-04` Matins, `Tempora/Pasc0-0.txt:60` carries the full
+  antiphon `Ego sum qui sum, * et consílium meum non est cum
+  ímpiis, sed in lege Dómini volúntas mea est, allelúja.` The
+  compositor preserves that source-backed antiphon; Perl abbreviates
+  it to incipit `Ant. Ego sum qui sum.` on subsequent Easter Octave
+  days.
+- For `2024-04-07` Lauds, `Psalterium/Psalmi/Psalmi major.txt:1-6`
+  Day0 Laudes1 carries the proper Sunday paschal antiphon
+  `Allelúja, * Dóminus regnávit, decórem índuit, allelúja, allelúja.`
+  The compositor emits the source-backed antiphon; Perl substitutes a
+  generic triple-alleluia surface.
+
+**Resolution.** Classified both as `perl-bug` (representative entries)
+with the source citations above. Net unadjudicated drop: Reduced 1955
+from `21` → `19`.
+
 ### 2026-04-26 — Pattern: paschal-tide ferial Matins versicle override (engine-bug, fixed)
 
 **Commit.** Current tranche commit.
