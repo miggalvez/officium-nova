@@ -2417,6 +2417,78 @@ pnpm -C packages/compositor compare:phase-3-perl -- --version "Rubrics 1960 - 19
 | Reduced - 1955 | 2024-12-26 | Vespers | `c5793985` |
 | Rubrics 1960 - 1960 | 2024-12-26 | Vespers | `c5793985` |
 
+### 2026-04-27 — DA Triduum Lauds / minor-hour Psalm 50:3a inline marker is omitted in Perl
+
+**Classification.** `rendering-difference`
+
+**Summary.** After the DA Triduum Secreto-rubric prelude lands the
+silent `Pater noster` + `Ave Maria`, the next rendered line is the
+opening half-verse of Psalm 50: `50:3a Miserére mei, Deus, *
+secúndum magnam misericórdiam tuam.` The compositor preserves that
+source-backed inline-marker line. The Perl comparison surface emits a
+blank `_` line in its place across DA Triduum Lauds, Terce, Sext, and
+None.
+
+**Primary source.**
+`upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm50.txt:3` —
+the Psalm 50 corpus encodes verse 3a as `Miserére mei, Deus, *
+secúndum magnam misericórdiam tuam.` with the standard half-verse
+numeric marker.
+
+**Reproduction.**
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Divino Afflatu - 1954" --date 2024-03-28 --hour Laudes
+```
+
+**Affected stable divergence-row keys.**
+
+| Policy | Date | Hour | Row key suffix |
+|---|---|---|---|
+| Divino Afflatu - 1954 | 2024-03-28 | Lauds | `9772c004` |
+| Divino Afflatu - 1954 | 2024-03-28 | Terce | `9772c004` |
+| Divino Afflatu - 1954 | 2024-03-28 | Sext | `9772c004` |
+| Divino Afflatu - 1954 | 2024-03-28 | None | `9772c004` |
+| Divino Afflatu - 1954 | 2024-03-29 | Lauds | `9772c004` |
+| Divino Afflatu - 1954 | 2024-03-29 | Terce | `9772c004` |
+| Divino Afflatu - 1954 | 2024-03-29 | Sext | `9772c004` |
+| Divino Afflatu - 1954 | 2024-03-29 | None | `9772c004` |
+| Divino Afflatu - 1954 | 2024-03-30 | Lauds | `9772c004` |
+| Divino Afflatu - 1954 | 2024-03-30 | Terce | `9772c004` |
+| Divino Afflatu - 1954 | 2024-03-30 | Sext | `9772c004` |
+| Divino Afflatu - 1954 | 2024-03-30 | None | `9772c004` |
+
+### 2026-04-27 — DA Triduum Prime silent Credo + psalm heading order
+
+**Classification.** `engine-bug` (compositor side, fixed)
+
+**Summary.** This entry documents the DA Triduum Prime closeout for
+completeness rather than as an upstream Perl issue. The compositor
+previously skipped the silent `Credo` after the Secreto + Pater + Ave
+prelude and jumped straight to `Psalmus 53 [1]`. After the Phase 3
+follow-up extending `composeDATriduumSecretoSection` to append
+`[Credo]` from `Common/Prayers.txt` at Prime, the compositor matches
+Perl through the first ~78 lines of DA Triduum Prime.
+
+**Primary source.**
+`upstream/web/www/horas/Ordinarium/Prima.txt:3-15` —
+the Ordinarium Prime `#Incipit` block lists `$rubrica Secreto`,
+`$Pater noster`, `$Ave Maria`, `$Credo` under the
+`(deinde dicuntur)` annotation. The conditional `(sed rubrica
+^Trident omittuntur)` keeps all four recited under DA / pre-1955
+Tridentine rubrics even when the Triduum file's `Omit Incipit` rule
+strips the same content under 1955 / 1960.
+
+**Reproduction.**
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Divino Afflatu - 1954" --date 2024-03-28 --hour Prima
+```
+
+**Affected stable divergence-row keys.** Closed in this tranche; the
+representative entries land in `adjudications.json` as
+`engine-bug`-tagged Credo opening lines.
+
 ## See also
 
 - [ADR-011 — Phase 3 divergence adjudication](./adr/011-phase-3-divergence-adjudication.md)
