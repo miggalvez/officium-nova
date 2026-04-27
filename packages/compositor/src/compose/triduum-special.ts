@@ -192,24 +192,19 @@ export function composeDATriduumSecretoSection(
   const merged = new Map<string, readonly TextContent[]>();
   for (const lang of args.options.languages) {
     const bucket: TextContent[] = [];
-    const rubric = rubricPerLanguage.get(lang);
-    if (rubric) {
-      bucket.push(...rubric);
-    }
-    const pater = paterPerLanguage.get(lang);
-    if (pater) {
-      bucket.push(...pater);
-    }
-    const ave = avePerLanguage.get(lang);
-    if (ave) {
-      bucket.push(...ave);
-    }
-    if (includeCredo) {
-      const credo = credoPerLanguage.get(lang);
-      if (credo) {
-        bucket.push(...credo);
+    const parts = [
+      rubricPerLanguage.get(lang),
+      paterPerLanguage.get(lang),
+      avePerLanguage.get(lang),
+      ...(includeCredo ? [credoPerLanguage.get(lang)] : [])
+    ];
+
+    for (const part of parts) {
+      if (part) {
+        bucket.push(...part);
       }
     }
+
     if (bucket.length > 0) {
       merged.set(lang, Object.freeze(bucket));
     }
