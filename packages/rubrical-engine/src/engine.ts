@@ -885,6 +885,7 @@ function defaultCelebrationRuleSet(): CelebrationRuleSet {
     quorumFestum: false,
     commemoratio3: false,
     unaAntiphona: false,
+    symbolumAthanasium: false,
     unmapped: [],
     hourScopedDirectives: []
   };

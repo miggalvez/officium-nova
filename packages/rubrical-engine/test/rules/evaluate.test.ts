@@ -132,7 +132,7 @@ describe('buildCelebrationRuleSet', () => {
   });
 
   it('collects unmapped directives with warnings', () => {
-    const { feastFile, context } = makeHarness(['Symbolum Athanasium']);
+    const { feastFile, context } = makeHarness(['1 et 2 lectiones']);
 
     const result = buildCelebrationRuleSet(feastFile, [], context);
 

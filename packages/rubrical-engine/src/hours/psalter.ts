@@ -75,7 +75,39 @@ export function selectPsalmodyRoman1960(
     }
   }
 
-  return applyPsalmOverrides(assignments, params);
+  return appendQuicumqueAtPrime(applyPsalmOverrides(assignments, params), params);
+}
+
+function appendQuicumqueAtPrime(
+  assignments: readonly PsalmAssignment[],
+  params: SelectPsalmodyInput
+): readonly PsalmAssignment[] {
+  // The `Symbolum Athanasium` rule directive — present on Trinity Sunday
+  // (`Pent01-0`), the Sundays after Epiphany, several Sundays after
+  // Pentecost, and the Tridentine Quadragesima Sundays — appends the
+  // Athanasian Creed (Psalm 234) to Sunday Prime psalmody. Mirrors the
+  // `quicumque` push at `upstream/web/cgi-bin/horas/specials/psalmi.pl:296-309`
+  // gated on Sunday + Prime + winner-from-Tempora; the `(rubrica 196)` clause
+  // there limits the year-round default to Trinity Sunday for 1955/1960,
+  // which the source files encode by stamping `Symbolum Athanasium` only on
+  // the surviving Sundays under those rubrics. We honor whatever the rule
+  // says.
+  if (
+    params.hour !== 'prime' ||
+    params.temporal.dayOfWeek !== 0 ||
+    !params.celebrationRules.symbolumAthanasium
+  ) {
+    return assignments;
+  }
+  return Object.freeze([
+    ...assignments,
+    {
+      psalmRef: {
+        path: `${PSALMORUM_ROOT}/Psalm234`,
+        section: '__preamble'
+      }
+    }
+  ]);
 }
 
 function isSundayForMajorHour(hour: HourName, temporal: TemporalContext): boolean {

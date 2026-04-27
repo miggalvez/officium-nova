@@ -384,8 +384,17 @@ describeIfUpstream('temporal Sunday minor-hour antiphon ownership', () => {
           continue;
         }
 
+        // Trinity Sunday's [Rule] adds the `Symbolum Athanasium` directive,
+        // so Prime appends Psalm 234 (Athanasian Creed) — the other two
+        // festal Sundays do not carry that directive and stop at three
+        // psalms.
+        expectMinorHour(
+          psalmodyAt(engine, '2024-05-26', 'prime'),
+          'horas/Latin/Tempora/Pent01-0r:Ant Laudes:1',
+          ['53', '118(1-16)', '118(17-32)', undefined as unknown as string]
+        );
+
         for (const [date, officePath] of [
-          ['2024-05-26', 'horas/Latin/Tempora/Pent01-0r'],
           ['2024-09-29', 'horas/Latin/Sancti/05-08'],
           ['2024-12-08', 'horas/Latin/Sancti/12-08']
         ] as const) {

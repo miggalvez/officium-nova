@@ -523,7 +523,7 @@ function resolveMajorHourPsalmRefs(
   files: readonly ParsedFile[],
   input: ApplyRuleSetInput,
   count: number
-): readonly TextReference[] {
+): readonly (TextReference | undefined)[] {
   const conditionContext = majorHourPsalmConditionContext(input);
   const headers =
     input.hour === 'lauds' ? ['Ant Laudes']
@@ -667,10 +667,21 @@ function extractMajorHourPsalmRefs(
   currentHeader: string,
   visited: ReadonlySet<string>,
   conditionContext: ConditionEvalContext | undefined
-): readonly TextReference[] {
-  const refs: TextReference[] = [];
+): readonly (TextReference | undefined)[] {
+  // Position-aligned with the antiphon list: each visible antiphon-bearing
+  // node contributes one slot. Text antiphon lines without a `;;NNN` psalm
+  // tie produce `undefined` (the psalter day's psalm wins), while text lines
+  // with `;;NNN` and `psalmRef` nodes push the explicit override. Sections
+  // like Holy Saturday's `[Ant Laudes]` mix tied and untied antiphons; the
+  // earlier dense-array form misaligned the `;;222` override on the fourth
+  // antiphon onto slot 0.
+  const refs: (TextReference | undefined)[] = [];
 
   for (const node of content) {
+    if (refs.length >= count) {
+      break;
+    }
+
     if (node.type === 'conditional') {
       if (!conditionContext || conditionMatches(node.condition, conditionContext)) {
         refs.push(
@@ -683,9 +694,6 @@ function extractMajorHourPsalmRefs(
             conditionContext
           )
         );
-        if (refs.length >= count) {
-          break;
-        }
       }
       continue;
     }
@@ -720,9 +728,6 @@ function extractMajorHourPsalmRefs(
             conditionContext
           )
         );
-        if (refs.length >= count) {
-          break;
-        }
       } catch {
         continue;
       }
@@ -736,9 +741,6 @@ function extractMajorHourPsalmRefs(
         section: '__preamble',
         selector: node.selector ?? String(node.psalmNumber)
       });
-      if (refs.length >= count) {
-        break;
-      }
       continue;
     }
 
@@ -746,18 +748,23 @@ function extractMajorHourPsalmRefs(
       continue;
     }
 
-    const [, psalmSpec] = splitPsalmTaggedTextRow(node.value);
-    if (!psalmSpec) {
+    if (!isAntiphonLikeText(node.value)) {
       continue;
     }
 
-    refs.push(psalmTokenReference(psalmSpec));
-    if (refs.length >= count) {
-      break;
-    }
+    const [, psalmSpec] = splitPsalmTaggedTextRow(node.value);
+    refs.push(psalmSpec ? psalmTokenReference(psalmSpec) : undefined);
   }
 
   return Object.freeze(refs);
+}
+
+function isAntiphonLikeText(value: string): boolean {
+  // `[Ant Laudes]` / `[Ant Vespera]` content is overwhelmingly antiphon
+  // strings; the parser routes rubric prose, GABC headers, and chant cues to
+  // distinct content-node types. Treat any non-empty `text` node as an
+  // antiphon-bearing slot for the purposes of psalm-tie alignment.
+  return value.trim().length > 0;
 }
 
 function majorHourPsalmConditionContext(
@@ -1518,6 +1525,8 @@ function majorHourLaterBlockFallbackSection(
           return `Hymnus Day${dayOfWeek} Laudes`;
         case 'versicle':
           return 'Feria Versum 2';
+        case 'antiphon-ad-benedictus':
+          return ferialBenedictusAntiphonSection(dayOfWeek);
         default:
           return undefined;
       }
@@ -1529,12 +1538,35 @@ function majorHourLaterBlockFallbackSection(
           return `Hymnus Day${dayOfWeek} Vespera`;
         case 'versicle':
           return 'Feria Versum 3';
+        case 'antiphon-ad-magnificat':
+          return ferialMagnificatAntiphonSection(dayOfWeek);
         default:
           return undefined;
       }
     default:
       return undefined;
   }
+}
+
+function ferialBenedictusAntiphonSection(dayOfWeek: number): string | undefined {
+  // `Major Special.txt` keys the per-feria Benedictus antiphon under
+  // `[Feria${N} Ant 2]` for Mon–Sat (N = dow + 1, so Saturday → Feria7).
+  // Sunday's Lauds I/II antiphons are owned by the temporal Sunday office,
+  // so no Sunday fallback is provided here.
+  if (dayOfWeek >= 1 && dayOfWeek <= 6) {
+    return `Feria${dayOfWeek + 1} Ant 2`;
+  }
+  return undefined;
+}
+
+function ferialMagnificatAntiphonSection(dayOfWeek: number): string | undefined {
+  // Mirror of `ferialBenedictusAntiphonSection` but on the Vespers side.
+  // `Major Special.txt` keys the per-feria Magnificat antiphon under
+  // `[Feria${N} Ant 3]` for Mon–Sat (N = dow + 1, so Saturday → Feria7).
+  if (dayOfWeek >= 1 && dayOfWeek <= 6) {
+    return `Feria${dayOfWeek + 1} Ant 3`;
+  }
+  return undefined;
 }
 
 function majorHourHolyWeekMonWedLaterBlockSection(

@@ -41,7 +41,8 @@ export type CelebrationEffect =
   | { readonly kind: 'no-suffragium' }
   | { readonly kind: 'quorum-festum' }
   | { readonly kind: 'commemoratio3' }
-  | { readonly kind: 'una-antiphona' };
+  | { readonly kind: 'una-antiphona' }
+  | { readonly kind: 'symbolum-athanasium' };
 
 export type HourEffect =
   | {
@@ -364,6 +365,20 @@ function classifyAction(directive: RuleActionDirective): ClassifiedDirective {
       target: 'celebration',
       effect: {
         kind: 'una-antiphona'
+      }
+    };
+  }
+
+  // Corpus examples: Tempora/Pent01-0, Pent03-0, Pent05-0, Pent07-0,
+  // Pent21-0, Pent23-0, Epi5-0tt, Epi6-0, Quadp1-0, Quadp3-0 (Tridentine
+  // gating handled by surrounding conditional). Marks the Sunday for
+  // appending the Athanasian Creed (Psalm 234) to Prime psalmody, mirroring
+  // the `quicumque` push in `specials/psalmi.pl:296-309`.
+  if (normalized === 'symbolum athanasium') {
+    return {
+      target: 'celebration',
+      effect: {
+        kind: 'symbolum-athanasium'
       }
     };
   }

@@ -45,7 +45,7 @@ import { applyDirectives } from './directives/index.js';
 import { isWholeAntiphonSlot, markAntiphonFirstText } from './emit/antiphon-marker.js';
 import { emitSection } from './emit/index.js';
 import { flattenConditionals } from './flatten/index.js';
-import { expandDeferredNodes } from './resolve/expand-deferred-nodes.js';
+import { expandDeferredNodes, interleaveSeparators } from './resolve/expand-deferred-nodes.js';
 import { resolveReference } from './resolve/reference-resolver.js';
 import type {
   ComposedHour,
@@ -434,12 +434,25 @@ function composeSlot(args: ComposeSlotArgs): Section | undefined {
       // prayed Matins and is continuing into Lauds, suppress the secreto
       // Pater / Ave block at the head of the Lauds `#Incipit`. The filter is
       // a no-op for every other Hour and slot.
-      const sourceContent =
+      const baseSourceContent =
         args.hour === 'lauds' &&
         args.slot === 'incipit' &&
         args.options.joinLaudsToMatins === true
           ? stripLaudsSecretoPrayers(section.content)
           : section.content;
+      // Phase 3 §3h: when an assignment's `psalmRef` points directly at a
+      // `Psalmorum/Psalm<N>` file (e.g. the Athanasian Creed appended via the
+      // `Symbolum Athanasium` directive), the resolved content is a flat list
+      // of per-verse `text` nodes with no separators. The standard
+      // `psalmRef`/`psalmInclude` expansion path already runs `interleave-
+      // Separators`, but a direct file reference bypasses that, so consecutive
+      // verses concatenate into a single line at emit time. Apply the same
+      // interleave to direct psalm-file refs so verses surface on separate
+      // lines like every other psalmody body.
+      const sourceContent =
+        args.slot === 'psalmody' && isDirectPsalmFileRef(ref)
+          ? interleaveSeparators(baseSourceContent)
+          : baseSourceContent;
       if (args.slot === 'psalmody' && isAntiphon && containsInlinePsalmRefs(sourceContent)) {
         const antiphonOnly = markAntiphonFirstText(extractInlinePsalmAntiphons(sourceContent));
         const flattened = flattenConditionals(antiphonOnly, args.context);
@@ -762,6 +775,18 @@ function isDomineExaudiNode(node: TextContent): boolean {
     return true;
   }
   return node.type === 'conditional' && node.content.some(isDomineExaudiNode);
+}
+
+function isDirectPsalmFileRef(ref: TextReference): boolean {
+  // `Psalmorum/Psalm<N>` files store one verse per source line and ship a
+  // single `__preamble` section. When an assignment's `psalmRef` points at
+  // such a file directly (e.g. the Athanasian Creed at Trinity Sunday Prime),
+  // the resolved content has no separators between verses; interleave them
+  // so emit produces one line per verse.
+  return (
+    ref.section === '__preamble' &&
+    /\/Psalterium\/Psalmorum\/Psalm\d+$/u.test(ref.path)
+  );
 }
 
 function isSimplifiedTriduumOration(args: ComposeSlotArgs, ref: TextReference): boolean {
