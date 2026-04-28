@@ -77,6 +77,28 @@ export interface OfficeDayResponse {
   };
 }
 
+export interface CalendarMonthResponse {
+  readonly kind: 'calendar-month';
+  readonly apiVersion: 'v1';
+  readonly year: number;
+  readonly month: number;
+  readonly version: VersionDescriptor;
+  readonly days: readonly CalendarDayDto[];
+  readonly meta: {
+    readonly contentVersion: string;
+    readonly canonicalPath: string;
+  };
+}
+
+export interface CalendarDayDto {
+  readonly date: string;
+  readonly dayOfWeek: number;
+  readonly season: DayOfficeSummary['temporal']['season'];
+  readonly celebration: CelebrationDto;
+  readonly commemorations: readonly CommemorationDto[];
+  readonly warnings: readonly RubricalWarning[];
+}
+
 export interface DaySummaryDto {
   readonly date: string;
   readonly version: VersionDescriptor;
@@ -306,6 +328,39 @@ export function toOfficeDayResponse(input: {
         ? 'partial'
         : 'complete'
     }
+  };
+}
+
+export function toCalendarMonthResponse(input: {
+  readonly year: number;
+  readonly month: number;
+  readonly version: VersionDescriptor;
+  readonly summaries: readonly DayOfficeSummary[];
+  readonly contentVersion: string;
+  readonly canonicalPath: string;
+}): CalendarMonthResponse {
+  return {
+    kind: 'calendar-month',
+    apiVersion: 'v1',
+    year: input.year,
+    month: input.month,
+    version: input.version,
+    days: input.summaries.map(toCalendarDayDto),
+    meta: {
+      contentVersion: input.contentVersion,
+      canonicalPath: input.canonicalPath
+    }
+  };
+}
+
+function toCalendarDayDto(summary: DayOfficeSummary): CalendarDayDto {
+  return {
+    date: summary.date,
+    dayOfWeek: summary.temporal.dayOfWeek,
+    season: summary.temporal.season,
+    celebration: toCelebrationDto(summary.celebration),
+    commemorations: summary.commemorations.map(toCommemorationDto),
+    warnings: summary.warnings
   };
 }
 
