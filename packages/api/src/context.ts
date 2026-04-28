@@ -53,7 +53,7 @@ export const SUPPORTED_HOURS: readonly HourName[] = [
 
 export async function buildApiContext(config: ApiConfig): Promise<ApiContext> {
   const versionRegistry = config.versionRegistry ?? (await loadVersionRegistry(config.corpusPath));
-  const runtime = config.versionRegistry
+  const runtime = config.loadRuntime === false
     ? undefined
     : await loadApiRuntime(config.corpusPath, versionRegistry);
   const versions = buildApiVersionRegistry({

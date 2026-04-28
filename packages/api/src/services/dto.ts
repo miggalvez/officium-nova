@@ -321,7 +321,7 @@ function applyTextOrthographyProfile(input: {
     .replaceAll('J', 'I')
     .replaceAll('j', 'i')
     .replaceAll('H-Iesu', 'H-Jesu')
-    .replaceAll('er eúmdem', 'er eúndem');
+    .replaceAll('eúmdem', 'eúndem');
 }
 
 function toCelebrationDto(celebration: Celebration): CelebrationDto {

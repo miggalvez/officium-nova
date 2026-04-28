@@ -21,7 +21,8 @@ async function lightweightApp() {
     corpusPath: '.',
     contentVersion: 'test-content',
     logger: false,
-    versionRegistry: testVersionRegistry()
+    versionRegistry: testVersionRegistry(),
+    loadRuntime: false
   });
   return createApp({ context, config: { logger: false } });
 }
@@ -127,6 +128,31 @@ describeIfUpstream('office route integration', () => {
 
     expect(response.statusCode).toBe(200);
     expect(response.json().request.version).toBe('Rubrics 1960 - 1960');
+  }, 120_000);
+
+  it('initializes office engines when a custom version registry is provided', async () => {
+    const context = await buildApiContext({
+      ...loadApiConfig({
+        OFFICIUM_CONTENT_VERSION: 'test-content',
+        OFFICIUM_API_LOGGER: 'false'
+      }),
+      versionRegistry: testVersionRegistry()
+    });
+    const app = await createApp({ context, config: { logger: false } });
+
+    const response = await app.inject(
+      '/api/v1/office/2024-01-01/lauds?version=Rubrics%201960%20-%201960&lang=la'
+    );
+
+    expect(response.statusCode).toBe(200);
+    expect(response.json()).toMatchObject({
+      kind: 'office-hour',
+      request: {
+        version: 'Rubrics 1960 - 1960'
+      }
+    });
+
+    await app.close();
   }, 120_000);
 
   it('applies the version orthography profile only to text and rubric runs', async () => {
