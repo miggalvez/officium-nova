@@ -22,6 +22,94 @@ anchor.
 
 ## Entries
 
+### 2026-04-27 — Pattern: Low Sunday (Pasc1-0) Matins shape + paschaltide Sunday `[Pasch0]` antiphon substitution (engine-bug, classified)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** Two related Low Sunday Matins rows surfaced as the
+last unadjudicated rows in the Roman ledgers:
+
+- `Rubrics 1960 - 1960/2024-04-07/Matins/49cd6755` — `expectedTotal=293,
+  actualTotal=317` at row `63/64` with `Ad Nocturnum` (Perl, 1-nocturn
+  shape) vs `Nocturnus I` (compositor, 3-nocturn shape).
+- `Reduced - 1955/2024-04-07/Matins/093db822` — at row `64/65` with
+  `Ant. Allelúja, * lapis revolútus est, allelúja: ab óstio
+  monuménti, allelúja, allelúja.` (Perl, paschal antiphon) vs
+  `Ant. Beátus vir. ‡` (compositor, Day0 Matutinum incipit).
+
+These reveal two related but distinct engine bugs that surface
+together on Pasc1-0 because both layers feed the same Matins output
+position.
+
+**Root cause (R60 Matins shape).** Codex Rubricarum (1960) §175a
+treats Pasc1-0 (Dominica in Albis in Octava Paschae) as part of the
+privileged Easter Octave and applies the same 1-nocturn paschal
+Matins shape used on Pasc0-0 through Pasc0-6. Perl mirrors that via
+`gettype1960()` (`upstream/web/cgi-bin/horas/specmatins.pl:1444-1478`):
+when `version =~ /196/` and `winner =~ /Pasc1\-0/i`, it returns
+`LT1960_SUNDAY` (non-zero), and at line 317 the 9-lessons branch is
+SKIPPED under 1960 (`!gettype1960()` is false), causing Matins to
+fall through to the 1-nocturn paschal shape with `Ad Nocturnum`
+heading. The compositor's private `isPaschalOctaveDay` in
+`packages/rubrical-engine/src/policy/rubrics-1960.ts:645` only
+matches `/^Pasc0-[0-6]$/u` and the I-classis Sunday simplification
+short-circuit at `:417-426` explicitly excludes `classSymbol === 'I'`
+(introduced in tranche 20 to keep Trinity Sunday's three-nocturn
+shape). Pasc1-0 is I-classis and falls through to the
+`classSymbol === 'I'` 3-nocturn branch at `:442-447`, so the
+compositor emits `Nocturnus I` instead of `Ad Nocturnum`.
+
+**Root cause (R55 paschal Matins antiphons).** Independent of the
+shape decision, Perl's `ant_matutinum_paschal`
+(`specmatins.pl:1549-1597`) substitutes paschal Matins antiphons on
+Pasc1-5 Sundays under non-Praedicatorum versions: it loads
+`upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:429-444`
+(`[Pasch0]`) and replaces the Day0 Matutinum antiphons with the
+three paschal antiphons (`Allelúja, * lapis revolútus est…` for the
+first nocturn, `Allelúja, * quem quæris múlier…` for the second, and
+`Allelúja, * noli flere María…` for the third) plus their three
+paschal versicles. For 1960, `ant_matutinum_paschal` then strips
+antiphons from positions 1+ leaving a single antiphon in the 1-
+nocturn shape. Phase 2's matins-plan in
+`packages/rubrical-engine/src/hours/matins-plan.ts` does not perform
+this substitution at all, so Reduced 1955 Pasc1-0 Matins keeps the
+`Beátus vir.` Day0 Matutinum antiphon and the `;;` continuation
+markers from the directly-resolved psalter row produce the trailing
+`‡`.
+
+**Resolution.** Both rows classified as `engine-bug` with explicit
+fix sketches in the citations. The R60 fix is small (extend the
+private `isPaschalOctaveDay` in `rubrics-1960.ts:645` to also match
+`Pasc1-0`, which in turn corrects the Te Deum disposition at `:490`
+for Low Sunday Matins). The R55 fix requires Phase 2's matins-plan
+to mirror Perl's `[Pasch0]` substitution on paschaltide week-1-
+through-5 Sundays — a non-trivial seam touching the Matins planner.
+Both are deferred for a future tranche; the classifications close
+the unadjudicated rows and document the family clearly.
+
+**Citation.**
+
+- `upstream/web/cgi-bin/horas/specmatins.pl:1444-1478`
+  (`gettype1960` LT1960_SUNDAY for Pasc1-0)
+- `upstream/web/cgi-bin/horas/specmatins.pl:317-352`
+  (`!gettype1960()` skip of 9-lessons branch under 1960)
+- `upstream/web/cgi-bin/horas/specmatins.pl:276-278` and
+  `:1549-1597` (`ant_matutinum_paschal` substitution)
+- `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:429-444`
+  (`[Pasch0]` paschaltide Sunday Matins antiphon scheme)
+- Codex Rubricarum (1960) §175a (Easter Octave Day Matins
+  simplification)
+- `packages/rubrical-engine/src/policy/rubrics-1960.ts:645`
+  (private `isPaschalOctaveDay` to extend)
+- `packages/rubrical-engine/src/policy/rubrics-1960.ts:417-426`
+  (Sunday-simplification short-circuit excluding `'I'`)
+- `packages/rubrical-engine/src/hours/matins-plan.ts` (Phase 2
+  matins-plan, where the `[Pasch0]` substitution should be wired)
+
+**Impact.** Net unadjudicated drop: Reduced 1955 from `1` → `0`,
+Rubrics 1960 from `1` → `0`, total `3` → `1`. Two new rows enter the
+`engine-bug` column for sign-off follow-up.
+
 ### 2026-04-27 — Pattern: shared Roman paschaltide Vespers psalmody-antiphon — Day6 / Day0 Vespera + add-alleluia decoration (perl-bug, classified)
 
 **Commit.** Current tranche commit.
