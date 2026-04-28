@@ -63,7 +63,24 @@ describe('Phase 5 schemas', () => {
   });
 
   it('accepts a redacted public reviewer report', () => {
-    const report = {
+    const report = publicReviewerReport();
+
+    expect(validateReviewerReport(report)).toEqual({
+      ok: true,
+      errors: []
+    });
+  });
+
+  it('allows reviewer report notes to be null', () => {
+    expect(validateReviewerReport({ ...publicReviewerReport(), notes: null })).toEqual({
+      ok: true,
+      errors: []
+    });
+  });
+});
+
+function publicReviewerReport() {
+  return {
       schemaVersion: 1,
       id: 'rr-2026-0001',
       submittedAt: '2026-04-28T14:30:00-05:00',
@@ -117,10 +134,4 @@ describe('Phase 5 schemas', () => {
       },
       notes: ''
     };
-
-    expect(validateReviewerReport(report)).toEqual({
-      ok: true,
-      errors: []
-    });
-  });
-});
+}

@@ -104,8 +104,8 @@ export function validateReviewerReport(value: unknown): ValidationResult {
   validateOutput(value.output, errors);
   validateDisagreement(value.disagreement, errors);
   validateTriage(value.triage, errors);
-  if (!isString(value.notes)) {
-    errors.push('notes must be a string');
+  if (!isNullableString(value.notes)) {
+    errors.push('notes must be a string or null');
   }
 
   const citation = validateCitation(value.citation);

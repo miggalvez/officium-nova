@@ -25,11 +25,7 @@ export async function auditReviewerReports(): Promise<ReviewerReportAuditSummary
     for (const file of files) {
       checkedReports += 1;
       const raw = await readFile(file, 'utf8');
-      const parsed = JSON.parse(raw) as unknown;
-      const result = validateReviewerReport(parsed);
-      for (const error of result.errors) {
-        errors.push(`${file}: ${error}`);
-      }
+      errors.push(...validateReviewerReportJson(raw, file));
     }
   }
 
@@ -37,6 +33,19 @@ export async function auditReviewerReports(): Promise<ReviewerReportAuditSummary
     checkedReports,
     errors
   };
+}
+
+export function validateReviewerReportJson(raw: string, file: string): readonly string[] {
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(raw) as unknown;
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : String(error);
+    return [`${file}: invalid JSON: ${message}`];
+  }
+
+  const result = validateReviewerReport(parsed);
+  return result.errors.map((error) => `${file}: ${error}`);
 }
 
 async function listJsonFiles(dir: string): Promise<string[]> {
