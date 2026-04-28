@@ -1,6 +1,6 @@
 # Phase 5 — Validation Strategy and Reviewer Feedback Loop
 
-**Status:** Proposed implementation plan  
+**Status:** Accepted implementation plan; implementation started
 **Date:** 2026-04-28  
 **Supersedes:** the short Phase 5 validation sketch in [`docs/divinum-officium-modernization-spec.md`](divinum-officium-modernization-spec.md)  
 **Depends on:**
@@ -10,6 +10,7 @@
 - [`docs/phase-4-API-design.md`](phase-4-API-design.md), especially §4g
 - [`docs/adr/011-phase-3-divergence-adjudication.md`](adr/011-phase-3-divergence-adjudication.md)
 - [`docs/adr/014-http-api-version-language-contract.md`](adr/014-http-api-version-language-contract.md)
+- [`docs/adr/015-cross-stack-adjudication.md`](adr/015-cross-stack-adjudication.md)
 - [`docs/rubrical-sources.md`](rubrical-sources.md)
 
 ## 1. Purpose
@@ -298,7 +299,7 @@ Private reviewer contact details must not live in the public fixture tree.
 
 ADR-011 solves compositor divergence adjudication with a hand-maintained sidecar keyed by stable row identity. Phase 5 generalizes that protocol across all packages.
 
-ADR-015 must formalize:
+ADR-015 formalizes:
 
 - the cross-stack authority hierarchy;
 - sidecar schema requirements;
@@ -830,7 +831,7 @@ Deliverables:
 - `docs/phase-5-validation-strategy-reviewer-feedback-loop.md`
 - `docs/adr/015-cross-stack-adjudication.md`
 
-ADR-015 must decide:
+ADR-015 decides:
 
 - authority hierarchy;
 - generalized sidecar schema;
