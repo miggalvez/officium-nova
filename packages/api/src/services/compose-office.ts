@@ -7,6 +7,10 @@ import { resolveLanguages } from './language-map.js';
 import { resolveOrthographyProfile } from './orthography-profile.js';
 import { toOfficeHourResponse, type OfficeHourResponse } from './dto.js';
 import {
+  buildCanonicalOfficeKey,
+  canonicalOfficePath
+} from './cache.js';
+import {
   assertVersionServable,
   resolveApiVersion
 } from './version-registry.js';
@@ -72,6 +76,18 @@ export function composeOfficeHour(input: {
     throw compositionError('Composition produced error-level warnings under strict mode.');
   }
 
+  const cacheKey = buildCanonicalOfficeKey({
+    date,
+    hour,
+    version: versionEntry.descriptor.handle,
+    languages: languageSelection.publicTags,
+    langfb: languageSelection.publicFallback,
+    orthography,
+    joinLaudsToMatins,
+    strict,
+    contentVersion: input.context.contentVersion
+  });
+
   return toOfficeHourResponse({
     date,
     hour,
@@ -83,16 +99,7 @@ export function composeOfficeHour(input: {
     joinLaudsToMatins,
     strict,
     contentVersion: input.context.contentVersion,
-    canonicalPath: canonicalOfficePath({
-      date,
-      hour,
-      version: versionEntry.descriptor.handle,
-      lang: languageSelection.publicTags.join(','),
-      langfb: languageSelection.publicFallback,
-      orthography,
-      joinLaudsToMatins,
-      strict
-    })
+    canonicalPath: canonicalOfficePath(cacheKey)
   });
 }
 
@@ -139,26 +146,4 @@ function parseBooleanQuery(
     return false;
   }
   throw invalidQueryValue(field, 'Expected "true" or "false".');
-}
-
-function canonicalOfficePath(input: {
-  readonly date: string;
-  readonly hour: HourName;
-  readonly version: string;
-  readonly lang: string;
-  readonly langfb?: string;
-  readonly orthography: string;
-  readonly joinLaudsToMatins: boolean;
-  readonly strict: boolean;
-}): string {
-  const params = new URLSearchParams();
-  params.set('version', input.version);
-  params.set('lang', input.lang);
-  if (input.langfb) {
-    params.set('langfb', input.langfb);
-  }
-  params.set('orthography', input.orthography);
-  params.set('joinLaudsToMatins', String(input.joinLaudsToMatins));
-  params.set('strict', String(input.strict));
-  return `/api/v1/office/${input.date}/${input.hour}?${params.toString()}`;
 }
