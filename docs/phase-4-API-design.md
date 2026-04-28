@@ -1,8 +1,8 @@
 # Phase 4 Detailed Plan: Read-only JSON API
 
-Phase 4 should be a thin, deterministic HTTP layer over the existing Parser → Rubrical Engine → Compositor pipeline. The API should not become another rubrical engine, another compositor, or a stealth frontend renderer. Its job is validation, version/language normalization, DTO adaptation, caching, OpenAPI, and stable public boundaries.
+Phase 4 should be a thin, deterministic HTTP layer over the existing Parser → Rubrical Engine → Compositor pipeline. The API should not become another rubrical engine, another compositor, or a stealth frontend renderer. Its job is validation, version/language normalization, text orthography adaptation, DTO adaptation, caching, OpenAPI, and stable public boundaries.
 
-The current repo still marks Phase 4 as not started and Phase 3 as in progress, with Phase 3h adjudication still underway. So the API contract should target the current `ComposedHour` surface while explicitly allowing the adapter layer to absorb final Phase 3h seam changes before public v1 stability begins.
+Phase 3 is complete, so the API contract should target the shipped `ComposedHour` surface while keeping public v1 stability at the adapter boundary. Phase 4 owns wire-format choices such as public language tags, spelling/orthography profiles, cache keys, and response DTO shape; Phase 3 continues to own format-agnostic composition.
 
 ## 0. Core Architectural Decisions
 
@@ -137,20 +137,46 @@ So the calendar DTO should omit `celebration.color` but pass through `commemorat
 
 No “best guess” day color. Liturgical APIs should not play vestment roulette.
 
-### Decision 6: Phase 4 wraps the current compositor surface, with a Phase 3 stability caveat
+### Decision 6: Phase 4 wraps the current compositor surface
 
 `composeHour()` is already the correct seam: it consumes a Phase-1 text index, a `DayOfficeSummary`, a `ResolvedVersion`, an `HourName`, and `ComposeOptions`; it emits a `ComposedHour`.
 
-Because Phase 3h is still in flight, Phase 4 should use DTO adapter functions rather than exporting compositor types directly as the permanent public contract.
+Phase 4 should use DTO adapter functions rather than exporting compositor types directly as the permanent public contract.
 
 Recommended wording for the Phase 4 design doc:
 
 ```md
 This Phase 4 contract targets the current Phase 3 `ComposedHour`
-surface. Until Phase 3h closes, DTO adapters may absorb final
-rubrical/composition seam changes. Public v1 stability begins only
-once Phase 4 is released.
+surface. DTO adapters own public wire-format stability, including
+language tags, text orthography profiles, and cache canonicalization.
+Public v1 stability begins only once Phase 4 is released.
 ```
+
+### Decision 7: Text orthography is an explicit Phase 4 adapter
+
+The corpus and `ComposedHour` preserve canonical source spelling. Public
+rendering may still need a version-sensitive spelling profile for user-visible
+parity with legacy Divinum Officium output, such as displaying Roman 1960
+Latin `Allelúja` as `Allelúia` via the same `j` to `i` convention used by
+upstream Perl's `spell_var()`.
+
+Model this as a request/adapter option, not as parser normalization, rubrical
+logic, or compositor mutation:
+
+```ts
+type TextOrthographyProfile = 'source' | 'version';
+```
+
+- `source` returns the text exactly as composed from the canonical corpus.
+- `version` applies the public display profile implied by the requested
+  `VersionHandle`, limited to plain text and rubric run values. It must not
+  rewrite references, citations, section metadata, warning payloads, HTML-like
+  diagnostic strings, or cache/content-version identifiers.
+
+`version` should be the API default once the adapter is implemented, because
+it matches the expected user-visible office for a requested version. `source`
+is valuable for source audit, corpus debugging, and tests that need to prove
+the canonical text has not changed.
 
 ## 1. Target Package Layout
 
@@ -177,6 +203,7 @@ packages/
       services/
         version-registry.ts
         language-map.ts
+        orthography-profile.ts
         compose-office.ts
         dto.ts
         cache.ts
@@ -435,6 +462,7 @@ Query parameters:
 | `rubrics` | no | `1960` | Compatibility alias only |
 | `lang` | no | `la,en` | Ordered public language tags; default `la` |
 | `langfb` | no | `en` | Preferred fallback tag |
+| `orthography` | no | `version` | Text spelling profile: `version` or `source`; default `version` |
 | `joinLaudsToMatins` | no | `true` | Passed to compositor options |
 | `strict` | no | `true` | Error if composition has `severity: "error"` |
 
@@ -451,6 +479,7 @@ interface OfficeHourResponse {
     version: VersionHandle;
     languages: PublicLanguageTag[];
     langfb?: PublicLanguageTag;
+    orthography: TextOrthographyProfile;
     joinLaudsToMatins: boolean;
     strict: boolean;
   };
@@ -740,6 +769,7 @@ interface PublicComposedHourDto {
   hour: HourName;
   celebration: string;
   languages: PublicLanguageTag[];
+  orthography: TextOrthographyProfile;
   sections: PublicSectionDto[];
   warnings: ComposeWarningDto[];
 }
@@ -774,6 +804,11 @@ type ComposedRunDto =
   | { type: 'unresolved-reference'; ref: CrossReferenceDto };
 ```
 
+Only `text` and `rubric` run values are eligible for text orthography
+adaptation. `citation`, unresolved placeholders, references, warning payloads,
+and section metadata remain source-identifying diagnostics and should not be
+rewritten by the public display profile.
+
 ## 5. Error Model
 
 One JSON shape everywhere:
@@ -791,6 +826,7 @@ interface ApiError {
     | 'unsupported-version'
     | 'missa-only-version'
     | 'invalid-language'
+    | 'invalid-query-value'
     | 'composition-error'
     | 'not-found'
     | 'internal-error';
@@ -812,6 +848,7 @@ Status mapping:
 | Known but deferred Breviary policy | `501` | `unsupported-version` |
 | Known Mass/Missa-only handle | `422` | `missa-only-version` |
 | Bad language tag | `400` | `invalid-language` |
+| Bad `orthography` value | `400` | `invalid-query-value` |
 | `strict=true` and composition has error warnings | `422` | `composition-error` |
 | Feast not found | `404` | `not-found` |
 | Actual bug / impossible state | `500` | `internal-error` |
@@ -864,6 +901,8 @@ async function getOfficeHour(request, reply) {
     context
   });
 
+  const orthography = resolveOrthographyProfile(request.query.orthography ?? 'version');
+
   const summary = versionEntry.engine.resolveDayOfficeSummary(date);
 
   const composed = composeHour({
@@ -891,6 +930,7 @@ async function getOfficeHour(request, reply) {
     summary,
     composed,
     languageSelection,
+    orthography,
     contentVersion: context.contentVersion
   });
 
@@ -899,7 +939,7 @@ async function getOfficeHour(request, reply) {
 }
 ```
 
-## 7. Language Adapter Details
+## 7. Language and Orthography Adapter Details
 
 Implement this early, before the office endpoint.
 
@@ -953,18 +993,71 @@ function resolveLanguages(input: {
 }
 ```
 
+Orthography profile parser:
+
+```ts
+type TextOrthographyProfile = 'source' | 'version';
+
+function resolveOrthographyProfile(value: string): TextOrthographyProfile {
+  if (value === 'source' || value === 'version') return value;
+  throw invalidQueryValue('orthography', 'Expected "source" or "version".');
+}
+```
+
+Text adapter:
+
+```ts
+function adaptRunForPublicText(input: {
+  run: ComposedRun;
+  profile: TextOrthographyProfile;
+  version: VersionHandle;
+  language: CorpusLanguageName;
+}): ComposedRunDto {
+  if (input.run.type !== 'text' && input.run.type !== 'rubric') {
+    return toComposedRunDto(input.run);
+  }
+
+  if (input.profile === 'source') {
+    return { type: input.run.type, value: input.run.value };
+  }
+
+  return {
+    type: input.run.type,
+    value: applyTextOrthographyProfile({
+      value: input.run.value,
+      version: input.version,
+      language: input.language
+    })
+  };
+}
+```
+
+The first implementation should cover the legacy Roman Latin display profile
+already proven in upstream Perl:
+
+- for `Rubrics 1960 - ...` Latin / Latin-Bea display, apply `Jj -> Ii` to
+  text outside markup-like spans, with upstream's narrow corrections
+  (`H-Iesu -> H-Jesu`, `er eúmdem -> er eúndem`);
+- leave `Latin-gabc` unchanged, because upstream explicitly avoids the spelling
+  pass for chant notation;
+- keep non-Roman / Cistercian substitutions out of v1 until those policy
+  families are supported by the API.
+
 DTO adapter:
 
 ```ts
 function toPublicComposedHour(
   composed: ComposedHour,
-  selection: LanguageSelection
+  selection: LanguageSelection,
+  orthography: TextOrthographyProfile,
+  version: VersionHandle
 ): PublicComposedHourDto {
   return {
     date: composed.date,
     hour: composed.hour,
     celebration: composed.celebration,
     languages: selection.publicTags,
+    orthography,
     warnings: composed.warnings.map(toComposeWarningDto),
     sections: composed.sections.map((section) => ({
       type: section.type,
@@ -974,7 +1067,11 @@ function toPublicComposedHour(
       languages: section.languages.map((lang) => selection.toPublic.get(lang)!),
       lines: section.lines.map((line) => ({
         marker: line.marker,
-        texts: remapTextKeys(line.texts, selection.toPublic)
+        texts: remapAndAdaptTextKeys(line.texts, {
+          toPublic: selection.toPublic,
+          orthography,
+          version
+        })
       }))
     }))
   };
@@ -1053,6 +1150,7 @@ interface CanonicalOfficeKey {
   version: VersionHandle;
   languages: PublicLanguageTag[];
   langfb?: PublicLanguageTag;
+  orthography: TextOrthographyProfile;
   joinLaudsToMatins: boolean;
   strict: boolean;
   contentVersion: string;
@@ -1145,11 +1243,12 @@ ADR-014 should cover:
 6. unsupported/deferred policies return `501`.
 7. missa-only handles return `422` with hints.
 8. `strict=true` composition errors return `422`.
-9. API DTOs are adapter-backed while Phase 3h finishes.
+9. `orthography` is an explicit DTO adapter option, defaulting to `version`.
+10. API DTOs are adapter-backed and do not expose raw compositor output.
 
 Acceptance criteria:
 
-- Design doc contains endpoint list, DTOs, error model, cache model, version model, and language model.
+- Design doc contains endpoint list, DTOs, error model, cache model, version model, language model, and orthography profile model.
 - ADR explicitly references ADR-001 and ADR-009.
 - No route implementation required yet.
 
@@ -1165,6 +1264,7 @@ packages/api/src/routes/metadata.ts
 packages/api/src/routes/openapi.ts
 packages/api/src/services/version-registry.ts
 packages/api/src/services/language-map.ts
+packages/api/src/services/orthography-profile.ts
 packages/api/src/services/errors.ts
 ```
 
@@ -1211,6 +1311,7 @@ version
 rubrics
 lang
 langfb
+orthography
 joinLaudsToMatins
 strict
 ```
@@ -1222,11 +1323,12 @@ Route responsibilities:
 3. Resolve canonical version.
 4. Reject deferred/missa-only versions with correct errors.
 5. Resolve public languages to corpus names.
-6. Call `engine.resolveDayOfficeSummary(date)`.
-7. Call `composeHour(...)`.
-8. Apply `strict=true`.
-9. Adapt native compositor output into public-language DTO.
-10. Return `OfficeHourResponse`.
+6. Resolve text orthography profile.
+7. Call `engine.resolveDayOfficeSummary(date)`.
+8. Call `composeHour(...)`.
+9. Apply `strict=true`.
+10. Adapt native compositor output into public-language DTO.
+11. Return `OfficeHourResponse`.
 
 Acceptance criteria:
 
@@ -1235,6 +1337,8 @@ Acceptance criteria:
 - `lang=la,en` produces public keys `la` and `en`, not `Latin` and `English`.
 - `rubrics=1960` normalizes to `"Rubrics 1960 - 1960"`.
 - `strict=true` returns `422` when any composition warning has severity `error`.
+- `orthography=version` adapts eligible Latin text/rubric runs without rewriting citations or metadata.
+- `orthography=source` preserves canonical source spelling in public text.
 - Composition warnings remain visible.
 
 ### 4d — Cache canonicalization and ETags
@@ -1259,6 +1363,7 @@ Acceptance criteria:
 
 - Equivalent query ordering produces same ETag.
 - Different language order produces different ETag, because `la,en` and `en,la` are display-distinct.
+- Different `orthography` values produce different ETags, because `source` and `version` can be text-distinct.
 - Content version changes produce different ETags.
 - No `generatedAt` in deterministic response bodies.
 
@@ -1283,6 +1388,7 @@ version
 rubrics
 lang
 langfb
+orthography
 hours
 strict
 ```
@@ -1401,6 +1507,12 @@ Mitigation: public DTO adapters, not direct raw type exposure.
 ### Risk: language-name leakage
 
 Mitigation: language-map tests that fail if `"Latin"` or `"English"` appears as a response language key.
+
+### Risk: hidden source-text mutation through display spelling
+
+Mitigation: keep `orthography=source` as a tested escape hatch, apply the
+version profile only in DTO text/rubric run adaptation, and add tests proving
+citations, references, warning payloads, and canonical corpus text are unchanged.
 
 ### Risk: accidental support for deferred families
 
