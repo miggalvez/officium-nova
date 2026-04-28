@@ -11,7 +11,8 @@ async function testApp() {
     corpusPath: '.',
     contentVersion: 'test-content',
     logger: false,
-    versionRegistry: testVersionRegistry()
+    versionRegistry: testVersionRegistry(),
+    loadRuntime: false
   });
   return createApp({ context });
 }

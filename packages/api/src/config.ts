@@ -14,6 +14,7 @@ export interface ApiConfig {
   readonly contentVersion: string;
   readonly logger: boolean;
   readonly versionRegistry?: VersionRegistry;
+  readonly loadRuntime?: boolean;
 }
 
 export function loadApiConfig(env: NodeJS.ProcessEnv = process.env): ApiConfig {
