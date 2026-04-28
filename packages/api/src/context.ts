@@ -16,6 +16,7 @@ import {
 } from './services/language-map.js';
 import {
   buildApiVersionRegistry,
+  DEFAULT_VERSION_HANDLE,
   type ApiVersionEntry
 } from './services/version-registry.js';
 
@@ -43,9 +44,9 @@ export async function buildApiContext(config: ApiConfig): Promise<ApiContext> {
   const versionRegistry =
     config.versionRegistry ?? (await loadVersionRegistry(config.corpusPath));
   const versions = buildApiVersionRegistry({ versionRegistry });
-  const defaultVersion = versions.get('Rubrics 1960 - 1960');
+  const defaultVersion = versions.get(DEFAULT_VERSION_HANDLE);
   if (!defaultVersion || defaultVersion.status !== 'supported') {
-    throw new Error('Default API version is not available: Rubrics 1960 - 1960');
+    throw new Error(`Default API version is not available: ${DEFAULT_VERSION_HANDLE}`);
   }
 
   return {

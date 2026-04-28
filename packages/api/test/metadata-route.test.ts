@@ -10,6 +10,7 @@ async function testApp() {
     port: 0,
     corpusPath: '.',
     contentVersion: 'test-content',
+    logger: false,
     versionRegistry: testVersionRegistry()
   });
   return createApp({ context });

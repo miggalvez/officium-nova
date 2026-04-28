@@ -2,6 +2,7 @@ import Fastify, { type FastifyInstance } from 'fastify';
 import swagger from '@fastify/swagger';
 import swaggerUi from '@fastify/swagger-ui';
 
+import type { ApiConfig } from './config.js';
 import type { ApiContext } from './context.js';
 import { registerErrorHandler } from './services/errors.js';
 import { registerMetadataRoutes } from './routes/metadata.js';
@@ -9,11 +10,12 @@ import { registerOpenApiRoutes } from './routes/openapi.js';
 
 export interface CreateAppOptions {
   readonly context: ApiContext;
+  readonly config?: Pick<ApiConfig, 'logger'>;
 }
 
 export async function createApp(options: CreateAppOptions): Promise<FastifyInstance> {
   const app = Fastify({
-    logger: false
+    logger: options.config?.logger ?? false
   });
 
   app.decorate('apiContext', options.context);

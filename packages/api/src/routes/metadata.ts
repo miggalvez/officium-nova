@@ -40,7 +40,7 @@ export async function registerMetadataRoutes(app: FastifyInstance): Promise<void
       }
     }
   }, async function statusHandler() {
-    const versions = Array.from(app.apiContext.versions.values());
+    const versionCounts = countVersionsByStatus(app.apiContext.versions.values());
     return {
       kind: 'status',
       apiVersion: 'v1',
@@ -53,9 +53,9 @@ export async function registerMetadataRoutes(app: FastifyInstance): Promise<void
       },
       support: {
         supportedHours: [...app.apiContext.supportedHours],
-        supportedVersionCount: versions.filter((entry) => entry.status === 'supported').length,
-        deferredVersionCount: versions.filter((entry) => entry.status === 'deferred').length,
-        missaOnlyVersionCount: versions.filter((entry) => entry.status === 'missa-only').length
+        supportedVersionCount: versionCounts.supported,
+        deferredVersionCount: versionCounts.deferred,
+        missaOnlyVersionCount: versionCounts['missa-only']
       }
     };
   });
@@ -119,4 +119,18 @@ export async function registerMetadataRoutes(app: FastifyInstance): Promise<void
       languages: Array.from(app.apiContext.languages.values())
     };
   });
+}
+
+function countVersionsByStatus(
+  entries: Iterable<{ readonly status: 'supported' | 'deferred' | 'missa-only' }>
+): Record<'supported' | 'deferred' | 'missa-only', number> {
+  const counts = {
+    supported: 0,
+    deferred: 0,
+    'missa-only': 0
+  };
+  for (const entry of entries) {
+    counts[entry.status] += 1;
+  }
+  return counts;
 }

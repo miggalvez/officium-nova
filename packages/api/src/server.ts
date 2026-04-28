@@ -5,7 +5,7 @@ import { buildApiContext } from './context.js';
 async function main(): Promise<void> {
   const config = loadApiConfig();
   const context = await buildApiContext(config);
-  const app = await createApp({ context });
+  const app = await createApp({ context, config });
 
   await app.listen({
     host: config.host,

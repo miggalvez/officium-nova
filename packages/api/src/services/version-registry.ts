@@ -33,17 +33,19 @@ export interface VersionInfoDto {
   readonly hint?: VersionHandle;
 }
 
+export const DEFAULT_VERSION_HANDLE = asVersionHandle('Rubrics 1960 - 1960');
+
 export const RUBRICS_ALIASES: Readonly<Record<string, VersionHandle>> = {
   '1911': asVersionHandle('Divino Afflatu - 1954'),
   '1955': asVersionHandle('Reduced - 1955'),
-  '1960': asVersionHandle('Rubrics 1960 - 1960')
+  '1960': DEFAULT_VERSION_HANDLE
 };
 
 const SUPPORTED_OFFICE_HANDLES = new Set<VersionHandle>([
   asVersionHandle('Divino Afflatu - 1939'),
   asVersionHandle('Divino Afflatu - 1954'),
   asVersionHandle('Reduced - 1955'),
-  asVersionHandle('Rubrics 1960 - 1960'),
+  DEFAULT_VERSION_HANDLE,
   asVersionHandle('Rubrics 1960 - 2020 USA')
 ]);
 
@@ -64,71 +66,9 @@ export function buildApiVersionRegistry(input: {
   readonly versionRegistry: VersionRegistry;
 }): ReadonlyMap<string, ApiVersionEntry> {
   const entries = new Map<string, ApiVersionEntry>();
-
-  for (const handle of SUPPORTED_OFFICE_HANDLES) {
-    const row = input.versionRegistry.get(handle);
-    const policy = VERSION_POLICY.get(handle);
-    if (!row || !policy) {
-      continue;
-    }
-    entries.set(handle, {
-      handle,
-      status: 'supported',
-      policyName: policy.name,
-      descriptor: {
-        handle,
-        kalendar: row.kalendar,
-        transfer: row.transfer,
-        stransfer: row.stransfer,
-        ...(row.base ? { base: row.base } : {}),
-        ...(row.transferBase ? { transferBase: row.transferBase } : {}),
-        policyName: policy.name
-      },
-      aliases: aliasesFor(handle)
-    });
-  }
-
-  for (const handle of DEFERRED_OFFICE_HANDLES) {
-    const row = input.versionRegistry.get(handle);
-    const policy = VERSION_POLICY.get(handle);
-    entries.set(handle, {
-      handle,
-      status: 'deferred',
-      ...(policy ? { policyName: policy.name } : {}),
-      ...(row && policy
-        ? {
-            descriptor: {
-              handle,
-              kalendar: row.kalendar,
-              transfer: row.transfer,
-              stransfer: row.stransfer,
-              ...(row.base ? { base: row.base } : {}),
-              ...(row.transferBase ? { transferBase: row.transferBase } : {}),
-              policyName: policy.name
-            }
-          }
-        : {}),
-      aliases: aliasesFor(handle)
-    });
-  }
-
-  for (const [handle, hint] of MISSA_ALIAS_HINTS.entries()) {
-    entries.set(handle, {
-      handle,
-      status: 'missa-only',
-      aliases: [],
-      hint
-    });
-  }
-
-  for (const handle of MISSA_ONLY_HANDLES) {
-    entries.set(handle, {
-      handle,
-      status: 'missa-only',
-      aliases: []
-    });
-  }
-
+  addSupportedVersions(entries, input.versionRegistry);
+  addDeferredVersions(entries, input.versionRegistry);
+  addMissaOnlyVersions(entries);
   return entries;
 }
 
@@ -157,4 +97,80 @@ function aliasesFor(handle: VersionHandle): readonly string[] {
   return Object.entries(RUBRICS_ALIASES)
     .filter(([, target]) => target === handle)
     .map(([alias]) => alias);
+}
+
+function addSupportedVersions(
+  entries: Map<string, ApiVersionEntry>,
+  versionRegistry: VersionRegistry
+): void {
+  for (const handle of SUPPORTED_OFFICE_HANDLES) {
+    const row = versionRegistry.get(handle);
+    const policy = VERSION_POLICY.get(handle);
+    if (!row || !policy) {
+      continue;
+    }
+    entries.set(handle, {
+      handle,
+      status: 'supported',
+      policyName: policy.name,
+      descriptor: {
+        handle,
+        kalendar: row.kalendar,
+        transfer: row.transfer,
+        stransfer: row.stransfer,
+        ...(row.base ? { base: row.base } : {}),
+        ...(row.transferBase ? { transferBase: row.transferBase } : {}),
+        policyName: policy.name
+      },
+      aliases: aliasesFor(handle)
+    });
+  }
+}
+
+function addDeferredVersions(
+  entries: Map<string, ApiVersionEntry>,
+  versionRegistry: VersionRegistry
+): void {
+  for (const handle of DEFERRED_OFFICE_HANDLES) {
+    const row = versionRegistry.get(handle);
+    const policy = VERSION_POLICY.get(handle);
+    entries.set(handle, {
+      handle,
+      status: 'deferred',
+      ...(policy ? { policyName: policy.name } : {}),
+      ...(row && policy
+        ? {
+            descriptor: {
+              handle,
+              kalendar: row.kalendar,
+              transfer: row.transfer,
+              stransfer: row.stransfer,
+              ...(row.base ? { base: row.base } : {}),
+              ...(row.transferBase ? { transferBase: row.transferBase } : {}),
+              policyName: policy.name
+            }
+          }
+        : {}),
+      aliases: aliasesFor(handle)
+    });
+  }
+}
+
+function addMissaOnlyVersions(entries: Map<string, ApiVersionEntry>): void {
+  for (const [handle, hint] of MISSA_ALIAS_HINTS.entries()) {
+    entries.set(handle, {
+      handle,
+      status: 'missa-only',
+      aliases: [],
+      hint
+    });
+  }
+
+  for (const handle of MISSA_ONLY_HANDLES) {
+    entries.set(handle, {
+      handle,
+      status: 'missa-only',
+      aliases: []
+    });
+  }
 }
