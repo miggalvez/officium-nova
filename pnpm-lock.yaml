@@ -92,6 +92,21 @@ importers:
         specifier: ^3.2.4
         version: 3.2.4(@types/node@22.19.17)(tsx@4.21.0)(yaml@2.8.3)
 
+  packages/validation:
+    devDependencies:
+      '@types/node':
+        specifier: ^22.15.3
+        version: 22.19.17
+      tsx:
+        specifier: ^4.19.4
+        version: 4.21.0
+      typescript:
+        specifier: ^5.8.3
+        version: 5.9.3
+      vitest:
+        specifier: ^3.2.4
+        version: 3.2.4(@types/node@22.19.17)(tsx@4.21.0)(yaml@2.8.3)
+
 packages:
 
   '@esbuild/aix-ppc64@0.27.7':
