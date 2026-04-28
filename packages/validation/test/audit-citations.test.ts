@@ -18,7 +18,7 @@ describe('citation audit', () => {
         'upstream/web/www/horas/Latin/Psalterium/Common/Rubricae.txt — source-backed rubric.',
         { requireCitation: true, context: 'row' }
       )
-    ).toEqual(['row: citation lacks a recognized source locator']);
+    ).toEqual(['row: corpus citation requires path and line locator']);
   });
 
   it('allows explicitly backlogged legacy migration exceptions', () => {
@@ -32,6 +32,19 @@ describe('citation audit', () => {
         }
       )
     ).toEqual([]);
+  });
+
+  it('still enforces corpus line locators for migration exceptions', () => {
+    expect(
+      validateLegacyCitationText(
+        'upstream/web/www/horas/Latin/Psalterium/Common/Rubricae.txt — source-backed rubric.',
+        {
+          requireCitation: true,
+          context: 'legacy-row',
+          allowMigrationException: true
+        }
+      )
+    ).toEqual(['legacy-row: corpus citation requires path and line locator']);
   });
 
   it('accepts rubrical-book paragraph locators', () => {

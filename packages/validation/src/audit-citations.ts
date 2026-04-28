@@ -178,8 +178,9 @@ async function auditMarkdownLedgers(repoRoot: string): Promise<LedgerAudit> {
 
 function extractMarkdownTableRows(content: string): string[][] {
   return content
-    .split('\n')
-    .filter((line) => line.startsWith('| 20'))
+    .split(/\r?\n/u)
+    .map((line) => line.trim())
+    .filter((line) => line.startsWith('| 20') && line.endsWith('|'))
     .map((line) =>
       line
         .slice(1, -1)
@@ -207,15 +208,15 @@ export function validateLegacyCitationText(
     return [];
   }
 
+  if (mentionsCorpus(trimmed) && !hasCorpusLineLocator(trimmed)) {
+    return [`${options.context}: corpus citation requires path and line locator`];
+  }
+
   if (!hasRecognizedLocator(trimmed)) {
     if (options.allowMigrationException) {
       return [];
     }
     return [`${options.context}: citation lacks a recognized source locator`];
-  }
-
-  if (mentionsCorpus(trimmed) && !hasCorpusLineLocator(trimmed)) {
-    return [`${options.context}: corpus citation requires path and line locator`];
   }
 
   return [];
