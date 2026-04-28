@@ -29,11 +29,8 @@ export async function auditReviewerPrivacy(): Promise<PrivacyAuditSummary> {
     for (const file of files) {
       checkedFiles += 1;
       const content = await readFile(file, 'utf8');
-      for (const field of PRIVATE_FIELD_NAMES) {
-        const pattern = new RegExp(`(^|[\\s"{,])${field}\\s*[:=]`, 'mu');
-        if (pattern.test(content)) {
-          errors.push(`${file}: public reviewer fixture contains private field ${field}`);
-        }
+      for (const field of findPrivateFieldLeaks(content)) {
+        errors.push(`${file}: public reviewer fixture contains private field ${field}`);
       }
     }
   }
@@ -42,6 +39,13 @@ export async function auditReviewerPrivacy(): Promise<PrivacyAuditSummary> {
     checkedFiles,
     errors
   };
+}
+
+export function findPrivateFieldLeaks(content: string): readonly string[] {
+  return PRIVATE_FIELD_NAMES.filter((field) => {
+    const pattern = new RegExp(`(^|[\\s"{,])${field}["']?\\s*[:=]`, 'mui');
+    return pattern.test(content);
+  });
 }
 
 async function listFixtureFiles(dir: string): Promise<string[]> {
