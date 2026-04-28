@@ -789,7 +789,8 @@ The maintained CI command mapping is recorded in
 | Phase 5 E2E harness | `pnpm -r test` via validation package | Block | Must pass. |
 | Citation audit | `pnpm -r test` via validation package | Block | 0 missing required citations. |
 | Reviewer privacy audit | `pnpm -r test` via validation package | Block | 0 public private-field leaks. |
-| 2024 Roman compositor unadjudicated rows | `pnpm -C packages/compositor verify:phase-3-signoff` | Block | 0 unadjudicated rows. |
+| Reviewer report audit | `pnpm -r test` via validation package | Block | 0 schema or fixture errors. |
+| 2024 Roman compositor sign-off | `pnpm -C packages/compositor verify:phase-3-signoff` | Block | 0 unadjudicated rows, <800 lines per source file, and no pending SHAs. |
 | Newly added candidate years | divergence sidecars | Transitional block | <10 unadjudicated rows per policy per year during promotion window. |
 | Promoted gate-set years | divergence sidecars | Block | 0 unadjudicated rows. |
 | Multi-year exploratory coverage | validation package | Informational | Tracked only. |
