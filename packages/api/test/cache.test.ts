@@ -74,6 +74,22 @@ describe('cache service', () => {
     expect(cache.get({ ...BASE_KEY })).toBe(etag);
   });
 
+  it('bounds ETag memory cache size with least-recently-used eviction', () => {
+    const cache = createEtagMemoryCache(2);
+    const first = BASE_KEY;
+    const second = { ...BASE_KEY, date: '2024-01-02' };
+    const third = { ...BASE_KEY, date: '2024-01-03' };
+
+    cache.set(first, '"first"');
+    cache.set(second, '"second"');
+    expect(cache.get(first)).toBe('"first"');
+    cache.set(third, '"third"');
+
+    expect(cache.get(first)).toBe('"first"');
+    expect(cache.get(second)).toBeUndefined();
+    expect(cache.get(third)).toBe('"third"');
+  });
+
   it('varies ETags by orthography and content version', () => {
     const body = { kind: 'office-hour', content: ['sample'] };
     const base = buildDeterministicEtag({ key: BASE_KEY, body });

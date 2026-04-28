@@ -142,7 +142,7 @@ function parseHours(
   value: string | undefined,
   supportedHours: readonly HourName[]
 ): readonly HourName[] {
-  if (!value || value === 'all') {
+  if (value === undefined || value === 'all') {
     return supportedHours;
   }
 
@@ -157,14 +157,17 @@ function parseHours(
     throw invalidQueryValue('hours', 'Use either "all" or a comma-separated hour list.');
   }
 
+  const unique = Array.from(new Set(names));
   const output: HourName[] = [];
-  for (const name of names) {
+  for (const name of unique) {
     if (!supportedHours.includes(name as HourName)) {
       throw invalidHour(name);
     }
     output.push(name as HourName);
   }
-  return output;
+  return output.sort(
+    (left, right) => supportedHours.indexOf(left) - supportedHours.indexOf(right)
+  );
 }
 
 function hasErrorCompositionWarning(

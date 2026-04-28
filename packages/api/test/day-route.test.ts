@@ -200,6 +200,22 @@ describeIfUpstream('day route integration', () => {
     expect(cached.headers.etag).toBe(first.headers.etag);
   }, 120_000);
 
+  it('canonicalizes selected hours by liturgical order and removes duplicates', async () => {
+    const app = await fullApp();
+    const canonical = await app.inject(
+      '/api/v1/days/2024-01-01?version=Rubrics%201960%20-%201960&lang=la&hours=lauds,vespers'
+    );
+    const reordered = await app.inject(
+      '/api/v1/days/2024-01-01?version=Rubrics%201960%20-%201960&lang=la&hours=vespers,lauds,lauds'
+    );
+
+    expect(canonical.statusCode).toBe(200);
+    expect(reordered.statusCode).toBe(200);
+    expect(reordered.json().request.hours).toEqual(['lauds', 'vespers']);
+    expect(reordered.headers.etag).toBe(canonical.headers.etag);
+    expect(reordered.json().meta.canonicalPath).toContain('hours=lauds%2Cvespers');
+  }, 120_000);
+
   it('rejects unsupported hour names', async () => {
     const app = await fullApp();
     const response = await app.inject(
@@ -208,5 +224,15 @@ describeIfUpstream('day route integration', () => {
 
     expect(response.statusCode).toBe(400);
     expect(response.json()).toMatchObject({ code: 'invalid-hour' });
+  }, 120_000);
+
+  it('rejects empty hours query values', async () => {
+    const app = await fullApp();
+    const response = await app.inject(
+      '/api/v1/days/2024-01-01?version=Rubrics%201960%20-%201960&hours='
+    );
+
+    expect(response.statusCode).toBe(400);
+    expect(response.json()).toMatchObject({ code: 'invalid-query-value' });
   }, 120_000);
 });

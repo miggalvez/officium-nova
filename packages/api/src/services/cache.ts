@@ -161,19 +161,39 @@ export function applyCacheHeaders(reply: FastifyReply, etag: string): void {
 }
 
 export class EtagMemoryCache {
+  private readonly maxEntries: number;
   private readonly etags = new Map<string, string>();
 
+  constructor(maxEntries = 1_024) {
+    this.maxEntries = maxEntries;
+  }
+
   get(key: CanonicalCacheKey): string | undefined {
-    return this.etags.get(stableJsonStringify(key));
+    const cacheKey = stableJsonStringify(key);
+    const etag = this.etags.get(cacheKey);
+    if (etag) {
+      this.etags.delete(cacheKey);
+      this.etags.set(cacheKey, etag);
+    }
+    return etag;
   }
 
   set(key: CanonicalCacheKey, etag: string): void {
-    this.etags.set(stableJsonStringify(key), etag);
+    const cacheKey = stableJsonStringify(key);
+    this.etags.delete(cacheKey);
+    this.etags.set(cacheKey, etag);
+    while (this.etags.size > this.maxEntries) {
+      const oldestKey = this.etags.keys().next().value;
+      if (!oldestKey) {
+        break;
+      }
+      this.etags.delete(oldestKey);
+    }
   }
 }
 
-export function createEtagMemoryCache(): EtagMemoryCache {
-  return new EtagMemoryCache();
+export function createEtagMemoryCache(maxEntries?: number): EtagMemoryCache {
+  return new EtagMemoryCache(maxEntries);
 }
 
 export function requestMatchesEtag(request: FastifyRequest, etag: string): boolean {
