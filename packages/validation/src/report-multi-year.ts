@@ -51,10 +51,14 @@ export async function loadMultiYearReport(options: {
   readonly manifestPath?: string;
 } = {}): Promise<MultiYearReport> {
   const manifestPath = options.manifestPath ?? defaultManifestPath();
+  const repoRoot = resolve(dirname(manifestPath), '../../../..');
   const raw = await readFile(manifestPath, 'utf8');
   const parsed = JSON.parse(raw) as unknown;
   const manifest = parseManifest(parsed);
-  const errors = validateManifest(manifest);
+  const errors = [
+    ...validateManifest(manifest),
+    ...await validateReferencedFiles(manifest, repoRoot)
+  ];
   const table = manifest.years.flatMap((year) =>
     year.policies.map((policy) => ({
       year: year.year,
@@ -156,11 +160,11 @@ function validateManifest(manifest: MultiYearManifest): readonly string[] {
       }
       seen.add(key);
 
-      if (policy.noThrowFailures !== 0) {
-        errors.push(`${key}: no-throw failures must be 0`);
+      if (year.status !== 'exploratory' && policy.noThrowFailures !== 0) {
+        errors.push(`${key}: candidate/gated no-throw failures must be 0`);
       }
-      if (policy.schemaFailures !== 0) {
-        errors.push(`${key}: schema failures must be 0`);
+      if (year.status !== 'exploratory' && policy.schemaFailures !== 0) {
+        errors.push(`${key}: candidate/gated schema failures must be 0`);
       }
       if (year.status === 'gated' && policy.unadjudicated !== 0) {
         errors.push(`${key}: gated years require 0 unadjudicated rows`);
@@ -177,6 +181,125 @@ function validateManifest(manifest: MultiYearManifest): readonly string[] {
   }
 
   return errors;
+}
+
+async function validateReferencedFiles(
+  manifest: MultiYearManifest,
+  repoRoot: string
+): Promise<readonly string[]> {
+  const errors: string[] = [];
+  const checkedSidecars = new Set<string>();
+
+  for (const year of manifest.years) {
+    for (const policy of year.policies) {
+      const key = `${year.year}/${policy.slug}`;
+      const ledgerPath = resolve(repoRoot, policy.ledger);
+      const ledger = await readTextFile(ledgerPath, `${key}: ledger`, errors);
+      if (ledger) {
+        errors.push(...validateLedgerCounts(policy, ledger, key));
+      }
+
+      if (!checkedSidecars.has(policy.sidecar)) {
+        checkedSidecars.add(policy.sidecar);
+        const sidecarPath = resolve(repoRoot, policy.sidecar);
+        const sidecar = await readTextFile(sidecarPath, `${key}: sidecar`, errors);
+        if (sidecar && policy.sidecar.endsWith('.json')) {
+          try {
+            JSON.parse(sidecar);
+          } catch (error: unknown) {
+            const message = error instanceof Error ? error.message : String(error);
+            errors.push(`${key}: sidecar must be valid JSON: ${message}`);
+          }
+        }
+      }
+    }
+  }
+
+  return errors;
+}
+
+function validateLedgerCounts(
+  policy: PolicyYearStatus,
+  ledger: string,
+  key: string
+): readonly string[] {
+  if (policy.ledger.endsWith('.json')) {
+    return validateJsonLedgerCounts(policy, ledger, key);
+  }
+
+  const unadjudicated = extractMarkdownCount(ledger, 'unadjudicated');
+  if (unadjudicated === null) {
+    return [`${key}: ledger does not expose an unadjudicated count`];
+  }
+  if (unadjudicated !== policy.unadjudicated) {
+    return [
+      `${key}: manifest unadjudicated ${policy.unadjudicated} does not match ledger ${unadjudicated}`
+    ];
+  }
+  return [];
+}
+
+function validateJsonLedgerCounts(
+  policy: PolicyYearStatus,
+  ledger: string,
+  key: string
+): readonly string[] {
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(ledger) as unknown;
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : String(error);
+    return [`${key}: ledger must be valid JSON: ${message}`];
+  }
+  if (!isRecord(parsed) || !Array.isArray(parsed.policies)) {
+    return [`${key}: JSON ledger must include a policies array`];
+  }
+  const row = parsed.policies.find(
+    (entry): entry is Record<string, unknown> =>
+      isRecord(entry) && entry.slug === policy.slug
+  );
+  if (!row) {
+    return [`${key}: JSON ledger has no row for ${policy.slug}`];
+  }
+
+  const errors: string[] = [];
+  for (const countField of [
+    'unadjudicated',
+    'noThrowFailures',
+    'schemaFailures'
+  ] as const) {
+    if (row[countField] !== policy[countField]) {
+      errors.push(
+        `${key}: manifest ${countField} ${policy[countField]} does not match ledger ${String(row[countField])}`
+      );
+    }
+  }
+  return errors;
+}
+
+function extractMarkdownCount(ledger: string, label: string): number | null {
+  const match = ledger.match(
+    new RegExp('- `' + escapeRegExp(label) + '`: `([^`]+)`', 'u')
+  );
+  if (!match) {
+    return null;
+  }
+  const parsed = Number(match[1]);
+  return Number.isInteger(parsed) ? parsed : null;
+}
+
+async function readTextFile(
+  filePath: string,
+  label: string,
+  errors: string[]
+): Promise<string | null> {
+  try {
+    return await readFile(filePath, 'utf8');
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : String(error);
+    errors.push(`${label} is not readable: ${message}`);
+    return null;
+  }
 }
 
 function parseStatus(value: unknown): YearStatus {
@@ -208,7 +331,11 @@ function defaultManifestPath(): string {
   );
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+function escapeRegExp(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/gu, '\\$&');
+}
+
+if (process.argv[1] && fileURLToPath(import.meta.url) === resolve(process.argv[1])) {
   const report = await loadMultiYearReport();
   if (report.errors.length > 0) {
     console.error(report.errors.join('\n'));
