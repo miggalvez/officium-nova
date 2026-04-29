@@ -1,7 +1,7 @@
 policy: Divino Afflatu - 1954
 date: 2024-03-19
 hour: sext
-celebration: 03-19
+celebration: S. Joseph Sponsi B.M.V. Confessoris
 languages: Latin
 section count: 8
 warning count: 6

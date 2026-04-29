@@ -6,8 +6,13 @@ import {
 } from '../internal/date.js';
 import { canonicalContentDir, resolveOfficeDefinition } from '../internal/content.js';
 import { normalizeRank } from '../sanctoral/rank-normalizer.js';
-import type { DateInput, OfficeTextIndex, TemporalContext } from '../types/model.js';
-import type { ResolvedVersion } from '../types/version.js';
+import type {
+  DateInput,
+  OfficeTextIndex,
+  TemporalContext,
+  TemporalSubstitutionTable
+} from '../types/model.js';
+import type { ResolvedVersion, VersionRegistry } from '../types/version.js';
 
 import { dayNameForDate, weekStemForDate } from './day-name.js';
 import { liturgicalSeasonForDate } from './season.js';
@@ -15,14 +20,23 @@ import { liturgicalSeasonForDate } from './season.js';
 export function buildTemporalContext(
   input: DateInput | CalendarDate,
   version: ResolvedVersion,
-  corpus: OfficeTextIndex
+  corpus: OfficeTextIndex,
+  options: {
+    readonly registry?: VersionRegistry;
+    readonly temporalSubstitutions?: TemporalSubstitutionTable;
+  } = {}
 ): TemporalContext {
   const date = normalizeDateInput(input);
   const weekday = dayOfWeek(date);
   const weekStem = weekStemForDate(date);
   const dayName = dayNameForDate(date);
   const season = liturgicalSeasonForDate(date);
-  const canonicalPath = `${canonicalContentDir('Tempora', version)}/${dayName}`;
+  const naturalPath = `${canonicalContentDir('Tempora', version)}/${dayName}`;
+  const canonicalPath = resolveTemporalSubstitution(
+    naturalPath,
+    version,
+    options.temporalSubstitutions
+  );
   const definition = resolveOfficeDefinition(corpus, canonicalPath, {
     date,
     dayOfWeek: weekday,
@@ -45,4 +59,21 @@ export function buildTemporalContext(
       season
     })
   };
+}
+
+function resolveTemporalSubstitution(
+  naturalPath: string,
+  version: ResolvedVersion,
+  temporalSubstitutions: TemporalSubstitutionTable | undefined
+): string {
+  if (!temporalSubstitutions) {
+    return naturalPath;
+  }
+
+  const entry = temporalSubstitutions.get(version.transfer)?.get(naturalPath);
+  if (!entry || entry.target === 'XXXXX' || entry.target.endsWith('r')) {
+    return naturalPath;
+  }
+
+  return entry.target;
 }

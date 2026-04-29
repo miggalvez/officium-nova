@@ -1,4 +1,7 @@
-import { parseKalendarium } from '@officium-novum/parser';
+import {
+  parseKalendarium,
+  parseTemporalSubstitutions
+} from '@officium-novum/parser';
 import { describe, expect, it } from 'vitest';
 
 import {
@@ -6,6 +9,7 @@ import {
   asVersionHandle,
   buildKalendariumTable,
   buildScriptureTransferTable,
+  buildTemporalSubstitutionTable,
   buildVersionRegistry,
   buildYearTransferTable,
   computeYearKey,
@@ -75,6 +79,98 @@ describe('createRubricalEngine', () => {
     expect(summary.commemorations.map((entry) => entry.feastRef.path)).toEqual(['Tempora/Pasc2-0']);
     expect(summary.winner.feastRef.path).toBe('Sancti/04-14');
     expect(summary.winner.rank.weight).toBe(1000);
+  });
+
+  it('uses 1960 temporal substitutions and kalendarium rank metadata on Eastertide weekdays', () => {
+    const corpus = new TestOfficeTextIndex();
+    seedTemporalYear(corpus, 2026);
+    corpus.add(
+      'horas/Latin/Tempora/Pasc3-2.txt',
+      [
+        '[Officium]',
+        'De VII die infra Octavam S. Joseph',
+        '',
+        '[Rank]',
+        ';;Semiduplex;;2;;'
+      ].join('\n')
+    );
+    corpus.add(
+      'horas/Latin/Tempora/Pasc3-2Feria.txt',
+      [
+        '[Officium]',
+        'Feria Tertia infra Hebdomadam III post Octavam Paschae',
+        '',
+        '[Rank]',
+        ';;Feria;;1;;'
+      ].join('\n')
+    );
+    corpus.add(
+      'horas/Latin/Tempora/Pasc3-3Feria.txt',
+      [
+        '[Officium]',
+        'Feria Quarta infra Hebdomadam III post Octavam Paschae',
+        '',
+        '[Rank]',
+        ';;Feria;;1;;'
+      ].join('\n')
+    );
+    corpus.add(
+      'horas/Latin/Sancti/04-28.txt',
+      [
+        '[Officium]',
+        'S. Pauli a Cruce Confessoris',
+        '',
+        '[Rank]',
+        ';;Duplex;;3;;',
+        '(sed rubrica innovata)',
+        ';;Simnplex;;1.1;;'
+      ].join('\n')
+    );
+
+    const registry = buildVersionRegistry([
+      {
+        version: 'Rubrics 1960 - 1960',
+        kalendar: '1960',
+        transfer: '1960',
+        stransfer: '1960'
+      }
+    ]);
+    const kalendarium = buildKalendariumTable([
+      {
+        name: '1960',
+        entries: parseKalendarium('04-28=04-28=S. Pauli a Cruce Confessoris=3=\n')
+      }
+    ]);
+    const temporalSubstitutions = buildTemporalSubstitutionTable([
+      {
+        name: '1960',
+        entries: parseTemporalSubstitutions(
+          [
+            'Tempora/Pasc3-2=Tempora/Pasc3-2Feria;;',
+            'Tempora/Pasc3-3=Tempora/Pasc3-3Feria;;'
+          ].join('\n')
+        )
+      }
+    ]);
+
+    const engine = createRubricalEngine({
+      corpus,
+      kalendarium,
+      yearTransfers: buildYearTransferTable([]),
+      scriptureTransfers: buildScriptureTransferTable([]),
+      temporalSubstitutions,
+      versionRegistry: registry,
+      version: asVersionHandle('Rubrics 1960 - 1960'),
+      policyMap: VERSION_POLICY
+    });
+
+    const summary = engine.resolveDayOfficeSummary('2026-04-28');
+
+    expect(summary.temporal.feastRef.path).toBe('Tempora/Pasc3-2Feria');
+    expect(summary.celebration.feastRef.path).toBe('Sancti/04-28');
+    expect(summary.celebration.feastRef.title).toBe('S. Pauli a Cruce Confessoris');
+    expect(summary.celebration.rank.classSymbol).toBe('III');
+    expect(summary.commemorations.map((entry) => entry.feastRef.path)).toEqual([]);
   });
 
   it('computes concurrence and compline when tomorrow outranks at Vespers', () => {

@@ -69,7 +69,7 @@ describe('parseCommonState', () => {
     expect(state.version).toBe('Rubrics 1960 - 1960');
     expect(state.languages).toEqual(['la', 'en']);
     expect(state.orthography).toBe('version');
-    expect(state.strict).toBe(true);
+    expect(state.strict).toBe(false);
     expect(state.displayMode).toBe('parallel');
     expect(state.fontSize).toBe('normal');
   });

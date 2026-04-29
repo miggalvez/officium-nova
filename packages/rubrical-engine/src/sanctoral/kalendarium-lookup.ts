@@ -1,3 +1,5 @@
+import type { KalendariumEntry } from '@officium-novum/parser';
+
 import { canonicalContentDir, resolveOfficeDefinition } from '../internal/content.js';
 import { annotateSanctoralCandidate } from '../candidates/metadata.js';
 import {
@@ -33,15 +35,16 @@ export function sanctoralCandidates(
   const season = liturgicalSeasonForDate(date);
   const weekday = dayOfWeek(date);
   const isoDate = formatIsoDate(date);
-  const entries = lookupEntriesForDate(key, version, registry, kalendarium);
+  const lookup = lookupEntriesForDate(key, version, registry, kalendarium);
   const contentDir = canonicalContentDir('Sancti', version);
 
-  return entries
+  return lookup.entries
     .filter((entry) => !entry.suppressed)
     .flatMap((entry) => {
       const refs = [entry.fileRef, ...(entry.alternates ?? [])];
 
-      return refs.map<SanctoralCandidate>((ref) => {
+      return refs.map<SanctoralCandidate>((ref, index) => {
+        const metadata = lookup.useEntryMetadata ? kalendariumMetadataAt(entry, index) : {};
         const canonicalPath = `${contentDir}/${ref}`;
         const definition = resolveOfficeDefinition(corpus, canonicalPath, {
           date,
@@ -53,16 +56,43 @@ export function sanctoralCandidates(
         return annotateSanctoralCandidate({
           dateKey: key,
           feastRef: definition.feastRef,
-          rank: normalizeRank(definition.rawRank, version.policy, {
-            date: isoDate,
-            feastPath: definition.feastRef.path,
-            source: 'sanctoral',
-            version: version.handle,
-            season
-          })
+          rank: normalizeRank(
+            {
+              ...definition.rawRank,
+              ...(metadata.classWeight !== undefined
+                ? { classWeight: metadata.classWeight }
+                : {})
+            },
+            version.policy,
+            {
+              date: isoDate,
+              feastPath: definition.feastRef.path,
+              source: 'sanctoral',
+              version: version.handle,
+              season
+            }
+          )
         });
       });
     });
+}
+
+function kalendariumMetadataAt(
+  entry: KalendariumEntry,
+  index: number
+): { readonly classWeight?: number } {
+  if (index === 0) {
+    return {
+      ...(entry.classWeight !== undefined ? { classWeight: entry.classWeight } : {})
+    };
+  }
+
+  const alternateIndex = index - 1;
+  return {
+    ...(entry.alternateClassWeights?.[alternateIndex] !== undefined
+      ? { classWeight: entry.alternateClassWeights[alternateIndex] }
+      : {})
+  };
 }
 
 function lookupEntriesForDate(
@@ -70,26 +100,40 @@ function lookupEntriesForDate(
   version: ResolvedVersion,
   registry: VersionRegistry,
   kalendarium: KalendariumTable
-) {
+): {
+  readonly entries: readonly KalendariumEntry[];
+  readonly useEntryMetadata: boolean;
+} {
   let current: Pick<ResolvedVersion, 'kalendar' | 'base'> | VersionRegistryRow | undefined = version;
+  let inherited = false;
 
   while (current) {
     const table = kalendarium.get(current.kalendar);
     const entries = table?.get(dateKey);
     if (entries) {
-      return entries;
+      return {
+        entries,
+        useEntryMetadata: !inherited
+      };
     }
 
     if (!current.base) {
-      return [];
+      return {
+        entries: [],
+        useEntryMetadata: false
+      };
     }
 
     const baseHandle = current.base;
     current = registry.get(baseHandle);
+    inherited = true;
     if (!current) {
       throw new Error(`Unknown base version in registry: ${baseHandle}`);
     }
   }
 
-  return [];
+  return {
+    entries: [],
+    useEntryMetadata: false
+  };
 }

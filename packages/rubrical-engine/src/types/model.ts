@@ -1,4 +1,8 @@
-import type { KalendariumEntry, ParsedFile } from '@officium-novum/parser';
+import type {
+  KalendariumEntry,
+  ParsedFile,
+  TemporalSubstitutionEntry
+} from '@officium-novum/parser';
 
 import type { ScriptureTransferTable } from '../directorium/tables/scripture-transfer-table.js';
 import type { YearTransferTable } from '../directorium/tables/year-transfer-table.js';
@@ -98,6 +102,11 @@ export interface KalendariumTable {
   readonly size: number;
 }
 
+export interface TemporalSubstitutionTable {
+  get(kalendar: string): ReadonlyMap<string, TemporalSubstitutionEntry> | undefined;
+  readonly size: number;
+}
+
 export interface OfficeTextIndex {
   getFile(path: string): ParsedFile | undefined;
   findByContentPath(contentPath: string): ParsedFile[];
@@ -108,6 +117,7 @@ export interface RubricalEngineConfig {
   readonly kalendarium: KalendariumTable;
   readonly yearTransfers: YearTransferTable;
   readonly scriptureTransfers: ScriptureTransferTable;
+  readonly temporalSubstitutions?: TemporalSubstitutionTable;
   readonly versionRegistry: VersionRegistry;
   readonly version: VersionHandle;
   readonly policyMap?: ReadonlyMap<VersionHandle, RubricalPolicy>;

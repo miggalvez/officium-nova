@@ -107,7 +107,7 @@ export function parseCommonState(params: URLSearchParams): CommonState {
     languages: parseLanguages(params),
     ...parseLangFallback(params),
     orthography: parseOrthography(params),
-    strict: parseBool(params.get('strict'), true),
+    strict: parseBool(params.get('strict'), false),
     displayMode: parseDisplayMode(params),
     fontSize: parseFontSize(params)
   };

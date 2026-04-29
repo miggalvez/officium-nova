@@ -1,8 +1,18 @@
 export interface KalendariumEntry {
   dateKey: string;
   fileRef: string;
+  title?: string;
+  classWeight?: number;
   alternates?: string[];
+  alternateTitles?: string[];
+  alternateClassWeights?: number[];
   suppressed: boolean;
+}
+
+export interface TemporalSubstitutionEntry {
+  source: string;
+  target: string;
+  versionFilter?: string;
 }
 
 export interface VersionDefinition {

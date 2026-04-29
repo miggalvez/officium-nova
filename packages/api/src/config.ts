@@ -19,8 +19,8 @@ export interface ApiConfig {
 
 export function loadApiConfig(env: NodeJS.ProcessEnv = process.env): ApiConfig {
   return {
-    host: env.OFFICIUM_API_HOST ?? '127.0.0.1',
-    port: parsePort(env.OFFICIUM_API_PORT),
+    host: env.OFFICIUM_API_HOST ?? (env.PORT ? '0.0.0.0' : '127.0.0.1'),
+    port: parsePort(env.OFFICIUM_API_PORT ?? env.PORT),
     corpusPath: env.OFFICIUM_CORPUS_PATH
       ? resolve(env.OFFICIUM_CORPUS_PATH)
       : resolve(REPOSITORY_ROOT, 'upstream/web/www'),
@@ -35,7 +35,7 @@ function parsePort(value: string | undefined): number {
   }
   const port = Number(value);
   if (!Number.isInteger(port) || port < 1 || port > 65535) {
-    throw new Error(`Invalid OFFICIUM_API_PORT: ${value}`);
+    throw new Error(`Invalid OFFICIUM_API_PORT/PORT: ${value}`);
   }
   return port;
 }

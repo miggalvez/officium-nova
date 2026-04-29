@@ -1,7 +1,7 @@
 policy: Rubrics 1960 - 1960
 date: 2024-03-19
 hour: terce
-celebration: 03-19
+celebration: S. Joseph Sponsi B.M.V. Confessoris
 languages: Latin
 section count: 8
 warning count: 3

@@ -384,6 +384,13 @@ function firstTextValue(content: readonly TextContent[]): string | undefined {
       }
     }
 
+    if (entry.type === 'verseMarker') {
+      const trimmed = entry.text.trim();
+      if (trimmed) {
+        return `${entry.marker} ${trimmed}`;
+      }
+    }
+
     if (entry.type === 'conditional') {
       const nested = firstTextValue(entry.content);
       if (nested) {

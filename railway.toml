@@ -1,0 +1,10 @@
+[build]
+builder = "RAILPACK"
+buildCommand = "git clone --depth 1 https://github.com/DivinumOfficium/divinum-officium.git upstream && pnpm -r build"
+
+[deploy]
+startCommand = "pnpm -C packages/api start"
+healthcheckPath = "/api/v1/status"
+healthcheckTimeout = 300
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 3

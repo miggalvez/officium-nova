@@ -5,6 +5,7 @@ import {
   loadCorpus,
   parseKalendarium,
   parseScriptureTransfer,
+  parseTemporalSubstitutions,
   parseTransfer,
   parseVersionRegistry,
   type TextIndex
@@ -12,6 +13,7 @@ import {
 import {
   buildKalendariumTable,
   buildScriptureTransferTable,
+  buildTemporalSubstitutionTable,
   buildVersionRegistry,
   buildYearTransferTable,
   type HourName,
@@ -64,7 +66,8 @@ export async function buildApiContext(config: ApiConfig): Promise<ApiContext> {
             corpus: runtime.rawCorpus.index,
             kalendarium: runtime.kalendarium,
             yearTransfers: runtime.yearTransfers,
-            scriptureTransfers: runtime.scriptureTransfers
+            scriptureTransfers: runtime.scriptureTransfers,
+            temporalSubstitutions: runtime.temporalSubstitutions
           }
         }
       : {})
@@ -92,13 +95,21 @@ async function loadVersionRegistry(corpusPath: string): Promise<VersionRegistry>
 }
 
 async function loadApiRuntime(corpusPath: string, versionRegistry: VersionRegistry) {
-  const [rawCorpus, resolvedCorpus, kalendaria, yearTransfers, scriptureTransfers] =
+  const [
+    rawCorpus,
+    resolvedCorpus,
+    kalendaria,
+    yearTransfers,
+    scriptureTransfers,
+    temporalSubstitutions
+  ] =
     await Promise.all([
       loadCorpus(corpusPath, { resolveReferences: false }),
       loadCorpus(corpusPath),
       loadKalendaria(corpusPath),
       loadTransferTables(corpusPath),
-      loadScriptureTransferTables(corpusPath)
+      loadScriptureTransferTables(corpusPath),
+      loadTemporalSubstitutionTables(corpusPath)
     ]);
 
   return {
@@ -106,7 +117,8 @@ async function loadApiRuntime(corpusPath: string, versionRegistry: VersionRegist
     resolvedCorpus,
     kalendarium: buildKalendariumTable(kalendaria),
     yearTransfers: buildYearTransferTable(yearTransfers),
-    scriptureTransfers: buildScriptureTransferTable(scriptureTransfers)
+    scriptureTransfers: buildScriptureTransferTable(scriptureTransfers),
+    temporalSubstitutions: buildTemporalSubstitutionTable(temporalSubstitutions)
   };
 }
 
@@ -139,6 +151,17 @@ async function loadScriptureTransferTables(corpusPath: string) {
     names.map(async (name) => ({
       yearKey: name.slice(0, -4),
       entries: parseScriptureTransfer(await readFile(resolve(dir, name), 'utf8'))
+    }))
+  );
+}
+
+async function loadTemporalSubstitutionTables(corpusPath: string) {
+  const dir = resolve(corpusPath, 'Tabulae/Tempora');
+  const names = await sortedTxtFiles(dir);
+  return Promise.all(
+    names.map(async (name) => ({
+      name: name.slice(0, -4),
+      entries: parseTemporalSubstitutions(await readFile(resolve(dir, name), 'utf8'))
     }))
   );
 }

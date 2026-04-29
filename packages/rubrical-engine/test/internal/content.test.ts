@@ -91,6 +91,33 @@ describe('resolveOfficeDefinition', () => {
     expect(definition.feastRef.title).toBe('Default Office');
     expect(definition.rawRank.classWeight).toBe(5.6);
   });
+
+  it('uses an Officium verse marker as the title when rank title is empty', () => {
+    const corpus = new TestOfficeTextIndex();
+    corpus.add(
+      'horas/Latin/Sancti/04-28.txt',
+      [
+        '[Officium]',
+        'S. Pauli a Cruce Confessoris',
+        '',
+        '[Rank]',
+        ';;Duplex;;3;;'
+      ].join('\n')
+    );
+
+    const definition = resolveOfficeDefinition(
+      corpus,
+      'Sancti/04-28',
+      {
+        date: { year: 2026, month: 4, day: 28 },
+        dayOfWeek: 2,
+        season: 'eastertide',
+        version: makeVersion('Rubrics 1960 - 1960', makeTestPolicy('rubrics-1960'))
+      }
+    );
+
+    expect(definition.feastRef.title).toBe('S. Pauli a Cruce Confessoris');
+  });
 });
 
 describe('resolveOfficeFile', () => {

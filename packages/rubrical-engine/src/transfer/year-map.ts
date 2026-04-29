@@ -20,7 +20,8 @@ import type {
   Candidate,
   KalendariumTable,
   OfficeTextIndex,
-  TemporalContext
+  TemporalContext,
+  TemporalSubstitutionTable
 } from '../types/model.js';
 import type { RubricalPolicy } from '../types/policy.js';
 import type { ResolvedVersion, VersionRegistry } from '../types/version.js';
@@ -72,6 +73,7 @@ export function buildYearTransferMap(params: {
   readonly kalendarium: KalendariumTable;
   readonly yearTransfers: YearTransferTable;
   readonly scriptureTransfers: ScriptureTransferTable;
+  readonly temporalSubstitutions?: TemporalSubstitutionTable;
   readonly maxDays?: number;
 }): YearTransferMap {
   const maxDays = params.maxDays ?? 60;
@@ -202,7 +204,9 @@ export function buildYearTransferMap(params: {
       date,
       params.version,
       params.policy,
-      params.corpus
+      params.corpus,
+      params.versionRegistry,
+      params.temporalSubstitutions
     );
     appendWarnings(warningsByDate, isoDate, temporalResult.warnings);
 
@@ -263,11 +267,16 @@ function buildTemporalContextWithFallback(
   date: CalendarDate,
   version: ResolvedVersion,
   policy: RubricalPolicy,
-  corpus: OfficeTextIndex
+  corpus: OfficeTextIndex,
+  registry: VersionRegistry,
+  temporalSubstitutions: TemporalSubstitutionTable | undefined
 ): TemporalPreviewBuildResult {
   try {
     return {
-      temporal: buildTemporalContext(date, version, corpus),
+      temporal: buildTemporalContext(date, version, corpus, {
+        registry,
+        temporalSubstitutions
+      }),
       warnings: []
     };
   } catch (error) {

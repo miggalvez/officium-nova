@@ -1,0 +1,10 @@
+.git
+.vercel
+node_modules
+packages/*/node_modules
+packages/*/dist
+packages/*/coverage
+packages/*/.vite
+coverage
+*.tsbuildinfo
+upstream

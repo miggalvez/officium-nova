@@ -27,7 +27,7 @@ export const DEFAULT_SETTINGS: DemoSettings = {
   displayMode: 'parallel',
   fontSize: 'normal',
   reviewerMode: false,
-  strict: true
+  strict: false
 };
 
 type Listener = (next: DemoSettings) => void;

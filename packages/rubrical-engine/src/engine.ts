@@ -578,7 +578,10 @@ export function createRubricalEngine(config: RubricalEngineConfig): RubricalEngi
   } {
     try {
       return {
-        temporal: buildTemporalContext(calendarDate, version, config.corpus),
+        temporal: buildTemporalContext(calendarDate, version, config.corpus, {
+          registry: config.versionRegistry,
+          temporalSubstitutions: config.temporalSubstitutions
+        }),
         warnings: []
       };
     } catch (error) {
@@ -659,7 +662,8 @@ export function createRubricalEngine(config: RubricalEngineConfig): RubricalEngi
       versionRegistry: config.versionRegistry,
       kalendarium: config.kalendarium,
       yearTransfers: config.yearTransfers,
-      scriptureTransfers: config.scriptureTransfers
+      scriptureTransfers: config.scriptureTransfers,
+      temporalSubstitutions: config.temporalSubstitutions
     });
     yearTransferMapCache.set(key, built);
     return built;

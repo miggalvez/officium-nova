@@ -10,6 +10,7 @@ import {
   type PolicyName,
   type RubricalEngine,
   type ScriptureTransferTable,
+  type TemporalSubstitutionTable,
   type VersionDescriptor,
   type VersionHandle,
   type VersionRegistry,
@@ -35,6 +36,7 @@ export interface ApiVersionEngineResources {
   readonly kalendarium: KalendariumTable;
   readonly yearTransfers: YearTransferTable;
   readonly scriptureTransfers: ScriptureTransferTable;
+  readonly temporalSubstitutions: TemporalSubstitutionTable;
 }
 
 export interface VersionInfoDto {
@@ -134,6 +136,7 @@ function addSupportedVersions(
           kalendarium: engineResources.kalendarium,
           yearTransfers: engineResources.yearTransfers,
           scriptureTransfers: engineResources.scriptureTransfers,
+          temporalSubstitutions: engineResources.temporalSubstitutions,
           versionRegistry,
           version: handle,
           policyMap: VERSION_POLICY
