@@ -5,6 +5,7 @@ import {
 } from '@officium-novum/parser';
 
 import { conditionMatches } from '../internal/conditions.js';
+import { resolveOfficeFile } from '../internal/content.js';
 import type { RubricalWarning } from '../types/directorium.js';
 import type { RuleEvaluationContext } from '../types/rule-set.js';
 import { commonContentPathVariants } from './common-source.js';
@@ -236,10 +237,11 @@ function collectReferenceFiles(
       continue;
     }
 
-    files.push(target);
+    const inheritedTarget = resolveTargetPreambleFile(state.context.corpus, target);
+    files.push(inheritedTarget);
     const nextVisited = new Set(visited);
     nextVisited.add(cycleKey);
-    collectReferenceFiles(target, state, files, warnings, depth + 1, nextVisited);
+    collectReferenceFiles(inheritedTarget, state, files, warnings, depth + 1, nextVisited);
   }
 }
 
@@ -380,6 +382,27 @@ function resolveRuleTargetFile(
   }
 
   return undefined;
+}
+
+function resolveTargetPreambleFile(
+  corpus: Pick<RuleEvaluationContext, 'corpus'>['corpus'],
+  target: ParsedFile
+): ParsedFile {
+  const canonicalPath = canonicalOfficePathFromCorpusPath(target.path);
+  if (!canonicalPath) {
+    return target;
+  }
+
+  try {
+    return resolveOfficeFile(corpus, canonicalPath);
+  } catch {
+    return target;
+  }
+}
+
+function canonicalOfficePathFromCorpusPath(path: string): string | undefined {
+  const match = /^horas\/Latin\/(.+?)\.txt$/u.exec(path);
+  return match?.[1];
 }
 
 function candidateContentPaths(

@@ -185,6 +185,16 @@ describe('applyDirectives — omit-alleluia / add-alleluia', () => {
     expect(out).toEqual(content);
   });
 
+  it('does not append alleluia to the bare English Thanks be to God chapter response', () => {
+    const content: TextContent[] = [
+      { type: 'text', value: 'Wis 5:1' },
+      { type: 'text', value: 'Then shall the just stand with great constancy.' },
+      { type: 'verseMarker', marker: 'R.', text: 'Thanks be to God.' }
+    ];
+    const out = run('chapter', content, ['add-alleluia']);
+    expect(out).toEqual(content);
+  });
+
   it('add-versicle-alleluia only touches V./R. markers on versicle slots', () => {
     const content: TextContent[] = [
       { type: 'verseMarker', marker: 'V.', text: 'Deus, in adjutórium meum inténde' },

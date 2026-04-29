@@ -281,4 +281,98 @@ describe('structureLauds', () => {
       expect(hymn.hymnOverride?.hymnKey).toBe('2');
     }
   });
+
+  it('expands paschaltide commune preambles for sanctoral Lauds later blocks', () => {
+    const corpus = new TestOfficeTextIndex();
+    corpus.add('horas/Ordinarium/Laudes.txt', ORDINARIUM_LAUDES);
+    corpus.add(
+      'horas/Latin/Sancti/04-29.txt',
+      [
+        '[Officium]',
+        'S. Petri Martyris',
+        '',
+        '[Rule]',
+        'vide C2a-1;',
+        '',
+        '[Oratio]',
+        'Oratio propria'
+      ].join('\n')
+    );
+    corpus.add('horas/Latin/Commune/C2a-1p.txt', '@Commune/C2ap');
+    corpus.add('horas/Latin/Commune/C2ap.txt', '@Commune/C2p');
+    corpus.add(
+      'horas/Latin/Commune/C2p.txt',
+      ['@Commune/C1p', '', '[Hymnus Laudes]', '@Commune/C2'].join('\n')
+    );
+    corpus.add(
+      'horas/Latin/Commune/C1p.txt',
+      [
+        '[Capitulum Laudes]',
+        'Stabunt justi',
+        '',
+        '[Versum 2]',
+        'V. Pretiosa',
+        'R. Mors Sanctorum',
+        '',
+        '[Ant 2]',
+        'Filiae Jerusalem'
+      ].join('\n')
+    );
+    corpus.add(
+      'horas/Latin/Commune/C2.txt',
+      ['[Hymnus Laudes]', 'Invicte Martyr'].join('\n')
+    );
+    const registry = buildVersionRegistry([
+      {
+        version: 'Rubrics 1960 - 1960',
+        kalendar: '1960',
+        transfer: '1960',
+        stransfer: '1960'
+      }
+    ]);
+    const version = resolveVersion(
+      asVersionHandle('Rubrics 1960 - 1960'),
+      registry,
+      VERSION_POLICY
+    );
+    const skeleton = loadOrdinariumSkeleton('lauds', version, corpus);
+    const celeb: Celebration = {
+      feastRef: { path: 'Sancti/04-29', id: 'Sancti/04-29', title: 'S. Petri Martyris' },
+      rank: { name: 'III', classSymbol: 'III', weight: 600 },
+      source: 'sanctoral'
+    };
+    const rules = baseRules();
+    const hourRules = deriveHourRuleSet(celeb, rules, 'lauds', [], {
+      temporal: temporal('2026-04-29', 'Pasc3-3', 'eastertide', 3)
+    });
+
+    const result = structureLauds({
+      skeleton,
+      celebration: celeb,
+      commemorations: [],
+      celebrationRules: rules,
+      hourRules,
+      temporal: temporal('2026-04-29', 'Pasc3-3', 'eastertide', 3),
+      policy: rubrics1960Policy,
+      corpus,
+      version
+    });
+
+    expect(result.hour.slots.chapter).toEqual({
+      kind: 'single-ref',
+      ref: { path: 'horas/Latin/Commune/C2a-1p', section: 'Capitulum Laudes' }
+    });
+    expect(result.hour.slots.hymn).toEqual({
+      kind: 'single-ref',
+      ref: { path: 'horas/Latin/Commune/C2a-1p', section: 'Hymnus Laudes' }
+    });
+    expect(result.hour.slots.versicle).toEqual({
+      kind: 'single-ref',
+      ref: { path: 'horas/Latin/Commune/C2a-1p', section: 'Versum 2' }
+    });
+    expect(result.hour.slots['antiphon-ad-benedictus']).toEqual({
+      kind: 'single-ref',
+      ref: { path: 'horas/Latin/Commune/C2a-1p', section: 'Ant 2' }
+    });
+  });
 });

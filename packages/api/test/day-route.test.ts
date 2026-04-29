@@ -215,6 +215,34 @@ describeIfUpstream('day route integration', () => {
     expect(firstPsalmHeading(body, 'none')).toBe('Psalmus 58(2-11) [1]');
     expect(firstPsalmHeading(body, 'vespers')).toBe('Psalmus 127 [1]');
     expect(firstAntiphonText(body, 'compline')).not.toMatch(/^Allelú[ij]a,/u);
+    expect(slotLineTexts(body, 'lauds', 'chapter', 'la').map((line) => line.trimStart())).toEqual([
+      'Sap 5:1',
+      'Stabunt iusti in magna constántia advérsus eos qui se angustiavérunt et qui abstulérunt labóres eórum.',
+      'Deo grátias.'
+    ]);
+    expect(slotLineTexts(body, 'lauds', 'chapter', 'en').map((line) => line.trimStart())).toEqual([
+      'Wis 5:1',
+      'Then shall the just stand with great constancy against those that have afflicted them, and taken away their labours.',
+      'Thanks be to God.'
+    ]);
+    expect(slotLineTexts(body, 'lauds', 'hymn', 'la')).toContain('Invícte Martyr, únicum');
+    expect(slotLineTexts(body, 'lauds', 'hymn', 'en')).toContain(
+      "Martyr of God, whose strength was steeled"
+    );
+    expect(slotLineTexts(body, 'lauds', 'versicle', 'la')).toEqual([
+      'Pretiósa in conspéctu Dómini, allelúia.',
+      'Mors Sanctórum eius, allelúia.'
+    ]);
+    expect(slotLineTexts(body, 'lauds', 'versicle', 'en')).toEqual([
+      'Precious in the sight of the Lord, alleluia.',
+      'Is the death of his saints, alleluia.'
+    ]);
+    expect(firstLineText(body, 'lauds', 'antiphon-ad-benedictus', 'la')).toBe(
+      'Fíliæ Ierúsalem, * veníte et vidéte Mártyres cum corónis, quibus coronávit eos Dóminus in die solemnitátis et lætítiæ, allelúia, allelúia.'
+    );
+    expect(firstLineText(body, 'lauds', 'antiphon-ad-benedictus', 'en')).toBe(
+      'Daughters of Jerusalem, * come and see the crowned martyrs, the Lord crowned them in his solemnity and delight, alleluia, alleluia.'
+    );
 
     expect(firstLineText(body, 'matins', 'hymn', 'en')).toBe(
       'O God, of those that fought thy fight,'

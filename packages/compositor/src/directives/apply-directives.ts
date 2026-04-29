@@ -339,8 +339,8 @@ function isBareDeoGratiasNode(node: TextContent): boolean {
   return false;
 }
 
-const DEO_GRATIAS_TEXT_RX = /^Deo gr[áa]tias\.?$/iu;
-const DEO_GRATIAS_LINE_RX = /^R\.\s*Deo gr[áa]tias\.?$/iu;
+const DEO_GRATIAS_TEXT_RX = /^(?:Deo gr[áa]tias|Thanks be to God)\.?$/iu;
+const DEO_GRATIAS_LINE_RX = /^R\.\s*(?:Deo gr[áa]tias|Thanks be to God)\.?$/iu;
 
 function isAntiphonLine(value: string): boolean {
   return /^ant\./iu.test(value.trimStart());
