@@ -55,7 +55,8 @@ officium-novum/
 │   ├── rubrical-engine/   # @officium-novum/rubrical-engine — Phase 2 implementation
 │   ├── compositor/        # @officium-novum/compositor — Phase 3 implementation
 │   ├── api/               # @officium-novum/api — Phase 4 Fastify/OpenAPI scaffold
-│   └── validation/        # @officium-novum/validation — Phase 5 schemas, audits, and E2E harness
+│   ├── validation/        # @officium-novum/validation — Phase 5 schemas, audits, and E2E harness
+│   └── web/               # @officium-novum/web — Phase 6 hosted demo (Vite + React SPA)
 ├── upstream/          # Divinum Officium as a Git submodule (source texts + legacy Perl app)
 ├── docs/              # Specifications and design documents
 │   ├── divinum-officium-modernization-spec.md
@@ -65,6 +66,8 @@ officium-novum/
 │   ├── phase-3-composition-engine-design.md
 │   ├── phase-4-API-design.md
 │   ├── phase-5-validation-strategy-reviewer-feedback-loop.md
+│   ├── hosted-demo-implementation-plan.md
+│   ├── deployment-hosted-demo.md
 │   ├── upstream-issues.md
 │   └── adr/               # Architecture Decision Records for implementation choices
 ├── LICENSE            # GPL-3.0
@@ -90,6 +93,8 @@ officium-novum/
 - [Phase 4 API Design](docs/phase-4-API-design.md) — detailed design for the read-only JSON API: version/language normalization, DTO boundaries, metadata/office/day/calendar endpoints, error model, cache model, and sub-phase plan
 - [Phase 5 Validation Strategy](docs/phase-5-validation-strategy-reviewer-feedback-loop.md) — project-wide validation plan for cross-stack E2E checks, citation audits, reviewer feedback intake, privacy handling, multi-year promotion, and sign-off
 - [Reviewer Reports](docs/REVIEWER_REPORTS.md) — Phase 5 public report index, report ID format, GitHub/email intake procedure, and private-data handling rule
+- [Phase 6 Hosted Demo Implementation Plan](docs/hosted-demo-implementation-plan.md) — design for the public demo / beta frontend including the reviewer **Report this** flow, sub-phase plan (6a–6h), and the read-only API consumer contract
+- [Hosted Demo Deployment Guide](docs/deployment-hosted-demo.md) — concrete API + static-frontend deployment recipes (Nginx, Caddy), env vars, CSP guidance, and a smoke checklist
 - [Phase 3 Adjudication Log](packages/compositor/test/divergence/ADJUDICATION_LOG.md) — chronological audit trail of divergence adjudications against the legacy Perl renderer, per ADR-011
 - [Upstream Perl issues](docs/upstream-issues.md) — forward-tracking file for divergence rows classified as legacy-Perl bugs
 - [Architecture Decision Records](docs/adr/) — implementation ADRs for version binding, rule evaluation, transfer caching, concurrence previews, hour-structuring architecture, compositor resolved-corpus contract, incipit emission, divergence adjudication, Compline verb disposition, Lucan canticle structural slots, the Phase 4 API version/language contract, and the Phase 5 cross-stack adjudication protocol
@@ -104,7 +109,7 @@ officium-novum/
 | **3 — Composition Engine** | Complete — all eight sub-phases (3a–3h) shipped. End-to-end composition, 8,784-composition no-throw sweep, typed `ComposeWarning` surface, Matins Benedictio + Te Deum replacement, Phase 2 commemoration-hour coordination, the adjudication-sidecar harness, and 312 Appendix-A snapshot goldens (13 dates × 3 policies × 8 Hours) are all in place. All three Roman policy ledgers report **0 unadjudicated** rows; `pnpm -C packages/compositor verify:phase-3-signoff` is green. See [Phase 3 Composition Engine Design §19](docs/phase-3-composition-engine-design.md) for per-sub-phase shipping summaries. |
 | **4 — API** | Complete for the core read-only Breviary JSON scope — Fastify app/server setup, OpenAPI 3.1 route generation, `/api/v1/status`, `/api/v1/versions`, `/api/v1/languages`, `GET /api/v1/office/{date}/{hour}`, `GET /api/v1/days/{date}`, and `GET /api/v1/calendar/{year}/{month}` are in place. The API supports canonical `version` handling, `rubrics` aliases, public `la`/`en` language mapping, supported/deferred/missa-only version classification, `orthography=source|version`, selected-Hour day bundles, summary-only calendar month payloads, `strict` query handling, canonical request keys, deterministic ETags, `Cache-Control`, and `If-None-Match` / `304` handling. The 4g contract gate locks the 13-date × 3-policy × 8-Hour Office matrix, OpenAPI JSON, cache headers, public DTO boundaries, strict-mode error behavior, and no invented celebration color. |
 | **5 — Validation Strategy and Reviewer Feedback Loop** | Started — the Phase 5 strategy and ADR-015 define the cross-stack authority hierarchy, generalized adjudication protocol, citation object, reviewer privacy boundary, package ownership model, CI thresholds, and initial PR sequence. The `@officium-novum/validation` package provides the shared schema/audit scaffold, and reviewer intake v1 is in place through the GitHub issue template plus `docs/REVIEWER_REPORTS.md`; implementation continues through sidecar citation migration, E2E harness, CI consolidation, multi-year expansion, and reviewer pilot. |
-| **6 — Frontend** | Not started |
+| **6 — Hosted Demo / Frontend** | Initial implementation shipped — `@officium-novum/web` is a Vite + React + TypeScript SPA consuming the Phase 4 API as an external client (no private internals, no client-side liturgical composition). Routes: `/`, `/office/:date/:hour`, `/day/:date`, `/calendar/:year/:month`, `/settings`, `/status`, `/about`, `/api`. The Office Hour view ships date/hour/version/language/orthography/display-mode controls, parallel and sequential rendering, semantically distinguished rubrics rendered through React's safe text path (no raw-HTML injection), warning banners, raw-API and OpenAPI links, **Cache this week**, and a reviewer **Report this** button. The report dialog captures frontend SHA + build date, API base, content version + upstream SHA, canonical path, exact API URL, request metadata, response kind/quality/warning codes; offers GitHub issue handoff (`template=reviewer-report.yml`) with paste fallback, `mailto:` handoff, and copy-to-clipboard YAML/JSON. Public report payloads never carry contact details, and anonymous reports also drop names. Local-only `DemoSettings` store via `localStorage`. Service worker (`/service-worker.js`) precaches the app shell and runs stale-while-revalidate over `/api/v1/*`, with a `cache-week` MessageChannel handler. Print stylesheet hides nav/toolbars. See [`docs/hosted-demo-implementation-plan.md`](docs/hosted-demo-implementation-plan.md) for the sub-phase plan (6a–6h) and [`docs/deployment-hosted-demo.md`](docs/deployment-hosted-demo.md) for deployment recipes. |
 
 Phase 2's Roman decision pipeline is complete, but the 3h comparison burn-down has shown that "complete" does not mean the `HourStructure` schema is frozen. Narrow structural seams such as Matins benedictions, Prime Martyrology / `De Officio Capituli`, and Lucan canticle slots were added during Phase 3 to keep the Phase 2 / Phase 3 boundary honest without regressing into Perl-style control flow. See [Phase 2 Rubrical Engine Design §4.2](docs/phase-2-rubrical-engine-design.md) and [ADR-013](docs/adr/013-phase-3-lucan-canticle-slots.md).
 
