@@ -499,13 +499,45 @@ export function selectRomanBenedictions(params: {
   for (let offset = 0; offset < lessons.length; offset += 1) {
     const lesson = lessons[offset];
     if (!lesson) continue;
-    const selector = String(offset + 1);
+    const selector = benedictionSelector({
+      offset,
+      totalLessons,
+      celebration: params.celebration
+    });
     entries.push({
       index: lesson.index,
       reference: { path, section: sourceNocturnSection, selector }
     });
   }
   return Object.freeze(entries);
+}
+
+function benedictionSelector(params: {
+  readonly offset: number;
+  readonly totalLessons: MatinsPlan['totalLessons'];
+  readonly celebration: FeastReferenceCarrier;
+}): string {
+  if (
+    params.totalLessons === 3 &&
+    params.offset === 1 &&
+    params.celebration.source === 'sanctoral'
+  ) {
+    return String(4 + sanctoralCujusOffset(params.celebration.feastRef.title));
+  }
+
+  return String(params.offset + 1);
+}
+
+function sanctoralCujusOffset(title: string): number {
+  if (/Ss\.|Sanctorum|Sociorum/iu.test(title)) {
+    return 1;
+  }
+
+  if (/Virgin|Vírgin|Vidua|Vídua|Poenitent|Pœnitent/iu.test(title)) {
+    return 2;
+  }
+
+  return 0;
 }
 
 interface FeastReferenceCarrier {

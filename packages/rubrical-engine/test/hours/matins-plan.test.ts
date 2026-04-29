@@ -291,6 +291,98 @@ describe('buildMatinsPlan', () => {
     ]);
   });
 
+  it('routes 1960 III-class sanctoral weekday lessons through the occurring feria and proper contracted legend', () => {
+    const corpus = new TestOfficeTextIndex();
+    corpus.add(
+      'horas/Latin/Sancti/04-29.txt',
+      [
+        '[Lectio94]',
+        'Legenda propria contracta.',
+        '&teDeum',
+        '',
+        '[Responsory3]',
+        'Responsory commune'
+      ].join('\n')
+    );
+    corpus.add(
+      'horas/Latin/Tempora/Pasc3-3.txt',
+      [
+        '[Lectio1]',
+        'Scriptura occurrens I',
+        '',
+        '[Responsory1]',
+        'Responsory feria I',
+        '',
+        '[Lectio2]',
+        'Scriptura occurrens II',
+        '',
+        '[Responsory2]',
+        'Responsory feria II',
+        '',
+        '[Lectio3]',
+        'Scriptura occurrens III',
+        '',
+        '[Responsory3]',
+        'Responsory feria III'
+      ].join('\n')
+    );
+
+    const result = buildMatinsPlanWithWarnings({
+      celebration: celebration('Sancti/04-29', 'III', 'sanctoral'),
+      celebrationRules: baseRules(),
+      commemorations: [],
+      hourRules: HOUR_RULES,
+      temporal: temporal('2026-04-29', 'Pasc3-3', 'eastertide', 'IV'),
+      policy: rubrics1960Policy,
+      corpus,
+      version: version1960()
+    });
+
+    const nocturn = result.plan.nocturnPlan[0];
+    expect(result.plan.teDeum).toBe('say');
+    expect(nocturn?.lessons.map((lesson) => lesson.source)).toEqual([
+      {
+        kind: 'scripture',
+        course: 'paschaltide',
+        pericope: {
+          book: 'paschaltide',
+          reference: { path: 'horas/Latin/Tempora/Pasc3-3', section: 'Lectio1' }
+        }
+      },
+      {
+        kind: 'scripture',
+        course: 'paschaltide',
+        pericope: {
+          book: 'paschaltide',
+          reference: { path: 'horas/Latin/Tempora/Pasc3-3', section: 'Lectio2' }
+        }
+      },
+      {
+        kind: 'hagiographic',
+        reference: {
+          path: 'horas/Latin/Sancti/04-29',
+          section: 'Lectio94',
+          selector: '1-1'
+        }
+      }
+    ]);
+    expect(nocturn?.responsories).toEqual([
+      {
+        index: 1,
+        reference: { path: 'horas/Latin/Tempora/Pasc3-3', section: 'Responsory1' }
+      },
+      {
+        index: 2,
+        reference: { path: 'horas/Latin/Tempora/Pasc3-3', section: 'Responsory2' }
+      }
+    ]);
+    expect(nocturn?.benedictions.map((entry) => entry.reference.selector)).toEqual([
+      '1',
+      '4',
+      '3'
+    ]);
+  });
+
   it('uses Paschaltide common variants for inherited Matins invitatories', () => {
     const corpus = new TestOfficeTextIndex();
     corpus.add(
@@ -301,7 +393,10 @@ describe('buildMatinsPlan', () => {
       'horas/Latin/Commune/C2a-1.txt',
       ['[Invit]', 'Regem Mártyrum Dóminum, * Veníte, adorémus.'].join('\n')
     );
-    corpus.add('horas/Latin/Commune/C2a-1p.txt', ['@Commune/C2p'].join('\n'));
+    corpus.add(
+      'horas/Latin/Commune/C2a-1p.txt',
+      ['@Commune/C2p', '', '[Hymnus Matutinum]', 'Deus tuórum mílitum'].join('\n')
+    );
     corpus.add(
       'horas/Latin/Commune/C2p.txt',
       ['[Invit]', 'Exsúltent in Dómino sancti, * Allelúja.'].join('\n')
@@ -331,6 +426,13 @@ describe('buildMatinsPlan', () => {
       reference: {
         path: 'horas/Latin/Commune/C2a-1p',
         section: 'Invit'
+      }
+    });
+    expect(result.plan.hymn).toEqual({
+      kind: 'feast',
+      reference: {
+        path: 'horas/Latin/Commune/C2a-1p',
+        section: 'Hymnus Matutinum'
       }
     });
   });

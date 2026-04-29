@@ -445,6 +445,7 @@ describe('rubrics1960Policy.resolveTeDeum', () => {
     expect(
       rubrics1960Policy.resolveTeDeum({
         plan: { nocturns: 1, totalLessons: 3 },
+        celebration: matinsCelebration('Tempora/Pent07-2', 'IV', 'temporal'),
         celebrationRules: {
           ...matinsRules(),
           teDeumOverride: 'forced'
@@ -456,6 +457,7 @@ describe('rubrics1960Policy.resolveTeDeum', () => {
     expect(
       rubrics1960Policy.resolveTeDeum({
         plan: { nocturns: 3, totalLessons: 9 },
+        celebration: matinsCelebration('Sancti/08-15', 'I', 'sanctoral'),
         celebrationRules: {
           ...matinsRules(),
           teDeumOverride: 'suppressed'
@@ -469,6 +471,7 @@ describe('rubrics1960Policy.resolveTeDeum', () => {
     expect(
       rubrics1960Policy.resolveTeDeum({
         plan: { nocturns: 3, totalLessons: 9 },
+        celebration: matinsCelebration('Tempora/Quad6-5', 'I', 'temporal'),
         celebrationRules: matinsRules(),
         temporal: temporal('2024-03-29', 'Quad6-5', 'passiontide')
       })
@@ -477,6 +480,7 @@ describe('rubrics1960Policy.resolveTeDeum', () => {
     expect(
       rubrics1960Policy.resolveTeDeum({
         plan: { nocturns: 1, totalLessons: 3 },
+        celebration: matinsCelebration('Tempora/Pasc0-2', 'I', 'temporal'),
         celebrationRules: matinsRules(),
         temporal: temporal('2024-04-02', 'Pasc0-2', 'eastertide', 'I')
       })
@@ -485,6 +489,7 @@ describe('rubrics1960Policy.resolveTeDeum', () => {
     expect(
       rubrics1960Policy.resolveTeDeum({
         plan: { nocturns: 1, totalLessons: 3 },
+        celebration: matinsCelebration('Tempora/Pasc1-0', 'I', 'temporal'),
         celebrationRules: matinsRules(),
         temporal: temporal('2024-04-07', 'Pasc1-0', 'eastertide', 'I')
       })
@@ -493,10 +498,20 @@ describe('rubrics1960Policy.resolveTeDeum', () => {
     expect(
       rubrics1960Policy.resolveTeDeum({
         plan: { nocturns: 1, totalLessons: 3 },
+        celebration: matinsCelebration('Tempora/Pent07-2', 'IV', 'temporal'),
         celebrationRules: matinsRules(),
         temporal: temporal('2024-07-09', 'Pent07-2', 'time-after-pentecost', 'IV')
       })
     ).toBe('replace-with-responsory');
+
+    expect(
+      rubrics1960Policy.resolveTeDeum({
+        plan: { nocturns: 1, totalLessons: 3 },
+        celebration: matinsCelebration('Sancti/04-29', 'III', 'sanctoral'),
+        celebrationRules: matinsRules(),
+        temporal: temporal('2026-04-29', 'Pasc3-3', 'eastertide', 'IV')
+      })
+    ).toBe('say');
   });
 });
 

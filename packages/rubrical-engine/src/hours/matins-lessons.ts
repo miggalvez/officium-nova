@@ -1,6 +1,6 @@
 import { conditionMatches } from '../internal/conditions.js';
 import { normalizeDateInput } from '../internal/date.js';
-import type { ParsedFile } from '@officium-novum/parser';
+import type { ParsedFile, TextContent } from '@officium-novum/parser';
 
 import { UnsupportedPolicyError } from '../types/policy.js';
 import type { RubricalWarning } from '../types/directorium.js';
@@ -166,6 +166,30 @@ function routePositionalDefault(
   lessonIndex: LessonIndex,
   context: RouteLessonContext
 ): LessonSource | undefined {
+  if (usesRubrics1960ThreeLessonSanctoralPattern(context)) {
+    if (lessonIndex === 1 || lessonIndex === 2) {
+      return {
+        kind: 'scripture',
+        course: effectiveScriptureCourse(context),
+        pericope: scripturePericope(
+          effectiveScriptureCourse(context),
+          lessonIndex,
+          context
+        )
+      };
+    }
+
+    if (lessonIndex === 3) {
+      const reference = findContractedSanctoralLegendReference(context);
+      if (reference) {
+        return {
+          kind: 'hagiographic',
+          reference
+        };
+      }
+    }
+  }
+
   if (context.shape.nocturns === 1 || context.shape.totalLessons === 3) {
     return {
       kind: 'scripture',
@@ -215,6 +239,39 @@ function routePositionalDefault(
   }
 
   return undefined;
+}
+
+function usesRubrics1960ThreeLessonSanctoralPattern(
+  context: RouteLessonContext
+): boolean {
+  return (
+    context.policy.name === 'rubrics-1960' &&
+    context.shape.nocturns === 1 &&
+    context.shape.totalLessons === 3 &&
+    context.celebration.source === 'sanctoral' &&
+    context.celebration.rank.classSymbol === 'III'
+  );
+}
+
+function findContractedSanctoralLegendReference(
+  context: RouteLessonContext
+): TextReference | undefined {
+  return (
+    findSectionReference(context, 'Lectio94', 3, {
+      warnOnMissing: false,
+      stripTeDeumMacro: true
+    }) ??
+    findSectionReference(context, 'Lectio93', 3, {
+      warnOnMissing: false,
+      stripTeDeumMacro: true
+    }) ??
+    findSectionReference(context, 'Lectio4', 3, {
+      warnOnMissing: false
+    }) ??
+    findSectionReference(context, 'Lectio3', 3, {
+      warnOnMissing: false
+    })
+  );
 }
 
 function effectiveScriptureCourse(context: RouteLessonContext): ScriptureCourse {
@@ -301,7 +358,10 @@ function findSectionReference(
   context: RouteLessonContext,
   sectionName: string,
   lessonIndex: LessonIndex,
-  options: { readonly warnOnMissing?: boolean } = {}
+  options: {
+    readonly warnOnMissing?: boolean;
+    readonly stripTeDeumMacro?: boolean;
+  } = {}
 ): TextReference | undefined {
   const warnOnMissing = options.warnOnMissing ?? true;
   const feastFile = context.feastFile;
@@ -328,7 +388,11 @@ function findSectionReference(
     }
 
     if (!section.condition) {
-      return lessonReference(context.celebration.feastRef.path, sectionName);
+      return lessonReference(
+        context.celebration.feastRef.path,
+        sectionName,
+        options.stripTeDeumMacro ? selectorBeforeTeDeumMacro(section.content) : undefined
+      );
     }
 
     if (!context.version) {
@@ -342,7 +406,11 @@ function findSectionReference(
       version: context.version
     });
     if (matches) {
-      return lessonReference(context.celebration.feastRef.path, sectionName);
+      return lessonReference(
+        context.celebration.feastRef.path,
+        sectionName,
+        options.stripTeDeumMacro ? selectorBeforeTeDeumMacro(section.content) : undefined
+      );
     }
   }
 
@@ -370,10 +438,28 @@ function placeholderReference(feastPath: string, lessonIndex: LessonIndex): Text
   };
 }
 
-function lessonReference(path: string, section: string): TextReference {
+function lessonReference(
+  path: string,
+  section: string,
+  selector?: string
+): TextReference {
   const normalizedPath = path.startsWith('horas/') ? path : `horas/Latin/${path}`;
   return {
     path: normalizedPath,
-    section
+    section,
+    ...(selector ? { selector } : {})
   };
+}
+
+function selectorBeforeTeDeumMacro(
+  content: readonly TextContent[]
+): string | undefined {
+  const index = content.findIndex(
+    (node) => node.type === 'macroRef' && node.name.toLowerCase() === 'tedeum'
+  );
+  if (index <= 0) {
+    return undefined;
+  }
+
+  return `1-${index}`;
 }

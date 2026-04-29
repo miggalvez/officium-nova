@@ -482,6 +482,7 @@ export const rubrics1960Policy: RubricalPolicy = {
   },
   resolveTeDeum(params: {
     readonly plan: Pick<MatinsPlan, 'nocturns' | 'totalLessons'>;
+    readonly celebration: Celebration;
     readonly celebrationRules: CelebrationRuleSet;
     readonly temporal: TemporalContext;
   }): 'say' | 'replace-with-responsory' | 'omit' {
@@ -498,7 +499,9 @@ export const rubrics1960Policy: RubricalPolicy = {
     }
 
     if (params.plan.totalLessons === 3) {
-      return isPaschalOctaveDay(params.temporal) ? 'say' : 'replace-with-responsory';
+      return requiresTeDeumInThreeLessonOffice1960(params)
+        ? 'say'
+        : 'replace-with-responsory';
     }
 
     return 'say';
@@ -570,6 +573,26 @@ function thirdClassSanctoralWeekdayPsalmody1960(
       ref: PASCHAL_ALLELUIA_PSALMODY_ANTIPHON_REF
     }
   };
+}
+
+function requiresTeDeumInThreeLessonOffice1960(params: {
+  readonly celebration: Celebration;
+  readonly temporal: TemporalContext;
+}): boolean {
+  if (
+    params.celebration.source === 'sanctoral' &&
+    params.celebration.kind !== 'vigil'
+  ) {
+    return true;
+  }
+
+  return (
+    isPaschalOctaveDay(params.temporal) ||
+    params.temporal.season === 'eastertide' ||
+    params.temporal.season === 'ascensiontide' ||
+    params.temporal.season === 'pentecost-octave' ||
+    /^Nat/iu.test(params.temporal.dayName)
+  );
 }
 
 function usesThirdClassSanctoralPaschalAlleluiaPsalmodyAntiphon(

@@ -208,7 +208,7 @@
       "matins": {
         "nocturns": 1,
         "totalLessons": 3,
-        "teDeum": "replace-with-responsory",
+        "teDeum": "say",
         "hymnKind": "ordinary",
         "invitatoriumKind": "season",
         "nocturnLessonSourceKinds": [

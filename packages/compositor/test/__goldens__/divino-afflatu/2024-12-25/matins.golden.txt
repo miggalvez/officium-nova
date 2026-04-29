@@ -4,13 +4,12 @@ hour: matins
 celebration: In Nativitate Domini
 languages: Latin
 section count: 77
-warning count: 4
+warning count: 3
 
 # warnings
 #0 [warn] resolve-missing-section — Reference did not resolve in language 'Latin' after fallback chain exhausted. {language=Latin, path=horas/Latin/Tempora/Nat25, section=Lectio1}
 #1 [warn] resolve-missing-section — Reference did not resolve in language 'Latin' after fallback chain exhausted. {language=Latin, path=horas/Latin/Tempora/Nat25, section=Lectio2}
 #2 [warn] resolve-missing-section — Reference did not resolve in language 'Latin' after fallback chain exhausted. {language=Latin, path=horas/Latin/Tempora/Nat25, section=Lectio3}
-#3 [warn] resolve-missing-section — Reference did not resolve in language 'Latin' after fallback chain exhausted. {language=Latin, path=horas/Latin/Sancti/12-25, section=Responsory9, selector=missing}
 
 [section #0 type=other slot=incipit reference=horas/Ordinarium/Matutinum#Incipit languages=Latin]
   Latin: rubric("secreto")

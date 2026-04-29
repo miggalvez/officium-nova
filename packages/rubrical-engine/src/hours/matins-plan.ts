@@ -136,7 +136,8 @@ export function buildMatinsPlanWithWarnings(
             toResponsoryIndex(globalLessonIndex),
             input,
             feastFiles,
-            warnings
+            warnings,
+            source
           )
         );
       }
@@ -212,6 +213,7 @@ export function buildMatinsPlanWithWarnings(
       nocturns: shape.nocturns,
       totalLessons: shape.totalLessons
     },
+    celebration: input.celebration,
     celebrationRules: input.celebrationRules,
     temporal: input.temporal
   });
@@ -224,6 +226,8 @@ export function buildMatinsPlanWithWarnings(
 
   if (teDeum === 'replace-with-responsory') {
     plan = markTeDeumReplacement(plan);
+  } else if (teDeum === 'say') {
+    plan = suppressFinalResponsoryBeforeTeDeum(plan);
   }
 
   return {
@@ -277,7 +281,9 @@ function buildHymnSource(
   if (match) {
     const doxologyVariant =
       input.celebrationRules.doxologyVariant ??
-      seasonalFallbackDoxologyVariant(input.temporal);
+      (usesThirdClassSanctoralWeekdayFerialMatinsPsalmody(input)
+        ? undefined
+        : seasonalFallbackDoxologyVariant(input.temporal));
     return {
       kind: 'feast',
       reference: officeReference(match.file.path, match.section.header),
@@ -344,6 +350,23 @@ function buildNocturnVersicle(
   }
 
   if (nocturnIndex === 1) {
+    const thirdClassSanctoralWeekdayVersicle = seasonalMatinsVersicleSection(
+      input,
+      nocturnIndex,
+      totalNocturns
+    );
+    if (
+      thirdClassSanctoralWeekdayVersicle &&
+      usesThirdClassSanctoralWeekdayFerialMatinsPsalmody(input)
+    ) {
+      return {
+        reference: {
+          path: PSALTERIUM_MATINS_CONTENT_PATH,
+          section: thirdClassSanctoralWeekdayVersicle
+        }
+      };
+    }
+
     const antiphonVersicle = findMatinsAntiphonVersicle(
       feastFiles,
       input,
@@ -532,7 +555,9 @@ function seasonalMatinsVersicleSection(
     return undefined;
   }
   if (input.celebration.source !== 'temporal') {
-    return undefined;
+    if (!usesThirdClassSanctoralWeekdayFerialMatinsPsalmody(input)) {
+      return undefined;
+    }
   }
   const seasonName = seasonNameForVersicle(input.temporal.season);
   if (!seasonName) {
@@ -572,9 +597,21 @@ function buildResponsory(
   index: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9,
   input: BuildMatinsPlanInput,
   feastFiles: readonly ParsedFile[],
-  warnings: RubricalWarning[]
+  warnings: RubricalWarning[],
+  lessonSource?: LessonPlan['source']
 ): ResponsorySource {
   const sectionName = `Responsory${index}`;
+
+  if (usesThirdClassSanctoralWeekdayFerialMatinsPsalmody(input)) {
+    const scriptureResponsory = findScriptureResponsory(index, input, lessonSource);
+    if (scriptureResponsory) {
+      return {
+        index,
+        reference: scriptureResponsory
+      };
+    }
+  }
+
   const match = findSection(feastFiles, sectionName, input);
   if (match) {
     return {
@@ -600,6 +637,28 @@ function buildResponsory(
       section: sectionName,
       selector: 'missing'
     }
+  };
+}
+
+function findScriptureResponsory(
+  index: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9,
+  input: BuildMatinsPlanInput,
+  lessonSource?: LessonPlan['source']
+): TextReference | undefined {
+  if (lessonSource?.kind !== 'scripture' && lessonSource?.kind !== 'scripture-transferred') {
+    return undefined;
+  }
+
+  const reference = lessonSource.pericope.reference;
+  const sectionName = `Responsory${index}`;
+  const file = safeResolveOfficeFile(input.corpus, canonicalOfficePath(reference.path));
+  if (!file?.sections.some((section) => section.header === sectionName)) {
+    return undefined;
+  }
+
+  return {
+    path: reference.path,
+    section: sectionName
   };
 }
 
@@ -691,7 +750,7 @@ function collectThirdClassSanctoralWeekdayPaschalMatinsAntiphons(
   });
 }
 
-function usesThirdClassSanctoralWeekdayPaschalMatinsAntiphon(
+function usesThirdClassSanctoralWeekdayFerialMatinsPsalmody(
   input: Pick<BuildMatinsPlanInput, 'celebration' | 'temporal' | 'version'>
 ): boolean {
   return (
@@ -700,6 +759,15 @@ function usesThirdClassSanctoralWeekdayPaschalMatinsAntiphon(
     input.celebration.rank.classSymbol === 'III' &&
     input.temporal.season === 'eastertide' &&
     input.temporal.dayOfWeek !== 0
+  );
+}
+
+function usesThirdClassSanctoralWeekdayPaschalMatinsAntiphon(
+  input: Pick<BuildMatinsPlanInput, 'celebration' | 'temporal' | 'version'>
+): boolean {
+  return (
+    usesThirdClassSanctoralWeekdayFerialMatinsPsalmody(input) &&
+    input.temporal.season === 'eastertide'
   );
 }
 
@@ -1099,6 +1167,33 @@ function markTeDeumReplacement(plan: MatinsPlan): MatinsPlan {
             replacesTeDeum: true
           }
         : responsory
+    )
+  };
+
+  const nocturnPlan = [...plan.nocturnPlan];
+  nocturnPlan[nocturnPlan.length - 1] = updatedLastNocturn;
+
+  return {
+    ...plan,
+    nocturnPlan
+  };
+}
+
+function suppressFinalResponsoryBeforeTeDeum(plan: MatinsPlan): MatinsPlan {
+  const lastNocturn = plan.nocturnPlan.at(-1);
+  if (!lastNocturn) {
+    return plan;
+  }
+
+  const lastLesson = lastNocturn.lessons.at(-1);
+  if (!lastLesson) {
+    return plan;
+  }
+
+  const updatedLastNocturn: NocturnPlan = {
+    ...lastNocturn,
+    responsories: lastNocturn.responsories.filter(
+      (responsory) => responsory.index !== lastLesson.index
     )
   };
 

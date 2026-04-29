@@ -211,6 +211,7 @@ export interface RubricalPolicy {
    */
   resolveTeDeum(params: {
     readonly plan: Pick<MatinsPlan, 'nocturns' | 'totalLessons'>;
+    readonly celebration: Celebration;
     readonly celebrationRules: CelebrationRuleSet;
     readonly temporal: TemporalContext;
   }): 'say' | 'replace-with-responsory' | 'omit';

@@ -4,13 +4,12 @@ hour: matins
 celebration: In Epiphania Domini
 languages: Latin
 section count: 73
-warning count: 4
+warning count: 3
 
 # warnings
 #0 [warn] resolve-missing-section — Reference did not resolve in language 'Latin' after fallback chain exhausted. {language=Latin, path=horas/Latin/Tempora/Nat06, section=Lectio1}
 #1 [warn] resolve-missing-section — Reference did not resolve in language 'Latin' after fallback chain exhausted. {language=Latin, path=horas/Latin/Tempora/Nat06, section=Lectio2}
 #2 [warn] resolve-missing-section — Reference did not resolve in language 'Latin' after fallback chain exhausted. {language=Latin, path=horas/Latin/Tempora/Nat06, section=Lectio3}
-#3 [warn] resolve-missing-section — Reference did not resolve in language 'Latin' after fallback chain exhausted. {language=Latin, path=horas/Latin/Sancti/01-06, section=Responsory9, selector=missing}
 
 [section #0 type=heading slot=heading languages=]
   heading: nocturn 1

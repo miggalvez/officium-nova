@@ -4,10 +4,7 @@ hour: matins
 celebration: In Conceptione Immaculata Beatæ Mariæ Virginis
 languages: Latin
 section count: 80
-warning count: 1
-
-# warnings
-#0 [warn] resolve-missing-section — Reference did not resolve in language 'Latin' after fallback chain exhausted. {language=Latin, path=horas/Latin/Sancti/12-08, section=Responsory9, selector=missing}
+warning count: 0
 
 [section #0 type=other slot=incipit reference=horas/Ordinarium/Matutinum#Incipit languages=Latin]
   Latin: rubric("secreto")

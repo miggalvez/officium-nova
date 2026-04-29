@@ -223,7 +223,7 @@ describeIfUpstream('day route integration', () => {
       firstLineText(body, 'matins', 'hymn', 'la')
     );
     expect(firstLineText(body, 'matins', 'responsory', 'en')).toBe(
-      'Blessed is the man that feareth the Lord, alleluia.'
+      'Thy streets, O Jerusalem, shall bel paved with pure gold, Alleluia, and the song of joy shall be sung in thee. Alleluia.'
     );
     expect(firstLineText(body, 'matins', 'lectio-brevis', 'en')).toContain(
       'Lesson from the book of Revelation'

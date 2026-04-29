@@ -4,11 +4,10 @@ hour: matins
 celebration: S. Joseph Sponsi B.M.V. Confessoris
 languages: Latin
 section count: 79
-warning count: 2
+warning count: 1
 
 # warnings
 #0 [warn] resolve-missing-section — Reference did not resolve in language 'Latin' after fallback chain exhausted. {language=Latin, path=horas/Latin/Tempora/Quad5-2, section=Lectio9}
-#1 [warn] resolve-missing-section — Reference did not resolve in language 'Latin' after fallback chain exhausted. {language=Latin, path=horas/Latin/Sancti/03-19, section=Responsory9, selector=missing}
 
 [section #0 type=other slot=incipit reference=horas/Ordinarium/Matutinum#Incipit languages=Latin]
   Latin: rubric("secreto")
