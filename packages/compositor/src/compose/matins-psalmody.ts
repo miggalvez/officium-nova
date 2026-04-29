@@ -125,6 +125,7 @@ export function appendExpandedPsalmWrapper(
       language: args.language,
       langfb: args.langfb,
       season: args.context.season,
+      conditionContext: args.context,
       seen: new Set(),
       maxDepth: args.maxDepth,
       ...(args.onWarning ? { onWarning: args.onWarning } : {})
@@ -634,6 +635,7 @@ function resolveFirstPsalmVerseText(
     language,
     langfb: args.options.langfb,
     season: args.context.season,
+    conditionContext: args.context,
     seen: new Set(),
     maxDepth: MAX_DEFERRED_DEPTH,
     ...(args.onWarning ? { onWarning: args.onWarning } : {})

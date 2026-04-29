@@ -169,6 +169,7 @@ describe('createRubricalEngine', () => {
     expect(summary.temporal.feastRef.path).toBe('Tempora/Pasc3-2Feria');
     expect(summary.celebration.feastRef.path).toBe('Sancti/04-28');
     expect(summary.celebration.feastRef.title).toBe('S. Pauli a Cruce Confessoris');
+    expect(summary.celebration.rank.name).toBe('III. classis');
     expect(summary.celebration.rank.classSymbol).toBe('III');
     expect(summary.commemorations.map((entry) => entry.feastRef.path)).toEqual([]);
   });

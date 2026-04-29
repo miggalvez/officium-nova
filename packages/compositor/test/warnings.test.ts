@@ -165,6 +165,69 @@ describe('expandDeferredNodes warnings', () => {
     expect(warnings[0]!.code).toBe('deferred-depth-exhausted');
     expect(warnings[0]!.severity).toBe('warn');
   });
+
+  it('does not leak warnings from formula candidate probes when a later alias resolves', () => {
+    const corpus = new InMemoryTextIndex();
+    corpus.addFile(
+      makeFile('horas/Latin/Psalterium/Common/Rubricae', 'Known rubric', [
+        { type: 'rubric', value: 'known' }
+      ])
+    );
+    const warnings: ComposeWarning[] = [];
+
+    const result = expandDeferredNodes(
+      [{ type: 'formulaRef', name: 'rubrica Known rubric' }],
+      {
+        index: corpus,
+        language: 'Latin',
+        season: 'time-after-pentecost',
+        seen: new Set(),
+        maxDepth: 4,
+        onWarning: (w) => warnings.push(w)
+      }
+    );
+
+    expect(result).toEqual([{ type: 'rubric', value: 'known' }]);
+    expect(warnings).toEqual([]);
+  });
+
+  it('does not expand false conditional branches before condition flattening', () => {
+    const corpus = new InMemoryTextIndex();
+    const warnings: ComposeWarning[] = [];
+
+    const result = expandDeferredNodes(
+      [
+        {
+          type: 'conditional',
+          condition: {
+            expression: {
+              type: 'match',
+              subject: 'rubrica',
+              predicate: 'altovadensis'
+            }
+          },
+          content: [{ type: 'formulaRef', name: 'Missing rubric' }]
+        }
+      ],
+      {
+        index: corpus,
+        language: 'Latin',
+        season: 'time-after-pentecost',
+        conditionContext: {
+          date: { year: 2026, month: 4, day: 28 },
+          dayOfWeek: 2,
+          season: 'eastertide',
+          version: stubVersion
+        },
+        seen: new Set(),
+        maxDepth: 4,
+        onWarning: (w) => warnings.push(w)
+      }
+    );
+
+    expect(result).toEqual([]);
+    expect(warnings).toEqual([]);
+  });
 });
 
 // ---------------------------------------------------------------------------

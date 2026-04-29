@@ -151,6 +151,7 @@ export function appendExpandedPsalmWrapper(
       language: args.language,
       langfb: args.langfb,
       season: args.context.season,
+      conditionContext: args.context,
       seen: args.seen,
       maxDepth: args.maxDepth,
       ...(args.onWarning ? { onWarning: args.onWarning } : {})

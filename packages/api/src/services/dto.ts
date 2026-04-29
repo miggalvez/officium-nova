@@ -236,8 +236,8 @@ export function toOfficeHourResponse(input: {
       version: input.version.handle
     }),
     warnings: {
-      rubrical: input.summary.warnings,
-      composition: input.composed.warnings
+      rubrical: publicRubricalWarnings(input.summary.warnings),
+      composition: publicCompositionWarnings(input.composed.warnings)
     },
     meta: {
       contentVersion: input.contentVersion,
@@ -268,7 +268,7 @@ export function toDaySummaryDto(summary: DayOfficeSummary): DaySummaryDto {
       winner: summary.concurrence.winner
     },
     candidates: summary.candidates.map(toCandidateDto),
-    warnings: summary.warnings
+    warnings: publicRubricalWarnings(summary.warnings)
   };
 }
 
@@ -298,7 +298,7 @@ export function toOfficeDayResponse(input: {
       orthography: input.orthography,
       version: input.version.handle
     });
-    composition[hour] = composed.warnings;
+    composition[hour] = publicCompositionWarnings(composed.warnings);
   }
 
   return {
@@ -319,7 +319,7 @@ export function toOfficeDayResponse(input: {
     summary: toDaySummaryDto(input.summary),
     hours,
     warnings: {
-      rubrical: input.summary.warnings,
+      rubrical: publicRubricalWarnings(input.summary.warnings),
       composition
     },
     meta: {
@@ -369,7 +369,7 @@ function toCalendarDayDto(summary: DayOfficeSummary): CalendarDayDto {
     season: summary.temporal.season,
     celebration: toCelebrationDto(summary.celebration),
     commemorations: summary.commemorations.map(toCommemorationDto),
-    warnings: summary.warnings
+    warnings: publicRubricalWarnings(summary.warnings)
   };
 }
 
@@ -385,7 +385,7 @@ export function toPublicComposedHour(input: {
     celebration: input.composed.celebration,
     languages: input.selection.publicTags,
     orthography: input.orthography,
-    warnings: input.composed.warnings,
+    warnings: publicCompositionWarnings(input.composed.warnings),
     sections: input.composed.sections.map((section) => ({
       type: section.type,
       slot: section.slot,
@@ -535,4 +535,16 @@ function hasErrorWarnings(
     rubrical.some((warning) => warning.severity === 'error') ||
     composition.some((warning) => warning.severity === 'error')
   );
+}
+
+function publicRubricalWarnings(
+  warnings: readonly RubricalWarning[]
+): readonly RubricalWarning[] {
+  return warnings.filter((warning) => warning.severity !== 'info');
+}
+
+function publicCompositionWarnings(
+  warnings: readonly ComposeWarning[]
+): readonly ComposeWarning[] {
+  return warnings.filter((warning) => warning.severity !== 'info');
 }

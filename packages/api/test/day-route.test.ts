@@ -124,6 +124,34 @@ describeIfUpstream('day route integration', () => {
     expect(Object.keys(body.hours)).toEqual(body.request.hours);
   }, 120_000);
 
+  it('returns the clean 1960 office for St Paul of the Cross on 2026-04-28', async () => {
+    const app = await fullApp();
+    const response = await app.inject(
+      '/api/v1/days/2026-04-28?rubrics=1960&hours=lauds&lang=la,en'
+    );
+
+    expect(response.statusCode).toBe(200);
+    const body = response.json();
+    expect(body.summary.celebration).toMatchObject({
+      feast: {
+        path: 'Sancti/04-28',
+        title: 'S. Pauli a Cruce Confessoris'
+      },
+      rank: {
+        name: 'III. classis',
+        classSymbol: 'III'
+      }
+    });
+    expect(body.summary.temporal.feast).toMatchObject({
+      path: 'Tempora/Pasc3-2Feria',
+      title: 'Feria Tertia infra Hebdomadam III post Octavam Paschæ'
+    });
+    expect(body.summary.warnings).toEqual([]);
+    expect(body.warnings.rubrical).toEqual([]);
+    expect(body.warnings.composition.lauds).toEqual([]);
+    expect(body.hours.lauds.warnings).toEqual([]);
+  }, 120_000);
+
   it('resolves the day summary once for multiple selected hours', async () => {
     const context = await buildApiContext(
       loadApiConfig({

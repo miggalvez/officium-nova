@@ -4,12 +4,7 @@ hour: sext
 celebration: Die Octavæ Nativitatis Domini
 languages: Latin
 section count: 8
-warning count: 3
-
-# warnings
-#0 [warn] resolve-missing-section — Reference did not resolve in language 'Latin' after fallback chain exhausted. {language=Latin, path=horas/Latin/Psalterium/Common/Rubricae, section=rubrica Secreto}
-#1 [warn] resolve-missing-section — Reference did not resolve in language 'Latin' after fallback chain exhausted. {language=Latin, path=horas/Latin/Psalterium/Common/Rubricae, section=rubrica Clara voce}
-#2 [warn] resolve-missing-section — Reference did not resolve in language 'Latin' after fallback chain exhausted. {language=Latin, path=horas/Latin/Psalterium/Common/Rubricae, section=rubrica Incipit}
+warning count: 0
 
 [section #0 type=other slot=incipit reference=horas/Ordinarium/Minor#Incipit languages=Latin]
   Latin: [V.] text("Deus + in adjutórium meum inténde.")

@@ -33,6 +33,7 @@ export function resolveGloriaOmittiturReplacement(
     language: args.language,
     langfb: args.langfb,
     season: args.context.season,
+    conditionContext: args.context,
     seen: new Set(),
     maxDepth: args.maxDepth,
     ...(args.onWarning ? { onWarning: args.onWarning } : {})

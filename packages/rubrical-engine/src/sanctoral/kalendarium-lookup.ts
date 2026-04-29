@@ -60,7 +60,10 @@ export function sanctoralCandidates(
             {
               ...definition.rawRank,
               ...(metadata.classWeight !== undefined
-                ? { classWeight: metadata.classWeight }
+                ? {
+                    classWeight: metadata.classWeight,
+                    ...rankNameFromKalendariumClass(metadata.classWeight, version)
+                  }
                 : {})
             },
             version.policy,
@@ -93,6 +96,26 @@ function kalendariumMetadataAt(
       ? { classWeight: entry.alternateClassWeights[alternateIndex] }
       : {})
   };
+}
+
+function rankNameFromKalendariumClass(
+  classWeight: number,
+  version: ResolvedVersion
+): { readonly name: string } | {} {
+  if (version.policy.name !== 'rubrics-1960') {
+    return {};
+  }
+
+  if (classWeight >= 6) {
+    return { name: 'I. classis' };
+  }
+  if (classWeight >= 5) {
+    return { name: 'II. classis' };
+  }
+  if (classWeight >= 2) {
+    return { name: 'III. classis' };
+  }
+  return { name: 'IV. classis' };
 }
 
 function lookupEntriesForDate(

@@ -472,6 +472,7 @@ function composeSlot(args: ComposeSlotArgs): Section | undefined {
             language: lang,
             langfb: args.options.langfb,
             season: args.context.season,
+            conditionContext: args.context,
             seen: new Set(),
             maxDepth: MAX_DEFERRED_DEPTH,
             ...(args.onWarning ? { onWarning: args.onWarning } : {})

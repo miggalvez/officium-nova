@@ -208,6 +208,7 @@ function composeInvitatorium(
       language,
       langfb: args.options.langfb,
       season: args.context.season,
+      conditionContext: args.context,
       seen: new Set(),
       maxDepth: MAX_DEFERRED_DEPTH,
       ...(args.onWarning ? { onWarning: args.onWarning } : {})
@@ -613,6 +614,7 @@ function composeMergedSlot(
         language: lang,
         langfb: args.options.langfb,
         season: args.context.season,
+        conditionContext: args.context,
         seen: new Set(),
         maxDepth: MAX_DEFERRED_DEPTH,
         ...(args.onWarning ? { onWarning: args.onWarning } : {})

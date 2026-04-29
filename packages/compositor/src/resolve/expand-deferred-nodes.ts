@@ -1,5 +1,9 @@
 import type { TextContent, TextIndex } from '@officium-novum/parser';
-import type { TextReference } from '@officium-novum/rubrical-engine';
+import {
+  conditionMatches,
+  type ConditionEvalContext,
+  type TextReference
+} from '@officium-novum/rubrical-engine';
 
 import type { ComposeWarning } from '../types/composed-hour.js';
 import { resolveReference } from './reference-resolver.js';
@@ -14,6 +18,7 @@ export interface DeferredNodeContext {
   readonly language: string;
   readonly langfb?: string;
   readonly season?: string;
+  readonly conditionContext?: ConditionEvalContext;
   readonly seen: ReadonlySet<string>;
   readonly maxDepth: number;
   /**
@@ -126,6 +131,12 @@ export function expandDeferredNodes(
         break;
       }
       case 'conditional': {
+        if (
+          context.conditionContext &&
+          !conditionMatches(node.condition, context.conditionContext)
+        ) {
+          break;
+        }
         const expandedChildren = expandDeferredNodes(node.content, context);
         out.push({
           type: 'conditional',
@@ -149,9 +160,19 @@ function expandNamedSection(
   pathCandidates: readonly string[],
   context: DeferredNodeContext
 ): readonly TextContent[] | undefined {
+  const candidateWarnings: ComposeWarning[] = [];
+  const probeWarning = context.onWarning
+    ? (warning: ComposeWarning): void => {
+        candidateWarnings.push(warning);
+      }
+    : undefined;
+
   for (const path of pathCandidates) {
     for (const section of sectionCandidates) {
-      const expanded = expandReference({ path, section }, context);
+      const expanded = expandReference(
+        { path, section },
+        probeWarning ? { ...context, onWarning: probeWarning } : context
+      );
       // Treat empty resolutions as fallthrough so Latin "shadow" sections
       // (e.g. `Revtrans[Gloria omittitur]`) don't mask downstream paths
       // that carry the real localized text.
@@ -159,6 +180,9 @@ function expandNamedSection(
         return expanded;
       }
     }
+  }
+  for (const warning of candidateWarnings) {
+    context.onWarning?.(warning);
   }
   return undefined;
 }
