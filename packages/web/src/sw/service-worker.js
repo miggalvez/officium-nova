@@ -40,7 +40,7 @@ self.addEventListener('fetch', (event) => {
   const url = new URL(request.url);
 
   if (url.pathname.startsWith('/api/v1/')) {
-    event.respondWith(staleWhileRevalidate(request, API_CACHE));
+    event.respondWith(networkFirstApi(request, API_CACHE));
     return;
   }
 
@@ -89,7 +89,7 @@ async function prefetch(urls) {
   await Promise.all(
     urls.map(async (url) => {
       try {
-        const response = await fetch(url);
+        const response = await fetch(url, { cache: 'reload' });
         if (response.ok) {
           await cache.put(url, response.clone());
           cached += 1;
@@ -104,18 +104,18 @@ async function prefetch(urls) {
   return { cached, failed };
 }
 
-async function staleWhileRevalidate(request, cacheName) {
+async function networkFirstApi(request, cacheName) {
   const cache = await caches.open(cacheName);
-  const cached = await cache.match(request);
-  const network = fetch(request)
-    .then((response) => {
-      if (response.ok) {
-        cache.put(request, response.clone()).catch(() => undefined);
-      }
-      return response;
-    })
-    .catch(() => cached || Response.error());
-  return cached || network;
+  try {
+    const response = await fetch(request);
+    if (response.ok) {
+      cache.put(request, response.clone()).catch(() => undefined);
+    }
+    return response;
+  } catch {
+    const cached = await cache.match(request);
+    return cached || Response.error();
+  }
 }
 
 async function cacheFirst(request, cacheName) {

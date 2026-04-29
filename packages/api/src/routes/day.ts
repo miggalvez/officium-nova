@@ -84,7 +84,7 @@ export async function registerDayRoutes(app: FastifyInstance): Promise<void> {
     });
     const cachedEtag = dayEtags.get(resolved.cacheKey);
     if (cachedEtag) {
-      applyCacheHeaders(reply, cachedEtag);
+      applyCacheHeaders(reply, cachedEtag, resolved.cacheKey.contentVersion);
       if (requestMatchesEtag(request, cachedEtag)) {
         return reply.code(304).send();
       }
@@ -101,7 +101,7 @@ export async function registerDayRoutes(app: FastifyInstance): Promise<void> {
       body
     });
     dayEtags.set(resolved.cacheKey, etag);
-    applyCacheHeaders(reply, etag);
+    applyCacheHeaders(reply, etag, body.meta.contentVersion);
     if (requestMatchesEtag(request, etag)) {
       return reply.code(304).send();
     }

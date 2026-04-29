@@ -13,6 +13,7 @@ import type { TextOrthographyProfile } from './orthography-profile.js';
 
 export const DETERMINISTIC_CACHE_CONTROL =
   'public, max-age=86400, stale-while-revalidate=604800';
+export const UNVERSIONED_CACHE_CONTROL = 'no-store';
 
 export interface CanonicalOfficeKey {
   readonly route: 'office';
@@ -204,8 +205,16 @@ export function buildDeterministicEtag(input: {
   return `"v1:${etagSegment(input.key.contentVersion)}:${requestHash}:${bodyHash}"`;
 }
 
-export function applyCacheHeaders(reply: FastifyReply, etag: string): void {
-  reply.header('Cache-Control', DETERMINISTIC_CACHE_CONTROL);
+export function cacheControlForContentVersion(contentVersion: string): string {
+  return contentVersion === 'dev' ? UNVERSIONED_CACHE_CONTROL : DETERMINISTIC_CACHE_CONTROL;
+}
+
+export function applyCacheHeaders(
+  reply: FastifyReply,
+  etag: string,
+  contentVersion: string
+): void {
+  reply.header('Cache-Control', cacheControlForContentVersion(contentVersion));
   reply.header('ETag', etag);
 }
 

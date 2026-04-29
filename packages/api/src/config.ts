@@ -24,9 +24,39 @@ export function loadApiConfig(env: NodeJS.ProcessEnv = process.env): ApiConfig {
     corpusPath: env.OFFICIUM_CORPUS_PATH
       ? resolve(env.OFFICIUM_CORPUS_PATH)
       : resolve(REPOSITORY_ROOT, 'upstream/web/www'),
-    contentVersion: env.OFFICIUM_CONTENT_VERSION ?? 'dev',
+    contentVersion: resolveContentVersion(env),
     logger: parseBoolean(env.OFFICIUM_API_LOGGER)
   };
+}
+
+export function resolveContentVersion(env: NodeJS.ProcessEnv = process.env): string {
+  const explicit = cleanEnvValue(env.OFFICIUM_CONTENT_VERSION);
+  if (explicit) {
+    return explicit;
+  }
+
+  const commitSha =
+    cleanEnvValue(env.RAILWAY_GIT_COMMIT_SHA) ??
+    cleanEnvValue(env.VERCEL_GIT_COMMIT_SHA) ??
+    cleanEnvValue(env.GIT_COMMIT_SHA) ??
+    cleanEnvValue(env.SOURCE_VERSION);
+  if (commitSha) {
+    return `git:${commitSha.slice(0, 12)}`;
+  }
+
+  const deploymentId =
+    cleanEnvValue(env.RAILWAY_DEPLOYMENT_ID) ??
+    cleanEnvValue(env.VERCEL_DEPLOYMENT_ID);
+  if (deploymentId) {
+    return `deploy:${deploymentId}`;
+  }
+
+  return 'dev';
+}
+
+function cleanEnvValue(value: string | undefined): string | undefined {
+  const trimmed = value?.trim();
+  return trimmed ? trimmed : undefined;
 }
 
 function parsePort(value: string | undefined): number {

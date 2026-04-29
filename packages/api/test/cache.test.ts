@@ -5,11 +5,13 @@ import {
   buildCanonicalCalendarKey,
   buildCanonicalDayKey,
   buildDeterministicEtag,
+  cacheControlForContentVersion,
   canonicalCalendarPath,
   canonicalDayPath,
   canonicalOfficePath,
   createEtagMemoryCache,
   DETERMINISTIC_CACHE_CONTROL,
+  UNVERSIONED_CACHE_CONTROL,
   requestMatchesEtag,
   stableJsonHash,
   stableJsonStringify
@@ -137,5 +139,11 @@ describe('cache service', () => {
     expect(DETERMINISTIC_CACHE_CONTROL).toBe(
       'public, max-age=86400, stale-while-revalidate=604800'
     );
+    expect(cacheControlForContentVersion('git:924d8a2f9adb')).toBe(DETERMINISTIC_CACHE_CONTROL);
+  });
+
+  it('does not publicly cache unversioned development content', () => {
+    expect(UNVERSIONED_CACHE_CONTROL).toBe('no-store');
+    expect(cacheControlForContentVersion('dev')).toBe(UNVERSIONED_CACHE_CONTROL);
   });
 });
