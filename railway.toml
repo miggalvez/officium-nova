@@ -1,6 +1,6 @@
 [build]
 builder = "RAILPACK"
-buildCommand = "git clone --depth 1 https://github.com/DivinumOfficium/divinum-officium.git upstream && pnpm -r build"
+buildCommand = "git init upstream && git -C upstream remote add origin https://github.com/DivinumOfficium/divinum-officium.git && git -C upstream fetch --depth 1 origin 3c96ef079a4af17f9268f2c755f95d690d60da52 && git -C upstream checkout FETCH_HEAD && pnpm -r build"
 
 [deploy]
 startCommand = "pnpm -C packages/api start"
