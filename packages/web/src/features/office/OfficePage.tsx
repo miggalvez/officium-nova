@@ -9,6 +9,7 @@ import { WarningBanner } from '../../components/WarningBanner';
 import { ReportButton } from '../report/ReportButton';
 import { useSettings } from '../settings/settings-store';
 import { useVersions } from '../settings/use-versions';
+import { useStatus } from '../status/use-status';
 import type { OfficeRoute } from '../../routes/paths';
 import { OfficeHeader } from './OfficeHeader';
 import { HourNav } from './HourNav';
@@ -24,11 +25,13 @@ export interface OfficePageProps {
 export function OfficePage({ route, currentRoutePath }: OfficePageProps): JSX.Element {
   const settings = useSettings();
   const versions = useVersions();
+  const status = useStatus();
   const [data, setData] = useState<OfficeHourResponse | undefined>(undefined);
   const [error, setError] = useState<ApiError | Error | undefined>(undefined);
   const [loading, setLoading] = useState(true);
   const [caching, setCaching] = useState(false);
   const [cached, setCached] = useState(false);
+  const [cacheError, setCacheError] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -97,13 +100,24 @@ export function OfficePage({ route, currentRoutePath }: OfficePageProps): JSX.El
       ? {
           kind: 'office-hour',
           contentVersion: data.meta.contentVersion,
+          ...(status?.content.upstreamSha ? { upstreamSha: status.content.upstreamSha } : {}),
           ...(data.meta.canonicalPath ? { canonicalPath: data.meta.canonicalPath } : {}),
           warnings: [...data.warnings.rubrical, ...data.warnings.composition],
           quality: data.meta.quality ?? 'unknown'
         }
       : error instanceof ApiError
-      ? { kind: 'error', quality: 'unknown' }
-      : { kind: 'unknown', quality: 'unknown' }
+      ? {
+          kind: 'error',
+          ...(status?.content.contentVersion ? { contentVersion: status.content.contentVersion } : {}),
+          ...(status?.content.upstreamSha ? { upstreamSha: status.content.upstreamSha } : {}),
+          quality: 'unknown'
+        }
+      : {
+          kind: 'unknown',
+          ...(status?.content.contentVersion ? { contentVersion: status.content.contentVersion } : {}),
+          ...(status?.content.upstreamSha ? { upstreamSha: status.content.upstreamSha } : {}),
+          quality: 'unknown'
+        }
   };
 
   return (
@@ -126,6 +140,7 @@ export function OfficePage({ route, currentRoutePath }: OfficePageProps): JSX.El
             disabled={caching}
             onClick={async () => {
               setCaching(true);
+              setCacheError(undefined);
               try {
                 await cacheWeek({
                   start: route.date,
@@ -135,6 +150,8 @@ export function OfficePage({ route, currentRoutePath }: OfficePageProps): JSX.El
                 });
                 setCached(true);
                 window.setTimeout(() => setCached(false), 3_000);
+              } catch (err) {
+                setCacheError(err instanceof Error ? err.message : 'Could not cache this week.');
               } finally {
                 setCaching(false);
               }
@@ -142,6 +159,9 @@ export function OfficePage({ route, currentRoutePath }: OfficePageProps): JSX.El
           >
             {caching ? 'Caching…' : cached ? 'Cached week' : 'Cache this week'}
           </button>
+          {cacheError ? (
+            <span className="muted" role="status">{cacheError}</span>
+          ) : null}
           <div className="toolbar__spacer" />
           <ReportButton context={reportContext} />
         </div>
@@ -158,6 +178,7 @@ export function OfficePage({ route, currentRoutePath }: OfficePageProps): JSX.El
             languages={route.languages}
             displayMode={route.displayMode}
             reviewerMode={settings.reviewerMode}
+            meta={data.meta}
           />
         </>
       ) : null}

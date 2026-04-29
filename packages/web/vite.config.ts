@@ -1,6 +1,8 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { execFileSync } from 'node:child_process';
+import { readFileSync } from 'node:fs';
+import type { Plugin } from 'vite';
 
 const buildSha = (() => {
   try {
@@ -13,7 +15,7 @@ const buildSha = (() => {
 const buildDate = new Date().toISOString();
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), serviceWorkerPlugin()],
   define: {
     __OFFICIUM_BUILD_SHA__: JSON.stringify(buildSha),
     __OFFICIUM_BUILD_DATE__: JSON.stringify(buildDate)
@@ -34,3 +36,40 @@ export default defineConfig({
     css: false
   }
 });
+
+function serviceWorkerPlugin(): Plugin {
+  return {
+    name: 'officium-service-worker',
+    apply: 'build',
+    generateBundle(_, bundle) {
+      const appShellAssets = new Set<string>([
+        '/',
+        '/index.html',
+        '/manifest.webmanifest',
+        '/favicon.svg'
+      ]);
+      for (const item of Object.values(bundle)) {
+        if (item.type === 'chunk' || item.type === 'asset') {
+          appShellAssets.add(`/${item.fileName}`);
+        }
+      }
+
+      const template = readFileSync(new URL('./src/sw/service-worker.js', import.meta.url), 'utf8');
+      const source = template
+        .replace(
+          '__OFFICIUM_APP_SHELL_VERSION__',
+          JSON.stringify(`${buildSha}-${buildDate}`)
+        )
+        .replace(
+          '__OFFICIUM_APP_SHELL_ASSETS__',
+          JSON.stringify([...appShellAssets].sort(), null, 2)
+        );
+
+      this.emitFile({
+        type: 'asset',
+        fileName: 'service-worker.js',
+        source
+      });
+    }
+  };
+}

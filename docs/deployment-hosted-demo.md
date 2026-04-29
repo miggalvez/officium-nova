@@ -82,6 +82,9 @@ must:
 3. Reverse-proxy `/api/*` to the API service.
 4. Serve `/service-worker.js` with `Cache-Control: no-cache` (or `max-age=0`) so users
    always pick up new SW versions.
+5. Send a restrictive production CSP. For same-origin API deployments, start with:
+   `default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; worker-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'`.
+   If the frontend uses a separate API origin, add that origin to `connect-src`.
 
 ### Nginx example
 
@@ -90,8 +93,9 @@ server {
   listen 443 ssl http2;
   server_name demo.example.org;
 
-  root /var/www/officium/dist;
-  index index.html;
+	  root /var/www/officium/dist;
+	  index index.html;
+	  add_header Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; worker-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'" always;
 
   # Hashed assets: cache forever
   location ^~ /assets/ {
@@ -125,7 +129,8 @@ server {
 
 ```caddyfile
 demo.example.org {
-  root * /var/www/officium/dist
+	  root * /var/www/officium/dist
+	  header Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; worker-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'"
 
   @assets path /assets/*
   header @assets Cache-Control "public, max-age=31536000, immutable"

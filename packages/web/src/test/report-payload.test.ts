@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest';
 import type { DemoEnvironment } from '../app/env';
 import {
   buildReportPayload,
+  buildPrivateEmailReportPayload,
   redactReviewer,
   validateReport,
   type ReportPayloadInput
@@ -95,6 +96,26 @@ describe('buildReportPayload', () => {
     expect(payload.generatedAt).toBe('2026-04-28T18:30:00.000Z');
   });
 
+  it('captures structured calendar report date metadata', () => {
+    const payload = buildReportPayload({
+      ...baseInput,
+      context: {
+        ...baseInput.context,
+        request: {
+          ...baseInput.context.request,
+          date: '2026-04-29',
+          year: 2026,
+          month: 4,
+          hour: undefined
+        },
+        response: { kind: 'calendar-month', quality: 'unknown' }
+      }
+    });
+    expect(payload.request.date).toBe('2026-04-29');
+    expect(payload.request.year).toBe(2026);
+    expect(payload.request.month).toBe(4);
+  });
+
   it('does not require contact details', () => {
     const payload = buildReportPayload(baseInput);
     expect(payload.reviewer.contact).toBeUndefined();
@@ -130,6 +151,27 @@ describe('buildReportPayload', () => {
     expect(payload.reviewer.name).toBe('Fr. N');
     expect(payload.reviewer.contact).toBeUndefined();
     expect(payload.reviewer.affiliation).toBe('diocesan priest');
+  });
+
+  it('preserves contact details only for private email payloads', () => {
+    const publicPayload = buildReportPayload({
+      ...baseInput,
+      reviewer: {
+        publicAttribution: 'name-ok',
+        name: 'Fr. N',
+        contact: 'fr.n@example.org'
+      }
+    });
+    const privatePayload = buildPrivateEmailReportPayload({
+      ...baseInput,
+      reviewer: {
+        publicAttribution: 'name-ok',
+        name: 'Fr. N',
+        contact: 'fr.n@example.org'
+      }
+    });
+    expect(publicPayload.reviewer.contact).toBeUndefined();
+    expect(privatePayload.reviewer.contact).toBe('fr.n@example.org');
   });
 });
 
@@ -198,11 +240,15 @@ describe('buildGithubIssueLink', () => {
 
 describe('buildMailtoLink', () => {
   it('builds a mailto: with subject + summary body', () => {
-    const payload = buildReportPayload(baseInput);
+    const payload = buildPrivateEmailReportPayload({
+      ...baseInput,
+      reviewer: { publicAttribution: 'name-ok', name: 'Fr. N', contact: 'fr.n@example.org' }
+    });
     const link = buildMailtoLink({ to: 'reports@example.org', payload });
     expect(link.startsWith('mailto:')).toBe(true);
     expect(link).toContain('subject=');
     expect(link).toContain('body=');
+    expect(decodeURIComponent(link)).toContain('fr.n@example.org');
   });
 });
 

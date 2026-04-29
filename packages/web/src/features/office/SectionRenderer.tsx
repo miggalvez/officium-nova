@@ -32,6 +32,7 @@ export function SectionRenderer({
           line={line}
           languages={languages}
           displayMode={displayMode}
+          reviewerMode={reviewerMode}
         />
       ))}
     </section>

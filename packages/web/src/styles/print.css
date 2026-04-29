@@ -30,13 +30,6 @@
     font-style: italic;
   }
 
-  .run-rubric::before {
-    content: '\2014 ';
-  }
-  .run-rubric::after {
-    content: '';
-  }
-
   a[href]::after {
     content: '';
   }

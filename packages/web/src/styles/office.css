@@ -87,14 +87,6 @@
   font-weight: 500;
 }
 
-.run-rubric::before {
-  content: '\201C';
-}
-
-.run-rubric::after {
-  content: '\201D';
-}
-
 .run-citation {
   color: var(--color-muted);
   font-size: 0.85em;

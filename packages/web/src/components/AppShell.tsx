@@ -15,6 +15,7 @@ export interface AppShellProps {
 export function AppShell({ children }: AppShellProps): JSX.Element {
   const env = getEnvironment();
   const settings = useSettings();
+  const homeLink = useLink('/');
   const today = todayIso();
   const officeHref = buildOfficeRoute({
     date: today,
@@ -46,14 +47,14 @@ export function AppShell({ children }: AppShellProps): JSX.Element {
       </div>
       <header className="app-header" role="banner">
         <div className="app-header__inner">
-          <h1 className="app-header__title">Officium Novum</h1>
+          <a {...homeLink} className="app-header__title">Officium Novum</a>
           <nav className="app-header__nav" aria-label="Primary">
-            <NavLink href={officeHref}>Office</NavLink>
-            <NavLink href={dayHref}>Day</NavLink>
-            <NavLink href={calendarHref}>Calendar</NavLink>
-            <NavLink href="/settings">Settings</NavLink>
-            <NavLink href="/status">Status</NavLink>
-            <NavLink href="/about">About</NavLink>
+            <NavLink href={officeHref} activePrefix="/office">Office</NavLink>
+            <NavLink href={dayHref} activePrefix="/day">Day</NavLink>
+            <NavLink href={calendarHref} activePrefix="/calendar">Calendar</NavLink>
+            <NavLink href="/settings" activePrefix="/settings">Settings</NavLink>
+            <NavLink href="/status" activePrefix="/status">Status</NavLink>
+            <NavLink href="/about" activePrefix="/about">About</NavLink>
           </nav>
         </div>
       </header>
@@ -69,11 +70,19 @@ export function AppShell({ children }: AppShellProps): JSX.Element {
   );
 }
 
-function NavLink({ href, children }: { href: string; children: ReactNode }): JSX.Element {
+function NavLink({
+  href,
+  activePrefix,
+  children
+}: {
+  href: string;
+  activePrefix: string;
+  children: ReactNode;
+}): JSX.Element {
   const { location } = useRouter();
   const link = useLink(href);
-  const target = href.split('?')[0];
-  const current = location.pathname.startsWith(target ?? '/__never__');
+  const current =
+    location.pathname === activePrefix || location.pathname.startsWith(`${activePrefix}/`);
   return (
     <a {...link} aria-current={current ? 'page' : undefined}>
       {children}

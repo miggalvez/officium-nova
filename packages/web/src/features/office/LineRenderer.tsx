@@ -5,9 +5,15 @@ export interface LineRendererProps {
   readonly line: PublicComposedLineDto;
   readonly languages: readonly PublicLanguageTag[];
   readonly displayMode: 'parallel' | 'sequential';
+  readonly reviewerMode: boolean;
 }
 
-export function LineRenderer({ line, languages, displayMode }: LineRendererProps): JSX.Element {
+export function LineRenderer({
+  line,
+  languages,
+  displayMode,
+  reviewerMode
+}: LineRendererProps): JSX.Element {
   const visible = languages.filter((lang) => Boolean(line.texts[lang]?.length));
   const mode: 'parallel' | 'single' =
     displayMode === 'sequential' || visible.length <= 1 ? 'single' : 'parallel';
@@ -26,6 +32,7 @@ export function LineRenderer({ line, languages, displayMode }: LineRendererProps
             runs={line.texts[lang] ?? []}
             marker={line.marker}
             showLabel={visible.length > 1}
+            reviewerMode={reviewerMode}
           />
         ))}
       </div>
@@ -41,6 +48,7 @@ export function LineRenderer({ line, languages, displayMode }: LineRendererProps
           runs={line.texts[lang] ?? []}
           marker={line.marker}
           showLabel={true}
+          reviewerMode={reviewerMode}
         />
       ))}
     </div>
@@ -51,12 +59,14 @@ function LangCell({
   lang,
   runs,
   marker,
-  showLabel
+  showLabel,
+  reviewerMode
 }: {
   lang: PublicLanguageTag;
   runs: readonly ComposedRunDto[];
   marker?: string;
   showLabel: boolean;
+  reviewerMode: boolean;
 }): JSX.Element {
   return (
     <div className="office__lang-cell" data-lang={lang} lang={lang}>
@@ -65,7 +75,7 @@ function LangCell({
       ) : null}
       {marker ? <span className="office__marker">{marker}</span> : null}
       {runs.map((run, index) => (
-        <RunRenderer key={index} run={run} />
+        <RunRenderer key={index} run={run} reviewerMode={reviewerMode} />
       ))}
     </div>
   );

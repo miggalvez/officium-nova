@@ -2,9 +2,10 @@ import type { ComposedRunDto } from '../../api/types';
 
 export interface RunRendererProps {
   readonly run: ComposedRunDto;
+  readonly reviewerMode: boolean;
 }
 
-export function RunRenderer({ run }: RunRendererProps): JSX.Element {
+export function RunRenderer({ run, reviewerMode }: RunRendererProps): JSX.Element | null {
   switch (run.type) {
     case 'text':
       return <span>{run.value}</span>;
@@ -13,11 +14,17 @@ export function RunRenderer({ run }: RunRendererProps): JSX.Element {
     case 'citation':
       return <span className="run-citation">{run.value}</span>;
     case 'unresolved-macro':
-      return <span className="run-unresolved" title="Unresolved macro">{`&${run.name}`}</span>;
+      return reviewerMode
+        ? <span className="run-unresolved" title="Unresolved macro">{`&${run.name}`}</span>
+        : null;
     case 'unresolved-formula':
-      return <span className="run-unresolved" title="Unresolved formula">{`$${run.name}`}</span>;
+      return reviewerMode
+        ? <span className="run-unresolved" title="Unresolved formula">{`$${run.name}`}</span>
+        : null;
     case 'unresolved-reference':
-      return <span className="run-unresolved" title="Unresolved reference">{'@?'}</span>;
+      return reviewerMode
+        ? <span className="run-unresolved" title="Unresolved reference">{'@?'}</span>
+        : null;
     default: {
       const _exhaustive: never = run;
       void _exhaustive;

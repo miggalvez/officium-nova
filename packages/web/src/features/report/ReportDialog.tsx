@@ -7,6 +7,7 @@ import { buildMailtoLink } from './email';
 import { formatReportAsYaml } from './report-format';
 import {
   buildReportPayload,
+  buildPrivateEmailReportPayload,
   validateReport,
   type ReportContextInput,
   type ReportPayload,
@@ -90,6 +91,7 @@ export function ReportDialog({ open, context, onClose }: ReportDialogProps): JSX
   const [issues, setIssues] = useState<readonly ReportValidationIssue[]>([]);
   const [copied, setCopied] = useState<'json' | 'yaml' | undefined>(undefined);
   const env = getEnvironment();
+  const contextKey = `${context.route}|${context.request.apiUrl}`;
 
   useEffect(() => {
     const node = dialogRef.current;
@@ -106,6 +108,14 @@ export function ReportDialog({ open, context, onClose }: ReportDialogProps): JSX
       node.close();
     }
   }, [open]);
+
+  useEffect(() => {
+    if (open) {
+      setForm(INITIAL);
+      setIssues([]);
+      setCopied(undefined);
+    }
+  }, [open, contextKey]);
 
   if (!open) {
     return null;
@@ -135,8 +145,9 @@ export function ReportDialog({ open, context, onClose }: ReportDialogProps): JSX
     ...(form.notes.trim() ? { notes: form.notes } : {})
   };
 
-  const payload: ReportPayload = buildReportPayload(payloadInput);
-  const yaml = formatReportAsYaml(payload);
+  const publicPayload: ReportPayload = buildReportPayload(payloadInput);
+  const privateEmailPayload: ReportPayload = buildPrivateEmailReportPayload(payloadInput);
+  const yaml = formatReportAsYaml(publicPayload);
 
   const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -151,7 +162,7 @@ export function ReportDialog({ open, context, onClose }: ReportDialogProps): JSX
   const copy = async (kind: 'json' | 'yaml') => {
     const text =
       kind === 'json'
-        ? JSON.stringify(payload, null, 2)
+        ? JSON.stringify(publicPayload, null, 2)
         : yaml;
     try {
       await navigator.clipboard.writeText(text);
@@ -165,11 +176,11 @@ export function ReportDialog({ open, context, onClose }: ReportDialogProps): JSX
   const issuesValid = validateReport(payloadInput).length === 0;
   const githubLink = buildGithubIssueLink({
     baseUrl: env.githubReportUrl,
-    payload,
+    payload: publicPayload,
     bodyText: yaml
   });
   const mailto = env.reportEmail
-    ? buildMailtoLink({ to: env.reportEmail, payload })
+    ? buildMailtoLink({ to: env.reportEmail, payload: privateEmailPayload })
     : undefined;
 
   return (
@@ -340,8 +351,8 @@ export function ReportDialog({ open, context, onClose }: ReportDialogProps): JSX
         </fieldset>
 
         <details>
-          <summary>Generated YAML payload</summary>
-          <pre aria-label="Report YAML payload">{yaml}</pre>
+          <summary>Generated public YAML payload</summary>
+          <pre aria-label="Public report YAML payload">{yaml}</pre>
         </details>
 
         {issues.length > 0 ? (

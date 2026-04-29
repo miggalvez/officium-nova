@@ -3,7 +3,7 @@ description: Report a disputed Office output with enough source detail to reprod
 title: "Reviewer report: YYYY-MM-DD hour version"
 labels:
   - reviewer-report
-  - phase-5
+  - phase-6
 body:
   - type: markdown
     attributes:
@@ -152,6 +152,15 @@ body:
         - "true"
     validations:
       required: true
+
+  - type: input
+    id: canonical-path
+    attributes:
+      label: Canonical path
+      description: Paste the canonical API path shown in reviewer metadata, if available.
+      placeholder: "/api/v1/office/2026-04-28/lauds?version=Rubrics%201960%20-%201960&lang=la,en&orthography=version"
+    validations:
+      required: false
 
   - type: input
     id: api-path

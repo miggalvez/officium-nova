@@ -1,17 +1,11 @@
 /* Officium Novum demo service worker.
- * Strategy: app shell precache + stale-while-revalidate for /api/v1.
+ * Strategy: build-specific app shell precache + stale-while-revalidate for /api/v1.
  */
 
-const APP_SHELL_VERSION = 'v1';
+const APP_SHELL_VERSION = __OFFICIUM_APP_SHELL_VERSION__;
 const APP_SHELL_CACHE = `app-shell-${APP_SHELL_VERSION}`;
 const API_CACHE = 'api-runtime-v1';
-
-const APP_SHELL_ASSETS = [
-  '/',
-  '/index.html',
-  '/manifest.webmanifest',
-  '/favicon.svg'
-];
+const APP_SHELL_ASSETS = __OFFICIUM_APP_SHELL_ASSETS__;
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
@@ -50,8 +44,17 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  if (url.origin === self.location.origin) {
-    event.respondWith(networkFirstAppShell(request));
+  if (url.origin !== self.location.origin) {
+    return;
+  }
+
+  if (request.mode === 'navigate') {
+    event.respondWith(networkFirstNavigation(request));
+    return;
+  }
+
+  if (APP_SHELL_ASSETS.includes(url.pathname)) {
+    event.respondWith(cacheFirst(request, APP_SHELL_CACHE));
   }
 });
 
@@ -61,23 +64,44 @@ self.addEventListener('message', (event) => {
     return;
   }
   const urls = Array.isArray(data.urls) ? data.urls.filter((u) => typeof u === 'string') : [];
-  event.waitUntil(prefetch(urls));
+  const replyPort = event.ports[0];
+  event.waitUntil(
+    prefetch(urls)
+      .then((result) => {
+        replyPort?.postMessage({ type: 'cache-week-result', ok: result.failed === 0, ...result });
+      })
+      .catch((error) => {
+        replyPort?.postMessage({
+          type: 'cache-week-result',
+          ok: false,
+          cached: 0,
+          failed: urls.length,
+          message: error instanceof Error ? error.message : 'Unknown cache error'
+        });
+      })
+  );
 });
 
 async function prefetch(urls) {
   const cache = await caches.open(API_CACHE);
+  let cached = 0;
+  let failed = 0;
   await Promise.all(
     urls.map(async (url) => {
       try {
         const response = await fetch(url);
         if (response.ok) {
           await cache.put(url, response.clone());
+          cached += 1;
+        } else {
+          failed += 1;
         }
       } catch {
-        // ignore failures; offline / network issues are expected
+        failed += 1;
       }
     })
   );
+  return { cached, failed };
 }
 
 async function staleWhileRevalidate(request, cacheName) {
@@ -94,7 +118,20 @@ async function staleWhileRevalidate(request, cacheName) {
   return cached || network;
 }
 
-async function networkFirstAppShell(request) {
+async function cacheFirst(request, cacheName) {
+  const cache = await caches.open(cacheName);
+  const cached = await cache.match(request);
+  if (cached) {
+    return cached;
+  }
+  const response = await fetch(request);
+  if (response.ok) {
+    cache.put(request, response.clone()).catch(() => undefined);
+  }
+  return response;
+}
+
+async function networkFirstNavigation(request) {
   try {
     const response = await fetch(request);
     if (response.ok) {

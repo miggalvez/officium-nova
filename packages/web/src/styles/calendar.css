@@ -17,6 +17,18 @@
   font-size: 0.92rem;
 }
 
+button.calendar__cell {
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.calendar__cell[aria-pressed='true'] {
+  border-color: var(--color-link);
+  box-shadow: 0 0 0 2px var(--color-info-bg);
+}
+
 .calendar__day-name {
   text-align: center;
   font-variant: small-caps;
@@ -60,17 +72,28 @@
   font-size: 0.8rem;
 }
 
-.calendar__cell a {
-  color: inherit;
-  text-decoration: none;
-}
-
 .calendar__nav {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-3);
   align-items: center;
   margin-bottom: var(--space-4);
+}
+
+.calendar__selected-day {
+  margin-top: var(--space-4);
+  padding: var(--space-4) 0 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.calendar__selected-day h2 {
+  margin-bottom: var(--space-1);
+}
+
+.calendar__selected-title {
+  margin: 0 0 var(--space-1);
+  font-family: var(--font-serif);
+  font-size: var(--font-size-lg);
 }
 
 @media (max-width: 720px) {

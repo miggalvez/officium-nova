@@ -130,10 +130,11 @@ describe('LineRenderer', () => {
   it('switches to single-cell rendering when only one language is visible', () => {
     const { container } = render(
       <LineRenderer
-        line={{ marker: 'R.', texts: { la: [{ type: 'text', value: 'Amen.' }] } }}
-        languages={['la']}
-        displayMode="parallel"
-      />
+	        line={{ marker: 'R.', texts: { la: [{ type: 'text', value: 'Amen.' }] } }}
+	        languages={['la']}
+	        displayMode="parallel"
+	        reviewerMode={false}
+	      />
     );
     const line = container.querySelector('.office__line');
     expect(line?.getAttribute('data-mode')).toBe('single');
@@ -149,9 +150,10 @@ describe('LineRenderer', () => {
             en: [{ type: 'text', value: 'Bar' }]
           }
         }}
-        languages={['la', 'en']}
-        displayMode="parallel"
-      />
+	        languages={['la', 'en']}
+	        displayMode="parallel"
+	        reviewerMode={false}
+	      />
     );
     const markers = screen.getAllByText('V.');
     expect(markers.length).toBeGreaterThan(0);
@@ -166,7 +168,7 @@ describe('RunRenderer', () => {
       { type: 'citation', value: '<i>y</i>' }
     ] as const;
     for (const run of cases) {
-      const { container, unmount } = render(<RunRenderer run={run} />);
+	      const { container, unmount } = render(<RunRenderer run={run} reviewerMode={false} />);
       expect(container.innerHTML).not.toContain('<script>');
       expect(container.innerHTML).not.toContain('<b>');
       expect(container.innerHTML).not.toContain('<i>');
@@ -176,8 +178,17 @@ describe('RunRenderer', () => {
     }
   });
 
-  it('renders unresolved-macro as a warning chip', () => {
-    const { container } = render(<RunRenderer run={{ type: 'unresolved-macro', name: 'foo' }} />);
-    expect(container.querySelector('.run-unresolved')).not.toBeNull();
-  });
-});
+	  it('renders unresolved-macro as a reviewer-mode warning chip', () => {
+	    const { container } = render(
+	      <RunRenderer run={{ type: 'unresolved-macro', name: 'foo' }} reviewerMode={true} />
+	    );
+	    expect(container.querySelector('.run-unresolved')).not.toBeNull();
+	  });
+
+	  it('hides unresolved internal chips outside reviewer mode', () => {
+	    const { container } = render(
+	      <RunRenderer run={{ type: 'unresolved-macro', name: 'foo' }} reviewerMode={false} />
+	    );
+	    expect(container.querySelector('.run-unresolved')).toBeNull();
+	  });
+	});

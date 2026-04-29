@@ -48,6 +48,8 @@ export interface ReportContextInput {
   readonly route: string;
   readonly request: {
     readonly date?: string;
+    readonly year?: number;
+    readonly month?: number;
     readonly hour?: HourName;
     readonly version: string;
     readonly languages: readonly PublicLanguageTag[];
@@ -116,6 +118,8 @@ export interface ReportPayload {
   };
   readonly request: {
     readonly date?: string;
+    readonly year?: number;
+    readonly month?: number;
     readonly hour?: HourName;
     readonly version: string;
     readonly languages: readonly PublicLanguageTag[];
@@ -167,6 +171,17 @@ export function validateReport(input: ReportPayloadInput): readonly ReportValida
 }
 
 export function buildReportPayload(input: ReportPayloadInput): ReportPayload {
+  return buildReportPayloadWithReviewer(input, redactReviewer(input.reviewer));
+}
+
+export function buildPrivateEmailReportPayload(input: ReportPayloadInput): ReportPayload {
+  return buildReportPayloadWithReviewer(input, input.reviewer);
+}
+
+function buildReportPayloadWithReviewer(
+  input: ReportPayloadInput,
+  reviewer: ReportReviewerInput
+): ReportPayload {
   const generatedAt = (input.now ?? new Date()).toISOString();
   const warningCodes = (input.context.response.warnings ?? []).map((w) => w.code);
 
@@ -189,6 +204,8 @@ export function buildReportPayload(input: ReportPayloadInput): ReportPayload {
     },
     request: {
       ...optional('date', input.context.request.date),
+      ...optional('year', input.context.request.year),
+      ...optional('month', input.context.request.month),
       ...optional('hour', input.context.request.hour),
       version: input.context.request.version,
       languages: input.context.request.languages,
@@ -204,7 +221,7 @@ export function buildReportPayload(input: ReportPayloadInput): ReportPayload {
     },
     disagreement: input.disagreement,
     citation: input.citation,
-    reviewer: redactReviewer(input.reviewer),
+    reviewer,
     ...optional('notes', input.notes)
   };
 }

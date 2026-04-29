@@ -13,14 +13,16 @@ describe('cacheWeek', () => {
       return new Response('', { status: 200 });
     }) as typeof fetch;
     try {
-      const { urls } = await cacheWeek({
+      const { urls, cached, failed } = await cacheWeek({
         start: '2026-04-28',
         version: 'Rubrics 1960 - 1960',
         languages: ['la'],
         orthography: 'version'
-      });
-      expect(urls).toHaveLength(21);
-      expect(urls[0]).toContain('/api/v1/office/2026-04-28/lauds');
+	      });
+	      expect(urls).toHaveLength(21);
+	      expect(cached).toBe(21);
+	      expect(failed).toBe(0);
+	      expect(urls[0]).toContain('/api/v1/office/2026-04-28/lauds');
       expect(urls[urls.length - 1]).toContain('compline');
     } finally {
       globalThis.fetch = original;

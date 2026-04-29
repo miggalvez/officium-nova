@@ -1,24 +1,25 @@
-import { useLink } from '../../app/router';
 import type { CalendarDayDto } from '../../api/types';
-import { buildOfficeRoute } from '../../routes/build-route';
-import { DEFAULT_HOUR } from '../../routes/paths';
 
 export interface CalendarDayCellProps {
   readonly day: CalendarDayDto;
-  readonly version: string;
+  readonly selected: boolean;
+  readonly onSelect: (day: CalendarDayDto) => void;
 }
 
-export function CalendarDayCell({ day, version }: CalendarDayCellProps): JSX.Element {
+export function CalendarDayCell({
+  day,
+  selected,
+  onSelect
+}: CalendarDayCellProps): JSX.Element {
   const date = day.date;
   const dayNumber = date.split('-')[2];
-  const href = buildOfficeRoute({
-    date,
-    hour: DEFAULT_HOUR,
-    version
-  });
-  const link = useLink(href);
   return (
-    <a {...link} className="calendar__cell">
+    <button
+      type="button"
+      className="calendar__cell"
+      aria-pressed={selected}
+      onClick={() => onSelect(day)}
+    >
       <span className="calendar__date">{Number(dayNumber)}</span>
       <span className="calendar__title" title={day.celebration.feast.title}>
         {day.celebration.feast.title}
@@ -37,6 +38,6 @@ export function CalendarDayCell({ day, version }: CalendarDayCellProps): JSX.Ele
           ⚠ {day.warnings.length}
         </span>
       ) : null}
-    </a>
+    </button>
   );
 }

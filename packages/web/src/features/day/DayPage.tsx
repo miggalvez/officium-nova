@@ -9,6 +9,7 @@ import { LoadingState } from '../../components/LoadingState';
 import { RawJsonLink } from '../../components/RawJsonLink';
 import { WarningBanner } from '../../components/WarningBanner';
 import { ReportButton } from '../report/ReportButton';
+import { useStatus } from '../status/use-status';
 import type { ReportContextInput } from '../report/report-payload';
 import type { DayRoute } from '../../routes/paths';
 import { buildOfficeRoute } from '../../routes/build-route';
@@ -20,6 +21,7 @@ export interface DayPageProps {
 }
 
 export function DayPage({ route, currentRoutePath }: DayPageProps): JSX.Element {
+  const status = useStatus();
   const [data, setData] = useState<OfficeDayResponse | undefined>(undefined);
   const [error, setError] = useState<Error | undefined>(undefined);
   const [loading, setLoading] = useState(true);
@@ -84,15 +86,21 @@ export function DayPage({ route, currentRoutePath }: DayPageProps): JSX.Element 
       apiUrl
     },
     response: data
-      ? {
-          kind: 'office-day',
-          contentVersion: data.meta.contentVersion,
-          ...(data.meta.canonicalPath ? { canonicalPath: data.meta.canonicalPath } : {}),
-          warnings: data.warnings.rubrical,
-          quality: data.meta.quality ?? 'unknown'
-        }
-      : { kind: error instanceof ApiError ? 'error' : 'unknown', quality: 'unknown' }
-  };
+	      ? {
+	          kind: 'office-day',
+	          contentVersion: data.meta.contentVersion,
+	          ...(status?.content.upstreamSha ? { upstreamSha: status.content.upstreamSha } : {}),
+	          ...(data.meta.canonicalPath ? { canonicalPath: data.meta.canonicalPath } : {}),
+	          warnings: data.warnings.rubrical,
+	          quality: data.meta.quality ?? 'unknown'
+	        }
+	      : {
+	          kind: error instanceof ApiError ? 'error' : 'unknown',
+	          ...(status?.content.contentVersion ? { contentVersion: status.content.contentVersion } : {}),
+	          ...(status?.content.upstreamSha ? { upstreamSha: status.content.upstreamSha } : {}),
+	          quality: 'unknown'
+	        }
+	  };
 
   return (
     <article aria-busy={loading}>
