@@ -234,6 +234,72 @@ describe('createRubricalEngine', () => {
     }
   });
 
+  it('uses inherited kalendarium rank metadata for 1960 First Vespers boundaries', () => {
+    const corpus = new TestOfficeTextIndex();
+    seedTemporalYear(corpus, 2026);
+    corpus.add(
+      'horas/Latin/Sancti/04-30.txt',
+      ['[Officium]', 'S. Catharina', '', '[Rank]', ';;Duplex;;3;;'].join('\n')
+    );
+    corpus.add(
+      'horas/Latin/Sancti/05-01r.txt',
+      [
+        '[Officium]',
+        'S. Joseph Opificis',
+        '',
+        '[Rank]',
+        ';;Duplex I classis;;6;;',
+        '(sed rubrica innovata)',
+        ';;Duplex optional classis;;2;;',
+        '',
+        '[Rule]',
+        'proper'
+      ].join('\n')
+    );
+
+    const registry = buildVersionRegistry([
+      {
+        version: 'Rubrics 1960 - 1960',
+        kalendar: '1960',
+        transfer: '1960',
+        stransfer: '1960',
+        base: 'Reduced - 1955'
+      },
+      {
+        version: 'Reduced - 1955',
+        kalendar: '1955',
+        transfer: '1955',
+        stransfer: '1955'
+      }
+    ]);
+    const kalendarium = buildKalendariumTable([
+      { name: '1960', entries: parseKalendarium('') },
+      {
+        name: '1955',
+        entries: parseKalendarium(
+          ['04-30=04-30=S. Catharina=3=', '05-01=05-01r=S. Joseph Opificis=6='].join('\n')
+        )
+      }
+    ]);
+
+    const engine = createRubricalEngine({
+      corpus,
+      kalendarium,
+      yearTransfers: buildYearTransferTable([]),
+      scriptureTransfers: buildScriptureTransferTable([]),
+      versionRegistry: registry,
+      version: asVersionHandle('Rubrics 1960 - 1960'),
+      policyMap: VERSION_POLICY
+    });
+
+    const summary = engine.resolveDayOfficeSummary('2026-04-30');
+
+    expect(summary.concurrence.winner).toBe('tomorrow');
+    expect(summary.concurrence.sourceSide).toBe('first');
+    expect(summary.concurrence.source.feastRef.path).toBe('Sancti/05-01r');
+    expect(summary.concurrence.source.rank.classSymbol).toBe('I');
+  });
+
   it('recovers today-resolution when a Sancti redirect has no applicable [Rank] section', () => {
     const corpus = new TestOfficeTextIndex();
     seedTemporalYear(corpus, 2024);

@@ -127,7 +127,10 @@ export function structureMatins(input: StructureMatinsInput): StructureMatinsRes
       ...(input.version ? { version: input.version } : {})
     }),
     ...(usesThirdClassSanctoralWeekdayFerialMatinsPsalmody(input)
-      ? ['matins-merge-second-third-scripture-lessons' as const]
+      ? [
+          'matins-merge-second-third-scripture-lessons' as const,
+          'matins-invitatory-paschal-alleluia' as const
+        ]
       : [])
   ];
 

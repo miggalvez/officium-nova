@@ -13,6 +13,7 @@ import { resolveGloriaOmittiturReplacement } from './gloria-omittitur.js';
 import { replaceFinalHymnDoxology } from './major-hour-hymn.js';
 import type { MatinsComposeContext } from './matins-shared.js';
 import { referenceIdentity } from './matins-shared.js';
+import { normalizeResponsoryGloria } from './responsory-gloria.js';
 import {
   appendExpandedPsalmWrapper,
   buildPsalmHeading,
@@ -156,7 +157,7 @@ export function composeMergedSlot(
         });
         continue;
       }
-      const expanded = expandDeferredNodes(
+      const expandedContent = expandDeferredNodes(
         slot === 'psalmody' && !isAntiphon && psalmIndex !== undefined
           ? withPsalmGloriaPatri(sourceContent)
           : sourceContent,
@@ -171,6 +172,7 @@ export function composeMergedSlot(
           ...(args.onWarning ? { onWarning: args.onWarning } : {})
         }
       );
+      const expanded = slot === 'responsory' ? normalizeResponsoryGloria(expandedContent) : expandedContent;
       const flattened = flattenConditionals(expanded, args.context);
       const transformed = applyDirectives(slot, flattened, {
         hour: 'matins',

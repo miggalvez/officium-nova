@@ -265,7 +265,6 @@ warning count: 0
   Latin: [V.] text("Hæc dies quam fecit Dóminus, exsultémus et lætémur in ea.")
   Latin: [R.] text("Allelúja, allelúja.")
   Latin: [V.] text("Glória Patri, et Fílio, * et Spirítui Sancto.")
-  Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
   Latin: [R.] text("Allelúja, allelúja.")
 
 [section #31 type=heading slot=heading languages=Latin+English]
@@ -443,7 +442,6 @@ warning count: 0
   Latin: [V.] text("Dómine, audívi audítum tuum, et tímui: considerávi ópera tua, et expávi: in médio duórum animálium.")
   Latin: [R.] text("Jacébat in præsépio, et fulgébat in cælo.")
   Latin: [V.] text("Glória Patri, et Fílio, * et Spirítui Sancto.")
-  Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
   Latin: [R.] text("Jacébat in præsépio, et fulgébat in cælo.")
 
 [section #59 type=heading slot=heading languages=Latin+English]
@@ -555,7 +553,6 @@ warning count: 0
   Latin: [V.] text("Benedícta tu in muliéribus, et benedíctus fructus ventris tui.")
   Latin: [R.] text("Quia quem cæli cápere non póterant, tuo grémio contulísti.")
   Latin: [V.] text("Glória Patri, et Fílio, * et Spirítui Sancto.")
-  Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
   Latin: [R.] text("Quia quem cæli cápere non póterant, tuo grémio contulísti.")
 
 [section #73 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Jube domne languages=Latin]
@@ -594,7 +591,6 @@ warning count: 0
   Latin: [V.] text("Domus pudíci péctoris templum repénte fit Dei: intácta nésciens virum, verbo concépit Fílium.")
   Latin: [R.] text("Salvatórem sæculórum, ipsum Regem Angelórum, sola Virgo lactábat úbere de cælo pleno.")
   Latin: [V.] text("Glória Patri, et Fílio, * et Spirítui Sancto.")
-  Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
   Latin: [R.] text("Salvatórem sæculórum, ipsum Regem Angelórum, sola Virgo lactábat úbere de cælo pleno.")
 
 [section #80 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Jube domne languages=Latin]

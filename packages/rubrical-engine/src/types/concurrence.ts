@@ -6,6 +6,7 @@ import type { CelebrationRuleSet } from './rule-set.js';
 export type VespersClass = 'totum' | 'capitulum' | 'nihil';
 
 export type VespersWinner = 'today' | 'tomorrow';
+export type VespersSide = 'first' | 'second';
 
 export interface VespersSideView {
   readonly celebration: Celebration;
@@ -30,6 +31,8 @@ export type ConcurrenceReason =
 
 export interface ConcurrenceResult {
   readonly winner: VespersWinner;
+  /** The concrete Vespers side supplied by the source celebration. */
+  readonly sourceSide?: VespersSide;
   /** Which celebration provides the Vespers content. */
   readonly source: Celebration;
   /** The other day's celebration, commemorated at this Vespers (if any). */

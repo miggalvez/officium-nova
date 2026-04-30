@@ -141,7 +141,6 @@ warning count: 0
   Latin: [V.] text("Et introëúntes in monuméntum, vidérunt júvenem sedéntem in dextris, coopértum stola cándida, et obstupuérunt: qui dixit illis.")
   Latin: [R.] text("Nolíte timére: scio enim quia crucifíxum quǽritis: jam surréxit: veníte, et vidéte locum, ubi pósitus erat Dóminus, allelúja.")
   Latin: [V.] text("Glória Patri, et Fílio, * et Spirítui Sancto.")
-  Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
   Latin: [R.] text("Angelus Dómini descéndit de cælo, et accédens revólvit lápidem, et super eum sedit, et dixit muliéribus: * Nolíte timére: scio enim quia crucifíxum quǽritis: jam surréxit: veníte, et vidéte locum, ubi pósitus erat Dóminus, allelúja.")
 
 [section #17 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Jube domne languages=Latin]
@@ -174,7 +173,6 @@ warning count: 0
   Latin: [V.] text("Et valde mane una sabbatórum, véniunt ad monuméntum, orto jam sole.")
   Latin: [R.] text("Ut veniéntes úngerent Jesum, allelúja, allelúja.")
   Latin: [V.] text("Glória Patri, et Fílio, * et Spirítui Sancto.")
-  Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
   Latin: [R.] text("Ut veniéntes úngerent Jesum, allelúja, allelúja.")
 
 [section #24 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Jube domne languages=Latin]

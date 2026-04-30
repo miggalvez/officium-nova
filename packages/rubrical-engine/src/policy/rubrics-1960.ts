@@ -1,6 +1,7 @@
 import { lookupVespers1960Row } from '../concurrence/tables/vespers-1960.js';
 import { selectPsalmodyRoman1960 } from '../hours/psalter.js';
 import { deriveSeasonalDirectives1960 } from '../hours/transforms.js';
+import { thirdClassSanctoralWeekdayInPaschaltide1960 } from '../hours/paschaltide-sanctoral.js';
 import {
   PRECEDENCE_1960_BY_CLASS,
   type ClassSymbol1960
@@ -570,7 +571,7 @@ function thirdClassSanctoralWeekdayPsalmody1960(
       : params.hourRules;
 
   if (
-    params.temporal.season !== 'eastertide' ||
+    !thirdClassSanctoralWeekdayInPaschaltide1960(params) ||
     !usesThirdClassSanctoralPaschalAlleluiaPsalmodyAntiphon(params.hour)
   ) {
     return hourRules;

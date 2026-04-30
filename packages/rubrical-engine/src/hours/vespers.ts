@@ -4,6 +4,7 @@ import type { HourStructure } from '../types/hour-structure.js';
 import type { OfficeTextIndex, TemporalContext } from '../types/model.js';
 import type { Celebration, Commemoration } from '../types/ordo.js';
 import type { RubricalPolicy } from '../types/policy.js';
+import type { VespersSide } from '../types/concurrence.js';
 import type {
   CelebrationRuleSet,
   HourRuleSet
@@ -24,6 +25,7 @@ export interface StructureVespersInput {
   readonly corpus: OfficeTextIndex;
   readonly overlay?: DirectoriumOverlay;
   readonly version?: ResolvedVersion;
+  readonly vespersSide?: VespersSide;
 }
 
 export interface StructureVespersResult {
@@ -43,7 +45,11 @@ export function structureVespers(input: StructureVespersInput): StructureVespers
   type InternalVespersInput = StructureVespersInput & {
     readonly __vespersSide?: 'first' | 'second';
   };
-  const applied = applyRuleSet({ hour: 'vespers', ...(input as InternalVespersInput) });
+  const applied = applyRuleSet({
+    hour: 'vespers',
+    ...(input as InternalVespersInput),
+    __vespersSide: input.vespersSide ?? (input as InternalVespersInput).__vespersSide
+  } as Parameters<typeof applyRuleSet>[0]);
   const directives = directivesFromPolicy({ hour: 'vespers', ...input });
 
   return {

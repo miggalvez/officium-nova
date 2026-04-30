@@ -488,7 +488,7 @@ function applyTextOrthographyProfile(input: {
   readonly version: VersionHandle;
   readonly language: CorpusLanguageName;
 }): string {
-  const publicValue = stripSourceQuoteMarkers(input.value);
+  const publicValue = applyPublicSourceDisplayProfile(input.value);
   if (input.language !== 'Latin' || !input.version.startsWith('Rubrics 1960 - ')) {
     return publicValue;
   }
@@ -496,7 +496,12 @@ function applyTextOrthographyProfile(input: {
   return publicValue
     .replaceAll('J', 'I')
     .replaceAll('j', 'i')
-    .replaceAll('H-Iesu', 'H-Jesu');
+    .replaceAll('H-Iesu', 'H-Jesu')
+    .replaceAll('er eúmdem', 'er eúndem');
+}
+
+function applyPublicSourceDisplayProfile(value: string): string {
+  return normalizeFlexMarkers(stripSourceQuoteMarkers(value));
 }
 
 function stripSourceQuoteMarkers(value: string): string {
@@ -505,6 +510,10 @@ function stripSourceQuoteMarkers(value: string): string {
     .replace(/«\s*Et ne nos indúcas in tentatiónem:\s*»/gu, 'Et ne nos indúcas in tentatiónem:')
     .replace(/«\s*Our Father\s*»/gu, 'Our Father')
     .replace(/«\s*And lead us not into temptation:\s*»/gu, 'And lead us not into temptation:');
+}
+
+function normalizeFlexMarkers(value: string): string {
+  return value.replace(/:\s*‡\s*([^*]+?)\s*\*\s*/gu, ': * $1 ');
 }
 
 function toCelebrationDto(celebration: Celebration): CelebrationDto {

@@ -23,6 +23,7 @@ import {
 } from './compose/major-hour-hymn.js';
 import { composeMatinsSections } from './compose/matins.js';
 import { composePrimeMartyrologySection } from './compose/prime-martyrology.js';
+import { normalizeResponsoryGloria } from './compose/responsory-gloria.js';
 import {
   appendExpandedPsalmWrapper,
   buildPsalmHeading,
@@ -191,50 +192,6 @@ export function composeHour(input: ComposeInput): ComposedHour {
     sections: Object.freeze(sections),
     warnings: Object.freeze(warnings)
   });
-}
-
-function normalizeResponsoryGloria(
-  args: ComposeSlotArgs,
-  content: readonly TextContent[]
-): readonly TextContent[] {
-  if (args.slot !== 'responsory') {
-    return content;
-  }
-
-  let changed = false;
-  const out: TextContent[] = [];
-  for (let index = 0; index < content.length; index += 1) {
-    const node = content[index]!;
-    if (node.type === 'conditional') {
-      const normalizedContent = normalizeResponsoryGloria(args, node.content);
-      if (normalizedContent !== node.content) {
-        changed = true;
-        out.push({
-          ...node,
-          content: [...normalizedContent]
-        });
-      } else {
-        out.push(node);
-      }
-      continue;
-    }
-    if (isResponsorySicutEratNode(node)) {
-      changed = true;
-      continue;
-    }
-    out.push(node);
-  }
-  return changed ? Object.freeze(out) : content;
-}
-
-function isResponsorySicutEratNode(node: TextContent): boolean {
-  if (node.type === 'verseMarker') {
-    return /^r\.?$/iu.test(node.marker.trim()) && /^sicut erat\b/iu.test(node.text.trim());
-  }
-  if (node.type === 'text') {
-    return /^r\.\s*sicut erat\b/iu.test(node.value.trim());
-  }
-  return false;
 }
 
 function withMinorHourLaterBlockSeparator(
@@ -462,24 +419,23 @@ function composeSlot(args: ComposeSlotArgs): Section | undefined {
         ref,
         prependSimplifiedTriduumOrationPrelude(args, ref, sourceContent)
       );
-      const expanded = normalizeResponsoryGloria(
-        args,
-        expandDeferredNodes(
-          args.slot === 'psalmody' && !isAntiphon && psalmIndex !== undefined
-            ? withPsalmGloriaPatri(sourceForExpansion)
-            : sourceForExpansion,
-          {
-            index: args.corpus,
-            language: lang,
-            langfb: args.options.langfb,
-            season: args.context.season,
-            conditionContext: args.context,
-            seen: new Set(),
-            maxDepth: MAX_DEFERRED_DEPTH,
-            ...(args.onWarning ? { onWarning: args.onWarning } : {})
-          }
-        )
+      const expandedContent = expandDeferredNodes(
+        args.slot === 'psalmody' && !isAntiphon && psalmIndex !== undefined
+          ? withPsalmGloriaPatri(sourceForExpansion)
+          : sourceForExpansion,
+        {
+          index: args.corpus,
+          language: lang,
+          langfb: args.options.langfb,
+          season: args.context.season,
+          conditionContext: args.context,
+          seen: new Set(),
+          maxDepth: MAX_DEFERRED_DEPTH,
+          ...(args.onWarning ? { onWarning: args.onWarning } : {})
+        }
       );
+      const expanded =
+        args.slot === 'responsory' ? normalizeResponsoryGloria(expandedContent) : expandedContent;
       const flattened = flattenConditionals(expanded, args.context);
       // Directives run before final emission. For psalmody antiphon refs we
       // synthesize the `Ant.` marker first so transforms like `add-alleluia`

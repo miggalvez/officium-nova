@@ -118,7 +118,8 @@ function maybeApplyFullSlots(
     policy: input.policy,
     corpus,
     ...(input.overlay ? { overlay: input.overlay } : {}),
-    ...(input.version ? { version: input.version } : {})
+    ...(input.version ? { version: input.version } : {}),
+    ...(input.concurrence.winner === 'tomorrow' ? { __ordinaryComplineSlots: true } : {})
   });
 
   const directives = directivesFromPolicy({

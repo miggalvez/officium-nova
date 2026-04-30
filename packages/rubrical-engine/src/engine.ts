@@ -215,7 +215,7 @@ export function createRubricalEngine(config: RubricalEngineConfig): RubricalEngi
       temporal: today.temporal
     });
     const overlay = summary.overlay;
-    const vespersSide = concurrence.winner === 'tomorrow' ? 'first' : 'second';
+    const vespersSide = concurrence.sourceSide ?? (concurrence.winner === 'tomorrow' ? 'first' : 'second');
     // First Vespers happens on the *current* evening (today). The Roman 1960
     // psalter selection keys off the actual evening's day-of-week (e.g.
     // Saturday's [Day6 Vespera] for First Vespers of Sunday). Without this
@@ -235,6 +235,7 @@ export function createRubricalEngine(config: RubricalEngineConfig): RubricalEngi
       policy: version.policy,
       corpus,
       version,
+      vespersSide,
       __vespersSide: vespersSide,
       ...(overlay ? { overlay } : {})
     } as Parameters<typeof structureVespers>[0]);
@@ -269,11 +270,15 @@ export function createRubricalEngine(config: RubricalEngineConfig): RubricalEngi
 
     // Compline follows the Vespers winner under 1960.
     if (concurrence.winner === 'tomorrow') {
+      const temporal =
+        concurrence.sourceSide === 'first' && tomorrow.celebration.source === 'sanctoral'
+          ? { ...tomorrow.temporal, dayOfWeek: 0 }
+          : tomorrow.temporal;
       return {
         celebration: tomorrow.celebration,
         celebrationRules: tomorrow.celebrationRules,
         commemorations: tomorrow.commemorations,
-        temporal: tomorrow.temporal,
+        temporal,
         overlay: summary.overlay
       };
     }

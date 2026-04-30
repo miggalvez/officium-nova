@@ -83,6 +83,21 @@ describe('deriveSeasonalDirectives1960', () => {
     expect(directives.has('omit-alleluia')).toBe(false);
   });
 
+  it('emits the Paschal short-responsory directive for III-class sanctoral weekdays', () => {
+    const feast = {
+      ...celebration('Sancti/04-30', 'sanctoral'),
+      rank: { name: 'Duplex', classSymbol: 'III', weight: 600 }
+    } satisfies Celebration;
+    const directives = deriveSeasonalDirectives1960({
+      hour: 'terce',
+      celebration: feast,
+      celebrationRules: celebrationRules(),
+      hourRules: hourRules('terce'),
+      temporal: temporal('Pasc3-4', 'eastertide', 4)
+    });
+    expect(directives.has('paschal-short-responsory')).toBe(true);
+  });
+
   it('emits omit-alleluia during Lent', () => {
     const directives = deriveSeasonalDirectives1960({
       hour: 'lauds',

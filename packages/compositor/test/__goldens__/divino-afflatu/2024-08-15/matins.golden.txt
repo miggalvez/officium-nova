@@ -364,7 +364,6 @@ warning count: 3
   Latin: [V.] text("Et misericórdia ejus a progénie in progénies timéntibus eum.")
   Latin: [R.] text("Quia fecit mihi Dóminus magna qui potens est, et sanctum nomen ejus.")
   Latin: [V.] text("Glória Patri, et Fílio, * et Spirítui Sancto.")
-  Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
   Latin: [R.] text("Quia fecit mihi Dóminus magna qui potens est, et sanctum nomen ejus.")
 
 [section #46 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Jube domne languages=Latin]
@@ -399,7 +398,6 @@ warning count: 3
   Latin: [V.] text("Ave, María, grátia plena; Dóminus tecum.")
   Latin: [R.] text("Genuísti qui te fecit, et in ætérnum pérmanes Virgo.")
   Latin: [V.] text("Glória Patri, et Fílio, * et Spirítui Sancto.")
-  Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
   Latin: [R.] text("Genuísti qui te fecit, et in ætérnum pérmanes Virgo.")
 
 [section #53 type=heading slot=heading languages=Latin+English]
@@ -550,7 +548,6 @@ warning count: 3
   Latin: [V.] text("Ave, María, grátia plena, Dóminus tecum.")
   Latin: [R.] text("Intercéde pro nobis ad Dóminum, Deum nostrum.")
   Latin: [V.] text("Glória Patri, et Fílio, * et Spirítui Sancto.")
-  Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
   Latin: [R.] text("Intercéde pro nobis ad Dóminum, Deum nostrum.")
 
 [section #74 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Jube domne languages=Latin]

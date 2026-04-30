@@ -266,7 +266,6 @@ warning count: 0
   Latin: [V.] text("Quodcúmque ligáveris super terram, erit ligátum et in cælis; et quodcúmque sólveris super terram, erit solútum et in cælis.")
   Latin: [R.] text("Et tibi dabo claves regni cælórum.")
   Latin: [V.] text("Glória Patri, et Fílio, * et Spirítui Sancto.")
-  Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
   Latin: [R.] text("Et tibi dabo claves regni cælórum.")
 
 [section #31 type=heading slot=heading languages=Latin+English]
@@ -429,7 +428,6 @@ warning count: 0
   Latin: [V.] text("Quodcúmque ligáveris super terram, erit ligátum et in cælis; et quodcúmque sólveris super terram, erit solútum et in cælis.")
   Latin: [R.] text("Et ídeo tibi tráditæ sunt claves regni cælórum.")
   Latin: [V.] text("Glória Patri, et Fílio, * et Spirítui Sancto.")
-  Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
   Latin: [R.] text("Et ídeo tibi tráditæ sunt claves regni cælórum.")
 
 [section #59 type=heading slot=heading languages=Latin+English]
@@ -575,7 +573,6 @@ warning count: 0
   Latin: [V.] text("Beátus es, Simon Bar-Jona, quia caro et sanguis non revelávit tibi, sed Pater meus qui est in cælis.")
   Latin: [R.] text("Et ego dico tibi, quia tu es Petrus, et super hanc petram ædificábo Ecclésiam meam.")
   Latin: [V.] text("Glória Patri, et Fílio, * et Spirítui Sancto.")
-  Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
   Latin: [R.] text("Et ego dico tibi, quia tu es Petrus, et super hanc petram ædificábo Ecclésiam meam.")
 
 [section #80 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Jube domne languages=Latin]
