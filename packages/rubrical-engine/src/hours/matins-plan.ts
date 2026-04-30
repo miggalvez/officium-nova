@@ -759,7 +759,7 @@ function collectThirdClassSanctoralWeekdayPaschalMatinsAntiphons(
   });
 }
 
-function usesThirdClassSanctoralWeekdayFerialMatinsPsalmody(
+export function usesThirdClassSanctoralWeekdayFerialMatinsPsalmody(
   input: Pick<BuildMatinsPlanInput, 'celebration' | 'temporal' | 'version'>
 ): boolean {
   return (

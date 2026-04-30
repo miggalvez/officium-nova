@@ -1,5 +1,8 @@
 import { applyRuleSet, directivesFromPolicy } from './apply-rule-set.js';
-import { buildMatinsPlanWithWarnings } from './matins-plan.js';
+import {
+  buildMatinsPlanWithWarnings,
+  usesThirdClassSanctoralWeekdayFerialMatinsPsalmody
+} from './matins-plan.js';
 
 import type { RubricalWarning } from '../types/directorium.js';
 import type { DirectoriumOverlay } from '../types/directorium.js';
@@ -109,19 +112,24 @@ export function structureMatins(input: StructureMatinsInput): StructureMatinsRes
     };
   }
 
-  const directives = directivesFromPolicy({
-    hour: 'matins',
-    skeleton: input.skeleton,
-    celebration: input.celebration,
-    commemorations: input.commemorations,
-    celebrationRules: input.celebrationRules,
-    hourRules: input.hourRules,
-    temporal: input.temporal,
-    policy: input.policy,
-    corpus: input.corpus,
-    ...(input.overlay ? { overlay: input.overlay } : {}),
-    ...(input.version ? { version: input.version } : {})
-  });
+  const directives = [
+    ...directivesFromPolicy({
+      hour: 'matins',
+      skeleton: input.skeleton,
+      celebration: input.celebration,
+      commemorations: input.commemorations,
+      celebrationRules: input.celebrationRules,
+      hourRules: input.hourRules,
+      temporal: input.temporal,
+      policy: input.policy,
+      corpus: input.corpus,
+      ...(input.overlay ? { overlay: input.overlay } : {}),
+      ...(input.version ? { version: input.version } : {})
+    }),
+    ...(usesThirdClassSanctoralWeekdayFerialMatinsPsalmody(input)
+      ? ['matins-merge-second-third-scripture-lessons' as const]
+      : [])
+  ];
 
   return {
     hour: {

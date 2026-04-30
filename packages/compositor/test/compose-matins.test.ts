@@ -179,6 +179,80 @@ describe('composeHour(matins)', () => {
     expect(rendered).not.toContain('Cum Patre, et almo Spíritu,');
   });
 
+  it('merges the second and third scripture lessons only when the Matins directive is present', () => {
+    const corpus = new InMemoryTextIndex();
+    corpus.addFile(
+      makeFileMulti('horas/Latin/Tempora/Pasc3-3', [
+        { header: 'Lectio2', content: [{ type: 'text', value: 'Lectio secunda' }] },
+        { header: 'Lectio3', content: [{ type: 'text', value: 'Lectio tertia' }] }
+      ])
+    );
+
+    const baseHour: HourStructure = {
+      hour: 'matins',
+      slots: {
+        psalmody: {
+          kind: 'matins-nocturns',
+          nocturns: [
+            {
+              index: 1,
+              psalmody: [],
+              antiphons: [],
+              versicle: { reference: { path: 'horas/Latin/Missing', section: 'Versum' } },
+              lessonIntroduction: 'ordinary',
+              lessons: [
+                {
+                  index: 2,
+                  source: {
+                    kind: 'scripture',
+                    course: 'paschaltide',
+                    pericope: {
+                      book: 'Acts',
+                      reference: { path: 'horas/Latin/Tempora/Pasc3-3', section: 'Lectio2' }
+                    }
+                  }
+                }
+              ],
+              responsories: [],
+              benedictions: []
+            }
+          ]
+        }
+      },
+      directives: []
+    };
+
+    const withoutDirective = composeHour({
+      corpus,
+      summary: buildSummaryForVersion(baseHour, stubVersion),
+      version: stubVersion,
+      hour: 'matins',
+      options: { languages: ['Latin'] }
+    });
+    const withDirective = composeHour({
+      corpus,
+      summary: buildSummaryForVersion(
+        { ...baseHour, directives: ['matins-merge-second-third-scripture-lessons'] },
+        stubVersion
+      ),
+      version: stubVersion,
+      hour: 'matins',
+      options: { languages: ['Latin'] }
+    });
+
+    const withoutText = withoutDirective.sections.flatMap((section) =>
+      section.lines.map((line) => renderRuns(line, 'Latin'))
+    );
+    const withText = withDirective.sections.flatMap((section) =>
+      section.lines.map((line) => renderRuns(line, 'Latin'))
+    );
+
+    expect(withoutText).toContain('Lectio secunda');
+    expect(withoutText).not.toContain('Lectio tertia');
+    expect(withText).toContain('Lectio secunda');
+    expect(withText).toContain('Lectio tertia');
+  });
+
   it('emits the fixed invitatory psalm with feast antiphon repetitions, then nocturn heading, psalmody, lectio, responsory, and Te Deum', () => {
     const corpus = new InMemoryTextIndex();
     corpus.addFile(

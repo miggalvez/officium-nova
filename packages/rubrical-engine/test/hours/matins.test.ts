@@ -365,6 +365,48 @@ describe('structureMatins', () => {
     }
   });
 
+  it('emits the 1960 Paschal weekday III-class sanctoral Matins lesson-merge directive', () => {
+    const { corpus, skeleton, version } = setup();
+    const celeb = celebration('Sancti/08-15', 'III', 'sanctoral');
+    const rules = baseRules();
+    const hourRules = deriveHourRuleSet(celeb, rules, 'matins');
+
+    const result = structureMatins({
+      skeleton,
+      celebration: celeb,
+      commemorations: [],
+      celebrationRules: rules,
+      hourRules,
+      temporal: temporal('2026-04-29', 'Pasc3-3', 'eastertide', 'IV'),
+      policy: rubrics1960Policy,
+      corpus,
+      version
+    });
+
+    expect(result.hour.directives).toContain('matins-merge-second-third-scripture-lessons');
+  });
+
+  it('does not emit the lesson-merge directive outside the 1960 Paschal weekday III-class sanctoral case', () => {
+    const { corpus, skeleton, version } = setup();
+    const celeb = celebration('Sancti/08-15', 'III', 'sanctoral');
+    const rules = baseRules();
+    const hourRules = deriveHourRuleSet(celeb, rules, 'matins');
+
+    const result = structureMatins({
+      skeleton,
+      celebration: celeb,
+      commemorations: [],
+      celebrationRules: rules,
+      hourRules,
+      temporal: temporal('2026-11-04', 'Pent23-3', 'time-after-pentecost', 'IV'),
+      policy: rubrics1960Policy,
+      corpus,
+      version
+    });
+
+    expect(result.hour.directives).not.toContain('matins-merge-second-third-scripture-lessons');
+  });
+
   it('carries festal Matins hymn doxology variants as a slot', () => {
     const { corpus, skeleton, version } = setup();
     const celeb = celebration('Sancti/08-15', 'I', 'sanctoral');
