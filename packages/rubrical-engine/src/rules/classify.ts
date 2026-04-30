@@ -20,6 +20,7 @@ export type ClassifiedDirective =
   | { readonly target: 'celebration'; readonly effect: CelebrationEffect }
   | { readonly target: 'hour'; readonly effect: HourEffect }
   | { readonly target: 'missa' }
+  | { readonly target: 'noop' }
   | { readonly target: 'unmapped' };
 
 export type CelebrationEffect =
@@ -204,6 +205,12 @@ function classifyAction(directive: RuleActionDirective): ClassifiedDirective {
         value: matins
       }
     };
+  }
+
+  // Corpus marker for a fully proper office. The concrete hour/source
+  // directives on the same feast carry the behavior.
+  if (normalized === 'proper') {
+    return { target: 'noop' };
   }
 
   // Tridentine/Monastic-only legacy form ("1 et 2 lectiones") is intentionally

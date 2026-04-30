@@ -350,6 +350,22 @@ describeIfReady('Phase 2h DA/1955 upstream matrix', () => {
         section: 'Capitulum Nona'
       }
     });
+    expect(
+      josephWorker.warnings.filter(
+        (warning) =>
+          warning.code === 'rule-unmapped' ||
+          warning.code === 'matins-skeleton-missing-section'
+      )
+    ).toEqual([]);
+
+    const josephWorker2024 = roman1960.resolveDayOfficeSummary('2024-05-01');
+    expect(
+      josephWorker2024.warnings.filter(
+        (warning) =>
+          warning.code === 'rule-unmapped' ||
+          warning.code === 'matins-skeleton-missing-section'
+      )
+    ).toEqual([]);
 
     const christmasVigil = roman1960.resolveDayOfficeSummary('2024-12-24');
     const vigilPsalmody = christmasVigil.hours.matins?.slots.psalmody;

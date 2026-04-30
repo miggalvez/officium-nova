@@ -80,6 +80,15 @@ export function buildMatinsPlanWithWarnings(
     temporal: input.temporal,
     commemorations: input.commemorations
   });
+  const teDeum = input.policy.resolveTeDeum({
+    plan: {
+      nocturns: shape.nocturns,
+      totalLessons: shape.totalLessons
+    },
+    celebration: input.celebration,
+    celebrationRules: input.celebrationRules,
+    temporal: input.temporal
+  });
 
   const invitatorium = buildInvitatoriumSource(input, feastFiles);
   const hymn = buildHymnSource(input, feastFiles);
@@ -131,7 +140,10 @@ export function buildMatinsPlanWithWarnings(
           : {})
       });
 
-      if (globalLessonIndex <= 9) {
+      if (
+        globalLessonIndex <= 9 &&
+        shouldBuildResponsory(globalLessonIndex, shape.totalLessons, teDeum)
+      ) {
         responsories.push(
           buildResponsory(
             toResponsoryIndex(globalLessonIndex),
@@ -206,18 +218,8 @@ export function buildMatinsPlanWithWarnings(
     invitatorium,
     hymn,
     nocturnPlan,
-    teDeum: 'say'
+    teDeum
   };
-
-  const teDeum = input.policy.resolveTeDeum({
-    plan: {
-      nocturns: shape.nocturns,
-      totalLessons: shape.totalLessons
-    },
-    celebration: input.celebration,
-    celebrationRules: input.celebrationRules,
-    temporal: input.temporal
-  });
 
   plan = applyScriptureTransfer(plan, input.overlayScriptureTransfer, warnings);
   plan = {
@@ -235,6 +237,14 @@ export function buildMatinsPlanWithWarnings(
     plan,
     warnings
   };
+}
+
+function shouldBuildResponsory(
+  lessonIndex: number,
+  totalLessons: number,
+  teDeum: MatinsPlan['teDeum']
+): boolean {
+  return !(teDeum === 'say' && lessonIndex === totalLessons);
 }
 
 function buildInvitatoriumSource(

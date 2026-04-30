@@ -82,6 +82,8 @@ export function buildCelebrationRuleSet(
           }
         });
         break;
+      case 'noop':
+        break;
       case 'unmapped':
         builder.unmapped.push(directive);
         warnings.push({

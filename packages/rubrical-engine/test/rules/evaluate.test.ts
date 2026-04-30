@@ -144,6 +144,15 @@ describe('buildCelebrationRuleSet', () => {
     );
   });
 
+  it('treats proper as a known office marker without a warning', () => {
+    const { feastFile, context } = makeHarness(['proper']);
+
+    const result = buildCelebrationRuleSet(feastFile, [], context);
+
+    expect(result.celebrationRules.unmapped).toEqual([]);
+    expect(result.warnings.filter((warning) => warning.code === 'rule-unmapped')).toEqual([]);
+  });
+
   it('classifies missa pass-through directives distinctly', () => {
     const { feastFile, context } = makeHarness(['Credo', 'Prefatio=Nat']);
 

@@ -6,7 +6,7 @@ import { classifyDirective } from '../../src/rules/classify.js';
 describe('classifyDirective', () => {
   const cases: ReadonlyArray<{
     readonly line: string;
-    readonly target: 'celebration' | 'hour' | 'missa' | 'unmapped';
+    readonly target: 'celebration' | 'hour' | 'missa' | 'noop' | 'unmapped';
     readonly effectKind?: string;
   }> = [
     { line: '9 lectiones', target: 'celebration', effectKind: 'matins' },
@@ -14,6 +14,7 @@ describe('classifyDirective', () => {
     { line: '3 lectiones', target: 'celebration', effectKind: 'matins' },
     { line: '12 lectiones', target: 'celebration', effectKind: 'matins' },
     { line: '1 nocturn', target: 'celebration', effectKind: 'matins' },
+    { line: 'proper', target: 'noop' },
     { line: 'No prima Vespera', target: 'celebration', effectKind: 'first-vespers' },
     { line: 'No secunda Vespera', target: 'celebration', effectKind: 'second-vespers' },
     { line: 'Lectio1 tempora', target: 'celebration', effectKind: 'lesson-source' },
