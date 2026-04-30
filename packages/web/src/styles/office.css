@@ -179,6 +179,7 @@
 .office__lang-cell[lang='la'],
 .office__lang-cell[data-lang='la'] {
   font-style: normal;
+  font-feature-settings: 'locl' 0, 'kern' 1, 'liga' 1, 'onum' 1;
 }
 
 .office__lang-cell[lang='en'],
