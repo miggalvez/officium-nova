@@ -268,6 +268,7 @@ function linesFromContent(
         // lines in the legacy stream.
         if (
           slot === 'hymn' ||
+          (slot === 'lectio-brevis' && node.source !== undefined) ||
           slot === 'martyrology' ||
           slot === 'responsory' ||
           slot === 'versicle'

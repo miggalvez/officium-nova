@@ -184,14 +184,10 @@ export function composeMergedSlot(
         slot === 'hymn'
           ? replaceFinalHymnDoxology(transformed, hymnDoxology?.get(lang))
           : transformed;
-      const withLessonSeparators =
-        slot === 'lectio-brevis'
-          ? renderCorpusSeparatorsAsUnderscoreLines(withDoxology)
-          : withDoxology;
       const withLiturgicalLineBreaks =
         slot === 'lectio-brevis' || slot === 'te-deum'
-          ? interleaveSeparators(withLessonSeparators)
-          : withLessonSeparators;
+          ? interleaveSeparators(withDoxology)
+          : withDoxology;
       const lineSeparated =
         slot === 'psalmody' && !isAntiphon && psalmIndex !== undefined
           ? separatePsalmVerseLines(withLiturgicalLineBreaks)
@@ -248,14 +244,6 @@ export function composeMergedSlot(
 
   const primary = refs[0]!.ref;
   return emitSection(slot, frozen, referenceIdentity(primary));
-}
-
-function renderCorpusSeparatorsAsUnderscoreLines(
-  content: readonly TextContent[]
-): readonly TextContent[] {
-  return content.map((node) =>
-    node.type === 'separator' ? ({ type: 'text', value: '_' } satisfies TextContent) : node
-  );
 }
 
 function withResponsoryGloria(content: readonly TextContent[]): readonly TextContent[] {
