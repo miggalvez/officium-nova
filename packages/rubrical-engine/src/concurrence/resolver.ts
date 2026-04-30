@@ -2,6 +2,7 @@ import type {
   ConcurrenceReason,
   ConcurrenceResult,
   DayConcurrencePreview,
+  VespersSide,
   VespersSideView
 } from '../types/concurrence.js';
 import type { TemporalContext } from '../types/model.js';
@@ -22,7 +23,7 @@ export function resolveConcurrence(params: {
     params.temporal.dayName === 'Quad6-6' && params.policy.name !== 'divino-afflatu';
 
   if (ABSOLUTE_TRIDUUM_KEYS.has(params.temporal.dayName) || treatHolySaturdayAsSpecial) {
-    return {
+    return withSourceSide({
       winner: 'today',
       source: today.celebration,
       commemorations: [],
@@ -39,7 +40,7 @@ export function resolveConcurrence(params: {
           }
         }
       ]
-    };
+    });
   }
 
   if (!today.hasVespers && tomorrow.hasVespers) {
@@ -59,7 +60,7 @@ export function resolveConcurrence(params: {
     );
   }
   if (!today.hasVespers && !tomorrow.hasVespers) {
-    return {
+    return withSourceSide({
       winner: 'today',
       source: today.celebration,
       commemorations: [],
@@ -76,11 +77,11 @@ export function resolveConcurrence(params: {
           }
         }
       ]
-    };
+    });
   }
 
   if (today.vespersClass === 'nihil' && tomorrow.vespersClass === 'nihil') {
-    return {
+    return withSourceSide({
       winner: 'today',
       source: today.celebration,
       commemorations: [],
@@ -97,32 +98,32 @@ export function resolveConcurrence(params: {
           }
         }
       ]
-    };
+    });
   }
   if (today.vespersClass === 'nihil') {
-    return {
+    return withSourceSide({
       winner: 'tomorrow',
       source: tomorrow.celebration,
       commemorations: [],
       reason: 'tomorrow-only-has-vespers',
       warnings: []
-    };
+    });
   }
   if (tomorrow.vespersClass === 'nihil') {
-    return {
+    return withSourceSide({
       winner: 'today',
       source: today.celebration,
       commemorations: [],
       reason: 'today-only-has-vespers',
       warnings: []
-    };
+    });
   }
 
-  return params.policy.resolveConcurrence({
+  return withSourceSide(params.policy.resolveConcurrence({
     today,
     tomorrow,
     temporal: params.temporal
-  });
+  }));
 }
 
 function toTodaySide(preview: DayConcurrencePreview): VespersSideView {
@@ -149,7 +150,7 @@ function vetoResult(
   tomorrowCelebration: VespersSideView['celebration'],
   reason: ConcurrenceReason
 ): ConcurrenceResult {
-  return {
+  return withSourceSide({
     winner,
     source: winner === 'today' ? todayCelebration : tomorrowCelebration,
     commemorations: [],
@@ -167,5 +168,16 @@ function vetoResult(
         }
       }
     ]
+  });
+}
+
+function withSourceSide(result: ConcurrenceResult): ConcurrenceResult {
+  return {
+    ...result,
+    sourceSide: result.sourceSide ?? sourceSideForWinner(result.winner)
   };
+}
+
+function sourceSideForWinner(winner: 'today' | 'tomorrow'): VespersSide {
+  return winner === 'tomorrow' ? 'first' : 'second';
 }

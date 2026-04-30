@@ -65,7 +65,8 @@ describe('sanctoralCandidates', () => {
       'Sancti/01-07r',
       'Sancti/01-07'
     ]);
-    expect(candidates[0]?.rank.weight).toBe(400);
+    expect(candidates[0]?.rank.name).toBe('III. classis');
+    expect(candidates[0]?.rank.weight).toBe(600);
     expect(candidates[0]?.feastRef.title).toBe('Primary Feast Modern');
   });
 

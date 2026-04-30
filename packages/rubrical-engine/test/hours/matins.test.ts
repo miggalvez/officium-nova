@@ -365,7 +365,7 @@ describe('structureMatins', () => {
     }
   });
 
-  it('emits the 1960 Paschal weekday III-class sanctoral Matins lesson-merge directive', () => {
+  it('emits 1960 Paschal weekday III-class sanctoral Matins directives', () => {
     const { corpus, skeleton, version } = setup();
     const celeb = celebration('Sancti/08-15', 'III', 'sanctoral');
     const rules = baseRules();
@@ -384,6 +384,7 @@ describe('structureMatins', () => {
     });
 
     expect(result.hour.directives).toContain('matins-merge-second-third-scripture-lessons');
+    expect(result.hour.directives).toContain('matins-invitatory-paschal-alleluia');
   });
 
   it('does not emit the lesson-merge directive outside the 1960 Paschal weekday III-class sanctoral case', () => {

@@ -7,6 +7,7 @@ export * from './matins-lessons.js';
 export * from './matins-plan.js';
 export * from './matins-scripture.js';
 export * from './minor-hours.js';
+export * from './paschaltide-sanctoral.js';
 export * from './psalter.js';
 export * from './skeleton.js';
 export * from './transforms.js';

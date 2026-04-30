@@ -235,7 +235,6 @@ warning count: 3
   Latin: [V.] text("Dícite, quidnam vidístis? et annuntiáte Christi nativitátem.")
   Latin: [R.] text("Natum vídimus, et choros Angelórum collaudántes Dóminum.")
   Latin: [V.] text("Glória Patri, et Fílio, * et Spirítui Sancto.")
-  Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
   Latin: [R.] text("Natum vídimus, et choros Angelórum collaudántes Dóminum.")
 
 [section #25 type=heading slot=heading languages=Latin+English]
@@ -417,7 +416,6 @@ warning count: 3
   Latin: [V.] text("Benedícta tu in muliéribus, et benedíctus fructus ventris tui.")
   Latin: [R.] text("Quia quem cæli cápere non póterant, tuo grémio contulísti.")
   Latin: [V.] text("Glória Patri, et Fílio, * et Spirítui Sancto.")
-  Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
   Latin: [R.] text("Quia quem cæli cápere non póterant, tuo grémio contulísti.")
 
 [section #53 type=heading slot=heading languages=Latin+English]
@@ -604,7 +602,6 @@ warning count: 3
   Latin: [V.] text("Omnia per ipsum facta sunt, et sine ipso factum est nihil.")
   Latin: [R.] text("Et vídimus glóriam ejus, glóriam quasi Unigéniti a Patre, plenum grátiæ et veritátis.")
   Latin: [V.] text("Glória Patri, et Fílio, * et Spirítui Sancto.")
-  Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
   Latin: [R.] text("Et vídimus glóriam ejus, glóriam quasi Unigéniti a Patre, plenum grátiæ et veritátis.")
 
 [section #74 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Jube domne languages=Latin]

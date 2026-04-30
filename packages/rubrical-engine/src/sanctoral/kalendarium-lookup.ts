@@ -128,15 +128,14 @@ function lookupEntriesForDate(
   readonly useEntryMetadata: boolean;
 } {
   let current: Pick<ResolvedVersion, 'kalendar' | 'base'> | VersionRegistryRow | undefined = version;
-  let inherited = false;
-
+  let inheritedDepth = 0;
   while (current) {
     const table = kalendarium.get(current.kalendar);
     const entries = table?.get(dateKey);
     if (entries) {
       return {
         entries,
-        useEntryMetadata: !inherited
+        useEntryMetadata: inheritedDepth <= 1
       };
     }
 
@@ -149,7 +148,7 @@ function lookupEntriesForDate(
 
     const baseHandle = current.base;
     current = registry.get(baseHandle);
-    inherited = true;
+    inheritedDepth += 1;
     if (!current) {
       throw new Error(`Unknown base version in registry: ${baseHandle}`);
     }

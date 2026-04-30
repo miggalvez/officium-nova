@@ -4,6 +4,7 @@ import type { TemporalContext } from '../types/model.js';
 import type { Celebration, HourName } from '../types/ordo.js';
 import type { CelebrationRuleSet, HourRuleSet } from '../types/rule-set.js';
 import { classifyDirective } from '../rules/classify.js';
+import { thirdClassSanctoralWeekdayInPaschaltide1960 } from './paschaltide-sanctoral.js';
 
 export interface HourDirectivesInput {
   readonly hour: HourName;
@@ -41,6 +42,12 @@ export function deriveSeasonalDirectives1960(
       temporal.season === 'pentecost-octave') {
     directives.add('add-alleluia');
     directives.add('add-versicle-alleluia');
+  }
+  if (
+    (hour === 'terce' || hour === 'sext' || hour === 'none') &&
+    thirdClassSanctoralWeekdayInPaschaltide1960(params)
+  ) {
+    directives.add('paschal-short-responsory');
   }
 
   // RI §§160-161: the Triduum omits the Gloria Patri and uses the short

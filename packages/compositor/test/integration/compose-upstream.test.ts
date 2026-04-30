@@ -6,6 +6,7 @@ import {
   loadCorpus,
   parseKalendarium,
   parseScriptureTransfer,
+  parseTemporalSubstitutions,
   parseTransfer,
   parseVersionRegistry
 } from '@officium-novum/parser';
@@ -14,6 +15,7 @@ import {
   asVersionHandle,
   buildKalendariumTable,
   buildScriptureTransferTable,
+  buildTemporalSubstitutionTable,
   buildVersionRegistry,
   buildYearTransferTable,
   createRubricalEngine,
@@ -42,6 +44,7 @@ interface SharedResources {
   kalendarium: ReturnType<typeof buildKalendariumTable>;
   yearTransfers: ReturnType<typeof buildYearTransferTable>;
   scriptureTransfers: ReturnType<typeof buildScriptureTransferTable>;
+  temporalSubstitutions: ReturnType<typeof buildTemporalSubstitutionTable>;
 }
 
 let sharedResourcesPromise: Promise<SharedResources> | undefined;
@@ -60,7 +63,8 @@ async function loadSharedResources(): Promise<SharedResources> {
       versionRegistry,
       kalendarium: buildKalendariumTable(loadKalendaria()),
       yearTransfers: buildYearTransferTable(loadTransferTables()),
-      scriptureTransfers: buildScriptureTransferTable(loadScriptureTransferTables())
+      scriptureTransfers: buildScriptureTransferTable(loadScriptureTransferTables()),
+      temporalSubstitutions: buildTemporalSubstitutionTable(loadTemporalSubstitutionTables())
     };
   })();
 
@@ -74,6 +78,7 @@ async function createHarness(version: RomanHandle) {
     kalendarium: resources.kalendarium,
     yearTransfers: resources.yearTransfers,
     scriptureTransfers: resources.scriptureTransfers,
+    temporalSubstitutions: resources.temporalSubstitutions,
     versionRegistry: resources.versionRegistry,
     version: asVersionHandle(version),
     policyMap: VERSION_POLICY
@@ -2599,6 +2604,178 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
     }
   }, 240_000);
 
+  it('composes the 2026 Paschaltide third-class sanctoral weekday witnesses through their family directives', async () => {
+    const { engine, resolvedCorpus } = await createHarness('Rubrics 1960 - 1960');
+    const hours = [
+      'matins',
+      'lauds',
+      'prime',
+      'terce',
+      'sext',
+      'none',
+      'vespers',
+      'compline'
+    ] as const;
+
+    for (const date of ['2026-04-29', '2026-04-30'] as const) {
+      const summary = engine.resolveDayOfficeSummary(date);
+
+      for (const hour of hours) {
+        const composed = composeHour({
+          corpus: resolvedCorpus.index,
+          summary,
+          version: engine.version,
+          hour,
+          options: { languages: ['Latin'] }
+        });
+
+        expect(composed.sections.length, `${date} ${hour} should compose`).toBeGreaterThan(0);
+      }
+    }
+
+    const peterMartyr = engine.resolveDayOfficeSummary('2026-04-29');
+    expect(peterMartyr.celebration.feastRef.path).toBe('Sancti/04-29');
+
+    const peterMartyrMatins = composeHour({
+      corpus: resolvedCorpus.index,
+      summary: peterMartyr,
+      version: engine.version,
+      hour: 'matins',
+      options: { languages: ['Latin'] }
+    });
+    expect(firstPsalmodyAntiphon(peterMartyrMatins)).toBe('Allelúja, * allelúja, allelúja.');
+    expect(sectionTexts(peterMartyrMatins, 'invitatory')[0]).toBe('Exsúltent in Dómino sancti, * Allelúja.');
+    expect(sectionTexts(peterMartyrMatins, 'versicle')).toEqual([
+      'Gavísi sunt discípuli, allelúja.',
+      'Viso Dómino, allelúja.'
+    ]);
+
+    for (const [hour, chapterCitation, responsoryOpening] of [
+      [
+        'lauds',
+        ' Sap 5:1',
+        undefined
+      ],
+      [
+        'terce',
+        ' Sap 5:1',
+        'Sancti et justi in Dómino gaudéte, * Allelúia, allelúia.'
+      ],
+      [
+        'sext',
+        ' Sap. 5:5',
+        'Lux perpétua lucébit Sanctis tuis, Dómine, * Allelúia, allelúia.'
+      ],
+      [
+        'none',
+        ' Rom 8:28',
+        'Lætítia sempitérna super cápita eórum, * Allelúia, allelúia.'
+      ],
+      [
+        'vespers',
+        ' Sap 5:1',
+        undefined
+      ]
+    ] as const) {
+      const composed = composeHour({
+        corpus: resolvedCorpus.index,
+        summary: peterMartyr,
+        version: engine.version,
+        hour,
+        options: { languages: ['Latin'] }
+      });
+
+      expect(firstPsalmodyAntiphon(composed), `2026-04-29 ${hour} psalmody antiphon`).toBe(
+        'Allelúja, * allelúja, allelúja.'
+      );
+      expect(sectionTexts(composed, 'chapter')[0], `2026-04-29 ${hour} chapter`).toBe(chapterCitation);
+      if (responsoryOpening) {
+        expect(sectionTexts(composed, 'responsory')[0], `2026-04-29 ${hour} responsory`).toBe(
+          responsoryOpening
+        );
+      }
+    }
+
+    const catherine = engine.resolveDayOfficeSummary('2026-04-30');
+    expect(catherine.celebration.feastRef.path).toBe('Sancti/04-30');
+    expect(catherine.concurrence.source.feastRef.path).toBe('Sancti/05-01r');
+    expect(catherine.concurrence.sourceSide).toBe('first');
+
+    const catherineMatins = composeHour({
+      corpus: resolvedCorpus.index,
+      summary: catherine,
+      version: engine.version,
+      hour: 'matins',
+      options: { languages: ['Latin'] }
+    });
+    expect(firstPsalmodyAntiphon(catherineMatins)).toBe('Allelúja, * allelúja, allelúja.');
+    expect(sectionTexts(catherineMatins, 'invitatory')[0]).toBe(
+      'Regem Vírginum Dóminum, * Veníte, adorémus, allelúia.'
+    );
+
+    for (const [hour, chapterCitation, responsoryOpening] of [
+      [
+        'terce',
+        ' 2 Cor 10:17-18',
+        'Spécie tua et pulchritúdine tua, * Allelúia, allelúia.'
+      ],
+      [
+        'sext',
+        ' 2 Cor 11:2',
+        'Adjuvábit eam Deus vultu suo, * Allelúja, allelúja.'
+      ],
+      [
+        'none',
+        ' Sap 4:1',
+        'Elégit eam Deus, et præelégit eam, * Allelúia, allelúia.'
+      ]
+    ] as const) {
+      const composed = composeHour({
+        corpus: resolvedCorpus.index,
+        summary: catherine,
+        version: engine.version,
+        hour,
+        options: { languages: ['Latin'] }
+      });
+
+      expect(firstPsalmodyAntiphon(composed), `2026-04-30 ${hour} psalmody antiphon`).toBe(
+        'Allelúja, * allelúja, allelúja.'
+      );
+      expect(sectionTexts(composed, 'chapter')[0], `2026-04-30 ${hour} chapter`).toBe(chapterCitation);
+      expect(sectionTexts(composed, 'responsory')[0], `2026-04-30 ${hour} responsory`).toBe(
+        responsoryOpening
+      );
+    }
+
+    const josephVespers = composeHour({
+      corpus: resolvedCorpus.index,
+      summary: catherine,
+      version: engine.version,
+      hour: 'vespers',
+      options: { languages: ['Latin'] }
+    });
+    expect(firstPsalmodyAntiphon(josephVespers)).toBe(
+      'Deus, mundi ópifex, * pósuit hóminem ut operarétur et custodíret terram, allelúja.'
+    );
+    expect(sectionTexts(josephVespers, 'chapter')[0]).toBe(' Col 3:14-15');
+    expect(sectionTexts(josephVespers, 'versicle')).toEqual([
+      'Solémnitas est hódie sancti Joseph, allelúja.',
+      'Qui mánibus suis Fílio Dei ministrávit, allelúja.'
+    ]);
+
+    const catherineCompline = composeHour({
+      corpus: resolvedCorpus.index,
+      summary: catherine,
+      version: engine.version,
+      hour: 'compline',
+      options: { languages: ['Latin'] }
+    });
+    expect(sectionTexts(catherineCompline, 'versicle')).toEqual([
+      'Custódi nos, Dómine, ut pupíllam óculi, allelúia.',
+      'Sub umbra alárum tuárum prótege nos, allelúia.'
+    ]);
+  }, 240_000);
+
   it('keeps Reduced 1955 Jan 6/7 minor hours in chapter-responsory-versicle-oration order after psalmody', async () => {
     const { engine, resolvedCorpus } = await createHarness('Reduced - 1955');
 
@@ -2687,6 +2864,7 @@ function psalmodyTexts(
 function sectionTexts(
   composed: ReturnType<typeof composeHour>,
   slot:
+    | 'invitatory'
     | 'chapter'
     | 'hymn'
     | 'responsory'
@@ -2765,5 +2943,16 @@ function loadScriptureTransferTables() {
     .map((name) => ({
       yearKey: name.slice(0, -4),
       entries: parseScriptureTransfer(readFileSync(resolve(dir, name), 'utf8'))
+    }));
+}
+
+function loadTemporalSubstitutionTables() {
+  const dir = resolve(UPSTREAM_ROOT, 'Tabulae/Tempora');
+  return readdirSync(dir)
+    .filter((name) => name.endsWith('.txt'))
+    .sort((left, right) => left.localeCompare(right))
+    .map((name) => ({
+      name: name.slice(0, -4),
+      entries: parseTemporalSubstitutions(readFileSync(resolve(dir, name), 'utf8'))
     }));
 }
