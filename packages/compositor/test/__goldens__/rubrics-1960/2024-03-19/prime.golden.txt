@@ -3,7 +3,7 @@ date: 2024-03-19
 hour: prime
 celebration: S. Joseph Sponsi B.M.V. Confessoris
 languages: Latin
-section count: 8
+section count: 7
 warning count: 0
 
 [section #0 type=other slot=incipit reference=horas/Ordinarium/Prima#Incipit languages=Latin]
@@ -96,17 +96,12 @@ warning count: 0
   Latin: text(" ") · citation("Sap 10:10")
   Latin: [v.] text("Prófugum justum dedúxit Sapiéntia per vias rectas, et osténdit illi regnum Dei, et dedit illi sciéntiam sanctórum; honestávit illum in labóribus, et complévit labóres illíus.")
 
-[section #4 type=versicle slot=versicle reference=horas/Latin/Sancti/03-19#Versum 1 languages=Latin]
-  Latin: text("_")
-  Latin: [V.] text("Constítuit eum dóminum domus suæ.")
-  Latin: [R.] text("Et príncipem omnis possessiónis suæ.")
-
-[section #5 type=oration slot=oration reference=horas/Latin/Sancti/03-19#Oratio languages=Latin]
+[section #4 type=oration slot=oration reference=horas/Latin/Sancti/03-19#Oratio languages=Latin]
   Latin: text("Sanctíssimæ Genetrícis tuæ sponsi, quǽsumus, Dómine, méritis adjuvémur; ut quod possibílitas nostra non óbtinet, ejus nobis intercessióne donétur.")
   Latin: [r.] text("Qui vivis et regnas cum Deo Patre, in unitáte Spíritus Sancti, Deus, per ómnia sǽcula sæculórum.")
   Latin: [R.] text("Amen.")
 
-[section #6 type=martyrology slot=martyrology reference=prime-martyrology:03-20 languages=Latin]
+[section #5 type=martyrology slot=martyrology reference=prime-martyrology:03-20 languages=Latin]
   Latin: [v.] text("Tertiodécimo Kaléndas Aprílis Luna nona Anno Dómini 2024")
   Latin: text("_")
   Latin: [r.] text("In Judǽa natális sancti Jóachim, patris immaculátæ Vírginis Genetrícis Dei Maríæ, Confessóris. Ipsíus tamen festum ágitur décimo séptimo Kaléndas Septémbris.")
@@ -125,7 +120,7 @@ warning count: 0
   Latin: [v.] text("Sancta María et omnes Sancti intercédant pro nobis ad Dóminum, ut nos mereámur ab eo adjuvári et salvári, qui vivit et regnat in sǽcula sæculórum.")
   Latin: [R.] text("Amen.")
 
-[section #7 type=other slot=de-officio-capituli reference=horas/Ordinarium/Prima#De Officio Capituli languages=Latin]
+[section #6 type=other slot=de-officio-capituli reference=horas/Ordinarium/Prima#De Officio Capituli languages=Latin]
   Latin: [V.] text("Deus in adjutórium meum inténde.")
   Latin: [R.] text("Dómine, ad adjuvándum me festína.")
   Latin: [V.] text("Deus in adjutórium meum inténde.")

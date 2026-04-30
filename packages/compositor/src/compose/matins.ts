@@ -23,7 +23,7 @@ import {
 import { isWholeAntiphonSlot, markAntiphonFirstText } from '../emit/antiphon-marker.js';
 import { emitSection } from '../emit/sections.js';
 import { flattenConditionals } from '../flatten/evaluate-conditionals.js';
-import { expandDeferredNodes } from '../resolve/expand-deferred-nodes.js';
+import { expandDeferredNodes, interleaveSeparators } from '../resolve/expand-deferred-nodes.js';
 import {
   materializeInvitatoryContent,
   resolveInvitatoryAntiphonContent,
@@ -216,6 +216,7 @@ function composeInvitatorium(
     const flattened = flattenConditionals(expanded, args.context);
     const transformed = applyDirectives('invitatory', flattened, {
       hour: 'matins',
+      language,
       directives: args.directives
     });
     if (transformed.length > 0) {
@@ -632,6 +633,7 @@ function composeMergedSlot(
         const flattened = flattenConditionals(antiphonOnly, args.context);
         const transformed = applyDirectives(slot, flattened, {
           hour: 'matins',
+          language: lang,
           directives: args.directives,
           gloriaOmittiturReplacement
         });
@@ -683,6 +685,7 @@ function composeMergedSlot(
       const flattened = flattenConditionals(expanded, args.context);
       const transformed = applyDirectives(slot, flattened, {
         hour: 'matins',
+        language: lang,
         directives: args.directives,
         gloriaOmittiturReplacement
       });
@@ -690,10 +693,14 @@ function composeMergedSlot(
         slot === 'hymn'
           ? replaceFinalHymnDoxology(transformed, hymnDoxology?.get(lang))
           : transformed;
+      const withLiturgicalLineBreaks =
+        slot === 'lectio-brevis' || slot === 'te-deum'
+          ? interleaveSeparators(withDoxology)
+          : withDoxology;
       const lineSeparated =
         slot === 'psalmody' && !isAntiphon && psalmIndex !== undefined
-          ? separatePsalmVerseLines(withDoxology)
-          : withDoxology;
+          ? separatePsalmVerseLines(withLiturgicalLineBreaks)
+          : withLiturgicalLineBreaks;
       const rangedPsalmBody =
         slot === 'psalmody' && !isAntiphon && psalmIndex !== undefined
           ? slicePsalmContentByVerseRange(

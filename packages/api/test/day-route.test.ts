@@ -214,7 +214,9 @@ describeIfUpstream('day route integration', () => {
     expect(firstPsalmHeading(body, 'sext')).toBe('Psalmus 55 [1]');
     expect(firstPsalmHeading(body, 'none')).toBe('Psalmus 58(2-11) [1]');
     expect(firstPsalmHeading(body, 'vespers')).toBe('Psalmus 127 [1]');
-    expect(firstAntiphonText(body, 'compline')).not.toMatch(/^Allelú[ij]a,/u);
+    expect(firstAntiphonText(body, 'compline')).toMatch(
+      /^Allelú[ij]a, \* allelú[ij]a, allelú[ij]a\.$/u
+    );
     expect(slotLineTexts(body, 'lauds', 'chapter', 'la').map((line) => line.trimStart())).toEqual([
       'Sap 5:1',
       'Stabunt iusti in magna constántia advérsus eos qui se angustiavérunt et qui abstulérunt labóres eórum.',

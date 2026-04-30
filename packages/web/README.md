@@ -60,7 +60,7 @@ public-env convention.
 | `VITE_OFFICIUM_PUBLIC_BASE_URL` | empty | Public origin of the demo (used in reports). |
 | `VITE_OFFICIUM_GITHUB_REPORT_URL` | `https://github.com/miggalvez/officium-novum/issues/new` | Base URL for reviewer-report GitHub issues. |
 | `VITE_OFFICIUM_REPORT_EMAIL` | empty | Optional reviewer-report email address. |
-| `VITE_OFFICIUM_BUILD_SHA` | git short SHA at build time | Override the build SHA shown in reports. |
+| `VITE_OFFICIUM_BUILD_SHA` | Vercel commit SHA or git short SHA at build time | Override the build SHA shown in reports. |
 | `VITE_OFFICIUM_BUILD_DATE` | ISO timestamp at build time | Override the build date. |
 | `VITE_OFFICIUM_ENV` | `development` | One of `development`, `preview`, `production`. |
 

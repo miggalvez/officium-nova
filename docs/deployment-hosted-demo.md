@@ -69,8 +69,9 @@ VITE_OFFICIUM_REPORT_EMAIL=reports@example.org
 VITE_OFFICIUM_ENV=production
 ```
 
-`VITE_OFFICIUM_BUILD_SHA` and `VITE_OFFICIUM_BUILD_DATE` default to the current git SHA
-and ISO timestamp; override only if you build outside a git checkout.
+`VITE_OFFICIUM_BUILD_SHA` and `VITE_OFFICIUM_BUILD_DATE` default to the Vercel
+deployment SHA when available, then the current git SHA and ISO timestamp; override
+only if you build outside a git-aware deployment context.
 
 ### Static-host configuration
 

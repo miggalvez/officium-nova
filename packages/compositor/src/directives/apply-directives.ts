@@ -3,6 +3,7 @@ import type { HourDirective, SlotName } from '@officium-novum/rubrical-engine';
 
 export interface DirectiveContext {
   readonly hour: string;
+  readonly language?: string;
   readonly directives: readonly HourDirective[];
   readonly gloriaOmittiturReplacement?: readonly TextContent[];
 }
@@ -70,8 +71,12 @@ function transformsFor(
   }
 
   if (flags.has('omit-alleluia')) pipeline.push(omitAlleluia);
-  if (flags.has('add-alleluia')) pipeline.push(addAlleluia);
-  if (flags.has('add-versicle-alleluia')) pipeline.push(addVersicleAlleluia);
+  if (flags.has('add-alleluia')) {
+    pipeline.push((slot, content) => addAlleluia(slot, content, context));
+  }
+  if (flags.has('add-versicle-alleluia')) {
+    pipeline.push((slot, content) => addVersicleAlleluia(slot, content, context));
+  }
 
   if (flags.has('omit-suffragium')) pipeline.push(clearSlot('suffragium'));
 
@@ -213,11 +218,18 @@ function stripAlleluiaOnNode(node: TextContent): TextContent | null {
   return node;
 }
 
-function addAlleluia(slot: SlotName, content: readonly TextContent[]): readonly TextContent[] {
+function addAlleluia(
+  slot: SlotName,
+  content: readonly TextContent[],
+  context: DirectiveContext
+): readonly TextContent[] {
   if (slot === 'psalmody') {
     return appendAlleluiaToPsalmodyAntiphons(content);
   }
   if (slot === 'chapter') {
+    if (context.hour === 'prime') {
+      return content;
+    }
     if (containsAntiphonSubstitution(content) || endsWithBareDeoGratias(content)) {
       return content;
     }
@@ -228,23 +240,70 @@ function addAlleluia(slot: SlotName, content: readonly TextContent[]): readonly 
 
 function addVersicleAlleluia(
   slot: SlotName,
-  content: readonly TextContent[]
+  content: readonly TextContent[],
+  context: DirectiveContext
 ): readonly TextContent[] {
   if (slot !== 'versicle' && slot !== 'responsory') return content;
-  const out = content.slice();
-  for (let i = out.length - 1; i >= 0; i--) {
-    const node = out[i]!;
-    if (node.type === 'verseMarker') {
-      if (hasAlleluiaTail(node.text)) return Object.freeze(out);
-      out[i] = {
+  const singleSuffix = `, ${alleluiaWord(context.language)}.`;
+  const doubleSuffix = `, ${alleluiaWord(context.language)}, ${alleluiaWord(context.language)}.`;
+
+  if (slot === 'responsory' && content.some((node) => isShortResponsoryNode(node))) {
+    let changed = false;
+    const out = content.map((node) => {
+      if (!isShortResponsoryResponseNode(node) || hasAlleluiaTail(node.text)) {
+        return node;
+      }
+      changed = true;
+      return {
         type: 'verseMarker',
         marker: node.marker,
-        text: appendSuffixBeforeLegacyPayload(node.text, ', allelúja, allelúja.')
-      };
-      return Object.freeze(out);
-    }
+        text: appendSuffixBeforeLegacyPayload(node.text, doubleSuffix)
+      } satisfies TextContent;
+    });
+    return changed ? Object.freeze(out) : content;
   }
-  return Object.freeze(out);
+  if (slot === 'responsory') {
+    return content;
+  }
+
+  let changed = false;
+  const out = content.map((node) => {
+    if (
+      node.type !== 'verseMarker' ||
+      !/^(?:v\.?|r\.?)$/iu.test(node.marker.trim()) ||
+      hasAlleluiaTail(node.text)
+    ) {
+      return node;
+    }
+    changed = true;
+    return {
+      type: 'verseMarker',
+      marker: node.marker,
+      text: appendSuffixBeforeLegacyPayload(node.text, singleSuffix)
+    } satisfies TextContent;
+  });
+  return changed ? Object.freeze(out) : content;
+}
+
+function alleluiaWord(language: string | undefined): string {
+  return language === 'English' ? 'alleluia' : 'allelúia';
+}
+
+function isShortResponsoryNode(node: TextContent): boolean {
+  return node.type === 'verseMarker' && /^r\.?\s*br\.?$/iu.test(node.marker.trim());
+}
+
+function isShortResponsoryResponseNode(
+  node: TextContent
+): node is Extract<TextContent, { type: 'verseMarker' }> {
+  if (node.type !== 'verseMarker') {
+    return false;
+  }
+  const marker = node.marker.trim();
+  if (!/^r\.?(?:\s*br\.?)?$/iu.test(marker)) {
+    return false;
+  }
+  return !GLORIA_PATRI_RX.test(node.text) && !SICUT_ERAT_RX.test(node.text);
 }
 
 function appendAlleluiaToLastText(

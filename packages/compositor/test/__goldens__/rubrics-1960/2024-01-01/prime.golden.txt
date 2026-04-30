@@ -3,7 +3,7 @@ date: 2024-01-01
 hour: prime
 celebration: Die Octavæ Nativitatis Domini
 languages: Latin
-section count: 8
+section count: 7
 warning count: 0
 
 [section #0 type=other slot=incipit reference=horas/Ordinarium/Prima#Incipit languages=Latin]
@@ -96,17 +96,12 @@ warning count: 0
   Latin: text(" ") · citation("Heb 1:11-12")
   Latin: [v.] text("Ipsi períbunt, tu autem permanébis; et omnes sicut vestiméntum veteráscent: et velut amíctum mutábis eos, et mutabúntur: tu autem idem ipse es, et anni tui non defícient.")
 
-[section #4 type=versicle slot=versicle reference=horas/Latin/Sancti/01-01#Versum 1 languages=Latin]
-  Latin: text("_")
-  Latin: [V.] text("Verbum caro factum est, allelúja.")
-  Latin: [R.] text("Et habitávit in nobis, allelúja.")
-
-[section #5 type=oration slot=oration reference=horas/Latin/Sancti/01-01#Oratio languages=Latin]
+[section #4 type=oration slot=oration reference=horas/Latin/Sancti/01-01#Oratio languages=Latin]
   Latin: text("Deus, qui salútis ætérnæ, beátæ Maríæ virginitáte fecúnda, humáno géneri prǽmia præstitísti: tríbue, quǽsumus; ut ipsam pro nobis intercédere sentiámus, per quam merúimus auctórem vitæ suscípere, Dóminum nostrum Jesum Christum Fílium tuum:")
   Latin: [r.] text("Qui tecum vivit et regnat in unitáte Spíritus Sancti, Deus, per ómnia sǽcula sæculórum.")
   Latin: [R.] text("Amen.")
 
-[section #6 type=martyrology slot=martyrology reference=prime-martyrology:01-02 languages=Latin]
+[section #5 type=martyrology slot=martyrology reference=prime-martyrology:01-02 languages=Latin]
   Latin: [v.] text("Quarto Nonas Januárii Luna vicésima prima Anno Dómini 2024")
   Latin: text("_")
   Latin: [r.] text("Romæ commemorátio plurimórum sanctórum Mártyrum, qui, spreto Diocletiáni Imperatóris edícto quo tradi sacri Códices jubebántur, pótius córpora carnifícibus quam sancta dare cánibus maluérunt.")
@@ -123,7 +118,7 @@ warning count: 0
   Latin: [v.] text("Sancta María et omnes Sancti intercédant pro nobis ad Dóminum, ut nos mereámur ab eo adjuvári et salvári, qui vivit et regnat in sǽcula sæculórum.")
   Latin: [R.] text("Amen.")
 
-[section #7 type=other slot=de-officio-capituli reference=horas/Ordinarium/Prima#De Officio Capituli languages=Latin]
+[section #6 type=other slot=de-officio-capituli reference=horas/Ordinarium/Prima#De Officio Capituli languages=Latin]
   Latin: [V.] text("Deus in adjutórium meum inténde.")
   Latin: [R.] text("Dómine, ad adjuvándum me festína.")
   Latin: [V.] text("Deus in adjutórium meum inténde.")

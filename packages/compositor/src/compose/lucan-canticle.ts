@@ -79,6 +79,7 @@ export function composeLucanCanticleSection(args: LucanCanticleComposeArgs): Sec
     const flattened = flattenConditionals(expanded, args.context);
     const transformed = applyDirectives(args.slot, flattened, {
       hour: args.hour,
+      language,
       directives: args.directives,
       gloriaOmittiturReplacement
     });
@@ -190,6 +191,7 @@ function resolveRepeatedCanticleAntiphon(
     markAntiphonFirstText(flattened),
     {
       hour: args.hour,
+      language,
       directives: args.directives
     }
   );

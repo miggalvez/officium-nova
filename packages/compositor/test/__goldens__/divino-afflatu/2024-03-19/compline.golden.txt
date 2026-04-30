@@ -3,7 +3,7 @@ date: 2024-03-19
 hour: compline
 celebration: S. Joseph Sponsi B.M.V. Confessoris
 languages: Latin
-section count: 11
+section count: 12
 warning count: 0
 
 [section #0 type=other slot=incipit reference=horas/Ordinarium/Completorium#Incipit languages=Latin]
@@ -31,7 +31,7 @@ warning count: 0
   Latin: text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
   Latin: [v.] text("Laus tibi, Dómine, Rex ætérnæ glóriæ.")
 
-[section #2 type=psalm slot=psalmody reference=horas/Latin/Psalterium/Psalmi/Psalmi minor#Completorium:Feria III languages=Latin]
+[section #2 type=psalm slot=psalmody reference=horas/Latin/Psalterium/Psalmi/Psalmi minor#Completorium:Feria III#antiphon languages=Latin]
   Latin: [Ant.] text("Tu, Dómine, * servábis nos: et custódies nos in ætérnum.")
   Latin: text("Psalmus 11 [1]")
   Latin: text("11:2 Salvum me fac, Dómine, quóniam defécit sanctus: * quóniam diminútæ sunt veritátes a fíliis hóminum.")
@@ -43,12 +43,19 @@ warning count: 0
   Latin: text("11:7 Elóquia Dómini, elóquia casta: * argéntum igne examinátum, probátum terræ purgátum séptuplum.")
   Latin: text("11:8 Tu, Dómine, servábis nos: et custódies nos * a generatióne hac in ætérnum.")
   Latin: text("11:9 In circúitu ímpii ámbulant: * secúndum altitúdinem tuam multiplicásti fílios hóminum.")
+  Latin: [V.] text("Glória Patri, et Fílio, * et Spirítui Sancto.")
+  Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
+  Latin: [Ant.] text("Tu, Dómine, servábis nos: et custódies nos in ætérnum.")
+  Latin: text("Psalmus 12 [2]")
   Latin: text("12:1 Úsquequo, Dómine, obliviscéris me in finem? * Úsquequo avértis fáciem tuam a me?")
   Latin: text("12:2 Quámdiu ponam consília in ánima mea, * dolórem in corde meo per diem?")
   Latin: text("12:3 Úsquequo exaltábitur inimícus meus super me? * réspice, et exáudi me, Dómine, Deus meus.")
   Latin: text("12:4 Illúmina óculos meos ne umquam obdórmiam in morte: * nequándo dicat inimícus meus: Præválui advérsus eum.")
   Latin: text("12:5 Qui tríbulant me, exsultábunt si motus fúero: * ego autem in misericórdia tua sperávi.")
   Latin: text("12:6 Exsultábit cor meum in salutári tuo: cantábo Dómino qui bona tríbuit mihi: * et psallam nómini Dómini altíssimi.")
+  Latin: [V.] text("Glória Patri, et Fílio, * et Spirítui Sancto.")
+  Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
+  Latin: text("Psalmus 15 [3]")
   Latin: text("15:1 Consérva me, Dómine, quóniam sperávi in te. ‡ Dixi Dómino: Deus meus es tu, * quóniam bonórum meórum non eges.")
   Latin: text("15:3 Sanctis, qui sunt in terra ejus, * mirificávit omnes voluntátes meas in eis.")
   Latin: text("15:4 Multiplicátæ sunt infirmitátes eórum: * póstea acceleravérunt.")
@@ -97,7 +104,10 @@ warning count: 0
   Latin: [V.] text("Constítuit eum dóminum domus suæ.")
   Latin: [R.] text("Et príncipem omnis possessiónis suæ.")
 
-[section #7 type=canticle slot=canticle-ad-nunc-dimittis reference=horas/Latin/Psalterium/Psalmorum/Psalm233#__preamble languages=Latin]
+[section #7 type=antiphon slot=antiphon-ad-nunc-dimittis reference=horas/Latin/Psalterium/Special/Minor Special#Ant 4 languages=Latin]
+  Latin: [Ant.] text("Salva nos, * Dómine, vigilántes, custódi nos dormiéntes; ut vigilémus cum Christo, et requiescámus in pace.")
+
+[section #8 type=canticle slot=canticle-ad-nunc-dimittis reference=horas/Latin/Psalterium/Psalmorum/Psalm233#__preamble languages=Latin]
   Latin: text("Canticum Simeonis")
   Latin: text("Luc. 2:29-32")
   Latin: text("2:29 Nunc dimíttis + servum tuum, Dómine, * secúndum verbum tuum in pace:")
@@ -106,13 +116,14 @@ warning count: 0
   Latin: text("2:32 Lumen ad revelatiónem géntium, * et glóriam plebis tuæ Israël.")
   Latin: [V.] text("Glória Patri, et Fílio, * et Spirítui Sancto.")
   Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
+  Latin: [Ant.] text("Salva nos, Dómine, vigilántes, custódi nos dormiéntes; ut vigilémus cum Christo, et requiescámus in pace.")
 
-[section #8 type=oration slot=oration reference=horas/Latin/Sancti/03-19#Oratio languages=Latin]
+[section #9 type=oration slot=oration reference=horas/Latin/Sancti/03-19#Oratio languages=Latin]
   Latin: text("Sanctíssimæ Genetrícis tuæ sponsi, quǽsumus, Dómine, méritis adjuvémur; ut quod possibílitas nostra non óbtinet, ejus nobis intercessióne donétur.")
   Latin: [r.] text("Qui vivis et regnas cum Deo Patre, in unitáte Spíritus Sancti, Deus, per ómnia sǽcula sæculórum.")
   Latin: [R.] text("Amen.")
 
-[section #9 type=conclusion slot=conclusion reference=horas/Ordinarium/Completorium#Conclusio languages=Latin]
+[section #10 type=conclusion slot=conclusion reference=horas/Ordinarium/Completorium#Conclusio languages=Latin]
   Latin: [V.] text("Dóminus vobíscum.")
   Latin: [R.] text("Et cum spíritu tuo.")
   Latin: [V.] text("Dómine, exáudi oratiónem meam.")
@@ -123,7 +134,7 @@ warning count: 0
   Latin: [Benedictio.] text("Benedícat et custódiat nos omnípotens et miséricors Dóminus, + Pater, et Fílius, et Spíritus Sanctus.")
   Latin: [R.] text("Amen.")
 
-[section #10 type=antiphon slot=final-antiphon-bvm reference=horas/Ordinarium/Completorium#Antiphona finalis languages=Latin]
+[section #11 type=antiphon slot=final-antiphon-bvm reference=horas/Ordinarium/Completorium#Antiphona finalis languages=Latin]
   Latin: rubric("Deinde dicitur secreto")
   Latin: [v.] text("Pater noster, qui es in cælis, sanctificétur nomen tuum: advéniat regnum tuum: fiat volúntas tua, sicut in cælo et in terra. Panem nostrum cotidiánum da nobis hódie: et dimítte nobis débita nostra, sicut et nos dimíttimus debitóribus nostris: et ne nos indúcas in tentatiónem: sed líbera nos a malo. Amen.")
   Latin: [v.] text("Ave María, grátia plena; Dóminus tecum: benedícta tu in muliéribus, et benedíctus fructus ventris tui Jesus. Sancta María, Mater Dei, ora pro nobis peccatóribus, nunc et in hora mortis nostræ. Amen.")

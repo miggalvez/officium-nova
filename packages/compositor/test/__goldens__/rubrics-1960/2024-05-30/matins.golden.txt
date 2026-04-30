@@ -151,7 +151,11 @@ warning count: 0
   (no lines)
 
 [section #14 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Tempora/Pent01-4#Lectio1 languages=Latin]
-  Latin: text("De Epístola prima beáti Pauli Apóstoli ad Corínthios ") · citation("1 Cor 11:20-22") · text("20 Conveniéntibus ergo vobis in unum, jam non est Domínicam cenam manducáre.21 Unusquísque enim suam cenam præsúmit ad manducándum. Et álius quidem ésurit, álius autem ébrius est. 22 Numquid domos non habétis ad manducándum et bibéndum? aut Ecclésiam Dei contémnitis, et confúnditis eos, qui non habent? Quid dicam vobis? Laudo vos? In hoc non laudo.")
+  Latin: text("De Epístola prima beáti Pauli Apóstoli ad Corínthios")
+  Latin: text(" ") · citation("1 Cor 11:20-22")
+  Latin: text("20 Conveniéntibus ergo vobis in unum, jam non est Domínicam cenam manducáre.")
+  Latin: text("21 Unusquísque enim suam cenam præsúmit ad manducándum. Et álius quidem ésurit, álius autem ébrius est. ")
+  Latin: text("22 Numquid domos non habétis ad manducándum et bibéndum? aut Ecclésiam Dei contémnitis, et confúnditis eos, qui non habent? Quid dicam vobis? Laudo vos? In hoc non laudo.")
 
 [section #15 type=responsory slot=responsory reference=horas/Latin/Tempora/Pent01-4#Responsory1 languages=Latin]
   Latin: [R.] text("Immolábit hædum multitúdo filiórum Israël ad vésperam Paschæ:")
@@ -173,7 +177,11 @@ warning count: 0
   (no lines)
 
 [section #20 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Tempora/Pent01-4#Lectio2 languages=Latin]
-  Latin: text(" ") · citation("1 Cor 11:23-26") · text("23 Ego enim accépi a Dómino quod et trádidi vobis, quóniam Dóminus Jesus, in qua nocte tradebátur, accépit panem, 24 et grátias agens fregit, et dixit: Accípite, et manducáte: hoc est corpus meum, quod pro vobis tradétur: hoc fácite in meam commemoratiónem. 25 Simíliter et cálicem, postquam cœnávit, dicens: Hic calix novum testaméntum est in meo sánguine: hoc fácite, quotiescúmque bibétis, in meam commemoratiónem. 26 Quotiescúmque enim manducábitis panem hunc, et cálicem bibétis, mortem Dómini annuntiábitis donec véniat.")
+  Latin: text(" ") · citation("1 Cor 11:23-26")
+  Latin: text("23 Ego enim accépi a Dómino quod et trádidi vobis, quóniam Dóminus Jesus, in qua nocte tradebátur, accépit panem, ")
+  Latin: text("24 et grátias agens fregit, et dixit: Accípite, et manducáte: hoc est corpus meum, quod pro vobis tradétur: hoc fácite in meam commemoratiónem. ")
+  Latin: text("25 Simíliter et cálicem, postquam cœnávit, dicens: Hic calix novum testaméntum est in meo sánguine: hoc fácite, quotiescúmque bibétis, in meam commemoratiónem. ")
+  Latin: text("26 Quotiescúmque enim manducábitis panem hunc, et cálicem bibétis, mortem Dómini annuntiábitis donec véniat.")
 
 [section #21 type=responsory slot=responsory reference=horas/Latin/Tempora/Pent01-4#Responsory2 languages=Latin]
   Latin: [R.] text("Comedétis carnes, et saturabímini pánibus:")
@@ -195,7 +203,13 @@ warning count: 0
   (no lines)
 
 [section #26 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Tempora/Pent01-4#Lectio3 languages=Latin]
-  Latin: text(" ") · citation("1 Cor 11:27-32") · text("27 Itaque quicúmque manducáverit panem hunc, vel bíberit cálicem Dómini indígne, reus erit córporis et sánguinis Dómini. 28 Probet autem seípsum homo: et sic de pane illo edat, et de cálice bibat. 29 Qui enim mandúcat et bibit indígne, judícium sibi mandúcat et bibit, non dijúdicans corpus Dómini. 30 Ideo inter vos multi infírmi et imbecílles, et dórmiunt multi. 31 Quod, si nosmetípsos dijudicarémus, non útique judicarémur. 32 Dum judicámur autem, a Dómino corrípimur, ut non cum hoc mundo damnémur.")
+  Latin: text(" ") · citation("1 Cor 11:27-32")
+  Latin: text("27 Itaque quicúmque manducáverit panem hunc, vel bíberit cálicem Dómini indígne, reus erit córporis et sánguinis Dómini. ")
+  Latin: text("28 Probet autem seípsum homo: et sic de pane illo edat, et de cálice bibat. ")
+  Latin: text("29 Qui enim mandúcat et bibit indígne, judícium sibi mandúcat et bibit, non dijúdicans corpus Dómini. ")
+  Latin: text("30 Ideo inter vos multi infírmi et imbecílles, et dórmiunt multi. ")
+  Latin: text("31 Quod, si nosmetípsos dijudicarémus, non útique judicarémur. ")
+  Latin: text("32 Dum judicámur autem, a Dómino corrípimur, ut non cum hoc mundo damnémur.")
 
 [section #27 type=responsory slot=responsory reference=horas/Latin/Tempora/Pent01-4#Responsory3 languages=Latin]
   Latin: [R.] text("Respéxit Elías ad caput suum subcinerícium panem: qui surgens comédit et bibit:")
@@ -294,7 +308,9 @@ warning count: 0
   (no lines)
 
 [section #39 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Tempora/Pent01-4#Lectio4 languages=Latin]
-  Latin: text("Sermo sancti Thomæ Aquinátis") · text(" ") · rubric("Lectio iv in opusculo 57") · text(" Imménsa divínæ largitátis benefícia, exhíbita pópulo christiáno, inæstimábilem ei cónferunt dignitátem. Neque enim est, aut fuit aliquándo tam grandis nátio, quæ hábeat deos appropinquántes sibi, sicut adest nobis Deus noster.  Unigénitus síquidem Dei Fílius, suæ divinitátis volens nos esse partícipes, natúram nostram assúmpsit, ut hómines deos fáceret factus homo. Et hoc ínsuper, quod de nostro assúmpsit, totum nobis cóntulit ad salútem. Corpus namque suum pro nostra reconcilatióne in ara crucis hóstiam óbtulit Deo Patri, sánguinem suum fudit in prétium simul et lavácrum; ut redémpti a miserábili servitúte, a peccátis ómnibus mundarémur. Ut autem tanti benefícii jugis in nobis manéret memória, corpus suum in cibum, et sánguinem suum in potum, sub spécie panis et vini suméndum fidélibus derelíquit.")
+  Latin: text("Sermo sancti Thomæ Aquinátis")
+  Latin: rubric("Lectio iv in opusculo 57")
+  Latin: text("Imménsa divínæ largitátis benefícia, exhíbita pópulo christiáno, inæstimábilem ei cónferunt dignitátem. Neque enim est, aut fuit aliquándo tam grandis nátio, quæ hábeat deos appropinquántes sibi, sicut adest nobis Deus noster.  Unigénitus síquidem Dei Fílius, suæ divinitátis volens nos esse partícipes, natúram nostram assúmpsit, ut hómines deos fáceret factus homo. Et hoc ínsuper, quod de nostro assúmpsit, totum nobis cóntulit ad salútem. Corpus namque suum pro nostra reconcilatióne in ara crucis hóstiam óbtulit Deo Patri, sánguinem suum fudit in prétium simul et lavácrum; ut redémpti a miserábili servitúte, a peccátis ómnibus mundarémur. Ut autem tanti benefícii jugis in nobis manéret memória, corpus suum in cibum, et sánguinem suum in potum, sub spécie panis et vini suméndum fidélibus derelíquit.")
 
 [section #40 type=responsory slot=responsory reference=horas/Latin/Tempora/Pent01-4#Responsory4 languages=Latin]
   Latin: [R.] text("Cenántibus illis, accépit Jesus panem, et benedíxit, ac fregit, dedítque discípulis suis, et ait:")
@@ -433,8 +449,12 @@ warning count: 0
   (no lines)
 
 [section #64 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Tempora/Pent01-4#Lectio7 languages=Latin]
-  Latin: text("Léctio sancti Evangélii secúndum Joánnem ") · citation("Joannes 6:56-59") · text("In illo témpore: Dixit Jesus turbis Judæórum: Caro mea vere est cibus, et sanguis meus vere est potus. Et réliqua.")
-  Latin: text("Homilía sancti Augustíni Epíscopi") · text(" ") · rubric("Tractatus 26 in Joannem, sub finem") · text(" Cum cibo et potu id áppetant hómines, ut neque esúriant, neque sítiant: hoc veráciter non præstat, nisi iste cibus et potus, qui eos, a quibus súmitur, immortáles et incorruptíbiles facit; id est, socíetas ipsa Sanctórum, ubi pax erit et únitas plena atque perfécta. Proptérea quippe, sicut étiam ante nos hoc intellexérunt hómines Dei, Dóminus noster Jesus Christus corpus et sánguinem suum in eis rebus commendávit, quæ ad unum áliquid redigúntur ex multis. Namque áliud in unum ex multis granis confícitur: áliud in unum ex multis ácinis cónfluit. Dénique jam expónit, quómodo id fiat, quod lóquitur; et quid sit manducáre corpus ejus, et sánguinem bíbere.")
+  Latin: text("Léctio sancti Evangélii secúndum Joánnem")
+  Latin: text(" ") · citation("Joannes 6:56-59")
+  Latin: text("In illo témpore: Dixit Jesus turbis Judæórum: Caro mea vere est cibus, et sanguis meus vere est potus. Et réliqua.")
+  Latin: text("Homilía sancti Augustíni Epíscopi")
+  Latin: rubric("Tractatus 26 in Joannem, sub finem")
+  Latin: text("Cum cibo et potu id áppetant hómines, ut neque esúriant, neque sítiant: hoc veráciter non præstat, nisi iste cibus et potus, qui eos, a quibus súmitur, immortáles et incorruptíbiles facit; id est, socíetas ipsa Sanctórum, ubi pax erit et únitas plena atque perfécta. Proptérea quippe, sicut étiam ante nos hoc intellexérunt hómines Dei, Dóminus noster Jesus Christus corpus et sánguinem suum in eis rebus commendávit, quæ ad unum áliquid redigúntur ex multis. Namque áliud in unum ex multis granis confícitur: áliud in unum ex multis ácinis cónfluit. Dénique jam expónit, quómodo id fiat, quod lóquitur; et quid sit manducáre corpus ejus, et sánguinem bíbere.")
 
 [section #65 type=responsory slot=responsory reference=horas/Latin/Tempora/Pent01-4#Responsory7 languages=Latin]
   Latin: [R.] text("Qui mandúcat meam carnem et bibit meum sánguinem,")
@@ -456,8 +476,12 @@ warning count: 0
   (no lines)
 
 [section #70 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Tempora/Pent01-4#Lectio7 languages=Latin]
-  Latin: text("Léctio sancti Evangélii secúndum Joánnem ") · citation("Joannes 6:56-59") · text("In illo témpore: Dixit Jesus turbis Judæórum: Caro mea vere est cibus, et sanguis meus vere est potus. Et réliqua.")
-  Latin: text("Homilía sancti Augustíni Epíscopi") · text(" ") · rubric("Tractatus 26 in Joannem, sub finem") · text(" Cum cibo et potu id áppetant hómines, ut neque esúriant, neque sítiant: hoc veráciter non præstat, nisi iste cibus et potus, qui eos, a quibus súmitur, immortáles et incorruptíbiles facit; id est, socíetas ipsa Sanctórum, ubi pax erit et únitas plena atque perfécta. Proptérea quippe, sicut étiam ante nos hoc intellexérunt hómines Dei, Dóminus noster Jesus Christus corpus et sánguinem suum in eis rebus commendávit, quæ ad unum áliquid redigúntur ex multis. Namque áliud in unum ex multis granis confícitur: áliud in unum ex multis ácinis cónfluit. Dénique jam expónit, quómodo id fiat, quod lóquitur; et quid sit manducáre corpus ejus, et sánguinem bíbere.")
+  Latin: text("Léctio sancti Evangélii secúndum Joánnem")
+  Latin: text(" ") · citation("Joannes 6:56-59")
+  Latin: text("In illo témpore: Dixit Jesus turbis Judæórum: Caro mea vere est cibus, et sanguis meus vere est potus. Et réliqua.")
+  Latin: text("Homilía sancti Augustíni Epíscopi")
+  Latin: rubric("Tractatus 26 in Joannem, sub finem")
+  Latin: text("Cum cibo et potu id áppetant hómines, ut neque esúriant, neque sítiant: hoc veráciter non præstat, nisi iste cibus et potus, qui eos, a quibus súmitur, immortáles et incorruptíbiles facit; id est, socíetas ipsa Sanctórum, ubi pax erit et únitas plena atque perfécta. Proptérea quippe, sicut étiam ante nos hoc intellexérunt hómines Dei, Dóminus noster Jesus Christus corpus et sánguinem suum in eis rebus commendávit, quæ ad unum áliquid redigúntur ex multis. Namque áliud in unum ex multis granis confícitur: áliud in unum ex multis ácinis cónfluit. Dénique jam expónit, quómodo id fiat, quod lóquitur; et quid sit manducáre corpus ejus, et sánguinem bíbere.")
 
 [section #71 type=responsory slot=responsory reference=horas/Latin/Tempora/Pent01-4#Responsory8 languages=Latin]
   Latin: [R.] text("Misit me vivens Pater, et ego vivo propter Patrem:")
@@ -482,12 +506,49 @@ warning count: 0
   (no lines)
 
 [section #76 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Tempora/Pent01-4#Lectio7 languages=Latin]
-  Latin: text("Léctio sancti Evangélii secúndum Joánnem ") · citation("Joannes 6:56-59") · text("In illo témpore: Dixit Jesus turbis Judæórum: Caro mea vere est cibus, et sanguis meus vere est potus. Et réliqua.")
-  Latin: text("Homilía sancti Augustíni Epíscopi") · text(" ") · rubric("Tractatus 26 in Joannem, sub finem") · text(" Cum cibo et potu id áppetant hómines, ut neque esúriant, neque sítiant: hoc veráciter non præstat, nisi iste cibus et potus, qui eos, a quibus súmitur, immortáles et incorruptíbiles facit; id est, socíetas ipsa Sanctórum, ubi pax erit et únitas plena atque perfécta. Proptérea quippe, sicut étiam ante nos hoc intellexérunt hómines Dei, Dóminus noster Jesus Christus corpus et sánguinem suum in eis rebus commendávit, quæ ad unum áliquid redigúntur ex multis. Namque áliud in unum ex multis granis confícitur: áliud in unum ex multis ácinis cónfluit. Dénique jam expónit, quómodo id fiat, quod lóquitur; et quid sit manducáre corpus ejus, et sánguinem bíbere.")
+  Latin: text("Léctio sancti Evangélii secúndum Joánnem")
+  Latin: text(" ") · citation("Joannes 6:56-59")
+  Latin: text("In illo témpore: Dixit Jesus turbis Judæórum: Caro mea vere est cibus, et sanguis meus vere est potus. Et réliqua.")
+  Latin: text("Homilía sancti Augustíni Epíscopi")
+  Latin: rubric("Tractatus 26 in Joannem, sub finem")
+  Latin: text("Cum cibo et potu id áppetant hómines, ut neque esúriant, neque sítiant: hoc veráciter non præstat, nisi iste cibus et potus, qui eos, a quibus súmitur, immortáles et incorruptíbiles facit; id est, socíetas ipsa Sanctórum, ubi pax erit et únitas plena atque perfécta. Proptérea quippe, sicut étiam ante nos hoc intellexérunt hómines Dei, Dóminus noster Jesus Christus corpus et sánguinem suum in eis rebus commendávit, quæ ad unum áliquid redigúntur ex multis. Namque áliud in unum ex multis granis confícitur: áliud in unum ex multis ácinis cónfluit. Dénique jam expónit, quómodo id fiat, quod lóquitur; et quid sit manducáre corpus ejus, et sánguinem bíbere.")
 
 [section #77 type=te-deum slot=te-deum reference=horas/Latin/Psalterium/Common/Prayers#Te Deum languages=Latin]
   Latin: [v.] text("Te Deum laudámus: * te Dóminum confitémur.")
-  Latin: text("Te ætérnum Patrem * omnis terra venerátur.Tibi omnes Ángeli, * tibi Cæli, et univérsæ Potestátes:Tibi Chérubim et Séraphim * incessábili voce proclámant:") · text(" ") · rubric("Fit reverentia") · text(" Sanctus, Sanctus, Sanctus * Dóminus Deus Sábaoth.Pleni sunt cæli et terra * majestátis glóriæ tuæ.Te gloriósus * Apostolórum chorus,Te Prophetárum * laudábilis númerus,Te Mártyrum candidátus * laudat exércitus.Te per orbem terrárum * sancta confitétur Ecclésia,Patrem * imménsæ majestátis;Venerándum tuum verum * et únicum Fílium;Sanctum quoque * Paráclitum Spíritum.Tu Rex glóriæ, * Christe.Tu Patris * sempitérnus es Fílius.") · text(" ") · rubric("Fit reverentia") · text(" Tu, ad liberándum susceptúrus hóminem: * non horruísti Vírginis úterum.Tu, devícto mortis acúleo, * aperuísti credéntibus regna cælórum.Tu ad déxteram Dei sedes, * in glória Patris.Judex créderis * esse ventúrus.") · text(" ") · rubric("Sequens versus dicitur flexis genibus") · text(" (sed rubrica cisterciensis dicitur)") · text(" ") · rubric("Fratres, quando incipiunt « Te ergo quæsumus, » exeuntes e Stallis, reverenter inclinent ad verba « Quos pretioso » et cetera") · text(" Te ergo quǽsumus, tuis fámulis súbveni, * quos pretióso sánguine redemísti.Ætérna fac cum Sanctis tuis * in glória numerári.Salvum fac pópulum tuum, Dómine, * et bénedic hereditáti tuæ.Et rege eos, * et extólle illos usque in ætérnum.Per síngulos dies * benedícimus te.") · text(" ") · rubric("Fit reverentia, secundum consuetudinem") · text(" Et laudámus nomen tuum in sǽculum, * et in sǽculum sǽculi.Dignáre, Dómine, die isto * sine peccáto nos custodíre.Miserére nostri, Dómine, * miserére nostri.Fiat misericórdia tua, Dómine, super nos, * quemádmodum sperávimus in te.In te, Dómine, sperávi: * non confúndar in ætérnum.")
+  Latin: text("Te ætérnum Patrem * omnis terra venerátur.")
+  Latin: text("Tibi omnes Ángeli, * tibi Cæli, et univérsæ Potestátes:")
+  Latin: text("Tibi Chérubim et Séraphim * incessábili voce proclámant:")
+  Latin: rubric("Fit reverentia")
+  Latin: text("Sanctus, Sanctus, Sanctus * Dóminus Deus Sábaoth.")
+  Latin: text("Pleni sunt cæli et terra * majestátis glóriæ tuæ.")
+  Latin: text("Te gloriósus * Apostolórum chorus,")
+  Latin: text("Te Prophetárum * laudábilis númerus,")
+  Latin: text("Te Mártyrum candidátus * laudat exércitus.")
+  Latin: text("Te per orbem terrárum * sancta confitétur Ecclésia,")
+  Latin: text("Patrem * imménsæ majestátis;")
+  Latin: text("Venerándum tuum verum * et únicum Fílium;")
+  Latin: text("Sanctum quoque * Paráclitum Spíritum.")
+  Latin: text("Tu Rex glóriæ, * Christe.")
+  Latin: text("Tu Patris * sempitérnus es Fílius.")
+  Latin: rubric("Fit reverentia")
+  Latin: text("Tu, ad liberándum susceptúrus hóminem: * non horruísti Vírginis úterum.")
+  Latin: text("Tu, devícto mortis acúleo, * aperuísti credéntibus regna cælórum.")
+  Latin: text("Tu ad déxteram Dei sedes, * in glória Patris.")
+  Latin: text("Judex créderis * esse ventúrus.")
+  Latin: rubric("Sequens versus dicitur flexis genibus")
+  Latin: text("(sed rubrica cisterciensis dicitur)")
+  Latin: rubric("Fratres, quando incipiunt « Te ergo quæsumus, » exeuntes e Stallis, reverenter inclinent ad verba « Quos pretioso » et cetera")
+  Latin: text("Te ergo quǽsumus, tuis fámulis súbveni, * quos pretióso sánguine redemísti.")
+  Latin: text("Ætérna fac cum Sanctis tuis * in glória numerári.")
+  Latin: text("Salvum fac pópulum tuum, Dómine, * et bénedic hereditáti tuæ.")
+  Latin: text("Et rege eos, * et extólle illos usque in ætérnum.")
+  Latin: text("Per síngulos dies * benedícimus te.")
+  Latin: rubric("Fit reverentia, secundum consuetudinem")
+  Latin: text("Et laudámus nomen tuum in sǽculum, * et in sǽculum sǽculi.")
+  Latin: text("Dignáre, Dómine, die isto * sine peccáto nos custodíre.")
+  Latin: text("Miserére nostri, Dómine, * miserére nostri.")
+  Latin: text("Fiat misericórdia tua, Dómine, super nos, * quemádmodum sperávimus in te.")
+  Latin: text("In te, Dómine, sperávi: * non confúndar in ætérnum.")
 
 [section #78 type=oration slot=oration reference=horas/Latin/Tempora/Pent01-4#Oratio languages=Latin]
   Latin: text("Deus, qui nobis sub Sacraménto mirábili passiónis tuæ memóriam reliquísti: tríbue, quǽsumus, ita nos Córporis, et Sánguinis tui sacra mystéria venerári; ut redemptiónis tuæ fructum in nobis júgiter sentiámus:")

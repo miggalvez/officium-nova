@@ -220,7 +220,9 @@ warning count: 3
   (no lines)
 
 [section #16 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/11-02#Lectio4 languages=Latin]
-  Latin: text("Ex Libro sancti Augustíni Epíscopi de cura pro mórtuis gerénda") · text(" ") · rubric("Cap 2 et 3") · text(" Curátio fúneris, condítio sepultúræ, pompa exsequiárum magis sunt vivórum solácia quam subsídia mortuórum. Nec ídeo tamen contemnénda et abiciénda sunt córpora defunctórum, maximéque justórum ac fidélium, quibus tamquam órganis et vasis ad ómnia bona ópera sancte usus est spíritus. Si enim patérna vestis et ánulus, ac si quid hujúsmodi, tanto cárius est pósteris, quanto erga paréntes major afféctus; nullo modo ipsa spernénda sunt córpora, quæ útique multo familiárius atque conjúnctius quam quǽlibet induménta gestámus. Hæc enim non ad ornaméntum vel adjutórium, quod adhibétur extrínsecus, sed ad ipsam natúram hóminis pértinent. Unde et antiquórum justórum fúnera officiósa pietáte curáta sunt, et exséquiæ celebrátæ, et sepultúra provísa; ipsíque, cum víverent, de sepeliéndis vel étiam transferéndis suis corpóribus fíliis mandavérunt.")
+  Latin: text("Ex Libro sancti Augustíni Epíscopi de cura pro mórtuis gerénda")
+  Latin: rubric("Cap 2 et 3")
+  Latin: text("Curátio fúneris, condítio sepultúræ, pompa exsequiárum magis sunt vivórum solácia quam subsídia mortuórum. Nec ídeo tamen contemnénda et abiciénda sunt córpora defunctórum, maximéque justórum ac fidélium, quibus tamquam órganis et vasis ad ómnia bona ópera sancte usus est spíritus. Si enim patérna vestis et ánulus, ac si quid hujúsmodi, tanto cárius est pósteris, quanto erga paréntes major afféctus; nullo modo ipsa spernénda sunt córpora, quæ útique multo familiárius atque conjúnctius quam quǽlibet induménta gestámus. Hæc enim non ad ornaméntum vel adjutórium, quod adhibétur extrínsecus, sed ad ipsam natúram hóminis pértinent. Unde et antiquórum justórum fúnera officiósa pietáte curáta sunt, et exséquiæ celebrátæ, et sepultúra provísa; ipsíque, cum víverent, de sepeliéndis vel étiam transferéndis suis corpóribus fíliis mandavérunt.")
 
 [section #17 type=responsory slot=responsory reference=horas/Latin/Commune/C9#Responsory4 languages=Latin]
   Latin: [R.] text("Meménto mei, Deus, quia ventus est vita mea,")
@@ -233,7 +235,8 @@ warning count: 3
   (no lines)
 
 [section #19 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/11-02#Lectio5 languages=Latin]
-  Latin: text(" ") · citation("Cap. 4") · text("Recordántis et precántis afféctus cum defúnctis a fidélibus caríssimis exhibétur, eum prodésse non dúbium est iis, qui cum in córpore víverent, tália sibi post hanc vitam prodésse meruérunt. Verum, etsi áliqua necéssitas vel humári córpora, vel in sacris locis humári nulla data facultáte permíttat, non sunt prætermitténdæ supplicatiónes pro spirítibus mortuórum: quas faciéndas pro ómnibus in christiána et cathólica societáte defúnctis, étiam tácitis eórum nomínibus, sub generáli commemoratióne suscépit Ecclésia; ut quibus ad ista desunt paréntes, aut fílii, aut quicúmque cognáti vel amíci, ab una eis exhibeántur pia matre commúni. Si autem deéssent istæ supplicatiónes, quæ fiunt recta fide ac pietáte pro mórtuis, puto quod nihil prodésset spirítibus eórum, quámlibet in locis sanctis exánima córpora poneréntur.")
+  Latin: text(" ") · citation("Cap. 4")
+  Latin: text("Recordántis et precántis afféctus cum defúnctis a fidélibus caríssimis exhibétur, eum prodésse non dúbium est iis, qui cum in córpore víverent, tália sibi post hanc vitam prodésse meruérunt. Verum, etsi áliqua necéssitas vel humári córpora, vel in sacris locis humári nulla data facultáte permíttat, non sunt prætermitténdæ supplicatiónes pro spirítibus mortuórum: quas faciéndas pro ómnibus in christiána et cathólica societáte defúnctis, étiam tácitis eórum nomínibus, sub generáli commemoratióne suscépit Ecclésia; ut quibus ad ista desunt paréntes, aut fílii, aut quicúmque cognáti vel amíci, ab una eis exhibeántur pia matre commúni. Si autem deéssent istæ supplicatiónes, quæ fiunt recta fide ac pietáte pro mórtuis, puto quod nihil prodésset spirítibus eórum, quámlibet in locis sanctis exánima córpora poneréntur.")
 
 [section #20 type=responsory slot=responsory reference=horas/Latin/Commune/C9#Responsory5 languages=Latin]
   Latin: [R.] text("Hei mihi, Dómine, quia peccávi nimis in vita mea: Quid fáciam, miser? ubi fúgiam, nisi ad te, Deus meus?")
@@ -246,7 +249,8 @@ warning count: 3
   (no lines)
 
 [section #22 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/11-02#Lectio6 languages=Latin]
-  Latin: text(" ") · citation("Cap. 18") · text("Quæ cum ita sint, non existimémus ad mórtuos, pro quibus curam gérimus, perveníre, nisi quod pro eis sive altáris, sive oratiónum, sive eleemosynárum sacrifíciis solémniter supplicámus: quamvis non pro quibus fiunt, ómnibus prosint; sed iis tantum pro quibus, dum vivunt, comparátur, ut prosint. Sed quia non discérnimus qui sunt, opórtet ea pro regenerátis ómnibus fácere, ut nullus eórum prætermittátur, ad quos hæc benefícia possint et débeant perveníre. Mélius enim supérerunt ista eis, quibus nec obsunt nec prosunt; quam eis déerunt, quibus prosunt. Diligéntius tamen facit hæc quisque pro necessáriis suis, quo pro illo fiat simíliter a suis. Córpori autem humándo quidquid impénditur, non est præsídium salútis, sed humanitátis offícium, secúndum afféctum quo nemo unquam carnem suam ódio habet. Unde opórtet ut quam potest pro carne próximi curam gerat, cum ille inde recésserit, qui gerébat. Et si hæc fáciunt, qui carnis resurrectiónem non credunt, quanto magis debent fácere qui credunt; ut córpori mórtuo, sed tamen resurrectúro et in æternitáte mansúro, impénsum ejúsmodi offícium sit étiam quodámmodo ejúsdem fídei testimónium!")
+  Latin: text(" ") · citation("Cap. 18")
+  Latin: text("Quæ cum ita sint, non existimémus ad mórtuos, pro quibus curam gérimus, perveníre, nisi quod pro eis sive altáris, sive oratiónum, sive eleemosynárum sacrifíciis solémniter supplicámus: quamvis non pro quibus fiunt, ómnibus prosint; sed iis tantum pro quibus, dum vivunt, comparátur, ut prosint. Sed quia non discérnimus qui sunt, opórtet ea pro regenerátis ómnibus fácere, ut nullus eórum prætermittátur, ad quos hæc benefícia possint et débeant perveníre. Mélius enim supérerunt ista eis, quibus nec obsunt nec prosunt; quam eis déerunt, quibus prosunt. Diligéntius tamen facit hæc quisque pro necessáriis suis, quo pro illo fiat simíliter a suis. Córpori autem humándo quidquid impénditur, non est præsídium salútis, sed humanitátis offícium, secúndum afféctum quo nemo unquam carnem suam ódio habet. Unde opórtet ut quam potest pro carne próximi curam gerat, cum ille inde recésserit, qui gerébat. Et si hæc fáciunt, qui carnis resurrectiónem non credunt, quanto magis debent fácere qui credunt; ut córpori mórtuo, sed tamen resurrectúro et in æternitáte mansúro, impénsum ejúsmodi offícium sit étiam quodámmodo ejúsdem fídei testimónium!")
 
 [section #23 type=responsory slot=responsory reference=horas/Latin/Commune/C9#Responsory6 languages=Latin]
   Latin: [R.] text("Ne recordéris peccáta mea, Dómine,")
@@ -345,7 +349,19 @@ warning count: 3
   (no lines)
 
 [section #29 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/11-02#Lectio7 languages=Latin]
-  Latin: text("De Epístola prima beáti Pauli Apóstoli ad Corínthios ") · citation("1 Cor 15:12-22") · text("12 Si Christus prædicátur quod resurréxit a mórtuis, quómodo quidam dicunt in vobis, quóniam resurréctio mortuórum non est?13 Si autem resurréctio mortuórum non est: neque Christus resurréxit.14 Si autem Christus non resurréxit, inánis est ergo prædicátio nostra, inánis est et fides vestra:15 invenímur autem et falsi testes Dei: quóniam testimónium díximus advérsus Deum quod suscitáverit Christum, quem non suscitávit, si mórtui non resúrgunt.16 Nam si mórtui non resúrgunt, neque Christus resurréxit.17 Quod si Christus non resurréxit, vana est fides vestra: adhuc enim estis in peccátis vestris.18 Ergo et qui dormiérunt in Christo, periérunt.19 Si in hac vita tantum in Christo sperántes sumus, miserabilióres sumus ómnibus homínibus.20 Nunc autem Christus resurréxit a mórtuis primítiæ dormiéntium,21 quóniam quidem per hóminem mors, et per hóminem resurréctio mortuórum.22 Et sicut in Adam omnes moriúntur, ita et in Christo omnes vivificabúntur.")
+  Latin: text("De Epístola prima beáti Pauli Apóstoli ad Corínthios")
+  Latin: text(" ") · citation("1 Cor 15:12-22")
+  Latin: text("12 Si Christus prædicátur quod resurréxit a mórtuis, quómodo quidam dicunt in vobis, quóniam resurréctio mortuórum non est?")
+  Latin: text("13 Si autem resurréctio mortuórum non est: neque Christus resurréxit.")
+  Latin: text("14 Si autem Christus non resurréxit, inánis est ergo prædicátio nostra, inánis est et fides vestra:")
+  Latin: text("15 invenímur autem et falsi testes Dei: quóniam testimónium díximus advérsus Deum quod suscitáverit Christum, quem non suscitávit, si mórtui non resúrgunt.")
+  Latin: text("16 Nam si mórtui non resúrgunt, neque Christus resurréxit.")
+  Latin: text("17 Quod si Christus non resurréxit, vana est fides vestra: adhuc enim estis in peccátis vestris.")
+  Latin: text("18 Ergo et qui dormiérunt in Christo, periérunt.")
+  Latin: text("19 Si in hac vita tantum in Christo sperántes sumus, miserabilióres sumus ómnibus homínibus.")
+  Latin: text("20 Nunc autem Christus resurréxit a mórtuis primítiæ dormiéntium,")
+  Latin: text("21 quóniam quidem per hóminem mors, et per hóminem resurréctio mortuórum.")
+  Latin: text("22 Et sicut in Adam omnes moriúntur, ita et in Christo omnes vivificabúntur.")
 
 [section #30 type=responsory slot=responsory reference=horas/Latin/Commune/C9#Responsory7 languages=Latin]
   Latin: [R.] text("Peccántem me cotídie, et non me pœniténtem, timor mortis contúrbat me:")
@@ -358,7 +374,19 @@ warning count: 3
   (no lines)
 
 [section #32 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/11-02#Lectio7 languages=Latin]
-  Latin: text("De Epístola prima beáti Pauli Apóstoli ad Corínthios ") · citation("1 Cor 15:12-22") · text("12 Si Christus prædicátur quod resurréxit a mórtuis, quómodo quidam dicunt in vobis, quóniam resurréctio mortuórum non est?13 Si autem resurréctio mortuórum non est: neque Christus resurréxit.14 Si autem Christus non resurréxit, inánis est ergo prædicátio nostra, inánis est et fides vestra:15 invenímur autem et falsi testes Dei: quóniam testimónium díximus advérsus Deum quod suscitáverit Christum, quem non suscitávit, si mórtui non resúrgunt.16 Nam si mórtui non resúrgunt, neque Christus resurréxit.17 Quod si Christus non resurréxit, vana est fides vestra: adhuc enim estis in peccátis vestris.18 Ergo et qui dormiérunt in Christo, periérunt.19 Si in hac vita tantum in Christo sperántes sumus, miserabilióres sumus ómnibus homínibus.20 Nunc autem Christus resurréxit a mórtuis primítiæ dormiéntium,21 quóniam quidem per hóminem mors, et per hóminem resurréctio mortuórum.22 Et sicut in Adam omnes moriúntur, ita et in Christo omnes vivificabúntur.")
+  Latin: text("De Epístola prima beáti Pauli Apóstoli ad Corínthios")
+  Latin: text(" ") · citation("1 Cor 15:12-22")
+  Latin: text("12 Si Christus prædicátur quod resurréxit a mórtuis, quómodo quidam dicunt in vobis, quóniam resurréctio mortuórum non est?")
+  Latin: text("13 Si autem resurréctio mortuórum non est: neque Christus resurréxit.")
+  Latin: text("14 Si autem Christus non resurréxit, inánis est ergo prædicátio nostra, inánis est et fides vestra:")
+  Latin: text("15 invenímur autem et falsi testes Dei: quóniam testimónium díximus advérsus Deum quod suscitáverit Christum, quem non suscitávit, si mórtui non resúrgunt.")
+  Latin: text("16 Nam si mórtui non resúrgunt, neque Christus resurréxit.")
+  Latin: text("17 Quod si Christus non resurréxit, vana est fides vestra: adhuc enim estis in peccátis vestris.")
+  Latin: text("18 Ergo et qui dormiérunt in Christo, periérunt.")
+  Latin: text("19 Si in hac vita tantum in Christo sperántes sumus, miserabilióres sumus ómnibus homínibus.")
+  Latin: text("20 Nunc autem Christus resurréxit a mórtuis primítiæ dormiéntium,")
+  Latin: text("21 quóniam quidem per hóminem mors, et per hóminem resurréctio mortuórum.")
+  Latin: text("22 Et sicut in Adam omnes moriúntur, ita et in Christo omnes vivificabúntur.")
 
 [section #33 type=responsory slot=responsory reference=horas/Latin/Commune/C9#Responsory8 languages=Latin]
   Latin: [R.] text("Dómine, secúndum actum meum noli me judicáre: nihil dignum in conspéctu tuo egi; ídeo déprecor majestátem tuam,")
@@ -371,7 +399,19 @@ warning count: 3
   (no lines)
 
 [section #35 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/11-02#Lectio7 languages=Latin]
-  Latin: text("De Epístola prima beáti Pauli Apóstoli ad Corínthios ") · citation("1 Cor 15:12-22") · text("12 Si Christus prædicátur quod resurréxit a mórtuis, quómodo quidam dicunt in vobis, quóniam resurréctio mortuórum non est?13 Si autem resurréctio mortuórum non est: neque Christus resurréxit.14 Si autem Christus non resurréxit, inánis est ergo prædicátio nostra, inánis est et fides vestra:15 invenímur autem et falsi testes Dei: quóniam testimónium díximus advérsus Deum quod suscitáverit Christum, quem non suscitávit, si mórtui non resúrgunt.16 Nam si mórtui non resúrgunt, neque Christus resurréxit.17 Quod si Christus non resurréxit, vana est fides vestra: adhuc enim estis in peccátis vestris.18 Ergo et qui dormiérunt in Christo, periérunt.19 Si in hac vita tantum in Christo sperántes sumus, miserabilióres sumus ómnibus homínibus.20 Nunc autem Christus resurréxit a mórtuis primítiæ dormiéntium,21 quóniam quidem per hóminem mors, et per hóminem resurréctio mortuórum.22 Et sicut in Adam omnes moriúntur, ita et in Christo omnes vivificabúntur.")
+  Latin: text("De Epístola prima beáti Pauli Apóstoli ad Corínthios")
+  Latin: text(" ") · citation("1 Cor 15:12-22")
+  Latin: text("12 Si Christus prædicátur quod resurréxit a mórtuis, quómodo quidam dicunt in vobis, quóniam resurréctio mortuórum non est?")
+  Latin: text("13 Si autem resurréctio mortuórum non est: neque Christus resurréxit.")
+  Latin: text("14 Si autem Christus non resurréxit, inánis est ergo prædicátio nostra, inánis est et fides vestra:")
+  Latin: text("15 invenímur autem et falsi testes Dei: quóniam testimónium díximus advérsus Deum quod suscitáverit Christum, quem non suscitávit, si mórtui non resúrgunt.")
+  Latin: text("16 Nam si mórtui non resúrgunt, neque Christus resurréxit.")
+  Latin: text("17 Quod si Christus non resurréxit, vana est fides vestra: adhuc enim estis in peccátis vestris.")
+  Latin: text("18 Ergo et qui dormiérunt in Christo, periérunt.")
+  Latin: text("19 Si in hac vita tantum in Christo sperántes sumus, miserabilióres sumus ómnibus homínibus.")
+  Latin: text("20 Nunc autem Christus resurréxit a mórtuis primítiæ dormiéntium,")
+  Latin: text("21 quóniam quidem per hóminem mors, et per hóminem resurréctio mortuórum.")
+  Latin: text("22 Et sicut in Adam omnes moriúntur, ita et in Christo omnes vivificabúntur.")
 
 [section #36 type=responsory slot=responsory reference=horas/Latin/Commune/C9#Responsory9 languages=Latin]
   Latin: [R.] text("Líbera me, Dómine, de morte ætérna in die illa treménda,")

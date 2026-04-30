@@ -150,8 +150,12 @@ warning count: 1
   (no lines)
 
 [section #14 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Tempora/Quad5-2#Lectio1 languages=Latin]
-  Latin: text("Léctio sancti Evangélii secúndum Joánnem ") · citation("Joannes 7:1-13") · text("In illo témpore: Ambulábat Jesus in Galilǽam: non enim volébat in Judǽam ambuláre, quia quærébant eum Judǽi interfícere. Et réliqua.")
-  Latin: text("Homilía sancti Augustíni Epíscopi") · text(" ") · rubric("Tractatus 28 in Joannem") · text(" In isto Evangélii capítulo, fratres, Dóminus noster Jesus Christus secúndum hóminem se plúrimum commendávit fídei nostræ. Etenim semper hoc egit dictis et factis suis, ut Deus credátur et homo: Deus qui nos fecit, homo qui nos quæsívit: Deus cum Patre semper, homo nobíscum ex témpore. Non enim quǽreret quem fécerat, nisi fíeret ipse quod fécerat. Verum hoc mementóte, et de córdibus vestris nolíte dimíttere: sic esse Christum hóminem factum, ut non destíterit Deus esse. Manens Deus accépit hóminem, qui fecit hóminem.")
+  Latin: text("Léctio sancti Evangélii secúndum Joánnem")
+  Latin: text(" ") · citation("Joannes 7:1-13")
+  Latin: text("In illo témpore: Ambulábat Jesus in Galilǽam: non enim volébat in Judǽam ambuláre, quia quærébant eum Judǽi interfícere. Et réliqua.")
+  Latin: text("Homilía sancti Augustíni Epíscopi")
+  Latin: rubric("Tractatus 28 in Joannem")
+  Latin: text("In isto Evangélii capítulo, fratres, Dóminus noster Jesus Christus secúndum hóminem se plúrimum commendávit fídei nostræ. Etenim semper hoc egit dictis et factis suis, ut Deus credátur et homo: Deus qui nos fecit, homo qui nos quæsívit: Deus cum Patre semper, homo nobíscum ex témpore. Non enim quǽreret quem fécerat, nisi fíeret ipse quod fécerat. Verum hoc mementóte, et de córdibus vestris nolíte dimíttere: sic esse Christum hóminem factum, ut non destíterit Deus esse. Manens Deus accépit hóminem, qui fecit hóminem.")
 
 [section #15 type=responsory slot=responsory reference=horas/Latin/Sancti/03-19#Responsory1 languages=Latin]
   Latin: [R.] text("Fuit Dóminus cum Joseph, et dedit ei grátiam in conspéctu príncipis cárceris:")
@@ -296,7 +300,9 @@ warning count: 1
   (no lines)
 
 [section #39 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/03-19#Lectio4 languages=Latin]
-  Latin: text("Sermo sancti Bernárdi Abbátis") · text(" ") · rubric("Homil. 2 super Missus est, prope finem") · text(" Quis et qualis homo fúerit beátus Joseph, cónice ex appellatióne, qua, licet dispensatória, méruit honorári ádeo, ut pater Dei et dictus et créditus sit; cónice et ex próprio vocábulo, quod augméntum non dúbitas interpretári. Simul et meménto magni illíus quondam Patriárchæ vénditi in Ægýpto; et scito ipsíus istum non solum vocábulum fuísse sortítum, sed et castimóniam adéptum, innocéntiam assecútum et grátiam.")
+  Latin: text("Sermo sancti Bernárdi Abbátis")
+  Latin: rubric("Homil. 2 super Missus est, prope finem")
+  Latin: text("Quis et qualis homo fúerit beátus Joseph, cónice ex appellatióne, qua, licet dispensatória, méruit honorári ádeo, ut pater Dei et dictus et créditus sit; cónice et ex próprio vocábulo, quod augméntum non dúbitas interpretári. Simul et meménto magni illíus quondam Patriárchæ vénditi in Ægýpto; et scito ipsíus istum non solum vocábulum fuísse sortítum, sed et castimóniam adéptum, innocéntiam assecútum et grátiam.")
 
 [section #40 type=responsory slot=responsory reference=horas/Latin/Sancti/03-19#Responsory4 languages=Latin]
   Latin: [R.] text("Ascéndit Joseph a Galilǽa de civitáte Názareth in Judǽam, in civitátem David, quæ vocátur Béthlehem:")
@@ -437,8 +443,12 @@ warning count: 1
   (no lines)
 
 [section #64 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/03-19#Lectio7 languages=Latin]
-  Latin: text("Léctio sancti Evangélii secúndum Matthǽum ") · citation("Matt 1:18-21") · text("Cum esset desponsáta Mater Jesu María Joseph, ántequam convenírent, invénta est in útero habens de Spíritu Sancto. Et réliqua.")
-  Latin: text("Homilía sancti Hierónymi Presbýteri") · text(" ") · rubric("Lib. 1 Comment. in c. 1 Matth.") · text(" Quare non de símplici vírgine, sed de desponsáta concípitur? Primum, ut per generatiónem Joseph, orígo Maríæ monstrarétur: secúndo, ne lapidarétur a Judǽis ut adúltera: tértio, ut in Ægýptum fúgiens habéret solátium. Martyr Ignátius étiam quartam áddidit causam, cur a desponsáta concéptus sit: Ut partus, ínquiens, ejus celarétur diábolo, dum eum putat non de vírgine, sed de uxóre generátum.")
+  Latin: text("Léctio sancti Evangélii secúndum Matthǽum")
+  Latin: text(" ") · citation("Matt 1:18-21")
+  Latin: text("Cum esset desponsáta Mater Jesu María Joseph, ántequam convenírent, invénta est in útero habens de Spíritu Sancto. Et réliqua.")
+  Latin: text("Homilía sancti Hierónymi Presbýteri")
+  Latin: rubric("Lib. 1 Comment. in c. 1 Matth.")
+  Latin: text("Quare non de símplici vírgine, sed de desponsáta concípitur? Primum, ut per generatiónem Joseph, orígo Maríæ monstrarétur: secúndo, ne lapidarétur a Judǽis ut adúltera: tértio, ut in Ægýptum fúgiens habéret solátium. Martyr Ignátius étiam quartam áddidit causam, cur a desponsáta concéptus sit: Ut partus, ínquiens, ejus celarétur diábolo, dum eum putat non de vírgine, sed de uxóre generátum.")
 
 [section #65 type=responsory slot=responsory reference=horas/Latin/Sancti/03-19#Responsory7 languages=Latin]
   Latin: [R.] text("Dicit Mater Jesu ad illum: Fili, quid fecísti nobis sic?")
@@ -461,8 +471,12 @@ warning count: 1
   (no lines)
 
 [section #70 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/03-19#Lectio7 languages=Latin]
-  Latin: text("Léctio sancti Evangélii secúndum Matthǽum ") · citation("Matt 1:18-21") · text("Cum esset desponsáta Mater Jesu María Joseph, ántequam convenírent, invénta est in útero habens de Spíritu Sancto. Et réliqua.")
-  Latin: text("Homilía sancti Hierónymi Presbýteri") · text(" ") · rubric("Lib. 1 Comment. in c. 1 Matth.") · text(" Quare non de símplici vírgine, sed de desponsáta concípitur? Primum, ut per generatiónem Joseph, orígo Maríæ monstrarétur: secúndo, ne lapidarétur a Judǽis ut adúltera: tértio, ut in Ægýptum fúgiens habéret solátium. Martyr Ignátius étiam quartam áddidit causam, cur a desponsáta concéptus sit: Ut partus, ínquiens, ejus celarétur diábolo, dum eum putat non de vírgine, sed de uxóre generátum.")
+  Latin: text("Léctio sancti Evangélii secúndum Matthǽum")
+  Latin: text(" ") · citation("Matt 1:18-21")
+  Latin: text("Cum esset desponsáta Mater Jesu María Joseph, ántequam convenírent, invénta est in útero habens de Spíritu Sancto. Et réliqua.")
+  Latin: text("Homilía sancti Hierónymi Presbýteri")
+  Latin: rubric("Lib. 1 Comment. in c. 1 Matth.")
+  Latin: text("Quare non de símplici vírgine, sed de desponsáta concípitur? Primum, ut per generatiónem Joseph, orígo Maríæ monstrarétur: secúndo, ne lapidarétur a Judǽis ut adúltera: tértio, ut in Ægýptum fúgiens habéret solátium. Martyr Ignátius étiam quartam áddidit causam, cur a desponsáta concéptus sit: Ut partus, ínquiens, ejus celarétur diábolo, dum eum putat non de vírgine, sed de uxóre generátum.")
 
 [section #71 type=responsory slot=responsory reference=horas/Latin/Sancti/03-19#Responsory8 languages=Latin]
   Latin: [R.] text("Descéndit Jesus cum eis, et venit Názareth:")
@@ -489,7 +503,40 @@ warning count: 1
 
 [section #76 type=te-deum slot=te-deum reference=horas/Latin/Psalterium/Common/Prayers#Te Deum languages=Latin]
   Latin: [v.] text("Te Deum laudámus: * te Dóminum confitémur.")
-  Latin: text("Te ætérnum Patrem * omnis terra venerátur.Tibi omnes Ángeli, * tibi Cæli, et univérsæ Potestátes:Tibi Chérubim et Séraphim * incessábili voce proclámant:") · text(" ") · rubric("Fit reverentia") · text(" Sanctus, Sanctus, Sanctus * Dóminus Deus Sábaoth.Pleni sunt cæli et terra * majestátis glóriæ tuæ.Te gloriósus * Apostolórum chorus,Te Prophetárum * laudábilis númerus,Te Mártyrum candidátus * laudat exércitus.Te per orbem terrárum * sancta confitétur Ecclésia,Patrem * imménsæ majestátis;Venerándum tuum verum * et únicum Fílium;Sanctum quoque * Paráclitum Spíritum.Tu Rex glóriæ, * Christe.Tu Patris * sempitérnus es Fílius.") · text(" ") · rubric("Fit reverentia") · text(" Tu, ad liberándum susceptúrus hóminem: * non horruísti Vírginis úterum.Tu, devícto mortis acúleo, * aperuísti credéntibus regna cælórum.Tu ad déxteram Dei sedes, * in glória Patris.Judex créderis * esse ventúrus.") · text(" ") · rubric("Sequens versus dicitur flexis genibus") · text(" (sed rubrica cisterciensis dicitur)") · text(" ") · rubric("Fratres, quando incipiunt « Te ergo quæsumus, » exeuntes e Stallis, reverenter inclinent ad verba « Quos pretioso » et cetera") · text(" Te ergo quǽsumus, tuis fámulis súbveni, * quos pretióso sánguine redemísti.Ætérna fac cum Sanctis tuis * in glória numerári.Salvum fac pópulum tuum, Dómine, * et bénedic hereditáti tuæ.Et rege eos, * et extólle illos usque in ætérnum.Per síngulos dies * benedícimus te.") · text(" ") · rubric("Fit reverentia, secundum consuetudinem") · text(" Et laudámus nomen tuum in sǽculum, * et in sǽculum sǽculi.Dignáre, Dómine, die isto * sine peccáto nos custodíre.Miserére nostri, Dómine, * miserére nostri.Fiat misericórdia tua, Dómine, super nos, * quemádmodum sperávimus in te.In te, Dómine, sperávi: * non confúndar in ætérnum.")
+  Latin: text("Te ætérnum Patrem * omnis terra venerátur.")
+  Latin: text("Tibi omnes Ángeli, * tibi Cæli, et univérsæ Potestátes:")
+  Latin: text("Tibi Chérubim et Séraphim * incessábili voce proclámant:")
+  Latin: rubric("Fit reverentia")
+  Latin: text("Sanctus, Sanctus, Sanctus * Dóminus Deus Sábaoth.")
+  Latin: text("Pleni sunt cæli et terra * majestátis glóriæ tuæ.")
+  Latin: text("Te gloriósus * Apostolórum chorus,")
+  Latin: text("Te Prophetárum * laudábilis númerus,")
+  Latin: text("Te Mártyrum candidátus * laudat exércitus.")
+  Latin: text("Te per orbem terrárum * sancta confitétur Ecclésia,")
+  Latin: text("Patrem * imménsæ majestátis;")
+  Latin: text("Venerándum tuum verum * et únicum Fílium;")
+  Latin: text("Sanctum quoque * Paráclitum Spíritum.")
+  Latin: text("Tu Rex glóriæ, * Christe.")
+  Latin: text("Tu Patris * sempitérnus es Fílius.")
+  Latin: rubric("Fit reverentia")
+  Latin: text("Tu, ad liberándum susceptúrus hóminem: * non horruísti Vírginis úterum.")
+  Latin: text("Tu, devícto mortis acúleo, * aperuísti credéntibus regna cælórum.")
+  Latin: text("Tu ad déxteram Dei sedes, * in glória Patris.")
+  Latin: text("Judex créderis * esse ventúrus.")
+  Latin: rubric("Sequens versus dicitur flexis genibus")
+  Latin: text("(sed rubrica cisterciensis dicitur)")
+  Latin: rubric("Fratres, quando incipiunt « Te ergo quæsumus, » exeuntes e Stallis, reverenter inclinent ad verba « Quos pretioso » et cetera")
+  Latin: text("Te ergo quǽsumus, tuis fámulis súbveni, * quos pretióso sánguine redemísti.")
+  Latin: text("Ætérna fac cum Sanctis tuis * in glória numerári.")
+  Latin: text("Salvum fac pópulum tuum, Dómine, * et bénedic hereditáti tuæ.")
+  Latin: text("Et rege eos, * et extólle illos usque in ætérnum.")
+  Latin: text("Per síngulos dies * benedícimus te.")
+  Latin: rubric("Fit reverentia, secundum consuetudinem")
+  Latin: text("Et laudámus nomen tuum in sǽculum, * et in sǽculum sǽculi.")
+  Latin: text("Dignáre, Dómine, die isto * sine peccáto nos custodíre.")
+  Latin: text("Miserére nostri, Dómine, * miserére nostri.")
+  Latin: text("Fiat misericórdia tua, Dómine, super nos, * quemádmodum sperávimus in te.")
+  Latin: text("In te, Dómine, sperávi: * non confúndar in ætérnum.")
 
 [section #77 type=oration slot=oration reference=horas/Latin/Sancti/03-19#Oratio languages=Latin]
   Latin: text("Sanctíssimæ Genetrícis tuæ sponsi, quǽsumus, Dómine, méritis adjuvémur; ut quod possibílitas nostra non óbtinet, ejus nobis intercessióne donétur.")

@@ -154,7 +154,12 @@ warning count: 0
   (no lines)
 
 [section #14 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Tempora/Adv2-0#Lectio1 languages=Latin]
-  Latin: text("De Isaía Prophéta ") · citation("Isa 11:1-4") · text("1 Et egrediétur virga de radíce Jesse, et flos de radíce ejus ascéndet.2 Et requiéscet super eum Spíritus Dómini: spíritus sapiéntiæ et intelléctus, spíritus consílii et fortitúdinis, spíritus sciéntiæ et pietátis;3 Et replébit eum spíritus timóris Dómini: non secúndum visiónem oculórum judicábit, neque secúndum audítum áurium árguet:4 Sed judicábit in justítia páuperes, et árguet in æquitáte pro mansuétis terræ:")
+  Latin: text("De Isaía Prophéta")
+  Latin: text(" ") · citation("Isa 11:1-4")
+  Latin: text("1 Et egrediétur virga de radíce Jesse, et flos de radíce ejus ascéndet.")
+  Latin: text("2 Et requiéscet super eum Spíritus Dómini: spíritus sapiéntiæ et intelléctus, spíritus consílii et fortitúdinis, spíritus sciéntiæ et pietátis;")
+  Latin: text("3 Et replébit eum spíritus timóris Dómini: non secúndum visiónem oculórum judicábit, neque secúndum audítum áurium árguet:")
+  Latin: text("4 Sed judicábit in justítia páuperes, et árguet in æquitáte pro mansuétis terræ:")
 
 [section #15 type=responsory slot=responsory reference=horas/Latin/Sancti/12-08#Responsory1 languages=Latin]
   Latin: [R.] text("Per unum hóminem peccátum in hunc mundum intrávit, in quo omnes peccavérunt.")
@@ -177,7 +182,11 @@ warning count: 0
   (no lines)
 
 [section #20 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Tempora/Adv2-0#Lectio2 languages=Latin]
-  Latin: text(" ") · citation("Isa 11:4-7") · text("4 Et percútiet terram virga oris sui, et spíritu labiórum suórum interfíciet ímpium.5 Et erit justítia cíngulum lumbórum ejus: et fides cinctórium renis ejus. 6 Habitábit lupus cum agno, et pardus cum hædo accubábit, vitúlus et leo et ovis simul morabúntur, et puer párvulus minábit eos. 7 Vítulus et ursus pascéntur, simul requiéscent cátuli eórum, et leo quasi bos cómedet páleas.")
+  Latin: text(" ") · citation("Isa 11:4-7")
+  Latin: text("4 Et percútiet terram virga oris sui, et spíritu labiórum suórum interfíciet ímpium.")
+  Latin: text("5 Et erit justítia cíngulum lumbórum ejus: et fides cinctórium renis ejus. ")
+  Latin: text("6 Habitábit lupus cum agno, et pardus cum hædo accubábit, vitúlus et leo et ovis simul morabúntur, et puer párvulus minábit eos. ")
+  Latin: text("7 Vítulus et ursus pascéntur, simul requiéscent cátuli eórum, et leo quasi bos cómedet páleas.")
 
 [section #21 type=responsory slot=responsory reference=horas/Latin/Sancti/12-08#Responsory2 languages=Latin]
   Latin: [R.] text("Transíte ad me, omnes qui concupíscitis me:")
@@ -200,7 +209,10 @@ warning count: 0
   (no lines)
 
 [section #26 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Tempora/Adv2-0#Lectio3 languages=Latin]
-  Latin: text(" ") · citation("Isa 11:8-10") · text("8 Et delectábitur infans ab úbere super forámine áspidis, et in cavérna réguli, qui ablactátus fúerit, manum suam mittet. 9 Non nocébunt, et non occídent in univérso monte sancto meo: quia repléta est terra sciéntia Dómini, sicut aquæ maris operiéntes. 10 In die illa radix Jesse, qui stat in signum populórum, ipsum gentes deprecabúntur, et erit sepúlcrum ejus gloriósum.")
+  Latin: text(" ") · citation("Isa 11:8-10")
+  Latin: text("8 Et delectábitur infans ab úbere super forámine áspidis, et in cavérna réguli, qui ablactátus fúerit, manum suam mittet. ")
+  Latin: text("9 Non nocébunt, et non occídent in univérso monte sancto meo: quia repléta est terra sciéntia Dómini, sicut aquæ maris operiéntes. ")
+  Latin: text("10 In die illa radix Jesse, qui stat in signum populórum, ipsum gentes deprecabúntur, et erit sepúlcrum ejus gloriósum.")
 
 [section #27 type=responsory slot=responsory reference=horas/Latin/Sancti/12-08#Responsory3 languages=Latin]
   Latin: [R.] text("Elécta mea cándida sicut nix in Líbano; sicut favus distíllans lábia ejus:")
@@ -303,7 +315,9 @@ warning count: 0
   (no lines)
 
 [section #39 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/12-08#Lectio4 languages=Latin]
-  Latin: text("Sermo sancti Hierónymi Presbýteri") · text(" ") · rubric("De Assumptione B. M. V.") · text(" Qualis et quanta esset beáta et gloriósa semper Virgo María, ab Angelo divínitus declarátur, cum dícitur: Ave, grátia plena; Dóminus tecum: benedícta tu in muliéribus. Tálibus namque decébat Vírginem oppignorári munéribus, ut esset grátia plena, quæ dedit cælis glóriam, terris Dóminum, pacémque refúdit, fidem géntibus, finem vítiis, vitæ órdinem, móribus disciplínam. Et bene plena, quia céteris per partes præstátur; Maríæ vero simul se tota infúdit plenitúdo grátiæ. Vere plena, quia etsi in sanctis Pátribus et Prophétis grátia fuísse créditur, non tamen eátenus plena; in Maríam vero totíus grátiæ, quæ in Christo est, plenitúdo venit, quamquam áliter. Et ídeo inquit: Benedícta tu in muliéribus; id est plus benedícta quam omnes mulíeres. Ac per hoc quidquid maledictiónis infúsum est per Hevam, totum ábstulit benedíctio Maríæ. De ipsa Sálomon in Cánticis, quasi in laudem ejus, Veni, inquit, colúmba mea, immaculáta mea. Jam enim hiems tránsiit, imber ábiit et recéssit. Ac deínde inquit: Veni de Líbano, veni, coronáberis.")
+  Latin: text("Sermo sancti Hierónymi Presbýteri")
+  Latin: rubric("De Assumptione B. M. V.")
+  Latin: text("Qualis et quanta esset beáta et gloriósa semper Virgo María, ab Angelo divínitus declarátur, cum dícitur: Ave, grátia plena; Dóminus tecum: benedícta tu in muliéribus. Tálibus namque decébat Vírginem oppignorári munéribus, ut esset grátia plena, quæ dedit cælis glóriam, terris Dóminum, pacémque refúdit, fidem géntibus, finem vítiis, vitæ órdinem, móribus disciplínam. Et bene plena, quia céteris per partes præstátur; Maríæ vero simul se tota infúdit plenitúdo grátiæ. Vere plena, quia etsi in sanctis Pátribus et Prophétis grátia fuísse créditur, non tamen eátenus plena; in Maríam vero totíus grátiæ, quæ in Christo est, plenitúdo venit, quamquam áliter. Et ídeo inquit: Benedícta tu in muliéribus; id est plus benedícta quam omnes mulíeres. Ac per hoc quidquid maledictiónis infúsum est per Hevam, totum ábstulit benedíctio Maríæ. De ipsa Sálomon in Cánticis, quasi in laudem ejus, Veni, inquit, colúmba mea, immaculáta mea. Jam enim hiems tránsiit, imber ábiit et recéssit. Ac deínde inquit: Veni de Líbano, veni, coronáberis.")
 
 [section #40 type=responsory slot=responsory reference=horas/Latin/Sancti/12-08#Responsory4 languages=Latin]
   Latin: [R.] text("Ego ex ore Altíssimi prodívi, primogénita ante omnem creatúram: ego feci in cælis, ut orirétur lumen indefíciens.")
@@ -451,8 +465,12 @@ warning count: 0
   (no lines)
 
 [section #64 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/12-08#Lectio7 languages=Latin]
-  Latin: text("Léctio sancti Evangélii secúndum Lucam ") · citation("Luc 1:26-28") · text("In illo témpore: Missus est Angelus Gábriel a Deo in civitátem Galilǽæ, cui nomen Názareth, ad Vírginem desponsátam viro, cui nomen erat Joseph, de domo David, et nomen Vírginis María. Et réliqua.")
-  Latin: text("Homilía sancti Germáni Epíscopi") · text(" ") · rubric("In Præsentatione Deiparæ") · text(" Ave, María, grátia plena, Sanctis sánctior, et cælis excélsior, et Chérubim gloriósior, et Séraphim honorabílior, et super omnem creatúram venerabílior. Ave, colúmba, quæ nobis et fructum fers olívæ, et servatórem a spiritáli dilúvio ac portum salútis annúntias; cujus pennæ deargentátæ, et posterióra dorsi in pallóre auri sanctíssimi et illuminántis Spíritus fulgóre irradiántur. Ave, amœníssimus et rationális Dei paradísus, benevolentíssima et omnipoténti ejúsdem dextra hódie ad Oriéntem plantátus, et ipsi suáve olens lílium, et rosam immarcescíbilem gérminans in eórum medélam, qui pestíferam animǽque exitiálem amaritúdinem mortis ad Occidéntem ebíberant; paradísus, in quo ad veritátis agnitiónem lignum vivíficum effloréscit, e quo qui gustáverint, immortalitátem consequúntur. Ave, sacrosáncte ædificátum, immaculátum, purissimúmque Dei summi Regis palátium, ejúsdem Dei Regis magnificéntia circumornátum, omnésque hospítio recípiens ac mýsticis refíciens delíciis; in quo non manufáctus et vário decóre nitens situs est spirituális Sponsi thálamus; in quo Verbum errántem humánam stirpem revocáre volens, carnem sibi desponsávit, ut eos, qui voluntáte própria extórres facti fúerant, Patri reconciliáret.")
+  Latin: text("Léctio sancti Evangélii secúndum Lucam")
+  Latin: text(" ") · citation("Luc 1:26-28")
+  Latin: text("In illo témpore: Missus est Angelus Gábriel a Deo in civitátem Galilǽæ, cui nomen Názareth, ad Vírginem desponsátam viro, cui nomen erat Joseph, de domo David, et nomen Vírginis María. Et réliqua.")
+  Latin: text("Homilía sancti Germáni Epíscopi")
+  Latin: rubric("In Præsentatione Deiparæ")
+  Latin: text("Ave, María, grátia plena, Sanctis sánctior, et cælis excélsior, et Chérubim gloriósior, et Séraphim honorabílior, et super omnem creatúram venerabílior. Ave, colúmba, quæ nobis et fructum fers olívæ, et servatórem a spiritáli dilúvio ac portum salútis annúntias; cujus pennæ deargentátæ, et posterióra dorsi in pallóre auri sanctíssimi et illuminántis Spíritus fulgóre irradiántur. Ave, amœníssimus et rationális Dei paradísus, benevolentíssima et omnipoténti ejúsdem dextra hódie ad Oriéntem plantátus, et ipsi suáve olens lílium, et rosam immarcescíbilem gérminans in eórum medélam, qui pestíferam animǽque exitiálem amaritúdinem mortis ad Occidéntem ebíberant; paradísus, in quo ad veritátis agnitiónem lignum vivíficum effloréscit, e quo qui gustáverint, immortalitátem consequúntur. Ave, sacrosáncte ædificátum, immaculátum, purissimúmque Dei summi Regis palátium, ejúsdem Dei Regis magnificéntia circumornátum, omnésque hospítio recípiens ac mýsticis refíciens delíciis; in quo non manufáctus et vário decóre nitens situs est spirituális Sponsi thálamus; in quo Verbum errántem humánam stirpem revocáre volens, carnem sibi desponsávit, ut eos, qui voluntáte própria extórres facti fúerant, Patri reconciliáret.")
 
 [section #65 type=responsory slot=responsory reference=horas/Latin/Sancti/12-08#Responsory7 languages=Latin]
   Latin: [R.] text("Hortus conclúsus soror mea sponsa, hortus conclúsus, fons signátus:")
@@ -475,8 +493,12 @@ warning count: 0
   (no lines)
 
 [section #70 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/12-08#Lectio7 languages=Latin]
-  Latin: text("Léctio sancti Evangélii secúndum Lucam ") · citation("Luc 1:26-28") · text("In illo témpore: Missus est Angelus Gábriel a Deo in civitátem Galilǽæ, cui nomen Názareth, ad Vírginem desponsátam viro, cui nomen erat Joseph, de domo David, et nomen Vírginis María. Et réliqua.")
-  Latin: text("Homilía sancti Germáni Epíscopi") · text(" ") · rubric("In Præsentatione Deiparæ") · text(" Ave, María, grátia plena, Sanctis sánctior, et cælis excélsior, et Chérubim gloriósior, et Séraphim honorabílior, et super omnem creatúram venerabílior. Ave, colúmba, quæ nobis et fructum fers olívæ, et servatórem a spiritáli dilúvio ac portum salútis annúntias; cujus pennæ deargentátæ, et posterióra dorsi in pallóre auri sanctíssimi et illuminántis Spíritus fulgóre irradiántur. Ave, amœníssimus et rationális Dei paradísus, benevolentíssima et omnipoténti ejúsdem dextra hódie ad Oriéntem plantátus, et ipsi suáve olens lílium, et rosam immarcescíbilem gérminans in eórum medélam, qui pestíferam animǽque exitiálem amaritúdinem mortis ad Occidéntem ebíberant; paradísus, in quo ad veritátis agnitiónem lignum vivíficum effloréscit, e quo qui gustáverint, immortalitátem consequúntur. Ave, sacrosáncte ædificátum, immaculátum, purissimúmque Dei summi Regis palátium, ejúsdem Dei Regis magnificéntia circumornátum, omnésque hospítio recípiens ac mýsticis refíciens delíciis; in quo non manufáctus et vário decóre nitens situs est spirituális Sponsi thálamus; in quo Verbum errántem humánam stirpem revocáre volens, carnem sibi desponsávit, ut eos, qui voluntáte própria extórres facti fúerant, Patri reconciliáret.")
+  Latin: text("Léctio sancti Evangélii secúndum Lucam")
+  Latin: text(" ") · citation("Luc 1:26-28")
+  Latin: text("In illo témpore: Missus est Angelus Gábriel a Deo in civitátem Galilǽæ, cui nomen Názareth, ad Vírginem desponsátam viro, cui nomen erat Joseph, de domo David, et nomen Vírginis María. Et réliqua.")
+  Latin: text("Homilía sancti Germáni Epíscopi")
+  Latin: rubric("In Præsentatione Deiparæ")
+  Latin: text("Ave, María, grátia plena, Sanctis sánctior, et cælis excélsior, et Chérubim gloriósior, et Séraphim honorabílior, et super omnem creatúram venerabílior. Ave, colúmba, quæ nobis et fructum fers olívæ, et servatórem a spiritáli dilúvio ac portum salútis annúntias; cujus pennæ deargentátæ, et posterióra dorsi in pallóre auri sanctíssimi et illuminántis Spíritus fulgóre irradiántur. Ave, amœníssimus et rationális Dei paradísus, benevolentíssima et omnipoténti ejúsdem dextra hódie ad Oriéntem plantátus, et ipsi suáve olens lílium, et rosam immarcescíbilem gérminans in eórum medélam, qui pestíferam animǽque exitiálem amaritúdinem mortis ad Occidéntem ebíberant; paradísus, in quo ad veritátis agnitiónem lignum vivíficum effloréscit, e quo qui gustáverint, immortalitátem consequúntur. Ave, sacrosáncte ædificátum, immaculátum, purissimúmque Dei summi Regis palátium, ejúsdem Dei Regis magnificéntia circumornátum, omnésque hospítio recípiens ac mýsticis refíciens delíciis; in quo non manufáctus et vário decóre nitens situs est spirituális Sponsi thálamus; in quo Verbum errántem humánam stirpem revocáre volens, carnem sibi desponsávit, ut eos, qui voluntáte própria extórres facti fúerant, Patri reconciliáret.")
 
 [section #71 type=responsory slot=responsory reference=horas/Latin/Sancti/12-08#Responsory8 languages=Latin]
   Latin: [R.] text("Magníficat ánima mea Dóminum:")
@@ -506,7 +528,40 @@ warning count: 0
 
 [section #77 type=te-deum slot=te-deum reference=horas/Latin/Psalterium/Common/Prayers#Te Deum languages=Latin]
   Latin: [v.] text("Te Deum laudámus: * te Dóminum confitémur.")
-  Latin: text("Te ætérnum Patrem * omnis terra venerátur.Tibi omnes Ángeli, * tibi Cæli, et univérsæ Potestátes:Tibi Chérubim et Séraphim * incessábili voce proclámant:") · text(" ") · rubric("Fit reverentia") · text(" Sanctus, Sanctus, Sanctus * Dóminus Deus Sábaoth.Pleni sunt cæli et terra * majestátis glóriæ tuæ.Te gloriósus * Apostolórum chorus,Te Prophetárum * laudábilis númerus,Te Mártyrum candidátus * laudat exércitus.Te per orbem terrárum * sancta confitétur Ecclésia,Patrem * imménsæ majestátis;Venerándum tuum verum * et únicum Fílium;Sanctum quoque * Paráclitum Spíritum.Tu Rex glóriæ, * Christe.Tu Patris * sempitérnus es Fílius.") · text(" ") · rubric("Fit reverentia") · text(" Tu, ad liberándum susceptúrus hóminem: * non horruísti Vírginis úterum.Tu, devícto mortis acúleo, * aperuísti credéntibus regna cælórum.Tu ad déxteram Dei sedes, * in glória Patris.Judex créderis * esse ventúrus.") · text(" ") · rubric("Sequens versus dicitur flexis genibus") · text(" (sed rubrica cisterciensis dicitur)") · text(" ") · rubric("Fratres, quando incipiunt « Te ergo quæsumus, » exeuntes e Stallis, reverenter inclinent ad verba « Quos pretioso » et cetera") · text(" Te ergo quǽsumus, tuis fámulis súbveni, * quos pretióso sánguine redemísti.Ætérna fac cum Sanctis tuis * in glória numerári.Salvum fac pópulum tuum, Dómine, * et bénedic hereditáti tuæ.Et rege eos, * et extólle illos usque in ætérnum.Per síngulos dies * benedícimus te.") · text(" ") · rubric("Fit reverentia, secundum consuetudinem") · text(" Et laudámus nomen tuum in sǽculum, * et in sǽculum sǽculi.Dignáre, Dómine, die isto * sine peccáto nos custodíre.Miserére nostri, Dómine, * miserére nostri.Fiat misericórdia tua, Dómine, super nos, * quemádmodum sperávimus in te.In te, Dómine, sperávi: * non confúndar in ætérnum.")
+  Latin: text("Te ætérnum Patrem * omnis terra venerátur.")
+  Latin: text("Tibi omnes Ángeli, * tibi Cæli, et univérsæ Potestátes:")
+  Latin: text("Tibi Chérubim et Séraphim * incessábili voce proclámant:")
+  Latin: rubric("Fit reverentia")
+  Latin: text("Sanctus, Sanctus, Sanctus * Dóminus Deus Sábaoth.")
+  Latin: text("Pleni sunt cæli et terra * majestátis glóriæ tuæ.")
+  Latin: text("Te gloriósus * Apostolórum chorus,")
+  Latin: text("Te Prophetárum * laudábilis númerus,")
+  Latin: text("Te Mártyrum candidátus * laudat exércitus.")
+  Latin: text("Te per orbem terrárum * sancta confitétur Ecclésia,")
+  Latin: text("Patrem * imménsæ majestátis;")
+  Latin: text("Venerándum tuum verum * et únicum Fílium;")
+  Latin: text("Sanctum quoque * Paráclitum Spíritum.")
+  Latin: text("Tu Rex glóriæ, * Christe.")
+  Latin: text("Tu Patris * sempitérnus es Fílius.")
+  Latin: rubric("Fit reverentia")
+  Latin: text("Tu, ad liberándum susceptúrus hóminem: * non horruísti Vírginis úterum.")
+  Latin: text("Tu, devícto mortis acúleo, * aperuísti credéntibus regna cælórum.")
+  Latin: text("Tu ad déxteram Dei sedes, * in glória Patris.")
+  Latin: text("Judex créderis * esse ventúrus.")
+  Latin: rubric("Sequens versus dicitur flexis genibus")
+  Latin: text("(sed rubrica cisterciensis dicitur)")
+  Latin: rubric("Fratres, quando incipiunt « Te ergo quæsumus, » exeuntes e Stallis, reverenter inclinent ad verba « Quos pretioso » et cetera")
+  Latin: text("Te ergo quǽsumus, tuis fámulis súbveni, * quos pretióso sánguine redemísti.")
+  Latin: text("Ætérna fac cum Sanctis tuis * in glória numerári.")
+  Latin: text("Salvum fac pópulum tuum, Dómine, * et bénedic hereditáti tuæ.")
+  Latin: text("Et rege eos, * et extólle illos usque in ætérnum.")
+  Latin: text("Per síngulos dies * benedícimus te.")
+  Latin: rubric("Fit reverentia, secundum consuetudinem")
+  Latin: text("Et laudámus nomen tuum in sǽculum, * et in sǽculum sǽculi.")
+  Latin: text("Dignáre, Dómine, die isto * sine peccáto nos custodíre.")
+  Latin: text("Miserére nostri, Dómine, * miserére nostri.")
+  Latin: text("Fiat misericórdia tua, Dómine, super nos, * quemádmodum sperávimus in te.")
+  Latin: text("In te, Dómine, sperávi: * non confúndar in ætérnum.")
 
 [section #78 type=oration slot=oration reference=horas/Latin/Sancti/12-08#Oratio languages=Latin]
   Latin: text("Deus, qui per immaculátam Vírginis Conceptiónem dignum Fílio tuo habitáculum præparásti: quǽsumus; ut qui ex morte ejúsdem Fílii tui prævísa, eam ab omni labe præservásti, nos quoque mundos ejus intercessióne ad te perveníre concédas.")

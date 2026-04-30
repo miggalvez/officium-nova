@@ -3,7 +3,7 @@ date: 2024-08-15
 hour: prime
 celebration: In Assumptione Beatæ Mariæ Virginis
 languages: Latin
-section count: 8
+section count: 7
 warning count: 0
 
 [section #0 type=other slot=incipit reference=horas/Ordinarium/Prima#Incipit languages=Latin]
@@ -96,17 +96,12 @@ warning count: 0
   Latin: text(" ") · citation("Judith 15:10")
   Latin: [v.] text("Tu glória Jerúsalem, tu lætítia Israël, tu honorificéntia pópuli nostri.")
 
-[section #4 type=versicle slot=versicle reference=horas/Latin/Sancti/08-15#Versum 1 languages=Latin]
-  Latin: text("_")
-  Latin: [V.] text("Exaltáta est sancta Dei Génetrix.")
-  Latin: [R.] text("Super choros Angelórum ad cæléstia regna.")
-
-[section #5 type=oration slot=oration reference=horas/Latin/Sancti/08-15#Oratio languages=Latin]
+[section #4 type=oration slot=oration reference=horas/Latin/Sancti/08-15#Oratio languages=Latin]
   Latin: text("Omnípotens sempitérne Deus, qui Immaculátam Vírginem Maríam, Fílii tui Genetrícem, córpore et ánima ad cæléstem glóriam assumpsísti: concéde, quǽsumus; ut ad supérna semper inténti, ipsíus glóriæ mereámur esse consórtes.")
   Latin: [r.] text("Per eúmdem Dóminum nostrum Jesum Christum Fílium tuum, qui tecum vivit et regnat in unitáte Spíritus Sancti, Deus, per ómnia sǽcula sæculórum.")
   Latin: [R.] text("Amen.")
 
-[section #6 type=martyrology slot=martyrology reference=prime-martyrology:08-16 languages=Latin]
+[section #5 type=martyrology slot=martyrology reference=prime-martyrology:08-16 languages=Latin]
   Latin: [v.] text("Décimo séptimo Kaléndas Septémbris Luna undécima Anno Dómini 2024")
   Latin: text("_")
   Latin: [r.] text("Sancti Jóachim, patris immaculátæ Vírginis Genitrícis Dei Maríæ, Confessóris, cujus dies natális refértur tertiodécimo Kaléndas Aprílis.")
@@ -126,7 +121,7 @@ warning count: 0
   Latin: [v.] text("Sancta María et omnes Sancti intercédant pro nobis ad Dóminum, ut nos mereámur ab eo adjuvári et salvári, qui vivit et regnat in sǽcula sæculórum.")
   Latin: [R.] text("Amen.")
 
-[section #7 type=other slot=de-officio-capituli reference=horas/Ordinarium/Prima#De Officio Capituli languages=Latin]
+[section #6 type=other slot=de-officio-capituli reference=horas/Ordinarium/Prima#De Officio Capituli languages=Latin]
   Latin: [V.] text("Deus in adjutórium meum inténde.")
   Latin: [R.] text("Dómine, ad adjuvándum me festína.")
   Latin: [V.] text("Deus in adjutórium meum inténde.")

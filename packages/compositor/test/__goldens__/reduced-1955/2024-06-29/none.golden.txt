@@ -3,7 +3,7 @@ date: 2024-06-29
 hour: none
 celebration: SS. Apostolorum Petri et Pauli
 languages: Latin
-section count: 8
+section count: 7
 warning count: 0
 
 [section #0 type=other slot=incipit reference=horas/Ordinarium/Minor#Incipit languages=Latin]
@@ -105,12 +105,7 @@ warning count: 0
   Latin: [V.] text("Glória Patri, et Fílio, * et Spirítui Sancto.")
   Latin: [R.] text("Nimis honoráti sunt * Amíci tui, Deus.")
 
-[section #5 type=versicle slot=versicle reference=horas/Latin/Commune/C1#Versum 1 languages=Latin]
-  Latin: text("_")
-  Latin: [V.] text("In omnem terram exívit sonus eórum.")
-  Latin: [R.] text("Et in fines orbis terræ verba eórum.")
-
-[section #6 type=oration slot=oration reference=horas/Latin/Psalterium/Common/Prayers#Domine exaudi languages=Latin]
+[section #5 type=oration slot=oration reference=horas/Latin/Psalterium/Common/Prayers#Domine exaudi languages=Latin]
   Latin: [V.] text("Dómine, exáudi oratiónem meam.")
   Latin: [R.] text("Et clamor meus ad te véniat.")
   Latin: [v.] text("Orémus.")
@@ -118,7 +113,7 @@ warning count: 0
   Latin: [r.] text("Per Dóminum nostrum Jesum Christum, Fílium tuum: qui tecum vivit et regnat in unitáte Spíritus Sancti, Deus, per ómnia sǽcula sæculórum.")
   Latin: [R.] text("Amen.")
 
-[section #7 type=conclusion slot=conclusion reference=horas/Latin/Psalterium/Common/Prayers#Domine exaudi languages=Latin]
+[section #6 type=conclusion slot=conclusion reference=horas/Latin/Psalterium/Common/Prayers#Domine exaudi languages=Latin]
   Latin: [V.] text("Dómine, exáudi oratiónem meam.")
   Latin: [R.] text("Et clamor meus ad te véniat.")
   Latin: [V.] text("Benedicámus Dómino.")

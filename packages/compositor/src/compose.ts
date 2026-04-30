@@ -417,6 +417,7 @@ function composeSlot(args: ComposeSlotArgs): Section | undefined {
         const flattened = flattenConditionals(antiphonOnly, args.context);
         const transformed = applyDirectives(args.slot, flattened, {
           hour: args.hour,
+          language: lang,
           directives: args.directives
         });
         appendContentWithBoundary(
@@ -486,6 +487,7 @@ function composeSlot(args: ComposeSlotArgs): Section | undefined {
       const directiveInput = isAntiphon ? markAntiphonFirstText(flattened) : flattened;
       const transformed = applyDirectives(args.slot, directiveInput, {
         hour: args.hour,
+        language: lang,
         directives: args.directives,
         gloriaOmittiturReplacement
       });
@@ -495,7 +497,7 @@ function composeSlot(args: ComposeSlotArgs): Section | undefined {
           : transformed;
       const withMajorHourHymnWrapper =
         args.slot === 'hymn'
-          ? prependMajorHourHymnWrapper(args, withHymnDoxology, transformed)
+          ? prependMajorHourHymnWrapper(args, withHymnDoxology, transformed, lang)
           : withHymnDoxology;
       const withTriduumOrationFilter = stripSimplifiedTriduumDismissal(
         args,

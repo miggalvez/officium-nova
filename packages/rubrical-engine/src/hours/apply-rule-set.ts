@@ -35,6 +35,7 @@ import { resolveRuleReferenceFiles } from '../rules/resolve-vide-ex.js';
 import { commonKeyVariants } from '../rules/common-source.js';
 
 const COMMON_PRAYERS_PATH = 'horas/Latin/Psalterium/Common/Prayers';
+const MARIAANT_PATH = 'horas/Latin/Psalterium/Mariaant';
 const PSALMI_MAJOR = 'horas/Latin/Psalterium/Psalmi/Psalmi major';
 const PSALMORUM_ROOT = 'horas/Latin/Psalterium/Psalmorum';
 const MAJOR_SPECIAL_PATH = 'horas/Latin/Psalterium/Special/Major Special';
@@ -168,9 +169,14 @@ function resolveSlot(
     }
   }
 
-  const specialOration = resolveSpecialMinorHourOration(slot.name, input);
+  const specialOration = resolveSpecialMinorHourOration(slot.name, input, properFiles);
   if (specialOration) {
     return specialOration;
+  }
+
+  const complineFinalAntiphon = resolveComplineFinalAntiphon(slot.name, input);
+  if (complineFinalAntiphon) {
+    return complineFinalAntiphon;
   }
 
   const primeMartyrology = resolvePrimeMartyrology(slot.name, input);
@@ -184,11 +190,18 @@ function resolveSlot(
   }
 
   const minorHourLaterBlockOverride = minorHourLaterBlockOverrideReference(input, slot.name);
-  const properRef = minorHourLaterBlockOverride ? undefined : findProperReference(properFiles, slot, input);
+  const primeOrdinaryLaterBlock = primeOrdinaryLaterBlockReference(input, slot.name, properFiles);
+  const properRef =
+    minorHourLaterBlockOverride || primeOrdinaryLaterBlock
+      ? undefined
+      : findProperReference(properFiles, slot, input);
   const inheritedSecondVespersRef = properRef
     ? undefined
     : findInheritedSecondVespersReference(properFiles, slot, input);
-  const communeRef = properRef || inheritedSecondVespersRef ? undefined : findCommuneReference(input, slot);
+  const communeRef =
+    properRef || inheritedSecondVespersRef || primeOrdinaryLaterBlock
+      ? undefined
+      : findCommuneReference(input, slot);
   if (input.hour === 'compline' && slot.name === 'lectio-brevis') {
     const wrapperRef = ordinariumSkeletonReference(input.skeleton, slot);
     const readingRef = properRef ?? communeRef ?? complineSpecialFallbackReference(input.hour, slot.name) ?? wrapperRef;
@@ -199,6 +212,7 @@ function resolveSlot(
   }
   const ref =
     minorHourLaterBlockOverride ??
+    primeOrdinaryLaterBlock ??
     properRef ??
     inheritedSecondVespersRef ??
     communeRef ??
@@ -253,6 +267,31 @@ function minorHourLaterBlockOverrideReference(
 
   return {
     path: minorHourLaterBlockFallbackPath(input.hour, input.temporal.dayOfWeek),
+    section
+  };
+}
+
+function primeOrdinaryLaterBlockReference(
+  input: ApplyRuleSetInput,
+  slot: SlotName,
+  properFiles: readonly ParsedFile[]
+): TextReference | undefined {
+  if (
+    input.policy.name !== 'rubrics-1960' ||
+    input.hour !== 'prime' ||
+    !usesOrdinaryPrimeLaterBlock(input, properFiles) ||
+    (slot !== 'chapter' && slot !== 'responsory' && slot !== 'versicle')
+  ) {
+    return undefined;
+  }
+
+  const section =
+    slot === 'chapter' ? 'Dominica'
+    : slot === 'responsory' ? 'Responsory'
+    : 'Versum';
+
+  return {
+    path: 'horas/Latin/Psalterium/Special/Prima Special',
     section
   };
 }
@@ -1027,9 +1066,7 @@ function attachDoxologyVariantSlot(
 
   const doxologyRef =
     findProperDoxologyReference(properFiles) ??
-    findVariantDoxologyReference(
-      input.celebrationRules.doxologyVariant ?? seasonalFallbackDoxologyVariant(input.temporal)
-    );
+    findVariantDoxologyReference(resolveFallbackDoxologyVariant(input));
   if (!doxologyRef) {
     return;
   }
@@ -1038,6 +1075,28 @@ function attachDoxologyVariantSlot(
     kind: 'single-ref',
     ref: doxologyRef
   };
+}
+
+function resolveFallbackDoxologyVariant(input: ApplyRuleSetInput): string | undefined {
+  if (input.celebrationRules.doxologyVariant) {
+    return input.celebrationRules.doxologyVariant;
+  }
+
+  if (input.hour === 'compline') {
+    return undefined;
+  }
+
+  if (
+    input.policy.name === 'rubrics-1960' &&
+    input.celebration.source === 'sanctoral' &&
+    input.celebration.rank.classSymbol === 'III' &&
+    input.temporal.season === 'eastertide' &&
+    input.temporal.dayOfWeek !== 0
+  ) {
+    return undefined;
+  }
+
+  return seasonalFallbackDoxologyVariant(input.temporal);
 }
 
 function isFallbackMinorHourHymn(ref: TextReference): boolean {
@@ -1630,6 +1689,39 @@ function usesVersum2InPlaceOfLaterBlock(input: ApplyRuleSetInput): boolean {
   return input.hour !== 'compline' && input.hourRules.capitulumVariant?.scheme === 2;
 }
 
+function usesOrdinaryPrimeLaterBlock(
+  input: ApplyRuleSetInput,
+  properFiles: readonly ParsedFile[]
+): boolean {
+  if (input.hour !== 'prime') {
+    return false;
+  }
+  if (usesVersum2InPlaceOfLaterBlock(input)) {
+    return true;
+  }
+  return (
+    input.policy.name === 'rubrics-1960' &&
+    input.celebration.source === 'sanctoral' &&
+    input.celebration.rank.classSymbol === 'III' &&
+    input.temporal.dayOfWeek !== 0 &&
+    !hasProperPrimeLaterBlock(input, properFiles)
+  );
+}
+
+function hasProperPrimeLaterBlock(input: ApplyRuleSetInput, files: readonly ParsedFile[]): boolean {
+  const feastPath = canonicalOfficeVisitPath(input.celebration.feastRef.path);
+  return files.some((file) =>
+    canonicalOfficeVisitPath(file.path) === feastPath &&
+    file.sections.some((section) =>
+        section.header === 'Lectio Prima' ||
+        section.header === 'Capitulum Prima' ||
+        section.header === 'Responsory Breve Prima' ||
+        section.header === 'Responsory Prima' ||
+        section.header === 'Versum Prima'
+      )
+  );
+}
+
 export function officeVisitKey(path: string, header: string): string {
   return `${canonicalOfficeVisitPath(path)}:${header}`;
 }
@@ -1716,15 +1808,56 @@ function sameReference(left: TextReference, right: TextReference): boolean {
 
 function resolveSpecialMinorHourOration(
   slotName: SlotName,
-  input: ApplyRuleSetInput
+  input: ApplyRuleSetInput,
+  properFiles: readonly ParsedFile[]
 ): SlotContent | undefined {
-  if (slotName !== 'oration' || input.hour !== 'prime' || !usesVersum2InPlaceOfLaterBlock(input)) {
+  if (
+    slotName !== 'oration' ||
+    input.hour !== 'prime' ||
+    !usesOrdinaryPrimeLaterBlock(input, properFiles)
+  ) {
     return undefined;
   }
 
   return {
     kind: 'ordered-refs',
-    refs: [commonPrayerRef('oratio_Domine'), commonPrayerRef('Per Dominum')]
+    refs: usesVersum2InPlaceOfLaterBlock(input)
+      ? [commonPrayerRef('oratio_Domine'), commonPrayerRef('Per Dominum')]
+      : [
+          commonPrayerRef('Domine exaudi'),
+          commonPrayerRef('Oremus'),
+          commonPrayerRef('oratio_Domine'),
+          commonPrayerRef('Per Dominum')
+        ]
+  };
+}
+
+function resolveComplineFinalAntiphon(
+  slotName: SlotName,
+  input: ApplyRuleSetInput
+): SlotContent | undefined {
+  if (
+    slotName !== 'final-antiphon-bvm' ||
+    input.hour !== 'compline' ||
+    input.policy.name !== 'rubrics-1960' ||
+    (input.temporal.season !== 'eastertide' && input.temporal.season !== 'ascensiontide')
+  ) {
+    return undefined;
+  }
+
+  return {
+    kind: 'ordered-refs',
+    refs: [
+      {
+        path: MARIAANT_PATH,
+        section: 'Paschalis'
+      },
+      {
+        path: COMMON_PRAYERS_PATH,
+        section: 'Divinum auxilium',
+        selector: '1'
+      }
+    ]
   };
 }
 
@@ -1787,6 +1920,20 @@ function properHeadersForSlot(
         }
         return ['Versum 3', `Versum ${hourSuffix}`, 'Versum 1'];
       }
+      if (hour === 'prime') {
+        return [`Versum ${hourSuffix}`];
+      }
+      if (hour === 'terce') {
+        return [`Versum ${hourSuffix}`, 'Nocturn 2 Versum'];
+      }
+      if (hour === 'sext') {
+        return [`Versum ${hourSuffix}`, 'Nocturn 3 Versum'];
+      }
+      if (hour === 'none') {
+        return input?.policy.name === 'rubrics-1960'
+          ? [`Versum ${hourSuffix}`, 'Versum 2']
+          : [`Versum ${hourSuffix}`];
+      }
       return [`Versum ${hourSuffix}`, 'Versum 1'];
     case 'antiphon-ad-benedictus':
       // Upstream temporal files use `[Ant 2]` for the Benedictus antiphon
@@ -1807,7 +1954,7 @@ function properHeadersForSlot(
       return ['Ant 3', 'Ant Vespera 3', 'Ant Vespera', 'Ant Magnificat'];
     }
     case 'antiphon-ad-nunc-dimittis':
-      return ['Ant Completorium', 'Ant Nunc dimittis'];
+      return ['Ant Completorium', 'Ant Nunc dimittis', 'Ant 4'];
     case 'oration':
       if (hour === 'lauds') {
         return ['Oratio 2', 'Oratio'];
@@ -1935,6 +2082,7 @@ const COMPLINE_SPECIAL_FALLBACKS: Readonly<Partial<Record<SlotName, string>>> = 
   chapter: 'Completorium',
   responsory: 'Responsory Completorium',
   versicle: 'Versum 4',
+  'antiphon-ad-nunc-dimittis': 'Ant 4',
   'lectio-brevis': 'Lectio Completorium'
 };
 

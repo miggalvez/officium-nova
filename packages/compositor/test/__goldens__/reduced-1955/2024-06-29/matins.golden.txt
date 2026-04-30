@@ -171,7 +171,12 @@ warning count: 0
   (no lines)
 
 [section #14 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Tempora/Pent05-6#Lectio1 languages=Latin]
-  Latin: text("De libro secúndo Regum ") · citation("2 Reg 11:1-4") · text("1 Factum est autem, verténte anno, eo témpore quo solent reges ad bella procédere, misit David Joab, et servos suos cum eo, et univérsum Israël, et vastavérunt fílios Ammon, et obsedérunt Rabba; David autem remánsit in Jerúsalem. 2 Dum hæc ageréntur, áccidit ut súrgeret David de strato suo post merídiem et deambuláret in solário domus régiæ: vidítque mulíerem se lavántem ex advérso super solárium suum; erat autem múlier pulchra valde. 3 Misit ergo rex, et requisívit quæ esset múlier; nuntiatúmque est ei, quod ipsa esset Bethsabée fília Elíam, uxor Uríæ Hethǽi. 4 Missis ítaque David núntiis, tulit eam.")
+  Latin: text("De libro secúndo Regum")
+  Latin: text(" ") · citation("2 Reg 11:1-4")
+  Latin: text("1 Factum est autem, verténte anno, eo témpore quo solent reges ad bella procédere, misit David Joab, et servos suos cum eo, et univérsum Israël, et vastavérunt fílios Ammon, et obsedérunt Rabba; David autem remánsit in Jerúsalem. ")
+  Latin: text("2 Dum hæc ageréntur, áccidit ut súrgeret David de strato suo post merídiem et deambuláret in solário domus régiæ: vidítque mulíerem se lavántem ex advérso super solárium suum; erat autem múlier pulchra valde. ")
+  Latin: text("3 Misit ergo rex, et requisívit quæ esset múlier; nuntiatúmque est ei, quod ipsa esset Bethsabée fília Elíam, uxor Uríæ Hethǽi. ")
+  Latin: text("4 Missis ítaque David núntiis, tulit eam.")
 
 [section #15 type=responsory slot=responsory reference=horas/Latin/Sancti/06-29#Responsory1 languages=Latin]
   Latin: [R.] text("Simon Petre, ántequam de navi vocárem te, novi te et super plebem meam príncipem te constítui:")
@@ -193,7 +198,14 @@ warning count: 0
   (no lines)
 
 [section #20 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Tempora/Pent05-6#Lectio2 languages=Latin]
-  Latin: text(" ") · citation("2 Reg 11:5-11") · text("5 Et revérsa est in domum suam, concépto fœtu. Mitténsque nuntiávit David et ait: Concépi. 6 Misit autem David ad Joab dicens: Mitte ad me Uríam Hethǽum. Misítque Joab Uríam ad David.7 Et venit Urías ad David. Quæsivítque David quam recte ágeret Joab et pópulus, et quómodo administrarétur bellum. 8 Et dixit David ad Uríam: Vade in domum tuam et lava pedes tuos. Et egréssus est Urías de domo regis, secutúsque est eum cibus régius.9 Dormívit autem Urías ante portam domus régiæ cum áliis servis dómini sui, et non descéndit ad domum suam. 10 Nuntiatúmque est David a dicéntibus: Non ivit Urías in domum suam. Et ait David ad Uríam: Numquid non de via venísti? quare non descendísti in domum tuam? 11 Et ait Urías ad David: Arca Dei et Israël et Juda hábitant in papiliónibus, et dóminus meus Joab et servi dómini mei super fáciem terræ manent; et ego ingrédiar domum meam, ut cómedam et bibam, et dórmiam cum uxóre mea? Per salútem tuam et per salútem ánimæ tuæ non fáciam rem hanc.")
+  Latin: text(" ") · citation("2 Reg 11:5-11")
+  Latin: text("5 Et revérsa est in domum suam, concépto fœtu. Mitténsque nuntiávit David et ait: Concépi. ")
+  Latin: text("6 Misit autem David ad Joab dicens: Mitte ad me Uríam Hethǽum. Misítque Joab Uríam ad David.")
+  Latin: text("7 Et venit Urías ad David. Quæsivítque David quam recte ágeret Joab et pópulus, et quómodo administrarétur bellum. ")
+  Latin: text("8 Et dixit David ad Uríam: Vade in domum tuam et lava pedes tuos. Et egréssus est Urías de domo regis, secutúsque est eum cibus régius.")
+  Latin: text("9 Dormívit autem Urías ante portam domus régiæ cum áliis servis dómini sui, et non descéndit ad domum suam. ")
+  Latin: text("10 Nuntiatúmque est David a dicéntibus: Non ivit Urías in domum suam. Et ait David ad Uríam: Numquid non de via venísti? quare non descendísti in domum tuam? ")
+  Latin: text("11 Et ait Urías ad David: Arca Dei et Israël et Juda hábitant in papiliónibus, et dóminus meus Joab et servi dómini mei super fáciem terræ manent; et ego ingrédiar domum meam, ut cómedam et bibam, et dórmiam cum uxóre mea? Per salútem tuam et per salútem ánimæ tuæ non fáciam rem hanc.")
 
 [section #21 type=responsory slot=responsory reference=horas/Latin/Sancti/06-29#Responsory2 languages=Latin]
   Latin: [R.] text("Si díligis me, Simon Petre, pasce oves meas. Dómine, tu nosti quia amo te,")
@@ -215,7 +227,13 @@ warning count: 0
   (no lines)
 
 [section #26 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Tempora/Pent05-6#Lectio3 languages=Latin]
-  Latin: text(" ") · citation("2 Reg 11:12-17") · text("12 Ait ergo David ad Uríam: Mane hic étiam hódie, et cras dimíttam te. Mansit Urías in Jerúsalem in die illa et áltera.13 Et vocávit eum David ut coméderet coram se et bíberet et inebriávit eum; qui egréssus véspere dormívit in strato suo cum servis dómini sui, et in domum suam non descéndit.14 Factum est ergo mane, et scripsit David epístolam ad Joab: misítque per manum Uríæ,15 scribens in epístola: Pónite Uríam ex advérso belli, ubi fortíssimum est prǽlium, et derelínquite eum ut percússus intéreat. 16 Igitur cum Joab obsidéret urbem, pósuit Uríam in loco ubi sciébat viros esse fortíssimos. 17 Egressíque viri de civitáte bellábant advérsum Joab, et cecidérunt de pópulo servórum David, et mórtuus est étiam Urías Hethǽus.")
+  Latin: text(" ") · citation("2 Reg 11:12-17")
+  Latin: text("12 Ait ergo David ad Uríam: Mane hic étiam hódie, et cras dimíttam te. Mansit Urías in Jerúsalem in die illa et áltera.")
+  Latin: text("13 Et vocávit eum David ut coméderet coram se et bíberet et inebriávit eum; qui egréssus véspere dormívit in strato suo cum servis dómini sui, et in domum suam non descéndit.")
+  Latin: text("14 Factum est ergo mane, et scripsit David epístolam ad Joab: misítque per manum Uríæ,")
+  Latin: text("15 scribens in epístola: Pónite Uríam ex advérso belli, ubi fortíssimum est prǽlium, et derelínquite eum ut percússus intéreat. ")
+  Latin: text("16 Igitur cum Joab obsidéret urbem, pósuit Uríam in loco ubi sciébat viros esse fortíssimos. ")
+  Latin: text("17 Egressíque viri de civitáte bellábant advérsum Joab, et cecidérunt de pópulo servórum David, et mórtuus est étiam Urías Hethǽus.")
 
 [section #27 type=responsory slot=responsory reference=horas/Latin/Sancti/06-29#Responsory3 languages=Latin]
   Latin: [R.] text("Tu es Petrus, et super hanc petram ædificábo Ecclésiam meam, et portæ ínferi non prævalébunt advérsus eam:")
@@ -307,7 +325,9 @@ warning count: 0
   (no lines)
 
 [section #39 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/06-29#Lectio4 languages=Latin]
-  Latin: text("Sermo sancti Leónis Papæ") · text(" ") · rubric("Sermo 1 in natali App. Petri et Pauli") · text(" Omnium quidem sanctárum solemnitátum, dilectíssimi, totus mundus est párticeps, et uníus fídei píetas éxigit, ut quidquid pro salúte universórum gestum recólitur, commúnibus ubíque gáudiis celebrétur. Verúmtamen hodiérna festívitas, præter illam reveréntiam quam toto terrárum orbe proméruit, speciáli et própria nostræ Urbis exsultatióne veneránda est; ut, ubi præcipuórum Apostolórum glorificátus est éxitus, ibi in die martýrii eórum sit lætítiæ principátus. Isti enim sunt viri, per quos tibi Evangélium Christi, Roma, resplénduit; et, quæ eras magístra erróris, facta es discípula veritátis.")
+  Latin: text("Sermo sancti Leónis Papæ")
+  Latin: rubric("Sermo 1 in natali App. Petri et Pauli")
+  Latin: text("Omnium quidem sanctárum solemnitátum, dilectíssimi, totus mundus est párticeps, et uníus fídei píetas éxigit, ut quidquid pro salúte universórum gestum recólitur, commúnibus ubíque gáudiis celebrétur. Verúmtamen hodiérna festívitas, præter illam reveréntiam quam toto terrárum orbe proméruit, speciáli et própria nostræ Urbis exsultatióne veneránda est; ut, ubi præcipuórum Apostolórum glorificátus est éxitus, ibi in die martýrii eórum sit lætítiæ principátus. Isti enim sunt viri, per quos tibi Evangélium Christi, Roma, resplénduit; et, quæ eras magístra erróris, facta es discípula veritátis.")
 
 [section #40 type=responsory slot=responsory reference=horas/Latin/Sancti/06-29#Responsory4 languages=Latin]
   Latin: [R.] text("Dómine, si tu es, jube me veníre ad te super aquas.")
@@ -448,8 +468,12 @@ warning count: 0
   (no lines)
 
 [section #64 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/06-29#Lectio7 languages=Latin]
-  Latin: text("Léctio sancti Evangélii secúndum Matthǽum ") · citation("Matt 16:13-19") · text("In illo témpore: Venit Jesus in partes Cæsaréæ Philíppi, et interrogábat discípulos suos, dicens: Quem dicunt hómines esse Fílium hóminis? Et réliqua.")
-  Latin: text("Homilía sancti Hierónymi Presbýteri") · text(" ") · rubric("Lib. 3 Comment. in Matth. cap. 16") · text(" Pulchre intérrogat: Quem dicunt hómines esse Fílium hóminis? quia qui de fílio hóminis loquúntur, hómines sunt; qui vero divinitátem ejus intéllegunt, non hómines, sed dii appellántur. At illi dixérunt: Alii Joánnem Baptístam, álii autem Elíam. Miror quosdam intérpretes causas errórum inquírere singulórum, et disputatiónem longíssimam téxere, quare Dóminum nostrum Jesum Christum álii Joánnem putáverint, álii Elíam, álii Jeremíam aut unum ex prophétis; cum sic potúerint erráre in Elía et Jeremía, quo modo Heródes errávit in Joánne, dicens: Quem ego decollávi Joánnem, ipse surréxit a mórtuis, et virtútes operántur in eo.")
+  Latin: text("Léctio sancti Evangélii secúndum Matthǽum")
+  Latin: text(" ") · citation("Matt 16:13-19")
+  Latin: text("In illo témpore: Venit Jesus in partes Cæsaréæ Philíppi, et interrogábat discípulos suos, dicens: Quem dicunt hómines esse Fílium hóminis? Et réliqua.")
+  Latin: text("Homilía sancti Hierónymi Presbýteri")
+  Latin: rubric("Lib. 3 Comment. in Matth. cap. 16")
+  Latin: text("Pulchre intérrogat: Quem dicunt hómines esse Fílium hóminis? quia qui de fílio hóminis loquúntur, hómines sunt; qui vero divinitátem ejus intéllegunt, non hómines, sed dii appellántur. At illi dixérunt: Alii Joánnem Baptístam, álii autem Elíam. Miror quosdam intérpretes causas errórum inquírere singulórum, et disputatiónem longíssimam téxere, quare Dóminum nostrum Jesum Christum álii Joánnem putáverint, álii Elíam, álii Jeremíam aut unum ex prophétis; cum sic potúerint erráre in Elía et Jeremía, quo modo Heródes errávit in Joánne, dicens: Quem ego decollávi Joánnem, ipse surréxit a mórtuis, et virtútes operántur in eo.")
 
 [section #65 type=responsory slot=responsory reference=horas/Latin/Sancti/06-29#Responsory7 languages=Latin]
   Latin: [R.] text("Ego pro te rogávi, Petre, ut non defíciat fides tua:")
@@ -471,8 +495,12 @@ warning count: 0
   (no lines)
 
 [section #70 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/06-29#Lectio7 languages=Latin]
-  Latin: text("Léctio sancti Evangélii secúndum Matthǽum ") · citation("Matt 16:13-19") · text("In illo témpore: Venit Jesus in partes Cæsaréæ Philíppi, et interrogábat discípulos suos, dicens: Quem dicunt hómines esse Fílium hóminis? Et réliqua.")
-  Latin: text("Homilía sancti Hierónymi Presbýteri") · text(" ") · rubric("Lib. 3 Comment. in Matth. cap. 16") · text(" Pulchre intérrogat: Quem dicunt hómines esse Fílium hóminis? quia qui de fílio hóminis loquúntur, hómines sunt; qui vero divinitátem ejus intéllegunt, non hómines, sed dii appellántur. At illi dixérunt: Alii Joánnem Baptístam, álii autem Elíam. Miror quosdam intérpretes causas errórum inquírere singulórum, et disputatiónem longíssimam téxere, quare Dóminum nostrum Jesum Christum álii Joánnem putáverint, álii Elíam, álii Jeremíam aut unum ex prophétis; cum sic potúerint erráre in Elía et Jeremía, quo modo Heródes errávit in Joánne, dicens: Quem ego decollávi Joánnem, ipse surréxit a mórtuis, et virtútes operántur in eo.")
+  Latin: text("Léctio sancti Evangélii secúndum Matthǽum")
+  Latin: text(" ") · citation("Matt 16:13-19")
+  Latin: text("In illo témpore: Venit Jesus in partes Cæsaréæ Philíppi, et interrogábat discípulos suos, dicens: Quem dicunt hómines esse Fílium hóminis? Et réliqua.")
+  Latin: text("Homilía sancti Hierónymi Presbýteri")
+  Latin: rubric("Lib. 3 Comment. in Matth. cap. 16")
+  Latin: text("Pulchre intérrogat: Quem dicunt hómines esse Fílium hóminis? quia qui de fílio hóminis loquúntur, hómines sunt; qui vero divinitátem ejus intéllegunt, non hómines, sed dii appellántur. At illi dixérunt: Alii Joánnem Baptístam, álii autem Elíam. Miror quosdam intérpretes causas errórum inquírere singulórum, et disputatiónem longíssimam téxere, quare Dóminum nostrum Jesum Christum álii Joánnem putáverint, álii Elíam, álii Jeremíam aut unum ex prophétis; cum sic potúerint erráre in Elía et Jeremía, quo modo Heródes errávit in Joánne, dicens: Quem ego decollávi Joánnem, ipse surréxit a mórtuis, et virtútes operántur in eo.")
 
 [section #71 type=responsory slot=responsory reference=horas/Latin/Sancti/06-29#Responsory8 languages=Latin]
   Latin: [R.] text("Quem dicunt hómines esse Filium hóminis? dixit Jesus discípulis suis. Respóndens Petrus dixit: Tu es Christus Fílius Dei vivi.")
@@ -497,12 +525,49 @@ warning count: 0
   (no lines)
 
 [section #76 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/06-29#Lectio7 languages=Latin]
-  Latin: text("Léctio sancti Evangélii secúndum Matthǽum ") · citation("Matt 16:13-19") · text("In illo témpore: Venit Jesus in partes Cæsaréæ Philíppi, et interrogábat discípulos suos, dicens: Quem dicunt hómines esse Fílium hóminis? Et réliqua.")
-  Latin: text("Homilía sancti Hierónymi Presbýteri") · text(" ") · rubric("Lib. 3 Comment. in Matth. cap. 16") · text(" Pulchre intérrogat: Quem dicunt hómines esse Fílium hóminis? quia qui de fílio hóminis loquúntur, hómines sunt; qui vero divinitátem ejus intéllegunt, non hómines, sed dii appellántur. At illi dixérunt: Alii Joánnem Baptístam, álii autem Elíam. Miror quosdam intérpretes causas errórum inquírere singulórum, et disputatiónem longíssimam téxere, quare Dóminum nostrum Jesum Christum álii Joánnem putáverint, álii Elíam, álii Jeremíam aut unum ex prophétis; cum sic potúerint erráre in Elía et Jeremía, quo modo Heródes errávit in Joánne, dicens: Quem ego decollávi Joánnem, ipse surréxit a mórtuis, et virtútes operántur in eo.")
+  Latin: text("Léctio sancti Evangélii secúndum Matthǽum")
+  Latin: text(" ") · citation("Matt 16:13-19")
+  Latin: text("In illo témpore: Venit Jesus in partes Cæsaréæ Philíppi, et interrogábat discípulos suos, dicens: Quem dicunt hómines esse Fílium hóminis? Et réliqua.")
+  Latin: text("Homilía sancti Hierónymi Presbýteri")
+  Latin: rubric("Lib. 3 Comment. in Matth. cap. 16")
+  Latin: text("Pulchre intérrogat: Quem dicunt hómines esse Fílium hóminis? quia qui de fílio hóminis loquúntur, hómines sunt; qui vero divinitátem ejus intéllegunt, non hómines, sed dii appellántur. At illi dixérunt: Alii Joánnem Baptístam, álii autem Elíam. Miror quosdam intérpretes causas errórum inquírere singulórum, et disputatiónem longíssimam téxere, quare Dóminum nostrum Jesum Christum álii Joánnem putáverint, álii Elíam, álii Jeremíam aut unum ex prophétis; cum sic potúerint erráre in Elía et Jeremía, quo modo Heródes errávit in Joánne, dicens: Quem ego decollávi Joánnem, ipse surréxit a mórtuis, et virtútes operántur in eo.")
 
 [section #77 type=te-deum slot=te-deum reference=horas/Latin/Psalterium/Common/Prayers#Te Deum languages=Latin]
   Latin: [v.] text("Te Deum laudámus: * te Dóminum confitémur.")
-  Latin: text("Te ætérnum Patrem * omnis terra venerátur.Tibi omnes Ángeli, * tibi Cæli, et univérsæ Potestátes:Tibi Chérubim et Séraphim * incessábili voce proclámant:") · text(" ") · rubric("Fit reverentia") · text(" Sanctus, Sanctus, Sanctus * Dóminus Deus Sábaoth.Pleni sunt cæli et terra * majestátis glóriæ tuæ.Te gloriósus * Apostolórum chorus,Te Prophetárum * laudábilis númerus,Te Mártyrum candidátus * laudat exércitus.Te per orbem terrárum * sancta confitétur Ecclésia,Patrem * imménsæ majestátis;Venerándum tuum verum * et únicum Fílium;Sanctum quoque * Paráclitum Spíritum.Tu Rex glóriæ, * Christe.Tu Patris * sempitérnus es Fílius.") · text(" ") · rubric("Fit reverentia") · text(" Tu, ad liberándum susceptúrus hóminem: * non horruísti Vírginis úterum.Tu, devícto mortis acúleo, * aperuísti credéntibus regna cælórum.Tu ad déxteram Dei sedes, * in glória Patris.Judex créderis * esse ventúrus.") · text(" ") · rubric("Sequens versus dicitur flexis genibus") · text(" (sed rubrica cisterciensis dicitur)") · text(" ") · rubric("Fratres, quando incipiunt « Te ergo quæsumus, » exeuntes e Stallis, reverenter inclinent ad verba « Quos pretioso » et cetera") · text(" Te ergo quǽsumus, tuis fámulis súbveni, * quos pretióso sánguine redemísti.Ætérna fac cum Sanctis tuis * in glória numerári.Salvum fac pópulum tuum, Dómine, * et bénedic hereditáti tuæ.Et rege eos, * et extólle illos usque in ætérnum.Per síngulos dies * benedícimus te.") · text(" ") · rubric("Fit reverentia, secundum consuetudinem") · text(" Et laudámus nomen tuum in sǽculum, * et in sǽculum sǽculi.Dignáre, Dómine, die isto * sine peccáto nos custodíre.Miserére nostri, Dómine, * miserére nostri.Fiat misericórdia tua, Dómine, super nos, * quemádmodum sperávimus in te.In te, Dómine, sperávi: * non confúndar in ætérnum.")
+  Latin: text("Te ætérnum Patrem * omnis terra venerátur.")
+  Latin: text("Tibi omnes Ángeli, * tibi Cæli, et univérsæ Potestátes:")
+  Latin: text("Tibi Chérubim et Séraphim * incessábili voce proclámant:")
+  Latin: rubric("Fit reverentia")
+  Latin: text("Sanctus, Sanctus, Sanctus * Dóminus Deus Sábaoth.")
+  Latin: text("Pleni sunt cæli et terra * majestátis glóriæ tuæ.")
+  Latin: text("Te gloriósus * Apostolórum chorus,")
+  Latin: text("Te Prophetárum * laudábilis númerus,")
+  Latin: text("Te Mártyrum candidátus * laudat exércitus.")
+  Latin: text("Te per orbem terrárum * sancta confitétur Ecclésia,")
+  Latin: text("Patrem * imménsæ majestátis;")
+  Latin: text("Venerándum tuum verum * et únicum Fílium;")
+  Latin: text("Sanctum quoque * Paráclitum Spíritum.")
+  Latin: text("Tu Rex glóriæ, * Christe.")
+  Latin: text("Tu Patris * sempitérnus es Fílius.")
+  Latin: rubric("Fit reverentia")
+  Latin: text("Tu, ad liberándum susceptúrus hóminem: * non horruísti Vírginis úterum.")
+  Latin: text("Tu, devícto mortis acúleo, * aperuísti credéntibus regna cælórum.")
+  Latin: text("Tu ad déxteram Dei sedes, * in glória Patris.")
+  Latin: text("Judex créderis * esse ventúrus.")
+  Latin: rubric("Sequens versus dicitur flexis genibus")
+  Latin: text("(sed rubrica cisterciensis dicitur)")
+  Latin: rubric("Fratres, quando incipiunt « Te ergo quæsumus, » exeuntes e Stallis, reverenter inclinent ad verba « Quos pretioso » et cetera")
+  Latin: text("Te ergo quǽsumus, tuis fámulis súbveni, * quos pretióso sánguine redemísti.")
+  Latin: text("Ætérna fac cum Sanctis tuis * in glória numerári.")
+  Latin: text("Salvum fac pópulum tuum, Dómine, * et bénedic hereditáti tuæ.")
+  Latin: text("Et rege eos, * et extólle illos usque in ætérnum.")
+  Latin: text("Per síngulos dies * benedícimus te.")
+  Latin: rubric("Fit reverentia, secundum consuetudinem")
+  Latin: text("Et laudámus nomen tuum in sǽculum, * et in sǽculum sǽculi.")
+  Latin: text("Dignáre, Dómine, die isto * sine peccáto nos custodíre.")
+  Latin: text("Miserére nostri, Dómine, * miserére nostri.")
+  Latin: text("Fiat misericórdia tua, Dómine, super nos, * quemádmodum sperávimus in te.")
+  Latin: text("In te, Dómine, sperávi: * non confúndar in ætérnum.")
 
 [section #78 type=oration slot=oration reference=horas/Latin/Sancti/06-29#Oratio languages=Latin]
   Latin: text("Deus, qui hodiérnam diem Apostolórum tuórum Petri et Pauli martýrio consecrásti: da Ecclésiæ tuæ, eórum in ómnibus sequi præcéptum; per quos religiónis sumpsit exórdium.")

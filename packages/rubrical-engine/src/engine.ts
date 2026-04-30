@@ -248,6 +248,25 @@ export function createRubricalEngine(config: RubricalEngineConfig): RubricalEngi
     today: DayConcurrencePreview,
     tomorrow: DayConcurrencePreview
   ): ComplineSummaryView {
+    const source = version.policy.complineSource({
+      concurrence,
+      today,
+      tomorrow
+    });
+    if (source.kind === 'ordinary') {
+      return {
+        celebration: {
+          feastRef: today.temporal.feastRef,
+          rank: today.temporal.rank,
+          source: 'temporal'
+        },
+        celebrationRules: defaultCelebrationRuleSet(),
+        commemorations: [],
+        temporal: today.temporal,
+        overlay: summary.overlay
+      };
+    }
+
     // Compline follows the Vespers winner under 1960.
     if (concurrence.winner === 'tomorrow') {
       return {

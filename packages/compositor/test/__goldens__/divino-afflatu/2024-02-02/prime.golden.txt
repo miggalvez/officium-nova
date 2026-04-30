@@ -3,7 +3,7 @@ date: 2024-02-02
 hour: prime
 celebration: In Purificatione Beatæ Mariæ Virginis
 languages: Latin
-section count: 9
+section count: 8
 warning count: 0
 
 [section #0 type=other slot=incipit reference=horas/Ordinarium/Prima#Incipit languages=Latin]
@@ -101,17 +101,12 @@ warning count: 0
   Latin: text(" ") · citation("Mal 3:4")
   Latin: [v.] text("Et placébit Dómino sacrifícium Juda et Jerúsalem sicut dies sǽculi et sicut anni antíqui, dicit Dóminus omnípotens.")
 
-[section #4 type=versicle slot=versicle reference=horas/Latin/Sancti/02-02#Versum 1 languages=Latin]
-  Latin: text("_")
-  Latin: [V.] text("Respónsum accépit Símeon a Spíritu Sancto.")
-  Latin: [R.] text("Non visúrum se mortem, nisi vidéret Christum Dómini.")
-
-[section #5 type=oration slot=oration reference=horas/Latin/Sancti/02-02#Oratio languages=Latin]
+[section #4 type=oration slot=oration reference=horas/Latin/Sancti/02-02#Oratio languages=Latin]
   Latin: text("Omnípotens sempitérne Deus, majestátem tuam súpplices exorámus: ut, sicut unigénitus Fílius tuus hodiérna die cum nostræ carnis substántia in templo est præsentátus; ita nos fácias purificátis tibi méntibus præsentári.")
   Latin: [r.] text("Per eúmdem Dóminum nostrum Jesum Christum Fílium tuum, qui tecum vivit et regnat in unitáte Spíritus Sancti, Deus, per ómnia sǽcula sæculórum.")
   Latin: [R.] text("Amen.")
 
-[section #6 type=martyrology slot=martyrology reference=prime-martyrology:02-03 languages=Latin]
+[section #5 type=martyrology slot=martyrology reference=prime-martyrology:02-03 languages=Latin]
   Latin: [v.] text("Tértio Nonas Februárii Luna vicésima tértia Anno Dómini 2024")
   Latin: text("_")
   Latin: [r.] text("Sebáste, in Arménia, pássio sancti Blásii, Epíscopi et Mártyris; qui, multórum patrátor miraculórum, sub Agricoláo Prǽside, post diútinam cæsiónem, atque in ligno suspensiónem, ubi férreis pectínibus carnes ejus dirúptæ sunt, post tetérrimum cárcerem et in lacum demérsionem, unde salvus exívit, tandem, jubénte eódem Júdice, una cum duóbus púeris, cápite truncátur. Ante ipsum vero septem mulíeres, quæ guttas sánguinis, ex ejúsdem Mártyris córpore defluéntes, dum torquerétur, colligébant, proptérea, deprehénsæ quod essent Christiánæ, omnes, post dira torménta, gládio percússæ sunt.")
@@ -128,7 +123,7 @@ warning count: 0
   Latin: [v.] text("Sancta María et omnes Sancti intercédant pro nobis ad Dóminum, ut nos mereámur ab eo adjuvári et salvári, qui vivit et regnat in sǽcula sæculórum.")
   Latin: [R.] text("Amen.")
 
-[section #7 type=other slot=de-officio-capituli reference=horas/Ordinarium/Prima#De Officio Capituli languages=Latin]
+[section #6 type=other slot=de-officio-capituli reference=horas/Ordinarium/Prima#De Officio Capituli languages=Latin]
   Latin: [V.] text("Deus in adjutórium meum inténde.")
   Latin: [R.] text("Dómine, ad adjuvándum me festína.")
   Latin: [V.] text("Deus in adjutórium meum inténde.")
@@ -150,7 +145,7 @@ warning count: 0
   Latin: [v.] text("Dirígere et sanctificáre, régere et gubernáre dignáre, Dómine Deus, Rex cæli et terræ, hódie corda et córpora nostra, sensus, sermónes et actus nostros in lege tua, et in opéribus mandatórum tuórum: ut hic et in ætérnum, te auxiliánte, salvi et líberi esse mereámur, Salvátor mundi: Qui vivis et regnas in sǽcula sæculórum.")
   Latin: [R.] text("Amen.")
 
-[section #8 type=conclusion slot=conclusion reference=horas/Ordinarium/Prima#Conclusio languages=Latin]
+[section #7 type=conclusion slot=conclusion reference=horas/Ordinarium/Prima#Conclusio languages=Latin]
   Latin: [V.] text("Adjutórium nostrum + in nómine Dómini.")
   Latin: [R.] text("Qui fecit cælum et terram.")
   Latin: [V.] text("Benedícite.")

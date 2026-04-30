@@ -154,6 +154,11 @@ function resolveForLanguage(
   sourceFallbackDepth = 0
 ): ResolvedSection | undefined {
   const { langfb, dayOfWeek, date, season, version, modernStyleMonthday, onWarning } = options;
+  const synthesized = synthesizeSection(index, reference, language, options);
+  if (synthesized) {
+    return synthesized;
+  }
+
   const chain = languageFallbackChain(language, { langfb });
   for (const candidate of chain) {
     const candidatePath = swapLanguageSegment(reference.path, candidate);
@@ -189,6 +194,421 @@ function resolveForLanguage(
     }
   }
   return undefined;
+}
+
+function synthesizeSection(
+  index: TextIndex,
+  reference: TextReference,
+  language: string,
+  options: Pick<ResolveOptions, 'season'>
+): ResolvedSection | undefined {
+  const commonPrayer = synthesizeLocalizedCommonPrayerSection(index, reference, language);
+  if (commonPrayer) {
+    return commonPrayer;
+  }
+
+  const primaChapter = synthesizePrimaSpecialChapter(index, reference, language);
+  if (primaChapter) {
+    return primaChapter;
+  }
+
+  if (isPaschalSeason(options.season)) {
+    const special = synthesizePaschalSpecialResponsory(index, reference, language);
+    if (special) {
+      return special;
+    }
+  }
+
+  return synthesizeLocalizedCommonSection(index, reference, language);
+}
+
+function synthesizeLocalizedCommonPrayerSection(
+  index: TextIndex,
+  reference: TextReference,
+  language: string
+): ResolvedSection | undefined {
+  if (
+    language === 'Latin' ||
+    reference.section !== 'benedictio Completorium' ||
+    !reference.path.endsWith('/Psalterium/Common/Prayers')
+  ) {
+    return undefined;
+  }
+
+  const localizedPath = swapLanguageSegment(reference.path, language);
+  const jube = firstSection(index, [localizedPath], 'Jube domne');
+  const benediction = firstSection(index, [localizedPath], 'Benedictio Completorium_');
+  if (!jube || !benediction) {
+    return undefined;
+  }
+
+  return Object.freeze({
+    language,
+    path: jube.path,
+    section: {
+      header: reference.section,
+      condition: undefined,
+      startLine: jube.section.startLine,
+      endLine: benediction.section.endLine,
+      content: []
+    },
+    content: Object.freeze([...jube.section.content, ...benediction.section.content]),
+    selectorUnhandled: false,
+    selectorMissing: false
+  });
+}
+
+function synthesizePrimaSpecialChapter(
+  index: TextIndex,
+  reference: TextReference,
+  language: string
+): ResolvedSection | undefined {
+  if (
+    !PRIMA_SPECIAL_CHAPTER_SECTIONS.has(reference.section) ||
+    !reference.path.endsWith('/Psalterium/Special/Prima Special')
+  ) {
+    return undefined;
+  }
+
+  const localizedPath = swapLanguageSegment(reference.path, language);
+  const source = firstSection(index, [localizedPath], reference.section);
+  if (!source || source.section.content.some(isDeoGratiasFormula)) {
+    return undefined;
+  }
+
+  return Object.freeze({
+    language: source.language,
+    path: source.path,
+    section: source.section,
+    content: Object.freeze([
+      ...source.section.content,
+      { type: 'formulaRef', name: 'Deo gratias' }
+    ] satisfies TextContent[]),
+    selectorUnhandled: false,
+    selectorMissing: false
+  });
+}
+
+const PRIMA_SPECIAL_CHAPTER_SECTIONS = new Set([
+  'Dominica',
+  'Feria',
+  'Per Annum',
+  'Adv',
+  'Nat',
+  'Epi',
+  'Asc',
+  'Quad',
+  'Quad5',
+  'Pasch',
+  'Pent'
+]);
+
+function isDeoGratiasFormula(node: TextContent): boolean {
+  return node.type === 'formulaRef' && /^deo gratias$/iu.test(node.name.trim());
+}
+
+function synthesizeLocalizedCommonSection(
+  index: TextIndex,
+  reference: TextReference,
+  language: string
+): ResolvedSection | undefined {
+  if (!reference.path.includes('/Commune/')) {
+    return undefined;
+  }
+
+  const section = reference.section;
+  const commonPaths = [
+    swapLanguageSegment(reference.path, language),
+    `horas/${language}/Commune/C1p`
+  ];
+
+  if (section === 'Responsory Breve Tertia') {
+    return synthesizePaschalCommonShortResponsory(index, commonPaths, section, 'Versum 1');
+  }
+  if (section === 'Responsory Breve Sexta') {
+    return synthesizePaschalCommonShortResponsory(index, commonPaths, section, 'Nocturn 2 Versum');
+  }
+  if (section === 'Responsory Breve Nona') {
+    return synthesizePaschalCommonShortResponsory(index, commonPaths, section, 'Nocturn 3 Versum');
+  }
+  if (section === 'Capitulum Nona') {
+    return synthesizePaschalCommonNonaChapter(index, commonPaths, section);
+  }
+
+  return undefined;
+}
+
+function synthesizePaschalSpecialResponsory(
+  index: TextIndex,
+  reference: TextReference,
+  language: string
+): ResolvedSection | undefined {
+  if (
+    reference.section === 'Responsory' &&
+    reference.path.endsWith('/Psalterium/Special/Prima Special')
+  ) {
+    return synthesizePrimePaschalResponsory(index, reference, language);
+  }
+
+  if (
+    reference.section === 'Responsory Completorium' &&
+    reference.path.endsWith('/Psalterium/Special/Minor Special')
+  ) {
+    return synthesizeComplinePaschalResponsory(index, reference, language);
+  }
+
+  return undefined;
+}
+
+function synthesizePrimePaschalResponsory(
+  index: TextIndex,
+  reference: TextReference,
+  language: string
+): ResolvedSection | undefined {
+  const localizedPath = swapLanguageSegment(reference.path, language);
+  const responsory = firstSection(index, [localizedPath], 'Responsory');
+  const paschal = firstSection(index, [localizedPath], 'Responsory Pasch');
+  const firstResponse = firstResponsoryResponse(responsory?.section.content);
+  const paschalVersicle = firstTextContent(paschal?.section.content);
+  if (!responsory || !firstResponse || !paschalVersicle) {
+    return undefined;
+  }
+
+  return buildPaschalShortResponsorySection({
+    source: responsory,
+    header: reference.section,
+    responseBase: normalizeStarredShortResponsoryBase(firstResponse.text),
+    versicle: paschalVersicle,
+    language
+  });
+}
+
+function synthesizeComplinePaschalResponsory(
+  index: TextIndex,
+  reference: TextReference,
+  language: string
+): ResolvedSection | undefined {
+  const localizedPath = swapLanguageSegment(reference.path, language);
+  const responsory = firstSection(index, [localizedPath], 'Responsory Completorium');
+  const firstResponse = firstResponsoryResponse(responsory?.section.content);
+  const versicle = firstVerseMarker(responsory?.section.content, /^v\.?$/iu);
+  if (!responsory || !firstResponse) {
+    return undefined;
+  }
+
+  return buildPaschalShortResponsorySection({
+    source: responsory,
+    header: reference.section,
+    responseBase: normalizeStarredShortResponsoryBase(firstResponse.text),
+    language,
+    ...(versicle ? { versicle: versicle.text } : {})
+  });
+}
+
+function synthesizePaschalCommonShortResponsory(
+  index: TextIndex,
+  candidatePaths: readonly string[],
+  sectionName: string,
+  versicleSectionName: string
+): ResolvedSection | undefined {
+  const source = firstSection(index, candidatePaths, versicleSectionName);
+  const first = source?.section.content.find(
+    (node): node is Extract<TextContent, { type: 'verseMarker' }> =>
+      node.type === 'verseMarker' && /^v\.?$/iu.test(node.marker.trim())
+  );
+  const second = source?.section.content.find(
+    (node): node is Extract<TextContent, { type: 'verseMarker' }> =>
+      node.type === 'verseMarker' && /^r\.?$/iu.test(node.marker.trim())
+  );
+  if (!source || !first || !second) {
+    return undefined;
+  }
+  if (!hasAlleluiaTail(first.text) && !hasAlleluiaTail(second.text)) {
+    return undefined;
+  }
+
+  const response = stripAlleluiaTail(first.text);
+  const versicle = stripAlleluiaTail(second.text);
+  return buildPaschalShortResponsorySection({
+    source,
+    header: sectionName,
+    responseBase: response,
+    versicle,
+    language: source.language
+  });
+}
+
+function synthesizePaschalCommonNonaChapter(
+  index: TextIndex,
+  candidatePaths: readonly string[],
+  sectionName: string
+): ResolvedSection | undefined {
+  const source = firstSection(index, candidatePaths, 'Lectio Prima');
+  if (!source) {
+    return undefined;
+  }
+
+  return Object.freeze({
+    language: source.language,
+    path: source.path,
+    section: {
+      header: sectionName,
+      condition: undefined,
+      startLine: source.section.startLine,
+      endLine: source.section.endLine,
+      content: []
+    },
+    content: Object.freeze([
+      ...source.section.content,
+      { type: 'formulaRef', name: 'Deo gratias' }
+    ] satisfies TextContent[]),
+    selectorUnhandled: false,
+    selectorMissing: false
+  });
+}
+
+function firstSection(
+  index: TextIndex,
+  candidatePaths: readonly string[],
+  sectionName: string
+): { readonly language: string; readonly path: string; readonly section: ParsedSection } | undefined {
+  for (const path of candidatePaths) {
+    const section = resolveSectionByName(index, path, sectionName);
+    if (section) {
+      const language = path.match(/^horas\/([^/]+)\//u)?.[1] ?? 'Latin';
+      return {
+        language,
+        path: ensureTxtSuffix(path),
+        section
+      };
+    }
+  }
+  return undefined;
+}
+
+function stripAlleluiaTail(value: string): string {
+  return value.replace(/,?\s*allel(?:u|ú)(?:ia|ja)(?:,?\s*allel(?:u|ú)(?:ia|ja))*\.?\s*$/iu, '').trimEnd();
+}
+
+function hasAlleluiaTail(value: string): boolean {
+  return /allel(?:u|ú)(?:ia|ja)(?:,?\s*allel(?:u|ú)(?:ia|ja))*\.?\s*$/iu.test(value.trim());
+}
+
+function isPaschalSeason(season: ResolveOptions['season']): boolean {
+  return season === 'eastertide' || season === 'ascensiontide';
+}
+
+function firstResponsoryResponse(
+  content: readonly TextContent[] | undefined
+): Extract<TextContent, { type: 'verseMarker' }> | undefined {
+  return firstVerseMarker(content, /^r\.?\s*br\.?$/iu);
+}
+
+function firstTextContent(content: readonly TextContent[] | undefined): string | undefined {
+  const node = firstTextLike(content);
+  if (!node) {
+    return undefined;
+  }
+  return node.type === 'text' ? node.value : node.text;
+}
+
+function firstVerseMarker(
+  content: readonly TextContent[] | undefined,
+  marker: RegExp
+): Extract<TextContent, { type: 'verseMarker' }> | undefined {
+  for (const node of content ?? []) {
+    if (node.type === 'verseMarker' && marker.test(node.marker.trim())) {
+      return node;
+    }
+    if (node.type === 'conditional') {
+      const nested = firstVerseMarker(node.content, marker);
+      if (nested) {
+        return nested;
+      }
+    }
+  }
+  return undefined;
+}
+
+function firstTextLike(
+  content: readonly TextContent[] | undefined
+): Extract<TextContent, { type: 'text' | 'verseMarker' }> | undefined {
+  for (const node of content ?? []) {
+    if (node.type === 'text' || node.type === 'verseMarker') {
+      return node;
+    }
+    if (node.type === 'conditional') {
+      const nested = firstTextLike(node.content);
+      if (nested) {
+        return nested;
+      }
+    }
+  }
+  return undefined;
+}
+
+function normalizeStarredShortResponsoryBase(value: string): string {
+  const withoutAlleluia = stripAlleluiaTail(value).replace(/\s+/gu, ' ').trim();
+  const match = /^(?<left>.*?),?\s*\*\s*(?<right>.+?)\.?$/u.exec(withoutAlleluia);
+  if (!match?.groups) {
+    return withoutAlleluia.replace(/\.?$/u, '');
+  }
+
+  const left = (match.groups.left ?? '').trim().replace(/\.?$/u, '');
+  const right = lowerInitial((match.groups.right ?? '').trim().replace(/\.?$/u, ''));
+  return `${left}, ${right}`;
+}
+
+function lowerInitial(value: string): string {
+  const first = value[0];
+  if (!first) {
+    return value;
+  }
+  return `${first.toLocaleLowerCase()}${value.slice(1)}`;
+}
+
+function buildPaschalShortResponsorySection(args: {
+  readonly source: { readonly language: string; readonly path: string; readonly section: ParsedSection };
+  readonly header: string;
+  readonly responseBase: string;
+  readonly language: string;
+  readonly versicle?: string;
+}): ResolvedSection {
+  const alleluia = alleluiaWords(args.language);
+  const response = `${args.responseBase.replace(/\.?$/u, '')}, * ${alleluia.capitalized}, ${alleluia.lowercase}.`;
+  const content: TextContent[] = [
+    { type: 'verseMarker', marker: 'R.br.', text: response },
+    { type: 'verseMarker', marker: 'R.', text: response }
+  ];
+  if (args.versicle) {
+    content.push({ type: 'verseMarker', marker: 'V.', text: stripAlleluiaTail(args.versicle).replace(/\.?$/u, '.') });
+  }
+  content.push(
+    { type: 'verseMarker', marker: 'R.', text: `${alleluia.capitalized}, ${alleluia.lowercase}.` },
+    { type: 'macroRef', name: 'Gloria1' },
+    { type: 'verseMarker', marker: 'R.', text: response }
+  );
+
+  return Object.freeze({
+    language: args.source.language,
+    path: args.source.path,
+    section: {
+      header: args.header,
+      condition: undefined,
+      startLine: args.source.section.startLine,
+      endLine: args.source.section.endLine,
+      content: []
+    },
+    content: Object.freeze(content),
+    selectorUnhandled: false,
+    selectorMissing: false
+  });
+}
+
+function alleluiaWords(language: string): { readonly capitalized: string; readonly lowercase: string } {
+  return language === 'English'
+    ? { capitalized: 'Alleluia', lowercase: 'alleluia' }
+    : { capitalized: 'Allelúia', lowercase: 'allelúia' };
 }
 
 function resolveLocalizedSourceFallback(
@@ -385,9 +805,11 @@ function resolveSectionByName(
   sectionName: string
 ): ParsedSection | undefined {
   const normalizedPath = ensureTxtSuffix(path);
-  const direct = index.getSection(normalizedPath, sectionName);
-  if (direct) {
-    return direct;
+  for (const candidate of sectionNameCandidates(sectionName)) {
+    const direct = index.getSection(normalizedPath, candidate);
+    if (direct) {
+      return direct;
+    }
   }
 
   const file = index.getFile(normalizedPath);
@@ -400,18 +822,40 @@ function resolveSectionByName(
     return undefined;
   }
 
-  const headingContent = extractHeadingSection(preamble, sectionName);
-  if (!headingContent) {
-    return undefined;
+  for (const candidate of sectionNameCandidates(sectionName)) {
+    const headingContent = extractHeadingSection(preamble, candidate);
+    if (headingContent) {
+      return {
+        header: candidate,
+        condition: undefined,
+        content: [...headingContent],
+        startLine: preamble.startLine,
+        endLine: preamble.endLine
+      };
+    }
   }
 
-  return {
-    header: sectionName,
-    condition: undefined,
-    content: [...headingContent],
-    startLine: preamble.startLine,
-    endLine: preamble.endLine
-  };
+  return undefined;
+}
+
+function sectionNameCandidates(sectionName: string): readonly string[] {
+  const trimmed = sectionName.trim();
+  const withoutTrailingUnderscore = trimmed.replace(/_+$/u, '');
+  const capitalized =
+    withoutTrailingUnderscore.length > 0
+      ? `${withoutTrailingUnderscore[0]!.toUpperCase()}${withoutTrailingUnderscore.slice(1)}`
+      : withoutTrailingUnderscore;
+  const canUseUnderscoreAliases = /^(?:[A-Z0-9]|.*_$)/u.test(trimmed);
+  const candidates = [
+    sectionName,
+    trimmed,
+    withoutTrailingUnderscore,
+    capitalized
+  ];
+  if (canUseUnderscoreAliases) {
+    candidates.push(`${withoutTrailingUnderscore}_`, `${capitalized}_`);
+  }
+  return Array.from(new Set(candidates.filter((value) => value.length > 0)));
 }
 
 function extractHeadingSection(

@@ -105,10 +105,10 @@ warning count: 0
   Latin: [V.] text("Glória Patri, et Fílio, * et Spirítui Sancto.")
   Latin: [R.] text("Adjuvábit eam * Deus vultu suo.")
 
-[section #5 type=versicle slot=versicle reference=horas/Latin/Sancti/02-02#Versum 1 languages=Latin]
+[section #5 type=versicle slot=versicle reference=horas/Latin/Commune/C11#Nocturn 3 Versum languages=Latin]
   Latin: text("_")
-  Latin: [V.] text("Respónsum accépit Símeon a Spíritu Sancto.")
-  Latin: [R.] text("Non visúrum se mortem, nisi vidéret Christum Dómini.")
+  Latin: [V.] text("Elégit eam Deus, et præelégit eam.")
+  Latin: [R.] text("In tabernáculo suo habitáre facit eam.")
 
 [section #6 type=oration slot=oration reference=horas/Latin/Psalterium/Common/Prayers#Domine exaudi languages=Latin]
   Latin: [V.] text("Dómine, exáudi oratiónem meam.")

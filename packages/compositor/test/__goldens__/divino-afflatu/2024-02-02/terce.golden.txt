@@ -109,10 +109,10 @@ warning count: 0
   Latin: [V.] text("Glória Patri, et Fílio, * et Spirítui Sancto.")
   Latin: [R.] text("Spécie tua * Et pulchritúdine tua.")
 
-[section #5 type=versicle slot=versicle reference=horas/Latin/Sancti/02-02#Versum 1 languages=Latin]
+[section #5 type=versicle slot=versicle reference=horas/Latin/Commune/C11#Nocturn 2 Versum languages=Latin]
   Latin: text("_")
-  Latin: [V.] text("Respónsum accépit Símeon a Spíritu Sancto.")
-  Latin: [R.] text("Non visúrum se mortem, nisi vidéret Christum Dómini.")
+  Latin: [V.] text("Adjuvábit eam Deus vultu suo.")
+  Latin: [R.] text("Deus in médio ejus, non commovébitur.")
 
 [section #6 type=oration slot=oration reference=horas/Latin/Sancti/02-02#Oratio languages=Latin]
   Latin: text("Omnípotens sempitérne Deus, majestátem tuam súpplices exorámus: ut, sicut unigénitus Fílius tuus hodiérna die cum nostræ carnis substántia in templo est præsentátus; ita nos fácias purificátis tibi méntibus præsentári.")

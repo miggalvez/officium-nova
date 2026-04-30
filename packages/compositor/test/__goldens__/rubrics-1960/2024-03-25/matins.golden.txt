@@ -285,8 +285,12 @@ warning count: 0
   (no lines)
 
 [section #14 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Tempora/Quad6-1#Lectio1 languages=Latin]
-  Latin: text("Léctio sancti Evangélii secúndum Joánnem ") · citation("Joannes 12:1-9") · text("Ante sex dies Paschæ venit Jesus Bethániam, ubi Lázarus fúerat mórtuus, quem suscitávit Jesus. Et réliqua.")
-  Latin: text("Homilía sancti Augustíni Epíscopi") · text(" ") · rubric("Tractus 50 in Joann., post initium") · text(" Ne putárent hómines phantásma esse factum, quia mórtuus resurréxit, Lázarus unus erat ex recumbéntibus: vivébat, loquebátur, epulabátur, véritas ostendebátur, infidélitas Judæórum confundebátur. Discumbébat ergo Jesus cum Lázaro, et céteris: ministrábat Martha, una ex soróribus Lázari. María vero, áltera soror Lázari, accépit libram unguénti nardi pístici pretiósi, et unxit pedes Jesu, et extérsit capíllis suis pedes ejus, et domus impléta est ex odóre unguénti. Factum audívimus: mystérium requirámus.")
+  Latin: text("Léctio sancti Evangélii secúndum Joánnem")
+  Latin: text(" ") · citation("Joannes 12:1-9")
+  Latin: text("Ante sex dies Paschæ venit Jesus Bethániam, ubi Lázarus fúerat mórtuus, quem suscitávit Jesus. Et réliqua.")
+  Latin: text("Homilía sancti Augustíni Epíscopi")
+  Latin: rubric("Tractus 50 in Joann., post initium")
+  Latin: text("Ne putárent hómines phantásma esse factum, quia mórtuus resurréxit, Lázarus unus erat ex recumbéntibus: vivébat, loquebátur, epulabátur, véritas ostendebátur, infidélitas Judæórum confundebátur. Discumbébat ergo Jesus cum Lázaro, et céteris: ministrábat Martha, una ex soróribus Lázari. María vero, áltera soror Lázari, accépit libram unguénti nardi pístici pretiósi, et unxit pedes Jesu, et extérsit capíllis suis pedes ejus, et domus impléta est ex odóre unguénti. Factum audívimus: mystérium requirámus.")
 
 [section #15 type=responsory slot=responsory reference=horas/Latin/Tempora/Quad6-1#Responsory1 languages=Latin]
   Latin: [R.] text("Viri ímpii dixérunt: Opprimámus virum justum injúste, et deglutiámus eum tamquam inférnus vivum: auferámus memóriam illíus de terra: et de spóliis ejus sortem mittámus inter nos: ipsi enim homicídæ thesaurizavérunt sibi mala.")

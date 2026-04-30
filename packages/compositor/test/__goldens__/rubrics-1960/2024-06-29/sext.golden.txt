@@ -105,10 +105,10 @@ warning count: 0
   Latin: [V.] text("Glória Patri, et Fílio, * et Spirítui Sancto.")
   Latin: [R.] text("Constítues eos príncipes * Super omnem terram.")
 
-[section #5 type=versicle slot=versicle reference=horas/Latin/Commune/C1#Versum 1 languages=Latin]
+[section #5 type=versicle slot=versicle reference=horas/Latin/Commune/C1#Nocturn 3 Versum languages=Latin]
   Latin: text("_")
-  Latin: [V.] text("In omnem terram exívit sonus eórum.")
-  Latin: [R.] text("Et in fines orbis terræ verba eórum.")
+  Latin: [V.] text("Nimis honoráti sunt amíci tui, Deus.")
+  Latin: [R.] text("Nimis confortátus est principátus eórum.")
 
 [section #6 type=oration slot=oration reference=horas/Latin/Psalterium/Common/Prayers#Domine exaudi languages=Latin]
   Latin: [V.] text("Dómine, exáudi oratiónem meam.")

@@ -189,10 +189,18 @@ function linesFromContent(
           // text. The legacy Perl renderer strips it; we do too so the
           // compositor matches the source author's intent.
           // See `upstream/.../Psalterium/Special/Prima Special.txt:107`.
-          const cleaned = normalizeHymnText(node.value);
+          const cleaned = normalizeHymnText(language, node.value);
           current = {
             parts: [{ type: 'text', value: cleaned }]
           };
+          break;
+        }
+        if (slot === 'final-antiphon-bvm') {
+          flush();
+          current = {
+            parts: [{ type: 'text', value: normalizeFinalAntiphonText(node.value) }]
+          };
+          flush();
           break;
         }
         pushRun({ type: 'text', value: normalizeSlotText(slot, node.value) });
@@ -299,17 +307,24 @@ function stripHymnDoxologyMarker(text: string): string {
 }
 
 function stripLeadingGabcInlineCue(text: string): string {
-  return text.replace(/^\{:[^}]+:\}\s*/u, '');
+  return text.replace(/^\{:[^}]*:\}\s*/u, '');
 }
 
-function normalizeHymnText(text: string): string {
+function normalizeHymnText(language: string, text: string): string {
   const withoutCue = stripLeadingGabcInlineCue(text);
   const verseMatch = withoutCue.match(/^v\.\s+(.*)$/u);
-  return stripHymnDoxologyMarker(verseMatch?.[1] ?? withoutCue);
+  const normalized = stripHymnDoxologyMarker(verseMatch?.[1] ?? withoutCue);
+  if (language === 'English' && normalized === 'Hymnus') {
+    return 'Hymn';
+  }
+  return normalized;
 }
 
 function normalizeSlotText(slot: SlotName, text: string): string {
-  const withoutContractionMarkerResidue = normalizeContractedMarkerText(text);
+  const withoutContractionMarkerResidue = normalizeContractedMarkerText(stripLeadingGabcInlineCue(text))
+    .replace(/«Pater Noster»/gu, 'Pater Noster')
+    .replace(/«Our Father»/gu, 'Our Father')
+    .replace(/«And lead us not into temptation:»/gu, 'And lead us not into temptation:');
   if (slot !== 'psalmody') {
     return withoutContractionMarkerResidue;
   }
@@ -328,6 +343,10 @@ function normalizeVerseMarkerText(slot: SlotName, marker: string, text: string):
   return normalizeSlotText(slot, text);
 }
 
+function normalizeFinalAntiphonText(text: string): string {
+  return stripLeadingGabcInlineCue(text).replace(/^v\.\s+/u, '');
+}
+
 function normalizeContractedMarkerText(text: string): string {
   return text
     .replace(/(\S)r\. N\./gu, '$1 N.')
@@ -335,10 +354,14 @@ function normalizeContractedMarkerText(text: string): string {
 }
 
 function normalizeRubricText(text: string): string {
-  return text.replace(
-    /sec(?:u|ú)nda\s+«D(?:o|ó)mine,\s+ex(?:a|á)udi»\s+omittitur/giu,
-    'secunda Domine, exaudi omittitur'
-  );
+  return text
+    .replace(/«Pater Noster»/gu, 'Pater Noster')
+    .replace(/«Our Father»/gu, 'Our Father')
+    .replace(/«And lead us not into temptation:»/gu, 'And lead us not into temptation:')
+    .replace(
+      /sec(?:u|ú)nda\s+«D(?:o|ó)mine,\s+ex(?:a|á)udi»\s+omittitur/giu,
+      'secunda Domine, exaudi omittitur'
+    );
 }
 
 function renderGabcHeaderText(

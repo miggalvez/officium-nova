@@ -248,7 +248,9 @@ warning count: 3
   (no lines)
 
 [section #33 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/01-06#Lectio4 languages=Latin]
-  Latin: text("Sermo sancti Leónis Papæ") · text(" ") · rubric("Sermo 2 de Epiphania") · text(" Gaudéte in Dómino, dilectíssimi, íterum dico, gaudéte: quóniam brevi intervállo témporis, post solemnitátem Nativitátis Christi, festívitas declaratiónis ejus illúxit: et quem in illo die Virgo péperit, in hoc mundus agnóvit. Verbum enim caro factum, sic susceptiónis nostræ temperávit exórdia, ut natus Jesus et credéntibus maniféstus, et persequéntibus esset occúltus. Jam tunc ergo cæli enarravérunt glóriam Dei, et in omnem terram sonus veritátis exívit, quando et pastóribus exércitus Angelórum Salvatóris éditi annuntiátor appáruit, et Magos ad eum adorándum prǽvia stella perdúxit: ut a solis ortu usque ad occásum veri Regis generátio coruscáret, cum rerum fidem et regna Oriéntis per Magos díscerent, et Románum impérium non latéret.")
+  Latin: text("Sermo sancti Leónis Papæ")
+  Latin: rubric("Sermo 2 de Epiphania")
+  Latin: text("Gaudéte in Dómino, dilectíssimi, íterum dico, gaudéte: quóniam brevi intervállo témporis, post solemnitátem Nativitátis Christi, festívitas declaratiónis ejus illúxit: et quem in illo die Virgo péperit, in hoc mundus agnóvit. Verbum enim caro factum, sic susceptiónis nostræ temperávit exórdia, ut natus Jesus et credéntibus maniféstus, et persequéntibus esset occúltus. Jam tunc ergo cæli enarravérunt glóriam Dei, et in omnem terram sonus veritátis exívit, quando et pastóribus exércitus Angelórum Salvatóris éditi annuntiátor appáruit, et Magos ad eum adorándum prǽvia stella perdúxit: ut a solis ortu usque ad occásum veri Regis generátio coruscáret, cum rerum fidem et regna Oriéntis per Magos díscerent, et Románum impérium non latéret.")
 
 [section #34 type=responsory slot=responsory reference=horas/Latin/Sancti/01-06#Responsory4 languages=Latin]
   Latin: [R.] text("Illumináre, illumináre Jerúsalem, quia venit lux tua:")
@@ -377,8 +379,12 @@ warning count: 3
   (no lines)
 
 [section #58 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/01-06#Lectio7 languages=Latin]
-  Latin: text("Léctio sancti Evangélii secúndum Matthǽum ") · citation("Matt 2:1-12") · text("Cum natus esset Jesus in Béthlehem Juda in diébus Heródis regis, ecce Magi ab Oriénte venérunt Jerosólymam, dicéntes: Ubi est qui natus est Rex Judæórum? Et réliqua.")
-  Latin: text("Homilía sancti Gregórii Papæ") · text(" ") · rubric("Homilia 10 in Evang.") · text(" Sicut in lectióne evangélica, fratres caríssimi, audístis, cæli Rege nato, rex terræ turbátus est: quia nimírum terréna altitúdo confúnditur, cum celsitúdo cæléstis aperítur. Sed quæréndum nobis est, quidnam sit, quod, Redemptóre nato, pastóribus in Judǽa Angelus appáruit, atque ad adorándum hunc ab Oriénte Magos non Angelus, sed stella perdúxit? Quia vidélicet Judǽis, tamquam ratióne uténtibus, rationále ánimal, id est, Angelus prædicáre débuit: gentíles vero, quia uti ratióne nesciébant, ad cognoscéndum Dóminum non per vocem, sed per signa perducúntur. Unde étiam per Paulum dícitur: Prophetíæ fidélibus datæ sunt, non infidélibus: signa autem infidélibus, non fidélibus. Quia et illis prophetíæ tamquam fidélibus, non infidélibus: et istis signa tamquam infidélibus, non fidélibus data sunt.")
+  Latin: text("Léctio sancti Evangélii secúndum Matthǽum")
+  Latin: text(" ") · citation("Matt 2:1-12")
+  Latin: text("Cum natus esset Jesus in Béthlehem Juda in diébus Heródis regis, ecce Magi ab Oriénte venérunt Jerosólymam, dicéntes: Ubi est qui natus est Rex Judæórum? Et réliqua.")
+  Latin: text("Homilía sancti Gregórii Papæ")
+  Latin: rubric("Homilia 10 in Evang.")
+  Latin: text("Sicut in lectióne evangélica, fratres caríssimi, audístis, cæli Rege nato, rex terræ turbátus est: quia nimírum terréna altitúdo confúnditur, cum celsitúdo cæléstis aperítur. Sed quæréndum nobis est, quidnam sit, quod, Redemptóre nato, pastóribus in Judǽa Angelus appáruit, atque ad adorándum hunc ab Oriénte Magos non Angelus, sed stella perdúxit? Quia vidélicet Judǽis, tamquam ratióne uténtibus, rationále ánimal, id est, Angelus prædicáre débuit: gentíles vero, quia uti ratióne nesciébant, ad cognoscéndum Dóminum non per vocem, sed per signa perducúntur. Unde étiam per Paulum dícitur: Prophetíæ fidélibus datæ sunt, non infidélibus: signa autem infidélibus, non fidélibus. Quia et illis prophetíæ tamquam fidélibus, non infidélibus: et istis signa tamquam infidélibus, non fidélibus data sunt.")
 
 [section #59 type=responsory slot=responsory reference=horas/Latin/Sancti/01-06#Responsory7 languages=Latin]
   Latin: [R.] text("Stella, quam víderant Magi in Oriénte, antecedébat eos, donec venírent ad locum, ubi puer erat.")
@@ -400,8 +406,12 @@ warning count: 3
   (no lines)
 
 [section #64 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/01-06#Lectio7 languages=Latin]
-  Latin: text("Léctio sancti Evangélii secúndum Matthǽum ") · citation("Matt 2:1-12") · text("Cum natus esset Jesus in Béthlehem Juda in diébus Heródis regis, ecce Magi ab Oriénte venérunt Jerosólymam, dicéntes: Ubi est qui natus est Rex Judæórum? Et réliqua.")
-  Latin: text("Homilía sancti Gregórii Papæ") · text(" ") · rubric("Homilia 10 in Evang.") · text(" Sicut in lectióne evangélica, fratres caríssimi, audístis, cæli Rege nato, rex terræ turbátus est: quia nimírum terréna altitúdo confúnditur, cum celsitúdo cæléstis aperítur. Sed quæréndum nobis est, quidnam sit, quod, Redemptóre nato, pastóribus in Judǽa Angelus appáruit, atque ad adorándum hunc ab Oriénte Magos non Angelus, sed stella perdúxit? Quia vidélicet Judǽis, tamquam ratióne uténtibus, rationále ánimal, id est, Angelus prædicáre débuit: gentíles vero, quia uti ratióne nesciébant, ad cognoscéndum Dóminum non per vocem, sed per signa perducúntur. Unde étiam per Paulum dícitur: Prophetíæ fidélibus datæ sunt, non infidélibus: signa autem infidélibus, non fidélibus. Quia et illis prophetíæ tamquam fidélibus, non infidélibus: et istis signa tamquam infidélibus, non fidélibus data sunt.")
+  Latin: text("Léctio sancti Evangélii secúndum Matthǽum")
+  Latin: text(" ") · citation("Matt 2:1-12")
+  Latin: text("Cum natus esset Jesus in Béthlehem Juda in diébus Heródis regis, ecce Magi ab Oriénte venérunt Jerosólymam, dicéntes: Ubi est qui natus est Rex Judæórum? Et réliqua.")
+  Latin: text("Homilía sancti Gregórii Papæ")
+  Latin: rubric("Homilia 10 in Evang.")
+  Latin: text("Sicut in lectióne evangélica, fratres caríssimi, audístis, cæli Rege nato, rex terræ turbátus est: quia nimírum terréna altitúdo confúnditur, cum celsitúdo cæléstis aperítur. Sed quæréndum nobis est, quidnam sit, quod, Redemptóre nato, pastóribus in Judǽa Angelus appáruit, atque ad adorándum hunc ab Oriénte Magos non Angelus, sed stella perdúxit? Quia vidélicet Judǽis, tamquam ratióne uténtibus, rationále ánimal, id est, Angelus prædicáre débuit: gentíles vero, quia uti ratióne nesciébant, ad cognoscéndum Dóminum non per vocem, sed per signa perducúntur. Unde étiam per Paulum dícitur: Prophetíæ fidélibus datæ sunt, non infidélibus: signa autem infidélibus, non fidélibus. Quia et illis prophetíæ tamquam fidélibus, non infidélibus: et istis signa tamquam infidélibus, non fidélibus data sunt.")
 
 [section #65 type=responsory slot=responsory reference=horas/Latin/Sancti/01-06#Responsory8 languages=Latin]
   Latin: [R.] text("Vidéntes stellam Magi, gavísi sunt gáudio magno:")
@@ -426,12 +436,49 @@ warning count: 3
   (no lines)
 
 [section #70 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/01-06#Lectio7 languages=Latin]
-  Latin: text("Léctio sancti Evangélii secúndum Matthǽum ") · citation("Matt 2:1-12") · text("Cum natus esset Jesus in Béthlehem Juda in diébus Heródis regis, ecce Magi ab Oriénte venérunt Jerosólymam, dicéntes: Ubi est qui natus est Rex Judæórum? Et réliqua.")
-  Latin: text("Homilía sancti Gregórii Papæ") · text(" ") · rubric("Homilia 10 in Evang.") · text(" Sicut in lectióne evangélica, fratres caríssimi, audístis, cæli Rege nato, rex terræ turbátus est: quia nimírum terréna altitúdo confúnditur, cum celsitúdo cæléstis aperítur. Sed quæréndum nobis est, quidnam sit, quod, Redemptóre nato, pastóribus in Judǽa Angelus appáruit, atque ad adorándum hunc ab Oriénte Magos non Angelus, sed stella perdúxit? Quia vidélicet Judǽis, tamquam ratióne uténtibus, rationále ánimal, id est, Angelus prædicáre débuit: gentíles vero, quia uti ratióne nesciébant, ad cognoscéndum Dóminum non per vocem, sed per signa perducúntur. Unde étiam per Paulum dícitur: Prophetíæ fidélibus datæ sunt, non infidélibus: signa autem infidélibus, non fidélibus. Quia et illis prophetíæ tamquam fidélibus, non infidélibus: et istis signa tamquam infidélibus, non fidélibus data sunt.")
+  Latin: text("Léctio sancti Evangélii secúndum Matthǽum")
+  Latin: text(" ") · citation("Matt 2:1-12")
+  Latin: text("Cum natus esset Jesus in Béthlehem Juda in diébus Heródis regis, ecce Magi ab Oriénte venérunt Jerosólymam, dicéntes: Ubi est qui natus est Rex Judæórum? Et réliqua.")
+  Latin: text("Homilía sancti Gregórii Papæ")
+  Latin: rubric("Homilia 10 in Evang.")
+  Latin: text("Sicut in lectióne evangélica, fratres caríssimi, audístis, cæli Rege nato, rex terræ turbátus est: quia nimírum terréna altitúdo confúnditur, cum celsitúdo cæléstis aperítur. Sed quæréndum nobis est, quidnam sit, quod, Redemptóre nato, pastóribus in Judǽa Angelus appáruit, atque ad adorándum hunc ab Oriénte Magos non Angelus, sed stella perdúxit? Quia vidélicet Judǽis, tamquam ratióne uténtibus, rationále ánimal, id est, Angelus prædicáre débuit: gentíles vero, quia uti ratióne nesciébant, ad cognoscéndum Dóminum non per vocem, sed per signa perducúntur. Unde étiam per Paulum dícitur: Prophetíæ fidélibus datæ sunt, non infidélibus: signa autem infidélibus, non fidélibus. Quia et illis prophetíæ tamquam fidélibus, non infidélibus: et istis signa tamquam infidélibus, non fidélibus data sunt.")
 
 [section #71 type=te-deum slot=te-deum reference=horas/Latin/Psalterium/Common/Prayers#Te Deum languages=Latin]
   Latin: [v.] text("Te Deum laudámus: * te Dóminum confitémur.")
-  Latin: text("Te ætérnum Patrem * omnis terra venerátur.Tibi omnes Ángeli, * tibi Cæli, et univérsæ Potestátes:Tibi Chérubim et Séraphim * incessábili voce proclámant:") · text(" ") · rubric("Fit reverentia") · text(" Sanctus, Sanctus, Sanctus * Dóminus Deus Sábaoth.Pleni sunt cæli et terra * majestátis glóriæ tuæ.Te gloriósus * Apostolórum chorus,Te Prophetárum * laudábilis númerus,Te Mártyrum candidátus * laudat exércitus.Te per orbem terrárum * sancta confitétur Ecclésia,Patrem * imménsæ majestátis;Venerándum tuum verum * et únicum Fílium;Sanctum quoque * Paráclitum Spíritum.Tu Rex glóriæ, * Christe.Tu Patris * sempitérnus es Fílius.") · text(" ") · rubric("Fit reverentia") · text(" Tu, ad liberándum susceptúrus hóminem: * non horruísti Vírginis úterum.Tu, devícto mortis acúleo, * aperuísti credéntibus regna cælórum.Tu ad déxteram Dei sedes, * in glória Patris.Judex créderis * esse ventúrus.") · text(" ") · rubric("Sequens versus dicitur flexis genibus") · text(" (sed rubrica cisterciensis dicitur)") · text(" ") · rubric("Fratres, quando incipiunt « Te ergo quæsumus, » exeuntes e Stallis, reverenter inclinent ad verba « Quos pretioso » et cetera") · text(" Te ergo quǽsumus, tuis fámulis súbveni, * quos pretióso sánguine redemísti.Ætérna fac cum Sanctis tuis * in glória numerári.Salvum fac pópulum tuum, Dómine, * et bénedic hereditáti tuæ.Et rege eos, * et extólle illos usque in ætérnum.Per síngulos dies * benedícimus te.") · text(" ") · rubric("Fit reverentia, secundum consuetudinem") · text(" Et laudámus nomen tuum in sǽculum, * et in sǽculum sǽculi.Dignáre, Dómine, die isto * sine peccáto nos custodíre.Miserére nostri, Dómine, * miserére nostri.Fiat misericórdia tua, Dómine, super nos, * quemádmodum sperávimus in te.In te, Dómine, sperávi: * non confúndar in ætérnum.")
+  Latin: text("Te ætérnum Patrem * omnis terra venerátur.")
+  Latin: text("Tibi omnes Ángeli, * tibi Cæli, et univérsæ Potestátes:")
+  Latin: text("Tibi Chérubim et Séraphim * incessábili voce proclámant:")
+  Latin: rubric("Fit reverentia")
+  Latin: text("Sanctus, Sanctus, Sanctus * Dóminus Deus Sábaoth.")
+  Latin: text("Pleni sunt cæli et terra * majestátis glóriæ tuæ.")
+  Latin: text("Te gloriósus * Apostolórum chorus,")
+  Latin: text("Te Prophetárum * laudábilis númerus,")
+  Latin: text("Te Mártyrum candidátus * laudat exércitus.")
+  Latin: text("Te per orbem terrárum * sancta confitétur Ecclésia,")
+  Latin: text("Patrem * imménsæ majestátis;")
+  Latin: text("Venerándum tuum verum * et únicum Fílium;")
+  Latin: text("Sanctum quoque * Paráclitum Spíritum.")
+  Latin: text("Tu Rex glóriæ, * Christe.")
+  Latin: text("Tu Patris * sempitérnus es Fílius.")
+  Latin: rubric("Fit reverentia")
+  Latin: text("Tu, ad liberándum susceptúrus hóminem: * non horruísti Vírginis úterum.")
+  Latin: text("Tu, devícto mortis acúleo, * aperuísti credéntibus regna cælórum.")
+  Latin: text("Tu ad déxteram Dei sedes, * in glória Patris.")
+  Latin: text("Judex créderis * esse ventúrus.")
+  Latin: rubric("Sequens versus dicitur flexis genibus")
+  Latin: text("(sed rubrica cisterciensis dicitur)")
+  Latin: rubric("Fratres, quando incipiunt « Te ergo quæsumus, » exeuntes e Stallis, reverenter inclinent ad verba « Quos pretioso » et cetera")
+  Latin: text("Te ergo quǽsumus, tuis fámulis súbveni, * quos pretióso sánguine redemísti.")
+  Latin: text("Ætérna fac cum Sanctis tuis * in glória numerári.")
+  Latin: text("Salvum fac pópulum tuum, Dómine, * et bénedic hereditáti tuæ.")
+  Latin: text("Et rege eos, * et extólle illos usque in ætérnum.")
+  Latin: text("Per síngulos dies * benedícimus te.")
+  Latin: rubric("Fit reverentia, secundum consuetudinem")
+  Latin: text("Et laudámus nomen tuum in sǽculum, * et in sǽculum sǽculi.")
+  Latin: text("Dignáre, Dómine, die isto * sine peccáto nos custodíre.")
+  Latin: text("Miserére nostri, Dómine, * miserére nostri.")
+  Latin: text("Fiat misericórdia tua, Dómine, super nos, * quemádmodum sperávimus in te.")
+  Latin: text("In te, Dómine, sperávi: * non confúndar in ætérnum.")
 
 [section #72 type=oration slot=oration reference=horas/Latin/Sancti/01-06#Oratio languages=Latin]
   Latin: text("Deus, qui hodiérna die Unigénitum tuum géntibus stella duce revelásti: concéde propítius; ut qui jam te ex fide cognóvimus, usque ad contemplándam spéciem tuæ celsitúdinis perducámur.")

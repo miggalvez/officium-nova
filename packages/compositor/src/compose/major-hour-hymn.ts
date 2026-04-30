@@ -126,7 +126,8 @@ export function replaceFinalHymnDoxology(
 export function prependMajorHourHymnWrapper(
   args: MajorHourHymnArgs,
   content: readonly TextContent[],
-  headingSource: readonly TextContent[]
+  headingSource: readonly TextContent[],
+  language = 'Latin'
 ): readonly TextContent[] {
   if ((args.hour !== 'lauds' && args.hour !== 'vespers') || content.length === 0) {
     return content;
@@ -144,7 +145,7 @@ export function prependMajorHourHymnWrapper(
       notation: {
         kind: 'header',
         notation: '',
-        text: majorHourHymnHeading(args, headingSource)
+        text: majorHourHymnHeading(args, headingSource, language)
       }
     } satisfies TextContent,
     ...content,
@@ -173,10 +174,12 @@ function trimLeadingSeparators(content: readonly TextContent[]): readonly TextCo
 
 function majorHourHymnHeading(
   args: MajorHourHymnArgs,
-  content: readonly TextContent[]
+  content: readonly TextContent[],
+  language: string
 ): string {
   const doxologyName = majorHourHymnDoxologyName(args, content);
-  return doxologyName ? `Hymnus {Doxology: ${doxologyName}}` : 'Hymnus';
+  const base = language === 'English' ? 'Hymn' : 'Hymnus';
+  return doxologyName ? `${base} {Doxology: ${doxologyName}}` : base;
 }
 
 function majorHourHymnDoxologyName(

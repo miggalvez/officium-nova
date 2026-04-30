@@ -162,7 +162,16 @@ warning count: 0
   (no lines)
 
 [section #14 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Tempora/Nat01#Lectio1 languages=Latin]
-  Latin: text("De Epístola beati Pauli Apóstoli ad Romános ") · citation("Rom 4:1-8") · text("1 Quid ergo dicémus invenísse Abraham patrem nostrum secúndum carnem? 2 Si enim Abraham ex opéribus justificátus est, habet glóriam, sed non apud Deum. 3 Quid enim dicit Scriptúra? Crédidit Abraham Deo: et reputátum est illi ad justítiam.4 Ei autem, qui operátur, merces non imputátur secúndum grátiam, sed secúndum débitum. 5 Ei vero, qui non operátur, credénti autem in eum, qui justíficat ímpium, reputátur fides ejus ad justítiam secúndum propósitum grátiæ Dei. 6 Sicut et David dicit beatitúdinem hóminis, cui Deus accépto fert justítiam sine opéribus: 7 Beáti, quorum remíssæ sunt iniquitátes, et quorum tecta sunt peccáta.8 Beátus vir, cui non imputávit Dóminus peccátum.")
+  Latin: text("De Epístola beati Pauli Apóstoli ad Romános")
+  Latin: text(" ") · citation("Rom 4:1-8")
+  Latin: text("1 Quid ergo dicémus invenísse Abraham patrem nostrum secúndum carnem? ")
+  Latin: text("2 Si enim Abraham ex opéribus justificátus est, habet glóriam, sed non apud Deum. ")
+  Latin: text("3 Quid enim dicit Scriptúra? Crédidit Abraham Deo: et reputátum est illi ad justítiam.")
+  Latin: text("4 Ei autem, qui operátur, merces non imputátur secúndum grátiam, sed secúndum débitum. ")
+  Latin: text("5 Ei vero, qui non operátur, credénti autem in eum, qui justíficat ímpium, reputátur fides ejus ad justítiam secúndum propósitum grátiæ Dei. ")
+  Latin: text("6 Sicut et David dicit beatitúdinem hóminis, cui Deus accépto fert justítiam sine opéribus: ")
+  Latin: text("7 Beáti, quorum remíssæ sunt iniquitátes, et quorum tecta sunt peccáta.")
+  Latin: text("8 Beátus vir, cui non imputávit Dóminus peccátum.")
 
 [section #15 type=responsory slot=responsory reference=horas/Latin/Sancti/01-01#Responsory1 languages=Latin]
   Latin: [R.] text("Ecce Agnus Dei, ecce qui tollit peccáta mundi: ecce de quo dicébam vobis: Qui post me venit, ante me factus est:")
@@ -184,7 +193,11 @@ warning count: 0
   (no lines)
 
 [section #20 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Tempora/Nat01#Lectio2 languages=Latin]
-  Latin: text(" ") · citation("Rom 4:9-12") · text("9 Beatitúdo ergo hæc in circumcisióne tantum manet, an étiam in præpútio? Dícimus enim quia reputáta est Abrahæ fides ad justítiam. 10 Quómodo ergo reputáta est? in circumcisióne, an in præpútio? Non in circumcisióne, sed in præpútio. 11 Et signum accépit circumcisiónis, signáculum justítiæ fídei, quæ est in præpútio: ut sit pater ómnium credéntium per præpútium, ut reputétur et illis ad justítiam:12 et sit pater circumcisiónis non iis tantum, qui sunt ex circumcisióne, sed et iis, qui sectántur vestígia fídei, quæ est in præpútio patris nostri Abrahæ.")
+  Latin: text(" ") · citation("Rom 4:9-12")
+  Latin: text("9 Beatitúdo ergo hæc in circumcisióne tantum manet, an étiam in præpútio? Dícimus enim quia reputáta est Abrahæ fides ad justítiam. ")
+  Latin: text("10 Quómodo ergo reputáta est? in circumcisióne, an in præpútio? Non in circumcisióne, sed in præpútio. ")
+  Latin: text("11 Et signum accépit circumcisiónis, signáculum justítiæ fídei, quæ est in præpútio: ut sit pater ómnium credéntium per præpútium, ut reputétur et illis ad justítiam:")
+  Latin: text("12 et sit pater circumcisiónis non iis tantum, qui sunt ex circumcisióne, sed et iis, qui sectántur vestígia fídei, quæ est in præpútio patris nostri Abrahæ.")
 
 [section #21 type=responsory slot=responsory reference=horas/Latin/Sancti/01-01#Responsory2 languages=Latin]
   Latin: [R.] text("Dies sanctificátus illúxit nobis: veníte, gentes, et adoráte Dóminum:")
@@ -206,7 +219,12 @@ warning count: 0
   (no lines)
 
 [section #26 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Tempora/Nat01#Lectio3 languages=Latin]
-  Latin: text(" ") · citation("Rom 4:13-17") · text("13 Non enim per legem promíssio Abrahæ, aut sémini ejus, ut heres esset mundi: sed per justítiam fídei. 14 Si enim qui ex lege, herédes sunt: exinaníta est fides, abólita est promíssio. 15 Lex enim iram operátur. Ubi enim non est lex: nec prævaricátio. 16 Ideo ex fide, ut secúndum grátiam firma sit promíssio omni sémini, non ei, qui ex lege est solum, sed et ei, qui ex fide est Abrahæ, qui pater est ómnium nostrum 17 (sicut scriptum est: Quia patrem multárum géntium pósui te) ante Deum, cui crédidit, qui vivíficat mórtuos, et vocat ea quæ non sunt, tamquam ea quæ sunt.")
+  Latin: text(" ") · citation("Rom 4:13-17")
+  Latin: text("13 Non enim per legem promíssio Abrahæ, aut sémini ejus, ut heres esset mundi: sed per justítiam fídei. ")
+  Latin: text("14 Si enim qui ex lege, herédes sunt: exinaníta est fides, abólita est promíssio. ")
+  Latin: text("15 Lex enim iram operátur. Ubi enim non est lex: nec prævaricátio. ")
+  Latin: text("16 Ideo ex fide, ut secúndum grátiam firma sit promíssio omni sémini, non ei, qui ex lege est solum, sed et ei, qui ex fide est Abrahæ, qui pater est ómnium nostrum ")
+  Latin: text("17 (sicut scriptum est: Quia patrem multárum géntium pósui te) ante Deum, cui crédidit, qui vivíficat mórtuos, et vocat ea quæ non sunt, tamquam ea quæ sunt.")
 
 [section #27 type=responsory slot=responsory reference=horas/Latin/Sancti/01-01#Responsory3 languages=Latin]
   Latin: [R.] text("Benedíctus qui venit in nómine Dómini, Deus Dóminus, et illúxit nobis:")
@@ -310,7 +328,9 @@ warning count: 0
   (no lines)
 
 [section #39 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/01-01#Lectio4 languages=Latin]
-  Latin: text("Sermo sancti Leónis Papæ") · text(" ") · rubric("Sermo 7 de Nativitate Domini") · text(" Festivitátis hodiérnæ, dilectíssimi, verus venerátor est, et pius cultor, qui nec de Incarnatióne Dómini áliquid falsum, nec de Deitáte áliquid sentit indígnum. Paris enim perículi malum est, si illi aut natúræ nostræ véritas, aut Patérnæ glóriæ negátur æquálitas. Cum ergo ad intellegéndum sacraméntum nativitátis Christi, qua de Matre vírgine est ortus, accédimus, abigátur procul terrenárum calígo ratiónum, et ab illuminátæ fídei óculo mundánæ sapiéntiæ fumus abscédat.")
+  Latin: text("Sermo sancti Leónis Papæ")
+  Latin: rubric("Sermo 7 de Nativitate Domini")
+  Latin: text("Festivitátis hodiérnæ, dilectíssimi, verus venerátor est, et pius cultor, qui nec de Incarnatióne Dómini áliquid falsum, nec de Deitáte áliquid sentit indígnum. Paris enim perículi malum est, si illi aut natúræ nostræ véritas, aut Patérnæ glóriæ negátur æquálitas. Cum ergo ad intellegéndum sacraméntum nativitátis Christi, qua de Matre vírgine est ortus, accédimus, abigátur procul terrenárum calígo ratiónum, et ab illuminátæ fídei óculo mundánæ sapiéntiæ fumus abscédat.")
 
 [section #40 type=responsory slot=responsory reference=horas/Latin/Sancti/01-01#Responsory4 languages=Latin]
   Latin: [R.] text("Congratulámini mihi, omnes qui dilígitis Dóminum:")
@@ -451,8 +471,12 @@ warning count: 0
   (no lines)
 
 [section #64 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/01-01#Lectio7 languages=Latin]
-  Latin: text("Léctio sancti Evangélii secúndum Lucam ") · citation("Luc 2:21") · text("In illo témpore: Postquam consummáti sunt dies octo, ut circumciderétur Puer: vocátum est nomen ejus Jesus. Et réliqua.")
-  Latin: text("Homilía sancti Ambrósii Epíscopi") · text(" ") · rubric("Liber 2 in cap. 2 Lucæ, circa medium") · text(" Circumcíditur ítaque Puer. Quis est iste puer, nisi ille, de quo dictum est: Puer natus est nobis, Fílius datus est nobis? Factus est enim sub lege, ut eos, qui sub lege essent, lucrifáceret. Ut sísterent eum Dómino. Quid sit autem in Jerúsalem sisti Dómino, dícerem, nisi in Isaíæ comméntis ante dixíssem. Circumcísus enim vítiis, Domínico dignus judicátur obtútu; quia, Oculi Dómini super justos. Vides omnem legis véteris sériem fuísse typum futúri: nam et circumcísio purgatiónem signíficat delictórum.")
+  Latin: text("Léctio sancti Evangélii secúndum Lucam")
+  Latin: text(" ") · citation("Luc 2:21")
+  Latin: text("In illo témpore: Postquam consummáti sunt dies octo, ut circumciderétur Puer: vocátum est nomen ejus Jesus. Et réliqua.")
+  Latin: text("Homilía sancti Ambrósii Epíscopi")
+  Latin: rubric("Liber 2 in cap. 2 Lucæ, circa medium")
+  Latin: text("Circumcíditur ítaque Puer. Quis est iste puer, nisi ille, de quo dictum est: Puer natus est nobis, Fílius datus est nobis? Factus est enim sub lege, ut eos, qui sub lege essent, lucrifáceret. Ut sísterent eum Dómino. Quid sit autem in Jerúsalem sisti Dómino, dícerem, nisi in Isaíæ comméntis ante dixíssem. Circumcísus enim vítiis, Domínico dignus judicátur obtútu; quia, Oculi Dómini super justos. Vides omnem legis véteris sériem fuísse typum futúri: nam et circumcísio purgatiónem signíficat delictórum.")
 
 [section #65 type=responsory slot=responsory reference=horas/Latin/Sancti/01-01#Responsory7 languages=Latin]
   Latin: [R.] text("Sancta et immaculáta virgínitas, quibus te láudibus éfferam, néscio:")
@@ -477,8 +501,12 @@ warning count: 0
   (no lines)
 
 [section #70 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/01-01#Lectio7 languages=Latin]
-  Latin: text("Léctio sancti Evangélii secúndum Lucam ") · citation("Luc 2:21") · text("In illo témpore: Postquam consummáti sunt dies octo, ut circumciderétur Puer: vocátum est nomen ejus Jesus. Et réliqua.")
-  Latin: text("Homilía sancti Ambrósii Epíscopi") · text(" ") · rubric("Liber 2 in cap. 2 Lucæ, circa medium") · text(" Circumcíditur ítaque Puer. Quis est iste puer, nisi ille, de quo dictum est: Puer natus est nobis, Fílius datus est nobis? Factus est enim sub lege, ut eos, qui sub lege essent, lucrifáceret. Ut sísterent eum Dómino. Quid sit autem in Jerúsalem sisti Dómino, dícerem, nisi in Isaíæ comméntis ante dixíssem. Circumcísus enim vítiis, Domínico dignus judicátur obtútu; quia, Oculi Dómini super justos. Vides omnem legis véteris sériem fuísse typum futúri: nam et circumcísio purgatiónem signíficat delictórum.")
+  Latin: text("Léctio sancti Evangélii secúndum Lucam")
+  Latin: text(" ") · citation("Luc 2:21")
+  Latin: text("In illo témpore: Postquam consummáti sunt dies octo, ut circumciderétur Puer: vocátum est nomen ejus Jesus. Et réliqua.")
+  Latin: text("Homilía sancti Ambrósii Epíscopi")
+  Latin: rubric("Liber 2 in cap. 2 Lucæ, circa medium")
+  Latin: text("Circumcíditur ítaque Puer. Quis est iste puer, nisi ille, de quo dictum est: Puer natus est nobis, Fílius datus est nobis? Factus est enim sub lege, ut eos, qui sub lege essent, lucrifáceret. Ut sísterent eum Dómino. Quid sit autem in Jerúsalem sisti Dómino, dícerem, nisi in Isaíæ comméntis ante dixíssem. Circumcísus enim vítiis, Domínico dignus judicátur obtútu; quia, Oculi Dómini super justos. Vides omnem legis véteris sériem fuísse typum futúri: nam et circumcísio purgatiónem signíficat delictórum.")
 
 [section #71 type=responsory slot=responsory reference=horas/Latin/Sancti/01-01#Responsory8 languages=Latin]
   Latin: [R.] text("Nésciens Mater Virgo virum, péperit sine dolóre:")
@@ -503,12 +531,49 @@ warning count: 0
   (no lines)
 
 [section #76 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/01-01#Lectio7 languages=Latin]
-  Latin: text("Léctio sancti Evangélii secúndum Lucam ") · citation("Luc 2:21") · text("In illo témpore: Postquam consummáti sunt dies octo, ut circumciderétur Puer: vocátum est nomen ejus Jesus. Et réliqua.")
-  Latin: text("Homilía sancti Ambrósii Epíscopi") · text(" ") · rubric("Liber 2 in cap. 2 Lucæ, circa medium") · text(" Circumcíditur ítaque Puer. Quis est iste puer, nisi ille, de quo dictum est: Puer natus est nobis, Fílius datus est nobis? Factus est enim sub lege, ut eos, qui sub lege essent, lucrifáceret. Ut sísterent eum Dómino. Quid sit autem in Jerúsalem sisti Dómino, dícerem, nisi in Isaíæ comméntis ante dixíssem. Circumcísus enim vítiis, Domínico dignus judicátur obtútu; quia, Oculi Dómini super justos. Vides omnem legis véteris sériem fuísse typum futúri: nam et circumcísio purgatiónem signíficat delictórum.")
+  Latin: text("Léctio sancti Evangélii secúndum Lucam")
+  Latin: text(" ") · citation("Luc 2:21")
+  Latin: text("In illo témpore: Postquam consummáti sunt dies octo, ut circumciderétur Puer: vocátum est nomen ejus Jesus. Et réliqua.")
+  Latin: text("Homilía sancti Ambrósii Epíscopi")
+  Latin: rubric("Liber 2 in cap. 2 Lucæ, circa medium")
+  Latin: text("Circumcíditur ítaque Puer. Quis est iste puer, nisi ille, de quo dictum est: Puer natus est nobis, Fílius datus est nobis? Factus est enim sub lege, ut eos, qui sub lege essent, lucrifáceret. Ut sísterent eum Dómino. Quid sit autem in Jerúsalem sisti Dómino, dícerem, nisi in Isaíæ comméntis ante dixíssem. Circumcísus enim vítiis, Domínico dignus judicátur obtútu; quia, Oculi Dómini super justos. Vides omnem legis véteris sériem fuísse typum futúri: nam et circumcísio purgatiónem signíficat delictórum.")
 
 [section #77 type=te-deum slot=te-deum reference=horas/Latin/Psalterium/Common/Prayers#Te Deum languages=Latin]
   Latin: [v.] text("Te Deum laudámus: * te Dóminum confitémur.")
-  Latin: text("Te ætérnum Patrem * omnis terra venerátur.Tibi omnes Ángeli, * tibi Cæli, et univérsæ Potestátes:Tibi Chérubim et Séraphim * incessábili voce proclámant:") · text(" ") · rubric("Fit reverentia") · text(" Sanctus, Sanctus, Sanctus * Dóminus Deus Sábaoth.Pleni sunt cæli et terra * majestátis glóriæ tuæ.Te gloriósus * Apostolórum chorus,Te Prophetárum * laudábilis númerus,Te Mártyrum candidátus * laudat exércitus.Te per orbem terrárum * sancta confitétur Ecclésia,Patrem * imménsæ majestátis;Venerándum tuum verum * et únicum Fílium;Sanctum quoque * Paráclitum Spíritum.Tu Rex glóriæ, * Christe.Tu Patris * sempitérnus es Fílius.") · text(" ") · rubric("Fit reverentia") · text(" Tu, ad liberándum susceptúrus hóminem: * non horruísti Vírginis úterum.Tu, devícto mortis acúleo, * aperuísti credéntibus regna cælórum.Tu ad déxteram Dei sedes, * in glória Patris.Judex créderis * esse ventúrus.") · text(" ") · rubric("Sequens versus dicitur flexis genibus") · text(" (sed rubrica cisterciensis dicitur)") · text(" ") · rubric("Fratres, quando incipiunt « Te ergo quæsumus, » exeuntes e Stallis, reverenter inclinent ad verba « Quos pretioso » et cetera") · text(" Te ergo quǽsumus, tuis fámulis súbveni, * quos pretióso sánguine redemísti.Ætérna fac cum Sanctis tuis * in glória numerári.Salvum fac pópulum tuum, Dómine, * et bénedic hereditáti tuæ.Et rege eos, * et extólle illos usque in ætérnum.Per síngulos dies * benedícimus te.") · text(" ") · rubric("Fit reverentia, secundum consuetudinem") · text(" Et laudámus nomen tuum in sǽculum, * et in sǽculum sǽculi.Dignáre, Dómine, die isto * sine peccáto nos custodíre.Miserére nostri, Dómine, * miserére nostri.Fiat misericórdia tua, Dómine, super nos, * quemádmodum sperávimus in te.In te, Dómine, sperávi: * non confúndar in ætérnum.")
+  Latin: text("Te ætérnum Patrem * omnis terra venerátur.")
+  Latin: text("Tibi omnes Ángeli, * tibi Cæli, et univérsæ Potestátes:")
+  Latin: text("Tibi Chérubim et Séraphim * incessábili voce proclámant:")
+  Latin: rubric("Fit reverentia")
+  Latin: text("Sanctus, Sanctus, Sanctus * Dóminus Deus Sábaoth.")
+  Latin: text("Pleni sunt cæli et terra * majestátis glóriæ tuæ.")
+  Latin: text("Te gloriósus * Apostolórum chorus,")
+  Latin: text("Te Prophetárum * laudábilis númerus,")
+  Latin: text("Te Mártyrum candidátus * laudat exércitus.")
+  Latin: text("Te per orbem terrárum * sancta confitétur Ecclésia,")
+  Latin: text("Patrem * imménsæ majestátis;")
+  Latin: text("Venerándum tuum verum * et únicum Fílium;")
+  Latin: text("Sanctum quoque * Paráclitum Spíritum.")
+  Latin: text("Tu Rex glóriæ, * Christe.")
+  Latin: text("Tu Patris * sempitérnus es Fílius.")
+  Latin: rubric("Fit reverentia")
+  Latin: text("Tu, ad liberándum susceptúrus hóminem: * non horruísti Vírginis úterum.")
+  Latin: text("Tu, devícto mortis acúleo, * aperuísti credéntibus regna cælórum.")
+  Latin: text("Tu ad déxteram Dei sedes, * in glória Patris.")
+  Latin: text("Judex créderis * esse ventúrus.")
+  Latin: rubric("Sequens versus dicitur flexis genibus")
+  Latin: text("(sed rubrica cisterciensis dicitur)")
+  Latin: rubric("Fratres, quando incipiunt « Te ergo quæsumus, » exeuntes e Stallis, reverenter inclinent ad verba « Quos pretioso » et cetera")
+  Latin: text("Te ergo quǽsumus, tuis fámulis súbveni, * quos pretióso sánguine redemísti.")
+  Latin: text("Ætérna fac cum Sanctis tuis * in glória numerári.")
+  Latin: text("Salvum fac pópulum tuum, Dómine, * et bénedic hereditáti tuæ.")
+  Latin: text("Et rege eos, * et extólle illos usque in ætérnum.")
+  Latin: text("Per síngulos dies * benedícimus te.")
+  Latin: rubric("Fit reverentia, secundum consuetudinem")
+  Latin: text("Et laudámus nomen tuum in sǽculum, * et in sǽculum sǽculi.")
+  Latin: text("Dignáre, Dómine, die isto * sine peccáto nos custodíre.")
+  Latin: text("Miserére nostri, Dómine, * miserére nostri.")
+  Latin: text("Fiat misericórdia tua, Dómine, super nos, * quemádmodum sperávimus in te.")
+  Latin: text("In te, Dómine, sperávi: * non confúndar in ætérnum.")
 
 [section #78 type=oration slot=oration reference=horas/Latin/Sancti/01-01#Oratio languages=Latin]
   Latin: text("Deus, qui salútis ætérnæ, beátæ Maríæ virginitáte fecúnda, humáno géneri prǽmia præstitísti: tríbue, quǽsumus; ut ipsam pro nobis intercédere sentiámus, per quam merúimus auctórem vitæ suscípere, Dóminum nostrum Jesum Christum Fílium tuum:")

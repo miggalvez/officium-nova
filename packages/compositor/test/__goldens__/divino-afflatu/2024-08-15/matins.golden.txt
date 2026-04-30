@@ -301,7 +301,11 @@ warning count: 3
   (no lines)
 
 [section #36 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/08-15#Lectio4 languages=Latin]
-  Latin: text("Sermo sancti Joánnis Damascéni") · text(" ") · rubric("Oratio 2 de Dormit. B. M. V., post init.") · text(" Hódie sacra et animáta arca Dei vivéntis, quæ suum in útero concépit Creatórem, requiéscit in templo Dómini, quod nullis est exstrúctum mánibus.  Et David exsúltat ejus parens, et cum eo choros ducunt Angeli, célebrant Archángeli, Virtútes gloríficant, Principátus exsúltant, Potestátes collætántur, gaudent Dominatiónes, Throni festum diem agunt, laudant Chérubim, glóriam ejus prǽdicant Séraphim. Hódie Eden novi Adam paradísum súscipit animátum, in quo solúta est condemnátio, in quo plantátum est lignum vitæ, in quo opérta fuit nostra núditas.") · text(" ") · rubric("De Assumptione?") · text(" Hodie regina assistes a dextris filii ubique regnantis, quasi in vestitu deaurato, incorruptionis, et immortalitatis circumamicta varietate, sacris et sollemnibus verbis celebratur, non quod secundum spiritum tantum, quasi sine corpore, et carne assistat: sed quod induta sit quantum spectat ad sanctissimam ejus carnem incorruptibilitate, et immortalitate. Circumamicta varietate rursus est, quantum attinet ad ossa sanctissima, quæ ejus carnem suffulciunt. Nam ex carne ejus, et ex ossibus ejus, veluti ex veteri Adamo novus iste Adam, ut vicem ejus expleret, costam sibi finxit, nimirum istam incarnationem, eaque semel indutam perpetuo gestat. Ac proinde nova ista Eva mater vitæ appelatur, circumamictaque varietate permanet ad primitias vitæ immortalis omnium viventium.")
+  Latin: text("Sermo sancti Joánnis Damascéni")
+  Latin: rubric("Oratio 2 de Dormit. B. M. V., post init.")
+  Latin: text("Hódie sacra et animáta arca Dei vivéntis, quæ suum in útero concépit Creatórem, requiéscit in templo Dómini, quod nullis est exstrúctum mánibus.  Et David exsúltat ejus parens, et cum eo choros ducunt Angeli, célebrant Archángeli, Virtútes gloríficant, Principátus exsúltant, Potestátes collætántur, gaudent Dominatiónes, Throni festum diem agunt, laudant Chérubim, glóriam ejus prǽdicant Séraphim. Hódie Eden novi Adam paradísum súscipit animátum, in quo solúta est condemnátio, in quo plantátum est lignum vitæ, in quo opérta fuit nostra núditas.")
+  Latin: rubric("De Assumptione?")
+  Latin: text("Hodie regina assistes a dextris filii ubique regnantis, quasi in vestitu deaurato, incorruptionis, et immortalitatis circumamicta varietate, sacris et sollemnibus verbis celebratur, non quod secundum spiritum tantum, quasi sine corpore, et carne assistat: sed quod induta sit quantum spectat ad sanctissimam ejus carnem incorruptibilitate, et immortalitate. Circumamicta varietate rursus est, quantum attinet ad ossa sanctissima, quæ ejus carnem suffulciunt. Nam ex carne ejus, et ex ossibus ejus, veluti ex veteri Adamo novus iste Adam, ut vicem ejus expleret, costam sibi finxit, nimirum istam incarnationem, eaque semel indutam perpetuo gestat. Ac proinde nova ista Eva mater vitæ appelatur, circumamictaque varietate permanet ad primitias vitæ immortalis omnium viventium.")
 
 [section #37 type=responsory slot=responsory reference=horas/Latin/Sancti/08-15#Responsory4 languages=Latin]
   Latin: rubric("\\*/")
@@ -450,8 +454,12 @@ warning count: 3
   (no lines)
 
 [section #61 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/08-15#Lectio7 languages=Latin]
-  Latin: text("Léctio sancti Evangélii secúndum Lucam ") · citation("Luc 1:41-50") · text("In illo témpore: Repléta est Spíritu Sancto Elísabeth et exclamávit voce magna, et dixit: Benedícta tu inter mulíeres. Et réliqua.")
-  Latin: text("Homilía sancti Petri Canísii Presbýteri") · text(" ") · rubric("De Maria Deipara Virgine, lib. 5, c. 6") · text(" Férias Deíparæ sacras, ut frequénter, ita reverénter perágit Ecclésia, certo intéllegens, Deo gratum, et christifidélibus dignum, hoc esse offícium, quo inter beátos et beátas omnes beatíssima Dómini et Dei nostri mater, certis anni tempóribus ac públicis cæremóniis sæpenúmero celebrátur. Inter has autem férias, quæ tot sǽculis religióse háctenus observántur, festum Assumptiónis máximum reputátur, locúmque príncipem tenet. Nec dies quidem ullus Maríæ lǽtior feliciórque cóntigit, si novam et ánimæ et córporis felicitátem eo die illi collátam rite contemplémur: ideóque si ántea unquam, tunc vel máxime spíritus et ánima et corpus ejus in Deum vivum mirabíliter exsultávit, ípsaque summo jure dícere pótuit: Respéxit humilitátem ancíllæ suæ: Ecce enim ex hoc beátam me dicent omnes generatiónes: quia fecit mihi magna qui potens est.")
+  Latin: text("Léctio sancti Evangélii secúndum Lucam")
+  Latin: text(" ") · citation("Luc 1:41-50")
+  Latin: text("In illo témpore: Repléta est Spíritu Sancto Elísabeth et exclamávit voce magna, et dixit: Benedícta tu inter mulíeres. Et réliqua.")
+  Latin: text("Homilía sancti Petri Canísii Presbýteri")
+  Latin: rubric("De Maria Deipara Virgine, lib. 5, c. 6")
+  Latin: text("Férias Deíparæ sacras, ut frequénter, ita reverénter perágit Ecclésia, certo intéllegens, Deo gratum, et christifidélibus dignum, hoc esse offícium, quo inter beátos et beátas omnes beatíssima Dómini et Dei nostri mater, certis anni tempóribus ac públicis cæremóniis sæpenúmero celebrátur. Inter has autem férias, quæ tot sǽculis religióse háctenus observántur, festum Assumptiónis máximum reputátur, locúmque príncipem tenet. Nec dies quidem ullus Maríæ lǽtior feliciórque cóntigit, si novam et ánimæ et córporis felicitátem eo die illi collátam rite contemplémur: ideóque si ántea unquam, tunc vel máxime spíritus et ánima et corpus ejus in Deum vivum mirabíliter exsultávit, ípsaque summo jure dícere pótuit: Respéxit humilitátem ancíllæ suæ: Ecce enim ex hoc beátam me dicent omnes generatiónes: quia fecit mihi magna qui potens est.")
 
 [section #62 type=responsory slot=responsory reference=horas/Latin/Sancti/08-15#Responsory7 languages=Latin]
   Latin: [R.] text("Diffúsa est grátia in lábiis tuis:")
@@ -474,8 +482,12 @@ warning count: 3
   (no lines)
 
 [section #67 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/08-15#Lectio7 languages=Latin]
-  Latin: text("Léctio sancti Evangélii secúndum Lucam ") · citation("Luc 1:41-50") · text("In illo témpore: Repléta est Spíritu Sancto Elísabeth et exclamávit voce magna, et dixit: Benedícta tu inter mulíeres. Et réliqua.")
-  Latin: text("Homilía sancti Petri Canísii Presbýteri") · text(" ") · rubric("De Maria Deipara Virgine, lib. 5, c. 6") · text(" Férias Deíparæ sacras, ut frequénter, ita reverénter perágit Ecclésia, certo intéllegens, Deo gratum, et christifidélibus dignum, hoc esse offícium, quo inter beátos et beátas omnes beatíssima Dómini et Dei nostri mater, certis anni tempóribus ac públicis cæremóniis sæpenúmero celebrátur. Inter has autem férias, quæ tot sǽculis religióse háctenus observántur, festum Assumptiónis máximum reputátur, locúmque príncipem tenet. Nec dies quidem ullus Maríæ lǽtior feliciórque cóntigit, si novam et ánimæ et córporis felicitátem eo die illi collátam rite contemplémur: ideóque si ántea unquam, tunc vel máxime spíritus et ánima et corpus ejus in Deum vivum mirabíliter exsultávit, ípsaque summo jure dícere pótuit: Respéxit humilitátem ancíllæ suæ: Ecce enim ex hoc beátam me dicent omnes generatiónes: quia fecit mihi magna qui potens est.")
+  Latin: text("Léctio sancti Evangélii secúndum Lucam")
+  Latin: text(" ") · citation("Luc 1:41-50")
+  Latin: text("In illo témpore: Repléta est Spíritu Sancto Elísabeth et exclamávit voce magna, et dixit: Benedícta tu inter mulíeres. Et réliqua.")
+  Latin: text("Homilía sancti Petri Canísii Presbýteri")
+  Latin: rubric("De Maria Deipara Virgine, lib. 5, c. 6")
+  Latin: text("Férias Deíparæ sacras, ut frequénter, ita reverénter perágit Ecclésia, certo intéllegens, Deo gratum, et christifidélibus dignum, hoc esse offícium, quo inter beátos et beátas omnes beatíssima Dómini et Dei nostri mater, certis anni tempóribus ac públicis cæremóniis sæpenúmero celebrátur. Inter has autem férias, quæ tot sǽculis religióse háctenus observántur, festum Assumptiónis máximum reputátur, locúmque príncipem tenet. Nec dies quidem ullus Maríæ lǽtior feliciórque cóntigit, si novam et ánimæ et córporis felicitátem eo die illi collátam rite contemplémur: ideóque si ántea unquam, tunc vel máxime spíritus et ánima et corpus ejus in Deum vivum mirabíliter exsultávit, ípsaque summo jure dícere pótuit: Respéxit humilitátem ancíllæ suæ: Ecce enim ex hoc beátam me dicent omnes generatiónes: quia fecit mihi magna qui potens est.")
 
 [section #68 type=responsory slot=responsory reference=horas/Latin/Sancti/08-15#Responsory8 languages=Latin]
   Latin: [R.] text("Beáta es Virgo María, Dei Génetrix, quæ credidísti Dómino: perfécta sunt in te quæ dicta sunt tibi: ecce exaltáta es super choros Angelórum:")
@@ -501,12 +513,49 @@ warning count: 3
   (no lines)
 
 [section #73 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/08-15#Lectio7 languages=Latin]
-  Latin: text("Léctio sancti Evangélii secúndum Lucam ") · citation("Luc 1:41-50") · text("In illo témpore: Repléta est Spíritu Sancto Elísabeth et exclamávit voce magna, et dixit: Benedícta tu inter mulíeres. Et réliqua.")
-  Latin: text("Homilía sancti Petri Canísii Presbýteri") · text(" ") · rubric("De Maria Deipara Virgine, lib. 5, c. 6") · text(" Férias Deíparæ sacras, ut frequénter, ita reverénter perágit Ecclésia, certo intéllegens, Deo gratum, et christifidélibus dignum, hoc esse offícium, quo inter beátos et beátas omnes beatíssima Dómini et Dei nostri mater, certis anni tempóribus ac públicis cæremóniis sæpenúmero celebrátur. Inter has autem férias, quæ tot sǽculis religióse háctenus observántur, festum Assumptiónis máximum reputátur, locúmque príncipem tenet. Nec dies quidem ullus Maríæ lǽtior feliciórque cóntigit, si novam et ánimæ et córporis felicitátem eo die illi collátam rite contemplémur: ideóque si ántea unquam, tunc vel máxime spíritus et ánima et corpus ejus in Deum vivum mirabíliter exsultávit, ípsaque summo jure dícere pótuit: Respéxit humilitátem ancíllæ suæ: Ecce enim ex hoc beátam me dicent omnes generatiónes: quia fecit mihi magna qui potens est.")
+  Latin: text("Léctio sancti Evangélii secúndum Lucam")
+  Latin: text(" ") · citation("Luc 1:41-50")
+  Latin: text("In illo témpore: Repléta est Spíritu Sancto Elísabeth et exclamávit voce magna, et dixit: Benedícta tu inter mulíeres. Et réliqua.")
+  Latin: text("Homilía sancti Petri Canísii Presbýteri")
+  Latin: rubric("De Maria Deipara Virgine, lib. 5, c. 6")
+  Latin: text("Férias Deíparæ sacras, ut frequénter, ita reverénter perágit Ecclésia, certo intéllegens, Deo gratum, et christifidélibus dignum, hoc esse offícium, quo inter beátos et beátas omnes beatíssima Dómini et Dei nostri mater, certis anni tempóribus ac públicis cæremóniis sæpenúmero celebrátur. Inter has autem férias, quæ tot sǽculis religióse háctenus observántur, festum Assumptiónis máximum reputátur, locúmque príncipem tenet. Nec dies quidem ullus Maríæ lǽtior feliciórque cóntigit, si novam et ánimæ et córporis felicitátem eo die illi collátam rite contemplémur: ideóque si ántea unquam, tunc vel máxime spíritus et ánima et corpus ejus in Deum vivum mirabíliter exsultávit, ípsaque summo jure dícere pótuit: Respéxit humilitátem ancíllæ suæ: Ecce enim ex hoc beátam me dicent omnes generatiónes: quia fecit mihi magna qui potens est.")
 
 [section #74 type=te-deum slot=te-deum reference=horas/Latin/Psalterium/Common/Prayers#Te Deum languages=Latin]
   Latin: [v.] text("Te Deum laudámus: * te Dóminum confitémur.")
-  Latin: text("Te ætérnum Patrem * omnis terra venerátur.Tibi omnes Ángeli, * tibi Cæli, et univérsæ Potestátes:Tibi Chérubim et Séraphim * incessábili voce proclámant:") · text(" ") · rubric("Fit reverentia") · text(" Sanctus, Sanctus, Sanctus * Dóminus Deus Sábaoth.Pleni sunt cæli et terra * majestátis glóriæ tuæ.Te gloriósus * Apostolórum chorus,Te Prophetárum * laudábilis númerus,Te Mártyrum candidátus * laudat exércitus.Te per orbem terrárum * sancta confitétur Ecclésia,Patrem * imménsæ majestátis;Venerándum tuum verum * et únicum Fílium;Sanctum quoque * Paráclitum Spíritum.Tu Rex glóriæ, * Christe.Tu Patris * sempitérnus es Fílius.") · text(" ") · rubric("Fit reverentia") · text(" Tu, ad liberándum susceptúrus hóminem: * non horruísti Vírginis úterum.Tu, devícto mortis acúleo, * aperuísti credéntibus regna cælórum.Tu ad déxteram Dei sedes, * in glória Patris.Judex créderis * esse ventúrus.") · text(" ") · rubric("Sequens versus dicitur flexis genibus") · text(" (sed rubrica cisterciensis dicitur)") · text(" ") · rubric("Fratres, quando incipiunt « Te ergo quæsumus, » exeuntes e Stallis, reverenter inclinent ad verba « Quos pretioso » et cetera") · text(" Te ergo quǽsumus, tuis fámulis súbveni, * quos pretióso sánguine redemísti.Ætérna fac cum Sanctis tuis * in glória numerári.Salvum fac pópulum tuum, Dómine, * et bénedic hereditáti tuæ.Et rege eos, * et extólle illos usque in ætérnum.Per síngulos dies * benedícimus te.") · text(" ") · rubric("Fit reverentia, secundum consuetudinem") · text(" Et laudámus nomen tuum in sǽculum, * et in sǽculum sǽculi.Dignáre, Dómine, die isto * sine peccáto nos custodíre.Miserére nostri, Dómine, * miserére nostri.Fiat misericórdia tua, Dómine, super nos, * quemádmodum sperávimus in te.In te, Dómine, sperávi: * non confúndar in ætérnum.")
+  Latin: text("Te ætérnum Patrem * omnis terra venerátur.")
+  Latin: text("Tibi omnes Ángeli, * tibi Cæli, et univérsæ Potestátes:")
+  Latin: text("Tibi Chérubim et Séraphim * incessábili voce proclámant:")
+  Latin: rubric("Fit reverentia")
+  Latin: text("Sanctus, Sanctus, Sanctus * Dóminus Deus Sábaoth.")
+  Latin: text("Pleni sunt cæli et terra * majestátis glóriæ tuæ.")
+  Latin: text("Te gloriósus * Apostolórum chorus,")
+  Latin: text("Te Prophetárum * laudábilis númerus,")
+  Latin: text("Te Mártyrum candidátus * laudat exércitus.")
+  Latin: text("Te per orbem terrárum * sancta confitétur Ecclésia,")
+  Latin: text("Patrem * imménsæ majestátis;")
+  Latin: text("Venerándum tuum verum * et únicum Fílium;")
+  Latin: text("Sanctum quoque * Paráclitum Spíritum.")
+  Latin: text("Tu Rex glóriæ, * Christe.")
+  Latin: text("Tu Patris * sempitérnus es Fílius.")
+  Latin: rubric("Fit reverentia")
+  Latin: text("Tu, ad liberándum susceptúrus hóminem: * non horruísti Vírginis úterum.")
+  Latin: text("Tu, devícto mortis acúleo, * aperuísti credéntibus regna cælórum.")
+  Latin: text("Tu ad déxteram Dei sedes, * in glória Patris.")
+  Latin: text("Judex créderis * esse ventúrus.")
+  Latin: rubric("Sequens versus dicitur flexis genibus")
+  Latin: text("(sed rubrica cisterciensis dicitur)")
+  Latin: rubric("Fratres, quando incipiunt « Te ergo quæsumus, » exeuntes e Stallis, reverenter inclinent ad verba « Quos pretioso » et cetera")
+  Latin: text("Te ergo quǽsumus, tuis fámulis súbveni, * quos pretióso sánguine redemísti.")
+  Latin: text("Ætérna fac cum Sanctis tuis * in glória numerári.")
+  Latin: text("Salvum fac pópulum tuum, Dómine, * et bénedic hereditáti tuæ.")
+  Latin: text("Et rege eos, * et extólle illos usque in ætérnum.")
+  Latin: text("Per síngulos dies * benedícimus te.")
+  Latin: rubric("Fit reverentia, secundum consuetudinem")
+  Latin: text("Et laudámus nomen tuum in sǽculum, * et in sǽculum sǽculi.")
+  Latin: text("Dignáre, Dómine, die isto * sine peccáto nos custodíre.")
+  Latin: text("Miserére nostri, Dómine, * miserére nostri.")
+  Latin: text("Fiat misericórdia tua, Dómine, super nos, * quemádmodum sperávimus in te.")
+  Latin: text("In te, Dómine, sperávi: * non confúndar in ætérnum.")
 
 [section #75 type=oration slot=oration reference=horas/Latin/Sancti/08-15#Oratio languages=Latin]
   Latin: text("Omnípotens sempitérne Deus, qui Immaculátam Vírginem Maríam, Fílii tui Genetrícem, córpore et ánima ad cæléstem glóriam assumpsísti: concéde, quǽsumus; ut ad supérna semper inténti, ipsíus glóriæ mereámur esse consórtes.")

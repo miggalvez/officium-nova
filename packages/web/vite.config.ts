@@ -4,7 +4,22 @@ import { execFileSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import type { Plugin } from 'vite';
 
+function firstNonEmpty(...values: Array<string | undefined>): string | undefined {
+  const value = values.find((value) => value !== undefined && value.trim() !== '');
+  return value?.trim();
+}
+
 const buildSha = (() => {
+  const explicitSha = firstNonEmpty(process.env.VITE_OFFICIUM_BUILD_SHA);
+  if (explicitSha) {
+    return explicitSha;
+  }
+
+  const vercelSha = firstNonEmpty(process.env.VERCEL_GIT_COMMIT_SHA);
+  if (vercelSha) {
+    return vercelSha.slice(0, 12);
+  }
+
   try {
     return execFileSync('git', ['rev-parse', '--short', 'HEAD']).toString().trim();
   } catch {

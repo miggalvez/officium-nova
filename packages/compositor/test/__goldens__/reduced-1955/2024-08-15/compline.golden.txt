@@ -3,7 +3,7 @@ date: 2024-08-15
 hour: compline
 celebration: In Assumptione Beatæ Mariæ Virginis
 languages: Latin
-section count: 10
+section count: 11
 warning count: 0
 
 [section #0 type=other slot=incipit reference=horas/Ordinarium/Completorium#Incipit languages=Latin]
@@ -30,7 +30,7 @@ warning count: 0
   Latin: text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
   Latin: [v.] text("Allelúja.")
 
-[section #2 type=psalm slot=psalmody reference=horas/Latin/Psalterium/Psalmi/Psalmi minor#Completorium:Feria V languages=Latin]
+[section #2 type=psalm slot=psalmody reference=horas/Latin/Psalterium/Psalmi/Psalmi minor#Completorium:Feria V#antiphon languages=Latin]
   Latin: [Ant.] text("Adjútor meus * et liberátor meus esto, Dómine.")
   Latin: text("Psalmus 69 [1]")
   Latin: text("69:2 Deus, in adjutórium meum inténde: * Dómine, ad adjuvándum me festína.")
@@ -40,6 +40,10 @@ warning count: 0
   Latin: text("69:5 Exsúltent et læténtur in te omnes qui quærunt te, * et dicant semper: Magnificétur Dóminus: qui díligunt salutáre tuum.")
   Latin: text("69:6 Ego vero egénus, et pauper sum: * Deus, ádjuva me.")
   Latin: text("69:6 Adjútor meus, et liberátor meus es tu: * Dómine, ne moréris.")
+  Latin: [V.] text("Glória Patri, et Fílio, * et Spirítui Sancto.")
+  Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
+  Latin: [Ant.] text("Adjútor meus et liberátor meus esto, Dómine.")
+  Latin: text("Psalmus 70(1-12) [2]")
   Latin: text("70:1 In te, Dómine, sperávi, non confúndar in ætérnum: * in justítia tua líbera me, et éripe me.")
   Latin: text("70:2 Inclína ad me aurem tuam, * et salva me.")
   Latin: text("70:3 Esto mihi in Deum protectórem, et in locum munítum: * ut salvum me fácias,")
@@ -53,6 +57,9 @@ warning count: 0
   Latin: text("70:10 Quia dixérunt inimíci mei mihi: * et qui custodiébant ánimam meam, consílium fecérunt in unum.")
   Latin: text("70:11 Dicéntes: Deus derelíquit eum, persequímini, et comprehéndite eum: * quia non est qui erípiat.")
   Latin: text("70:12 Deus, ne elongéris a me: * Deus meus, in auxílium meum réspice.")
+  Latin: [V.] text("Glória Patri, et Fílio, * et Spirítui Sancto.")
+  Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
+  Latin: text("Psalmus 70(13-24) [3]")
   Latin: text("70:13 Confundántur, et defíciant detrahéntes ánimæ meæ: * operiántur confusióne, et pudóre qui quærunt mala mihi.")
   Latin: text("70:14 Ego autem semper sperábo: * et adíciam super omnem laudem tuam.")
   Latin: text("70:15 Os meum annuntiábit justítiam tuam: * tota die salutáre tuum.")
@@ -103,7 +110,10 @@ warning count: 0
   Latin: [V.] text("Exaltáta est sancta Dei Génetrix.")
   Latin: [R.] text("Super choros Angelórum ad cæléstia regna.")
 
-[section #7 type=canticle slot=canticle-ad-nunc-dimittis reference=horas/Latin/Psalterium/Psalmorum/Psalm233#__preamble languages=Latin]
+[section #7 type=antiphon slot=antiphon-ad-nunc-dimittis reference=horas/Latin/Psalterium/Special/Minor Special#Ant 4 languages=Latin]
+  Latin: [Ant.] text("Salva nos, * Dómine, vigilántes, custódi nos dormiéntes; ut vigilémus cum Christo, et requiescámus in pace.")
+
+[section #8 type=canticle slot=canticle-ad-nunc-dimittis reference=horas/Latin/Psalterium/Psalmorum/Psalm233#__preamble languages=Latin]
   Latin: text("Canticum Simeonis")
   Latin: text("Luc. 2:29-32")
   Latin: text("2:29 Nunc dimíttis + servum tuum, Dómine, * secúndum verbum tuum in pace:")
@@ -112,13 +122,14 @@ warning count: 0
   Latin: text("2:32 Lumen ad revelatiónem géntium, * et glóriam plebis tuæ Israël.")
   Latin: [V.] text("Glória Patri, et Fílio, * et Spirítui Sancto.")
   Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
+  Latin: [Ant.] text("Salva nos, Dómine, vigilántes, custódi nos dormiéntes; ut vigilémus cum Christo, et requiescámus in pace.")
 
-[section #8 type=oration slot=oration reference=horas/Latin/Sancti/08-15#Oratio languages=Latin]
+[section #9 type=oration slot=oration reference=horas/Latin/Sancti/08-15#Oratio languages=Latin]
   Latin: text("Omnípotens sempitérne Deus, qui Immaculátam Vírginem Maríam, Fílii tui Genetrícem, córpore et ánima ad cæléstem glóriam assumpsísti: concéde, quǽsumus; ut ad supérna semper inténti, ipsíus glóriæ mereámur esse consórtes.")
   Latin: [r.] text("Per eúmdem Dóminum nostrum Jesum Christum Fílium tuum, qui tecum vivit et regnat in unitáte Spíritus Sancti, Deus, per ómnia sǽcula sæculórum.")
   Latin: [R.] text("Amen.")
 
-[section #9 type=conclusion slot=conclusion reference=horas/Ordinarium/Completorium#Conclusio languages=Latin]
+[section #10 type=conclusion slot=conclusion reference=horas/Ordinarium/Completorium#Conclusio languages=Latin]
   Latin: [V.] text("Dóminus vobíscum.")
   Latin: [R.] text("Et cum spíritu tuo.")
   Latin: [V.] text("Dómine, exáudi oratiónem meam.")

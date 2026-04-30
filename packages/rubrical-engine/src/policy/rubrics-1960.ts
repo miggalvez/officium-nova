@@ -241,6 +241,17 @@ export const rubrics1960Policy: RubricalPolicy = {
       };
     }
 
+    if (
+      params.concurrence.winner === 'today' &&
+      params.today.celebration.source === 'sanctoral' &&
+      params.today.celebration.rank.classSymbol === 'III' &&
+      params.today.temporal.dayOfWeek !== 0
+    ) {
+      return {
+        kind: 'ordinary'
+      };
+    }
+
     return {
       kind: 'vespers-winner',
       celebration: params.concurrence.source

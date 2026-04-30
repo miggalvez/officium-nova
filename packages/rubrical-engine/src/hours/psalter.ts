@@ -51,7 +51,7 @@ export function selectPsalmodyRoman1960(
       hour
     });
   } else if (hour === 'compline') {
-    assignments = complineReferences(temporal);
+    assignments = complineReferences(params);
   } else {
     // §16.2 step 4: `psalterScheme === 'dominica'` (e.g. `Psalmi Dominica` in a
     // feast's [Rule]) forces the Sunday distribution even on a weekday.
@@ -161,16 +161,42 @@ function vespersReferences(
   return numberedSectionAssignments(PSALMI_MAJOR, section, 5);
 }
 
-function complineReferences(temporal: TemporalContext): readonly PsalmAssignment[] {
+function complineReferences(params: SelectPsalmodyInput): readonly PsalmAssignment[] {
   // Pius X's Compline (1911) varies by day of week; 1960 retains that
   // distribution — the source file stores it as weekday-keyed entries under
   // the shared `Completorium` section in `Psalmi minor.txt`.
-  const weekdayKey = WEEKDAY_KEYS[temporal.dayOfWeek] ?? WEEKDAY_KEYS[0];
-  return [
-    {
-      psalmRef: { path: PSALMI_MINOR, section: 'Completorium', selector: weekdayKey }
-    }
-  ];
+  const { temporal, corpus } = params;
+  const weekdayKey = WEEKDAY_KEYS[temporal.dayOfWeek] ?? WEEKDAY_KEYS[0] ?? 'Dominica';
+  const assignments = resolveWeekdayMinorHourAssignments(corpus, 'Completorium', weekdayKey, {
+    includePrimeBracketPsalm: true
+  });
+  const keyed =
+    assignments.length > 0
+      ? assignments
+      : [
+          {
+            psalmRef: { path: PSALMI_MINOR, section: 'Completorium', selector: weekdayKey }
+          }
+        ];
+
+  if (
+    temporal.season !== 'eastertide' &&
+    temporal.season !== 'ascensiontide' &&
+    temporal.season !== 'pentecost-octave'
+  ) {
+    return keyed;
+  }
+
+  return Object.freeze(
+    keyed.map((assignment) => ({
+      ...assignment,
+      antiphonRef: {
+        path: PSALMI_MINOR,
+        section: 'Pasch',
+        selector: '1'
+      }
+    }))
+  );
 }
 
 function minorHourReferences(

@@ -201,8 +201,10 @@ describe('applyDirectives — omit-alleluia / add-alleluia', () => {
       { type: 'verseMarker', marker: 'R.', text: 'Dómine, ad adjuvándum me festína' }
     ];
     const out = run('versicle', content, ['add-versicle-alleluia']);
-    const last = out[out.length - 1];
-    expect(last && last.type === 'verseMarker' ? last.text : undefined).toMatch(/allel[úu]ja, allel[úu]ja\./u);
+    expect(out).toEqual([
+      { type: 'verseMarker', marker: 'V.', text: 'Deus, in adjutórium meum inténde, allelúia.' },
+      { type: 'verseMarker', marker: 'R.', text: 'Dómine, ad adjuvándum me festína, allelúia.' }
+    ]);
   });
 });
 

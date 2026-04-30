@@ -262,8 +262,18 @@ function formulaSectionCandidates(name: string): readonly string[] {
     strippedRubric.length > 0
       ? `${strippedRubric[0]!.toLowerCase()}${strippedRubric.slice(1)}`
       : strippedRubric;
+  const rubricCapitalized =
+    strippedRubric.length > 0
+      ? `${strippedRubric[0]!.toUpperCase()}${strippedRubric.slice(1)}`
+      : strippedRubric;
 
-  return dedupe([trimmed, strippedPeriod, strippedRubric, rubricLowered]);
+  return dedupe([
+    trimmed,
+    strippedPeriod,
+    strippedRubric,
+    rubricLowered,
+    rubricCapitalized
+  ]);
 }
 
 function formulaPathCandidates(

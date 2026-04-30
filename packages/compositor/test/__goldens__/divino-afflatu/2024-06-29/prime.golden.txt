@@ -3,7 +3,7 @@ date: 2024-06-29
 hour: prime
 celebration: SS. Apostolorum Petri et Pauli
 languages: Latin
-section count: 9
+section count: 8
 warning count: 0
 
 [section #0 type=other slot=incipit reference=horas/Ordinarium/Prima#Incipit languages=Latin]
@@ -101,17 +101,12 @@ warning count: 0
   Latin: text(" ") · citation("Act 12:11")
   Latin: [v.] text("Et Petrus ad se revérsus dixit: Nunc scio vere quia misit Dóminus Angelum suum, et erípuit me de manu Heródis et de omni exspectatióne plebis Judæórum.")
 
-[section #4 type=versicle slot=versicle reference=horas/Latin/Commune/C1#Versum 1 languages=Latin]
-  Latin: text("_")
-  Latin: [V.] text("In omnem terram exívit sonus eórum.")
-  Latin: [R.] text("Et in fines orbis terræ verba eórum.")
-
-[section #5 type=oration slot=oration reference=horas/Latin/Sancti/06-29#Oratio languages=Latin]
+[section #4 type=oration slot=oration reference=horas/Latin/Sancti/06-29#Oratio languages=Latin]
   Latin: text("Deus, qui hodiérnam diem Apostolórum tuórum Petri et Pauli martýrio consecrásti: da Ecclésiæ tuæ, eórum in ómnibus sequi præcéptum; per quos religiónis sumpsit exórdium.")
   Latin: [r.] text("Per Dóminum nostrum Jesum Christum, Fílium tuum: qui tecum vivit et regnat in unitáte Spíritus Sancti, Deus, per ómnia sǽcula sæculórum.")
   Latin: [R.] text("Amen.")
 
-[section #6 type=martyrology slot=martyrology reference=prime-martyrology:06-30 languages=Latin]
+[section #5 type=martyrology slot=martyrology reference=prime-martyrology:06-30 languages=Latin]
   Latin: [v.] text("Prídie Kaléndas Júlii Luna vicésima tértia Anno Dómini 2024")
   Latin: text("_")
   Latin: [r.] text("Commemorátio sancti Pauli Apóstoli. ")
@@ -129,7 +124,7 @@ warning count: 0
   Latin: [v.] text("Sancta María et omnes Sancti intercédant pro nobis ad Dóminum, ut nos mereámur ab eo adjuvári et salvári, qui vivit et regnat in sǽcula sæculórum.")
   Latin: [R.] text("Amen.")
 
-[section #7 type=other slot=de-officio-capituli reference=horas/Ordinarium/Prima#De Officio Capituli languages=Latin]
+[section #6 type=other slot=de-officio-capituli reference=horas/Ordinarium/Prima#De Officio Capituli languages=Latin]
   Latin: [V.] text("Deus in adjutórium meum inténde.")
   Latin: [R.] text("Dómine, ad adjuvándum me festína.")
   Latin: [V.] text("Deus in adjutórium meum inténde.")
@@ -151,7 +146,7 @@ warning count: 0
   Latin: [v.] text("Dirígere et sanctificáre, régere et gubernáre dignáre, Dómine Deus, Rex cæli et terræ, hódie corda et córpora nostra, sensus, sermónes et actus nostros in lege tua, et in opéribus mandatórum tuórum: ut hic et in ætérnum, te auxiliánte, salvi et líberi esse mereámur, Salvátor mundi: Qui vivis et regnas in sǽcula sæculórum.")
   Latin: [R.] text("Amen.")
 
-[section #8 type=conclusion slot=conclusion reference=horas/Ordinarium/Prima#Conclusio languages=Latin]
+[section #7 type=conclusion slot=conclusion reference=horas/Ordinarium/Prima#Conclusio languages=Latin]
   Latin: [V.] text("Adjutórium nostrum + in nómine Dómini.")
   Latin: [R.] text("Qui fecit cælum et terram.")
   Latin: [V.] text("Benedícite.")
