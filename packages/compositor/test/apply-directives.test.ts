@@ -206,6 +206,60 @@ describe('applyDirectives — omit-alleluia / add-alleluia', () => {
       { type: 'verseMarker', marker: 'R.', text: 'Dómine, ad adjuvándum me festína, allelúia.' }
     ]);
   });
+
+  it('adds the Paschal Alleluia to inherited Matins invitatory antiphons', () => {
+    const content: TextContent[] = [
+      { type: 'text', value: 'Regem Vírginum Dóminum, * Veníte, adorémus.' },
+      { type: 'text', value: 'Veníte, adorémus.' }
+    ];
+    const out = run('invitatory', content, ['matins-invitatory-paschal-alleluia']);
+    expect(out).toEqual([
+      {
+        type: 'text',
+        value: 'Regem Vírginum Dóminum, * Veníte, adorémus, allelúia.'
+      },
+      {
+        type: 'text',
+        value: 'Veníte, adorémus, allelúia.'
+      }
+    ]);
+  });
+
+  it('flattens common short responsories into the Paschal form', () => {
+    const content: TextContent[] = [
+      { type: 'verseMarker', marker: 'R.br.', text: 'Spécie tua * Et pulchritúdine tua.' },
+      { type: 'verseMarker', marker: 'R.', text: 'Spécie tua * Et pulchritúdine tua.' },
+      { type: 'verseMarker', marker: 'V.', text: 'Inténde, próspere procéde, et regna.' },
+      { type: 'verseMarker', marker: 'R.', text: 'Et pulchritúdine tua.' },
+      { type: 'verseMarker', marker: 'V.', text: 'Glória Patri, et Fílio, * et Spirítui Sancto.' },
+      { type: 'verseMarker', marker: 'R.', text: 'Sicut erat in princípio.' },
+      { type: 'verseMarker', marker: 'R.', text: 'Spécie tua * Et pulchritúdine tua.' }
+    ];
+
+    const out = run('responsory', content, ['paschal-short-responsory', 'add-versicle-alleluia']);
+
+    expect(out).toEqual([
+      {
+        type: 'verseMarker',
+        marker: 'R.br.',
+        text: 'Spécie tua et pulchritúdine tua, * Allelúia, allelúia.'
+      },
+      {
+        type: 'verseMarker',
+        marker: 'R.',
+        text: 'Spécie tua et pulchritúdine tua, * Allelúia, allelúia.'
+      },
+      { type: 'verseMarker', marker: 'V.', text: 'Inténde, próspere procéde, et regna.' },
+      { type: 'verseMarker', marker: 'R.', text: 'Allelúia, allelúia.' },
+      { type: 'verseMarker', marker: 'V.', text: 'Glória Patri, et Fílio, * et Spirítui Sancto.' },
+      { type: 'verseMarker', marker: 'R.', text: 'Sicut erat in princípio.' },
+      {
+        type: 'verseMarker',
+        marker: 'R.',
+        text: 'Spécie tua et pulchritúdine tua, * Allelúia, allelúia.'
+      }
+    ]);
+  });
 });
 
 describe('applyDirectives — short-chapter-only', () => {

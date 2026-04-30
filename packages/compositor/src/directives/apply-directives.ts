@@ -71,6 +71,12 @@ function transformsFor(
   }
 
   if (flags.has('omit-alleluia')) pipeline.push(omitAlleluia);
+  if (flags.has('matins-invitatory-paschal-alleluia')) {
+    pipeline.push((slot, content) => matinsInvitatoryPaschalAlleluia(slot, content, context));
+  }
+  if (flags.has('paschal-short-responsory')) {
+    pipeline.push((slot, content) => paschalShortResponsory(slot, content, context));
+  }
   if (flags.has('add-alleluia')) {
     pipeline.push((slot, content) => addAlleluia(slot, content, context));
   }
@@ -283,6 +289,136 @@ function addVersicleAlleluia(
     } satisfies TextContent;
   });
   return changed ? Object.freeze(out) : content;
+}
+
+function matinsInvitatoryPaschalAlleluia(
+  slot: SlotName,
+  content: readonly TextContent[],
+  context: DirectiveContext
+): readonly TextContent[] {
+  if (slot !== 'invitatory') return content;
+  const suffix = `, ${alleluiaWord(context.language)}.`;
+  let changed = false;
+  const out = content.map((node) => {
+    if (node.type === 'text' && isPaschalInvitatoryText(node.value) && !hasAlleluiaTail(node.value)) {
+      changed = true;
+      return {
+        type: 'text',
+        value: appendSuffixBeforeLegacyPayload(node.value, suffix)
+      } satisfies TextContent;
+    }
+    if (
+      node.type === 'verseMarker' &&
+      isPaschalInvitatoryText(node.text) &&
+      !hasAlleluiaTail(node.text)
+    ) {
+      changed = true;
+      return {
+        type: 'verseMarker',
+        marker: node.marker,
+        text: appendSuffixBeforeLegacyPayload(node.text, suffix)
+      } satisfies TextContent;
+    }
+    return node;
+  });
+
+  return changed ? Object.freeze(out) : content;
+}
+
+function paschalShortResponsory(
+  slot: SlotName,
+  content: readonly TextContent[],
+  context: DirectiveContext
+): readonly TextContent[] {
+  if (slot !== 'responsory') return content;
+
+  const firstResponse = content.find(isShortResponsoryResponseNode);
+  if (!firstResponse || hasAlleluiaTail(firstResponse.text)) {
+    return content;
+  }
+
+  const versicle = content.find(
+    (node): node is Extract<TextContent, { type: 'verseMarker' }> =>
+      node.type === 'verseMarker' &&
+      /^v\.?$/iu.test(node.marker.trim()) &&
+      !isGloriaPatriNode(node)
+  );
+  const gloria = content.filter(isResponsoryGloriaNode);
+  const alleluia = alleluiaPair(context.language);
+  const responseBase = normalizeStarredShortResponsoryBase(firstResponse.text);
+  const response = `${responseBase}, * ${alleluia.capitalized}, ${alleluia.lowercase}.`;
+  const out: TextContent[] = [
+    { type: 'verseMarker', marker: 'R.br.', text: response },
+    { type: 'verseMarker', marker: 'R.', text: response }
+  ];
+  if (versicle) {
+    out.push({
+      type: 'verseMarker',
+      marker: 'V.',
+      text: stripAlleluiaTail(versicle.text).replace(/\.?$/u, '.')
+    });
+  }
+  out.push({ type: 'verseMarker', marker: 'R.', text: `${alleluia.capitalized}, ${alleluia.lowercase}.` });
+  if (gloria.length > 0) {
+    out.push(...gloria);
+  } else {
+    out.push({ type: 'macroRef', name: 'Gloria1' });
+  }
+  out.push({ type: 'verseMarker', marker: 'R.', text: response });
+  return Object.freeze(out);
+}
+
+function isPaschalInvitatoryText(value: string): boolean {
+  return isInvitatoryAntiphonText(value) || isInvitatoryResponseText(value);
+}
+
+function isInvitatoryAntiphonText(value: string): boolean {
+  return /\*\s*(?:ven[íi]te,\s+ador[ée]mus|come,\s+let\s+us\s+worship)\.?$/iu.test(
+    value.trim()
+  );
+}
+
+function isInvitatoryResponseText(value: string): boolean {
+  return /^(?:ven[íi]te,\s+ador[ée]mus|come,\s+let\s+us\s+worship)\.?$/iu.test(value.trim());
+}
+
+function isResponsoryGloriaNode(node: TextContent): boolean {
+  return isGloriaPatriNode(node) || isSicutEratNode(node);
+}
+
+function stripAlleluiaTail(value: string): string {
+  return value
+    .replace(/,?\s*allel[úu](?:j|i)?a(?:,?\s*allel[úu](?:j|i)?a)*\.?\s*$/iu, '')
+    .trimEnd();
+}
+
+function normalizeStarredShortResponsoryBase(value: string): string {
+  const withoutAlleluia = stripAlleluiaTail(value).replace(/\s+/gu, ' ').trim();
+  const match = /^(?<left>.*?)(?<comma>,?)\s*\*\s*(?<right>.+?)\.?$/u.exec(withoutAlleluia);
+  if (!match?.groups) {
+    return withoutAlleluia.replace(/\.?$/u, '');
+  }
+
+  const left = (match.groups.left ?? '').trim().replace(/\.?$/u, '');
+  const right = lowerInitial((match.groups.right ?? '').trim().replace(/\.?$/u, ''));
+  const separator = match.groups.comma ? ', ' : /^et\b/iu.test(right) ? ' ' : ', ';
+  return `${left}${separator}${right}`;
+}
+
+function lowerInitial(value: string): string {
+  const first = value[0];
+  if (!first) {
+    return value;
+  }
+  return `${first.toLocaleLowerCase()}${value.slice(1)}`;
+}
+
+function alleluiaPair(
+  language: string | undefined
+): { readonly capitalized: string; readonly lowercase: string } {
+  return language === 'English'
+    ? { capitalized: 'Alleluia', lowercase: 'alleluia' }
+    : { capitalized: 'Allelúia', lowercase: 'allelúia' };
 }
 
 function alleluiaWord(language: string | undefined): string {

@@ -8,6 +8,7 @@ import { routeLesson } from './matins-lessons.js';
 import { applyScriptureTransfer } from './matins-scripture.js';
 import { selectLessonAlternate } from './matins-alternates.js';
 import { seasonalFallbackDoxologyVariant } from './doxology.js';
+import { thirdClassSanctoralWeekdayInPaschaltide } from './paschaltide-sanctoral.js';
 import { resolveRuleReferenceFiles } from '../rules/resolve-vide-ex.js';
 
 import type {
@@ -762,13 +763,7 @@ function collectThirdClassSanctoralWeekdayPaschalMatinsAntiphons(
 export function usesThirdClassSanctoralWeekdayFerialMatinsPsalmody(
   input: Pick<BuildMatinsPlanInput, 'celebration' | 'temporal' | 'version'>
 ): boolean {
-  return (
-    input.version?.handle.includes('1960') === true &&
-    input.celebration.source === 'sanctoral' &&
-    input.celebration.rank.classSymbol === 'III' &&
-    input.temporal.season === 'eastertide' &&
-    input.temporal.dayOfWeek !== 0
-  );
+  return thirdClassSanctoralWeekdayInPaschaltide(input);
 }
 
 function usesThirdClassSanctoralWeekdayPaschalMatinsAntiphon(

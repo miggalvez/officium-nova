@@ -70,6 +70,7 @@ const {
   loadCorpus,
   parseKalendarium,
   parseScriptureTransfer,
+  parseTemporalSubstitutions,
   parseTransfer,
   parseVersionRegistry
 } = parser;
@@ -78,11 +79,12 @@ const {
   asVersionHandle,
   buildKalendariumTable,
   buildScriptureTransferTable,
+  buildTemporalSubstitutionTable,
   buildVersionRegistry,
   buildYearTransferTable,
   createRubricalEngine
 } = rubricalEngine;
-const { composeHour } = compositor;
+const { applyPublicSourceDisplayProfile, composeHour } = compositor;
 
 const selectedHandles = args.version
   ? [args.version]
@@ -111,6 +113,7 @@ const versionRegistry = buildVersionRegistry(
 const kalendarium = buildKalendariumTable(loadKalendaria());
 const yearTransfers = buildYearTransferTable(loadTransferTables());
 const scriptureTransfers = buildScriptureTransferTable(loadScriptureTransferTables());
+const temporalSubstitutions = buildTemporalSubstitutionTable(loadTemporalSubstitutionTables());
 
 let totalMismatches = 0;
 mkdirSync(DIVERGENCE_DIR, { recursive: true });
@@ -128,6 +131,7 @@ for (const handle of selectedHandles) {
     kalendarium,
     yearTransfers,
     scriptureTransfers,
+    temporalSubstitutions,
     versionRegistry,
     version: asVersionHandle(handle),
     policyMap: VERSION_POLICY
@@ -409,6 +413,14 @@ function loadScriptureTransferTables() {
   }));
 }
 
+function loadTemporalSubstitutionTables() {
+  const dir = resolve(UPSTREAM_ROOT, 'Tabulae/Tempora');
+  return readDirTxt(dir).map((name) => ({
+    name: name.slice(0, -4),
+    entries: parseTemporalSubstitutions(readFileSync(resolve(dir, name), 'utf8'))
+  }));
+}
+
 function readDirTxt(dir) {
   return readdirSync(dir)
     .filter((name) => name.endsWith('.txt'))
@@ -496,6 +508,9 @@ function normalizeComposedLines(composed, language) {
       const rendered = renderHeading(section.heading, { nocturnHeadingCount });
       const normalized = rendered ? renderCanonicalText(rendered) : '';
       if (normalized) {
+        if (section.heading?.kind === 'lesson' && lines.at(-1) !== '_') {
+          lines.push('_');
+        }
         lines.push(normalized);
       }
       continue;
@@ -576,6 +591,7 @@ function renderRun(run) {
   switch (run.type) {
     case 'text':
     case 'rubric':
+      return applyPublicSourceDisplayProfile(run.value);
     case 'citation':
       return run.value;
     case 'unresolved-macro':
@@ -588,14 +604,21 @@ function renderRun(run) {
 }
 
 function renderCanonicalText(text) {
-  return text
+  return canonicalizeAlleluiaOrthography(applyPublicSourceDisplayProfile(text))
     .replace(/\u00a0/gu, ' ')
     .replace(/\+{2,}/gu, '+')
     .replace(/℣\./gu, 'V.')
     .replace(/℟\./gu, 'R.')
     .replace(/✠/gu, '+')
+    .replace(/✙[\ufe0e\ufe0f]?/gu, '+')
     .replace(/\s+/gu, ' ')
     .trim();
+}
+
+function canonicalizeAlleluiaOrthography(text) {
+  return text
+    .replace(/Allelúia/gu, 'Allelúja')
+    .replace(/allelúia/gu, 'allelúja');
 }
 
 function decodeHtmlEntities(text) {

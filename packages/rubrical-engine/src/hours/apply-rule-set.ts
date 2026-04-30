@@ -52,6 +52,7 @@ export interface ApplyRuleSetInput {
   readonly policy: RubricalPolicy;
   readonly corpus: OfficeTextIndex;
   readonly overlay?: DirectoriumOverlay;
+  readonly __ordinaryComplineSlots?: boolean;
   /**
    * Required to evaluate Ordinarium omission conditions like
    * `(sed rubrica 196 omittuntur)` on heading-level slots. When omitted,
@@ -201,8 +202,9 @@ function resolveSlot(
 
   const minorHourLaterBlockOverride = minorHourLaterBlockOverrideReference(input, slot.name);
   const primeOrdinaryLaterBlock = primeOrdinaryLaterBlockReference(input, slot.name, properFiles);
+  const complineOrdinaryRef = complineOrdinarySlotReference(input, slot.name);
   const properRef =
-    minorHourLaterBlockOverride || primeOrdinaryLaterBlock
+    minorHourLaterBlockOverride || primeOrdinaryLaterBlock || complineOrdinaryRef
       ? undefined
       : findProperReference(properFiles, slot, input);
   const inheritedSecondVespersRef = properRef
@@ -223,6 +225,7 @@ function resolveSlot(
   const ref =
     minorHourLaterBlockOverride ??
     primeOrdinaryLaterBlock ??
+    complineOrdinaryRef ??
     properRef ??
     inheritedSecondVespersRef ??
     communeRef ??
@@ -1188,6 +1191,23 @@ function complineSpecialFallbackReference(
     path: 'horas/Latin/Psalterium/Special/Minor Special',
     section
   };
+}
+
+function complineOrdinarySlotReference(
+  input: ApplyRuleSetInput,
+  slot: SlotName
+): TextReference | undefined {
+  if (!input.__ordinaryComplineSlots) {
+    return undefined;
+  }
+  if (input.policy.name !== 'rubrics-1960') {
+    return undefined;
+  }
+  if (slot === 'lectio-brevis') {
+    return undefined;
+  }
+
+  return complineSpecialFallbackReference(input.hour, slot);
 }
 
 function minorHourSpecialFallbackReference(

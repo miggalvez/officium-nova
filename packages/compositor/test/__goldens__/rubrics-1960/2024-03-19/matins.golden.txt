@@ -226,7 +226,6 @@ warning count: 1
   Latin: [V.] text("Veníte ad me, et ego dabo vobis ómnia bona Ægýpti, et comedétis medúllam terræ.")
   Latin: [R.] text("Pro salúte enim vestra misit me Deus ante vos in Ægýptum.")
   Latin: [V.] text("Glória Patri, et Fílio, * et Spirítui Sancto.")
-  Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
   Latin: [R.] text("Pro salúte enim vestra misit me Deus ante vos in Ægýptum.")
 
 [section #31 type=heading slot=heading languages=Latin+English]
@@ -395,7 +394,6 @@ warning count: 1
   Latin: [V.] text("Et erat Pater ejus et Mater mirántes super his, quæ dicebántur de illo.")
   Latin: [R.] text("Accépit eum Símeon in ulnas suas, et benedíxit Deum.")
   Latin: [V.] text("Glória Patri, et Fílio, * et Spirítui Sancto.")
-  Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
   Latin: [R.] text("Accépit eum Símeon in ulnas suas, et benedíxit Deum.")
 
 [section #59 type=heading slot=heading languages=Latin+English]
@@ -538,7 +536,6 @@ warning count: 1
   Latin: [V.] text("Proficiébat sapiéntia, et ætáte, et grátia apud Deum et hómines.")
   Latin: [R.] text("Et erat súbditus illis.")
   Latin: [V.] text("Glória Patri, et Fílio, * et Spirítui Sancto.")
-  Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
   Latin: [R.] text("Et erat súbditus illis.")
 
 [section #80 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Jube domne languages=Latin]

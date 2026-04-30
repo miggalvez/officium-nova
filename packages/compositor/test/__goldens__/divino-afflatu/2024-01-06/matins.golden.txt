@@ -153,7 +153,6 @@ warning count: 3
   Latin: [V.] text("Omnes de Saba vénient, aurum et thus deferéntes.")
   Latin: [R.] text("Reges Arabum et Saba dona Dómino Deo addúcent.")
   Latin: [V.] text("Glória Patri, et Fílio, * et Spirítui Sancto.")
-  Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
   Latin: [R.] text("Reges Arabum et Saba dona Dómino Deo addúcent.")
 
 [section #22 type=heading slot=heading languages=Latin+English]
@@ -346,7 +345,6 @@ warning count: 3
   Latin: [V.] text("Vídimus stellam ejus in Oriénte.")
   Latin: [R.] text("Et vénimus adoráre Dóminum.")
   Latin: [V.] text("Glória Patri, et Fílio, * et Spirítui Sancto.")
-  Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
   Latin: [R.] text("Et vénimus adoráre Dóminum.")
 
 [section #50 type=heading slot=heading languages=Latin+English]
@@ -482,7 +480,6 @@ warning count: 3
   Latin: [V.] text("Stella, quam víderant Magi in Oriénte, antecedébat eos, usque dum véniens staret supra ubi erat puer.")
   Latin: [R.] text("Et intrántes domum invenérunt púerum cum María matre ejus, et procidéntes adoravérunt eum:")
   Latin: [V.] text("Glória Patri, et Fílio, * et Spirítui Sancto.")
-  Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
   Latin: [R.] text("Et apértis thesáuris suis obtulérunt ei múnera, aurum, thus, et myrrham.")
 
 [section #71 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Jube domne languages=Latin]
