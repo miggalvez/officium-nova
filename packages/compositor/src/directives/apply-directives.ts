@@ -343,7 +343,7 @@ function paschalShortResponsory(
       /^v\.?$/iu.test(node.marker.trim()) &&
       !isGloriaPatriNode(node)
   );
-  const gloria = content.filter(isResponsoryGloriaNode);
+  const gloria = content.filter(isGloriaPatriOnlyNode);
   const alleluia = alleluiaPair(context.language);
   const responseBase = normalizeStarredShortResponsoryBase(firstResponse.text);
   const response = `${responseBase}, * ${alleluia.capitalized}, ${alleluia.lowercase}.`;
@@ -355,14 +355,14 @@ function paschalShortResponsory(
     out.push({
       type: 'verseMarker',
       marker: 'V.',
-      text: stripAlleluiaTail(versicle.text).replace(/\.?$/u, '.')
+      text: ensureTerminalPeriod(stripAlleluiaTail(versicle.text))
     });
   }
   out.push({ type: 'verseMarker', marker: 'R.', text: `${alleluia.capitalized}, ${alleluia.lowercase}.` });
   if (gloria.length > 0) {
     out.push(...gloria);
   } else {
-    out.push({ type: 'macroRef', name: 'Gloria1' });
+    out.push(defaultGloriaPatriVersicle(context.language));
   }
   out.push({ type: 'verseMarker', marker: 'R.', text: response });
   return Object.freeze(out);
@@ -382,8 +382,32 @@ function isInvitatoryResponseText(value: string): boolean {
   return /^(?:ven[íi]te,\s+ador[ée]mus|come,\s+let\s+us\s+worship)\.?$/iu.test(value.trim());
 }
 
-function isResponsoryGloriaNode(node: TextContent): boolean {
-  return isGloriaPatriNode(node) || isSicutEratNode(node);
+function defaultGloriaPatriVersicle(
+  language: string | undefined
+): Extract<TextContent, { type: 'verseMarker' }> {
+  return {
+    type: 'verseMarker',
+    marker: 'V.',
+    text:
+      language === 'English'
+        ? 'Glory be to the Father, and to the Son, * and to the Holy Ghost.'
+        : 'Glória Patri, et Fílio, * et Spirítui Sancto.'
+  };
+}
+
+function isGloriaPatriOnlyNode(node: TextContent): boolean {
+  if (node.type === 'text') {
+    return GLORIA_PATRI_RX.test(node.value);
+  }
+  if (node.type === 'verseMarker') {
+    return GLORIA_PATRI_RX.test(node.text);
+  }
+  return false;
+}
+
+function ensureTerminalPeriod(value: string): string {
+  const trimmed = value.trimEnd();
+  return /[?!.]$/u.test(trimmed) ? trimmed : `${trimmed}.`;
 }
 
 function stripAlleluiaTail(value: string): string {

@@ -252,11 +252,43 @@ describe('applyDirectives — omit-alleluia / add-alleluia', () => {
       { type: 'verseMarker', marker: 'V.', text: 'Inténde, próspere procéde, et regna.' },
       { type: 'verseMarker', marker: 'R.', text: 'Allelúia, allelúia.' },
       { type: 'verseMarker', marker: 'V.', text: 'Glória Patri, et Fílio, * et Spirítui Sancto.' },
-      { type: 'verseMarker', marker: 'R.', text: 'Sicut erat in princípio.' },
       {
         type: 'verseMarker',
         marker: 'R.',
         text: 'Spécie tua et pulchritúdine tua, * Allelúia, allelúia.'
+      }
+    ]);
+  });
+
+  it('synthesizes a resolved Gloria versicle without duplicating terminal punctuation', () => {
+    const content: TextContent[] = [
+      { type: 'verseMarker', marker: 'R.br.', text: 'Ascéndit Christus * in cælum.' },
+      { type: 'verseMarker', marker: 'R.', text: 'Ascéndit Christus * in cælum.' },
+      { type: 'verseMarker', marker: 'V.', text: 'Quis descéndit de cælo?' },
+      { type: 'verseMarker', marker: 'R.', text: 'In cælum.' },
+      { type: 'verseMarker', marker: 'R.', text: 'Ascéndit Christus * in cælum.' }
+    ];
+
+    const out = run('responsory', content, ['paschal-short-responsory']);
+
+    expect(out).toEqual([
+      {
+        type: 'verseMarker',
+        marker: 'R.br.',
+        text: 'Ascéndit Christus, in cælum, * Allelúia, allelúia.'
+      },
+      {
+        type: 'verseMarker',
+        marker: 'R.',
+        text: 'Ascéndit Christus, in cælum, * Allelúia, allelúia.'
+      },
+      { type: 'verseMarker', marker: 'V.', text: 'Quis descéndit de cælo?' },
+      { type: 'verseMarker', marker: 'R.', text: 'Allelúia, allelúia.' },
+      { type: 'verseMarker', marker: 'V.', text: 'Glória Patri, et Fílio, * et Spirítui Sancto.' },
+      {
+        type: 'verseMarker',
+        marker: 'R.',
+        text: 'Ascéndit Christus, in cælum, * Allelúia, allelúia.'
       }
     ]);
   });
