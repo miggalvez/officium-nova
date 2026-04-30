@@ -7,7 +7,7 @@ import { LoadingState } from '../../components/LoadingState';
 import { RawJsonLink } from '../../components/RawJsonLink';
 import { WarningBanner } from '../../components/WarningBanner';
 import { ReportButton } from '../report/ReportButton';
-import { useSettings } from '../settings/settings-store';
+import { updateSettings, useSettings, type DemoSettings } from '../settings/settings-store';
 import { useVersions } from '../settings/use-versions';
 import { useStatus } from '../status/use-status';
 import type { OfficeRoute } from '../../routes/paths';
@@ -32,6 +32,7 @@ export function OfficePage({ route, currentRoutePath }: OfficePageProps): JSX.El
   const [caching, setCaching] = useState(false);
   const [cached, setCached] = useState(false);
   const [cacheError, setCacheError] = useState<string | undefined>(undefined);
+  const [controlsOpen, setControlsOpen] = useState(false);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -122,72 +123,145 @@ export function OfficePage({ route, currentRoutePath }: OfficePageProps): JSX.El
 
   const title = data?.summary.celebration.feast.title ?? prettyHour(route.hour);
 
+  useEffect(() => {
+    const openControls = () => setControlsOpen(true);
+    window.addEventListener('officium:open-office-controls', openControls);
+    return () => window.removeEventListener('officium:open-office-controls', openControls);
+  }, []);
+
+  useEffect(() => {
+    if (!controlsOpen) {
+      return;
+    }
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setControlsOpen(false);
+      }
+    };
+    window.addEventListener('keydown', closeOnEscape);
+    return () => window.removeEventListener('keydown', closeOnEscape);
+  }, [controlsOpen]);
+
   return (
-    <article aria-busy={loading}>
-      <div className="office-controls">
-        <OfficeHeader route={route} versions={versions} />
-        <HourNav date={route.date} current={route.hour} state={route} />
-        <div className="office-controls__row office-controls__row--actions">
-          <RawJsonLink href={apiUrl} />
-          <a className="button button--ghost" href={openApiUrl()} target="_blank" rel="noreferrer noopener">
-            OpenAPI
-          </a>
-          <button
-            type="button"
-            className="button button--ghost"
-            disabled={caching}
-            onClick={async () => {
-              setCaching(true);
-              setCacheError(undefined);
-              try {
-                await cacheWeek({
-                  start: route.date,
-                  version: route.version,
-                  languages: route.languages,
-                  orthography: route.orthography
-                });
-                setCached(true);
-                window.setTimeout(() => setCached(false), 3_000);
-              } catch (err) {
-                setCacheError(err instanceof Error ? err.message : 'Could not cache this week.');
-              } finally {
-                setCaching(false);
-              }
-            }}
-          >
-            {caching ? 'Caching…' : cached ? 'Cached for week' : 'Cache this week'}
-          </button>
-          {cacheError ? (
-            <span className="muted" role="status">{cacheError}</span>
+    <article className="office-page" aria-busy={loading}>
+      <div className="office-workspace">
+        <div className="office-stage">
+          {controlsOpen ? (
+            <div className="office-drawer-layer" role="presentation">
+              <button
+                type="button"
+                className="office-drawer-backdrop"
+                aria-label="Close compose controls"
+                onClick={() => setControlsOpen(false)}
+              />
+              <aside
+                id="office-controls-drawer"
+                className="office-sidebar"
+                role="dialog"
+                aria-modal="true"
+                aria-label="Office controls"
+              >
+                <div className="office-sidebar__heading">
+                  <span>Compose</span>
+                  <strong>{prettyHour(route.hour)}</strong>
+                  <button
+                    type="button"
+                    className="button button--ghost office-drawer-close"
+                    onClick={() => setControlsOpen(false)}
+                  >
+                    Close
+                  </button>
+                </div>
+                <div className="office-controls">
+                  <OfficeHeader route={route} versions={versions} />
+                  <div className="office-controls__row office-controls__row--appearance">
+                    <label>
+                      <span>Appearance</span>
+                      <select
+                        value={settings.theme}
+                        onChange={(e) =>
+                          updateSettings({ theme: e.target.value as DemoSettings['theme'] })
+                        }
+                      >
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                        <option value="auto">System</option>
+                      </select>
+                    </label>
+                  </div>
+                  <HourNav date={route.date} current={route.hour} state={route} />
+                  <div className="office-controls__row office-controls__row--actions">
+                    <RawJsonLink href={apiUrl} />
+                    <a
+                      className="button button--ghost"
+                      href={openApiUrl()}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                    >
+                      OpenAPI
+                    </a>
+                    <button
+                      type="button"
+                      className="button button--ghost"
+                      disabled={caching}
+                      onClick={async () => {
+                        setCaching(true);
+                        setCacheError(undefined);
+                        try {
+                          await cacheWeek({
+                            start: route.date,
+                            version: route.version,
+                            languages: route.languages,
+                            orthography: route.orthography
+                          });
+                          setCached(true);
+                          window.setTimeout(() => setCached(false), 3_000);
+                        } catch (err) {
+                          setCacheError(err instanceof Error ? err.message : 'Could not cache this week.');
+                        } finally {
+                          setCaching(false);
+                        }
+                      }}
+                    >
+                      {caching ? 'Caching…' : cached ? 'Cached for week' : 'Cache this week'}
+                    </button>
+                    {cacheError ? (
+                      <span className="muted" role="status">{cacheError}</span>
+                    ) : null}
+                    <ReportButton context={reportContext} />
+                  </div>
+                </div>
+              </aside>
+            </div>
           ) : null}
-          <div className="toolbar__spacer" />
-          <ReportButton context={reportContext} />
+
+          {loading ? <LoadingState label={`Loading ${route.hour}…`} /> : null}
+          {error ? <ErrorState error={error} apiUrl={apiUrl} /> : null}
+          {data ? (
+            <>
+              <WarningBanner warnings={data.warnings.rubrical} title="Rubrical warnings" />
+              <WarningBanner warnings={data.warnings.composition} title="Composition warnings" />
+              <div className="office">
+                <div className="office__engraving" aria-hidden="true" />
+                <header className="office__header">
+                  <p className="office__kicker">Office of the Day</p>
+                  <h1>{title}</h1>
+                  <p className="muted">
+                    {formatHumanDate(route.date)} · {prettyHour(route.hour)} · {route.version}
+                  </p>
+                </header>
+                <OfficeRenderer
+                  office={data.office}
+                  languages={route.languages}
+                  displayMode={route.displayMode}
+                  reviewerMode={settings.reviewerMode}
+                  meta={data.meta}
+                />
+              </div>
+            </>
+          ) : null}
         </div>
       </div>
-
-      {loading ? <LoadingState label={`Loading ${route.hour}…`} /> : null}
-      {error ? <ErrorState error={error} apiUrl={apiUrl} /> : null}
-      {data ? (
-        <>
-          <WarningBanner warnings={data.warnings.rubrical} title="Rubrical warnings" />
-          <WarningBanner warnings={data.warnings.composition} title="Composition warnings" />
-          <div className="office">
-            <header className="office__header">
-              <h1>{title}</h1>
-              <p className="muted">
-                {formatHumanDate(route.date)} · {prettyHour(route.hour)} · {route.version}
-              </p>
-            </header>
-            <OfficeRenderer
-              office={data.office}
-              languages={route.languages}
-              displayMode={route.displayMode}
-              reviewerMode={settings.reviewerMode}
-              meta={data.meta}
-            />
-          </div>
-        </>
-      ) : null}
     </article>
   );
 }

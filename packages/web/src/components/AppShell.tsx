@@ -15,8 +15,10 @@ export interface AppShellProps {
 export function AppShell({ children }: AppShellProps): JSX.Element {
   const env = getEnvironment();
   const settings = useSettings();
+  const { location } = useRouter();
   const homeLink = useLink('/');
   const today = todayIso();
+  const isOfficeRoute = location.pathname === '/office' || location.pathname.startsWith('/office/');
   const officeHref = buildOfficeRoute({
     date: today,
     hour: DEFAULT_HOUR,
@@ -45,11 +47,11 @@ export function AppShell({ children }: AppShellProps): JSX.Element {
 
   useEffect(() => {
     document.documentElement.dataset.fontSize = settings.fontSize;
-  }, [settings.fontSize]);
+    document.documentElement.dataset.theme = settings.theme;
+  }, [settings.fontSize, settings.theme]);
 
   return (
     <div className="app-shell">
-      <a className="skip-link" href="#main">Skip to content</a>
       <div className="beta-banner" role="status">
         Hosted beta. Verify important rubrical questions against the published Ordo.
       </div>
@@ -65,6 +67,17 @@ export function AppShell({ children }: AppShellProps): JSX.Element {
             <NavLink href="/status" activePrefix="/status">Status</NavLink>
             <NavLink href="/about" activePrefix="/about">About</NavLink>
           </nav>
+          {isOfficeRoute ? (
+            <button
+              type="button"
+              className="app-header__compose"
+              aria-controls="office-controls-drawer"
+              aria-haspopup="dialog"
+              onClick={() => window.dispatchEvent(new Event('officium:open-office-controls'))}
+            >
+              Compose
+            </button>
+          ) : null}
         </div>
       </header>
       <main id="main" className="app-main" tabIndex={-1}>

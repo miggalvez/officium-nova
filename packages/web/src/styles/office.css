@@ -1,24 +1,120 @@
 /* ----------------------------------------------------------------------
-   Officium Novum — office reading surface
-   The page is styled to evoke a printed breviary (Baronius Press) while
-   tuned for on-screen readability: wider columns, generous leading,
-   restrained justification, warm cream paper, deep brick rubrics.
+   Officium Novum - office reading surface
+   The page is styled to evoke a printed breviary while tuned for
+   responsive screen reading and app controls.
 ---------------------------------------------------------------------- */
+
+.office-page {
+  width: 100%;
+}
+
+.office-workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-4);
+  align-items: start;
+}
+
+.office-drawer-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  pointer-events: none;
+}
+
+.office-drawer-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  min-height: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: color-mix(in srgb, #000 48%, transparent);
+  cursor: default;
+  pointer-events: auto;
+}
+
+.office-sidebar {
+  position: relative;
+  z-index: 1;
+  width: min(380px, calc(100vw - var(--space-4)));
+  max-height: calc(100svh - var(--space-4));
+  margin: var(--space-2);
+  overflow: auto;
+  display: grid;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  background: color-mix(in srgb, var(--color-paper) 96%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-ink) 58%, var(--color-border));
+  box-shadow: 0 28px 72px -30px rgba(0, 0, 0, 0.42);
+  pointer-events: auto;
+}
+
+.office-sidebar__heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2px var(--space-3);
+  align-items: start;
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.office-sidebar__heading span {
+  grid-column: 1;
+  color: var(--color-rubric);
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.office-sidebar__heading strong {
+  grid-column: 1;
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.office-drawer-close {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: center;
+  width: auto;
+}
+
+.office-stage {
+  min-width: 0;
+}
+
+.office-stage > .warning-banner,
+.office-stage > .loading {
+  max-width: 840px;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 .office {
   font-family: var(--font-text);
   font-size: var(--font-size-base);
   line-height: var(--leading-text);
   color: var(--color-ink);
-  background: var(--color-paper);
-  max-width: var(--measure-page);
-  margin: var(--space-6) auto var(--space-10);
-  padding: clamp(var(--space-6), 4vw, var(--space-12)) clamp(var(--space-5), 4vw, var(--space-10));
-  border: 1px solid var(--color-border);
-  border-radius: 2px;
+  background: var(--color-paper-bright);
+  max-width: 840px;
+  margin: 0 auto var(--space-10);
+  padding: clamp(var(--space-5), 4vw, var(--space-10));
+  border: 1px solid color-mix(in srgb, var(--color-ink) 42%, var(--color-border));
+  border-radius: 1px;
   box-shadow:
-    0 1px 0 var(--color-rule-soft),
-    0 12px 32px -18px var(--color-paper-shadow);
+    inset 0 0 0 10px var(--color-paper),
+    inset 0 0 0 11px color-mix(in srgb, var(--color-ink) 18%, transparent),
+    0 28px 68px -42px var(--color-paper-shadow);
   font-feature-settings: 'kern' 1, 'liga' 1, 'onum' 1;
   hyphens: manual;
 }
@@ -29,6 +125,43 @@
 
 /* ---- Office header (title block) ---------------------------------- */
 
+.office__engraving {
+  height: clamp(84px, 12vw, 126px);
+  margin: 0 0 var(--space-6);
+  border: 1px solid color-mix(in srgb, var(--color-ink) 52%, var(--color-border));
+  background:
+    radial-gradient(circle at 50% 45%, var(--color-paper-bright) 0 6%, transparent 7%),
+    radial-gradient(circle at 50% 45%, transparent 0 18%, var(--color-engraving-ink) 19% 20%, transparent 21%),
+    repeating-radial-gradient(circle at 50% 48%, color-mix(in srgb, var(--color-engraving-ink) 72%, transparent) 0 1px, transparent 1px 4px),
+    linear-gradient(135deg, var(--color-engraving-ink), var(--color-engraving-paper) 46%, var(--color-engraving-ink));
+  filter: grayscale(1);
+  opacity: 0.84;
+  overflow: hidden;
+  position: relative;
+}
+
+.office__engraving::before,
+.office__engraving::after {
+  content: '';
+  position: absolute;
+  top: 20%;
+  bottom: 14%;
+  width: 22%;
+  border: solid var(--color-engraving-ink);
+  border-width: 0 2px;
+  opacity: 0.42;
+}
+
+.office__engraving::before {
+  left: 9%;
+  transform: skewY(-12deg);
+}
+
+.office__engraving::after {
+  right: 9%;
+  transform: skewY(12deg);
+}
+
 .office__header {
   margin-bottom: var(--space-8);
   padding-bottom: var(--space-5);
@@ -38,8 +171,8 @@
 
 .office__header h1 {
   font-family: var(--font-display);
-  font-size: clamp(1.75rem, 2.5vw + 1rem, 2.4rem);
-  font-weight: 600;
+  font-size: clamp(1.85rem, 2.6vw + 1rem, 3rem);
+  font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   margin: 0 0 var(--space-2);
@@ -63,6 +196,16 @@
   letter-spacing: 0.04em;
   color: var(--color-muted);
   font-size: 0.95rem;
+}
+
+.office__kicker {
+  margin: 0 0 var(--space-1);
+  color: var(--color-rubric);
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
 
 /* ---- Sections ----------------------------------------------------- */
@@ -140,7 +283,7 @@
 }
 
 .office__line[data-mode='parallel'] {
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   position: relative;
 }
 
@@ -164,6 +307,63 @@
   }
   .office__line[data-mode='parallel']::before {
     display: none;
+  }
+}
+
+@media (max-width: 1040px) {
+  .office-controls__row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .office-controls__row--actions {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .hours-nav {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .office-workspace {
+    gap: var(--space-4);
+  }
+
+  .office-sidebar {
+    width: min(360px, calc(100vw - var(--space-4)));
+    max-height: calc(100svh - var(--space-4));
+    margin: var(--space-2);
+    padding: var(--space-3);
+  }
+
+  .office-controls__row,
+  .office-controls__row--actions {
+    grid-template-columns: 1fr;
+  }
+
+  .hours-nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .office {
+    font-size: clamp(1rem, 4.6vw, var(--font-size-base));
+    line-height: 1.48;
+    margin-bottom: var(--space-6);
+    padding: var(--space-5) var(--space-4);
+    box-shadow:
+      inset 0 0 0 6px var(--color-paper),
+      inset 0 0 0 7px color-mix(in srgb, var(--color-ink) 18%, transparent),
+      0 18px 48px -36px var(--color-paper-shadow);
+  }
+
+  .office__header h1 {
+    font-size: clamp(1.45rem, 8vw, 2.25rem);
+    overflow-wrap: anywhere;
+  }
+
+  .office__section-heading {
+    font-size: 0.9rem;
+    letter-spacing: 0.12em;
   }
 }
 

@@ -62,11 +62,12 @@ describe('settings store', () => {
   });
 
   it('round-trips through save/load', () => {
-    saveSettings({ ...DEFAULT_SETTINGS, fontSize: 'large', reviewerMode: true });
+    saveSettings({ ...DEFAULT_SETTINGS, fontSize: 'large', reviewerMode: true, theme: 'dark' });
     resetSettingsCacheForTests();
     const next = loadSettings();
     expect(next.fontSize).toBe('large');
     expect(next.reviewerMode).toBe(true);
+    expect(next.theme).toBe('dark');
   });
 
   it('updateSettings merges patches', () => {

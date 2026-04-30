@@ -2,6 +2,8 @@ label {
   display: inline-flex;
   flex-direction: column;
   gap: 2px;
+  width: 100%;
+  min-width: 0;
   font-size: 0.72rem;
   color: var(--color-muted);
   font-family: var(--font-sans);
@@ -19,6 +21,7 @@ input[type='text'],
 input[type='email'],
 select,
 textarea {
+  min-width: 0;
   font-family: var(--font-sans);
   font-size: 0.92rem;
   background: var(--color-paper);
@@ -72,6 +75,7 @@ button,
   text-decoration: none;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: var(--space-1);
   letter-spacing: 0.02em;
   cursor: pointer;
@@ -152,6 +156,11 @@ dialog {
   padding: var(--space-4);
   max-width: 640px;
   width: calc(100vw - 2rem);
+}
+
+.office-sidebar button:not(.office-drawer-close),
+.office-sidebar .button:not(.office-drawer-close) {
+  width: 100%;
 }
 
 dialog::backdrop {

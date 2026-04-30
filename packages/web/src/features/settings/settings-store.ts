@@ -15,6 +15,7 @@ export interface DemoSettings {
   readonly langfb?: PublicLanguageTag;
   readonly orthography: TextOrthographyProfile;
   readonly displayMode: 'parallel' | 'sequential';
+  readonly theme: 'light' | 'dark' | 'auto';
   readonly fontSize: 'normal' | 'large' | 'larger';
   readonly reviewerMode: boolean;
   readonly strict: boolean;
@@ -25,6 +26,7 @@ export const DEFAULT_SETTINGS: DemoSettings = {
   defaultLanguages: DEFAULT_LANGUAGES,
   orthography: DEFAULT_ORTHOGRAPHY,
   displayMode: 'parallel',
+  theme: 'light',
   fontSize: 'normal',
   reviewerMode: false,
   strict: false
@@ -117,6 +119,10 @@ export function mergeSettings(input: Partial<DemoSettings>): DemoSettings {
       : {}),
     orthography: input.orthography === 'source' ? 'source' : 'version',
     displayMode: input.displayMode === 'sequential' ? 'sequential' : 'parallel',
+    theme:
+      input.theme === 'dark' || input.theme === 'auto' || input.theme === 'light'
+        ? input.theme
+        : DEFAULT_SETTINGS.theme,
     fontSize:
       input.fontSize === 'large' || input.fontSize === 'larger' ? input.fontSize : 'normal',
     reviewerMode: Boolean(input.reviewerMode),

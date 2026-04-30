@@ -64,6 +64,19 @@ export function SettingsPage(): JSX.Element {
         </div>
         <div className="form-row">
           <label>
+            <span>Appearance</span>
+            <select
+              value={settings.theme}
+              onChange={(e) => update('theme', e.target.value as DemoSettings['theme'])}
+            >
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+              <option value="auto">System</option>
+            </select>
+          </label>
+        </div>
+        <div className="form-row">
+          <label>
             <span>Font size</span>
             <select
               value={settings.fontSize}
