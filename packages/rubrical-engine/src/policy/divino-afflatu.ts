@@ -353,6 +353,7 @@ export const divinoAfflatuPolicy: RubricalPolicy = {
   },
   selectPsalmody(params: SelectPsalmodyParams): readonly PsalmAssignment[] {
     return selectPsalmodyRoman1960({
+      policyName: 'divino-afflatu',
       hour: params.hour,
       celebration: params.celebration,
       celebrationRules: params.celebrationRules,

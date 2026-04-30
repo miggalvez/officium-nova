@@ -279,6 +279,7 @@ export const reduced1955Policy: RubricalPolicy = {
   },
   selectPsalmody(params: SelectPsalmodyParams): readonly PsalmAssignment[] {
     return selectPsalmodyRoman1960({
+      policyName: 'reduced-1955',
       hour: params.hour,
       celebration: params.celebration,
       celebrationRules: params.celebrationRules,

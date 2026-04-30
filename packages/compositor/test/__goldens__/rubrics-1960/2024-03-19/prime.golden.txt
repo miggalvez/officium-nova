@@ -3,7 +3,7 @@ date: 2024-03-19
 hour: prime
 celebration: S. Joseph Sponsi B.M.V. Confessoris
 languages: Latin
-section count: 7
+section count: 11
 warning count: 0
 
 [section #0 type=other slot=incipit reference=horas/Ordinarium/Prima#Incipit languages=Latin]
@@ -92,16 +92,38 @@ warning count: 0
   Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
   Latin: [Ant.] text("Ibant paréntes Jesu per omnes annos in Jerúsalem, in die solémni Paschæ.")
 
-[section #3 type=chapter slot=chapter reference=horas/Latin/Sancti/03-19#Lectio Prima languages=Latin]
-  Latin: text(" ") · citation("Sap 10:10")
-  Latin: [v.] text("Prófugum justum dedúxit Sapiéntia per vias rectas, et osténdit illi regnum Dei, et dedit illi sciéntiam sanctórum; honestávit illum in labóribus, et complévit labóres illíus.")
+[section #3 type=chapter slot=chapter reference=horas/Latin/Psalterium/Special/Prima Special#Dominica languages=Latin]
+  Latin: text(" ") · citation("1 Tim. 1:17")
+  Latin: [v.] text("Regi sæculórum immortáli et invisíbili, soli Deo honor et glória in sǽcula sæculórum. Amen.")
+  Latin: [R.] text("Deo grátias.")
 
-[section #4 type=oration slot=oration reference=horas/Latin/Sancti/03-19#Oratio languages=Latin]
-  Latin: text("Sanctíssimæ Genetrícis tuæ sponsi, quǽsumus, Dómine, méritis adjuvémur; ut quod possibílitas nostra non óbtinet, ejus nobis intercessióne donétur.")
-  Latin: [r.] text("Qui vivis et regnas cum Deo Patre, in unitáte Spíritus Sancti, Deus, per ómnia sǽcula sæculórum.")
+[section #4 type=responsory slot=responsory reference=horas/Latin/Psalterium/Special/Prima Special#Responsory languages=Latin]
+  Latin: text("_")
+  Latin: [R.br.] text("Christe, Fili Dei vivi, * Miserére nobis.")
+  Latin: [R.] text("Christe, Fili Dei vivi, * Miserére nobis.")
+  Latin: [V.] text("Qui sedes ad déxteram Patris.")
+  Latin: [R.] text("Miserére nobis.")
+  Latin: [V.] text("Glória Patri, et Fílio, * et Spirítui Sancto.")
+  Latin: [R.] text("Christe, Fili Dei vivi, * Miserére nobis.")
+
+[section #5 type=versicle slot=versicle reference=horas/Latin/Psalterium/Special/Prima Special#Versum languages=Latin]
+  Latin: text("_")
+  Latin: [V.] text("Exsúrge, Christe, ádjuva nos.")
+  Latin: [R.] text("Et líbera nos propter nomen tuum.")
+
+[section #6 type=oration slot=oration reference=horas/Latin/Psalterium/Common/Prayers#Domine exaudi languages=Latin]
+  Latin: [V.] text("Dómine, exáudi oratiónem meam.")
+  Latin: [R.] text("Et clamor meus ad te véniat.")
+  Latin: [v.] text("Orémus.")
+  Latin: [v.] text("Dómine Deus omnípotens, qui ad princípium hujus diéi nos perveníre fecísti: tua nos hódie salva virtúte; ut in hac die ad nullum declinémus peccátum, sed semper ad tuam justítiam faciéndam nostra procédant elóquia, dirigántur cogitatiónes et ópera.")
+  Latin: [r.] text("Per Dóminum nostrum Jesum Christum, Fílium tuum: qui tecum vivit et regnat in unitáte Spíritus Sancti, Deus, per ómnia sǽcula sæculórum.")
   Latin: [R.] text("Amen.")
+  Latin: [V.] text("Dómine, exáudi oratiónem meam.")
+  Latin: [R.] text("Et clamor meus ad te véniat.")
+  Latin: [V.] text("Benedicámus Dómino.")
+  Latin: [R.] text("Deo grátias.")
 
-[section #5 type=martyrology slot=martyrology reference=prime-martyrology:03-20 languages=Latin]
+[section #7 type=martyrology slot=martyrology reference=prime-martyrology:03-20 languages=Latin]
   Latin: [v.] text("Tertiodécimo Kaléndas Aprílis Luna nona Anno Dómini 2024")
   Latin: text("_")
   Latin: [r.] text("In Judǽa natális sancti Jóachim, patris immaculátæ Vírginis Genetrícis Dei Maríæ, Confessóris. Ipsíus tamen festum ágitur décimo séptimo Kaléndas Septémbris.")
@@ -120,7 +142,7 @@ warning count: 0
   Latin: [v.] text("Sancta María et omnes Sancti intercédant pro nobis ad Dóminum, ut nos mereámur ab eo adjuvári et salvári, qui vivit et regnat in sǽcula sæculórum.")
   Latin: [R.] text("Amen.")
 
-[section #6 type=other slot=de-officio-capituli reference=horas/Ordinarium/Prima#De Officio Capituli languages=Latin]
+[section #8 type=other slot=de-officio-capituli reference=horas/Ordinarium/Prima#De Officio Capituli languages=Latin]
   Latin: [V.] text("Deus in adjutórium meum inténde.")
   Latin: [R.] text("Dómine, ad adjuvándum me festína.")
   Latin: [V.] text("Deus in adjutórium meum inténde.")
@@ -140,4 +162,21 @@ warning count: 0
   Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
   Latin: [v.] text("Orémus.")
   Latin: [v.] text("Dirígere et sanctificáre, régere et gubernáre dignáre, Dómine Deus, Rex cæli et terræ, hódie corda et córpora nostra, sensus, sermónes et actus nostros in lege tua, et in opéribus mandatórum tuórum: ut hic et in ætérnum, te auxiliánte, salvi et líberi esse mereámur, Salvátor mundi: Qui vivis et regnas in sǽcula sæculórum.")
+  Latin: [R.] text("Amen.")
+
+[section #9 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Psalterium/Common/Prayers#Jube domne languages=Latin]
+  Latin: [V.] text("Jube, Dómine, benedícere.")
+  Latin: [Benedictio.] text("Dies et actus nostros in sua pace dispónat Dóminus omnípotens.")
+  Latin: [R.] text("Amen.")
+  Latin: text(" ") · citation("Isa 50:6-7")
+  Latin: [v.] text("Fáciem meam non avérti ab increpántibus, et conspuéntibus in me. Dóminus Deus auxiliátor meus, et ídeo non sum confúsus.")
+  Latin: [V.] text("Tu autem, Dómine, miserére nobis.")
+  Latin: [R.] text("Deo grátias.")
+
+[section #10 type=conclusion slot=conclusion reference=horas/Latin/Psalterium/Common/Prayers#Adjutorium nostrum languages=Latin]
+  Latin: [V.] text("Adjutórium nostrum + in nómine Dómini.")
+  Latin: [R.] text("Qui fecit cælum et terram.")
+  Latin: [V.] text("Benedícite.")
+  Latin: [R.] text("Deus.")
+  Latin: [Benedictio.] text("Dóminus nos benedícat, + et ab omni malo deféndat, et ad vitam perdúcat ætérnam. Et fidélium ánimæ per misericórdiam Dei requiéscant in pace.")
   Latin: [R.] text("Amen.")

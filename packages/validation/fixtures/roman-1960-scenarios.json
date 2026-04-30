@@ -251,6 +251,11 @@
           "date": "2026-04-30",
           "hours": ["matins", "lauds", "prime", "terce", "sext", "none", "vespers", "compline"],
           "notes": "Known current-year full-hour comparison witness."
+        },
+        {
+          "date": "2026-05-01",
+          "hours": ["matins", "lauds", "prime", "terce", "sext", "none", "vespers", "compline"],
+          "notes": "St. Joseph the Worker full-day witness covering proper Matins psalm-only rows, Sunday Compline under Psalmi Dominica, 1960 sanctoral doxology fallback, and Old Testament canticle Gloria handling."
         }
       ],
       "assertions": [

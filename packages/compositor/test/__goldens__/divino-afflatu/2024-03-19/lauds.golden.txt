@@ -82,8 +82,6 @@ warning count: 2
   Latin: text("3:74 Benedícite, Ananía, Azaría, Mísaël, Dómino: * laudáte et superexaltáte eum in sǽcula.")
   Latin: text("3:75 (Fit reverentia:) Benedicámus Patrem et Fílium cum Sancto Spíritu: * laudémus et superexaltémus eum in sǽcula.")
   Latin: text("3:56 Benedíctus es, Dómine, in firmaménto cæli: * et laudábilis, et gloriósus, et superexaltátus in sǽcula.")
-  Latin: [V.] text("Glória Patri, et Fílio, * et Spirítui Sancto.")
-  Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
   Latin: [Ant.] text("Dixit Mater ejus ad illum: Fili, quid fecísti nobis sic? Ecce pater tuus, et ego doléntes quærebámus te.")
   Latin: [Ant.] text("Descéndit Jesus * cum eis, et venit Názareth, et erat súbditus illis.")
   Latin: text("Psalmus 148 [5]")

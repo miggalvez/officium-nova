@@ -110,9 +110,9 @@ warning count: 0
   Latin: [V.] text("Glória Patri, et Fílio, * et Spirítui Sancto.")
   Latin: [R.] text("In manus tuas, Dómine, * Comméndo spíritum meum.")
 
-[section #6 type=versicle slot=versicle reference=horas/Latin/Sancti/02-02#Versum 1 languages=Latin]
-  Latin: [V.] text("Respónsum accépit Símeon a Spíritu Sancto.")
-  Latin: [R.] text("Non visúrum se mortem, nisi vidéret Christum Dómini.")
+[section #6 type=versicle slot=versicle reference=horas/Latin/Psalterium/Special/Minor Special#Versum 4 languages=Latin]
+  Latin: [V.] text("Custódi nos, Dómine, ut pupíllam óculi.")
+  Latin: [R.] text("Sub umbra alárum tuárum prótege nos.")
 
 [section #7 type=antiphon slot=antiphon-ad-nunc-dimittis reference=horas/Latin/Psalterium/Special/Minor Special#Ant 4 languages=Latin]
   Latin: [Ant.] text("Salva nos, * Dómine, vigilántes, custódi nos dormiéntes; ut vigilémus cum Christo, et requiescámus in pace.")

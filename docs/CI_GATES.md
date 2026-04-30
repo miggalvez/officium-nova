@@ -42,3 +42,18 @@ vitest run && pnpm run audit:citations && pnpm run audit:reviewer-privacy && pnp
 Candidate-year exceptions must stay temporary. Each promoted candidate year
 needs an owner, a promotion-window note, and a follow-up path to `gated`; the
 `<10` threshold never applies to the already-gated 2024 Roman baseline.
+
+## Year-Scoped Validation Commands
+
+The default CI path continues to protect the gated 2024 baseline. Year expansion
+work should use the explicit runners below before promoting a policy/year row:
+
+```bash
+pnpm -C packages/compositor test:no-throw -- --year 2025
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Rubrics 1960 - 1960" --year 2025
+pnpm -C packages/validation report:multi-year
+```
+
+`compare:phase-3-perl` preserves the older no-argument 2024 fixture-matrix
+surface for Phase 3 workflows. Supplying `--year YYYY` always means the full
+civil year, including explicit `--year 2024`.

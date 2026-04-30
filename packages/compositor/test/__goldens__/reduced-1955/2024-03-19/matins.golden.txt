@@ -147,13 +147,14 @@ warning count: 1
   English: text("Reading 1")
   Latin: text("Lectio 1")
 
-[section #14 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Tempora/Quad5-2#Lectio1 languages=Latin]
-  Latin: text("Léctio sancti Evangélii secúndum Joánnem")
-  Latin: text(" ") · citation("Joannes 7:1-13")
-  Latin: text("In illo témpore: Ambulábat Jesus in Galilǽam: non enim volébat in Judǽam ambuláre, quia quærébant eum Judǽi interfícere. Et réliqua.")
-  Latin: text("Homilía sancti Augustíni Epíscopi")
-  Latin: rubric("Tractatus 28 in Joannem")
-  Latin: text("In isto Evangélii capítulo, fratres, Dóminus noster Jesus Christus secúndum hóminem se plúrimum commendávit fídei nostræ. Etenim semper hoc egit dictis et factis suis, ut Deus credátur et homo: Deus qui nos fecit, homo qui nos quæsívit: Deus cum Patre semper, homo nobíscum ex témpore. Non enim quǽreret quem fécerat, nisi fíeret ipse quod fécerat. Verum hoc mementóte, et de córdibus vestris nolíte dimíttere: sic esse Christum hóminem factum, ut non destíterit Deus esse. Manens Deus accépit hóminem, qui fecit hóminem.")
+[section #14 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/03-19#Lectio1 languages=Latin]
+  Latin: text("De libro Génesis")
+  Latin: text(" ") · citation("Gen 39:1-5")
+  Latin: text("1 Joseph ígitur ductus est in Ægýptum, emítque eum Putíphar eunúchus Pharaónis, princeps exércitus, vir Ægýptius, de manu Ismaelitárum, a quibus perdúctus erat.")
+  Latin: text("2 Fuítque Dóminus cum eo, et erat vir in cunctis próspere agens: habitavítque in domo dómini sui,")
+  Latin: text("3 Qui óptime nóverat Dóminum esse cum eo, et ómnia, quæ gerébat, ab eo dírigi in manu illíus.")
+  Latin: text("4 Invenítque Joseph grátiam coram dómino suo, et ministrábat ei: a quo præpósitus ómnibus gubernábat créditam sibi domum, et univérsa quæ ei trádita fúerant:")
+  Latin: text("5 Benedixítque Dóminus dómui Ægýptii propter Joseph.")
 
 [section #15 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Tu autem languages=Latin]
   Latin: [V.] text("Tu autem, Dómine, miserére nobis.")
@@ -182,8 +183,12 @@ warning count: 1
   English: text("Reading 2")
   Latin: text("Lectio 2")
 
-[section #21 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Tempora/Quad5-2#Lectio2 languages=Latin]
-  Latin: text("Quando ergo látuit ut homo, non poténtiam perdidísse putándus est, sed exémplum infirmitáti præbuísse. Ille enim quando vóluit, deténtus est: quando vóluit, occísus est. Sed quóniam futúra erant membra ejus, id est, fidéles ejus, qui non habérent illam potestátem, quam habébat ipse Deus noster: quod latébat, quod se tamquam ne occiderétur, occultábat, hoc indicábat factúra esse membra sua, in quibus útique membris suis ipse erat.")
+[section #21 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/03-19#Lectio2 languages=Latin]
+  Latin: text(" ") · citation("Gen 41:37-40")
+  Latin: text("37 Plácuit Pharaóni consílium et cunctis minístris ejus:")
+  Latin: text("38 Locutúsque est ad eos: Num inveníre potérimus talem virum, qui spíritu Dei plenus sit?")
+  Latin: text("39 Dixit ergo ad Joseph: Quia osténdit tibi Deus ómnia quæ locútus es, numquid sapientiórem et consímilem tui inveníre pótero?")
+  Latin: text("40 Tu eris super domum meam, et ad tui oris impérium cunctus pópulus obédiet: uno tantum regni sólio te præcédam.")
 
 [section #22 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Tu autem languages=Latin]
   Latin: [V.] text("Tu autem, Dómine, miserére nobis.")
@@ -212,8 +217,12 @@ warning count: 1
   English: text("Reading 3")
   Latin: text("Lectio 3")
 
-[section #28 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Tempora/Quad5-2#Lectio3 languages=Latin]
-  Latin: text("Non enim Christus in cápite, et non in córpore: sed Christus totus in cápite, et in córpore. Quod ergo membra ejus, ipse: quod autem ipse, non contínuo membra ejus. Nam si non ipsi essent membra ejus, non díceret Saulo: Quid me perséqueris? Non enim Saulus ipsum, sed membra ejus, id est, fidéles ejus, in terra persequebátur. Nóluit tamen dícere sanctos meos, servos meos, postrémo honorabílius, fratres meos: sed me, hoc est membra mea, quibus ego sum caput.")
+[section #28 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/03-19#Lectio3 languages=Latin]
+  Latin: text(" ") · citation("Gen 41:41-44")
+  Latin: text("41 Dixítque rursus Phárao ad Joseph: Ecce, constítui te super univérsam terram Ægýpti.")
+  Latin: text("42 Tulítque ánnulum de manu sua, et dedit eum in manu ejus: vestivítque eum stola býssina, et collo torquem áuream circumpósuit.")
+  Latin: text("43 Fecítque eum ascéndere super currum suum secúndum, clamánte præcóne, ut omnes coram eo genu flécterent, et præpósitum esse scirent univérsæ terræ Ægýpti.")
+  Latin: text("44 Dixit quoque rex ad Joseph: Ego sum Phárao: absque tuo império non movébit quisquam manum aut pedem in omni terra Ægýpti.")
 
 [section #29 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Tu autem languages=Latin]
   Latin: [V.] text("Tu autem, Dómine, miserére nobis.")
@@ -235,7 +244,7 @@ warning count: 1
 
 [section #32 type=psalm slot=psalmody reference=horas/Latin/Sancti/03-19#Ant Matutinum:4 languages=Latin]
   Latin: [Ant.] text("Consúrgens Joseph, * accépit Púerum et Matrem ejus nocte, et secéssit in Ægýptum; et erat ibi usque ad óbitum Heródis.")
-  Latin: text("Psalmus 4 [1]")
+  Latin: text("Psalmus 4 [4]")
   Latin: text("4:2 Cum invocárem exaudívit me Deus justítiæ meæ: * in tribulatióne dilatásti mihi.")
   Latin: text("4:2 Miserére mei, * et exáudi oratiónem meam.")
   Latin: text("4:3 Fílii hóminum, úsquequo gravi corde? * ut quid dilígitis vanitátem, et quǽritis mendácium?")
@@ -250,7 +259,7 @@ warning count: 1
   Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
   Latin: [Ant.] text("Consúrgens Joseph, accépit Púerum et Matrem ejus nocte, et secéssit in Ægýptum; et erat ibi usque ad óbitum Heródis.")
   Latin: [Ant.] text("Defúncto Heróde, * Angelus Dómini appáruit in somnis Joseph in Ægýpto, dicens: Surge, et áccipe Púerum et Matrem ejus, et vade in terram Israël; defúncti sunt enim qui quærébant ánimam Púeri.")
-  Latin: text("Psalmus 5 [2]")
+  Latin: text("Psalmus 5 [5]")
   Latin: text("5:2 Verba mea áuribus pércipe, Dómine, * intéllege clamórem meum.")
   Latin: text("5:3 Inténde voci oratiónis meæ, * Rex meus et Deus meus.")
   Latin: text("5:4 Quóniam ad te orábo: * Dómine, mane exáudies vocem meam.")
@@ -270,7 +279,7 @@ warning count: 1
   Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
   Latin: [Ant.] text("Defúncto Heróde, Angelus Dómini appáruit in somnis Joseph in Ægýpto, dicens: Surge, et áccipe Púerum et Matrem ejus, et vade in terram Israël; defúncti sunt enim qui quærébant ánimam Púeri.")
   Latin: [Ant.] text("Accépit Joseph * Púerum et Matrem ejus, et venit in terram Israël.")
-  Latin: text("Psalmus 8 [3]")
+  Latin: text("Psalmus 8 [6]")
   Latin: text("8:2 Dómine, Dóminus noster, * quam admirábile est nomen tuum in univérsa terra!")
   Latin: text("8:2 Quóniam eleváta est magnificéntia tua, * super cælos.")
   Latin: text("8:3 Ex ore infántium et lacténtium perfecísti laudem propter inimícos tuos, * ut déstruas inimícum et ultórem.")
@@ -403,7 +412,7 @@ warning count: 1
 
 [section #60 type=psalm slot=psalmody reference=horas/Latin/Sancti/03-19#Ant Matutinum:7 languages=Latin]
   Latin: [Ant.] text("Audiens Joseph, * quod Archeláus regnáret in Judǽa pro Heróde patre suo, tímuit illo ire.")
-  Latin: text("Psalmus 14 [1]")
+  Latin: text("Psalmus 14 [7]")
   Latin: text("14:1 Dómine, quis habitábit in tabernáculo tuo? * aut quis requiéscet in monte sancto tuo?")
   Latin: text("14:2 Qui ingréditur sine mácula, * et operátur justítiam:")
   Latin: text("14:3 Qui lóquitur veritátem in corde suo, * qui non egit dolum in lingua sua:")
@@ -415,7 +424,7 @@ warning count: 1
   Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
   Latin: [Ant.] text("Audiens Joseph, quod Archeláus regnáret in Judǽa pro Heróde patre suo, tímuit illo ire.")
   Latin: [Ant.] text("Admónitus in somnis, * Joseph secéssit in partes Galilǽæ: et véniens habitávit in civitáte, quæ vocátur Názareth; ut adimplerétur quod dictum est per prophétas: Quóniam Nazarǽus vocábitur.")
-  Latin: text("Psalmus 20 [2]")
+  Latin: text("Psalmus 20 [8]")
   Latin: text("20:2 Dómine, in virtúte tua lætábitur rex: * et super salutáre tuum exsultábit veheménter.")
   Latin: text("20:3 Desidérium cordis ejus tribuísti ei: * et voluntáte labiórum ejus non fraudásti eum.")
   Latin: text("20:4 Quóniam prævenísti eum in benedictiónibus dulcédinis: * posuísti in cápite ejus corónam de lápide pretióso.")
@@ -433,7 +442,7 @@ warning count: 1
   Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
   Latin: [Ant.] text("Admónitus in somnis, Joseph secéssit in partes Galilǽæ: et véniens habitávit in civitáte, quæ vocátur Názareth; ut adimplerétur quod dictum est per prophétas: Quóniam Nazarǽus vocábitur.")
   Latin: [Ant.] text("Erat Pater Jesu * et Mater mirántes super his, quæ dicebántur de illo; et benedíxit illis Símeon.")
-  Latin: text("Psalmus 23 [3]")
+  Latin: text("Psalmus 23 [9]")
   Latin: text("23:1 Dómini est terra, et plenitúdo ejus: * orbis terrárum, et univérsi qui hábitant in eo.")
   Latin: text("23:2 Quia ipse super mária fundávit eum: * et super flúmina præparávit eum.")
   Latin: text("23:3 Quis ascéndet in montem Dómini? * aut quis stabit in loco sancto ejus?")
@@ -469,8 +478,8 @@ warning count: 1
 [section #66 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Jube domne languages=Latin]
   Latin: [V.] text("Jube, domne, benedícere.")
 
-[section #67 type=benedictio slot=benedictio reference=horas/Latin/Psalterium/Benedictions.txt#Nocturn 3:1 languages=Latin]
-  Latin: [Benedictio.] text("Ille nos benedícat, qui sine fine vivit et regnat.")
+[section #67 type=benedictio slot=benedictio reference=horas/Latin/Psalterium/Benedictions.txt#Evangelica:1 languages=Latin]
+  Latin: [Benedictio.] text("Evangélica léctio sit nobis salus et protéctio.")
 
 [section #68 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Amen languages=Latin]
   Latin: [R.] text("Amen.")
@@ -486,6 +495,7 @@ warning count: 1
   Latin: text("Léctio sancti Evangélii secúndum Matthǽum")
   Latin: text(" ") · citation("Matt 1:18-21")
   Latin: text("Cum esset desponsáta Mater Jesu María Joseph, ántequam convenírent, invénta est in útero habens de Spíritu Sancto. Et réliqua.")
+  Latin: text("_")
   Latin: text("Homilía sancti Hierónymi Presbýteri")
   Latin: rubric("Lib. 1 Comment. in c. 1 Matth.")
   Latin: text("Quare non de símplici vírgine, sed de desponsáta concípitur? Primum, ut per generatiónem Joseph, orígo Maríæ monstrarétur: secúndo, ne lapidarétur a Judǽis ut adúltera: tértio, ut in Ægýptum fúgiens habéret solátium. Martyr Ignátius étiam quartam áddidit causam, cur a desponsáta concéptus sit: Ut partus, ínquiens, ejus celarétur diábolo, dum eum putat non de vírgine, sed de uxóre generátum.")
@@ -504,8 +514,8 @@ warning count: 1
 [section #73 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Jube domne languages=Latin]
   Latin: [V.] text("Jube, domne, benedícere.")
 
-[section #74 type=benedictio slot=benedictio reference=horas/Latin/Psalterium/Benedictions.txt#Nocturn 3:2 languages=Latin]
-  Latin: [Benedictio.] text("Divínum auxílium máneat semper nobíscum.")
+[section #74 type=benedictio slot=benedictio reference=horas/Latin/Psalterium/Benedictions.txt#Nocturn 3:4 languages=Latin]
+  Latin: [Benedictio.] text("Cujus festum cólimus, ipse intercédat pro nobis ad Dóminum.")
 
 [section #75 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Amen languages=Latin]
   Latin: [R.] text("Amen.")
@@ -517,13 +527,8 @@ warning count: 1
   English: text("Reading 8")
   Latin: text("Lectio 8")
 
-[section #77 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/03-19#Lectio7 languages=Latin]
-  Latin: text("Léctio sancti Evangélii secúndum Matthǽum")
-  Latin: text(" ") · citation("Matt 1:18-21")
-  Latin: text("Cum esset desponsáta Mater Jesu María Joseph, ántequam convenírent, invénta est in útero habens de Spíritu Sancto. Et réliqua.")
-  Latin: text("Homilía sancti Hierónymi Presbýteri")
-  Latin: rubric("Lib. 1 Comment. in c. 1 Matth.")
-  Latin: text("Quare non de símplici vírgine, sed de desponsáta concípitur? Primum, ut per generatiónem Joseph, orígo Maríæ monstrarétur: secúndo, ne lapidarétur a Judǽis ut adúltera: tértio, ut in Ægýptum fúgiens habéret solátium. Martyr Ignátius étiam quartam áddidit causam, cur a desponsáta concéptus sit: Ut partus, ínquiens, ejus celarétur diábolo, dum eum putat non de vírgine, sed de uxóre generátum.")
+[section #77 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/03-19#Lectio8 languages=Latin]
+  Latin: text("Antequam convenírent, invénta est in útero habens de Spíritu Sancto. Non ab álio invénta est, nisi a Joseph, qui pene licéntia maritáli futúræ uxóris ómnia nóverat. Quod autem dícitur, Antequam convenírent, non séquitur ut póstea convénerint: sed Scriptúra quod factum non sit, osténdit.")
 
 [section #78 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Tu autem languages=Latin]
   Latin: [V.] text("Tu autem, Dómine, miserére nobis.")

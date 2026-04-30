@@ -174,13 +174,14 @@ warning count: 0
   English: text("Reading 1")
   Latin: text("Lectio 1")
 
-[section #14 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Tempora/Pent05-6#Lectio1 languages=Latin]
-  Latin: text("De libro secúndo Regum")
-  Latin: text(" ") · citation("2 Reg 11:1-4")
-  Latin: text("1 Factum est autem, verténte anno, eo témpore quo solent reges ad bella procédere, misit David Joab, et servos suos cum eo, et univérsum Israël, et vastavérunt fílios Ammon, et obsedérunt Rabba; David autem remánsit in Jerúsalem. ")
-  Latin: text("2 Dum hæc ageréntur, áccidit ut súrgeret David de strato suo post merídiem et deambuláret in solário domus régiæ: vidítque mulíerem se lavántem ex advérso super solárium suum; erat autem múlier pulchra valde. ")
-  Latin: text("3 Misit ergo rex, et requisívit quæ esset múlier; nuntiatúmque est ei, quod ipsa esset Bethsabée fília Elíam, uxor Uríæ Hethǽi. ")
-  Latin: text("4 Missis ítaque David núntiis, tulit eam.")
+[section #14 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/06-29#Lectio1 languages=Latin]
+  Latin: text("De Actibus Apostolórum")
+  Latin: text(" ") · citation("Act 3:1-5")
+  Latin: text("1 Petrus autem et Joánnes ascendébant in templum ad horam oratiónis nonam.")
+  Latin: text("2 Et quidam vir, qui erat claudus ex útero matris suæ, bajulabátur; quem ponébant cotídie ad portam templi, quæ dícitur Speciósa, ut péteret eleemósynam ab introëúntibus in templum.")
+  Latin: text("3 Is, cum vidísset Petrum et Joánnem incipiéntes introíre in templum, rogábat ut eleemósynam accíperet.")
+  Latin: text("4 Intuens autem in eum Petrus cum Joánne, dixit: Réspice in nos.")
+  Latin: text("5 At ille intendébat in eos, sperans se áliquid acceptúrum ab eis.")
 
 [section #15 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Tu autem languages=Latin]
   Latin: [V.] text("Tu autem, Dómine, miserére nobis.")
@@ -209,15 +210,13 @@ warning count: 0
   English: text("Reading 2")
   Latin: text("Lectio 2")
 
-[section #21 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Tempora/Pent05-6#Lectio2 languages=Latin]
-  Latin: text(" ") · citation("2 Reg 11:5-11")
-  Latin: text("5 Et revérsa est in domum suam, concépto fœtu. Mitténsque nuntiávit David et ait: Concépi. ")
-  Latin: text("6 Misit autem David ad Joab dicens: Mitte ad me Uríam Hethǽum. Misítque Joab Uríam ad David.")
-  Latin: text("7 Et venit Urías ad David. Quæsivítque David quam recte ágeret Joab et pópulus, et quómodo administrarétur bellum. ")
-  Latin: text("8 Et dixit David ad Uríam: Vade in domum tuam et lava pedes tuos. Et egréssus est Urías de domo regis, secutúsque est eum cibus régius.")
-  Latin: text("9 Dormívit autem Urías ante portam domus régiæ cum áliis servis dómini sui, et non descéndit ad domum suam. ")
-  Latin: text("10 Nuntiatúmque est David a dicéntibus: Non ivit Urías in domum suam. Et ait David ad Uríam: Numquid non de via venísti? quare non descendísti in domum tuam? ")
-  Latin: text("11 Et ait Urías ad David: Arca Dei et Israël et Juda hábitant in papiliónibus, et dóminus meus Joab et servi dómini mei super fáciem terræ manent; et ego ingrédiar domum meam, ut cómedam et bibam, et dórmiam cum uxóre mea? Per salútem tuam et per salútem ánimæ tuæ non fáciam rem hanc.")
+[section #21 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/06-29#Lectio2 languages=Latin]
+  Latin: text(" ") · citation("Act 3:6-10")
+  Latin: text("6 Petrus autem dixit: Argéntum et aurum non est mihi: quod autem hábeo, hoc tibi do: In nómine Jesu Christi Nazaréni surge, et ámbula.")
+  Latin: text("7 Et, apprehénsa manu ejus déxtera, allevávit eum, et prótinus consolidátæ sunt bases ejus, et plantæ.")
+  Latin: text("8 Et exsíliens stetit, et ambulábat; et intrávit cum illis in templum ámbulans, et exsíliens, et laudans Deum.")
+  Latin: text("9 Et vidit omnis pópulus eum ambulántem, et laudántem Deum.")
+  Latin: text("10 Cognoscébant autem illum, quod ipse erat, qui ad eleemósynam sedébat ad Speciósam portam templi; et impléti sunt stupóre et éxtasi in eo, quod contígerat illi.")
 
 [section #22 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Tu autem languages=Latin]
   Latin: [V.] text("Tu autem, Dómine, miserére nobis.")
@@ -246,14 +245,14 @@ warning count: 0
   English: text("Reading 3")
   Latin: text("Lectio 3")
 
-[section #28 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Tempora/Pent05-6#Lectio3 languages=Latin]
-  Latin: text(" ") · citation("2 Reg 11:12-17")
-  Latin: text("12 Ait ergo David ad Uríam: Mane hic étiam hódie, et cras dimíttam te. Mansit Urías in Jerúsalem in die illa et áltera.")
-  Latin: text("13 Et vocávit eum David ut coméderet coram se et bíberet et inebriávit eum; qui egréssus véspere dormívit in strato suo cum servis dómini sui, et in domum suam non descéndit.")
-  Latin: text("14 Factum est ergo mane, et scripsit David epístolam ad Joab: misítque per manum Uríæ,")
-  Latin: text("15 Scribens in epístola: Pónite Uríam ex advérso belli, ubi fortíssimum est prǽlium, et derelínquite eum ut percússus intéreat. ")
-  Latin: text("16 Igitur cum Joab obsidéret urbem, pósuit Uríam in loco ubi sciébat viros esse fortíssimos. ")
-  Latin: text("17 Egressíque viri de civitáte bellábant advérsum Joab, et cecidérunt de pópulo servórum David, et mórtuus est étiam Urías Hethǽus.")
+[section #28 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/06-29#Lectio3 languages=Latin]
+  Latin: text(" ") · citation("Act 3:11-16")
+  Latin: text("11 Cum tenéret autem Petrum et Joánnem, cucúrrit omnis pópulus ad eos ad pórticum, quæ appellátur Salomónis, stupéntes.")
+  Latin: text("12 Videns autem Petrus, respóndit ad pópulum: Viri Israëlítæ, quid mirámini in hoc, aut nos quid intuémini, quasi nostra virtúte aut potestáte fecérimus hunc ambuláre?")
+  Latin: text("13 Deus Abraham, et Deus Isaac, et Deus Jacob, Deus patrum nostrórum glorificávit Fílium suum Jesum, quem vos quidem tradidístis et negástis ante fáciem Piláti, judicánte illo dimítti.")
+  Latin: text("14 Vos autem Sanctum et Justum negástis, et petístis virum homicídam donári vobis:")
+  Latin: text("15 Auctórem vero vitæ interfecístis, quem Deus suscitávit a mórtuis, cujus nos testes sumus.")
+  Latin: text("16 Et in fide nóminis ejus, hunc, quem vos vidístis et nostis, confirmávit nomen ejus: et fides, quæ per eum est, dedit íntegram sanitátem istam in conspéctu ómnium vestrum.")
 
 [section #29 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Tu autem languages=Latin]
   Latin: [V.] text("Tu autem, Dómine, miserére nobis.")
@@ -275,7 +274,7 @@ warning count: 0
 
 [section #32 type=psalm slot=psalmody reference=horas/Latin/Commune/C1#Ant Matutinum:4 languages=Latin]
   Latin: [Ant.] text("Príncipes populórum * congregáti sunt cum Deo Ábraham.")
-  Latin: text("Psalmus 46 [1]")
+  Latin: text("Psalmus 46 [4]")
   Latin: text("46:2 Omnes gentes, pláudite mánibus: * jubiláte Deo in voce exsultatiónis.")
   Latin: text("46:3 Quóniam Dóminus excélsus, terríbilis: * Rex magnus super omnem terram.")
   Latin: text("46:4 Subjécit pópulos nobis: * et gentes sub pédibus nostris.")
@@ -289,7 +288,7 @@ warning count: 0
   Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
   Latin: [Ant.] text("Príncipes populórum congregáti sunt cum Deo Ábraham.")
   Latin: [Ant.] text("Dedísti hereditátem * timéntibus nomen tuum, Dómine.")
-  Latin: text("Psalmus 60 [2]")
+  Latin: text("Psalmus 60 [5]")
   Latin: text("60:2 Exáudi, Deus, deprecatiónem meam: * inténde oratióni meæ.")
   Latin: text("60:3 A fínibus terræ ad te clamávi: * dum anxiarétur cor meum, in petra exaltásti me.")
   Latin: text("60:4 Deduxísti me, quia factus es spes mea: * turris fortitúdinis a fácie inimíci.")
@@ -302,7 +301,7 @@ warning count: 0
   Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
   Latin: [Ant.] text("Dedísti hereditátem timéntibus nomen tuum, Dómine.")
   Latin: [Ant.] text("Annuntiavérunt * ópera Dei, et facta ejus intellexérunt.")
-  Latin: text("Psalmus 63 [3]")
+  Latin: text("Psalmus 63 [6]")
   Latin: text("63:2 Exáudi, Deus, oratiónem meam cum déprecor: * a timóre inimíci éripe ánimam meam.")
   Latin: text("63:3 Protexísti me a convéntu malignántium: * a multitúdine operántium iniquitátem.")
   Latin: text("63:4 Quia exacuérunt ut gládium linguas suas: * intendérunt arcum rem amáram, ut sagíttent in occúltis immaculátum.")
@@ -437,7 +436,7 @@ warning count: 0
 
 [section #60 type=psalm slot=psalmody reference=horas/Latin/Commune/C1#Ant Matutinum:7 languages=Latin]
   Latin: [Ant.] text("Exaltabúntur * córnua justi, allelúja.")
-  Latin: text("Psalmus 74 [1]")
+  Latin: text("Psalmus 74 [7]")
   Latin: text("74:2 Confitébimur tibi, Deus: * confitébimur, et invocábimus nomen tuum.")
   Latin: text("74:3 Narrábimus mirabília tua: * cum accépero tempus, ego justítias judicábo.")
   Latin: text("74:4 Liquefácta est terra, et omnes qui hábitant in ea: * ego confirmávi colúmnas ejus.")
@@ -452,7 +451,7 @@ warning count: 0
   Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
   Latin: [Ant.] text("Exaltabúntur córnua justi, allelúja.")
   Latin: [Ant.] text("Lux orta est * justo, allelúja, rectis corde lætítia, allelúja.")
-  Latin: text("Psalmus 96 [2]")
+  Latin: text("Psalmus 96 [8]")
   Latin: text("96:1 Dóminus regnávit, exsúltet terra: * læténtur ínsulæ multæ.")
   Latin: text("96:2 Nubes, et calígo in circúitu ejus: * justítia, et judícium corréctio sedis ejus.")
   Latin: text("96:3 Ignis ante ipsum præcédet, * et inflammábit in circúitu inimícos ejus.")
@@ -470,7 +469,7 @@ warning count: 0
   Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
   Latin: [Ant.] text("Lux orta est justo, allelúja, rectis corde lætítia, allelúja.")
   Latin: [Ant.] text("Custodiébant * testimónia ejus, et præcépta ejus, allelúja.")
-  Latin: text("Psalmus 98 [3]")
+  Latin: text("Psalmus 98 [9]")
   Latin: text("98:1 Dóminus regnávit, irascántur pópuli: * qui sedet super Chérubim, moveátur terra.")
   Latin: text("98:2 Dóminus in Sion magnus: * et excélsus super omnes pópulos.")
   Latin: text("98:3 Confiteántur nómini tuo magno: quóniam terríbile, et sanctum est: * et honor regis judícium díligit.")
@@ -506,8 +505,8 @@ warning count: 0
 [section #66 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Jube domne languages=Latin]
   Latin: [V.] text("Jube, Dómine, benedícere.")
 
-[section #67 type=benedictio slot=benedictio reference=horas/Latin/Psalterium/Benedictions.txt#Nocturn 3:1 languages=Latin]
-  Latin: [Benedictio.] text("Ille nos benedícat, qui sine fine vivit et regnat.")
+[section #67 type=benedictio slot=benedictio reference=horas/Latin/Psalterium/Benedictions.txt#Evangelica:1 languages=Latin]
+  Latin: [Benedictio.] text("Evangélica léctio sit nobis salus et protéctio.")
 
 [section #68 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Amen languages=Latin]
   Latin: [R.] text("Amen.")
@@ -523,6 +522,7 @@ warning count: 0
   Latin: text("Léctio sancti Evangélii secúndum Matthǽum")
   Latin: text(" ") · citation("Matt 16:13-19")
   Latin: text("In illo témpore: Venit Jesus in partes Cæsaréæ Philíppi, et interrogábat discípulos suos, dicens: Quem dicunt hómines esse Fílium hóminis? Et réliqua.")
+  Latin: text("_")
   Latin: text("Homilía sancti Hierónymi Presbýteri")
   Latin: rubric("Lib. 3 Comment. in Matth. cap. 16")
   Latin: text("Pulchre intérrogat: Quem dicunt hómines esse Fílium hóminis? quia qui de fílio hóminis loquúntur, hómines sunt; qui vero divinitátem ejus intéllegunt, non hómines, sed dii appellántur. At illi dixérunt: Alii Joánnem Baptístam, álii autem Elíam. Miror quosdam intérpretes causas errórum inquírere singulórum, et disputatiónem longíssimam téxere, quare Dóminum nostrum Jesum Christum álii Joánnem putáverint, álii Elíam, álii Jeremíam aut unum ex prophétis; cum sic potúerint erráre in Elía et Jeremía, quo modo Heródes errávit in Joánne, dicens: Quem ego decollávi Joánnem, ipse surréxit a mórtuis, et virtútes operántur in eo.")
@@ -541,8 +541,8 @@ warning count: 0
 [section #73 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Jube domne languages=Latin]
   Latin: [V.] text("Jube, Dómine, benedícere.")
 
-[section #74 type=benedictio slot=benedictio reference=horas/Latin/Psalterium/Benedictions.txt#Nocturn 3:2 languages=Latin]
-  Latin: [Benedictio.] text("Divínum auxílium máneat semper nobíscum.")
+[section #74 type=benedictio slot=benedictio reference=horas/Latin/Psalterium/Benedictions.txt#Nocturn 3:5 languages=Latin]
+  Latin: [Benedictio.] text("Quorum festum cólimus, ipsi intercédant pro nobis ad Dóminum.")
 
 [section #75 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Amen languages=Latin]
   Latin: [R.] text("Amen.")
@@ -554,13 +554,8 @@ warning count: 0
   English: text("Reading 8")
   Latin: text("Lectio 8")
 
-[section #77 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/06-29#Lectio7 languages=Latin]
-  Latin: text("Léctio sancti Evangélii secúndum Matthǽum")
-  Latin: text(" ") · citation("Matt 16:13-19")
-  Latin: text("In illo témpore: Venit Jesus in partes Cæsaréæ Philíppi, et interrogábat discípulos suos, dicens: Quem dicunt hómines esse Fílium hóminis? Et réliqua.")
-  Latin: text("Homilía sancti Hierónymi Presbýteri")
-  Latin: rubric("Lib. 3 Comment. in Matth. cap. 16")
-  Latin: text("Pulchre intérrogat: Quem dicunt hómines esse Fílium hóminis? quia qui de fílio hóminis loquúntur, hómines sunt; qui vero divinitátem ejus intéllegunt, non hómines, sed dii appellántur. At illi dixérunt: Alii Joánnem Baptístam, álii autem Elíam. Miror quosdam intérpretes causas errórum inquírere singulórum, et disputatiónem longíssimam téxere, quare Dóminum nostrum Jesum Christum álii Joánnem putáverint, álii Elíam, álii Jeremíam aut unum ex prophétis; cum sic potúerint erráre in Elía et Jeremía, quo modo Heródes errávit in Joánne, dicens: Quem ego decollávi Joánnem, ipse surréxit a mórtuis, et virtútes operántur in eo.")
+[section #77 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/06-29#Lectio8 languages=Latin]
+  Latin: text("Vos autem quem me esse dícitis? Prudens lector, atténde quod, ex consequéntibus textúque sermónis, Apóstoli nequáquam hómines, sed dii appellántur. Cum enim dixísset: Quem dicunt hómines esse Fílium hóminis? subjécit: Vos autem quem me esse dícitis? Illis, quia hómines sunt, humána opinántibus, vos qui estis dii, quem me esse existimátis? Petrus ex persóna ómnium Apostolórum profitétur: Tu es Christus Fílius Dei vivi. Deum vivum appéllat, ad distinctiónem eórum deórum, qui putántur dii, sed mórtui sunt.")
 
 [section #78 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Tu autem languages=Latin]
   Latin: [V.] text("Tu autem, Dómine, miserére nobis.")
@@ -591,13 +586,8 @@ warning count: 0
   English: text("Reading 9")
   Latin: text("Lectio 9")
 
-[section #84 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/06-29#Lectio7 languages=Latin]
-  Latin: text("Léctio sancti Evangélii secúndum Matthǽum")
-  Latin: text(" ") · citation("Matt 16:13-19")
-  Latin: text("In illo témpore: Venit Jesus in partes Cæsaréæ Philíppi, et interrogábat discípulos suos, dicens: Quem dicunt hómines esse Fílium hóminis? Et réliqua.")
-  Latin: text("Homilía sancti Hierónymi Presbýteri")
-  Latin: rubric("Lib. 3 Comment. in Matth. cap. 16")
-  Latin: text("Pulchre intérrogat: Quem dicunt hómines esse Fílium hóminis? quia qui de fílio hóminis loquúntur, hómines sunt; qui vero divinitátem ejus intéllegunt, non hómines, sed dii appellántur. At illi dixérunt: Alii Joánnem Baptístam, álii autem Elíam. Miror quosdam intérpretes causas errórum inquírere singulórum, et disputatiónem longíssimam téxere, quare Dóminum nostrum Jesum Christum álii Joánnem putáverint, álii Elíam, álii Jeremíam aut unum ex prophétis; cum sic potúerint erráre in Elía et Jeremía, quo modo Heródes errávit in Joánne, dicens: Quem ego decollávi Joánnem, ipse surréxit a mórtuis, et virtútes operántur in eo.")
+[section #84 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/06-29#Lectio9:1-1 languages=Latin]
+  Latin: text("Respóndens autem Jesus, dixit ei: Beátus es, Simon Bar-Jona. Testimónio de se Apóstoli reddit vicem. Petrus díxerat: Tu es Christus Fílius Dei vivi; mercédem recépit vera conféssio: Beátus es, Simon Bar-Jona. Quare? Quia non revelávit tibi caro et sanguis, sed revelávit Pater. Quod caro et sanguis reveláre non pótuit, Spíritus Sancti grátia revelátum est. Ergo ex confessióne sortítur vocábulum, quod revelatiónem ex Spíritu Sancto hábeat, cujus et fílius appellándus sit. Síquidem Bar-Jona in nostra lingua sonat Fílius colúmbæ.")
 
 [section #85 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Tu autem languages=Latin]
   Latin: [V.] text("Tu autem, Dómine, miserére nobis.")

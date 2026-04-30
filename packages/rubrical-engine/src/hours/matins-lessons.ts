@@ -204,6 +204,19 @@ function routePositionalDefault(
 
   if (context.shape.nocturns === 3 && context.shape.totalLessons === 9) {
     if (context.nocturnIndex === 1) {
+      const reference = findSectionReference(
+        context,
+        `Lectio${lessonIndex}`,
+        lessonIndex,
+        { warnOnMissing: false }
+      );
+      if (reference) {
+        return {
+          kind: 'patristic',
+          reference
+        };
+      }
+
       return {
         kind: 'scripture',
         course: effectiveScriptureCourse(context),
@@ -231,11 +244,25 @@ function routePositionalDefault(
       return undefined;
     }
 
-    const gospel = homilyGospelPericope(context);
-    return {
-      kind: 'homily-on-gospel',
-      gospel
-    };
+    if (lessonIndex === 7) {
+      const gospel = homilyGospelPericope(context);
+      return {
+        kind: 'homily-on-gospel',
+        gospel
+      };
+    }
+
+    const reference = findSectionReference(context, `Lectio${lessonIndex}`, lessonIndex, {
+      warnOnMissing: false,
+      stripTeDeumMacro: lessonIndex === 9
+    });
+    if (reference) {
+      return {
+        kind: 'patristic',
+        reference
+      };
+    }
+    return undefined;
   }
 
   return undefined;

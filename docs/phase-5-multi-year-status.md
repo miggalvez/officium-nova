@@ -38,6 +38,10 @@ pnpm -C packages/compositor compare:phase-3-perl -- --version "Rubrics 1960 - 19
 pnpm -C packages/compositor compare:phase-3-perl -- --version "Rubrics 1960 - 1960" --year 2026
 ```
 
+The comparator keeps the legacy no-argument 2024 fixture-matrix behavior for
+Phase 3 workflows. Supplying `--year` is an explicit full-civil-year request,
+including `--year 2024`.
+
 Promotion follow-up is to burn down those ledgers, classify every accepted
 divergence against the Phase 5 authority hierarchy, and move a year to
 `candidate` or `gated` only when the configured thresholds are actually met.

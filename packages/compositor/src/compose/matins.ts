@@ -130,8 +130,10 @@ export function composeMatinsSections(
   const psalmody = hour.slots.psalmody;
   if (psalmody && psalmody.kind === 'matins-nocturns') {
     const totalNocturns = psalmody.nocturns.length;
+    let psalmOffset = 0;
     for (const nocturn of psalmody.nocturns) {
-      sections.push(...composeNocturn(nocturn, totalNocturns, args));
+      sections.push(...composeNocturn(nocturn, totalNocturns, psalmOffset, args));
+      psalmOffset += nocturn.psalmody.length;
     }
   }
 
@@ -319,12 +321,13 @@ function detectInvitatoryMaterializationMode(
 function composeNocturn(
   nocturn: NocturnPlan,
   totalNocturns: number,
+  psalmOffset: number,
   args: MatinsComposeContext
 ): readonly Section[] {
   const out: Section[] = [];
   out.push(headingSection({ kind: 'nocturn', ordinal: nocturn.index }));
 
-  out.push(...composePsalmody(nocturn, args));
+  out.push(...composePsalmody(nocturn, psalmOffset, args));
 
   const versicleSection = composeReferenceSlot(
     'versicle',
@@ -392,16 +395,22 @@ function composeNocturn(
 
 function composePsalmody(
   nocturn: NocturnPlan,
+  psalmOffset: number,
   args: MatinsComposeContext
 ): readonly Section[] {
   const out: Section[] = [];
   const refs: MatinsSlotRef[] = [];
   let groupedAntiphonRef: TextReference | undefined;
+  let activeNonGroupedAntiphonRef: TextReference | undefined;
   for (const [index, assignment] of nocturn.psalmody.entries()) {
+    const startsGroupedAntiphon =
+      assignment.antiphonRef && usesGroupedMatinsAntiphon(assignment.antiphonRef);
     if (assignment.antiphonRef) {
-      groupedAntiphonRef ??= usesGroupedMatinsAntiphon(assignment.antiphonRef)
-        ? assignment.antiphonRef
-        : undefined;
+      if (startsGroupedAntiphon) {
+        groupedAntiphonRef ??= assignment.antiphonRef;
+      } else {
+        activeNonGroupedAntiphonRef = assignment.antiphonRef;
+      }
       refs.push({
         ref: assignment.antiphonRef,
         isAntiphon: true,
@@ -413,16 +422,21 @@ function composePsalmody(
       ref: assignment.psalmRef,
       isAntiphon: false,
       pairedAntiphonRef: assignment.antiphonRef,
-      psalmIndex: index + 1,
+      psalmIndex: psalmOffset + index + 1,
       hasExplicitAntiphon: Boolean(assignment.antiphonRef)
     });
-    if (assignment.antiphonRef && !usesGroupedMatinsAntiphon(assignment.antiphonRef)) {
+    const nextAssignment = nocturn.psalmody[index + 1];
+    if (
+      activeNonGroupedAntiphonRef &&
+      (!nextAssignment || Boolean(nextAssignment.antiphonRef))
+    ) {
       refs.push({
-        ref: assignment.antiphonRef,
+        ref: activeNonGroupedAntiphonRef,
         isAntiphon: true,
         repeatAntiphon: true,
         pairedPsalmRef: assignment.psalmRef
       });
+      activeNonGroupedAntiphonRef = undefined;
     }
   }
   const closingPsalmRef = nocturn.psalmody.at(-1)?.psalmRef;

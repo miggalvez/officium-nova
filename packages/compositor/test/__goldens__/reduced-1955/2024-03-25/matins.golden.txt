@@ -292,6 +292,7 @@ warning count: 0
   Latin: text("Léctio sancti Evangélii secúndum Joánnem")
   Latin: text(" ") · citation("Joannes 12:1-9")
   Latin: text("Ante sex dies Paschæ venit Jesus Bethániam, ubi Lázarus fúerat mórtuus, quem suscitávit Jesus. Et réliqua.")
+  Latin: text("_")
   Latin: text("Homilía sancti Augustíni Epíscopi")
   Latin: rubric("Tractus 50 in Joann., post initium")
   Latin: text("Ne putárent hómines phantásma esse factum, quia mórtuus resurréxit, Lázarus unus erat ex recumbéntibus: vivébat, loquebátur, epulabátur, véritas ostendebátur, infidélitas Judæórum confundebátur. Discumbébat ergo Jesus cum Lázaro, et céteris: ministrábat Martha, una ex soróribus Lázari. María vero, áltera soror Lázari, accépit libram unguénti nardi pístici pretiósi, et unxit pedes Jesu, et extérsit capíllis suis pedes ejus, et domus impléta est ex odóre unguénti. Factum audívimus: mystérium requirámus.")

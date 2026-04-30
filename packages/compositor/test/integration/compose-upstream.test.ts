@@ -2045,7 +2045,7 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
         options: { languages: ['Latin'] }
       });
       expect(sectionTexts(prime, 'chapter').map((line) => normalizeLatin(line).trim()), `${version} Prime chapter`).toContain(
-        normalizeLatin('Sap 10:10')
+        normalizeLatin(version === 'Rubrics 1960 - 1960' ? '1 Tim. 1:17' : 'Sap 10:10')
       );
 
       for (const [hour, expected] of [
@@ -2082,7 +2082,7 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
         options: { languages: ['Latin'] }
       });
       expect(sectionTexts(prime, 'chapter').map((line) => normalizeLatin(line).trim()), `${version} Prime chapter`).toContain(
-        normalizeLatin('Isa 49:7')
+        normalizeLatin(version === 'Rubrics 1960 - 1960' ? '1 Tim. 1:17' : 'Isa 49:7')
       );
 
       for (const [hour, expected] of [
@@ -2119,7 +2119,7 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
         options: { languages: ['Latin'] }
       });
       expect(sectionTexts(prime, 'chapter').map((line) => normalizeLatin(line).trim()), `${version} Prime chapter`).toContain(
-        normalizeLatin('Act 12:11')
+        normalizeLatin(version === 'Rubrics 1960 - 1960' ? '1 Tim. 1:17' : 'Act 12:11')
       );
 
       for (const [hour, expected] of [
@@ -2156,7 +2156,7 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
         options: { languages: ['Latin'] }
       });
       expect(sectionTexts(prime, 'chapter').map((line) => normalizeLatin(line).trim()), `${version} Prime chapter`).toContain(
-        normalizeLatin('Heb 9:19-20')
+        normalizeLatin(version === 'Rubrics 1960 - 1960' ? '1 Tim. 1:17' : 'Heb 9:19-20')
       );
 
       for (const [hour, expected] of [

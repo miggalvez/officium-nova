@@ -97,6 +97,9 @@ describeIfUpstream('January hymn routing regressions', () => {
       }
       expectNoDoxologyVariant(reduced, '2024-02-18', 'prime');
       expectNoDoxologyVariant(roman1960, '2024-02-18', 'prime');
+      for (const hour of ['prime', 'terce', 'sext', 'none'] as const) {
+        expectNoDoxologyVariant(roman1960, '2026-05-01', hour);
+      }
 
       expectMinorHourHymn(
         reduced,

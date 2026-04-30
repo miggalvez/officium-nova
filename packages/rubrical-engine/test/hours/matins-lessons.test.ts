@@ -81,12 +81,30 @@ describe('routeLesson', () => {
     }
   });
 
-  it('uses positional defaults for 9-lesson Matins: scripture -> hagiographic -> homily', () => {
-    const scriptural = routeLesson(1, {
+  it('uses proper first-nocturn lessons when a 9-lesson sanctoral office supplies them', () => {
+    const properScripture = routeLesson(1, {
       ...baseContext({
         shape: { nocturns: 3, totalLessons: 9, lessonsPerNocturn: [3, 3, 3] },
         nocturnIndex: 1,
         feastFile: parseFile('[Lectio1]\nText', 'horas/Latin/Sancti/08-15.txt')
+      })
+    });
+
+    expect(properScripture.kind).toBe('patristic');
+    if (properScripture.kind === 'patristic') {
+      expect(properScripture.reference).toEqual({
+        path: 'horas/Latin/Sancti/08-15',
+        section: 'Lectio1'
+      });
+    }
+  });
+
+  it('uses positional defaults for 9-lesson Matins when proper first-nocturn lessons are absent', () => {
+    const scriptural = routeLesson(1, {
+      ...baseContext({
+        shape: { nocturns: 3, totalLessons: 9, lessonsPerNocturn: [3, 3, 3] },
+        nocturnIndex: 1,
+        feastFile: parseFile('[Officium]\nTest', 'horas/Latin/Sancti/08-15.txt')
       })
     });
     const hagiographic = routeLesson(4, {
@@ -100,13 +118,27 @@ describe('routeLesson', () => {
       ...baseContext({
         shape: { nocturns: 3, totalLessons: 9, lessonsPerNocturn: [3, 3, 3] },
         nocturnIndex: 3,
-        feastFile: parseFile('[Lectio7]\nText', 'horas/Latin/Sancti/08-15.txt')
+        feastFile: parseFile('[Lectio7]\nText\n\n[Lectio8]\nContinuation', 'horas/Latin/Sancti/08-15.txt')
+      })
+    });
+    const homilyContinuation = routeLesson(8, {
+      ...baseContext({
+        shape: { nocturns: 3, totalLessons: 9, lessonsPerNocturn: [3, 3, 3] },
+        nocturnIndex: 3,
+        feastFile: parseFile('[Lectio7]\nText\n\n[Lectio8]\nContinuation', 'horas/Latin/Sancti/08-15.txt')
       })
     });
 
     expect(scriptural.kind).toBe('scripture');
     expect(hagiographic.kind).toBe('hagiographic');
     expect(homily.kind).toBe('homily-on-gospel');
+    expect(homilyContinuation.kind).toBe('patristic');
+    if (homilyContinuation.kind === 'patristic') {
+      expect(homilyContinuation.reference).toEqual({
+        path: 'horas/Latin/Sancti/08-15',
+        section: 'Lectio8'
+      });
+    }
   });
 
   it('emits matins-lesson-unresolved warning when required lesson section is missing', () => {
