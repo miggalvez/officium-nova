@@ -132,7 +132,9 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
           for (const section of composed.sections) {
             if (section.type === 'heading') {
               expect(section.heading).toBeDefined();
-              expect(section.lines).toEqual([]);
+              for (const line of section.lines) {
+                expect(Object.keys(line.texts).length).toBeGreaterThan(0);
+              }
               continue;
             }
             expect(section.languages).toContain('Latin');

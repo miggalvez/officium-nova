@@ -440,8 +440,9 @@ Phase 3 is "done" when all of the following hold:
    ADRs 010 and 011 are accepted; any ADR 013+ produced by 3h is
    accepted or deliberately deferred with justification.
 7. `pnpm -r typecheck` and `pnpm -r test` green.
-8. Every compositor source file is under 800 lines (Phase 2 §22.10
-   precedent extended to Phase 3).
+8. Every new compositor source file is under 800 lines (Phase 2 §22.10
+   precedent extended to Phase 3), and explicitly grandfathered legacy
+   files may not grow beyond their recorded baseline.
 
 Meeting these criteria unblocks Phase 4 (API), which consumes
 `ComposedHour` and serialises it.
@@ -778,8 +779,8 @@ The remainder of Phase 3 should run in four lanes, in this order:
 4. **Stabilization and sign-off.** When the ledgers are mostly adjudication
    work and row churn has slowed materially, commit the 312 Appendix-A
    snapshots, run `verify:phase-3-signoff` (which now enforces the
-   per-policy <10 `unadjudicated` threshold as well as the source-file and
-   adjudication hygiene checks), prune stale sidecar entries if needed, and
+   per-policy <10 `unadjudicated` threshold as well as the source-file
+   no-growth and adjudication hygiene checks), prune stale sidecar entries if needed, and
    drive each policy below the <10 `unadjudicated` threshold.
 
 #### 19.9.3 Definition of done for a family

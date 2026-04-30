@@ -649,8 +649,7 @@ describe('hymn stanza separator emission', () => {
       options: { languages: ['Latin'] }
     });
     const texts = lineTexts(composed, 'versicle', 'Latin');
-    // No "_" appears — separator is treated as a plain line break here.
-    expect(texts).toEqual(['First line', 'Second line']);
+    expect(texts).toEqual(['First line', '_', 'Second line']);
   });
 
   it('renders trailing text on gabc hymn header lines instead of dropping the opening line', () => {

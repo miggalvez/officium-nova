@@ -276,14 +276,15 @@ function synthesizePrimaSpecialChapter(
     return undefined;
   }
 
+  const content = reference.selector === 'without-deo-gratias'
+    ? source.section.content
+    : ([...source.section.content, { type: 'formulaRef', name: 'Deo gratias' }] satisfies TextContent[]);
+
   return Object.freeze({
     language: source.language,
     path: source.path,
     section: source.section,
-    content: Object.freeze([
-      ...source.section.content,
-      { type: 'formulaRef', name: 'Deo gratias' }
-    ] satisfies TextContent[]),
+    content: Object.freeze(content),
     selectorUnhandled: false,
     selectorMissing: false
   });
@@ -576,18 +577,16 @@ function buildPaschalShortResponsorySection(args: {
 }): ResolvedSection {
   const alleluia = alleluiaWords(args.language);
   const response = `${args.responseBase.replace(/\.?$/u, '')}, * ${alleluia.capitalized}, ${alleluia.lowercase}.`;
-  const content: TextContent[] = [
-    { type: 'verseMarker', marker: 'R.br.', text: response },
-    { type: 'verseMarker', marker: 'R.', text: response }
-  ];
-  if (args.versicle) {
-    content.push({ type: 'verseMarker', marker: 'V.', text: stripAlleluiaTail(args.versicle).replace(/\.?$/u, '.') });
-  }
+  const content: TextContent[] = [];
+  if (args.header === 'Responsory Completorium') content.push({ type: 'separator' });
+  content.push({ type: 'verseMarker', marker: 'R.br.', text: response }, { type: 'verseMarker', marker: 'R.', text: response });
+  if (args.versicle) content.push({ type: 'verseMarker', marker: 'V.', text: stripAlleluiaTail(args.versicle).replace(/\.?$/u, '.') });
   content.push(
     { type: 'verseMarker', marker: 'R.', text: `${alleluia.capitalized}, ${alleluia.lowercase}.` },
     { type: 'macroRef', name: 'Gloria1' },
     { type: 'verseMarker', marker: 'R.', text: response }
   );
+  if (args.header === 'Responsory Completorium') content.push({ type: 'separator' });
 
   return Object.freeze({
     language: args.source.language,

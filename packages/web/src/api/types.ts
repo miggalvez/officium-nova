@@ -155,6 +155,7 @@ export type ComposedRunDto =
 
 export interface PublicComposedLineDto {
   readonly marker?: string;
+  readonly markers?: Partial<Record<PublicLanguageTag, string>>;
   readonly texts: Partial<Record<PublicLanguageTag, readonly ComposedRunDto[]>>;
 }
 

@@ -30,7 +30,7 @@ export function LineRenderer({
             key={lang}
             lang={lang}
             runs={line.texts[lang] ?? []}
-            marker={line.marker}
+            marker={line.markers?.[lang] ?? line.marker}
             showLabel={visible.length > 1}
             reviewerMode={reviewerMode}
           />
@@ -46,7 +46,7 @@ export function LineRenderer({
           key={lang}
           lang={lang}
           runs={line.texts[lang] ?? []}
-          marker={line.marker}
+          marker={line.markers?.[lang] ?? line.marker}
           showLabel={true}
           reviewerMode={reviewerMode}
         />

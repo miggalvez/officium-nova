@@ -188,6 +188,7 @@ export interface PublicSectionDto {
 
 export interface PublicComposedLineDto {
   readonly marker?: string;
+  readonly markers?: Partial<Record<PublicLanguageTag, string>>;
   readonly texts: Partial<Record<PublicLanguageTag, readonly ComposedRunDto[]>>;
 }
 
@@ -397,6 +398,10 @@ export function toPublicComposedHour(input: {
       ...(section.heading ? { heading: section.heading } : {}),
       lines: section.lines.map((line) => ({
         ...(line.marker ? { marker: line.marker } : {}),
+        ...remapLineMarkers({
+          markers: line.markers,
+          selection: input.selection
+        }),
         texts: remapLineTexts({
           texts: line.texts,
           selection: input.selection,
@@ -406,6 +411,23 @@ export function toPublicComposedHour(input: {
       }))
     }))
   };
+}
+
+function remapLineMarkers(args: {
+  readonly markers: Readonly<Record<string, string>> | undefined;
+  readonly selection: LanguageSelection;
+}): { readonly markers?: Partial<Record<PublicLanguageTag, string>> } {
+  if (!args.markers) {
+    return {};
+  }
+  const out: Partial<Record<PublicLanguageTag, string>> = {};
+  for (const [language, marker] of Object.entries(args.markers)) {
+    const publicTag = args.selection.toPublic.get(language as CorpusLanguageName);
+    if (publicTag) {
+      out[publicTag] = marker;
+    }
+  }
+  return Object.keys(out).length > 0 ? { markers: out } : {};
 }
 
 function remapLineTexts(input: {
@@ -466,15 +488,23 @@ function applyTextOrthographyProfile(input: {
   readonly version: VersionHandle;
   readonly language: CorpusLanguageName;
 }): string {
+  const publicValue = stripSourceQuoteMarkers(input.value);
   if (input.language !== 'Latin' || !input.version.startsWith('Rubrics 1960 - ')) {
-    return input.value;
+    return publicValue;
   }
 
-  return input.value
+  return publicValue
     .replaceAll('J', 'I')
     .replaceAll('j', 'i')
-    .replaceAll('H-Iesu', 'H-Jesu')
-    .replaceAll('eúmdem', 'eúndem');
+    .replaceAll('H-Iesu', 'H-Jesu');
+}
+
+function stripSourceQuoteMarkers(value: string): string {
+  return value
+    .replace(/«\s*Pater Noster\s*»/gu, 'Pater Noster')
+    .replace(/«\s*Et ne nos indúcas in tentatiónem:\s*»/gu, 'Et ne nos indúcas in tentatiónem:')
+    .replace(/«\s*Our Father\s*»/gu, 'Our Father')
+    .replace(/«\s*And lead us not into temptation:\s*»/gu, 'And lead us not into temptation:');
 }
 
 function toCelebrationDto(celebration: Celebration): CelebrationDto {

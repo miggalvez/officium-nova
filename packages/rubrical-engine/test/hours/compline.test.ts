@@ -242,7 +242,7 @@ describe('buildCompline', () => {
       kind: 'single-ref',
       ref: {
         path: 'horas/Latin/Psalterium/Special/Minor Special',
-        section: 'Completorium'
+        section: 'Completorium_'
       }
     });
     expect(compline.slots.responsory).toEqual({

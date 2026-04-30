@@ -74,18 +74,20 @@ warning count: 0
   Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
   Latin: [Ant.] text("Allelúja, allelúja, allelúja.")
 
-[section #3 type=chapter slot=chapter reference=horas/Latin/Psalterium/Special/Minor Special#Completorium languages=Latin]
+[section #3 type=chapter slot=chapter reference=horas/Latin/Psalterium/Special/Minor Special#Completorium_ languages=Latin]
   Latin: text(" ") · citation("Jer 14:9")
   Latin: [v.] text("Tu autem in nobis es, Dómine, et nomen sanctum tuum invocátum est super nos: ne derelínquas nos, Dómine, Deus noster.")
   Latin: [R.] text("Deo grátias.")
 
 [section #4 type=responsory slot=responsory reference=horas/Latin/Psalterium/Special/Minor Special#Responsory Completorium languages=Latin]
+  Latin: text("_")
   Latin: [R.br.] text("In manus tuas, Dómine, comméndo spíritum meum, * Allelúia, allelúia.")
   Latin: [R.] text("In manus tuas, Dómine, comméndo spíritum meum, * Allelúia, allelúia.")
   Latin: [V.] text("Redemísti nos, Dómine, Deus veritátis.")
   Latin: [R.] text("Allelúia, allelúia.")
   Latin: [V.] text("Glória Patri, et Fílio, * et Spirítui Sancto.")
   Latin: [R.] text("In manus tuas, Dómine, comméndo spíritum meum, * Allelúia, allelúia.")
+  Latin: text("_")
 
 [section #5 type=versicle slot=versicle reference=horas/Latin/Psalterium/Special/Minor Special#Versum 4 languages=Latin]
   Latin: [V.] text("Custódi nos, Dómine, ut pupíllam óculi, allelúia.")

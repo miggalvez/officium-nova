@@ -1,8 +1,5 @@
-import { ensureTxtSuffix, type TextContent, type TextIndex } from '@officium-novum/parser';
+import { ensureTxtSuffix, type TextContent } from '@officium-novum/parser';
 import type {
-  ConditionEvalContext,
-  DayOfficeSummary,
-  HourDirective,
   HourStructure,
   InvitatoriumSource,
   LessonPlan,
@@ -14,40 +11,31 @@ import type {
 import { conditionMatches } from '@officium-novum/rubrical-engine';
 
 import { applyDirectives } from '../directives/apply-directives.js';
-import { resolveGloriaOmittiturReplacement } from './gloria-omittitur.js';
-import { appendContentWithBoundary } from './content-boundary.js';
-import {
-  replaceFinalHymnDoxology,
-  resolveHymnDoxologyByLanguage
-} from './major-hour-hymn.js';
-import { isWholeAntiphonSlot, markAntiphonFirstText } from '../emit/antiphon-marker.js';
+import { resolveHymnDoxologyByLanguage } from './major-hour-hymn.js';
 import { emitSection } from '../emit/sections.js';
 import { flattenConditionals } from '../flatten/evaluate-conditionals.js';
-import { expandDeferredNodes, interleaveSeparators } from '../resolve/expand-deferred-nodes.js';
+import { expandDeferredNodes } from '../resolve/expand-deferred-nodes.js';
 import {
   materializeInvitatoryContent,
   resolveInvitatoryAntiphonContent,
   resolveReference
 } from '../resolve/reference-resolver.js';
-import type {
-  ComposeOptions,
-  ComposeWarning,
-  HeadingDescriptor,
-  Section
-} from '../types/composed-hour.js';
+import type { Section } from '../types/composed-hour.js';
 import {
-  appendExpandedPsalmWrapper,
-  buildPsalmHeading,
-  containsInlinePsalmRefs,
-  extendPsalterMatinsVersicleContent,
-  extractInlinePsalmAntiphons,
+  composeMergedSlot,
+  composeReferenceSlot,
+  type MatinsSlotRef
+} from './matins-merged-slot.js';
+import {
+  headingSection,
+  markSectionFirstLine,
+  prependSeparatorLine,
+  prependTeDeumHeading
+} from './matins-section-helpers.js';
+import { referenceIdentity, type MatinsComposeContext } from './matins-shared.js';
+import {
   normalizeOpeningAntiphonContent,
-  normalizeOpeningPsalmBodyContent,
-  normalizeRepeatedAntiphonContent,
-  resolvePairedAntiphonRangeValue,
-  separatePsalmVerseLines,
-  slicePsalmContentByVerseRange,
-  withPsalmGloriaPatri
+  normalizeRepeatedAntiphonContent
 } from './matins-psalmody.js';
 import { MAX_DEFERRED_DEPTH } from './shared.js';
 
@@ -58,6 +46,10 @@ import { MAX_DEFERRED_DEPTH } from './shared.js';
 const TE_DEUM_REF: TextReference = {
   path: 'horas/Latin/Psalterium/Common/Prayers',
   section: 'Te Deum'
+};
+const MATINS_LAUDS_SEPARATION_REF: TextReference = {
+  path: 'horas/Latin/Psalterium/Common/Rubricae',
+  section: 'Matutinum'
 };
 const PATER_SECRETO_REF: TextReference = {
   path: 'horas/Latin/Psalterium/Common/Rubricae',
@@ -75,6 +67,10 @@ const JUBE_DOMNE_REF: TextReference = {
   path: 'horas/Latin/Psalterium/Common/Prayers',
   section: 'Jube domne'
 };
+const TU_AUTEM_REF: TextReference = {
+  path: 'horas/Latin/Psalterium/Common/Prayers',
+  section: 'Tu autem'
+};
 const AMEN_REF: TextReference = {
   path: 'horas/Latin/Psalterium/Common/Prayers',
   section: 'Amen'
@@ -87,20 +83,6 @@ const INVITATORIUM_SKELETON_REF: TextReference = {
   path: 'horas/Latin/Psalterium/Invitatorium',
   section: '__preamble'
 };
-
-export interface MatinsComposeContext {
-  readonly corpus: TextIndex;
-  readonly summary: DayOfficeSummary;
-  readonly options: ComposeOptions;
-  readonly directives: readonly HourDirective[];
-  readonly context: ConditionEvalContext;
-  /**
-   * Optional compose-time warning sink — see Phase 3 §3f and
-   * {@link ComposeWarning}. The generic `composeSlot` in `compose.ts`
-   * passes this in; Matins reuses it for its plan-driven path.
-   */
-  readonly onWarning?: (warning: ComposeWarning) => void;
-}
 
 /**
  * Compose the Matins-specific slots — invitatorium, nocturns, Te Deum —
@@ -156,8 +138,10 @@ export function composeMatinsSections(
   const teDeum = hour.slots['te-deum'];
   if (teDeum && teDeum.kind === 'te-deum') {
     if (teDeum.decision === 'say') {
-      const section = composeReferenceSlot('te-deum', TE_DEUM_REF, args);
+      const section = prependTeDeumHeading(composeReferenceSlot('te-deum', TE_DEUM_REF, args), args.options.languages);
       if (section) sections.push(section);
+      const matinsRubric = composeReferenceSlot('de-officio-capituli', MATINS_LAUDS_SEPARATION_REF, args);
+      if (matinsRubric) sections.push(matinsRubric);
     } else if (teDeum.decision === 'replace-with-responsory' && psalmody && psalmody.kind === 'matins-nocturns') {
       // Per Phase 3 plan §3d and Perl `specmatins.pl`: when the policy
       // resolves `teDeum: 'replace-with-responsory'` the 9th / last
@@ -168,6 +152,8 @@ export function composeMatinsSections(
       if (replacementRef) {
         const section = composeReferenceSlot('te-deum', replacementRef, args);
         if (section) sections.push(section);
+        const matinsRubric = composeReferenceSlot('de-officio-capituli', MATINS_LAUDS_SEPARATION_REF, args);
+        if (matinsRubric) sections.push(matinsRubric);
       }
     }
     // `decision === 'omit'` emits nothing, per RI §196 (Sacred Triduum) and
@@ -360,16 +346,24 @@ function composeNocturn(
     const responsorySection = responsory
       ? responsory.replacesTeDeum
         ? undefined
-        : composeReferenceSlot('responsory', responsory.reference, args, undefined, {
-            appendGloria: responsory.appendGloria === true
-          })
+        : prependSeparatorLine(
+            composeReferenceSlot('responsory', responsory.reference, args, undefined, {
+              appendGloria: responsory.appendGloria === true
+            }),
+            args.options.languages
+          )
       : undefined;
     const benediction = nocturn.benedictions.find((b) => b.index === lesson.index);
     const benedictioSection = benediction
-      ? composeReferenceSlot('benedictio', benediction.reference, args)
+      ? markSectionFirstLine(
+          composeReferenceSlot('benedictio', benediction.reference, args),
+          'Benedictio.',
+          args.options.languages
+        )
       : undefined;
     const jubeSection = benedictioSection ? composeOtherReferenceSection(JUBE_DOMNE_REF, args) : undefined;
     const amenSection = benedictioSection ? composeOtherReferenceSection(AMEN_REF, args) : undefined;
+    const tuAutemSection = lessonSection ? composeOtherReferenceSection(TU_AUTEM_REF, args) : undefined;
 
     // Only emit a heading when at least one downstream section resolves;
     // otherwise the client would see an orphan "Lectio N" label with no text.
@@ -389,6 +383,7 @@ function composeNocturn(
       out.push(headingSection({ kind: 'lesson', ordinal: lesson.index }));
     }
     if (lessonSection) out.push(lessonSection);
+    if (tuAutemSection) out.push(tuAutemSection);
     if (responsorySection) out.push(responsorySection);
   }
 
@@ -469,7 +464,28 @@ function usesGroupedMatinsAntiphon(ref: TextReference): boolean {
 function composeLesson(lesson: LessonPlan, args: MatinsComposeContext): Section | undefined {
   const ref = lessonReference(lesson.source);
   if (!ref) return undefined;
+  if (shouldCombineSecondAndThirdScriptureLessons(lesson, args)) {
+    return composeMergedSlot(
+      'lectio-brevis',
+      [
+        { ref, isAntiphon: false },
+        { ref: { ...ref, section: 'Lectio3' }, isAntiphon: false }
+      ],
+      args
+    );
+  }
   return composeReferenceSlot('lectio-brevis', ref, args);
+}
+
+function shouldCombineSecondAndThirdScriptureLessons(
+  lesson: LessonPlan,
+  args: MatinsComposeContext
+): boolean {
+  return (
+    lesson.index === 2 &&
+    (lesson.source.kind === 'scripture' || lesson.source.kind === 'scripture-transferred') &&
+    args.directives.includes('matins-merge-second-third-scripture-lessons')
+  );
 }
 
 function lessonReference(source: LessonSource): TextReference | undefined {
@@ -493,281 +509,6 @@ function lessonReference(source: LessonSource): TextReference | undefined {
         section: `Lectio${source.lessonIndex}`
       };
   }
-}
-
-// --------------------------------------------------------------------------
-// Shared helpers
-// --------------------------------------------------------------------------
-
-interface MatinsSlotRef {
-  readonly ref: TextReference;
-  readonly isAntiphon: boolean;
-  readonly openingAntiphon?: boolean;
-  readonly repeatAntiphon?: boolean;
-  readonly appendGloria?: boolean;
-  readonly hasExplicitAntiphon?: boolean;
-  readonly pairedAntiphonRef?: TextReference;
-  readonly pairedPsalmRef?: TextReference;
-  readonly psalmIndex?: number;
-}
-
-function composeReferenceSlot(
-  slot: Parameters<typeof emitSection>[0],
-  ref: TextReference,
-  args: MatinsComposeContext,
-  hymnDoxology?: ReadonlyMap<string, readonly TextContent[]>,
-  options: { readonly appendGloria?: boolean } = {}
-): Section | undefined {
-  return composeMergedSlot(
-    slot,
-    [{ ref, isAntiphon: isWholeAntiphonSlot(slot), ...options }],
-    args,
-    hymnDoxology
-  );
-}
-
-function withResponsoryGloria(
-  content: readonly TextContent[]
-): readonly TextContent[] {
-  if (containsGloriaMacro(content)) {
-    return content;
-  }
-
-  const repeatedResponse = findLastResponsoryResponse(content);
-  return Object.freeze([
-    ...content,
-    { type: 'macroRef', name: 'Gloria' } satisfies TextContent,
-    ...(repeatedResponse ? [repeatedResponse] : [])
-  ]);
-}
-
-function containsGloriaMacro(content: readonly TextContent[]): boolean {
-  return content.some((node) => {
-    if (node.type === 'macroRef') {
-      return node.name.toLowerCase() === 'gloria';
-    }
-    if (node.type === 'conditional') {
-      return containsGloriaMacro(node.content);
-    }
-    return false;
-  });
-}
-
-function findLastResponsoryResponse(
-  content: readonly TextContent[]
-): Extract<TextContent, { type: 'verseMarker' }> | undefined {
-  for (let index = content.length - 1; index >= 0; index -= 1) {
-    const node = content[index]!;
-    if (node.type === 'verseMarker' && /^r\.?$/iu.test(node.marker.trim())) {
-      return {
-        type: 'verseMarker',
-        marker: node.marker,
-        text: node.text
-      };
-    }
-    if (node.type === 'conditional') {
-      const nested = findLastResponsoryResponse(node.content);
-      if (nested) {
-        return nested;
-      }
-    }
-  }
-  return undefined;
-}
-
-function composeMergedSlot(
-  slot: Parameters<typeof emitSection>[0],
-  refs: readonly MatinsSlotRef[],
-  args: MatinsComposeContext,
-  hymnDoxology?: ReadonlyMap<string, readonly TextContent[]>
-): Section | undefined {
-  if (refs.length === 0) return undefined;
-  const perLanguage = new Map<string, TextContent[]>();
-  for (const lang of args.options.languages) {
-    perLanguage.set(lang, []);
-  }
-
-  for (const { ref, isAntiphon, openingAntiphon, psalmIndex, hasExplicitAntiphon, repeatAntiphon, appendGloria, pairedAntiphonRef, pairedPsalmRef } of refs) {
-    const resolved = resolveReference(args.corpus, ref, {
-      languages: args.options.languages,
-      langfb: args.options.langfb,
-      dayOfWeek: args.context.dayOfWeek,
-      date: args.context.date,
-      season: args.context.season,
-      version: args.context.version,
-      modernStyleMonthday: args.context.version.handle.includes('1960'),
-      ...(args.onWarning ? { onWarning: args.onWarning } : {})
-    });
-    for (const lang of args.options.languages) {
-      const bucket = perLanguage.get(lang);
-      if (!bucket) continue;
-      const gloriaOmittiturReplacement =
-        slot === 'psalmody'
-          ? resolveGloriaOmittiturReplacement({
-              directives: args.directives,
-              corpus: args.corpus,
-              language: lang,
-              langfb: args.options.langfb,
-              context: args.context,
-              maxDepth: MAX_DEFERRED_DEPTH,
-              ...(args.onWarning ? { onWarning: args.onWarning } : {})
-            })
-          : undefined;
-      const section = resolved[lang];
-      if (!section) continue;
-      if (section.selectorMissing) {
-        bucket.push({
-          type: 'rubric',
-          value: `(Section missing: ${ref.section})`
-        });
-        continue;
-      }
-      const sourceContent =
-        slot === 'versicle'
-          ? extendPsalterMatinsVersicleContent(section.content, ref, lang, args)
-          : appendGloria === true && slot === 'responsory'
-            ? withResponsoryGloria(section.content)
-            : section.content;
-      if (slot === 'psalmody' && isAntiphon && containsInlinePsalmRefs(sourceContent)) {
-        const antiphonOnly = extractInlinePsalmAntiphons(sourceContent);
-        const flattened = flattenConditionals(antiphonOnly, args.context);
-        const transformed = applyDirectives(slot, flattened, {
-          hour: 'matins',
-          language: lang,
-          directives: args.directives,
-          gloriaOmittiturReplacement
-        });
-        const normalized = repeatAntiphon
-          ? normalizeRepeatedAntiphonContent(transformed)
-          : openingAntiphon
-            ? normalizeOpeningAntiphonContent(transformed, ref, pairedPsalmRef, lang, args)
-            : transformed;
-        appendContentWithBoundary(
-          bucket,
-          markAntiphonFirstText(normalized)
-        );
-        continue;
-      }
-      if (
-        slot === 'psalmody' &&
-        !isAntiphon &&
-        psalmIndex !== undefined &&
-        containsInlinePsalmRefs(sourceContent)
-      ) {
-        appendExpandedPsalmWrapper(bucket, sourceContent, {
-          directives: args.directives,
-          context: args.context,
-          index: args.corpus,
-          language: lang,
-          langfb: args.options.langfb,
-          maxDepth: MAX_DEFERRED_DEPTH,
-          psalmIndex,
-          suppressFirstInlineAntiphon: hasExplicitAntiphon === true,
-          ...(args.onWarning ? { onWarning: args.onWarning } : {})
-        });
-        continue;
-      }
-      const expanded = expandDeferredNodes(
-        slot === 'psalmody' && !isAntiphon && psalmIndex !== undefined
-          ? withPsalmGloriaPatri(sourceContent)
-          : sourceContent,
-        {
-        index: args.corpus,
-        language: lang,
-        langfb: args.options.langfb,
-        season: args.context.season,
-        conditionContext: args.context,
-        seen: new Set(),
-        maxDepth: MAX_DEFERRED_DEPTH,
-        ...(args.onWarning ? { onWarning: args.onWarning } : {})
-        }
-      );
-      const flattened = flattenConditionals(expanded, args.context);
-      const transformed = applyDirectives(slot, flattened, {
-        hour: 'matins',
-        language: lang,
-        directives: args.directives,
-        gloriaOmittiturReplacement
-      });
-      const withDoxology =
-        slot === 'hymn'
-          ? replaceFinalHymnDoxology(transformed, hymnDoxology?.get(lang))
-          : transformed;
-      const withLiturgicalLineBreaks =
-        slot === 'lectio-brevis' || slot === 'te-deum'
-          ? interleaveSeparators(withDoxology)
-          : withDoxology;
-      const lineSeparated =
-        slot === 'psalmody' && !isAntiphon && psalmIndex !== undefined
-          ? separatePsalmVerseLines(withLiturgicalLineBreaks)
-          : withLiturgicalLineBreaks;
-      const rangedPsalmBody =
-        slot === 'psalmody' && !isAntiphon && psalmIndex !== undefined
-          ? slicePsalmContentByVerseRange(
-              lineSeparated,
-              resolvePairedAntiphonRangeValue(pairedAntiphonRef, lang, args)
-            )
-          : lineSeparated;
-      const normalizedPsalmBody =
-        slot === 'psalmody' && !isAntiphon && psalmIndex !== undefined
-          ? normalizeOpeningPsalmBodyContent(rangedPsalmBody, pairedAntiphonRef, ref, lang, args)
-          : rangedPsalmBody;
-      // Same `Ant.` marker synthesis as the generic composeSlot; see
-      // `emit/antiphon-marker.ts`. For Matins this covers the invitatory,
-      // the nocturn antiphons inside `psalmody`, and any unpaired
-      // antiphons surfaced as standalone sections.
-      const markered = isAntiphon
-        ? markAntiphonFirstText(
-            repeatAntiphon
-              ? normalizeRepeatedAntiphonContent(lineSeparated)
-              : openingAntiphon
-                ? normalizeOpeningAntiphonContent(lineSeparated, ref, pairedPsalmRef, lang, args)
-                : lineSeparated
-          )
-        : normalizedPsalmBody;
-      if (slot === 'psalmody' && !isAntiphon && psalmIndex !== undefined) {
-        const heading = buildPsalmHeading(
-          ref,
-          normalizedPsalmBody,
-          psalmIndex,
-          pairedAntiphonRef,
-          lang,
-          args
-        );
-        if (heading) {
-          appendContentWithBoundary(bucket, [
-            { type: 'text', value: heading },
-            { type: 'separator' }
-          ]);
-        }
-      }
-      appendContentWithBoundary(bucket, markered);
-    }
-  }
-
-  const frozen = new Map<string, readonly TextContent[]>();
-  for (const [lang, nodes] of perLanguage) {
-    if (nodes.length > 0) frozen.set(lang, Object.freeze(nodes));
-  }
-  if (frozen.size === 0) return undefined;
-
-  const primary = refs[0]!.ref;
-  return emitSection(slot, frozen, referenceIdentity(primary));
-}
-
-function headingSection(heading: HeadingDescriptor): Section {
-  return Object.freeze({
-    type: 'heading' as const,
-    slot: 'heading',
-    reference: undefined,
-    lines: Object.freeze([]),
-    languages: Object.freeze([]),
-    heading: Object.freeze(heading)
-  });
-}
-
-function referenceIdentity(reference: TextReference): string {
-  return `${reference.path}#${reference.section}${reference.selector ? `:${reference.selector}` : ''}`;
 }
 
 function composePreLessonTransition(
@@ -819,6 +560,10 @@ function composeAbsolutioSection(
       lines: Object.freeze([
         Object.freeze({
           marker: 'Absolutio.',
+          markers: Object.freeze({
+            Latin: 'Absolutio.',
+            English: 'Absolution.'
+          }),
           texts: first!.texts
         }),
         ...rest

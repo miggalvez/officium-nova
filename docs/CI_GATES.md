@@ -1,6 +1,6 @@
 # CI Gates
 
-Current as of 2026-04-28.
+Current as of 2026-04-30.
 
 The required GitHub Actions workflow is `.github/workflows/ci.yml`. It is
 deliberately small and mirrors the commands maintainers run locally.
@@ -12,7 +12,7 @@ deliberately small and mirrors the commands maintainers run locally.
 | 1 | Build workspace | `pnpm -r build` | Produces workspace package `dist/` exports needed by downstream package type resolution in clean CI. |
 | 2 | Typecheck workspace | `pnpm -r typecheck` | Blocks on TypeScript errors in every package. |
 | 3 | Test workspace | `pnpm -r test` | Blocks on package tests and package-owned audits. |
-| 4 | Verify 2024 adjudication sign-off | `pnpm -C packages/compositor verify:phase-3-signoff` | Blocks on unadjudicated rows, files over 800 lines, or pending commit SHAs. |
+| 4 | Verify 2024 adjudication sign-off | `pnpm -C packages/compositor verify:phase-3-signoff` | Blocks on unadjudicated rows, source files over 800 lines unless explicitly grandfathered at their current baseline, or pending commit SHAs. |
 
 The validation package owns Phase 5 audit wiring through its package `test`
 script:

@@ -149,6 +149,7 @@ export const SectionSchema = Type.Object({
   })),
   lines: Type.Array(Type.Object({
     marker: Type.Optional(Type.String()),
+    markers: Type.Optional(Type.Record(Type.String(), Type.String())),
     texts: Type.Record(Type.String(), Type.Array(ComposedRunSchema))
   }))
 });

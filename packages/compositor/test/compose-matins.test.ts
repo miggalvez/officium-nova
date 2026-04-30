@@ -179,6 +179,80 @@ describe('composeHour(matins)', () => {
     expect(rendered).not.toContain('Cum Patre, et almo Spíritu,');
   });
 
+  it('merges the second and third scripture lessons only when the Matins directive is present', () => {
+    const corpus = new InMemoryTextIndex();
+    corpus.addFile(
+      makeFileMulti('horas/Latin/Tempora/Pasc3-3', [
+        { header: 'Lectio2', content: [{ type: 'text', value: 'Lectio secunda' }] },
+        { header: 'Lectio3', content: [{ type: 'text', value: 'Lectio tertia' }] }
+      ])
+    );
+
+    const baseHour: HourStructure = {
+      hour: 'matins',
+      slots: {
+        psalmody: {
+          kind: 'matins-nocturns',
+          nocturns: [
+            {
+              index: 1,
+              psalmody: [],
+              antiphons: [],
+              versicle: { reference: { path: 'horas/Latin/Missing', section: 'Versum' } },
+              lessonIntroduction: 'ordinary',
+              lessons: [
+                {
+                  index: 2,
+                  source: {
+                    kind: 'scripture',
+                    course: 'paschaltide',
+                    pericope: {
+                      book: 'Acts',
+                      reference: { path: 'horas/Latin/Tempora/Pasc3-3', section: 'Lectio2' }
+                    }
+                  }
+                }
+              ],
+              responsories: [],
+              benedictions: []
+            }
+          ]
+        }
+      },
+      directives: []
+    };
+
+    const withoutDirective = composeHour({
+      corpus,
+      summary: buildSummaryForVersion(baseHour, stubVersion),
+      version: stubVersion,
+      hour: 'matins',
+      options: { languages: ['Latin'] }
+    });
+    const withDirective = composeHour({
+      corpus,
+      summary: buildSummaryForVersion(
+        { ...baseHour, directives: ['matins-merge-second-third-scripture-lessons'] },
+        stubVersion
+      ),
+      version: stubVersion,
+      hour: 'matins',
+      options: { languages: ['Latin'] }
+    });
+
+    const withoutText = withoutDirective.sections.flatMap((section) =>
+      section.lines.map((line) => renderRuns(line, 'Latin'))
+    );
+    const withText = withDirective.sections.flatMap((section) =>
+      section.lines.map((line) => renderRuns(line, 'Latin'))
+    );
+
+    expect(withoutText).toContain('Lectio secunda');
+    expect(withoutText).not.toContain('Lectio tertia');
+    expect(withText).toContain('Lectio secunda');
+    expect(withText).toContain('Lectio tertia');
+  });
+
   it('emits the fixed invitatory psalm with feast antiphon repetitions, then nocturn heading, psalmody, lectio, responsory, and Te Deum', () => {
     const corpus = new InMemoryTextIndex();
     corpus.addFile(
@@ -318,9 +392,11 @@ describe('composeHour(matins)', () => {
       'Ant. veníte adorémus.'
     ]);
     expect(composed.sections[1]!.heading).toEqual({ kind: 'nocturn', ordinal: 1 });
-    expect(composed.sections[1]!.lines).toEqual([]);
+    expect(renderRuns(composed.sections[1]!.lines[0]!, 'Latin')).toBe('Ad Nocturnum');
     expect(composed.sections[4]!.heading).toEqual({ kind: 'lesson', ordinal: 1 });
-    expect(renderRuns(composed.sections.at(-1)!.lines[0]!, 'Latin')).toBe('Te Deum laudámus.');
+    expect(renderRuns(composed.sections.at(-1)!.lines[0]!, 'Latin')).toBe('_');
+    expect(renderRuns(composed.sections.at(-1)!.lines[1]!, 'Latin')).toBe('Te Deum');
+    expect(renderRuns(composed.sections.at(-1)!.lines[2]!, 'Latin')).toBe('Te Deum laudámus.');
   });
 
   it('suppresses Te Deum output when the plan decides replace-with-responsory', () => {
@@ -1363,7 +1439,8 @@ describe('composeHour(matins)', () => {
     expect(renderRuns(composed.sections[8]!.lines[0]!, 'Latin')).toBe('Amen.');
     expect(composed.sections[9]!.heading).toEqual({ kind: 'lesson', ordinal: 1 });
     expect(renderRuns(composed.sections[10]!.lines[0]!, 'Latin')).toBe('Lectio prima contents');
-    expect(renderRuns(composed.sections[11]!.lines[0]!, 'Latin')).toBe('Responsorium primum.');
+    expect(renderRuns(composed.sections[11]!.lines[0]!, 'Latin')).toBe('_');
+    expect(renderRuns(composed.sections[11]!.lines[1]!, 'Latin')).toBe('Responsorium primum.');
   });
 
   it('uses Pater totum secreto and suppresses the ordinary pre-lesson bundle under Limit Benedictiones Oratio', () => {

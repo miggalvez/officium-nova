@@ -65,7 +65,7 @@ export function directiveDrivenSlotContent(args: DirectiveSlotContentArgs): Slot
 }
 
 function majorHourOrationPreludeContent(args: DirectiveSlotContentArgs): SlotContent | undefined {
-  if (args.slot !== 'oration' || (args.hour !== 'lauds' && args.hour !== 'vespers')) {
+  if (args.slot !== 'oration' || !isWrappedMajorHour(args.hour)) {
     return undefined;
   }
 
@@ -132,7 +132,7 @@ function isPaschalOctaveMajorHour(args: DirectiveSlotContentArgs): boolean {
 }
 
 function usesWrappedMajorHourConclusion(args: DirectiveSlotContentArgs): boolean {
-  if (args.slot !== 'conclusion' || (args.hour !== 'lauds' && args.hour !== 'vespers')) {
+  if (args.slot !== 'conclusion' || !isWrappedMajorHour(args.hour)) {
     return false;
   }
 
@@ -145,9 +145,14 @@ function usesWrappedMajorHourConclusion(args: DirectiveSlotContentArgs): boolean
     args.content.ref.section === 'Conclusio' &&
     (
       (args.hour === 'lauds' && args.content.ref.path === 'horas/Ordinarium/Laudes') ||
-      (args.hour === 'vespers' && args.content.ref.path === 'horas/Ordinarium/Vespera')
+      (args.hour === 'vespers' && args.content.ref.path === 'horas/Ordinarium/Vespera') ||
+      (args.hour === 'matins' && args.content.ref.path === 'horas/Ordinarium/Matutinum')
     )
   );
+}
+
+function isWrappedMajorHour(hour: HourName): boolean {
+  return hour === 'matins' || hour === 'lauds' || hour === 'vespers';
 }
 
 function precesDirectiveContent(

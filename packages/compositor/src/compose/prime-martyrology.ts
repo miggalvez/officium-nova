@@ -434,6 +434,14 @@ function appendMoonLabel(content: readonly TextContent[], label: string): TextCo
 
   for (const node of content) {
     if (!appended && node.type === 'text') {
+      if (/^Upon the\b/iu.test(node.value)) {
+        out.push({
+          type: 'text',
+          value: modernEnglishMartyrologyDateLine(node.value, label)
+        });
+        appended = true;
+        continue;
+      }
       out.push({
         type: 'text',
         value: `${node.value.trimEnd()} ${label}`.trim()
@@ -446,6 +454,25 @@ function appendMoonLabel(content: readonly TextContent[], label: string): TextCo
   }
 
   return out;
+}
+
+function modernEnglishMartyrologyDateLine(value: string, label: string): string {
+  const match = value.match(/^Upon the\s+(\d+)(?:st|nd|rd|th)\s+day\s+of\s+([^,]+),/iu);
+  if (!match) {
+    return `${value.trimEnd()} ${label}`.trim();
+  }
+
+  const day = Number(match[1]);
+  const month = match[2]?.trim();
+  if (!Number.isFinite(day) || !month) {
+    return `${value.trimEnd()} ${label}`.trim();
+  }
+
+  const moon = label.replace(/^the\s+/u, '');
+  const year = moon.match(/\bin the year of our Lord\s+(\d{4})$/u)?.[1];
+  const moonWithoutYear = moon.replace(/,\s*in the year of our Lord\s+\d{4}$/u, '');
+  const moonDisplay = /^the\b/u.test(moonWithoutYear) ? moonWithoutYear : `the ${moonWithoutYear}`;
+  return `${month} ${day}${ordinalSuffix(day)}${year ? ` ${year}` : ''}, ${moonDisplay}, were born into the better life:`;
 }
 
 function moonLabelForDate(date: MartyrologyDateParts, language: string): string {

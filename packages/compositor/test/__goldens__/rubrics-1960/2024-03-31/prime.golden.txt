@@ -3,7 +3,7 @@ date: 2024-03-31
 hour: prime
 celebration: Dominica Resurrectionis
 languages: Latin
-section count: 6
+section count: 8
 warning count: 0
 
 [section #0 type=other slot=incipit reference=horas/Ordinarium/Prima#Incipit languages=Latin]
@@ -118,4 +118,21 @@ warning count: 0
   Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
   Latin: [v.] text("Orémus.")
   Latin: [v.] text("Dirígere et sanctificáre, régere et gubernáre dignáre, Dómine Deus, Rex cæli et terræ, hódie corda et córpora nostra, sensus, sermónes et actus nostros in lege tua, et in opéribus mandatórum tuórum: ut hic et in ætérnum, te auxiliánte, salvi et líberi esse mereámur, Salvátor mundi: Qui vivis et regnas in sǽcula sæculórum.")
+  Latin: [R.] text("Amen.")
+
+[section #6 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Psalterium/Common/Prayers#Jube domne languages=Latin]
+  Latin: [V.] text("Jube, Dómine, benedícere.")
+  Latin: [Benedictio.] text("Dies et actus nostros in sua pace dispónat Dóminus omnípotens.")
+  Latin: [R.] text("Amen.")
+  Latin: text(" ") · citation("Col 3:1-2")
+  Latin: [v.] text("Si consurrexístis cum Christo, quæ sursum sunt quǽrite, ubi Christus est in déxtera Dei sedens: quæ sursum sunt sápite, non quæ super terram.")
+  Latin: [V.] text("Tu autem, Dómine, miserére nobis.")
+  Latin: [R.] text("Deo grátias.")
+
+[section #7 type=conclusion slot=conclusion reference=horas/Latin/Psalterium/Common/Prayers#Adjutorium nostrum languages=Latin]
+  Latin: [V.] text("Adjutórium nostrum + in nómine Dómini.")
+  Latin: [R.] text("Qui fecit cælum et terram.")
+  Latin: [V.] text("Benedícite.")
+  Latin: [R.] text("Deus.")
+  Latin: [Benedictio.] text("Dóminus nos benedícat, + et ab omni malo deféndat, et ad vitam perdúcat ætérnam. Et fidélium ánimæ per misericórdiam Dei requiéscant in pace.")
   Latin: [R.] text("Amen.")

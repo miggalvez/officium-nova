@@ -84,7 +84,8 @@ export type HourDirective =
   | 'short-chapter-only'
   | 'genuflection-at-oration'
   | 'dirge-vespers'
-  | 'dirge-lauds';
+  | 'dirge-lauds'
+  | 'matins-merge-second-third-scripture-lessons';
 
 export type ComplineSource =
   | { readonly kind: 'vespers-winner'; readonly celebration: Celebration }
