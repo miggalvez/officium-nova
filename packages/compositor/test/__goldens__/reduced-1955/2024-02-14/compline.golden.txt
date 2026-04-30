@@ -90,7 +90,7 @@ warning count: 0
   Latin: text("Regnans per omne sǽculum.")
   Latin: text("Amen.")
 
-[section #4 type=chapter slot=chapter reference=horas/Latin/Psalterium/Special/Minor Special#Completorium languages=Latin]
+[section #4 type=chapter slot=chapter reference=horas/Latin/Psalterium/Special/Minor Special#Completorium_ languages=Latin]
   Latin: text(" ") · citation("Jer 14:9")
   Latin: [v.] text("Tu autem in nobis es, Dómine, et nomen sanctum tuum invocátum est super nos: ne derelínquas nos, Dómine, Deus noster.")
   Latin: [R.] text("Deo grátias.")

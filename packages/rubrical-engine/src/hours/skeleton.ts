@@ -252,7 +252,7 @@ export function mapHeaderToSlots(header: string): readonly SlotName[] {
   if (normalized === 'Oratio') {
     return ['oration'];
   }
-  if (normalized === 'Lectio brevis') {
+  if (normalized === 'Lectio brevis' || normalized === 'Regula vel Lectio brevis') {
     return ['lectio-brevis'];
   }
   if (/^Preces/u.test(normalized)) {

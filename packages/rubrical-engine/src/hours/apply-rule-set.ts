@@ -174,6 +174,16 @@ function resolveSlot(
     return specialOration;
   }
 
+  const specialPrimeChapterOffice = resolveSpecialPrimeChapterOffice(slot.name, input, properFiles);
+  if (specialPrimeChapterOffice) {
+    return specialPrimeChapterOffice;
+  }
+
+  const specialComplineOration = resolveSpecialComplineOrationAndConclusion(slot.name, input);
+  if (specialComplineOration) {
+    return specialComplineOration;
+  }
+
   const complineFinalAntiphon = resolveComplineFinalAntiphon(slot.name, input);
   if (complineFinalAntiphon) {
     return complineFinalAntiphon;
@@ -1827,8 +1837,100 @@ function resolveSpecialMinorHourOration(
           commonPrayerRef('Domine exaudi'),
           commonPrayerRef('Oremus'),
           commonPrayerRef('oratio_Domine'),
-          commonPrayerRef('Per Dominum')
+          commonPrayerRef('Per Dominum'),
+          commonPrayerRef('Domine exaudi'),
+          commonPrayerRef('Benedicamus Domino')
         ]
+  };
+}
+
+function resolveSpecialPrimeChapterOffice(
+  slotName: SlotName,
+  input: ApplyRuleSetInput,
+  properFiles: readonly ParsedFile[]
+): SlotContent | undefined {
+  if (
+    input.hour !== 'prime' ||
+    !usesOrdinaryPrimeLaterBlock(input, properFiles) ||
+    (slotName !== 'lectio-brevis' && slotName !== 'conclusion')
+  ) {
+    return undefined;
+  }
+
+  if (slotName === 'lectio-brevis') {
+    return {
+      kind: 'ordered-refs',
+      refs: [
+        commonPrayerRef('Jube domne'),
+        commonPrayerRef('benedictio Prima_'),
+        {
+          path: 'horas/Latin/Psalterium/Special/Prima Special',
+          section: primeShortLessonSection(input),
+          selector: 'without-deo-gratias'
+        },
+        commonPrayerRef('Tu autem')
+      ]
+    };
+  }
+
+  return {
+    kind: 'ordered-refs',
+    refs: [
+      commonPrayerRef('Adjutorium nostrum'),
+      commonPrayerRef('Benedicite'),
+      commonPrayerRef('benedictio Prima2'),
+      commonPrayerRef('Amen')
+    ]
+  };
+}
+
+function primeShortLessonSection(input: ApplyRuleSetInput): string {
+  if (input.temporal.season === 'eastertide' || input.temporal.season === 'ascensiontide') {
+    return 'Pasch';
+  }
+  if (input.temporal.season === 'pentecost-octave') {
+    return 'Pent';
+  }
+  if (input.temporal.season === 'lent' || input.temporal.season === 'passiontide') {
+    return input.temporal.dayName.startsWith('Quad5') || input.temporal.dayName.startsWith('Quad6')
+      ? 'Quad5'
+      : 'Quad';
+  }
+  return 'Dominica';
+}
+
+function resolveSpecialComplineOrationAndConclusion(
+  slotName: SlotName,
+  input: ApplyRuleSetInput
+): SlotContent | undefined {
+  if (
+    input.hour !== 'compline' ||
+    input.policy.name !== 'rubrics-1960' ||
+    (slotName !== 'oration' && slotName !== 'conclusion')
+  ) {
+    return undefined;
+  }
+
+  if (slotName === 'oration') {
+    return {
+      kind: 'ordered-refs',
+      refs: [
+        commonPrayerRef('Domine exaudi'),
+        commonPrayerRef('Oremus'),
+        commonPrayerRef('Oratio Visita_'),
+        commonPrayerRef('Per Dominum')
+      ]
+    };
+  }
+
+  return {
+    kind: 'ordered-refs',
+    refs: [
+      commonPrayerRef('Domine exaudi'),
+      commonPrayerRef('Benedicamus Domino'),
+      commonPrayerRef('benedictio Completorium Final'),
+      commonPrayerRef('Amen')
+    ]
   };
 }
 
@@ -1856,7 +1958,8 @@ function resolveComplineFinalAntiphon(
         path: COMMON_PRAYERS_PATH,
         section: 'Divinum auxilium',
         selector: '1'
-      }
+      },
+      commonPrayerRef('Amen')
     ]
   };
 }
@@ -2079,7 +2182,7 @@ const HOUR_SECTION_SUFFIX: Readonly<Record<HourName, string>> = {
 
 const COMPLINE_SPECIAL_FALLBACKS: Readonly<Partial<Record<SlotName, string>>> = {
   hymn: 'Hymnus Completorium',
-  chapter: 'Completorium',
+  chapter: 'Completorium_',
   responsory: 'Responsory Completorium',
   versicle: 'Versum 4',
   'antiphon-ad-nunc-dimittis': 'Ant 4',

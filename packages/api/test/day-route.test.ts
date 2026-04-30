@@ -268,18 +268,16 @@ describeIfUpstream('day route integration', () => {
     expect(firstLineText(body, 'matins', 'hymn', 'en')).not.toBe(
       firstLineText(body, 'matins', 'hymn', 'la')
     );
-    expect(firstLineText(body, 'matins', 'responsory', 'en')).toBe(
+    expect(slotLineTexts(body, 'matins', 'responsory', 'en')[1]).toBe(
       'Thy streets, O Jerusalem, shall bel paved with pure gold, Alleluia, and the song of joy shall be sung in thee. Alleluia.'
     );
-    expect(slotLineTexts(body, 'matins', 'responsory', 'la', 1).slice(-3)).toEqual([
+    expect(slotLineTexts(body, 'matins', 'responsory', 'la', 1).slice(-2)).toEqual([
       'Glória Patri, et Fílio, * et Spirítui Sancto.',
-      'Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.',
-      'Et David cum cantóribus cítharam percutiébat in domo Dómini, et laudes Deo canébat, allelúia, allelúia.'
+      'Et super muros eius Angelórum custódiam, allelúia.'
     ]);
-    expect(slotLineTexts(body, 'matins', 'responsory', 'en', 1).slice(-3)).toEqual([
+    expect(slotLineTexts(body, 'matins', 'responsory', 'en', 1).slice(-2)).toEqual([
       'Glory be to the Father, and to the Son, * and to the Holy Ghost.',
-      'As it was in the beginning, is now, * and ever shall be, world without end. Amen.',
-      'And David was with the singers, (and) played upon an harp in the house of the Lord, and sung praises unto God. Alleluia, Alleluia.'
+      'And upon the walls thereof a guard of Angels. Alleluia.'
     ]);
     expect(firstLineText(body, 'matins', 'lectio-brevis', 'en')).toContain(
       'Lesson from the book of Revelation'

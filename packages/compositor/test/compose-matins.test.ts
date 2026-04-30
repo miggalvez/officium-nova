@@ -318,9 +318,11 @@ describe('composeHour(matins)', () => {
       'Ant. veníte adorémus.'
     ]);
     expect(composed.sections[1]!.heading).toEqual({ kind: 'nocturn', ordinal: 1 });
-    expect(composed.sections[1]!.lines).toEqual([]);
+    expect(renderRuns(composed.sections[1]!.lines[0]!, 'Latin')).toBe('Ad Nocturnum');
     expect(composed.sections[4]!.heading).toEqual({ kind: 'lesson', ordinal: 1 });
-    expect(renderRuns(composed.sections.at(-1)!.lines[0]!, 'Latin')).toBe('Te Deum laudámus.');
+    expect(renderRuns(composed.sections.at(-1)!.lines[0]!, 'Latin')).toBe('_');
+    expect(renderRuns(composed.sections.at(-1)!.lines[1]!, 'Latin')).toBe('Te Deum');
+    expect(renderRuns(composed.sections.at(-1)!.lines[2]!, 'Latin')).toBe('Te Deum laudámus.');
   });
 
   it('suppresses Te Deum output when the plan decides replace-with-responsory', () => {
@@ -1363,7 +1365,8 @@ describe('composeHour(matins)', () => {
     expect(renderRuns(composed.sections[8]!.lines[0]!, 'Latin')).toBe('Amen.');
     expect(composed.sections[9]!.heading).toEqual({ kind: 'lesson', ordinal: 1 });
     expect(renderRuns(composed.sections[10]!.lines[0]!, 'Latin')).toBe('Lectio prima contents');
-    expect(renderRuns(composed.sections[11]!.lines[0]!, 'Latin')).toBe('Responsorium primum.');
+    expect(renderRuns(composed.sections[11]!.lines[0]!, 'Latin')).toBe('_');
+    expect(renderRuns(composed.sections[11]!.lines[1]!, 'Latin')).toBe('Responsorium primum.');
   });
 
   it('uses Pater totum secreto and suppresses the ordinary pre-lesson bundle under Limit Benedictiones Oratio', () => {

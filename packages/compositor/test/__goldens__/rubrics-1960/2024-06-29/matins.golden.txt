@@ -3,7 +3,7 @@ date: 2024-06-29
 hour: matins
 celebration: SS. Apostolorum Petri et Pauli
 languages: Latin
-section count: 79
+section count: 90
 warning count: 0
 
 [section #0 type=other slot=incipit reference=horas/Ordinarium/Matutinum#Incipit languages=Latin]
@@ -60,9 +60,10 @@ warning count: 0
   Latin: text("Sæclum per omne glória.")
   Latin: text("Amen.")
 
-[section #3 type=heading slot=heading languages=]
+[section #3 type=heading slot=heading languages=Latin+English]
   heading: nocturn 1
-  (no lines)
+  English: text("At the Nocturn")
+  Latin: text("Ad Nocturnum")
 
 [section #4 type=psalm slot=psalmody reference=horas/Latin/Commune/C1#Ant Matutinum:1 languages=Latin]
   Latin: [Ant.] text("In omnem terram * exívit sonus eórum, et in fines orbis terræ verba eórum.")
@@ -161,14 +162,17 @@ warning count: 0
   Latin: [V.] text("Jube, Dómine, benedícere.")
 
 [section #11 type=benedictio slot=benedictio reference=horas/Latin/Psalterium/Benedictions.txt#Nocturn 1:1 languages=Latin]
-  Latin: text("Benedictióne perpétua benedícat nos Pater ætérnus.")
+  Latin: [Benedictio.] text("Benedictióne perpétua benedícat nos Pater ætérnus.")
 
 [section #12 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Amen languages=Latin]
   Latin: [R.] text("Amen.")
 
-[section #13 type=heading slot=heading languages=]
+[section #13 type=heading slot=heading languages=Latin+English]
   heading: lesson 1
-  (no lines)
+  English: text("_")
+  Latin: text("_")
+  English: text("Reading 1")
+  Latin: text("Lectio 1")
 
 [section #14 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Tempora/Pent05-6#Lectio1 languages=Latin]
   Latin: text("De libro secúndo Regum")
@@ -178,26 +182,34 @@ warning count: 0
   Latin: text("3 Misit ergo rex, et requisívit quæ esset múlier; nuntiatúmque est ei, quod ipsa esset Bethsabée fília Elíam, uxor Uríæ Hethǽi. ")
   Latin: text("4 Missis ítaque David núntiis, tulit eam.")
 
-[section #15 type=responsory slot=responsory reference=horas/Latin/Sancti/06-29#Responsory1 languages=Latin]
+[section #15 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Tu autem languages=Latin]
+  Latin: [V.] text("Tu autem, Dómine, miserére nobis.")
+  Latin: [R.] text("Deo grátias.")
+
+[section #16 type=responsory slot=responsory reference=horas/Latin/Sancti/06-29#Responsory1 languages=Latin]
+  Latin: text("_")
   Latin: [R.] text("Simon Petre, ántequam de navi vocárem te, novi te et super plebem meam príncipem te constítui:")
   Latin: text("* Et claves regni cælórum trádidi tibi.")
   Latin: [V.] text("Quodcúmque ligáveris super terram erit ligátum et in cælis; et quodcúmque sólveris super terram, erit solútum et in cælis.")
   Latin: [R.] text("Et claves regni cælórum trádidi tibi.")
 
-[section #16 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Jube domne languages=Latin]
+[section #17 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Jube domne languages=Latin]
   Latin: [V.] text("Jube, Dómine, benedícere.")
 
-[section #17 type=benedictio slot=benedictio reference=horas/Latin/Psalterium/Benedictions.txt#Nocturn 1:2 languages=Latin]
-  Latin: text("Unigénitus Dei Fílius nos benedícere et adjuváre dignétur.")
+[section #18 type=benedictio slot=benedictio reference=horas/Latin/Psalterium/Benedictions.txt#Nocturn 1:2 languages=Latin]
+  Latin: [Benedictio.] text("Unigénitus Dei Fílius nos benedícere et adjuváre dignétur.")
 
-[section #18 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Amen languages=Latin]
+[section #19 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Amen languages=Latin]
   Latin: [R.] text("Amen.")
 
-[section #19 type=heading slot=heading languages=]
+[section #20 type=heading slot=heading languages=Latin+English]
   heading: lesson 2
-  (no lines)
+  English: text("_")
+  Latin: text("_")
+  English: text("Reading 2")
+  Latin: text("Lectio 2")
 
-[section #20 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Tempora/Pent05-6#Lectio2 languages=Latin]
+[section #21 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Tempora/Pent05-6#Lectio2 languages=Latin]
   Latin: text(" ") · citation("2 Reg 11:5-11")
   Latin: text("5 Et revérsa est in domum suam, concépto fœtu. Mitténsque nuntiávit David et ait: Concépi. ")
   Latin: text("6 Misit autem David ad Joab dicens: Mitte ad me Uríam Hethǽum. Misítque Joab Uríam ad David.")
@@ -207,35 +219,48 @@ warning count: 0
   Latin: text("10 Nuntiatúmque est David a dicéntibus: Non ivit Urías in domum suam. Et ait David ad Uríam: Numquid non de via venísti? quare non descendísti in domum tuam? ")
   Latin: text("11 Et ait Urías ad David: Arca Dei et Israël et Juda hábitant in papiliónibus, et dóminus meus Joab et servi dómini mei super fáciem terræ manent; et ego ingrédiar domum meam, ut cómedam et bibam, et dórmiam cum uxóre mea? Per salútem tuam et per salútem ánimæ tuæ non fáciam rem hanc.")
 
-[section #21 type=responsory slot=responsory reference=horas/Latin/Sancti/06-29#Responsory2 languages=Latin]
+[section #22 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Tu autem languages=Latin]
+  Latin: [V.] text("Tu autem, Dómine, miserére nobis.")
+  Latin: [R.] text("Deo grátias.")
+
+[section #23 type=responsory slot=responsory reference=horas/Latin/Sancti/06-29#Responsory2 languages=Latin]
+  Latin: text("_")
   Latin: [R.] text("Si díligis me, Simon Petre, pasce oves meas. Dómine, tu nosti quia amo te,")
   Latin: text("* Et ánimam meam pono pro te.")
   Latin: [V.] text("Si oportúerit me mori tecum, non te negábo.")
   Latin: [R.] text("Et ánimam meam pono pro te.")
 
-[section #22 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Jube domne languages=Latin]
+[section #24 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Jube domne languages=Latin]
   Latin: [V.] text("Jube, Dómine, benedícere.")
 
-[section #23 type=benedictio slot=benedictio reference=horas/Latin/Psalterium/Benedictions.txt#Nocturn 1:3 languages=Latin]
-  Latin: text("Spíritus Sancti grátia illúminet sensus et corda nostra.")
+[section #25 type=benedictio slot=benedictio reference=horas/Latin/Psalterium/Benedictions.txt#Nocturn 1:3 languages=Latin]
+  Latin: [Benedictio.] text("Spíritus Sancti grátia illúminet sensus et corda nostra.")
 
-[section #24 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Amen languages=Latin]
+[section #26 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Amen languages=Latin]
   Latin: [R.] text("Amen.")
 
-[section #25 type=heading slot=heading languages=]
+[section #27 type=heading slot=heading languages=Latin+English]
   heading: lesson 3
-  (no lines)
+  English: text("_")
+  Latin: text("_")
+  English: text("Reading 3")
+  Latin: text("Lectio 3")
 
-[section #26 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Tempora/Pent05-6#Lectio3 languages=Latin]
+[section #28 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Tempora/Pent05-6#Lectio3 languages=Latin]
   Latin: text(" ") · citation("2 Reg 11:12-17")
   Latin: text("12 Ait ergo David ad Uríam: Mane hic étiam hódie, et cras dimíttam te. Mansit Urías in Jerúsalem in die illa et áltera.")
   Latin: text("13 Et vocávit eum David ut coméderet coram se et bíberet et inebriávit eum; qui egréssus véspere dormívit in strato suo cum servis dómini sui, et in domum suam non descéndit.")
   Latin: text("14 Factum est ergo mane, et scripsit David epístolam ad Joab: misítque per manum Uríæ,")
-  Latin: text("15 scribens in epístola: Pónite Uríam ex advérso belli, ubi fortíssimum est prǽlium, et derelínquite eum ut percússus intéreat. ")
+  Latin: text("15 Scribens in epístola: Pónite Uríam ex advérso belli, ubi fortíssimum est prǽlium, et derelínquite eum ut percússus intéreat. ")
   Latin: text("16 Igitur cum Joab obsidéret urbem, pósuit Uríam in loco ubi sciébat viros esse fortíssimos. ")
   Latin: text("17 Egressíque viri de civitáte bellábant advérsum Joab, et cecidérunt de pópulo servórum David, et mórtuus est étiam Urías Hethǽus.")
 
-[section #27 type=responsory slot=responsory reference=horas/Latin/Sancti/06-29#Responsory3 languages=Latin]
+[section #29 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Tu autem languages=Latin]
+  Latin: [V.] text("Tu autem, Dómine, miserére nobis.")
+  Latin: [R.] text("Deo grátias.")
+
+[section #30 type=responsory slot=responsory reference=horas/Latin/Sancti/06-29#Responsory3 languages=Latin]
+  Latin: text("_")
   Latin: [R.] text("Tu es Petrus, et super hanc petram ædificábo Ecclésiam meam, et portæ ínferi non prævalébunt advérsus eam:")
   Latin: text("* Et tibi dabo claves regni cælórum.")
   Latin: [V.] text("Quodcúmque ligáveris super terram, erit ligátum et in cælis; et quodcúmque sólveris super terram, erit solútum et in cælis.")
@@ -244,11 +269,12 @@ warning count: 0
   Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
   Latin: [R.] text("Et tibi dabo claves regni cælórum.")
 
-[section #28 type=heading slot=heading languages=]
+[section #31 type=heading slot=heading languages=Latin+English]
   heading: nocturn 2
-  (no lines)
+  English: text("At the Nocturn")
+  Latin: text("Ad Nocturnum")
 
-[section #29 type=psalm slot=psalmody reference=horas/Latin/Commune/C1#Ant Matutinum:4 languages=Latin]
+[section #32 type=psalm slot=psalmody reference=horas/Latin/Commune/C1#Ant Matutinum:4 languages=Latin]
   Latin: [Ant.] text("Príncipes populórum * congregáti sunt cum Deo Ábraham.")
   Latin: text("Psalmus 46 [1]")
   Latin: text("46:2 Omnes gentes, pláudite mánibus: * jubiláte Deo in voce exsultatiónis.")
@@ -293,87 +319,111 @@ warning count: 0
   Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
   Latin: [Ant.] text("Annuntiavérunt ópera Dei, et facta ejus intellexérunt.")
 
-[section #30 type=versicle slot=versicle reference=horas/Latin/Commune/C1#Nocturn 2 Versum languages=Latin]
+[section #33 type=versicle slot=versicle reference=horas/Latin/Commune/C1#Nocturn 2 Versum languages=Latin]
   Latin: [V.] text("Constítues eos príncipes super omnem terram.")
   Latin: [R.] text("Mémores erunt nóminis tui, Dómine.")
 
-[section #31 type=other slot=other reference=horas/Latin/Psalterium/Common/Rubricae#Pater secreto languages=Latin]
+[section #34 type=other slot=other reference=horas/Latin/Psalterium/Common/Rubricae#Pater secreto languages=Latin]
   Latin: rubric("« Pater Noster » dicitur secreto usque ad « Et ne nos indúcas in tentatiónem: »")
 
-[section #32 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Pater noster Et languages=Latin]
+[section #35 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Pater noster Et languages=Latin]
   Latin: [v.] text("Pater noster, qui es in cælis, sanctificétur nomen tuum: advéniat regnum tuum: fiat volúntas tua, sicut in cælo et in terra. Panem nostrum cotidiánum da nobis hódie: et dimítte nobis débita nostra, sicut et nos dimíttimus debitóribus nostris:")
   Latin: [V.] text("Et ne nos indúcas in tentatiónem:")
   Latin: [R.] text("Sed líbera nos a malo.")
 
-[section #33 type=other slot=other reference=matins-absolutio languages=Latin]
+[section #36 type=other slot=other reference=matins-absolutio languages=Latin]
   Latin: [Absolutio.] text("Ipsíus píetas et misericórdia nos ádjuvet, qui cum Patre et Spíritu Sancto vivit et regnat in sǽcula sæculórum.")
-
-[section #34 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Amen languages=Latin]
-  Latin: [R.] text("Amen.")
-
-[section #35 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Jube domne languages=Latin]
-  Latin: [V.] text("Jube, Dómine, benedícere.")
-
-[section #36 type=benedictio slot=benedictio reference=horas/Latin/Psalterium/Benedictions.txt#Nocturn 2:1 languages=Latin]
-  Latin: text("Deus Pater omnípotens sit nobis propítius et clemens.")
 
 [section #37 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Amen languages=Latin]
   Latin: [R.] text("Amen.")
 
-[section #38 type=heading slot=heading languages=]
-  heading: lesson 4
-  (no lines)
+[section #38 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Jube domne languages=Latin]
+  Latin: [V.] text("Jube, Dómine, benedícere.")
 
-[section #39 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/06-29#Lectio4 languages=Latin]
+[section #39 type=benedictio slot=benedictio reference=horas/Latin/Psalterium/Benedictions.txt#Nocturn 2:1 languages=Latin]
+  Latin: [Benedictio.] text("Deus Pater omnípotens sit nobis propítius et clemens.")
+
+[section #40 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Amen languages=Latin]
+  Latin: [R.] text("Amen.")
+
+[section #41 type=heading slot=heading languages=Latin+English]
+  heading: lesson 4
+  English: text("_")
+  Latin: text("_")
+  English: text("Reading 4")
+  Latin: text("Lectio 4")
+
+[section #42 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/06-29#Lectio4 languages=Latin]
   Latin: text("Sermo sancti Leónis Papæ")
   Latin: rubric("Sermo 1 in natali App. Petri et Pauli")
   Latin: text("Omnium quidem sanctárum solemnitátum, dilectíssimi, totus mundus est párticeps, et uníus fídei píetas éxigit, ut quidquid pro salúte universórum gestum recólitur, commúnibus ubíque gáudiis celebrétur. Verúmtamen hodiérna festívitas, præter illam reveréntiam quam toto terrárum orbe proméruit, speciáli et própria nostræ Urbis exsultatióne veneránda est; ut, ubi præcipuórum Apostolórum glorificátus est éxitus, ibi in die martýrii eórum sit lætítiæ principátus. Isti enim sunt viri, per quos tibi Evangélium Christi, Roma, resplénduit; et, quæ eras magístra erróris, facta es discípula veritátis.")
 
-[section #40 type=responsory slot=responsory reference=horas/Latin/Sancti/06-29#Responsory4 languages=Latin]
+[section #43 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Tu autem languages=Latin]
+  Latin: [V.] text("Tu autem, Dómine, miserére nobis.")
+  Latin: [R.] text("Deo grátias.")
+
+[section #44 type=responsory slot=responsory reference=horas/Latin/Sancti/06-29#Responsory4 languages=Latin]
+  Latin: text("_")
   Latin: [R.] text("Dómine, si tu es, jube me veníre ad te super aquas.")
   Latin: text("* Et exténdens manum apprehéndit eum, et dixit Jesus: Módicæ fídei, quare dubitásti?")
   Latin: [V.] text("Cumque vidísset ventum válidum veniéntem, tímuit; et, cum cœpísset mergi, clamávit dicens: Dómine, salvum me fac.")
   Latin: [R.] text("Et exténdens manum apprehéndit eum, et dixit Jesus: Módicæ fídei, quare dubitásti?")
 
-[section #41 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Jube domne languages=Latin]
+[section #45 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Jube domne languages=Latin]
   Latin: [V.] text("Jube, Dómine, benedícere.")
 
-[section #42 type=benedictio slot=benedictio reference=horas/Latin/Psalterium/Benedictions.txt#Nocturn 2:2 languages=Latin]
-  Latin: text("Christus perpétuæ det nobis gáudia vitæ.")
+[section #46 type=benedictio slot=benedictio reference=horas/Latin/Psalterium/Benedictions.txt#Nocturn 2:2 languages=Latin]
+  Latin: [Benedictio.] text("Christus perpétuæ det nobis gáudia vitæ.")
 
-[section #43 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Amen languages=Latin]
+[section #47 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Amen languages=Latin]
   Latin: [R.] text("Amen.")
 
-[section #44 type=heading slot=heading languages=]
+[section #48 type=heading slot=heading languages=Latin+English]
   heading: lesson 5
-  (no lines)
+  English: text("_")
+  Latin: text("_")
+  English: text("Reading 5")
+  Latin: text("Lectio 5")
 
-[section #45 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/06-29#Lectio5 languages=Latin]
+[section #49 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/06-29#Lectio5 languages=Latin]
   Latin: text("Isti sunt patres tui veríque pastóres, qui te regnis cæléstibus inseréndam multo mélius multóque felícius condidérunt, quam illi quorum stúdio prima mœ́nium tuórum fundaménta locáta sunt; ex quibus is qui tibi nomen dedit, fratérna te cæde fœdávit. Isti sunt, qui te ad hanc glóriam provexérunt, ut gens sancta, pópulus eléctus, cívitas sacerdotális et régia, per sacram beáti Petri Sedem caput orbis effécta, látius præsidéres religióne divína quam dominatióne terréna. Quamvis enim, multis aucta victóriis, jus impérii tui terra maríque protúleris; minus tamen est quod tibi béllicus labor súbdidit, quam quod pax christiána subjécit.")
 
-[section #46 type=responsory slot=responsory reference=horas/Latin/Sancti/06-29#Responsory5 languages=Latin]
+[section #50 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Tu autem languages=Latin]
+  Latin: [V.] text("Tu autem, Dómine, miserére nobis.")
+  Latin: [R.] text("Deo grátias.")
+
+[section #51 type=responsory slot=responsory reference=horas/Latin/Sancti/06-29#Responsory5 languages=Latin]
+  Latin: text("_")
   Latin: [R.] text("Surge, Petre, et índue te vestiméntis tuis, áccipe fortitúdinem ad salvándas gentes:")
   Latin: text("* Quia cecidérunt caténæ de mánibus tuis.")
   Latin: [V.] text("Angelus Dómini ástitit, et lumen refúlsit in habitáculo cárceris, percussóque látere Petri, excitávit eum, dicens: Surge, velóciter.")
   Latin: [R.] text("Quia cecidérunt caténæ de mánibus tuis.")
 
-[section #47 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Jube domne languages=Latin]
+[section #52 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Jube domne languages=Latin]
   Latin: [V.] text("Jube, Dómine, benedícere.")
 
-[section #48 type=benedictio slot=benedictio reference=horas/Latin/Psalterium/Benedictions.txt#Nocturn 2:3 languages=Latin]
-  Latin: text("Ignem sui amóris accéndat Deus in córdibus nostris.")
+[section #53 type=benedictio slot=benedictio reference=horas/Latin/Psalterium/Benedictions.txt#Nocturn 2:3 languages=Latin]
+  Latin: [Benedictio.] text("Ignem sui amóris accéndat Deus in córdibus nostris.")
 
-[section #49 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Amen languages=Latin]
+[section #54 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Amen languages=Latin]
   Latin: [R.] text("Amen.")
 
-[section #50 type=heading slot=heading languages=]
+[section #55 type=heading slot=heading languages=Latin+English]
   heading: lesson 6
-  (no lines)
+  English: text("_")
+  Latin: text("_")
+  English: text("Reading 6")
+  Latin: text("Lectio 6")
 
-[section #51 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/06-29#Lectio6 languages=Latin]
+[section #56 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/06-29#Lectio6 languages=Latin]
   Latin: text("Disposítio namque divínitus óperi máxime congruébat, ut multa regna uno confœderaréntur império, et cito pérvios habéret pópulos prædicátio generális, quos uníus tenéret régimen civitátis. Hæc autem cívitas ignórans suæ provectiónis auctórem, cum pene ómnibus dominarétur géntibus, ómnium géntium serviébat erróribus; et magnam sibi videbátur assumpsísse religiónem, quia nullam respúerat falsitátem. Unde, quantum erat per diábolum tenácius illigáta, tantum per Christum est mirabílius absolúta.")
 
-[section #52 type=responsory slot=responsory reference=horas/Latin/Sancti/06-29#Responsory6 languages=Latin]
+[section #57 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Tu autem languages=Latin]
+  Latin: [V.] text("Tu autem, Dómine, miserére nobis.")
+  Latin: [R.] text("Deo grátias.")
+
+[section #58 type=responsory slot=responsory reference=horas/Latin/Sancti/06-29#Responsory6 languages=Latin]
+  Latin: text("_")
   Latin: [R.] text("Tu es pastor óvium, princeps Apostolórum: tibi trádidit Deus ómnia regna mundi:")
   Latin: text("* Et ídeo tibi tráditæ sunt claves regni cælórum.")
   Latin: [V.] text("Quodcúmque ligáveris super terram, erit ligátum et in cælis; et quodcúmque sólveris super terram, erit solútum et in cælis.")
@@ -382,11 +432,12 @@ warning count: 0
   Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
   Latin: [R.] text("Et ídeo tibi tráditæ sunt claves regni cælórum.")
 
-[section #53 type=heading slot=heading languages=]
+[section #59 type=heading slot=heading languages=Latin+English]
   heading: nocturn 3
-  (no lines)
+  English: text("At the Nocturn")
+  Latin: text("Ad Nocturnum")
 
-[section #54 type=psalm slot=psalmody reference=horas/Latin/Commune/C1#Ant Matutinum:7 languages=Latin]
+[section #60 type=psalm slot=psalmody reference=horas/Latin/Commune/C1#Ant Matutinum:7 languages=Latin]
   Latin: [Ant.] text("Exaltabúntur * córnua justi, allelúja.")
   Latin: text("Psalmus 74 [1]")
   Latin: text("74:2 Confitébimur tibi, Deus: * confitébimur, et invocábimus nomen tuum.")
@@ -436,63 +487,39 @@ warning count: 0
   Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
   Latin: [Ant.] text("Custodiébant testimónia ejus, et præcépta ejus, allelúja.")
 
-[section #55 type=versicle slot=versicle reference=horas/Latin/Commune/C1#Nocturn 3 Versum languages=Latin]
+[section #61 type=versicle slot=versicle reference=horas/Latin/Commune/C1#Nocturn 3 Versum languages=Latin]
   Latin: [V.] text("Nimis honoráti sunt amíci tui, Deus.")
   Latin: [R.] text("Nimis confortátus est principátus eórum.")
 
-[section #56 type=other slot=other reference=horas/Latin/Psalterium/Common/Rubricae#Pater secreto languages=Latin]
+[section #62 type=other slot=other reference=horas/Latin/Psalterium/Common/Rubricae#Pater secreto languages=Latin]
   Latin: rubric("« Pater Noster » dicitur secreto usque ad « Et ne nos indúcas in tentatiónem: »")
 
-[section #57 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Pater noster Et languages=Latin]
+[section #63 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Pater noster Et languages=Latin]
   Latin: [v.] text("Pater noster, qui es in cælis, sanctificétur nomen tuum: advéniat regnum tuum: fiat volúntas tua, sicut in cælo et in terra. Panem nostrum cotidiánum da nobis hódie: et dimítte nobis débita nostra, sicut et nos dimíttimus debitóribus nostris:")
   Latin: [V.] text("Et ne nos indúcas in tentatiónem:")
   Latin: [R.] text("Sed líbera nos a malo.")
 
-[section #58 type=other slot=other reference=matins-absolutio languages=Latin]
+[section #64 type=other slot=other reference=matins-absolutio languages=Latin]
   Latin: [Absolutio.] text("A vínculis peccatórum nostrórum absólvat nos omnípotens et miséricors Dóminus.")
 
-[section #59 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Amen languages=Latin]
+[section #65 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Amen languages=Latin]
   Latin: [R.] text("Amen.")
-
-[section #60 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Jube domne languages=Latin]
-  Latin: [V.] text("Jube, Dómine, benedícere.")
-
-[section #61 type=benedictio slot=benedictio reference=horas/Latin/Psalterium/Benedictions.txt#Nocturn 3:1 languages=Latin]
-  Latin: text("Ille nos benedícat, qui sine fine vivit et regnat.")
-
-[section #62 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Amen languages=Latin]
-  Latin: [R.] text("Amen.")
-
-[section #63 type=heading slot=heading languages=]
-  heading: lesson 7
-  (no lines)
-
-[section #64 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/06-29#Lectio7 languages=Latin]
-  Latin: text("Léctio sancti Evangélii secúndum Matthǽum")
-  Latin: text(" ") · citation("Matt 16:13-19")
-  Latin: text("In illo témpore: Venit Jesus in partes Cæsaréæ Philíppi, et interrogábat discípulos suos, dicens: Quem dicunt hómines esse Fílium hóminis? Et réliqua.")
-  Latin: text("Homilía sancti Hierónymi Presbýteri")
-  Latin: rubric("Lib. 3 Comment. in Matth. cap. 16")
-  Latin: text("Pulchre intérrogat: Quem dicunt hómines esse Fílium hóminis? quia qui de fílio hóminis loquúntur, hómines sunt; qui vero divinitátem ejus intéllegunt, non hómines, sed dii appellántur. At illi dixérunt: Alii Joánnem Baptístam, álii autem Elíam. Miror quosdam intérpretes causas errórum inquírere singulórum, et disputatiónem longíssimam téxere, quare Dóminum nostrum Jesum Christum álii Joánnem putáverint, álii Elíam, álii Jeremíam aut unum ex prophétis; cum sic potúerint erráre in Elía et Jeremía, quo modo Heródes errávit in Joánne, dicens: Quem ego decollávi Joánnem, ipse surréxit a mórtuis, et virtútes operántur in eo.")
-
-[section #65 type=responsory slot=responsory reference=horas/Latin/Sancti/06-29#Responsory7 languages=Latin]
-  Latin: [R.] text("Ego pro te rogávi, Petre, ut non defíciat fides tua:")
-  Latin: text("* Et tu aliquándo convérsus confírma fratres tuos.")
-  Latin: [V.] text("Caro et sanguis non revelávit tibi, sed Pater meus, qui est in cælis.")
-  Latin: [R.] text("Et tu aliquándo convérsus confírma fratres tuos.")
 
 [section #66 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Jube domne languages=Latin]
   Latin: [V.] text("Jube, Dómine, benedícere.")
 
-[section #67 type=benedictio slot=benedictio reference=horas/Latin/Psalterium/Benedictions.txt#Nocturn 3:2 languages=Latin]
-  Latin: text("Divínum auxílium máneat semper nobíscum.")
+[section #67 type=benedictio slot=benedictio reference=horas/Latin/Psalterium/Benedictions.txt#Nocturn 3:1 languages=Latin]
+  Latin: [Benedictio.] text("Ille nos benedícat, qui sine fine vivit et regnat.")
 
 [section #68 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Amen languages=Latin]
   Latin: [R.] text("Amen.")
 
-[section #69 type=heading slot=heading languages=]
-  heading: lesson 8
-  (no lines)
+[section #69 type=heading slot=heading languages=Latin+English]
+  heading: lesson 7
+  English: text("_")
+  Latin: text("_")
+  English: text("Reading 7")
+  Latin: text("Lectio 7")
 
 [section #70 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/06-29#Lectio7 languages=Latin]
   Latin: text("Léctio sancti Evangélii secúndum Matthǽum")
@@ -502,7 +529,47 @@ warning count: 0
   Latin: rubric("Lib. 3 Comment. in Matth. cap. 16")
   Latin: text("Pulchre intérrogat: Quem dicunt hómines esse Fílium hóminis? quia qui de fílio hóminis loquúntur, hómines sunt; qui vero divinitátem ejus intéllegunt, non hómines, sed dii appellántur. At illi dixérunt: Alii Joánnem Baptístam, álii autem Elíam. Miror quosdam intérpretes causas errórum inquírere singulórum, et disputatiónem longíssimam téxere, quare Dóminum nostrum Jesum Christum álii Joánnem putáverint, álii Elíam, álii Jeremíam aut unum ex prophétis; cum sic potúerint erráre in Elía et Jeremía, quo modo Heródes errávit in Joánne, dicens: Quem ego decollávi Joánnem, ipse surréxit a mórtuis, et virtútes operántur in eo.")
 
-[section #71 type=responsory slot=responsory reference=horas/Latin/Sancti/06-29#Responsory8 languages=Latin]
+[section #71 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Tu autem languages=Latin]
+  Latin: [V.] text("Tu autem, Dómine, miserére nobis.")
+  Latin: [R.] text("Deo grátias.")
+
+[section #72 type=responsory slot=responsory reference=horas/Latin/Sancti/06-29#Responsory7 languages=Latin]
+  Latin: text("_")
+  Latin: [R.] text("Ego pro te rogávi, Petre, ut non defíciat fides tua:")
+  Latin: text("* Et tu aliquándo convérsus confírma fratres tuos.")
+  Latin: [V.] text("Caro et sanguis non revelávit tibi, sed Pater meus, qui est in cælis.")
+  Latin: [R.] text("Et tu aliquándo convérsus confírma fratres tuos.")
+
+[section #73 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Jube domne languages=Latin]
+  Latin: [V.] text("Jube, Dómine, benedícere.")
+
+[section #74 type=benedictio slot=benedictio reference=horas/Latin/Psalterium/Benedictions.txt#Nocturn 3:2 languages=Latin]
+  Latin: [Benedictio.] text("Divínum auxílium máneat semper nobíscum.")
+
+[section #75 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Amen languages=Latin]
+  Latin: [R.] text("Amen.")
+
+[section #76 type=heading slot=heading languages=Latin+English]
+  heading: lesson 8
+  English: text("_")
+  Latin: text("_")
+  English: text("Reading 8")
+  Latin: text("Lectio 8")
+
+[section #77 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/06-29#Lectio7 languages=Latin]
+  Latin: text("Léctio sancti Evangélii secúndum Matthǽum")
+  Latin: text(" ") · citation("Matt 16:13-19")
+  Latin: text("In illo témpore: Venit Jesus in partes Cæsaréæ Philíppi, et interrogábat discípulos suos, dicens: Quem dicunt hómines esse Fílium hóminis? Et réliqua.")
+  Latin: text("Homilía sancti Hierónymi Presbýteri")
+  Latin: rubric("Lib. 3 Comment. in Matth. cap. 16")
+  Latin: text("Pulchre intérrogat: Quem dicunt hómines esse Fílium hóminis? quia qui de fílio hóminis loquúntur, hómines sunt; qui vero divinitátem ejus intéllegunt, non hómines, sed dii appellántur. At illi dixérunt: Alii Joánnem Baptístam, álii autem Elíam. Miror quosdam intérpretes causas errórum inquírere singulórum, et disputatiónem longíssimam téxere, quare Dóminum nostrum Jesum Christum álii Joánnem putáverint, álii Elíam, álii Jeremíam aut unum ex prophétis; cum sic potúerint erráre in Elía et Jeremía, quo modo Heródes errávit in Joánne, dicens: Quem ego decollávi Joánnem, ipse surréxit a mórtuis, et virtútes operántur in eo.")
+
+[section #78 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Tu autem languages=Latin]
+  Latin: [V.] text("Tu autem, Dómine, miserére nobis.")
+  Latin: [R.] text("Deo grátias.")
+
+[section #79 type=responsory slot=responsory reference=horas/Latin/Sancti/06-29#Responsory8 languages=Latin]
+  Latin: text("_")
   Latin: [R.] text("Quem dicunt hómines esse Filium hóminis? dixit Jesus discípulis suis. Respóndens Petrus dixit: Tu es Christus Fílius Dei vivi.")
   Latin: text("* Et ego dico tibi, quia tu es Petrus, et super hanc petram ædificábo Ecclésiam meam.")
   Latin: [V.] text("Beátus es, Simon Bar-Jona, quia caro et sanguis non revelávit tibi, sed Pater meus qui est in cælis.")
@@ -511,20 +578,23 @@ warning count: 0
   Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
   Latin: [R.] text("Et ego dico tibi, quia tu es Petrus, et super hanc petram ædificábo Ecclésiam meam.")
 
-[section #72 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Jube domne languages=Latin]
+[section #80 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Jube domne languages=Latin]
   Latin: [V.] text("Jube, Dómine, benedícere.")
 
-[section #73 type=benedictio slot=benedictio reference=horas/Latin/Psalterium/Benedictions.txt#Nocturn 3:3 languages=Latin]
-  Latin: text("Ad societátem cívium supernórum perdúcat nos Rex Angelórum.")
+[section #81 type=benedictio slot=benedictio reference=horas/Latin/Psalterium/Benedictions.txt#Nocturn 3:3 languages=Latin]
+  Latin: [Benedictio.] text("Ad societátem cívium supernórum perdúcat nos Rex Angelórum.")
 
-[section #74 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Amen languages=Latin]
+[section #82 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Amen languages=Latin]
   Latin: [R.] text("Amen.")
 
-[section #75 type=heading slot=heading languages=]
+[section #83 type=heading slot=heading languages=Latin+English]
   heading: lesson 9
-  (no lines)
+  English: text("_")
+  Latin: text("_")
+  English: text("Reading 9")
+  Latin: text("Lectio 9")
 
-[section #76 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/06-29#Lectio7 languages=Latin]
+[section #84 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/06-29#Lectio7 languages=Latin]
   Latin: text("Léctio sancti Evangélii secúndum Matthǽum")
   Latin: text(" ") · citation("Matt 16:13-19")
   Latin: text("In illo témpore: Venit Jesus in partes Cæsaréæ Philíppi, et interrogábat discípulos suos, dicens: Quem dicunt hómines esse Fílium hóminis? Et réliqua.")
@@ -532,13 +602,18 @@ warning count: 0
   Latin: rubric("Lib. 3 Comment. in Matth. cap. 16")
   Latin: text("Pulchre intérrogat: Quem dicunt hómines esse Fílium hóminis? quia qui de fílio hóminis loquúntur, hómines sunt; qui vero divinitátem ejus intéllegunt, non hómines, sed dii appellántur. At illi dixérunt: Alii Joánnem Baptístam, álii autem Elíam. Miror quosdam intérpretes causas errórum inquírere singulórum, et disputatiónem longíssimam téxere, quare Dóminum nostrum Jesum Christum álii Joánnem putáverint, álii Elíam, álii Jeremíam aut unum ex prophétis; cum sic potúerint erráre in Elía et Jeremía, quo modo Heródes errávit in Joánne, dicens: Quem ego decollávi Joánnem, ipse surréxit a mórtuis, et virtútes operántur in eo.")
 
-[section #77 type=te-deum slot=te-deum reference=horas/Latin/Psalterium/Common/Prayers#Te Deum languages=Latin]
+[section #85 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Tu autem languages=Latin]
+  Latin: [V.] text("Tu autem, Dómine, miserére nobis.")
+  Latin: [R.] text("Deo grátias.")
+
+[section #86 type=te-deum slot=te-deum reference=horas/Latin/Psalterium/Common/Prayers#Te Deum languages=Latin]
+  Latin: text("_")
+  Latin: text("Te Deum")
   Latin: [v.] text("Te Deum laudámus: * te Dóminum confitémur.")
   Latin: text("Te ætérnum Patrem * omnis terra venerátur.")
   Latin: text("Tibi omnes Ángeli, * tibi Cæli, et univérsæ Potestátes:")
   Latin: text("Tibi Chérubim et Séraphim * incessábili voce proclámant:")
-  Latin: rubric("Fit reverentia")
-  Latin: text("Sanctus, Sanctus, Sanctus * Dóminus Deus Sábaoth.")
+  Latin: text("Fit reverentia Sanctus, Sanctus, Sanctus * Dóminus Deus Sábaoth.")
   Latin: text("Pleni sunt cæli et terra * majestátis glóriæ tuæ.")
   Latin: text("Te gloriósus * Apostolórum chorus,")
   Latin: text("Te Prophetárum * laudábilis númerus,")
@@ -549,27 +624,36 @@ warning count: 0
   Latin: text("Sanctum quoque * Paráclitum Spíritum.")
   Latin: text("Tu Rex glóriæ, * Christe.")
   Latin: text("Tu Patris * sempitérnus es Fílius.")
-  Latin: rubric("Fit reverentia")
-  Latin: text("Tu, ad liberándum susceptúrus hóminem: * non horruísti Vírginis úterum.")
+  Latin: text("Fit reverentia Tu, ad liberándum susceptúrus hóminem: * non horruísti Vírginis úterum.")
   Latin: text("Tu, devícto mortis acúleo, * aperuísti credéntibus regna cælórum.")
   Latin: text("Tu ad déxteram Dei sedes, * in glória Patris.")
   Latin: text("Judex créderis * esse ventúrus.")
-  Latin: rubric("Sequens versus dicitur flexis genibus")
-  Latin: text("(sed rubrica cisterciensis dicitur)")
-  Latin: rubric("Fratres, quando incipiunt « Te ergo quæsumus, » exeuntes e Stallis, reverenter inclinent ad verba « Quos pretioso » et cetera")
-  Latin: text("Te ergo quǽsumus, tuis fámulis súbveni, * quos pretióso sánguine redemísti.")
+  Latin: text("Sequens versus dicitur flexis genibus Te ergo quǽsumus, tuis fámulis súbveni, * quos pretióso sánguine redemísti.")
   Latin: text("Ætérna fac cum Sanctis tuis * in glória numerári.")
   Latin: text("Salvum fac pópulum tuum, Dómine, * et bénedic hereditáti tuæ.")
   Latin: text("Et rege eos, * et extólle illos usque in ætérnum.")
   Latin: text("Per síngulos dies * benedícimus te.")
-  Latin: rubric("Fit reverentia, secundum consuetudinem")
-  Latin: text("Et laudámus nomen tuum in sǽculum, * et in sǽculum sǽculi.")
+  Latin: text("Fit reverentia, secundum consuetudinem Et laudámus nomen tuum in sǽculum, * et in sǽculum sǽculi.")
   Latin: text("Dignáre, Dómine, die isto * sine peccáto nos custodíre.")
   Latin: text("Miserére nostri, Dómine, * miserére nostri.")
   Latin: text("Fiat misericórdia tua, Dómine, super nos, * quemádmodum sperávimus in te.")
   Latin: text("In te, Dómine, sperávi: * non confúndar in ætérnum.")
 
-[section #78 type=oration slot=oration reference=horas/Latin/Sancti/06-29#Oratio languages=Latin]
+[section #87 type=other slot=de-officio-capituli reference=horas/Latin/Psalterium/Common/Rubricae#Matutinum languages=Latin]
+  Latin: rubric("Reliqua omittuntur, nisi %Laudes% separandæ sint.")
+
+[section #88 type=oration slot=oration reference=horas/Latin/Psalterium/Common/Prayers#Domine exaudi languages=Latin]
+  Latin: [V.] text("Dómine, exáudi oratiónem meam.")
+  Latin: [R.] text("Et clamor meus ad te véniat.")
+  Latin: [v.] text("Orémus.")
   Latin: text("Deus, qui hodiérnam diem Apostolórum tuórum Petri et Pauli martýrio consecrásti: da Ecclésiæ tuæ, eórum in ómnibus sequi præcéptum; per quos religiónis sumpsit exórdium.")
   Latin: [r.] text("Per Dóminum nostrum Jesum Christum, Fílium tuum: qui tecum vivit et regnat in unitáte Spíritus Sancti, Deus, per ómnia sǽcula sæculórum.")
+  Latin: [R.] text("Amen.")
+
+[section #89 type=conclusion slot=conclusion reference=horas/Latin/Psalterium/Common/Prayers#Domine exaudi languages=Latin]
+  Latin: [V.] text("Dómine, exáudi oratiónem meam.")
+  Latin: [R.] text("Et clamor meus ad te véniat.")
+  Latin: [V.] text("Benedicámus Dómino.")
+  Latin: [R.] text("Deo grátias.")
+  Latin: [V.] text("Fidélium ánimæ per misericórdiam Dei requiéscant in pace.")
   Latin: [R.] text("Amen.")

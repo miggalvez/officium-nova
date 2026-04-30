@@ -1689,7 +1689,7 @@ describe('composeHour', () => {
     );
   });
 
-  it('avoids duplicating the civil date in the English Martyrologium moon label', () => {
+  it('formats the English Martyrologium moon label with the civil date prefix', () => {
     const corpus = new InMemoryTextIndex();
     corpus.addFile(
       makeFile('horas/English/Martyrologium/04-03', '__preamble', [
@@ -1720,9 +1720,9 @@ describe('composeHour', () => {
     const martyrology = composed.sections.find((section) => section.slot === 'martyrology');
     expect(martyrology?.slot).toBe('martyrology');
     const firstLine = renderRuns(martyrology!.lines[0]!, 'English');
-    expect(firstLine).toContain('Upon the 3rd day of April, were born into the better life:');
+    expect(firstLine).toContain('April 3rd 2024, the ');
     expect(firstLine).toContain('the ');
     expect(firstLine).toContain('day of the Moon');
-    expect(firstLine).not.toContain('April 3rd 2024');
+    expect(firstLine).not.toContain('Upon the 3rd day of April');
   });
 });

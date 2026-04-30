@@ -33,6 +33,7 @@ export type ComposedRun =
 
 export interface ComposedLine {
   readonly marker?: string;
+  readonly markers?: Readonly<Record<string, string>>;
   readonly texts: Readonly<Record<string, readonly ComposedRun[]>>;
 }
 

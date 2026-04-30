@@ -121,6 +121,11 @@ export function expandDeferredNodes(
         break;
       }
       case 'formulaRef': {
+        if (/^\s*Deus in adjutorium iij\s*$/iu.test(node.name)) {
+          const expanded = expandDeusInAdjutoriumTriple(context);
+          out.push(...(expanded ?? [node]));
+          break;
+        }
         const sectionCandidates = formulaSectionCandidates(node.name);
         const expanded = expandNamedSection(
           sectionCandidates,
@@ -250,12 +255,37 @@ function expandDominusVobiscumVariant(
   );
 }
 
+function expandDeusInAdjutoriumTriple(
+  context: DeferredNodeContext
+): readonly TextContent[] | undefined {
+  const expanded = expandReference(
+    {
+      path: COMMON_PRAYERS_PATH,
+      section: 'Deus in adjutorium'
+    },
+    context
+  );
+  if (!expanded || expanded.length === 0) {
+    return undefined;
+  }
+
+  const opening = expanded.slice(0, 2).map((node) =>
+    node.type === 'verseMarker' && /^v\.?$/iu.test(node.marker)
+      ? { ...node, text: node.text.replace(/\s*\+\s*/u, ' ') }
+      : node
+  );
+  return Object.freeze([...opening, ...opening, ...opening]);
+}
+
 function macroSectionCandidates(name: string): readonly string[] {
   return dedupe([normalizeMacroLikeName(name), ...macroAliasSections(name)]);
 }
 
 function formulaSectionCandidates(name: string): readonly string[] {
   const trimmed = name.trim();
+  if (/^Confiteor$/iu.test(trimmed)) {
+    return ['Confiteor_', 'Confiteor'];
+  }
   const strippedPeriod = trimmed.replace(/[.]+$/u, '').trim();
   const strippedRubric = strippedPeriod.replace(/^rubrica\s+/iu, '').trim();
   const rubricLowered =
@@ -270,6 +300,7 @@ function formulaSectionCandidates(name: string): readonly string[] {
   return dedupe([
     trimmed,
     strippedPeriod,
+    `${strippedPeriod}_`,
     strippedRubric,
     rubricLowered,
     rubricCapitalized

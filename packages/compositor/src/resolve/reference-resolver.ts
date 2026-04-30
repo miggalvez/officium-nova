@@ -280,10 +280,14 @@ function synthesizePrimaSpecialChapter(
     language: source.language,
     path: source.path,
     section: source.section,
-    content: Object.freeze([
-      ...source.section.content,
-      { type: 'formulaRef', name: 'Deo gratias' }
-    ] satisfies TextContent[]),
+    content: Object.freeze(
+      reference.selector === 'without-deo-gratias'
+        ? source.section.content
+        : ([
+            ...source.section.content,
+            { type: 'formulaRef', name: 'Deo gratias' }
+          ] satisfies TextContent[])
+    ),
     selectorUnhandled: false,
     selectorMissing: false
   });
@@ -577,6 +581,7 @@ function buildPaschalShortResponsorySection(args: {
   const alleluia = alleluiaWords(args.language);
   const response = `${args.responseBase.replace(/\.?$/u, '')}, * ${alleluia.capitalized}, ${alleluia.lowercase}.`;
   const content: TextContent[] = [
+    ...(args.header === 'Responsory Completorium' ? ([{ type: 'separator' } satisfies TextContent] as const) : []),
     { type: 'verseMarker', marker: 'R.br.', text: response },
     { type: 'verseMarker', marker: 'R.', text: response }
   ];
@@ -588,6 +593,9 @@ function buildPaschalShortResponsorySection(args: {
     { type: 'macroRef', name: 'Gloria1' },
     { type: 'verseMarker', marker: 'R.', text: response }
   );
+  if (args.header === 'Responsory Completorium') {
+    content.push({ type: 'separator' });
+  }
 
   return Object.freeze({
     language: args.source.language,

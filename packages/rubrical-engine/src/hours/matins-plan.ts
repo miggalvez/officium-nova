@@ -603,6 +603,15 @@ function buildResponsory(
   const sectionName = `Responsory${index}`;
 
   if (usesThirdClassSanctoralWeekdayFerialMatinsPsalmody(input)) {
+    if (index === 2) {
+      const thirdScriptureResponsory = findScriptureResponsory(3, input, lessonSource);
+      if (thirdScriptureResponsory) {
+        return {
+          index,
+          reference: thirdScriptureResponsory
+        };
+      }
+    }
     const scriptureResponsory = findScriptureResponsory(index, input, lessonSource);
     if (scriptureResponsory) {
       return {

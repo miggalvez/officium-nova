@@ -18,7 +18,7 @@ warning count: 0
   Latin: [R.] text("Deo grátias.")
   Latin: [V.] text("Adjutórium nostrum + in nómine Dómini.")
   Latin: [R.] text("Qui fecit cælum et terram.")
-  Latin: rubric("Examen conscientiæ vel Pater Noster totum secreto.")
+  Latin: rubric("Examen conscientiæ vel «Pater Noster» totum secreto.")
   Latin: [v.] text("Pater noster, qui es in cælis, sanctificétur nomen tuum: advéniat regnum tuum: fiat volúntas tua, sicut in cælo et in terra. Panem nostrum cotidiánum da nobis hódie: et dimítte nobis débita nostra, sicut et nos dimíttimus debitóribus nostris: et ne nos indúcas in tentatiónem: sed líbera nos a malo. Amen.")
   Latin: [v.] text("Confíteor Deo omnipoténti, beátæ Maríæ semper Vírgini, beáto Michaéli Archángelo, beáto Joánni Baptístæ, sanctis Apóstolis Petro et Paulo, et ómnibus Sanctis, quia peccávi nimis, cogitatióne, verbo et ópere:") · text(" ") · rubric("percutit sibi pectus") · text(" mea culpa, mea culpa, mea máxima culpa. Ídeo precor beátam Maríam semper Vírginem, beátum Michaélem Archángelum, beátum Joánnem Baptístam, sanctos Apóstolos Petrum et Paulum, et omnes Sanctos, oráre pro me ad Dóminum Deum nostrum.")
   Latin: [v.] text("Misereátur nostri omnípotens Deus, et dimíssis peccátis nostris, perdúcat nos ad vitam ætérnam. Amen.")
@@ -102,7 +102,7 @@ warning count: 0
   Latin: text("In sempitérna sǽcula.")
   Latin: text("Amen.")
 
-[section #4 type=chapter slot=chapter reference=horas/Latin/Psalterium/Special/Minor Special#Completorium languages=Latin]
+[section #4 type=chapter slot=chapter reference=horas/Latin/Psalterium/Special/Minor Special#Completorium_ languages=Latin]
   Latin: text(" ") · citation("Jer 14:9")
   Latin: [v.] text("Tu autem in nobis es, Dómine, et nomen sanctum tuum invocátum est super nos: ne derelínquas nos, Dómine, Deus noster.")
   Latin: [R.] text("Deo grátias.")
@@ -133,17 +133,17 @@ warning count: 0
   Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
   Latin: [Ant.] text("Salva nos, Dómine, vigilántes, custódi nos dormiéntes; ut vigilémus cum Christo, et requiescámus in pace.")
 
-[section #9 type=oration slot=oration reference=horas/Latin/Sancti/01-06#Oratio languages=Latin]
-  Latin: text("Deus, qui hodiérna die Unigénitum tuum géntibus stella duce revelásti: concéde propítius; ut qui jam te ex fide cognóvimus, usque ad contemplándam spéciem tuæ celsitúdinis perducámur.")
-  Latin: [r.] text("Per eúmdem Dóminum nostrum Jesum Christum Fílium tuum, qui tecum vivit et regnat in unitáte Spíritus Sancti, Deus, per ómnia sǽcula sæculórum.")
-  Latin: [R.] text("Amen.")
-
-[section #10 type=conclusion slot=conclusion reference=horas/Ordinarium/Completorium#Conclusio languages=Latin]
-  Latin: [V.] text("Dóminus vobíscum.")
-  Latin: [R.] text("Et cum spíritu tuo.")
+[section #9 type=oration slot=oration reference=horas/Latin/Psalterium/Common/Prayers#Domine exaudi languages=Latin]
   Latin: [V.] text("Dómine, exáudi oratiónem meam.")
   Latin: [R.] text("Et clamor meus ad te véniat.")
-  Latin: rubric("secunda Domine, exaudi omittitur")
+  Latin: [v.] text("Orémus.")
+  Latin: [v.] text("Vísita, quǽsumus, Dómine, habitatiónem istam, et omnes insídias inimíci ab ea longe repélle: Ángeli tui sancti hábitent in ea, qui nos in pace custódiant; et benedíctio tua sit super nos semper.")
+  Latin: [r.] text("Per Dóminum nostrum Jesum Christum, Fílium tuum: qui tecum vivit et regnat in unitáte Spíritus Sancti, Deus, per ómnia sǽcula sæculórum.")
+  Latin: [R.] text("Amen.")
+
+[section #10 type=conclusion slot=conclusion reference=horas/Latin/Psalterium/Common/Prayers#Domine exaudi languages=Latin]
+  Latin: [V.] text("Dómine, exáudi oratiónem meam.")
+  Latin: [R.] text("Et clamor meus ad te véniat.")
   Latin: [V.] text("Benedicámus Dómino.")
   Latin: [R.] text("Deo grátias.")
   Latin: [Benedictio.] text("Benedícat et custódiat nos omnípotens et miséricors Dóminus, + Pater, et Fílius, et Spíritus Sanctus.")

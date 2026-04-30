@@ -374,7 +374,7 @@ describe('buildMatinsPlan', () => {
       {
         appendGloria: true,
         index: 2,
-        reference: { path: 'horas/Latin/Tempora/Pasc3-3', section: 'Responsory2' }
+        reference: { path: 'horas/Latin/Tempora/Pasc3-3', section: 'Responsory3' }
       }
     ]);
     expect(nocturn?.benedictions.map((entry) => entry.reference.selector)).toEqual([

@@ -313,7 +313,7 @@ interface LeadingCanticleTitleLine {
 
 function parseCanticleTitleLine(text: string): CanticleTitleLine | undefined {
   const match = text.match(
-    /^\s*\(((?:Canticum|Canticle of)(?:\s+[^*)]+?)?)(?:\s*\*\s*([^)]+))?\)\s*$/u
+    /^\s*\(((?:Canticum|Canticle of)[^*)]*?)(?:\s*\*\s*([^)]+))?\)\s*$/u
   );
   const title = match?.[1]?.replace(/\s+/gu, ' ').trim();
   if (!title) return undefined;

@@ -59,6 +59,10 @@ const TE_DEUM_REF: TextReference = {
   path: 'horas/Latin/Psalterium/Common/Prayers',
   section: 'Te Deum'
 };
+const MATINS_LAUDS_SEPARATION_REF: TextReference = {
+  path: 'horas/Latin/Psalterium/Common/Rubricae',
+  section: 'Matutinum'
+};
 const PATER_SECRETO_REF: TextReference = {
   path: 'horas/Latin/Psalterium/Common/Rubricae',
   section: 'Pater secreto'
@@ -74,6 +78,10 @@ const PATER_NOSTER_ET_REF: TextReference = {
 const JUBE_DOMNE_REF: TextReference = {
   path: 'horas/Latin/Psalterium/Common/Prayers',
   section: 'Jube domne'
+};
+const TU_AUTEM_REF: TextReference = {
+  path: 'horas/Latin/Psalterium/Common/Prayers',
+  section: 'Tu autem'
 };
 const AMEN_REF: TextReference = {
   path: 'horas/Latin/Psalterium/Common/Prayers',
@@ -156,8 +164,10 @@ export function composeMatinsSections(
   const teDeum = hour.slots['te-deum'];
   if (teDeum && teDeum.kind === 'te-deum') {
     if (teDeum.decision === 'say') {
-      const section = composeReferenceSlot('te-deum', TE_DEUM_REF, args);
+      const section = prependTeDeumHeading(composeReferenceSlot('te-deum', TE_DEUM_REF, args), args.options.languages);
       if (section) sections.push(section);
+      const matinsRubric = composeReferenceSlot('de-officio-capituli', MATINS_LAUDS_SEPARATION_REF, args);
+      if (matinsRubric) sections.push(matinsRubric);
     } else if (teDeum.decision === 'replace-with-responsory' && psalmody && psalmody.kind === 'matins-nocturns') {
       // Per Phase 3 plan §3d and Perl `specmatins.pl`: when the policy
       // resolves `teDeum: 'replace-with-responsory'` the 9th / last
@@ -168,6 +178,8 @@ export function composeMatinsSections(
       if (replacementRef) {
         const section = composeReferenceSlot('te-deum', replacementRef, args);
         if (section) sections.push(section);
+        const matinsRubric = composeReferenceSlot('de-officio-capituli', MATINS_LAUDS_SEPARATION_REF, args);
+        if (matinsRubric) sections.push(matinsRubric);
       }
     }
     // `decision === 'omit'` emits nothing, per RI §196 (Sacred Triduum) and
@@ -176,6 +188,37 @@ export function composeMatinsSections(
   }
 
   return sections;
+}
+
+function prependTeDeumHeading(
+  section: Section | undefined,
+  languages: readonly string[]
+): Section | undefined {
+  if (!section) {
+    return undefined;
+  }
+  return Object.freeze({
+    ...section,
+    lines: Object.freeze([
+      Object.freeze({
+        texts: Object.freeze(Object.fromEntries(
+          languages.map((language) => [
+            language,
+            Object.freeze([{ type: 'text' as const, value: '_' }])
+          ])
+        ))
+      }),
+      Object.freeze({
+        texts: Object.freeze(Object.fromEntries(
+          languages.map((language) => [
+            language,
+            Object.freeze([{ type: 'text' as const, value: 'Te Deum' }])
+          ])
+        ))
+      }),
+      ...section.lines
+    ])
+  });
 }
 
 function findTeDeumReplacement(
@@ -360,16 +403,24 @@ function composeNocturn(
     const responsorySection = responsory
       ? responsory.replacesTeDeum
         ? undefined
-        : composeReferenceSlot('responsory', responsory.reference, args, undefined, {
-            appendGloria: responsory.appendGloria === true
-          })
+        : prependSeparatorLine(
+            composeReferenceSlot('responsory', responsory.reference, args, undefined, {
+              appendGloria: responsory.appendGloria === true
+            }),
+            args.options.languages
+          )
       : undefined;
     const benediction = nocturn.benedictions.find((b) => b.index === lesson.index);
     const benedictioSection = benediction
-      ? composeReferenceSlot('benedictio', benediction.reference, args)
+      ? markSectionFirstLine(
+          composeReferenceSlot('benedictio', benediction.reference, args),
+          'Benedictio.',
+          args.options.languages
+        )
       : undefined;
     const jubeSection = benedictioSection ? composeOtherReferenceSection(JUBE_DOMNE_REF, args) : undefined;
     const amenSection = benedictioSection ? composeOtherReferenceSection(AMEN_REF, args) : undefined;
+    const tuAutemSection = lessonSection ? composeOtherReferenceSection(TU_AUTEM_REF, args) : undefined;
 
     // Only emit a heading when at least one downstream section resolves;
     // otherwise the client would see an orphan "Lectio N" label with no text.
@@ -389,10 +440,34 @@ function composeNocturn(
       out.push(headingSection({ kind: 'lesson', ordinal: lesson.index }));
     }
     if (lessonSection) out.push(lessonSection);
+    if (tuAutemSection) out.push(tuAutemSection);
     if (responsorySection) out.push(responsorySection);
   }
 
   return out;
+}
+
+function prependSeparatorLine(
+  section: Section | undefined,
+  languages: readonly string[]
+): Section | undefined {
+  if (!section) {
+    return undefined;
+  }
+  return Object.freeze({
+    ...section,
+    lines: Object.freeze([
+      Object.freeze({
+        texts: Object.freeze(Object.fromEntries(
+          languages.map((language) => [
+            language,
+            Object.freeze([{ type: 'text' as const, value: '_' }])
+          ])
+        ))
+      }),
+      ...section.lines
+    ])
+  });
 }
 
 function composePsalmody(
@@ -469,7 +544,30 @@ function usesGroupedMatinsAntiphon(ref: TextReference): boolean {
 function composeLesson(lesson: LessonPlan, args: MatinsComposeContext): Section | undefined {
   const ref = lessonReference(lesson.source);
   if (!ref) return undefined;
+  if (shouldCombineSecondAndThirdScriptureLessons(lesson, args)) {
+    return composeMergedSlot(
+      'lectio-brevis',
+      [
+        { ref, isAntiphon: false },
+        { ref: { ...ref, section: 'Lectio3' }, isAntiphon: false }
+      ],
+      args
+    );
+  }
   return composeReferenceSlot('lectio-brevis', ref, args);
+}
+
+function shouldCombineSecondAndThirdScriptureLessons(
+  lesson: LessonPlan,
+  args: MatinsComposeContext
+): boolean {
+  return (
+    lesson.index === 2 &&
+    (lesson.source.kind === 'scripture' || lesson.source.kind === 'scripture-transferred') &&
+    args.context.version.handle.includes('1960') &&
+    args.summary.celebration.source === 'sanctoral' &&
+    args.summary.celebration.rank.classSymbol === 'III'
+  );
 }
 
 function lessonReference(source: LessonSource): TextReference | undefined {
@@ -536,7 +634,7 @@ function withResponsoryGloria(
   const repeatedResponse = findLastResponsoryResponse(content);
   return Object.freeze([
     ...content,
-    { type: 'macroRef', name: 'Gloria' } satisfies TextContent,
+    { type: 'macroRef', name: 'Gloria1' } satisfies TextContent,
     ...(repeatedResponse ? [repeatedResponse] : [])
   ]);
 }
@@ -756,13 +854,64 @@ function composeMergedSlot(
 }
 
 function headingSection(heading: HeadingDescriptor): Section {
+  const text =
+    heading.kind === 'nocturn'
+      ? { Latin: 'Ad Nocturnum', English: 'At the Nocturn' }
+      : { Latin: `Lectio ${heading.ordinal}`, English: `Reading ${heading.ordinal}` };
+  const lines =
+    heading.kind === 'lesson'
+      ? [
+          Object.freeze({
+            texts: Object.freeze({
+              Latin: Object.freeze([{ type: 'text' as const, value: '_' }]),
+              English: Object.freeze([{ type: 'text' as const, value: '_' }])
+            })
+          })
+        ]
+      : [];
   return Object.freeze({
     type: 'heading' as const,
     slot: 'heading',
     reference: undefined,
-    lines: Object.freeze([]),
-    languages: Object.freeze([]),
+    lines: Object.freeze([
+      ...lines,
+      Object.freeze({
+        texts: Object.freeze({
+          Latin: Object.freeze([{ type: 'text' as const, value: text.Latin }]),
+          English: Object.freeze([{ type: 'text' as const, value: text.English }])
+        })
+      })
+    ]),
+    languages: Object.freeze(['Latin', 'English']),
     heading: Object.freeze(heading)
+  });
+}
+
+function markSectionFirstLine(
+  section: Section | undefined,
+  marker: string,
+  languages: readonly string[]
+): Section | undefined {
+  const first = section?.lines[0];
+  if (!section || !first) {
+    return section;
+  }
+  const markers = Object.fromEntries(
+    languages.map((language) => [
+      language,
+      language === 'English' && /^Benedictio\.?$/iu.test(marker) ? 'Benediction.' : marker
+    ])
+  );
+  return Object.freeze({
+    ...section,
+    lines: Object.freeze([
+      Object.freeze({
+        ...first,
+        marker,
+        markers: Object.freeze(markers)
+      }),
+      ...section.lines.slice(1)
+    ])
   });
 }
 
@@ -819,6 +968,10 @@ function composeAbsolutioSection(
       lines: Object.freeze([
         Object.freeze({
           marker: 'Absolutio.',
+          markers: Object.freeze({
+            Latin: 'Absolutio.',
+            English: 'Absolution.'
+          }),
           texts: first!.texts
         }),
         ...rest
