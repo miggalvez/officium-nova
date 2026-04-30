@@ -155,6 +155,10 @@ describe('buildCompline', () => {
 
     const corpus = new TestOfficeTextIndex();
     corpus.add(
+      'horas/Latin/Tempora/Pent24-2.txt',
+      ['[Versum 1]', 'V. Proper Vespers versicle.'].join('\n')
+    );
+    corpus.add(
       'horas/Ordinarium/Completorium.txt',
       [
         '#Incipit',

@@ -478,8 +478,8 @@ function thirdSundayOfSeptember(year: number): number {
  *
  * This is an MVP shared by all three Roman policies: it produces the
  * structural Benedictio-before-Lectio output the compositor emits. The
- * cujus/quorum and "Evangelica" Gospel-homily substitutions (Perl lines
- * 496-530) remain open for later adjudication — see Phase 3 plan §3h.
+ * cujus/quorum and final-Gospel substitutions (Perl lines 496-530) remain
+ * open for later adjudication — see Phase 3 plan §3h.
  */
 export function selectRomanBenedictions(params: {
   readonly nocturnIndex: 1 | 2 | 3;
@@ -499,7 +499,22 @@ export function selectRomanBenedictions(params: {
   for (let offset = 0; offset < lessons.length; offset += 1) {
     const lesson = lessons[offset];
     if (!lesson) continue;
+    if (
+      usesEvangelicaOpeningBenediction({
+        nocturnIndex,
+        offset,
+        totalLessons,
+        celebration: params.celebration
+      })
+    ) {
+      entries.push({
+        index: lesson.index,
+        reference: { path, section: 'Evangelica', selector: '1' }
+      });
+      continue;
+    }
     const selector = benedictionSelector({
+      nocturnIndex,
       offset,
       totalLessons,
       celebration: params.celebration
@@ -512,15 +527,30 @@ export function selectRomanBenedictions(params: {
   return Object.freeze(entries);
 }
 
+function usesEvangelicaOpeningBenediction(params: {
+  readonly nocturnIndex: 1 | 2 | 3;
+  readonly offset: number;
+  readonly totalLessons: MatinsPlan['totalLessons'];
+  readonly celebration: FeastReferenceCarrier;
+}): boolean {
+  return (
+    params.nocturnIndex === 3 &&
+    params.offset === 0 &&
+    params.totalLessons !== 3 &&
+    !params.celebration.feastRef.path.endsWith('/12-25')
+  );
+}
+
 function benedictionSelector(params: {
+  readonly nocturnIndex: 1 | 2 | 3;
   readonly offset: number;
   readonly totalLessons: MatinsPlan['totalLessons'];
   readonly celebration: FeastReferenceCarrier;
 }): string {
   if (
-    params.totalLessons === 3 &&
     params.offset === 1 &&
-    params.celebration.source === 'sanctoral'
+    params.celebration.source === 'sanctoral' &&
+    (params.totalLessons === 3 || params.nocturnIndex === 3)
   ) {
     return String(4 + sanctoralCujusOffset(params.celebration.feastRef.title));
   }

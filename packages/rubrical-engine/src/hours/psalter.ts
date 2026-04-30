@@ -13,6 +13,7 @@ import type {
 } from '../types/rule-set.js';
 
 export interface SelectPsalmodyInput {
+  readonly policyName?: 'divino-afflatu' | 'reduced-1955' | 'rubrics-1960';
   readonly hour: HourName;
   readonly celebration: Celebration;
   readonly celebrationRules: CelebrationRuleSet;
@@ -165,8 +166,12 @@ function complineReferences(params: SelectPsalmodyInput): readonly PsalmAssignme
   // Pius X's Compline (1911) varies by day of week; 1960 retains that
   // distribution — the source file stores it as weekday-keyed entries under
   // the shared `Completorium` section in `Psalmi minor.txt`.
-  const { temporal, corpus } = params;
-  const weekdayKey = WEEKDAY_KEYS[temporal.dayOfWeek] ?? WEEKDAY_KEYS[0] ?? 'Dominica';
+  const { temporal, corpus, hourRules, policyName } = params;
+  const weekday =
+    policyName === 'rubrics-1960' && hourRules.psalterScheme === 'dominica'
+      ? 0
+      : temporal.dayOfWeek;
+  const weekdayKey = WEEKDAY_KEYS[weekday] ?? WEEKDAY_KEYS[0] ?? 'Dominica';
   const assignments = resolveWeekdayMinorHourAssignments(corpus, 'Completorium', weekdayKey, {
     includePrimeBracketPsalm: true
   });

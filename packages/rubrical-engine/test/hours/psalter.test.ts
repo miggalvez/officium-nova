@@ -147,6 +147,41 @@ describe('selectPsalmodyRoman1960', () => {
     expect(refs[0]?.psalmRef.section).toBe('Day0 Vespera');
   });
 
+  it('uses Sunday Compline psalms on high-ranking offices with Psalmi Dominica', () => {
+    const textIndex = new TestOfficeTextIndex();
+    textIndex.add(
+      'horas/Latin/Psalterium/Psalmi/Psalmi minor.txt',
+      `
+[Completorium]
+Dominica = Allelúja, * allelúja, allelúja.
+4,90,133
+Feria VI = Allelúja, * allelúja, allelúja.
+76(2-13),85,90
+`.trim()
+    );
+
+    const refs = selectPsalmodyRoman1960({
+      policyName: 'rubrics-1960',
+      hour: 'compline',
+      celebration: {
+        feastRef: { path: 'Sancti/05-01r', id: 'Sancti/05-01r', title: 'S. Joseph Opificis' },
+        rank: { name: 'I', classSymbol: 'I', weight: 1000 },
+        source: 'sanctoral'
+      },
+      celebrationRules: baseCelebrationRules(),
+      hourRules: hourRules('compline', { psalterScheme: 'dominica' }),
+      temporal: temporal('2026-05-01', 'Pasc3-5', 'eastertide', 5),
+      corpus: textIndex
+    });
+
+    expect(refs.map((entry) => entry.psalmRef.selector)).toEqual(['4', '90', '133']);
+    expect(refs[0]?.antiphonRef).toEqual({
+      path: 'horas/Latin/Psalterium/Psalmi/Psalmi minor',
+      section: 'Pasch',
+      selector: '1'
+    });
+  });
+
   it('psalm overrides replace only the targeted Vespers slot (Codex P1 #5)', () => {
     const refs = selectPsalmodyRoman1960({
       hour: 'vespers',

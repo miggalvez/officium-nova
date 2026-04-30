@@ -335,6 +335,22 @@ describeIfReady('Phase 2h DA/1955 upstream matrix', () => {
     expect(trinity.commemorations).toEqual([]);
     expect(trinity.concurrence.source.feastRef.path).toBe('Tempora/Pent01-0r');
 
+    const josephWorker = roman1960.resolveDayOfficeSummary('2026-05-01');
+    expect(josephWorker.hours.prime?.slots.chapter).toEqual({
+      kind: 'single-ref',
+      ref: {
+        path: 'horas/Latin/Psalterium/Special/Prima Special',
+        section: 'Dominica'
+      }
+    });
+    expect(josephWorker.hours.none?.slots.chapter).toEqual({
+      kind: 'single-ref',
+      ref: {
+        path: 'horas/Latin/Sancti/05-01r',
+        section: 'Capitulum Nona'
+      }
+    });
+
     const christmasVigil = roman1960.resolveDayOfficeSummary('2024-12-24');
     const vigilPsalmody = christmasVigil.hours.matins?.slots.psalmody;
     expect(vigilPsalmody?.kind).toBe('matins-nocturns');

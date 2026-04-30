@@ -266,7 +266,7 @@ warning count: 0
 
 [section #32 type=psalm slot=psalmody reference=horas/Latin/Sancti/01-01#Ant Matutinum:4 languages=Latin]
   Latin: [Ant.] text("Speciósus forma * præ fíliis hóminum, diffúsa est grátia in lábiis tuis.")
-  Latin: text("Psalmus 44 [1]")
+  Latin: text("Psalmus 44 [4]")
   Latin: text("44:2 Eructávit cor meum verbum bonum: * dico ego ópera mea Regi.")
   Latin: text("44:2 Lingua mea cálamus scribæ: * velóciter scribéntis.")
   Latin: text("44:3 Speciósus forma præ fíliis hóminum, diffúsa est grátia in lábiis tuis: * proptérea benedíxit te Deus in ætérnum.")
@@ -291,7 +291,7 @@ warning count: 0
   Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
   Latin: [Ant.] text("Speciósus forma præ fíliis hóminum, diffúsa est grátia in lábiis tuis.")
   Latin: [Ant.] text("Homo natus est * in ea, et ipse fundávit eam Altíssimus.")
-  Latin: text("Psalmus 86 [2]")
+  Latin: text("Psalmus 86 [5]")
   Latin: text("86:1 Fundaménta ejus in móntibus sanctis: * díligit Dóminus portas Sion super ómnia tabernácula Jacob.")
   Latin: text("86:3 Gloriósa dicta sunt de te, * cívitas Dei.")
   Latin: text("86:4 Memor ero Rahab, et Babylónis * sciéntium me.")
@@ -303,7 +303,7 @@ warning count: 0
   Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
   Latin: [Ant.] text("Homo natus est in ea, et ipse fundávit eam Altíssimus.")
   Latin: [Ant.] text("Exsultábunt ómnia ligna * silvárum ante fáciem Dómini, quóniam venit.")
-  Latin: text("Psalmus 95 [3]")
+  Latin: text("Psalmus 95 [6]")
   Latin: text("95:1 Cantáte Dómino cánticum novum: * cantáte Dómino, omnis terra.")
   Latin: text("95:2 Cantáte Dómino, et benedícite nómini ejus: * annuntiáte de die in diem salutáre ejus.")
   Latin: text("95:3 Annuntiáte inter gentes glóriam ejus, * in ómnibus pópulis mirabília ejus.")
@@ -440,7 +440,7 @@ warning count: 0
 
 [section #60 type=psalm slot=psalmody reference=horas/Latin/Sancti/01-01#Ant Matutinum:7 languages=Latin]
   Latin: [Ant.] text("In princípio, * et ante sǽcula Deus erat Verbum, et ipse natus est hódie Salvátor mundi.")
-  Latin: text("Psalmus 96 [1]")
+  Latin: text("Psalmus 96 [7]")
   Latin: text("96:1 Dóminus regnávit, exsúltet terra: * læténtur ínsulæ multæ.")
   Latin: text("96:2 Nubes, et calígo in circúitu ejus: * justítia, et judícium corréctio sedis ejus.")
   Latin: text("96:3 Ignis ante ipsum præcédet, * et inflammábit in circúitu inimícos ejus.")
@@ -458,7 +458,7 @@ warning count: 0
   Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
   Latin: [Ant.] text("In princípio, et ante sǽcula Deus erat Verbum, et ipse natus est hódie Salvátor mundi.")
   Latin: [Ant.] text("Ante lucíferum génitus, * et ante sǽcula, Dóminus Salvátor noster hódie nasci dignátus est.")
-  Latin: text("Psalmus 97 [2]")
+  Latin: text("Psalmus 97 [8]")
   Latin: text("97:1 Cantáte Dómino cánticum novum: * quia mirabília fecit.")
   Latin: text("97:1 Salvávit sibi déxtera ejus: * et brácchium sanctum ejus.")
   Latin: text("97:2 Notum fecit Dóminus salutáre suum: * in conspéctu géntium revelávit justítiam suam.")
@@ -473,7 +473,7 @@ warning count: 0
   Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
   Latin: [Ant.] text("Ante lucíferum génitus, et ante sǽcula, Dóminus Salvátor noster hódie nasci dignátus est.")
   Latin: [Ant.] text("Nato Dómino, * Angelórum chorus canébat, dicens: Salus Deo nostro, sedénti super thronum, et Agno.")
-  Latin: text("Psalmus 98 [3]")
+  Latin: text("Psalmus 98 [9]")
   Latin: text("98:1 Dóminus regnávit, irascántur pópuli: * qui sedet super Chérubim, moveátur terra.")
   Latin: text("98:2 Dóminus in Sion magnus: * et excélsus super omnes pópulos.")
   Latin: text("98:3 Confiteántur nómini tuo magno: quóniam terríbile, et sanctum est: * et honor regis judícium díligit.")
@@ -509,8 +509,8 @@ warning count: 0
 [section #66 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Jube domne languages=Latin]
   Latin: [V.] text("Jube, domne, benedícere.")
 
-[section #67 type=benedictio slot=benedictio reference=horas/Latin/Psalterium/Benedictions.txt#Nocturn 3:1 languages=Latin]
-  Latin: [Benedictio.] text("Ille nos benedícat, qui sine fine vivit et regnat.")
+[section #67 type=benedictio slot=benedictio reference=horas/Latin/Psalterium/Benedictions.txt#Evangelica:1 languages=Latin]
+  Latin: [Benedictio.] text("Evangélica léctio sit nobis salus et protéctio.")
 
 [section #68 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Amen languages=Latin]
   Latin: [R.] text("Amen.")
@@ -526,6 +526,7 @@ warning count: 0
   Latin: text("Léctio sancti Evangélii secúndum Lucam")
   Latin: text(" ") · citation("Luc 2:21")
   Latin: text("In illo témpore: Postquam consummáti sunt dies octo, ut circumciderétur Puer: vocátum est nomen ejus Jesus. Et réliqua.")
+  Latin: text("_")
   Latin: text("Homilía sancti Ambrósii Epíscopi")
   Latin: rubric("Liber 2 in cap. 2 Lucæ, circa medium")
   Latin: text("Circumcíditur ítaque Puer. Quis est iste puer, nisi ille, de quo dictum est: Puer natus est nobis, Fílius datus est nobis? Factus est enim sub lege, ut eos, qui sub lege essent, lucrifáceret. Ut sísterent eum Dómino. Quid sit autem in Jerúsalem sisti Dómino, dícerem, nisi in Isaíæ comméntis ante dixíssem. Circumcísus enim vítiis, Domínico dignus judicátur obtútu; quia, Oculi Dómini super justos. Vides omnem legis véteris sériem fuísse typum futúri: nam et circumcísio purgatiónem signíficat delictórum.")
@@ -546,8 +547,8 @@ warning count: 0
 [section #73 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Jube domne languages=Latin]
   Latin: [V.] text("Jube, domne, benedícere.")
 
-[section #74 type=benedictio slot=benedictio reference=horas/Latin/Psalterium/Benedictions.txt#Nocturn 3:2 languages=Latin]
-  Latin: [Benedictio.] text("Divínum auxílium máneat semper nobíscum.")
+[section #74 type=benedictio slot=benedictio reference=horas/Latin/Psalterium/Benedictions.txt#Nocturn 3:4 languages=Latin]
+  Latin: [Benedictio.] text("Cujus festum cólimus, ipse intercédat pro nobis ad Dóminum.")
 
 [section #75 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Amen languages=Latin]
   Latin: [R.] text("Amen.")
@@ -559,13 +560,8 @@ warning count: 0
   English: text("Reading 8")
   Latin: text("Lectio 8")
 
-[section #77 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/01-01#Lectio7 languages=Latin]
-  Latin: text("Léctio sancti Evangélii secúndum Lucam")
-  Latin: text(" ") · citation("Luc 2:21")
-  Latin: text("In illo témpore: Postquam consummáti sunt dies octo, ut circumciderétur Puer: vocátum est nomen ejus Jesus. Et réliqua.")
-  Latin: text("Homilía sancti Ambrósii Epíscopi")
-  Latin: rubric("Liber 2 in cap. 2 Lucæ, circa medium")
-  Latin: text("Circumcíditur ítaque Puer. Quis est iste puer, nisi ille, de quo dictum est: Puer natus est nobis, Fílius datus est nobis? Factus est enim sub lege, ut eos, qui sub lege essent, lucrifáceret. Ut sísterent eum Dómino. Quid sit autem in Jerúsalem sisti Dómino, dícerem, nisi in Isaíæ comméntis ante dixíssem. Circumcísus enim vítiis, Domínico dignus judicátur obtútu; quia, Oculi Dómini super justos. Vides omnem legis véteris sériem fuísse typum futúri: nam et circumcísio purgatiónem signíficat delictórum.")
+[section #77 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/01-01#Lectio8 languages=Latin]
+  Latin: text("Sed quóniam prona quadam cupiditáte peccándi, humánæ carnis et mentis fragílitas inextricabílibus vítiis implicátur, eo per octávum circumcisiónis diem culpæ totíus futúra purgátio, resurrectiónis præfigurabátur ætáte. Hoc est enim illud: Quia omne masculínum adapériens vulvam, sanctum Dómino vocábitur. Verbis enim legis promittebátur Vírginis partus. Et vere sanctus, quia immaculátus. Dénique ipsum esse, qui lege signétur, in eúndem modum ab Angelo repetíta verba declárant: Quod nascétur, inquit, Sanctum, vocábitur Fílius Dei.")
 
 [section #78 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Tu autem languages=Latin]
   Latin: [V.] text("Tu autem, Dómine, miserére nobis.")
@@ -596,13 +592,8 @@ warning count: 0
   English: text("Reading 9")
   Latin: text("Lectio 9")
 
-[section #84 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/01-01#Lectio7 languages=Latin]
-  Latin: text("Léctio sancti Evangélii secúndum Lucam")
-  Latin: text(" ") · citation("Luc 2:21")
-  Latin: text("In illo témpore: Postquam consummáti sunt dies octo, ut circumciderétur Puer: vocátum est nomen ejus Jesus. Et réliqua.")
-  Latin: text("Homilía sancti Ambrósii Epíscopi")
-  Latin: rubric("Liber 2 in cap. 2 Lucæ, circa medium")
-  Latin: text("Circumcíditur ítaque Puer. Quis est iste puer, nisi ille, de quo dictum est: Puer natus est nobis, Fílius datus est nobis? Factus est enim sub lege, ut eos, qui sub lege essent, lucrifáceret. Ut sísterent eum Dómino. Quid sit autem in Jerúsalem sisti Dómino, dícerem, nisi in Isaíæ comméntis ante dixíssem. Circumcísus enim vítiis, Domínico dignus judicátur obtútu; quia, Oculi Dómini super justos. Vides omnem legis véteris sériem fuísse typum futúri: nam et circumcísio purgatiónem signíficat delictórum.")
+[section #84 type=lectio-brevis slot=lectio-brevis reference=horas/Latin/Sancti/01-01#Lectio9:1-1 languages=Latin]
+  Latin: text("Solus enim per ómnia ex natis de fémina sanctus Dóminus Jesus, qui terrénæ contágia corruptélæ, immaculáti partus novitáte non sénserit, et cælésti majestáte depúlerit. Nam si lítteram sequámur: quómodo sanctus omnis másculus, cum multos sceleratíssimos fuísse non láteat? Numquid sanctus Achab? numquid sancti pseudoprophétæ, quos ad Elíæ preces ultor cæléstis injúriæ ignis absúmpsit? Sed ille sanctus, quem in figúra futúri mystérii pia legis divínæ præscrípta signábant; eo quod solus sanctæ Ecclésiæ vírginis ad generándos pópulos Dei, immaculátæ fecunditátis aperíret genitále secrétum.")
 
 [section #85 type=other slot=other reference=horas/Latin/Psalterium/Common/Prayers#Tu autem languages=Latin]
   Latin: [V.] text("Tu autem, Dómine, miserére nobis.")

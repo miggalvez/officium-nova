@@ -146,7 +146,10 @@ export function appendExpandedPsalmWrapper(
       suppressFirstInlineAntiphon && localPsalmOffset === 0 && node.antiphon
         ? { ...node, antiphon: undefined }
         : node;
-    const expanded = expandDeferredNodes(withPsalmGloriaPatri([psalmNode]), {
+    const wrappedPsalm = shouldAppendGloriaPatri(psalmNode)
+      ? withPsalmGloriaPatri([psalmNode])
+      : [psalmNode];
+    const expanded = expandDeferredNodes(wrappedPsalm, {
       index: args.index,
       language: args.language,
       langfb: args.langfb,
@@ -191,6 +194,12 @@ export function appendExpandedPsalmWrapper(
 
 export function withPsalmGloriaPatri(content: readonly TextContent[]): readonly TextContent[] {
   return Object.freeze([...content, GLORIA_PATRI_MACRO]);
+}
+
+function shouldAppendGloriaPatri(node: Extract<TextContent, { type: 'psalmRef' }>): boolean {
+  // Lauds Old Testament canticles are stored as Psalm210-Psalm225 in the
+  // legacy corpus and are not followed by the psalmic Gloria Patri couplet.
+  return node.psalmNumber < 210 || node.psalmNumber > 225;
 }
 
 export function normalizeRepeatedAntiphonContent(

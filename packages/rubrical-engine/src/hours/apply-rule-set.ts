@@ -1099,13 +1099,7 @@ function resolveFallbackDoxologyVariant(input: ApplyRuleSetInput): string | unde
     return undefined;
   }
 
-  if (
-    input.policy.name === 'rubrics-1960' &&
-    input.celebration.source === 'sanctoral' &&
-    input.celebration.rank.classSymbol === 'III' &&
-    input.temporal.season === 'eastertide' &&
-    input.temporal.dayOfWeek !== 0
-  ) {
+  if (input.policy.name === 'rubrics-1960' && input.celebration.source === 'sanctoral') {
     return undefined;
   }
 
@@ -1721,7 +1715,7 @@ function usesVersum2InPlaceOfLaterBlock(input: ApplyRuleSetInput): boolean {
 
 function usesOrdinaryPrimeLaterBlock(
   input: ApplyRuleSetInput,
-  properFiles: readonly ParsedFile[]
+  _properFiles: readonly ParsedFile[]
 ): boolean {
   if (input.hour !== 'prime') {
     return false;
@@ -1732,24 +1726,12 @@ function usesOrdinaryPrimeLaterBlock(
   return (
     input.policy.name === 'rubrics-1960' &&
     input.celebration.source === 'sanctoral' &&
-    input.celebration.rank.classSymbol === 'III' &&
-    input.temporal.dayOfWeek !== 0 &&
-    !hasProperPrimeLaterBlock(input, properFiles)
+    is1960SanctoralFestiveClass(input.celebration.rank.classSymbol)
   );
 }
 
-function hasProperPrimeLaterBlock(input: ApplyRuleSetInput, files: readonly ParsedFile[]): boolean {
-  const feastPath = canonicalOfficeVisitPath(input.celebration.feastRef.path);
-  return files.some((file) =>
-    canonicalOfficeVisitPath(file.path) === feastPath &&
-    file.sections.some((section) =>
-        section.header === 'Lectio Prima' ||
-        section.header === 'Capitulum Prima' ||
-        section.header === 'Responsory Breve Prima' ||
-        section.header === 'Responsory Prima' ||
-        section.header === 'Versum Prima'
-      )
-  );
+function is1960SanctoralFestiveClass(classSymbol: string): boolean {
+  return classSymbol === 'I' || classSymbol === 'II' || classSymbol === 'III';
 }
 
 export function officeVisitKey(path: string, header: string): string {
@@ -2056,6 +2038,9 @@ function properHeadersForSlot(
         return input?.policy.name === 'rubrics-1960'
           ? [`Versum ${hourSuffix}`, 'Versum 2']
           : [`Versum ${hourSuffix}`];
+      }
+      if (hour === 'compline') {
+        return [`Versum ${hourSuffix}`];
       }
       return [`Versum ${hourSuffix}`, 'Versum 1'];
     case 'antiphon-ad-benedictus':

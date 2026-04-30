@@ -3,7 +3,7 @@ date: 2024-11-02
 hour: prime
 celebration: In Commemoratione Omnium Fidelium Defunctorum
 languages: Latin
-section count: 3
+section count: 5
 warning count: 0
 
 [section #0 type=psalm slot=psalmody reference=horas/Latin/Commune/C9#Ant Laudes:1 languages=Latin]
@@ -58,7 +58,19 @@ warning count: 0
   Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
   Latin: [Ant.] text("Exsultábunt Dómino ossa humiliáta.")
 
-[section #1 type=martyrology slot=martyrology reference=prime-martyrology:11-03 languages=Latin]
+[section #1 type=oration slot=oration reference=horas/Latin/Psalterium/Common/Prayers#Domine exaudi languages=Latin]
+  Latin: [V.] text("Dómine, exáudi oratiónem meam.")
+  Latin: [R.] text("Et clamor meus ad te véniat.")
+  Latin: [v.] text("Orémus.")
+  Latin: [v.] text("Dómine Deus omnípotens, qui ad princípium hujus diéi nos perveníre fecísti: tua nos hódie salva virtúte; ut in hac die ad nullum declinémus peccátum, sed semper ad tuam justítiam faciéndam nostra procédant elóquia, dirigántur cogitatiónes et ópera.")
+  Latin: [r.] text("Per Dóminum nostrum Jesum Christum, Fílium tuum: qui tecum vivit et regnat in unitáte Spíritus Sancti, Deus, per ómnia sǽcula sæculórum.")
+  Latin: [R.] text("Amen.")
+  Latin: [V.] text("Dómine, exáudi oratiónem meam.")
+  Latin: [R.] text("Et clamor meus ad te véniat.")
+  Latin: [V.] text("Benedicámus Dómino.")
+  Latin: [R.] text("Deo grátias.")
+
+[section #2 type=martyrology slot=martyrology reference=prime-martyrology:11-03 languages=Latin]
   Latin: [v.] text("Tértio Nonas Novémbris Luna prima Anno Dómini 2024")
   Latin: text("_")
   Latin: [r.] text("Medioláni natális sancti Cároli Borromǽi Cardinális, Epíscopi Mediolanénsis et Confessóris, quem, sanctitáte conspícuum et miráculis clarum, Paulus Papa Quintus in sanctórum númerum rétulit. Ipsíus tamen festívitas sequénti die celebrátur.")
@@ -76,7 +88,7 @@ warning count: 0
   Latin: [V.] text("Et álibi aliórum plurimórum sanctórum Mártyrum et Confessórum, atque sanctárum Vírginum.")
   Latin: [R.] text("Deo grátias.")
 
-[section #2 type=other slot=de-officio-capituli reference=horas/Ordinarium/Prima#De Officio Capituli languages=Latin]
+[section #3 type=other slot=de-officio-capituli reference=horas/Ordinarium/Prima#De Officio Capituli languages=Latin]
   Latin: [V.] text("Deus in adjutórium meum inténde.")
   Latin: [R.] text("Dómine, ad adjuvándum me festína.")
   Latin: [V.] text("Deus in adjutórium meum inténde.")
@@ -96,4 +108,12 @@ warning count: 0
   Latin: [R.] text("Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen.")
   Latin: [v.] text("Orémus.")
   Latin: [v.] text("Dirígere et sanctificáre, régere et gubernáre dignáre, Dómine Deus, Rex cæli et terræ, hódie corda et córpora nostra, sensus, sermónes et actus nostros in lege tua, et in opéribus mandatórum tuórum: ut hic et in ætérnum, te auxiliánte, salvi et líberi esse mereámur, Salvátor mundi: Qui vivis et regnas in sǽcula sæculórum.")
+  Latin: [R.] text("Amen.")
+
+[section #4 type=conclusion slot=conclusion reference=horas/Latin/Psalterium/Common/Prayers#Adjutorium nostrum languages=Latin]
+  Latin: [V.] text("Adjutórium nostrum + in nómine Dómini.")
+  Latin: [R.] text("Qui fecit cælum et terram.")
+  Latin: [V.] text("Benedícite.")
+  Latin: [R.] text("Deus.")
+  Latin: [Benedictio.] text("Dóminus nos benedícat, + et ab omni malo deféndat, et ad vitam perdúcat ætérnam. Et fidélium ánimæ per misericórdiam Dei requiéscant in pace.")
   Latin: [R.] text("Amen.")

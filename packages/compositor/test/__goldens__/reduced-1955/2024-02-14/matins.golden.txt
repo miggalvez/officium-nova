@@ -259,6 +259,7 @@ warning count: 0
   Latin: text("Léctio sancti Evangélii secúndum Matthǽum")
   Latin: text(" ") · citation("Matt 6:16-21")
   Latin: text("In illo témpore: Dixit Jesus discípulis suis: Cum jejunátis, nolíte fíeri sicut hypócritæ, tristes. Et réliqua.")
+  Latin: text("_")
   Latin: text("Homilía sancti Augustíni Epíscopi")
   Latin: rubric("Lib. 2 de Serm. Domini in monte, cap. 12 tom. 4")
   Latin: text("Maniféstum est, his præcéptis omnem nostram intentiónem in interióra gáudia dírigi: ne foris quæréntes mercédem, huic sǽculo conformémur, et amittámus promissiónem tanto solidióris atque firmióris, quanto interióris beatitúdinis, qua nos elégit Deus confórmes fíeri imáginis Fílii sui. In hoc autem capítulo máxime adverténdum est, non in solo rerum corporeárum nitóre atque pompa, sed étiam in ipsis sórdibus luctuósis esse posse jactántiam et eo periculosiórem, quo sub nómine servitútis Dei décipit.")

@@ -147,6 +147,19 @@ Current baseline:
 
 This tier proves mechanical robustness. It does not prove content correctness.
 
+The compositor no-throw runner remains backward-compatible with the 2024
+baseline by default, and also accepts explicit year selection:
+
+```bash
+pnpm -C packages/compositor test:no-throw -- --year 2025
+pnpm -C packages/compositor test:no-throw -- --year 2026
+```
+
+Candidate and gated years should additionally enforce the compositor's internal
+slot-accounting trace: every planned slot must be rendered, explicitly
+rubrically omitted, or surfaced as an unresolved/error state. A silent missing
+slot is a validation failure even if the Hour did not throw.
+
 ### Tier 2 — Content goldens and package snapshots
 
 CI-gated. Includes package-owned content assertions:
@@ -218,6 +231,25 @@ Rules:
 - Exploratory years may have unadjudicated rows and are not blocking.
 - Candidate years may block only on no-throw failures and schema failures.
 - Gated years must reach the same standard as the baseline year: 0 unadjudicated rows for the packages and policies included in the gate set.
+
+Roman 1960 now has its own first-class expansion lane. The scenario manifest at
+`packages/validation/fixtures/roman-1960-scenarios.json` records the minimum
+matrix for transfers, concurrence, commemorations, privileged ferias, octaves,
+proper/common fallback, Matins lesson plans, first/second Vespers, seasonal
+omissions, and known 2026 bug dates. The package ledger remains the source of
+truth for promotion: scenario coverage proves structural classes, while
+year-specific ledgers prove the civil-year surface.
+
+The compositor comparison harness accepts explicit year selection:
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Rubrics 1960 - 1960" --year 2025
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Rubrics 1960 - 1960" --year 2026
+```
+
+Explicit `--year 2024` means the full 366-day civil year. The no-argument
+default remains the original 2024 fixture matrix so older Phase 3 workflows keep
+their narrower comparison surface unless they opt into year-wide coverage.
 
 ### Tier 5 — Reviewer-submitted fixtures
 

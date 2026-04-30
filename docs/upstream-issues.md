@@ -74,6 +74,31 @@ pnpm -C packages/compositor compare:phase-3-perl -- --version "Rubrics 1960 - 19
 | Rubrics 1960 - 1960 | 2024-04-06 | Vespers | `40a67109` |
 | Rubrics 1960 - 1960 | 2024-04-07 | Vespers | `4ad3678c` |
 
+### 2026-04-30 — Correction: Rubrics 1960 Prime uses the ordinary short lesson on sanctoral feasts
+
+**Classification.** `engine-bug` in Officium Novum, fixed.
+
+**Summary.** Earlier entries in this document grouped Reduced 1955 and
+Rubrics 1960 Prime divergences together and classified Perl's `1 Tim.
+1:17` as a comparison-surface bug whenever the office source supplied
+`[Lectio Prima]`. That remains a pre-1960/1955 question, but it is not
+correct for Rubrics 1960 sanctoral feasts. The Divinum Officium 1960
+version notes state that the Prime `Lectio brevis` does not change for
+saints' feasts, and the St Joseph the Worker institution text assigns
+the Colossians proper chapter to None while saying only that Prime is
+done "as in feasts." The 1960 compositor therefore now routes Prime
+chapter/short-lesson material to `Psalterium/Special/Prima Special`
+while keeping proper later blocks for Terce, Sext, and None.
+
+**Primary sources.**
+
+- `upstream/web/www/horas/Help/versions.html:184-188`
+- `upstream/web/www/horas/Latin/Psalterium/Special/Prima Special.txt:1-3`
+- `upstream/web/www/horas/Latin/Sancti/05-01r.txt:239-272`
+- Acta Apostolicae Sedis 48 (1956), pp. 233-234, S. Joseph Opificis:
+  `Ad Horas Psalmi de Dominica, ad Primam tamen ut in festis`; None has
+  `Capitulum Col. 3, 23-24`.
+
 ### 2026-04-27 — Trinity Sunday Prime keeps weekday `1 Tim. 1:17` instead of the proper `1 Joann. 5:7` chapter
 
 **Classification.** `perl-bug`

@@ -247,6 +247,116 @@ describe('buildMatinsPlan', () => {
     ]);
   });
 
+  it('keeps psalm-only rows from proper Matins antiphon sections in the normalized plan', () => {
+    const corpus = new TestOfficeTextIndex();
+    corpus.add(
+      'horas/Latin/Sancti/05-01r.txt',
+      [
+        festalMatinsSections().replace(
+          [
+            'Ant 1;;8',
+            'Ant 2;;18',
+            'Ant 3;;23',
+            'Ant 4;;44',
+            'Ant 5;;45',
+            'Ant 6;;86',
+            'Ant 7;;95',
+            'Ant 8;;96',
+            'Ant 9;;97'
+          ].join('\n'),
+          [
+            'Exit homo * ad opus suum.;;1',
+            ';;2',
+            ';;3',
+            'Jesus, * cum esset trigínta annórum.;;4',
+            ';;5',
+            ';;8',
+            'Nonne hic est * fabri fílius?;;14',
+            ';;20',
+            ';;23'
+          ].join('\n')
+        ),
+        '',
+        '[Lectio1]',
+        'De libro Génesis',
+        '',
+        '[Lectio2]',
+        'Text',
+        '',
+        '[Lectio3]',
+        'Text',
+        '',
+        '[Lectio7]',
+        'Gospel and homily',
+        '',
+        '[Lectio8]',
+        'Homily continuation',
+        '',
+        '[Lectio9]',
+        'Homily conclusion',
+        '&teDeum'
+      ].join('\n')
+    );
+
+    const result = buildMatinsPlanWithWarnings({
+      celebration: celebration('Sancti/05-01r', 'I', 'sanctoral'),
+      celebrationRules: baseRules(),
+      commemorations: [],
+      hourRules: HOUR_RULES,
+      temporal: temporal('2026-05-01', 'Pasc3-5', 'eastertide', 'IV'),
+      policy: rubrics1960Policy,
+      corpus,
+      version: version1960()
+    });
+
+    expect(result.plan.nocturns).toBe(3);
+    expect(result.plan.nocturnPlan.map((nocturn) => nocturn.psalmody.length)).toEqual([
+      3,
+      3,
+      3
+    ]);
+    expect(
+      result.plan.nocturnPlan.flatMap((nocturn) =>
+        nocturn.psalmody.map((assignment) => assignment.psalmRef.selector)
+      )
+    ).toEqual(['1', '2', '3', '4', '5', '8', '14', '20', '23']);
+    expect(
+      result.plan.nocturnPlan.flatMap((nocturn) =>
+        nocturn.antiphons.map((antiphon) => antiphon.reference.selector)
+      )
+    ).toEqual(['1', '4', '7']);
+    expect(
+      result.plan.nocturnPlan[0]?.lessons.map((lesson) =>
+        lesson.source.kind === 'patristic' || lesson.source.kind === 'hagiographic'
+          ? lesson.source.reference
+          : undefined
+      )
+    ).toEqual([
+      { path: 'horas/Latin/Sancti/05-01r', section: 'Lectio1' },
+      { path: 'horas/Latin/Sancti/05-01r', section: 'Lectio2' },
+      { path: 'horas/Latin/Sancti/05-01r', section: 'Lectio3' }
+    ]);
+    expect(result.plan.nocturnPlan[2]?.benedictions[0]?.reference).toEqual({
+      path: 'horas/Latin/Psalterium/Benedictions.txt',
+      section: 'Evangelica',
+      selector: '1'
+    });
+    expect(result.plan.nocturnPlan[2]?.benedictions[1]?.reference).toEqual({
+      path: 'horas/Latin/Psalterium/Benedictions.txt',
+      section: 'Nocturn 3',
+      selector: '4'
+    });
+    expect(
+      result.plan.nocturnPlan[2]?.lessons.map((lesson) =>
+        lesson.source.kind === 'patristic' ? lesson.source.reference : lesson.source.kind
+      )
+    ).toEqual([
+      'homily-on-gospel',
+      { path: 'horas/Latin/Sancti/05-01r', section: 'Lectio8' },
+      { path: 'horas/Latin/Sancti/05-01r', section: 'Lectio9', selector: '1-1' }
+    ]);
+  });
+
   it('uses ferial Matins psalms with one Paschal Alleluia antiphon for 1960 III-class sanctoral weekdays', () => {
     const corpus = new TestOfficeTextIndex();
     corpus.add('horas/Latin/Sancti/04-29.txt', festalMatinsSections());

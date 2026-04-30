@@ -62,9 +62,9 @@
         "invitatoriumKind": "feast",
         "nocturnLessonSourceKinds": [
           [
-            "scripture",
-            "scripture",
-            "scripture"
+            "patristic",
+            "patristic",
+            "patristic"
           ],
           [
             "hagiographic",
@@ -73,8 +73,8 @@
           ],
           [
             "homily-on-gospel",
-            "homily-on-gospel",
-            "homily-on-gospel"
+            "patristic",
+            "patristic"
           ]
         ],
         "structuralSignature": {
@@ -108,9 +108,9 @@
         "invitatoriumKind": "feast",
         "nocturnLessonSourceKinds": [
           [
-            "scripture",
-            "scripture",
-            "scripture"
+            "patristic",
+            "patristic",
+            "patristic"
           ],
           [
             "hagiographic",
@@ -119,8 +119,8 @@
           ],
           [
             "homily-on-gospel",
-            "homily-on-gospel",
-            "homily-on-gospel"
+            "patristic",
+            "patristic"
           ]
         ]
       }
@@ -135,9 +135,9 @@
         "invitatoriumKind": "suppressed",
         "nocturnLessonSourceKinds": [
           [
-            "scripture",
-            "scripture",
-            "scripture"
+            "patristic",
+            "patristic",
+            "patristic"
           ],
           [
             "hagiographic",
@@ -146,8 +146,8 @@
           ],
           [
             "homily-on-gospel",
-            "homily-on-gospel",
-            "homily-on-gospel"
+            "patristic",
+            "patristic"
           ]
         ],
         "structuralSignature": {
@@ -181,9 +181,9 @@
         "invitatoriumKind": "suppressed",
         "nocturnLessonSourceKinds": [
           [
-            "scripture",
-            "scripture",
-            "scripture"
+            "patristic",
+            "patristic",
+            "patristic"
           ],
           [
             "hagiographic",
@@ -192,8 +192,8 @@
           ],
           [
             "homily-on-gospel",
-            "homily-on-gospel",
-            "homily-on-gospel"
+            "patristic",
+            "patristic"
           ]
         ]
       }
@@ -208,9 +208,9 @@
         "invitatoriumKind": "suppressed",
         "nocturnLessonSourceKinds": [
           [
-            "scripture",
-            "scripture",
-            "scripture"
+            "patristic",
+            "patristic",
+            "patristic"
           ],
           [
             "hagiographic",
@@ -219,8 +219,8 @@
           ],
           [
             "homily-on-gospel",
-            "homily-on-gospel",
-            "homily-on-gospel"
+            "patristic",
+            "patristic"
           ]
         ]
       }
@@ -246,7 +246,7 @@
           ],
           [
             "homily-on-gospel",
-            "homily-on-gospel",
+            "patristic",
             "commemorated"
           ]
         ]
@@ -301,9 +301,9 @@
         "invitatoriumKind": "feast",
         "nocturnLessonSourceKinds": [
           [
-            "scripture",
-            "scripture",
-            "scripture"
+            "patristic",
+            "patristic",
+            "patristic"
           ],
           [
             "hagiographic",
@@ -312,7 +312,7 @@
           ],
           [
             "homily-on-gospel",
-            "homily-on-gospel",
+            "patristic",
             "commemorated"
           ]
         ]

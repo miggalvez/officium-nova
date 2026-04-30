@@ -801,18 +801,20 @@ function collectMatinsAntiphonEntriesFromSection(
 
   for (const [contentIndex, content] of expandedContent.entries()) {
     const antiphon = antiphonLineValue(content);
-    if (!antiphon) {
+    const psalmNumber = extractPsalmNumber(content) ?? extractPsalmNumberFromLine(antiphon ?? '');
+    if (!antiphon && !psalmNumber) {
       continue;
     }
 
-    const ref: TextReference = {
-      path: sourcePath,
-      section: section.header,
-      selector: String(contentIndex + 1)
-    };
+    const ref: TextReference | undefined = antiphon
+      ? {
+          path: sourcePath,
+          section: section.header,
+          selector: String(contentIndex + 1)
+        }
+      : undefined;
 
-    const psalmNumber = extractPsalmNumber(content) ?? extractPsalmNumberFromLine(antiphon);
-    const psalmSelector = extractPsalmSelector(content) ?? extractPsalmSelectorFromLine(antiphon);
+    const psalmSelector = extractPsalmSelector(content) ?? extractPsalmSelectorFromLine(antiphon ?? '');
     const psalmRef = psalmNumber
       ? {
           psalmRef: {
@@ -820,12 +822,12 @@ function collectMatinsAntiphonEntriesFromSection(
             section: '__preamble',
             ...(psalmSelector ? { selector: psalmSelector } : {})
           },
-          antiphonRef: ref
+          ...(ref ? { antiphonRef: ref } : {})
         }
       : undefined;
 
     entries.push({
-      antiphonRef: ref,
+      ...(ref ? { antiphonRef: ref } : {}),
       ...(psalmRef ? { psalmRef } : {})
     });
   }
@@ -1063,6 +1065,9 @@ function antiphonLineValue(content: TextContent): string | undefined {
 
   if (content.type === 'text') {
     const value = content.value.trim();
+    if (/^;;\s*[0-9]+(?:\([^)]+\))?\s*$/u.test(value)) {
+      return undefined;
+    }
     if (value && value !== '_') {
       return value;
     }

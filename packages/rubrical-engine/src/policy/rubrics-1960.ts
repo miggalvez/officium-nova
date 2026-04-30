@@ -311,6 +311,7 @@ export const rubrics1960Policy: RubricalPolicy = {
   },
   selectPsalmody(params: SelectPsalmodyParams): readonly PsalmAssignment[] {
     return selectPsalmodyRoman1960({
+      policyName: 'rubrics-1960',
       hour: params.hour,
       celebration: params.celebration,
       celebrationRules: params.celebrationRules,

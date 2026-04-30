@@ -954,6 +954,64 @@ describe('composeHour', () => {
     );
   });
 
+  it('does not append a psalmic Gloria Patri after Old Testament Lauds canticles', () => {
+    const corpus = new InMemoryTextIndex();
+    corpus.addFile(
+      makeFile('horas/Latin/Psalterium/Psalmi/Psalmi major', 'Day0 Laudes1', [
+        {
+          type: 'psalmRef',
+          psalmNumber: 210,
+          antiphon: 'Tres púeri * jussu regis in fornácem missi sunt.'
+        }
+      ])
+    );
+    corpus.addFile(
+      makeFile('horas/Latin/Psalterium/Psalmorum/Psalm210', '__preamble', [
+        { type: 'text', value: '(Canticum trium puerorum * Dan. 3:57-88, 56)' },
+        { type: 'text', value: '3:57 Benedícite, ómnia ópera Dómini, Dómino.' }
+      ])
+    );
+    corpus.addFile(
+      makeFile('horas/Latin/Psalterium/Common/Prayers', 'Gloria', [
+        { type: 'verseMarker', marker: 'V.', text: 'Glória Patri.' },
+        { type: 'verseMarker', marker: 'R.', text: 'Sicut erat.' }
+      ])
+    );
+
+    const hour: HourStructure = {
+      hour: 'lauds',
+      slots: {
+        psalmody: {
+          kind: 'psalmody',
+          psalms: [
+            {
+              psalmRef: {
+                path: 'horas/Latin/Psalterium/Psalmi/Psalmi major',
+                section: 'Day0 Laudes1'
+              }
+            }
+          ]
+        }
+      },
+      directives: []
+    };
+
+    const composed = composeHour({
+      corpus,
+      summary: buildSummary(hour),
+      version: stubVersion,
+      hour: 'lauds',
+      options: { languages: ['Latin'] }
+    });
+
+    const psalmodyLines = slotLines(composed, 'psalmody', 'Latin');
+    expect(psalmodyLines).toContain('Canticum trium puerorum [1]');
+    expect(psalmodyLines).toContain('Dan. 3:57-88, 56');
+    expect(psalmodyLines).toContain('3:57 Benedícite, ómnia ópera Dómini, Dómino.');
+    expect(psalmodyLines).not.toContain('Glória Patri.');
+    expect(psalmodyLines).not.toContain('Sicut erat.');
+  });
+
   it('preserves wrapper reopening antiphons and source-backed heading numbers across inline psalm overrides', () => {
     const corpus = new InMemoryTextIndex();
     corpus.addFile(

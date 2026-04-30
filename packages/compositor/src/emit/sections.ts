@@ -264,9 +264,15 @@ function linesFromContent(
         break;
       case 'separator':
         flush();
-        // Hymns and Prime Martyrology both render corpus separator nodes as
-        // literal underscore-only lines in the legacy stream.
-        if (slot === 'hymn' || slot === 'martyrology' || slot === 'responsory' || slot === 'versicle') {
+        // These slots render corpus separator nodes as literal underscore-only
+        // lines in the legacy stream.
+        if (
+          slot === 'hymn' ||
+          (slot === 'lectio-brevis' && node.source !== undefined) ||
+          slot === 'martyrology' ||
+          slot === 'responsory' ||
+          slot === 'versicle'
+        ) {
           lines.push(singleRunLine(language, undefined, { type: 'text', value: '_' }));
         }
         break;

@@ -253,6 +253,32 @@ ledger rows with this first-divergence pair.
 **Impact.** Net unadjudicated drop: Reduced 1955 from `2` → `1`,
 Rubrics 1960 from `3` → `1`, total `6` → `3`.
 
+### 2026-04-30 — Correction: Rubrics 1960 Prime ordinary short lesson on sanctoral feasts (engine-bug, fixed)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** The `2026-05-01` Rubrics 1960 full-day comparison
+left Prime as the only divergence: Perl emitted `1 Tim. 1:17`, while
+the compositor emitted the St Joseph the Worker `[Lectio Prima]`
+`Col. 3:24`.
+
+**Correction.** Earlier adjudications classified similar Rubrics 1960
+Prime rows as `perl-bug` by treating `[Lectio Prima]` as the governing
+Prime chapter. That was overbroad. The 1960 version notes state that the
+Prime `Lectio brevis` does not change for saints' feasts, and the St
+Joseph the Worker institution text assigns the Colossians chapter to
+None while saying Prime is only `ut in festis`. The fixed 1960 engine
+therefore routes sanctoral-feast Prime chapter/responsory/versicle and
+short-lesson material through `Psalterium/Special/Prima Special`; the
+proper material remains available to Terce/Sext/None.
+
+**Citation.**
+
+- `upstream/web/www/horas/Help/versions.html:184-188`
+- `upstream/web/www/horas/Latin/Psalterium/Special/Prima Special.txt:1-3`
+- `upstream/web/www/horas/Latin/Sancti/05-01r.txt:239-272`
+- Acta Apostolicae Sedis 48 (1956), pp. 233-234, S. Joseph Opificis
+
 ### 2026-04-27 — Pattern: Trinity Sunday proper Prime capitulum override (perl-bug, classified)
 
 **Commit.** Current tranche commit.

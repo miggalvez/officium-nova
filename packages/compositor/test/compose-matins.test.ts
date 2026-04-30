@@ -253,6 +253,209 @@ describe('composeHour(matins)', () => {
     expect(withText).toContain('Lectio tertia');
   });
 
+  it('keeps one proper Matins antiphon open across following psalm-only rows', () => {
+    const corpus = new InMemoryTextIndex();
+    corpus.addFile(
+      makeFileMulti('horas/Latin/Sancti/05-01r', [
+        {
+          header: 'Ant Matutinum',
+          content: [{ type: 'text', value: 'Exit homo * ad opus suum.' }]
+        },
+        {
+          header: 'Versum Matutinum',
+          content: [{ type: 'verseMarker', marker: 'V.', text: 'Alleluia.' }]
+        }
+      ])
+    );
+    for (const psalm of ['1', '2', '3', '4', '5', '8']) {
+      corpus.addFile(
+        makeFile(
+          `horas/Latin/Psalterium/Psalms/Psalm${psalm}`,
+          `Psalmus ${psalm}`,
+          Array.from({ length: 8 }, (_, index) => ({
+            type: 'text' as const,
+            value: index + 1 === Number(psalm) ? `Psalm ${psalm} text` : `Psalm ${psalm} verse ${index + 1}`
+          }))
+        )
+      );
+    }
+
+    const hour: HourStructure = {
+      hour: 'matins',
+      slots: {
+        psalmody: {
+          kind: 'matins-nocturns',
+          nocturns: [
+            {
+              index: 1,
+              psalmody: ['1', '2', '3'].map((psalm) => ({
+                psalmRef: {
+                  path: `horas/Latin/Psalterium/Psalms/Psalm${psalm}`,
+                  section: `Psalmus ${psalm}`,
+                  selector: psalm
+                }
+              })),
+              antiphons: [],
+              versicle: {
+                reference: {
+                  path: 'horas/Latin/Sancti/05-01r',
+                  section: 'Versum Matutinum'
+                }
+              },
+              lessonIntroduction: 'ordinary',
+              lessons: [],
+              responsories: [],
+              benedictions: []
+            },
+            {
+              index: 2,
+              psalmody: [
+                {
+                  psalmRef: {
+                    path: 'horas/Latin/Psalterium/Psalms/Psalm4',
+                    section: 'Psalmus 4',
+                    selector: '4'
+                  },
+                  antiphonRef: {
+                    path: 'horas/Latin/Sancti/05-01r',
+                    section: 'Ant Matutinum'
+                  }
+                },
+                {
+                  psalmRef: {
+                    path: 'horas/Latin/Psalterium/Psalms/Psalm5',
+                    section: 'Psalmus 5',
+                    selector: '5'
+                  }
+                },
+                {
+                  psalmRef: {
+                    path: 'horas/Latin/Psalterium/Psalms/Psalm8',
+                    section: 'Psalmus 8',
+                    selector: '8'
+                  }
+                }
+              ],
+              antiphons: [
+                {
+                  index: 1,
+                  reference: {
+                    path: 'horas/Latin/Sancti/05-01r',
+                    section: 'Ant Matutinum'
+                  }
+                }
+              ],
+              versicle: {
+                reference: {
+                  path: 'horas/Latin/Sancti/05-01r',
+                  section: 'Versum Matutinum'
+                }
+              },
+              lessonIntroduction: 'ordinary',
+              lessons: [],
+              responsories: [],
+              benedictions: []
+            }
+          ]
+        }
+      },
+      directives: []
+    };
+
+    const composed = composeHour({
+      corpus,
+      summary: buildSummaryForVersion(hour, stubVersion),
+      version: stubVersion,
+      hour: 'matins',
+      options: { languages: ['Latin'] }
+    });
+    const rendered = composed.sections.flatMap((section) =>
+      section.lines.map((line) => renderRuns(line, 'Latin'))
+    );
+    const antiphonIndexes = rendered
+      .map((line, index) => ({ line, index }))
+      .filter(({ line }) => line.includes('Exit homo'))
+      .map(({ index }) => index);
+    const psalm5Index = rendered.findIndex((line) => line.includes('Psalm 5 text'));
+    const psalm8Index = rendered.findIndex((line) => line.includes('Psalm 8 text'));
+
+    expect(antiphonIndexes).toHaveLength(2);
+    expect(rendered).toContain('Psalmus 4 [4]');
+    expect(antiphonIndexes[0]).toBeLessThan(psalm5Index);
+    expect(psalm8Index).toBeLessThan(antiphonIndexes[1]!);
+  });
+
+  it('renders corpus separators inside Matins lessons as underscore lines', () => {
+    const corpus = new InMemoryTextIndex();
+    corpus.addFile(
+      makeFileMulti('horas/Latin/Sancti/05-01r', [
+        {
+          header: 'Lectio7',
+          content: [
+            { type: 'text', value: 'Léctio sancti Evangélii secúndum Matthǽum' },
+            { type: 'separator' },
+            { type: 'text', value: 'Homilía sancti Albérti Magni Epíscopi' }
+          ]
+        },
+        {
+          header: 'Versum Matutinum',
+          content: [{ type: 'verseMarker', marker: 'V.', text: 'Alleluia.' }]
+        }
+      ])
+    );
+
+    const hour: HourStructure = {
+      hour: 'matins',
+      slots: {
+        psalmody: {
+          kind: 'matins-nocturns',
+          nocturns: [
+            {
+              index: 3,
+              psalmody: [],
+              antiphons: [],
+              versicle: {
+                reference: {
+                  path: 'horas/Latin/Sancti/05-01r',
+                  section: 'Versum Matutinum'
+                }
+              },
+              lessonIntroduction: 'ordinary',
+              lessons: [
+                {
+                  index: 7,
+                  source: {
+                    kind: 'patristic',
+                    reference: { path: 'horas/Latin/Sancti/05-01r', section: 'Lectio7' }
+                  }
+                }
+              ],
+              responsories: [],
+              benedictions: []
+            }
+          ]
+        }
+      },
+      directives: []
+    };
+
+    const composed = composeHour({
+      corpus,
+      summary: buildSummaryForVersion(hour, stubVersion),
+      version: stubVersion,
+      hour: 'matins',
+      options: { languages: ['Latin'] }
+    });
+    const rendered = composed.sections.flatMap((section) =>
+      section.lines.map((line) => renderRuns(line, 'Latin'))
+    );
+
+    expect(rendered).toContain('_');
+    expect(rendered.indexOf('_')).toBeLessThan(
+      rendered.indexOf('Homilía sancti Albérti Magni Epíscopi')
+    );
+  });
+
   it('emits the fixed invitatory psalm with feast antiphon repetitions, then nocturn heading, psalmody, lectio, responsory, and Te Deum', () => {
     const corpus = new InMemoryTextIndex();
     corpus.addFile(
