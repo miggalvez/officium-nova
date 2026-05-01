@@ -82,7 +82,7 @@ function substituteOfficeNameText(
 
   const replacement = officeNameForText(value, binding, context);
   return value
-    .replace(/N\.\s+.*?\s+N\./gu, replacement)
+    .replace(/N\.\s+(?:et|&|and)\s+N\./gu, replacement)
     .replace(/N\./gu, replacement);
 }
 
@@ -120,7 +120,9 @@ function resolveOfficeNameBinding(
   const lines = section.content.flatMap((node) =>
     node.type === 'text' ? node.value.split(/\r?\n/u).map((line) => line.trim()) : []
   );
-  const defaultName = lines.find((line) => line.length > 0 && !line.includes('='));
+  const defaultName = lines.find(
+    (line) => line.length > 0 && !line.startsWith(';') && !line.includes('=')
+  );
   const antiphonName = prefixedName(lines, 'Ant');
   const orationName = prefixedName(lines, 'Oratio');
   const fallback = orationName ?? defaultName ?? antiphonName;
@@ -137,10 +139,8 @@ function resolveOfficeNameBinding(
 
 function prefixedName(lines: readonly string[], key: string): string | undefined {
   const prefix = `${key}=`;
-  return lines
-    .find((line) => line.startsWith(prefix))
-    ?.slice(prefix.length)
-    .trim();
+  const line = lines.find((candidate) => candidate.replace(/\s+/gu, '').startsWith(prefix));
+  return line?.replace(/^[^=]+=/u, '').trim();
 }
 
 function officeNameSourcePath(context: OfficeNameSubstitutionContext): string | undefined {

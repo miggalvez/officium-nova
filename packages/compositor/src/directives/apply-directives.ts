@@ -424,7 +424,7 @@ function normalizeStarredShortResponsoryBase(value: string): string {
   }
 
   const rawLeft = (match.groups.left ?? '').trim();
-  const hasSourceComma = Boolean(match.groups.comma) || rawLeft.endsWith(',');
+  const hasSourceComma = /\s*,\s*\*/u.test(withoutAlleluia) || rawLeft.endsWith(',');
   const left = rawLeft.replace(/[,.]?$/u, '');
   const right = lowerInitial((match.groups.right ?? '').trim().replace(/\.?$/u, ''));
   const separator = hasSourceComma ? ', ' : ' ';
