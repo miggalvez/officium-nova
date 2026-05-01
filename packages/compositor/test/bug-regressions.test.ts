@@ -196,14 +196,14 @@ describe('office name placeholder substitution', () => {
     const corpus = new InMemoryTextIndex();
     corpus.addFile(
       makeFile('horas/Latin/Sancti/05-02', [
-        { header: 'Name', content: [{ type: 'text', value: 'Athanásii\nAnt=Athanási' }] },
+        { header: 'Name', content: [{ type: 'text', value: '; ignored\nAthanásii\nAnt=Athanási' }] },
         {
           header: 'Oratio',
           content: [
             {
               type: 'text',
               value:
-                'Exáudi, quǽsumus, Dómine, preces nostras, quas in beáti N. Confessóris tui atque Pontíficis solemnitáte deférimus.'
+                'Exáudi, quǽsumus, Dómine, preces nostras, quas in beáti N. Confessóris tui atque Pontíficis solemnitáte deférimus, intercedénte beáto N.'
             }
           ]
         }
@@ -239,13 +239,16 @@ describe('office name placeholder substitution', () => {
     });
 
     expect(renderRuns(composed.sections[0]!.lines[0]!, 'Latin')).toContain('beáti Athanásii');
+    expect(renderRuns(composed.sections[0]!.lines[0]!, 'Latin')).toContain(
+      'Pontíficis solemnitáte deférimus, intercedénte beáto Athanásii'
+    );
   });
 
   it('uses Ant= from the feast Name section for inherited common antiphons', () => {
     const corpus = new InMemoryTextIndex();
     corpus.addFile(
       makeFile('horas/Latin/Sancti/05-02', [
-        { header: 'Name', content: [{ type: 'text', value: 'Athanásii\nAnt=Athanási' }] }
+        { header: 'Name', content: [{ type: 'text', value: 'Athanásii\nAnt = Athanási' }] }
       ])
     );
     corpus.addFile(
@@ -292,6 +295,61 @@ describe('office name placeholder substitution', () => {
     });
 
     expect(renderRuns(composed.sections[0]!.lines[0]!, 'Latin')).toContain('beáte Athanási');
+  });
+
+  it('uses the active language Name section for multilingual substitution', () => {
+    const corpus = new InMemoryTextIndex();
+    corpus.addFile(
+      makeFile('horas/Latin/Sancti/05-02', [
+        { header: 'Name', content: [{ type: 'text', value: 'Athanásii' }] },
+        {
+          header: 'Oratio',
+          content: [{ type: 'text', value: 'Oratio de beáto N.' }]
+        }
+      ])
+    );
+    corpus.addFile(
+      makeFile('horas/English/Sancti/05-02', [
+        { header: 'Name', content: [{ type: 'text', value: 'Athanasius' }] },
+        {
+          header: 'Oratio',
+          content: [{ type: 'text', value: 'Prayer about blessed N.' }]
+        }
+      ])
+    );
+
+    const hour: HourStructure = {
+      hour: 'lauds',
+      slots: {
+        oration: {
+          kind: 'single-ref',
+          ref: { path: 'horas/Latin/Sancti/05-02', section: 'Oratio' }
+        }
+      },
+      directives: []
+    };
+
+    const composed = composeHour({
+      corpus,
+      summary: {
+        ...buildSummary(hour),
+        celebration: {
+          feastRef: {
+            path: 'Sancti/05-02',
+            id: 'Sancti/05-02',
+            title: 'S. Athanasii Episcopi Confessoris et Ecclesiæ Doctoris'
+          }
+        } as never
+      },
+      version: stubVersion,
+      hour: 'lauds',
+      options: { languages: ['Latin', 'English'] }
+    });
+
+    expect(renderRuns(composed.sections[0]!.lines[0]!, 'Latin')).toBe('Oratio de beáto Athanásii');
+    expect(renderRuns(composed.sections[0]!.lines[0]!, 'English')).toBe(
+      'Prayer about blessed Athanasius'
+    );
   });
 });
 

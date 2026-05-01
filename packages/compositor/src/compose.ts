@@ -378,6 +378,8 @@ function composeSlot(args: ComposeSlotArgs): Section | undefined {
         ref,
         summary: args.summary,
         slot: args.slot,
+        language: lang,
+        ...(args.options.langfb ? { langfb: args.options.langfb } : {}),
         isAntiphon
       });
       if (args.slot === 'psalmody' && isAntiphon && containsInlinePsalmRefs(namedSourceContent)) {

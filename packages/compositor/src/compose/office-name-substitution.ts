@@ -1,19 +1,19 @@
-import {
-  ensureTxtSuffix,
-  type TextContent,
-  type TextIndex
-} from '@officium-novum/parser';
+import { type TextContent, type TextIndex } from '@officium-novum/parser';
 import type {
   DayOfficeSummary,
   SlotName,
   TextReference
 } from '@officium-novum/rubrical-engine';
 
+import { resolveAuxiliarySection } from '../resolve/path.js';
+
 interface OfficeNameSubstitutionContext {
   readonly corpus: TextIndex;
   readonly ref: TextReference;
   readonly summary: DayOfficeSummary;
   readonly slot: SlotName;
+  readonly language: string;
+  readonly langfb?: string;
   readonly isAntiphon: boolean;
 }
 
@@ -112,7 +112,13 @@ function resolveOfficeNameBinding(
     return undefined;
   }
 
-  const section = context.corpus.getSection(ensureTxtSuffix(sourcePath), 'Name');
+  const section = resolveAuxiliarySection(
+    context.corpus,
+    context.language,
+    context.langfb,
+    sourcePath,
+    'Name'
+  );
   if (!section) {
     return undefined;
   }
