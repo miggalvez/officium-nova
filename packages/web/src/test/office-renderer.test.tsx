@@ -158,6 +158,26 @@ describe('LineRenderer', () => {
     const markers = screen.getAllByText('℣.');
     expect(markers.length).toBeGreaterThan(0);
   });
+
+  it('renders source separator markers as silent spacing', () => {
+    const { container } = render(
+      <LineRenderer
+        line={{
+          texts: {
+            la: [{ type: 'text', value: '_' }],
+            en: [{ type: 'text', value: '_' }]
+          }
+        }}
+        languages={['la', 'en']}
+        displayMode="parallel"
+        reviewerMode={false}
+      />
+    );
+
+    expect(container.querySelector('.office__line--separator')).not.toBeNull();
+    expect(container.textContent).toBe('');
+    expect(screen.queryByText('_')).not.toBeInTheDocument();
+  });
 });
 
 describe('RunRenderer', () => {

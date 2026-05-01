@@ -22,6 +22,16 @@ export function LineRenderer({
     return <></>;
   }
 
+  if (isSourceSeparatorLine(line, visible)) {
+    return (
+      <div
+        className="office__line office__line--separator"
+        data-mode={mode}
+        aria-hidden="true"
+      />
+    );
+  }
+
   if (mode === 'single') {
     return (
       <div className="office__line" data-mode="single">
@@ -83,6 +93,19 @@ function LangCell({
       ))}
     </div>
   );
+}
+
+function isSourceSeparatorLine(
+  line: PublicComposedLineDto,
+  visible: readonly PublicLanguageTag[]
+): boolean {
+  if (line.marker || Object.keys(line.markers ?? {}).length > 0) {
+    return false;
+  }
+  return visible.every((lang) => {
+    const runs = line.texts[lang] ?? [];
+    return runs.length === 1 && runs[0]?.type === 'text' && runs[0].value.trim() === '_';
+  });
 }
 
 /**

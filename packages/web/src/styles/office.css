@@ -263,6 +263,11 @@
   pointer-events: none;
 }
 
+.office__line--separator {
+  min-height: var(--space-5);
+  margin-bottom: 0;
+}
+
 @media (max-width: 720px) {
   .office__line[data-mode='parallel'] {
     grid-template-columns: 1fr;

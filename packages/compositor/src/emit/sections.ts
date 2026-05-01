@@ -483,7 +483,10 @@ function normalizeLanguageText(language: string, text: string): string {
   if (language !== 'English') {
     return text;
   }
-  return text.replace(/Allelú(?:ia|ja)/gu, 'Alleluia').replace(/allelú(?:ia|ja)/gu, 'alleluia');
+  return text
+    .replace(/^Psalmus\b/u, 'Psalm')
+    .replace(/Allelú(?:ia|ja)/gu, 'Alleluia')
+    .replace(/allelú(?:ia|ja)/gu, 'alleluia');
 }
 
 function isTeDeumInlineRubricText(text: string): boolean {

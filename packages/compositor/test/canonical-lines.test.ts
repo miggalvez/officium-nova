@@ -936,6 +936,56 @@ describe('Psalmus N [index] heading emission', () => {
     expect(texts[3]).toBe('Jubiláte Deo, omnis terra...');
   });
 
+  it('localizes generated psalm headings in English output', () => {
+    const corpus = new InMemoryTextIndex();
+    corpus.addFile({
+      path: 'horas/Latin/Psalterium/Psalmorum/Psalm110.txt',
+      sections: [
+        {
+          header: '__preamble',
+          startLine: 1,
+          endLine: 1,
+          content: [{ type: 'text', value: 'Confitébor tibi, Dómine...' }]
+        }
+      ]
+    });
+    corpus.addFile({
+      path: 'horas/English/Psalterium/Psalmorum/Psalm110.txt',
+      sections: [
+        {
+          header: '__preamble',
+          startLine: 1,
+          endLine: 1,
+          content: [{ type: 'text', value: 'I will praise thee, O Lord...' }]
+        }
+      ]
+    });
+
+    const hour: HourStructure = {
+      hour: 'vespers',
+      slots: {
+        psalmody: {
+          kind: 'psalmody',
+          psalms: [
+            { psalmRef: { path: 'horas/Latin/Psalterium/Psalmorum/Psalm110', section: '__preamble' } }
+          ]
+        }
+      },
+      directives: []
+    };
+
+    const composed = composeHour({
+      corpus,
+      summary: buildSummary(hour),
+      version: stubVersion,
+      hour: 'vespers',
+      options: { languages: ['Latin', 'English'] }
+    });
+
+    expect(lineTexts(composed, 'psalmody', 'Latin')[0]).toBe('Psalmus 110 [1]');
+    expect(lineTexts(composed, 'psalmody', 'English')[0]).toBe('Psalm 110 [1]');
+  });
+
   it('includes a verse-range suffix when the psalm reference carries a range selector', () => {
     const corpus = new InMemoryTextIndex();
     corpus.addFile({
