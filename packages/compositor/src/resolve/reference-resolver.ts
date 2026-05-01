@@ -550,14 +550,16 @@ function firstTextLike(
 
 function normalizeStarredShortResponsoryBase(value: string): string {
   const withoutAlleluia = stripAlleluiaTail(value).replace(/\s+/gu, ' ').trim();
-  const match = /^(?<left>.*?),?\s*\*\s*(?<right>.+?)\.?$/u.exec(withoutAlleluia);
+  const match = /^(?<left>.*?)(?<comma>,?)\s*\*\s*(?<right>.+?)\.?$/u.exec(withoutAlleluia);
   if (!match?.groups) {
     return withoutAlleluia.replace(/\.?$/u, '');
   }
 
-  const left = (match.groups.left ?? '').trim().replace(/\.?$/u, '');
+  const rawLeft = (match.groups.left ?? '').trim();
+  const hasSourceComma = Boolean(match.groups.comma) || rawLeft.endsWith(',');
+  const left = rawLeft.replace(/[,.]?$/u, '');
   const right = lowerInitial((match.groups.right ?? '').trim().replace(/\.?$/u, ''));
-  return `${left}, ${right}`;
+  return `${left}${hasSourceComma ? ', ' : ' '}${right}`;
 }
 
 function lowerInitial(value: string): string {
