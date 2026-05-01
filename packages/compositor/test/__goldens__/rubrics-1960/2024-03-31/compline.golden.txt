@@ -145,7 +145,7 @@ warning count: 0
   Latin: text("Resurréxit, sicut dixit, allelúja:")
   Latin: text("Ora pro nobis Deum, allelúja.")
   Latin: text("_")
-  Latin: [V.] text("{::}Gaude et lætáre, Virgo María, allelúja.")
+  Latin: [V.] text("Gaude et lætáre, Virgo María, allelúja.")
   Latin: [R.] text("Quia surréxit Dóminus vere, allelúja.")
   Latin: text("_")
   Latin: [v.] text("Orémus.")

@@ -780,6 +780,44 @@ describe('hymn stanza separator emission', () => {
     ]);
   });
 
+  it('strips final-antiphon GABC double-bar cues from Marian versicles', () => {
+    const corpus = new InMemoryTextIndex();
+    corpus.addFile({
+      path: 'horas/Latin/Psalterium/Mariaant.txt',
+      sections: [
+        {
+          header: 'Paschalis',
+          startLine: 1,
+          endLine: 2,
+          content: [
+            { type: 'verseMarker', marker: 'V.', text: '{::}Gaude et lætáre, Virgo María, allelúja.' },
+            { type: 'verseMarker', marker: 'R.', text: 'Quia surréxit Dóminus vere, allelúja.' }
+          ]
+        }
+      ]
+    });
+
+    const hour = buildHour(
+      'final-antiphon-bvm',
+      { path: 'horas/Latin/Psalterium/Mariaant', section: 'Paschalis' },
+      'compline'
+    );
+
+    const composed = composeHour({
+      corpus,
+      summary: buildSummary(hour),
+      version: stubVersion,
+      hour: 'compline',
+      options: { languages: ['Latin'] }
+    });
+
+    expect(lineTexts(composed, 'final-antiphon-bvm', 'Latin')).toEqual([
+      '_',
+      'Gaude et lætáre, Virgo María, allelúja.',
+      'Quia surréxit Dóminus vere, allelúja.'
+    ]);
+  });
+
   it('only strips the leading inline gabc cue from hymn text nodes', () => {
     const corpus = new InMemoryTextIndex();
     corpus.addFile({

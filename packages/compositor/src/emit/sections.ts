@@ -506,7 +506,7 @@ function normalizeVerseMarkerText(slot: SlotName, marker: string, text: string):
 
 function normalizeFinalAntiphonText(text: string): string {
   return text
-    .replace(/^\{:(?!:)[^}]*:\}\s*/u, '')
+    .replace(/^\{:[^}]*:\}\s*/u, '')
     .replace(/^v\.\s+/u, '')
     .replace(/eúndem/gu, 'eúmdem');
 }
