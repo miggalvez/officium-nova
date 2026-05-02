@@ -889,7 +889,10 @@ describe('hymn stanza separator emission', () => {
           header: 'Hymnus1 Matutinum',
           startLine: 1,
           endLine: 1,
-          content: [{ type: 'verseMarker', marker: 'v.', text: 'Iste Conféssor Dómini, coléntes' }]
+          content: [
+            { type: 'verseMarker', marker: 'V.', text: 'Iste Conféssor Dómini, coléntes' },
+            { type: 'rubric', value: 'rubrica inline' }
+          ]
         }
       ]
     });
@@ -909,7 +912,7 @@ describe('hymn stanza separator emission', () => {
     });
 
     expect(lineTexts(composed, 'hymn', 'Latin')).toEqual([
-      'Iste Conféssor Dómini, coléntes'
+      'Iste Conféssor Dómini, coléntes rubrica inline '
     ]);
     expect(lineMarkers(composed, 'hymn')).toEqual([undefined]);
   });
