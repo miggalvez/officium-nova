@@ -225,6 +225,28 @@ describe('applyDirectives — omit-alleluia / add-alleluia', () => {
     ]);
   });
 
+  it('adds the Paschal Alleluia to proper Matins invitatory antiphon repeats', () => {
+    const content: TextContent[] = [
+      { type: 'verseMarker', marker: 'Ant.', text: 'Laudémus Deum nostrum * In confessióne beátæ Mónicæ.' },
+      { type: 'verseMarker', marker: 'v.', text: 'Veníte, exsultémus Dómino.' },
+      { type: 'verseMarker', marker: 'Ant.', text: 'In confessióne beátæ Mónicæ.' }
+    ];
+    const out = run('invitatory', content, ['matins-invitatory-paschal-alleluia']);
+    expect(out).toEqual([
+      {
+        type: 'verseMarker',
+        marker: 'Ant.',
+        text: 'Laudémus Deum nostrum * In confessióne beátæ Mónicæ, allelúia.'
+      },
+      { type: 'verseMarker', marker: 'v.', text: 'Veníte, exsultémus Dómino.' },
+      {
+        type: 'verseMarker',
+        marker: 'Ant.',
+        text: 'In confessióne beátæ Mónicæ, allelúia.'
+      }
+    ]);
+  });
+
   it('flattens common short responsories into the Paschal form', () => {
     const content: TextContent[] = [
       { type: 'verseMarker', marker: 'R.br.', text: 'Spécie tua * Et pulchritúdine tua.' },

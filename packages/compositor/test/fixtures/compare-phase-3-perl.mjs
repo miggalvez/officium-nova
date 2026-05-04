@@ -631,6 +631,7 @@ function renderCanonicalText(text) {
     .replace(/℟\./gu, 'R.')
     .replace(/✠/gu, '+')
     .replace(/✙[\ufe0e\ufe0f]?/gu, '+')
+    .replace(/\{::\}/gu, '')
     .replace(/\s+/gu, ' ')
     .trim();
 }

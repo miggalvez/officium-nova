@@ -309,7 +309,7 @@ function matinsInvitatoryPaschalAlleluia(
     }
     if (
       node.type === 'verseMarker' &&
-      isPaschalInvitatoryText(node.text) &&
+      isPaschalInvitatoryAntiphonNode(node) &&
       !hasAlleluiaTail(node.text)
     ) {
       changed = true;
@@ -370,6 +370,12 @@ function paschalShortResponsory(
 
 function isPaschalInvitatoryText(value: string): boolean {
   return isInvitatoryAntiphonText(value) || isInvitatoryResponseText(value);
+}
+
+function isPaschalInvitatoryAntiphonNode(
+  node: Extract<TextContent, { type: 'verseMarker' }>
+): boolean {
+  return node.marker === 'Ant.' || isPaschalInvitatoryText(node.text);
 }
 
 function isInvitatoryAntiphonText(value: string): boolean {

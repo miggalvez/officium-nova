@@ -602,7 +602,7 @@ function paschaltidePsalmody1960(
   }
 
   const hourRules: SelectPsalmodyParams['hourRules'] =
-    params.hourRules.psalterScheme === 'dominica'
+    usesThirdClassSanctoralWeekdayFerialPsalmody(params.hour)
       ? {
           ...params.hourRules,
           psalterScheme: 'ferial'
@@ -694,6 +694,10 @@ function usesThirdClassSanctoralPaschalAlleluiaPsalmodyAntiphon(
     hour === 'none' ||
     hour === 'vespers'
   );
+}
+
+function usesThirdClassSanctoralWeekdayFerialPsalmody(hour: HourName): boolean {
+  return usesThirdClassSanctoralPaschalAlleluiaPsalmodyAntiphon(hour);
 }
 
 function compareCandidates1960(a: Candidate, b: Candidate): number {

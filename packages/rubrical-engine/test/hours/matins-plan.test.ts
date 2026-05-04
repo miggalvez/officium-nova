@@ -492,6 +492,29 @@ describe('buildMatinsPlan', () => {
       '4',
       '3'
     ]);
+
+    const widowCelebration = celebration('Sancti/04-29', 'III', 'sanctoral');
+    const widowResult = buildMatinsPlanWithWarnings({
+      celebration: {
+        ...widowCelebration,
+        feastRef: {
+          ...widowCelebration.feastRef,
+          title: 'S. Monicæ Viduæ'
+        }
+      },
+      celebrationRules: baseRules(),
+      commemorations: [],
+      hourRules: HOUR_RULES,
+      temporal: temporal('2026-05-04', 'Pasc4-1', 'eastertide', 'IV'),
+      policy: rubrics1960Policy,
+      corpus,
+      version: version1960()
+    });
+    expect(widowResult.plan.nocturnPlan[0]?.benedictions.map((entry) => entry.reference.selector)).toEqual([
+      '1',
+      '6',
+      '3'
+    ]);
   });
 
   it('uses Paschaltide common variants for inherited Matins invitatories', () => {

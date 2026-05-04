@@ -2617,7 +2617,7 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
       'compline'
     ] as const;
 
-    for (const date of ['2026-04-29', '2026-04-30', '2026-05-02'] as const) {
+    for (const date of ['2026-04-29', '2026-04-30', '2026-05-02', '2026-05-04'] as const) {
       const summary = engine.resolveDayOfficeSummary(date);
 
       for (const hour of hours) {
@@ -2712,6 +2712,30 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
     expect(sectionTexts(catherineMatins, 'invitatory')[0]).toBe(
       'Regem Vírginum Dóminum, * Veníte, adorémus, allelúia.'
     );
+
+    const monica = engine.resolveDayOfficeSummary('2026-05-04');
+    expect(monica.celebration.feastRef.path).toBe('Sancti/05-04');
+
+    const monicaMatins = composeHour({
+      corpus: resolvedCorpus.index,
+      summary: monica,
+      version: engine.version,
+      hour: 'matins',
+      options: { languages: ['Latin'] }
+    });
+    expect(sectionTexts(monicaMatins, 'invitatory')[0]).toBe(
+      'Laudémus Deum nostrum * In confessióne beátæ Mónicæ, allelúia.'
+    );
+
+    const monicaVespers = composeHour({
+      corpus: resolvedCorpus.index,
+      summary: monica,
+      version: engine.version,
+      hour: 'vespers',
+      options: { languages: ['Latin'] }
+    });
+    expect(firstPsalmodyAntiphon(monicaVespers)).toBe('Allelúja, * allelúja, allelúja.');
+    expect(psalmodyTexts(monicaVespers).find((line) => /^Psalmus /u.test(line))).toBe('Psalmus 114 [1]');
 
     for (const [hour, chapterCitation, responsoryOpening] of [
       [

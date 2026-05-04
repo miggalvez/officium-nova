@@ -539,6 +539,7 @@ function decoratePsalmodyAssignments(
   if (input.hour === 'lauds' || input.hour === 'vespers') {
     const antiphons = resolveMajorHourAntiphonRefs(properFiles, input);
     const properPsalmRefs = resolveMajorHourPsalmRefs(properFiles, input, assignments.length);
+    const preservePsalterPsalmRefs = isRubrics1960ThirdClassSanctoralWeekday(input);
     if (antiphons.length === 0) {
       return assignments;
     }
@@ -550,7 +551,7 @@ function decoratePsalmodyAssignments(
             // When the office file itself supplies a major-hour psalm row,
             // that source-backed psalm assignment owns the slot even if the
             // psalter fallback already chose a concrete psalm number.
-            ...(properPsalmRefs[index]
+            ...(!preservePsalterPsalmRefs && properPsalmRefs[index]
               ? {
                   psalmRef: properPsalmRefs[index]
                 }
@@ -1070,6 +1071,15 @@ function resolveMinorHourAntiphonRef(
 
 function isPaschalAlleluiaAntiphonRef(ref: TextReference): boolean {
   return ref.path === 'horas/Latin/Psalterium/Psalmi/Psalmi minor' && ref.section === 'Pasch';
+}
+
+function isRubrics1960ThirdClassSanctoralWeekday(input: ApplyRuleSetInput): boolean {
+  return (
+    input.policy.name === 'rubrics-1960' &&
+    input.celebration.source === 'sanctoral' &&
+    input.celebration.rank.classSymbol === 'III' &&
+    input.temporal.dayOfWeek !== 0
+  );
 }
 
 function protectedMinorHourPsalmodyAntiphonRef(
