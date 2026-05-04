@@ -191,6 +191,31 @@ describe('rubrics1960Policy.selectPsalmody', () => {
     });
   });
 
+  it('keeps Eastertide III-class sanctoral weekday Vespers on the ferial psalter even when the office inherited festal psalmody', () => {
+    const psalms = rubrics1960Policy.selectPsalmody({
+      hour: 'vespers',
+      celebration: matinsCelebration('Sancti/05-04', 'III', 'sanctoral'),
+      celebrationRules: matinsRules(),
+      hourRules: hourRules({ hour: 'vespers', psalterScheme: 'festal' }),
+      temporal: temporal('2026-05-04', 'Pasc4-1', 'eastertide', 'IV'),
+      corpus: {} as never
+    });
+
+    expect(psalms[0]?.psalmRef).toEqual({
+      path: 'horas/Latin/Psalterium/Psalmi/Psalmi major',
+      section: 'Day1 Vespera',
+      selector: '1'
+    });
+    expect(psalms.every((assignment) => assignment.antiphonRef === psalms[0]?.antiphonRef)).toBe(
+      true
+    );
+    expect(psalms[0]?.antiphonRef).toEqual({
+      path: 'horas/Latin/Psalterium/Psalmi/Psalmi minor',
+      section: 'Pasch',
+      selector: '1'
+    });
+  });
+
   it('does not attach the Paschal Lauds antiphon outside Eastertide', () => {
     const psalms = rubrics1960Policy.selectPsalmody({
       hour: 'lauds',

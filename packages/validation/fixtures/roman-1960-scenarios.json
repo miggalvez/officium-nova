@@ -147,6 +147,11 @@
           "date": "2026-05-02",
           "hours": ["matins", "lauds", "prime", "terce", "sext", "none"],
           "notes": "St. Athanasius witness for common C4a/C4-1 fallback with feast Name substitution and 1960 Paschaltide minor-hour antiphon preservation."
+        },
+        {
+          "date": "2026-05-04",
+          "hours": ["matins", "vespers"],
+          "notes": "St. Monica witness for proper Matins invitatory Paschal Alleluia insertion and III-class sanctoral weekday Vespers ferial psalter ownership."
         }
       ],
       "assertions": [
@@ -282,6 +287,11 @@
           "date": "2026-05-03",
           "hours": ["matins", "lauds", "prime", "terce", "sext", "none", "vespers", "compline"],
           "notes": "Fourth Sunday after Easter full-day witness covering 1960 Paschaltide Sunday Matins lesson merging, whole-slot Lauds/Vespers Alleluia antiphons, ordinary minor-hour doxology, and Compline preces suppression."
+        },
+        {
+          "date": "2026-05-04",
+          "hours": ["matins", "lauds", "prime", "terce", "sext", "none", "vespers", "compline"],
+          "notes": "Full-day St. Monica witness covering proper invitatory antiphon Paschal Alleluia insertion, ferial Vespers psalter routing, and final Marian antiphon source-cue normalization."
         }
       ],
       "assertions": [

@@ -563,7 +563,7 @@ function sanctoralCujusOffset(title: string): number {
     return 1;
   }
 
-  if (/Virgin|Vírgin|Vidua|Vídua|Poenitent|Pœnitent/iu.test(title)) {
+  if (/Virgin|Vírgin|Vidu|Vídu|Poenitent|Pœnitent/iu.test(title)) {
     return 2;
   }
 
