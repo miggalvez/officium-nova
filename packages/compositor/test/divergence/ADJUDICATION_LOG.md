@@ -6075,6 +6075,39 @@ and `packages/rubrical-engine/src/policy/_shared/roman.ts`.
 remain at `1472`, because the same Matins hours now expose later
 first-divergence families.
 
+### 2026-05-05 — Pattern: Common-backed sanctoral commemorations keep proper names (engine-bug, fixed)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** The refreshed Rubrics 1960 2026 frontier exposed
+major-hour rows represented by 2026-03-06 Lauds, where Perl rendered the
+commemoration of Ss. Perpetua and Felicity before the final conclusion
+while the compositor fell through to the conclusion.
+
+**Root cause.** The engine knew the sanctoral commemoration, but
+`attachCommemorationSlots` emitted references only to sections on the
+proper file. Proper sanctoral offices such as `Sancti/03-06` can carry
+`vide C7b` and leave their commemoration antiphon, versicle, and oration
+in the inherited commune. Once the slot refs were pointed at the common
+sections, the compositor also needed to keep the commemorated proper as
+the name source so the heading and `N. et N.` substitutions did not use
+the commune's generic name.
+
+**Resolution.** Class `engine-bug`, fixed. Commemoration slot
+construction now resolves the commemorated office's inherited rule
+reference files and annotates common-backed text refs with
+`nameSourcePath`; the compositor uses that owner for commemoration
+headings and office-name substitutions.
+
+**Citation.** `upstream/web/www/horas/Latin/Sancti/03-06.txt:9-13`,
+`upstream/web/www/horas/Latin/Commune/C7b.txt:22-26`,
+`upstream/web/www/horas/Latin/Commune/C7b.txt:13-14`,
+`packages/rubrical-engine/src/hours/apply-rule-set.ts`, and
+`packages/compositor/src/compose/office-name-substitution.ts`.
+
+**Impact.** Rubrics 1960 2026 divergent hours drop from `2141` to
+`2136`, and unadjudicated rows drop from `1472` to `1467`.
+
 ## See also
 
 - [ADR-011 — Divergence adjudication protocol](../../../../docs/adr/011-phase-3-divergence-adjudication.md)

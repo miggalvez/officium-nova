@@ -1713,6 +1713,48 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
     );
   }, 240_000);
 
+  it('renders common-backed Rubrics 1960 sanctoral commemorations with proper names', async () => {
+    const { engine, resolvedCorpus } = await createHarness('Rubrics 1960 - 1960');
+    const summary = engine.resolveDayOfficeSummary('2026-03-06');
+    expect(summary.commemorations.map((commemoration) => commemoration.feastRef.path)).toContain(
+      'Sancti/03-06'
+    );
+
+    const lauds = composeHour({
+      corpus: resolvedCorpus.index,
+      summary,
+      version: engine.version,
+      hour: 'lauds',
+      options: { languages: ['Latin'] }
+    });
+
+    const slotOrder = lauds.sections.map((section) => section.slot);
+    const commemorationIndex = slotOrder.indexOf('commemoration-antiphons');
+    expect(commemorationIndex, 'Lauds should include the sanctoral commemoration').toBeGreaterThan(
+      slotOrder.indexOf('oration')
+    );
+    expect(slotOrder.indexOf('conclusion'), 'Lauds conclusion should follow the commemoration').toBeGreaterThan(
+      commemorationIndex
+    );
+    expect(lauds.sections.find((section) => section.slot === 'commemoration-antiphons')?.reference).toBe(
+      'horas/Latin/Commune/C7b#Ant 2'
+    );
+
+    const lines = canonicalLatinLines(lauds);
+    expect(lines).toContain(normalizeLatin('Commemoratio Ss. Perpetuæ et Felicitatis Martyrum'));
+    expect(lines).toContain(
+      normalizeLatin(
+        'Istárum est enim regnum cælórum, quæ contempsérunt vitam mundi, et pervenérunt ad prǽmia regni, et lavérunt stolas suas in sánguine Agni.'
+      )
+    );
+    expect(lines).toContain(
+      normalizeLatin(
+        'Da nobis, quǽsumus, Dómine Deus noster, sanctárum Mártyrum tuárum Perpétuæ et Felicitátis palmas incessábili devotióne venerári: ut quas digna mente non póssumus celebráre, humílibus saltem frequentémus obséquiis.'
+      )
+    );
+    expect(lines).not.toContain(normalizeLatin('Commemoratio Commune plurimarum non Virginum Martyrum'));
+  }, 240_000);
+
   it('renders Ash Wednesday Roman minor-hour seasonal antiphons before the psalm heading', async () => {
     for (const [version, expectations] of [
       [

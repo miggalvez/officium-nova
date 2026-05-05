@@ -2379,12 +2379,34 @@ function attachCommemorationSlots(
 
   for (const commem of applicable) {
     const basePath = `horas/Latin/${commem.feastRef.path}`;
-    antiphons.push({ path: basePath, section: antiphonHeader });
-    versicles.push(resolveCommemorationVersicleReference(input, basePath, commem.feastRef.path, versicleHeader));
-    orations.push({
-      path: basePath,
-      section: firstExistingSection(input, basePath, orationHeaders) ?? 'Oratio'
-    });
+    const commemorationFiles = resolveCommemorationTextFiles(input, commem, warnings);
+    antiphons.push(
+      resolveCommemorationReference(
+        input,
+        commemorationFiles,
+        basePath,
+        commem.feastRef.path,
+        [antiphonHeader]
+      ) ?? { path: basePath, section: antiphonHeader }
+    );
+    versicles.push(
+      resolveCommemorationReference(
+        input,
+        commemorationFiles,
+        basePath,
+        commem.feastRef.path,
+        [versicleHeader]
+      ) ?? { path: basePath, section: versicleHeader }
+    );
+    orations.push(
+      resolveCommemorationReference(
+        input,
+        commemorationFiles,
+        basePath,
+        commem.feastRef.path,
+        orationHeaders
+      ) ?? { path: basePath, section: orationHeaders[0] ?? 'Oratio' }
+    );
   }
 
   const conclusion = slots.conclusion;
@@ -2426,37 +2448,50 @@ function commemorationHeaders(hour: HourName): {
   }
 }
 
-function resolveCommemorationVersicleReference(
+function resolveCommemorationTextFiles(
   input: ApplyRuleSetInput,
+  commemoration: Commemoration,
+  warnings: RubricalWarning[]
+): readonly ParsedFile[] {
+  const feastFile = resolveFeastFile(input.corpus, {
+    feastRef: commemoration.feastRef,
+    rank: commemoration.rank,
+    source: commemoration.feastRef.path.startsWith('Tempora/') ? 'temporal' : 'sanctoral',
+    ...(commemoration.kind ? { kind: commemoration.kind } : {}),
+    ...(commemoration.octaveDay ? { octaveDay: commemoration.octaveDay } : {})
+  });
+  return resolveProperTextFiles(feastFile, input, warnings);
+}
+
+function resolveCommemorationReference(
+  input: ApplyRuleSetInput,
+  files: readonly ParsedFile[],
   basePath: string,
   feastPath: string,
-  section: string
-): TextReference {
-  if (sectionExists(input, basePath, section)) {
-    return { path: basePath, section };
+  sections: readonly string[]
+): TextReference | undefined {
+  const properOrCommon = findReferenceInFiles(files, sections);
+  if (properOrCommon) {
+    return properOrCommon.path === basePath
+      ? properOrCommon
+      : { ...properOrCommon, nameSourcePath: basePath };
   }
 
   if (feastPath.startsWith('Tempora/')) {
     const temporalWeekPath = basePath.replace(/-\d$/u, '-0');
-    if (temporalWeekPath !== basePath && sectionExists(input, temporalWeekPath, section)) {
-      return { path: temporalWeekPath, section };
+    if (temporalWeekPath !== basePath) {
+      const temporalWeekFile =
+        input.corpus.getFile(temporalWeekPath) ?? input.corpus.getFile(`${temporalWeekPath}.txt`);
+      if (temporalWeekFile) {
+        const temporalWeek = findReferenceInFile(temporalWeekFile, temporalWeekPath, sections);
+        if (temporalWeek) {
+          return temporalWeek;
+        }
+      }
     }
   }
 
-  return { path: basePath, section };
-}
-
-function firstExistingSection(
-  input: ApplyRuleSetInput,
-  path: string,
-  sections: readonly string[]
-): string | undefined {
-  return sections.find((section) => sectionExists(input, path, section));
-}
-
-function sectionExists(input: ApplyRuleSetInput, path: string, section: string): boolean {
-  const file = input.corpus.getFile(path) ?? input.corpus.getFile(`${path}.txt`);
-  return file?.sections.some((candidate) => candidate.header === section) === true;
+  return undefined;
 }
 
 const HOUR_SECTION_SUFFIX: Readonly<Record<HourName, string>> = {

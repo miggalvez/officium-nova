@@ -532,7 +532,7 @@ function prependCommemorationAntiphonHeading(
   ref: TextReference,
   content: readonly TextContent[]
 ): readonly TextContent[] {
-  const title = commemorationTitle(corpus, ref.path);
+  const title = commemorationTitle(corpus, ref.nameSourcePath ?? ref.path);
   return title
     ? [{ type: 'text', value: `Commemoratio ${title}` }, { type: 'separator' }, ...content]
     : content;

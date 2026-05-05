@@ -528,6 +528,11 @@ Rubrics 1960 ledger:
 - **Compline guillemets** — confirmed in corpus at
   `upstream/.../Common/Rubricae.txt:129`. Classified as
   `rendering-difference`; no compositor fix.
+- **Common-backed commemoration names** — commemoration antiphon,
+  versicle, and oration refs may render from an inherited commune while
+  still carrying `TextReference.nameSourcePath` for the commemorated
+  proper. The compositor uses that owner for `Commemoratio ...` headings
+  and `N.` / `N. et N.` substitution.
 - 12 new tests in `packages/compositor/test/canonical-lines.test.ts`.
 - Harness impact: every first-divergent-line on Rubrics 1960 Jan 1
   advanced into a later, different pattern. No regression on 52
