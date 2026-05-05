@@ -5979,6 +5979,37 @@ and `upstream/web/cgi-bin/horas/specials/psalmi.pl:94-119`.
 **Impact.** Rubrics 1960 2026 divergent hours drop from `2172` to
 `2141`, and unadjudicated rows drop from `1801` to `1770`.
 
+### 2026-05-05 — Pattern: Rubrics 1960 complete psalter antiphons gain unsupported trailing markers (perl-bug, adjudicated)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** The refreshed Rubrics 1960 2026 frontier exposed a
+repeated punctuation-only family where Perl appends a trailing `‡` to
+complete psalter antiphons. Representative witnesses are 2026-01-18
+Matins (`Ut quid, Domine`), 2026-01-18 Vespers (`Dixit Dominus`), and
+2026-01-17 Vespers (`Fidelis Dominus`).
+
+**Root cause.** The cited psalter rows carry complete antiphon text and
+do not include a final continuation marker. The compositor preserves the
+source antiphon text; the legacy Perl comparison surface appends an
+unsupported trailing `‡` to those completed antiphon lines.
+
+**Resolution.** Class `perl-bug`, adjudicated. The 2026 sidecar now
+fans out the existing source-backed trailing-marker adjudications to
+the current-year exact-row keys for this family.
+
+**Citation.** `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:12-15`,
+`upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:15-20`,
+`upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:142-147`,
+`upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:27-65`,
+`upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:183`,
+`upstream/web/www/horas/Latin/Tempora/Nat2-0.txt:93`,
+`upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm90.txt:1`,
+and `docs/upstream-issues.md`.
+
+**Impact.** Rubrics 1960 2026 divergent hours remain at `2141`, and
+unadjudicated rows drop from `1770` to `1502`.
+
 ## See also
 
 - [ADR-011 — Divergence adjudication protocol](../../../../docs/adr/011-phase-3-divergence-adjudication.md)

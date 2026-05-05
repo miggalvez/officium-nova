@@ -26,6 +26,10 @@ import { applyOfficeNameSubstitution } from './compose/office-name-substitution.
 import { composePrimeMartyrologySection } from './compose/prime-martyrology.js';
 import { normalizeResponsoryGloria } from './compose/responsory-gloria.js';
 import {
+  withCommemorationSeparator,
+  withMinorHourLaterBlockSeparator
+} from './compose/separators.js';
+import {
   appendExpandedPsalmWrapper,
   buildPsalmHeading,
   containsInlinePsalmRefs,
@@ -47,8 +51,6 @@ import { expandDeferredNodes, interleaveSeparators } from './resolve/expand-defe
 import { resolveReference } from './resolve/reference-resolver.js';
 import type {
   ComposedHour,
-  ComposedLine,
-  ComposedRun,
   ComposeOptions,
   ComposeWarning,
   Section
@@ -196,72 +198,6 @@ export function composeHour(input: ComposeInput): ComposedHour {
     sections: Object.freeze(sections),
     warnings: Object.freeze(warnings),
     slotAccounting: Object.freeze(buildSlotAccounting(hour, sections))
-  });
-}
-
-function withMinorHourLaterBlockSeparator(
-  hour: HourName,
-  slot: SlotName,
-  structure: HourStructure,
-  section: Section
-): Section {
-  if (!isMinorHour(hour) || (slot !== 'responsory' && slot !== 'versicle')) {
-    return section;
-  }
-  if (slot === 'responsory' && !isRenderableLaterBlockSlot(structure.slots.chapter)) {
-    return section;
-  }
-  if (
-    slot === 'versicle' &&
-    !isRenderableLaterBlockSlot(structure.slots.chapter) &&
-    !isRenderableLaterBlockSlot(structure.slots.responsory)
-  ) {
-    return section;
-  }
-
-  return Object.freeze({
-    ...section,
-    lines: Object.freeze([minorHourSeparatorLine(section.languages), ...section.lines])
-  });
-}
-
-function withCommemorationSeparator(slot: SlotName, section: Section): Section {
-  if (
-    slot !== 'commemoration-antiphons' &&
-    slot !== 'commemoration-versicles' &&
-    slot !== 'commemoration-orations'
-  ) {
-    return section;
-  }
-  if (section.lines[0] && isSeparatorLine(section.lines[0])) {
-    return section;
-  }
-
-  return Object.freeze({
-    ...section,
-    lines: Object.freeze([minorHourSeparatorLine(section.languages), ...section.lines])
-  });
-}
-
-function isSeparatorLine(line: ComposedLine): boolean {
-  const entries = Object.values(line.texts);
-  return (
-    entries.length > 0 &&
-    entries.every((runs) => runs.length === 1 && runs[0]?.type === 'text' && runs[0].value === '_')
-  );
-}
-
-function isRenderableLaterBlockSlot(content: SlotContent | undefined): boolean {
-  return content !== undefined && content.kind !== 'empty';
-}
-
-function minorHourSeparatorLine(languages: readonly string[]): ComposedLine {
-  const texts: Record<string, readonly ComposedRun[]> = {};
-  for (const language of languages) {
-    texts[language] = Object.freeze([{ type: 'text', value: '_' }]);
-  }
-  return Object.freeze({
-    texts: Object.freeze(texts)
   });
 }
 
