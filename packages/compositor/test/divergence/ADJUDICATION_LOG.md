@@ -6162,6 +6162,31 @@ keyed source row; the Perl comparison surface uses the older full
 unadjudicated rows drop from `1447` to `1427` and `perl-bug` rows rise
 from `689` to `709`.
 
+### 2026-05-05 — Pattern: 2026 Prime Paschal fallback-hymn doxology fanout (perl-bug)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** The refreshed Rubrics 1960 2026 frontier carried 16
+Prime rows with stable key-hash `7859a9fb`: Perl retained the ordinary
+fallback hymn line `Ejúsque soli Fílio,`, while the compositor emitted
+the Paschal doxology line `Et Fílio, qui a mórtuis`.
+
+**Root cause.** This is fanout from the already documented Paschal
+fallback-hymn doxology family. `Psalterium/Doxologies#Pasch` begins
+`Deo Patri sit glória,` and continues `Et Fílio, qui a mórtuis`; the
+engine/compositor now attaches that seasonal variant to fallback Prime
+hymns in Paschaltide. The Perl comparison surface retains the ordinary
+fallback stanza.
+
+**Resolution.** Class `perl-bug`. Added row-level adjudications for the
+16 Rubrics 1960 2026 Prime rows sharing stable key-hash `7859a9fb`.
+
+**Citation.** `upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:29-34`.
+
+**Impact.** Rubrics 1960 2026 divergent hours remain `2136`, while
+unadjudicated rows drop from `1427` to `1411` and `perl-bug` rows rise
+from `709` to `725`.
+
 ## See also
 
 - [ADR-011 — Divergence adjudication protocol](../../../../docs/adr/011-phase-3-divergence-adjudication.md)

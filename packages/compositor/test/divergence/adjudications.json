@@ -19500,6 +19500,17 @@
     "resolvedAt": "2026-05-05",
     "commitSha": "26e2fdd"
   },
+  "Rubrics 1960 - 1960/2026-04-15/Prime/7859a9fb": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-04-15",
+    "hour": "Prime",
+    "firstExpected": "Ejúsque soli Fílio,",
+    "firstActual": "Et Fílio, qui a mórtuis",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:29-34 - the Paschal doxology source begins Deo Patri sit gloria and continues Et Filio, qui a mortuis; the compositor attaches that seasonal variant to fallback Prime hymns while the Perl comparison surface retains the ordinary fallback stanza.",
+    "notes": "Rubrics 1960 2026 Prime fanout for the Paschal fallback-hymn doxology family; stable key-hash 7859a9fb extends existing 2024 and 2026 source-backed adjudications.",
+    "resolvedAt": "2026-05-05"
+  },
   "Rubrics 1960 - 1960/2026-04-15/Sext/dcdd92bf": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-04-15",
@@ -19536,6 +19547,17 @@
     "resolvedAt": "2026-05-05",
     "commitSha": "26e2fdd"
   },
+  "Rubrics 1960 - 1960/2026-04-16/Prime/7859a9fb": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-04-16",
+    "hour": "Prime",
+    "firstExpected": "Ejúsque soli Fílio,",
+    "firstActual": "Et Fílio, qui a mórtuis",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:29-34 - the Paschal doxology source begins Deo Patri sit gloria and continues Et Filio, qui a mortuis; the compositor attaches that seasonal variant to fallback Prime hymns while the Perl comparison surface retains the ordinary fallback stanza.",
+    "notes": "Rubrics 1960 2026 Prime fanout for the Paschal fallback-hymn doxology family; stable key-hash 7859a9fb extends existing 2024 and 2026 source-backed adjudications.",
+    "resolvedAt": "2026-05-05"
+  },
   "Rubrics 1960 - 1960/2026-04-16/Sext/dcdd92bf": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-04-16",
@@ -19571,6 +19593,17 @@
     "notes": "Phase 2/3 fix plus adjudication: seasonal Paschal fallback-hymn doxology now reaches minor-hour fallback hymns; residual Perl rows keep the non-seasonal stanza.",
     "resolvedAt": "2026-05-05",
     "commitSha": "26e2fdd"
+  },
+  "Rubrics 1960 - 1960/2026-04-17/Prime/7859a9fb": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-04-17",
+    "hour": "Prime",
+    "firstExpected": "Ejúsque soli Fílio,",
+    "firstActual": "Et Fílio, qui a mórtuis",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:29-34 - the Paschal doxology source begins Deo Patri sit gloria and continues Et Filio, qui a mortuis; the compositor attaches that seasonal variant to fallback Prime hymns while the Perl comparison surface retains the ordinary fallback stanza.",
+    "notes": "Rubrics 1960 2026 Prime fanout for the Paschal fallback-hymn doxology family; stable key-hash 7859a9fb extends existing 2024 and 2026 source-backed adjudications.",
+    "resolvedAt": "2026-05-05"
   },
   "Rubrics 1960 - 1960/2026-04-17/Sext/dcdd92bf": {
     "policy": "Rubrics 1960 - 1960",
@@ -19667,6 +19700,17 @@
     "resolvedAt": "2026-05-05",
     "commitSha": "26e2fdd"
   },
+  "Rubrics 1960 - 1960/2026-04-20/Prime/7859a9fb": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-04-20",
+    "hour": "Prime",
+    "firstExpected": "Ejúsque soli Fílio,",
+    "firstActual": "Et Fílio, qui a mórtuis",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:29-34 - the Paschal doxology source begins Deo Patri sit gloria and continues Et Filio, qui a mortuis; the compositor attaches that seasonal variant to fallback Prime hymns while the Perl comparison surface retains the ordinary fallback stanza.",
+    "notes": "Rubrics 1960 2026 Prime fanout for the Paschal fallback-hymn doxology family; stable key-hash 7859a9fb extends existing 2024 and 2026 source-backed adjudications.",
+    "resolvedAt": "2026-05-05"
+  },
   "Rubrics 1960 - 1960/2026-04-20/Sext/dcdd92bf": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-04-20",
@@ -19713,6 +19757,17 @@
     "notes": "Phase 2/3 fix plus adjudication: seasonal Paschal fallback-hymn doxology now reaches minor-hour fallback hymns; residual Perl rows keep the non-seasonal stanza.",
     "resolvedAt": "2026-05-05",
     "commitSha": "26e2fdd"
+  },
+  "Rubrics 1960 - 1960/2026-04-23/Prime/7859a9fb": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-04-23",
+    "hour": "Prime",
+    "firstExpected": "Ejúsque soli Fílio,",
+    "firstActual": "Et Fílio, qui a mórtuis",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:29-34 - the Paschal doxology source begins Deo Patri sit gloria and continues Et Filio, qui a mortuis; the compositor attaches that seasonal variant to fallback Prime hymns while the Perl comparison surface retains the ordinary fallback stanza.",
+    "notes": "Rubrics 1960 2026 Prime fanout for the Paschal fallback-hymn doxology family; stable key-hash 7859a9fb extends existing 2024 and 2026 source-backed adjudications.",
+    "resolvedAt": "2026-05-05"
   },
   "Rubrics 1960 - 1960/2026-04-23/Sext/dcdd92bf": {
     "policy": "Rubrics 1960 - 1960",
@@ -19772,6 +19827,17 @@
     "resolvedAt": "2026-05-05",
     "commitSha": "26e2fdd"
   },
+  "Rubrics 1960 - 1960/2026-05-06/Prime/7859a9fb": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-05-06",
+    "hour": "Prime",
+    "firstExpected": "Ejúsque soli Fílio,",
+    "firstActual": "Et Fílio, qui a mórtuis",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:29-34 - the Paschal doxology source begins Deo Patri sit gloria and continues Et Filio, qui a mortuis; the compositor attaches that seasonal variant to fallback Prime hymns while the Perl comparison surface retains the ordinary fallback stanza.",
+    "notes": "Rubrics 1960 2026 Prime fanout for the Paschal fallback-hymn doxology family; stable key-hash 7859a9fb extends existing 2024 and 2026 source-backed adjudications.",
+    "resolvedAt": "2026-05-05"
+  },
   "Rubrics 1960 - 1960/2026-05-06/Sext/dcdd92bf": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-05-06",
@@ -19808,6 +19874,17 @@
     "resolvedAt": "2026-05-05",
     "commitSha": "26e2fdd"
   },
+  "Rubrics 1960 - 1960/2026-05-08/Prime/7859a9fb": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-05-08",
+    "hour": "Prime",
+    "firstExpected": "Ejúsque soli Fílio,",
+    "firstActual": "Et Fílio, qui a mórtuis",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:29-34 - the Paschal doxology source begins Deo Patri sit gloria and continues Et Filio, qui a mortuis; the compositor attaches that seasonal variant to fallback Prime hymns while the Perl comparison surface retains the ordinary fallback stanza.",
+    "notes": "Rubrics 1960 2026 Prime fanout for the Paschal fallback-hymn doxology family; stable key-hash 7859a9fb extends existing 2024 and 2026 source-backed adjudications.",
+    "resolvedAt": "2026-05-05"
+  },
   "Rubrics 1960 - 1960/2026-05-08/Sext/dcdd92bf": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-05-08",
@@ -19843,6 +19920,17 @@
     "notes": "Phase 2/3 fix plus adjudication: seasonal Paschal fallback-hymn doxology now reaches minor-hour fallback hymns; residual Perl rows keep the non-seasonal stanza.",
     "resolvedAt": "2026-05-05",
     "commitSha": "26e2fdd"
+  },
+  "Rubrics 1960 - 1960/2026-05-11/Prime/7859a9fb": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-05-11",
+    "hour": "Prime",
+    "firstExpected": "Ejúsque soli Fílio,",
+    "firstActual": "Et Fílio, qui a mórtuis",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:29-34 - the Paschal doxology source begins Deo Patri sit gloria and continues Et Filio, qui a mortuis; the compositor attaches that seasonal variant to fallback Prime hymns while the Perl comparison surface retains the ordinary fallback stanza.",
+    "notes": "Rubrics 1960 2026 Prime fanout for the Paschal fallback-hymn doxology family; stable key-hash 7859a9fb extends existing 2024 and 2026 source-backed adjudications.",
+    "resolvedAt": "2026-05-05"
   },
   "Rubrics 1960 - 1960/2026-05-11/Sext/dcdd92bf": {
     "policy": "Rubrics 1960 - 1960",
@@ -19902,6 +19990,17 @@
     "notes": "Phase 2/3 fix plus adjudication: seasonal Paschal fallback-hymn doxology now reaches minor-hour fallback hymns; residual Perl rows keep the non-seasonal stanza.",
     "resolvedAt": "2026-05-05",
     "commitSha": "26e2fdd"
+  },
+  "Rubrics 1960 - 1960/2026-05-13/Prime/7859a9fb": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-05-13",
+    "hour": "Prime",
+    "firstExpected": "Ejúsque soli Fílio,",
+    "firstActual": "Et Fílio, qui a mórtuis",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:29-34 - the Paschal doxology source begins Deo Patri sit gloria and continues Et Filio, qui a mortuis; the compositor attaches that seasonal variant to fallback Prime hymns while the Perl comparison surface retains the ordinary fallback stanza.",
+    "notes": "Rubrics 1960 2026 Prime fanout for the Paschal fallback-hymn doxology family; stable key-hash 7859a9fb extends existing 2024 and 2026 source-backed adjudications.",
+    "resolvedAt": "2026-05-05"
   },
   "Rubrics 1960 - 1960/2026-05-13/Sext/dcdd92bf": {
     "policy": "Rubrics 1960 - 1960",
@@ -20154,6 +20253,17 @@
     "resolvedAt": "2026-05-05",
     "commitSha": "26e2fdd"
   },
+  "Rubrics 1960 - 1960/2026-05-24/Prime/7859a9fb": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-05-24",
+    "hour": "Prime",
+    "firstExpected": "Ejúsque soli Fílio,",
+    "firstActual": "Et Fílio, qui a mórtuis",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:29-34 - the Paschal doxology source begins Deo Patri sit gloria and continues Et Filio, qui a mortuis; the compositor attaches that seasonal variant to fallback Prime hymns while the Perl comparison surface retains the ordinary fallback stanza.",
+    "notes": "Rubrics 1960 2026 Prime fanout for the Paschal fallback-hymn doxology family; stable key-hash 7859a9fb extends existing 2024 and 2026 source-backed adjudications.",
+    "resolvedAt": "2026-05-05"
+  },
   "Rubrics 1960 - 1960/2026-05-24/Sext/dcdd92bf": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-05-24",
@@ -20177,6 +20287,17 @@
     "notes": "Phase 2/3 fix plus adjudication: seasonal Paschal fallback-hymn doxology now reaches minor-hour fallback hymns; residual Perl rows keep the non-seasonal stanza.",
     "resolvedAt": "2026-05-05",
     "commitSha": "26e2fdd"
+  },
+  "Rubrics 1960 - 1960/2026-05-25/Prime/7859a9fb": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-05-25",
+    "hour": "Prime",
+    "firstExpected": "Ejúsque soli Fílio,",
+    "firstActual": "Et Fílio, qui a mórtuis",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:29-34 - the Paschal doxology source begins Deo Patri sit gloria and continues Et Filio, qui a mortuis; the compositor attaches that seasonal variant to fallback Prime hymns while the Perl comparison surface retains the ordinary fallback stanza.",
+    "notes": "Rubrics 1960 2026 Prime fanout for the Paschal fallback-hymn doxology family; stable key-hash 7859a9fb extends existing 2024 and 2026 source-backed adjudications.",
+    "resolvedAt": "2026-05-05"
   },
   "Rubrics 1960 - 1960/2026-05-25/Sext/dcdd92bf": {
     "policy": "Rubrics 1960 - 1960",
@@ -20202,6 +20323,17 @@
     "resolvedAt": "2026-05-05",
     "commitSha": "26e2fdd"
   },
+  "Rubrics 1960 - 1960/2026-05-26/Prime/7859a9fb": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-05-26",
+    "hour": "Prime",
+    "firstExpected": "Ejúsque soli Fílio,",
+    "firstActual": "Et Fílio, qui a mórtuis",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:29-34 - the Paschal doxology source begins Deo Patri sit gloria and continues Et Filio, qui a mortuis; the compositor attaches that seasonal variant to fallback Prime hymns while the Perl comparison surface retains the ordinary fallback stanza.",
+    "notes": "Rubrics 1960 2026 Prime fanout for the Paschal fallback-hymn doxology family; stable key-hash 7859a9fb extends existing 2024 and 2026 source-backed adjudications.",
+    "resolvedAt": "2026-05-05"
+  },
   "Rubrics 1960 - 1960/2026-05-26/Sext/dcdd92bf": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-05-26",
@@ -20225,6 +20357,17 @@
     "notes": "Phase 2/3 fix plus adjudication: seasonal Paschal fallback-hymn doxology now reaches minor-hour fallback hymns; residual Perl rows keep the non-seasonal stanza.",
     "resolvedAt": "2026-05-05",
     "commitSha": "26e2fdd"
+  },
+  "Rubrics 1960 - 1960/2026-05-27/Prime/7859a9fb": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-05-27",
+    "hour": "Prime",
+    "firstExpected": "Ejúsque soli Fílio,",
+    "firstActual": "Et Fílio, qui a mórtuis",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:29-34 - the Paschal doxology source begins Deo Patri sit gloria and continues Et Filio, qui a mortuis; the compositor attaches that seasonal variant to fallback Prime hymns while the Perl comparison surface retains the ordinary fallback stanza.",
+    "notes": "Rubrics 1960 2026 Prime fanout for the Paschal fallback-hymn doxology family; stable key-hash 7859a9fb extends existing 2024 and 2026 source-backed adjudications.",
+    "resolvedAt": "2026-05-05"
   },
   "Rubrics 1960 - 1960/2026-05-27/Sext/dcdd92bf": {
     "policy": "Rubrics 1960 - 1960",
@@ -20250,6 +20393,17 @@
     "resolvedAt": "2026-05-05",
     "commitSha": "26e2fdd"
   },
+  "Rubrics 1960 - 1960/2026-05-28/Prime/7859a9fb": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-05-28",
+    "hour": "Prime",
+    "firstExpected": "Ejúsque soli Fílio,",
+    "firstActual": "Et Fílio, qui a mórtuis",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:29-34 - the Paschal doxology source begins Deo Patri sit gloria and continues Et Filio, qui a mortuis; the compositor attaches that seasonal variant to fallback Prime hymns while the Perl comparison surface retains the ordinary fallback stanza.",
+    "notes": "Rubrics 1960 2026 Prime fanout for the Paschal fallback-hymn doxology family; stable key-hash 7859a9fb extends existing 2024 and 2026 source-backed adjudications.",
+    "resolvedAt": "2026-05-05"
+  },
   "Rubrics 1960 - 1960/2026-05-28/Sext/dcdd92bf": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-05-28",
@@ -20274,6 +20428,17 @@
     "resolvedAt": "2026-05-05",
     "commitSha": "26e2fdd"
   },
+  "Rubrics 1960 - 1960/2026-05-29/Prime/7859a9fb": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-05-29",
+    "hour": "Prime",
+    "firstExpected": "Ejúsque soli Fílio,",
+    "firstActual": "Et Fílio, qui a mórtuis",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:29-34 - the Paschal doxology source begins Deo Patri sit gloria and continues Et Filio, qui a mortuis; the compositor attaches that seasonal variant to fallback Prime hymns while the Perl comparison surface retains the ordinary fallback stanza.",
+    "notes": "Rubrics 1960 2026 Prime fanout for the Paschal fallback-hymn doxology family; stable key-hash 7859a9fb extends existing 2024 and 2026 source-backed adjudications.",
+    "resolvedAt": "2026-05-05"
+  },
   "Rubrics 1960 - 1960/2026-05-29/Sext/dcdd92bf": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-05-29",
@@ -20297,6 +20462,17 @@
     "notes": "Phase 2/3 fix plus adjudication: seasonal Paschal fallback-hymn doxology now reaches minor-hour fallback hymns; residual Perl rows keep the non-seasonal stanza.",
     "resolvedAt": "2026-05-05",
     "commitSha": "26e2fdd"
+  },
+  "Rubrics 1960 - 1960/2026-05-30/Prime/7859a9fb": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-05-30",
+    "hour": "Prime",
+    "firstExpected": "Ejúsque soli Fílio,",
+    "firstActual": "Et Fílio, qui a mórtuis",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:29-34 - the Paschal doxology source begins Deo Patri sit gloria and continues Et Filio, qui a mortuis; the compositor attaches that seasonal variant to fallback Prime hymns while the Perl comparison surface retains the ordinary fallback stanza.",
+    "notes": "Rubrics 1960 2026 Prime fanout for the Paschal fallback-hymn doxology family; stable key-hash 7859a9fb extends existing 2024 and 2026 source-backed adjudications.",
+    "resolvedAt": "2026-05-05"
   },
   "Rubrics 1960 - 1960/2026-05-30/Sext/dcdd92bf": {
     "policy": "Rubrics 1960 - 1960",
