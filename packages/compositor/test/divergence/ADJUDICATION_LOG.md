@@ -6187,6 +6187,31 @@ fallback stanza.
 unadjudicated rows drop from `1427` to `1411` and `perl-bug` rows rise
 from `709` to `725`.
 
+### 2026-05-05 — Pattern: 2026 `Dómine, exáudi` conclusion-bridge fanout (perl-bug)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** The refreshed Rubrics 1960 2026 frontier carried 14
+rows with stable key-hash `843b6667`: Perl stopped at `_`, while the
+compositor continued with `V. Dómine, exáudi oratiónem meam.` after the
+collect conclusion boundary.
+
+**Root cause.** This is fanout from the already documented conclusion
+bridge family. `Psalterium/Common/Prayers#Dominus` supplies the
+source-backed `Domine exaudi` versicle and response used in the
+post-collect conclusion bridge; existing Vespers and one-alone
+minor-hour compositor integration coverage verifies this reusable block.
+The Perl comparison surface stops at the separator on these rows.
+
+**Resolution.** Class `perl-bug`. Added row-level adjudications for the
+14 Rubrics 1960 2026 rows sharing stable key-hash `843b6667`.
+
+**Citation.** `upstream/web/www/horas/Latin/Psalterium/Common/Prayers.txt:82-86`.
+
+**Impact.** Rubrics 1960 2026 divergent hours remain `2136`, while
+unadjudicated rows drop from `1411` to `1397` and `perl-bug` rows rise
+from `725` to `739`.
+
 ## See also
 
 - [ADR-011 — Divergence adjudication protocol](../../../../docs/adr/011-phase-3-divergence-adjudication.md)

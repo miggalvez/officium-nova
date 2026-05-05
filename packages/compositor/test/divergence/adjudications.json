@@ -19077,6 +19077,30 @@
     "notes": "Rubrics 1960 2026 fanout for the ferial Prime fallback chapter family. Representative witness: 2026-01-19 Prime.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-03-18/Vespers/843b6667": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-03-18",
+    "hour": "Vespers",
+    "firstExpected": "_",
+    "firstActual": "V. Dómine, exáudi oratiónem meam.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Prayers.txt:82-86 - the source-backed Dominus section supplies V. Domine, exaudi orationem meam and R. Et clamor meus ad te veniat for the post-collect conclusion bridge; the compositor emits that bridge while the Perl comparison surface stops at `_` on these rows.",
+    "notes": "2026 Rubrics 1960 Domine exaudi conclusion-bridge fanout. Existing Vespers and one-alone minor-hour integration coverage verifies the source-backed conclusion block; this row records the Perl comparison surface stopping at the separator.",
+    "resolvedAt": "2026-05-05",
+    "commitSha": "d9c4204"
+  },
+  "Rubrics 1960 - 1960/2026-03-19/Vespers/843b6667": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-03-19",
+    "hour": "Vespers",
+    "firstExpected": "_",
+    "firstActual": "V. Dómine, exáudi oratiónem meam.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Prayers.txt:82-86 - the source-backed Dominus section supplies V. Domine, exaudi orationem meam and R. Et clamor meus ad te veniat for the post-collect conclusion bridge; the compositor emits that bridge while the Perl comparison surface stops at `_` on these rows.",
+    "notes": "2026 Rubrics 1960 Domine exaudi conclusion-bridge fanout. Existing Vespers and one-alone minor-hour integration coverage verifies the source-backed conclusion block; this row records the Perl comparison surface stopping at the separator.",
+    "resolvedAt": "2026-05-05",
+    "commitSha": "d9c4204"
+  },
   "Rubrics 1960 - 1960/2026-03-20/Prime/b7853e49": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-03-20",
@@ -19220,6 +19244,18 @@
     "notes": "Rubrics 1960 2026 fanout for the ferial Prime fallback chapter family. Representative witness: 2026-01-19 Prime.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-03-24/Vespers/843b6667": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-03-24",
+    "hour": "Vespers",
+    "firstExpected": "_",
+    "firstActual": "V. Dómine, exáudi oratiónem meam.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Prayers.txt:82-86 - the source-backed Dominus section supplies V. Domine, exaudi orationem meam and R. Et clamor meus ad te veniat for the post-collect conclusion bridge; the compositor emits that bridge while the Perl comparison surface stops at `_` on these rows.",
+    "notes": "2026 Rubrics 1960 Domine exaudi conclusion-bridge fanout. Existing Vespers and one-alone minor-hour integration coverage verifies the source-backed conclusion block; this row records the Perl comparison surface stopping at the separator.",
+    "resolvedAt": "2026-05-05",
+    "commitSha": "d9c4204"
+  },
   "Rubrics 1960 - 1960/2026-03-25/Compline/318cf47a": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-03-25",
@@ -19289,6 +19325,18 @@
     "notes": "2026 Rubrics 1960 fallback-hymn doxology row. Engine slot coverage in january-hymn-routing.test.ts verifies representative Nat/Epi/Asc/Corp/Heart/local doxology sources for this reusable family.",
     "resolvedAt": "2026-05-05",
     "commitSha": "e6f1475"
+  },
+  "Rubrics 1960 - 1960/2026-03-25/Vespers/843b6667": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-03-25",
+    "hour": "Vespers",
+    "firstExpected": "_",
+    "firstActual": "V. Dómine, exáudi oratiónem meam.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Prayers.txt:82-86 - the source-backed Dominus section supplies V. Domine, exaudi orationem meam and R. Et clamor meus ad te veniat for the post-collect conclusion bridge; the compositor emits that bridge while the Perl comparison surface stops at `_` on these rows.",
+    "notes": "2026 Rubrics 1960 Domine exaudi conclusion-bridge fanout. Existing Vespers and one-alone minor-hour integration coverage verifies the source-backed conclusion block; this row records the Perl comparison surface stopping at the separator.",
+    "resolvedAt": "2026-05-05",
+    "commitSha": "d9c4204"
   },
   "Rubrics 1960 - 1960/2026-03-26/Matins/02b507e6": {
     "policy": "Rubrics 1960 - 1960",
@@ -21218,6 +21266,18 @@
     "notes": "Rubrics 1960 2026 fanout for the 1960 Tridentinum Sunday Prime antiphon source; stable key-hash e3d07cc1 extends the existing 2024 source-backed adjudication.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-06-28/Vespers/843b6667": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-06-28",
+    "hour": "Vespers",
+    "firstExpected": "_",
+    "firstActual": "V. Dómine, exáudi oratiónem meam.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Prayers.txt:82-86 - the source-backed Dominus section supplies V. Domine, exaudi orationem meam and R. Et clamor meus ad te veniat for the post-collect conclusion bridge; the compositor emits that bridge while the Perl comparison surface stops at `_` on these rows.",
+    "notes": "2026 Rubrics 1960 Domine exaudi conclusion-bridge fanout. Existing Vespers and one-alone minor-hour integration coverage verifies the source-backed conclusion block; this row records the Perl comparison surface stopping at the separator.",
+    "resolvedAt": "2026-05-05",
+    "commitSha": "d9c4204"
+  },
   "Rubrics 1960 - 1960/2026-07-02/Compline/318cf47a": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-07-02",
@@ -22205,6 +22265,18 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:1-20 and upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:716-730 and upstream/web/www/horas/Latin/Sancti/02-02.txt:4-8 and upstream/web/www/horas/Latin/Tempora/Epi1-0.txt:62-67 and docs/phase-2-rubrical-engine-design.md:1506 — Compline Te lucis carries a default replaceable doxology stanza under `Hymnus Completorium`, and winning 2026 Nat/Epi/local offices expose source-backed doxology variants. The compositor substitutes the required stanza; the Perl comparison surface retains the default `Præsta, Pater piíssime,` close.",
     "notes": "2026 Rubrics 1960 Compline fallback-hymn doxology row. This extends the source-backed fallback-hymn doxology adjudication to `Hymnus Completorium` witnesses.",
     "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-08-06/Lauds/843b6667": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-08-06",
+    "hour": "Lauds",
+    "firstExpected": "_",
+    "firstActual": "V. Dómine, exáudi oratiónem meam.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Prayers.txt:82-86 - the source-backed Dominus section supplies V. Domine, exaudi orationem meam and R. Et clamor meus ad te veniat for the post-collect conclusion bridge; the compositor emits that bridge while the Perl comparison surface stops at `_` on these rows.",
+    "notes": "2026 Rubrics 1960 Domine exaudi conclusion-bridge fanout. Existing Vespers and one-alone minor-hour integration coverage verifies the source-backed conclusion block; this row records the Perl comparison surface stopping at the separator.",
+    "resolvedAt": "2026-05-05",
+    "commitSha": "d9c4204"
   },
   "Rubrics 1960 - 1960/2026-08-06/None/318cf47a": {
     "policy": "Rubrics 1960 - 1960",
@@ -23220,6 +23292,18 @@
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited psalter source carries the complete antiphon without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-09-19/None/843b6667": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-09-19",
+    "hour": "None",
+    "firstExpected": "_",
+    "firstActual": "V. Dómine, exáudi oratiónem meam.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Prayers.txt:82-86 - the source-backed Dominus section supplies V. Domine, exaudi orationem meam and R. Et clamor meus ad te veniat for the post-collect conclusion bridge; the compositor emits that bridge while the Perl comparison surface stops at `_` on these rows.",
+    "notes": "2026 Rubrics 1960 Domine exaudi conclusion-bridge fanout. Existing Vespers and one-alone minor-hour integration coverage verifies the source-backed conclusion block; this row records the Perl comparison surface stopping at the separator.",
+    "resolvedAt": "2026-05-05",
+    "commitSha": "d9c4204"
+  },
   "Rubrics 1960 - 1960/2026-09-19/Vespers/b047f132": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-09-19",
@@ -24097,6 +24181,30 @@
     "resolvedAt": "2026-05-05",
     "commitSha": "e6f1475"
   },
+  "Rubrics 1960 - 1960/2026-10-31/Vespers/843b6667": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-10-31",
+    "hour": "Vespers",
+    "firstExpected": "_",
+    "firstActual": "V. Dómine, exáudi oratiónem meam.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Prayers.txt:82-86 - the source-backed Dominus section supplies V. Domine, exaudi orationem meam and R. Et clamor meus ad te veniat for the post-collect conclusion bridge; the compositor emits that bridge while the Perl comparison surface stops at `_` on these rows.",
+    "notes": "2026 Rubrics 1960 Domine exaudi conclusion-bridge fanout. Existing Vespers and one-alone minor-hour integration coverage verifies the source-backed conclusion block; this row records the Perl comparison surface stopping at the separator.",
+    "resolvedAt": "2026-05-05",
+    "commitSha": "d9c4204"
+  },
+  "Rubrics 1960 - 1960/2026-11-01/Vespers/843b6667": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-11-01",
+    "hour": "Vespers",
+    "firstExpected": "_",
+    "firstActual": "V. Dómine, exáudi oratiónem meam.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Prayers.txt:82-86 - the source-backed Dominus section supplies V. Domine, exaudi orationem meam and R. Et clamor meus ad te veniat for the post-collect conclusion bridge; the compositor emits that bridge while the Perl comparison surface stops at `_` on these rows.",
+    "notes": "2026 Rubrics 1960 Domine exaudi conclusion-bridge fanout. Existing Vespers and one-alone minor-hour integration coverage verifies the source-backed conclusion block; this row records the Perl comparison surface stopping at the separator.",
+    "resolvedAt": "2026-05-05",
+    "commitSha": "d9c4204"
+  },
   "Rubrics 1960 - 1960/2026-11-03/Compline/c262774b": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-11-03",
@@ -24626,6 +24734,18 @@
     "resolvedAt": "2026-05-05",
     "commitSha": "e6f1475"
   },
+  "Rubrics 1960 - 1960/2026-11-30/Vespers/843b6667": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-11-30",
+    "hour": "Vespers",
+    "firstExpected": "_",
+    "firstActual": "V. Dómine, exáudi oratiónem meam.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Prayers.txt:82-86 - the source-backed Dominus section supplies V. Domine, exaudi orationem meam and R. Et clamor meus ad te veniat for the post-collect conclusion bridge; the compositor emits that bridge while the Perl comparison surface stops at `_` on these rows.",
+    "notes": "2026 Rubrics 1960 Domine exaudi conclusion-bridge fanout. Existing Vespers and one-alone minor-hour integration coverage verifies the source-backed conclusion block; this row records the Perl comparison surface stopping at the separator.",
+    "resolvedAt": "2026-05-05",
+    "commitSha": "d9c4204"
+  },
   "Rubrics 1960 - 1960/2026-12-01/Compline/c262774b": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-12-01",
@@ -24780,6 +24900,18 @@
     "notes": "Rubrics 1960 2026 fanout for the ferial Prime fallback chapter family. Representative witness: 2026-01-19 Prime.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-12-07/Vespers/843b6667": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-12-07",
+    "hour": "Vespers",
+    "firstExpected": "_",
+    "firstActual": "V. Dómine, exáudi oratiónem meam.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Prayers.txt:82-86 - the source-backed Dominus section supplies V. Domine, exaudi orationem meam and R. Et clamor meus ad te veniat for the post-collect conclusion bridge; the compositor emits that bridge while the Perl comparison surface stops at `_` on these rows.",
+    "notes": "2026 Rubrics 1960 Domine exaudi conclusion-bridge fanout. Existing Vespers and one-alone minor-hour integration coverage verifies the source-backed conclusion block; this row records the Perl comparison surface stopping at the separator.",
+    "resolvedAt": "2026-05-05",
+    "commitSha": "d9c4204"
+  },
   "Rubrics 1960 - 1960/2026-12-08/Compline/318cf47a": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-12-08",
@@ -24838,6 +24970,18 @@
     "notes": "2026 Rubrics 1960 fallback-hymn doxology row. Engine slot coverage in january-hymn-routing.test.ts verifies representative Nat/Epi/Asc/Corp/Heart/local doxology sources for this reusable family.",
     "resolvedAt": "2026-05-05",
     "commitSha": "e6f1475"
+  },
+  "Rubrics 1960 - 1960/2026-12-08/Vespers/843b6667": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-12-08",
+    "hour": "Vespers",
+    "firstExpected": "_",
+    "firstActual": "V. Dómine, exáudi oratiónem meam.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Prayers.txt:82-86 - the source-backed Dominus section supplies V. Domine, exaudi orationem meam and R. Et clamor meus ad te veniat for the post-collect conclusion bridge; the compositor emits that bridge while the Perl comparison surface stops at `_` on these rows.",
+    "notes": "2026 Rubrics 1960 Domine exaudi conclusion-bridge fanout. Existing Vespers and one-alone minor-hour integration coverage verifies the source-backed conclusion block; this row records the Perl comparison surface stopping at the separator.",
+    "resolvedAt": "2026-05-05",
+    "commitSha": "d9c4204"
   },
   "Rubrics 1960 - 1960/2026-12-09/Vespers/cc3c00d8": {
     "policy": "Rubrics 1960 - 1960",
@@ -24982,6 +25126,18 @@
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited psalter source carries the complete antiphon without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-12-21/Vespers/843b6667": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-12-21",
+    "hour": "Vespers",
+    "firstExpected": "_",
+    "firstActual": "V. Dómine, exáudi oratiónem meam.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Prayers.txt:82-86 - the source-backed Dominus section supplies V. Domine, exaudi orationem meam and R. Et clamor meus ad te veniat for the post-collect conclusion bridge; the compositor emits that bridge while the Perl comparison surface stops at `_` on these rows.",
+    "notes": "2026 Rubrics 1960 Domine exaudi conclusion-bridge fanout. Existing Vespers and one-alone minor-hour integration coverage verifies the source-backed conclusion block; this row records the Perl comparison surface stopping at the separator.",
+    "resolvedAt": "2026-05-05",
+    "commitSha": "d9c4204"
+  },
   "Rubrics 1960 - 1960/2026-12-22/Compline/c262774b": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-12-22",
@@ -25095,6 +25251,18 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Doxologies.txt:1-20 and upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:716-730 and upstream/web/www/horas/Latin/Sancti/02-02.txt:4-8 and upstream/web/www/horas/Latin/Tempora/Epi1-0.txt:62-67 and docs/phase-2-rubrical-engine-design.md:1506 — Compline Te lucis carries a default replaceable doxology stanza under `Hymnus Completorium`, and winning 2026 Nat/Epi/local offices expose source-backed doxology variants. The compositor substitutes the required stanza; the Perl comparison surface retains the default `Præsta, Pater piíssime,` close.",
     "notes": "2026 Rubrics 1960 Compline fallback-hymn doxology row. This extends the source-backed fallback-hymn doxology adjudication to `Hymnus Completorium` witnesses.",
     "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-12-27/Lauds/843b6667": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-12-27",
+    "hour": "Lauds",
+    "firstExpected": "_",
+    "firstActual": "V. Dómine, exáudi oratiónem meam.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Common/Prayers.txt:82-86 - the source-backed Dominus section supplies V. Domine, exaudi orationem meam and R. Et clamor meus ad te veniat for the post-collect conclusion bridge; the compositor emits that bridge while the Perl comparison surface stops at `_` on these rows.",
+    "notes": "2026 Rubrics 1960 Domine exaudi conclusion-bridge fanout. Existing Vespers and one-alone minor-hour integration coverage verifies the source-backed conclusion block; this row records the Perl comparison surface stopping at the separator.",
+    "resolvedAt": "2026-05-05",
+    "commitSha": "d9c4204"
   },
   "Rubrics 1960 - 1960/2026-12-27/None/318cf47a": {
     "policy": "Rubrics 1960 - 1960",
