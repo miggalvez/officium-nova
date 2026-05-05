@@ -1396,6 +1396,36 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
     }
   }, 240_000);
 
+  it('applies Monday seasonal Invit4 Psalm 94 materialization for Rubrics 1960 2026 Matins', async () => {
+    const { engine, resolvedCorpus } = await createHarness('Rubrics 1960 - 1960');
+    const summary = engine.resolveDayOfficeSummary('2026-01-19');
+    const matins = summary.hours.matins;
+    expect(matins).toBeDefined();
+    if (!matins) return;
+
+    expect(matins.slots.invitatory?.kind).toBe('matins-invitatorium');
+    if (matins.slots.invitatory?.kind === 'matins-invitatorium') {
+      expect(matins.slots.invitatory.source.kind).toBe('season');
+      expect(matins.slots.invitatory.source.reference.selector).toBe('Epiphania');
+    }
+
+    const composed = composeHour({
+      corpus: resolvedCorpus.index,
+      summary,
+      version: engine.version,
+      hour: 'matins',
+      options: { languages: ['Latin'] }
+    });
+
+    const invitatory = composed.sections.find((section) => section.slot === 'invitatory');
+    const invitatoryLines = invitatory?.lines.map(renderLatinText) ?? [];
+    expect(invitatoryLines[0]).toBe('Veníte, * Exsultémus Dómino.');
+    expect(invitatoryLines[1]).toBe('Veníte, * Exsultémus Dómino.');
+    expect(invitatoryLines[2]).toBe(
+      'Jubilémus Deo, salutári nostro: præoccupémus fáciem ejus in confessióne, et in psalmis jubilémus ei.'
+    );
+  }, 240_000);
+
   it('keeps the Passiontide Psalm 94 responsorial split and Gloria omission before the hymn across the Roman families', async () => {
     for (const version of PHASE_3_ROMAN_HANDLES.filter((handle) => handle !== 'Divino Afflatu - 1954')) {
       const { engine, resolvedCorpus } = await createHarness(version);

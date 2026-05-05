@@ -178,6 +178,40 @@ describe('swapLanguageSegment', () => {
     ]);
   });
 
+  it('trims the first Psalm 94 incipit for Invit4 Monday materialization before antiphon insertion', () => {
+    const materialized = materializeInvitatoryContent(
+      [
+        { type: 'formulaRef', name: 'ant' },
+        {
+          type: 'verseMarker',
+          marker: 'v.',
+          text: 'Veníte, exsultémus Dómino, + jubilémus Deo, salutári nostro: * præoccupémus fáciem ejus in confessióne, et in psalmis jubilémus ei.'
+        },
+        { type: 'formulaRef', name: 'ant2' }
+      ],
+      [{ type: 'text', value: 'Veníte, * Exsultémus Dómino.' }],
+      'Invit4'
+    );
+
+    expect(materialized).toEqual([
+      {
+        type: 'verseMarker',
+        marker: 'Ant.',
+        text: 'Veníte, * Exsultémus Dómino.'
+      },
+      {
+        type: 'verseMarker',
+        marker: 'v.',
+        text: 'Jubilémus Deo, salutári nostro: * præoccupémus fáciem ejus in confessióne, et in psalmis jubilémus ei.'
+      },
+      {
+        type: 'verseMarker',
+        marker: 'Ant.',
+        text: 'Exsultémus Dómino.'
+      }
+    ]);
+  });
+
   it('materializes the Passiontide invitatory tail and Gloria omission before antiphon insertion', () => {
     const materialized = materializeInvitatoryContent(
       [

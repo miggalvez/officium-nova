@@ -24,7 +24,11 @@ import { swapLanguageSegment } from './path.js';
 import { resolveLocalizedSourceFallback } from './localized-source-fallback.js';
 import { synthesizeSection } from './synthetic-sections.js';
 
-export { materializeInvitatoryContent, resolveInvitatoryAntiphonContent } from './invitatory.js';
+export {
+  materializeInvitatoryContent,
+  type InvitatoryMaterializationMode,
+  resolveInvitatoryAntiphonContent
+} from './invitatory.js';
 export { swapLanguageSegment } from './path.js';
 
 export interface ResolvedSection {

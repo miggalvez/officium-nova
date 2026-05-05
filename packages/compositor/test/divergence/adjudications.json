@@ -17877,6 +17877,17 @@
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited source carries the complete antiphon or incipit without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-01-19/Matins/86cb45c3": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-01-19",
+    "hour": "Matins",
+    "firstExpected": "Ant. Exáudiat te * Dóminus in die tribulatiónis. ‡",
+    "firstActual": "Ant. Exáudiat te * Dóminus in die tribulatiónis.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:29 — the psalter-matins row carries `Exáudiat te * Dóminus in die tribulatiónis.` without a trailing `‡`; the compositor preserves that source text while the Perl comparison surface appends an unsupported marker.",
+    "notes": "2026 Rubrics 1960 Monday seasonal Invit4 Matins fanout. After the source-backed invitatory materialization fix, these rows advance to the existing Psalm 19 unsupported trailing-continuation-marker family.",
+    "resolvedAt": "2026-05-05"
+  },
   "Rubrics 1960 - 1960/2026-01-19/Prime/b7853e49": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-01-19",
@@ -18317,6 +18328,17 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:30 — the weekday Lauds psalter source carries the complete antiphon `Miserére * mei, Deus, secúndum magnam misericórdiam tuam.` without a trailing `‡`. The compositor preserves the source text; the Perl comparison surface adds an unsupported trailing continuation marker.",
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited source carries the complete antiphon or incipit without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
+    "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-02-16/Matins/86cb45c3": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-02-16",
+    "hour": "Matins",
+    "firstExpected": "Ant. Exáudiat te * Dóminus in die tribulatiónis. ‡",
+    "firstActual": "Ant. Exáudiat te * Dóminus in die tribulatiónis.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:29 — the psalter-matins row carries `Exáudiat te * Dóminus in die tribulatiónis.` without a trailing `‡`; the compositor preserves that source text while the Perl comparison surface appends an unsupported marker.",
+    "notes": "2026 Rubrics 1960 Monday seasonal Invit4 Matins fanout. After the source-backed invitatory materialization fix, these rows advance to the existing Psalm 19 unsupported trailing-continuation-marker family.",
     "resolvedAt": "2026-05-05"
   },
   "Rubrics 1960 - 1960/2026-02-16/Prime/b7853e49": {
@@ -21017,6 +21039,17 @@
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited source carries the complete antiphon or incipit without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-06-15/Matins/86cb45c3": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-06-15",
+    "hour": "Matins",
+    "firstExpected": "Ant. Exáudiat te * Dóminus in die tribulatiónis. ‡",
+    "firstActual": "Ant. Exáudiat te * Dóminus in die tribulatiónis.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:29 — the psalter-matins row carries `Exáudiat te * Dóminus in die tribulatiónis.` without a trailing `‡`; the compositor preserves that source text while the Perl comparison surface appends an unsupported marker.",
+    "notes": "2026 Rubrics 1960 Monday seasonal Invit4 Matins fanout. After the source-backed invitatory materialization fix, these rows advance to the existing Psalm 19 unsupported trailing-continuation-marker family.",
+    "resolvedAt": "2026-05-05"
+  },
   "Rubrics 1960 - 1960/2026-06-15/Prime/b7853e49": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-06-15",
@@ -21518,6 +21551,17 @@
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited source carries the complete antiphon or incipit without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-07-06/Matins/86cb45c3": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-07-06",
+    "hour": "Matins",
+    "firstExpected": "Ant. Exáudiat te * Dóminus in die tribulatiónis. ‡",
+    "firstActual": "Ant. Exáudiat te * Dóminus in die tribulatiónis.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:29 — the psalter-matins row carries `Exáudiat te * Dóminus in die tribulatiónis.` without a trailing `‡`; the compositor preserves that source text while the Perl comparison surface appends an unsupported marker.",
+    "notes": "2026 Rubrics 1960 Monday seasonal Invit4 Matins fanout. After the source-backed invitatory materialization fix, these rows advance to the existing Psalm 19 unsupported trailing-continuation-marker family.",
+    "resolvedAt": "2026-05-05"
+  },
   "Rubrics 1960 - 1960/2026-07-06/Prime/b7853e49": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-07-06",
@@ -21730,6 +21774,17 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:27 — the weekday Vespers psalter source carries the complete antiphon `Laudáte * Dóminum omnes gentes.` without a trailing `‡`. The compositor preserves the source text; the Perl comparison surface adds an unsupported trailing continuation marker.",
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited source carries the complete antiphon or incipit without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
+    "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-07-13/Matins/86cb45c3": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-07-13",
+    "hour": "Matins",
+    "firstExpected": "Ant. Exáudiat te * Dóminus in die tribulatiónis. ‡",
+    "firstActual": "Ant. Exáudiat te * Dóminus in die tribulatiónis.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:29 — the psalter-matins row carries `Exáudiat te * Dóminus in die tribulatiónis.` without a trailing `‡`; the compositor preserves that source text while the Perl comparison surface appends an unsupported marker.",
+    "notes": "2026 Rubrics 1960 Monday seasonal Invit4 Matins fanout. After the source-backed invitatory materialization fix, these rows advance to the existing Psalm 19 unsupported trailing-continuation-marker family.",
     "resolvedAt": "2026-05-05"
   },
   "Rubrics 1960 - 1960/2026-07-13/Prime/b7853e49": {
@@ -22042,6 +22097,17 @@
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited source carries the complete antiphon or incipit without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-07-27/Matins/86cb45c3": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-07-27",
+    "hour": "Matins",
+    "firstExpected": "Ant. Exáudiat te * Dóminus in die tribulatiónis. ‡",
+    "firstActual": "Ant. Exáudiat te * Dóminus in die tribulatiónis.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:29 — the psalter-matins row carries `Exáudiat te * Dóminus in die tribulatiónis.` without a trailing `‡`; the compositor preserves that source text while the Perl comparison surface appends an unsupported marker.",
+    "notes": "2026 Rubrics 1960 Monday seasonal Invit4 Matins fanout. After the source-backed invitatory materialization fix, these rows advance to the existing Psalm 19 unsupported trailing-continuation-marker family.",
+    "resolvedAt": "2026-05-05"
+  },
   "Rubrics 1960 - 1960/2026-07-27/Prime/b7853e49": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-07-27",
@@ -22242,6 +22308,17 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:27 — the weekday Vespers psalter source carries the complete antiphon `Laudáte * Dóminum omnes gentes.` without a trailing `‡`. The compositor preserves the source text; the Perl comparison surface adds an unsupported trailing continuation marker.",
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited source carries the complete antiphon or incipit without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
+    "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-08-03/Matins/86cb45c3": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-08-03",
+    "hour": "Matins",
+    "firstExpected": "Ant. Exáudiat te * Dóminus in die tribulatiónis. ‡",
+    "firstActual": "Ant. Exáudiat te * Dóminus in die tribulatiónis.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:29 — the psalter-matins row carries `Exáudiat te * Dóminus in die tribulatiónis.` without a trailing `‡`; the compositor preserves that source text while the Perl comparison surface appends an unsupported marker.",
+    "notes": "2026 Rubrics 1960 Monday seasonal Invit4 Matins fanout. After the source-backed invitatory materialization fix, these rows advance to the existing Psalm 19 unsupported trailing-continuation-marker family.",
     "resolvedAt": "2026-05-05"
   },
   "Rubrics 1960 - 1960/2026-08-03/Prime/b7853e49": {
@@ -23022,6 +23099,17 @@
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited source carries the complete antiphon or incipit without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-09-07/Matins/86cb45c3": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-09-07",
+    "hour": "Matins",
+    "firstExpected": "Ant. Exáudiat te * Dóminus in die tribulatiónis. ‡",
+    "firstActual": "Ant. Exáudiat te * Dóminus in die tribulatiónis.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:29 — the psalter-matins row carries `Exáudiat te * Dóminus in die tribulatiónis.` without a trailing `‡`; the compositor preserves that source text while the Perl comparison surface appends an unsupported marker.",
+    "notes": "2026 Rubrics 1960 Monday seasonal Invit4 Matins fanout. After the source-backed invitatory materialization fix, these rows advance to the existing Psalm 19 unsupported trailing-continuation-marker family.",
+    "resolvedAt": "2026-05-05"
+  },
   "Rubrics 1960 - 1960/2026-09-07/Prime/b7853e49": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-09-07",
@@ -23773,6 +23861,17 @@
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited source carries the complete antiphon or incipit without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-10-05/Matins/86cb45c3": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-10-05",
+    "hour": "Matins",
+    "firstExpected": "Ant. Exáudiat te * Dóminus in die tribulatiónis. ‡",
+    "firstActual": "Ant. Exáudiat te * Dóminus in die tribulatiónis.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:29 — the psalter-matins row carries `Exáudiat te * Dóminus in die tribulatiónis.` without a trailing `‡`; the compositor preserves that source text while the Perl comparison surface appends an unsupported marker.",
+    "notes": "2026 Rubrics 1960 Monday seasonal Invit4 Matins fanout. After the source-backed invitatory materialization fix, these rows advance to the existing Psalm 19 unsupported trailing-continuation-marker family.",
+    "resolvedAt": "2026-05-05"
+  },
   "Rubrics 1960 - 1960/2026-10-05/Prime/b7853e49": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-10-05",
@@ -23952,6 +24051,17 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:27 — the weekday Vespers psalter source carries the complete antiphon `Laudáte * Dóminum omnes gentes.` without a trailing `‡`. The compositor preserves the source text; the Perl comparison surface adds an unsupported trailing continuation marker.",
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited source carries the complete antiphon or incipit without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
+    "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-10-12/Matins/86cb45c3": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-10-12",
+    "hour": "Matins",
+    "firstExpected": "Ant. Exáudiat te * Dóminus in die tribulatiónis. ‡",
+    "firstActual": "Ant. Exáudiat te * Dóminus in die tribulatiónis.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:29 — the psalter-matins row carries `Exáudiat te * Dóminus in die tribulatiónis.` without a trailing `‡`; the compositor preserves that source text while the Perl comparison surface appends an unsupported marker.",
+    "notes": "2026 Rubrics 1960 Monday seasonal Invit4 Matins fanout. After the source-backed invitatory materialization fix, these rows advance to the existing Psalm 19 unsupported trailing-continuation-marker family.",
     "resolvedAt": "2026-05-05"
   },
   "Rubrics 1960 - 1960/2026-10-12/Prime/b7853e49": {
@@ -24207,6 +24317,17 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:27 — the weekday Vespers psalter source carries the complete antiphon `Laudáte * Dóminum omnes gentes.` without a trailing `‡`. The compositor preserves the source text; the Perl comparison surface adds an unsupported trailing continuation marker.",
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited source carries the complete antiphon or incipit without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
+    "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-10-26/Matins/86cb45c3": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-10-26",
+    "hour": "Matins",
+    "firstExpected": "Ant. Exáudiat te * Dóminus in die tribulatiónis. ‡",
+    "firstActual": "Ant. Exáudiat te * Dóminus in die tribulatiónis.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:29 — the psalter-matins row carries `Exáudiat te * Dóminus in die tribulatiónis.` without a trailing `‡`; the compositor preserves that source text while the Perl comparison surface appends an unsupported marker.",
+    "notes": "2026 Rubrics 1960 Monday seasonal Invit4 Matins fanout. After the source-backed invitatory materialization fix, these rows advance to the existing Psalm 19 unsupported trailing-continuation-marker family.",
     "resolvedAt": "2026-05-05"
   },
   "Rubrics 1960 - 1960/2026-10-26/Prime/b7853e49": {

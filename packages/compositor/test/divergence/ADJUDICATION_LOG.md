@@ -6300,6 +6300,42 @@ but these offices are source-backed common-antiphon offices.
 unadjudicated rows drop from `1274` to `1262` and `perl-bug` rows rise
 from `752` to `764`.
 
+### 2026-05-05 — Fix: 2026 Monday seasonal Invit4 Matins materialization (compositor-bug)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** The refreshed Rubrics 1960 2026 frontier carried 11
+Monday Matins rows where Perl continued the invitatory psalm at
+`Jubilémus Deo...`, while the compositor repeated the full Psalm 94
+incipit `Veníte, exsultémus Dómino...` after the antiphon.
+
+**Root cause.** This was a Phase 3 composition bug. Perl
+`specmatins.pl` applies the old `Invitatorium4` materialization for
+Monday seasonal invitatories in Epiphanytide, pre-Lent, and after
+Pentecost, trimming the first Psalm 94 skeleton verse at the `+` marker
+before inserting the weekday antiphon. The compositor supported the
+related `Invit2` and Passiontide `Invit3` modes, but not this Monday
+seasonal `Invit4` split.
+
+**Resolution.** Class `compositor-bug` for the materialization seam.
+Added `Invit4` support in the invitatory resolver and selected it for
+Monday seasonal `Epiphania`, `Septuagesima`, and `PostPentecosten`
+sources. Added resolver coverage plus an upstream Rubrics 1960
+`2026-01-19` Matins witness. After the fix, the same 11 rows advance to
+the already documented Psalm 19 trailing-continuation-marker
+`perl-bug` family, so row-level adjudications classify that exposed
+surface.
+
+**Citation.** `upstream/web/cgi-bin/horas/specmatins.pl:101-120`;
+`upstream/web/www/horas/Latin/Psalterium/Invitatorium.txt:1-15`;
+`upstream/web/www/horas/Latin/Psalterium/Special/Matutinum Special.txt:1-8`;
+`upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:29`.
+
+**Impact.** Rubrics 1960 2026 divergent hours remain `2026`, the
+average matching prefix improves from `49.4` to `50.3`, unadjudicated
+rows drop from `1262` to `1251`, and `perl-bug` rows rise from `764` to
+`775`.
+
 ## See also
 
 - [ADR-011 — Divergence adjudication protocol](../../../../docs/adr/011-phase-3-divergence-adjudication.md)
