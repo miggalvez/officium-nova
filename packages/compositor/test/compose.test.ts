@@ -417,6 +417,51 @@ describe('composeHour', () => {
     ]);
   });
 
+  it('emits ordinary Compline responsory boundary separators', () => {
+    const corpus = new InMemoryTextIndex();
+    corpus.addFile(
+      makeFileMulti('horas/Latin/Psalterium/Special/Minor Special', [
+        {
+          header: 'Responsory Completorium',
+          content: [
+            { type: 'verseMarker', marker: 'R.br.', text: 'In manus tuas, Dómine' },
+            { type: 'verseMarker', marker: 'R.', text: 'In manus tuas, Dómine' }
+          ]
+        }
+      ])
+    );
+
+    const hour: HourStructure = {
+      hour: 'compline',
+      slots: {
+        responsory: {
+          kind: 'single-ref',
+          ref: {
+            path: 'horas/Latin/Psalterium/Special/Minor Special',
+            section: 'Responsory Completorium'
+          }
+        }
+      },
+      directives: []
+    };
+
+    const composed = composeHour({
+      corpus,
+      summary: buildSummary(hour, { season: 'ordinary' }),
+      version: stubVersion,
+      hour: 'compline',
+      options: { languages: ['Latin'] }
+    });
+
+    const responsory = composed.sections.find((section) => section.slot === 'responsory');
+    expect(responsory?.lines.map((line) => renderRuns(line, 'Latin'))).toEqual([
+      '_',
+      'In manus tuas, Dómine',
+      'In manus tuas, Dómine',
+      '_'
+    ]);
+  });
+
   it('injects Sunday Compline preces from the special corpus section when the slot is empty', () => {
     const corpus = new InMemoryTextIndex();
     corpus.addFile(

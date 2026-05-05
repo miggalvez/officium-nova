@@ -192,7 +192,7 @@ function resolveForLanguage(
           return sourceLocalized;
         }
       }
-      return selected;
+      return withComplineResponsoryBoundaries(selected, reference, candidatePath);
     }
   }
   return undefined;
@@ -292,6 +292,32 @@ interface SelectorContext {
 const INVITATORIUM_SUFFIX = '/Psalterium/Invitatorium';
 const PSALMI_MINOR_SUFFIX = '/Psalterium/Psalmi/Psalmi minor';
 const PSALMORUM_SEGMENT = '/Psalterium/Psalmorum/Psalm';
+const MINOR_SPECIAL_SUFFIX = '/Psalterium/Special/Minor Special';
+
+function withComplineResponsoryBoundaries(
+  section: ResolvedSection,
+  reference: TextReference,
+  path: string
+): ResolvedSection {
+  if (
+    reference.section !== 'Responsory Completorium' ||
+    !path.endsWith(MINOR_SPECIAL_SUFFIX)
+  ) {
+    return section;
+  }
+
+  const content = [...section.content];
+  if (content[0]?.type !== 'separator') {
+    content.unshift({ type: 'separator' });
+  }
+  if (content.at(-1)?.type !== 'separator') {
+    content.push({ type: 'separator' });
+  }
+  return Object.freeze({
+    ...section,
+    content: Object.freeze(content)
+  });
+}
 
 function applySelector(
   index: TextIndex,

@@ -5693,6 +5693,44 @@ from the 2026 ledger. The total divergent-hour count remains `2407`
 because those same Compline hours still contain later unresolved
 differences, now led primarily by later-block and half-verse surfaces.
 
+### 2026-05-05 — Pattern: Ordinary Compline short-responsory boundary separators (compositor-bug, fixed)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** After the ordinary Compline psalmody antiphon wrapper
+was fixed, 205 Rubrics 1960 2026 Compline rows advanced to the next
+stable family: Perl expected an underscore separator before
+`R.br. In manus tuas, Dómine, * Comméndo spíritum meum.`, while the
+compositor moved directly from the short lesson response to the
+responsory body.
+
+**Root cause.** The legacy renderer surfaces the blank boundaries around
+`[Responsory Completorium]` as underscore separator lines. The
+Paschaltide synthetic Compline responsory already inserted those
+boundary separators, but the ordinary resolved section path returned the
+source body without them.
+
+**Resolution.** Class `compositor-bug`, fixed. The reference resolver
+now wraps the ordinary `Minor Special#Responsory Completorium` section
+with leading and trailing separator nodes before emission. This keeps the
+ordinary path aligned with the existing paschal synthetic path and lets
+the normal responsory emitter render those separators as `_`.
+
+Regression coverage was added in `packages/compositor/test/compose.test.ts`
+for the exact resolver/emitter seam and in
+`packages/compositor/test/integration/compose-upstream.test.ts` for the
+2026 Rubrics 1960 Jan. 2 witness. The Appendix-A Compline goldens were
+refreshed for the shared Roman ordinary-responsory shape.
+
+**Citation.** `upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:807-815`,
+`packages/compositor/src/resolve/synthetic-sections.ts:446-454`, and
+`packages/compositor/src/emit/sections.ts:273-284`.
+
+**Impact.** The `_` versus `R.br.` Compline family is removed from the
+2026 ledger. The total divergent-hour count remains `2407` because those
+hours still contain later unresolved Compline differences, now led by
+final BVM antiphon handling, preces routing, and half-verse rendering.
+
 ## See also
 
 - [ADR-011 — Divergence adjudication protocol](../../../../docs/adr/011-phase-3-divergence-adjudication.md)

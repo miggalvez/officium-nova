@@ -2938,6 +2938,31 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
     );
   }, 240_000);
 
+  it('keeps ordinary Rubrics 1960 Compline responsory separators in 2026', async () => {
+    const { engine, resolvedCorpus } = await createHarness('Rubrics 1960 - 1960');
+    const summary = engine.resolveDayOfficeSummary(new Date(Date.UTC(2026, 0, 2)));
+    const compline = composeHour({
+      corpus: resolvedCorpus.index,
+      summary,
+      version: engine.version,
+      hour: 'compline',
+      options: { languages: ['Latin'] }
+    });
+
+    const responsory = compline.sections.find((section) => section.slot === 'responsory');
+    expect(responsory, '2026-01-02 Compline should include the ordinary responsory').toBeDefined();
+    expect(responsory?.lines.map(renderLatinText)).toEqual([
+      '_',
+      'In manus tuas, Dómine, * Comméndo spíritum meum.',
+      'In manus tuas, Dómine, * Comméndo spíritum meum.',
+      'Redemísti nos, Dómine, Deus veritátis.',
+      'Comméndo spíritum meum.',
+      'Glória Patri, et Fílio, * et Spirítui Sancto.',
+      'In manus tuas, Dómine, * Comméndo spíritum meum.',
+      '_'
+    ]);
+  }, 240_000);
+
   it('keeps Reduced 1955 Jan 6/7 minor hours in chapter-responsory-versicle-oration order after psalmody', async () => {
     const { engine, resolvedCorpus } = await createHarness('Reduced - 1955');
 
