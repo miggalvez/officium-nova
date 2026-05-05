@@ -518,13 +518,26 @@ function prependCommemorationPrelude(
 ): readonly TextContent[] {
   if (args.slot === 'commemoration-orations') {
     return [
-      { type: 'text', value: language === 'Latin' ? 'Orémus.' : 'Let us pray.' },
+      { type: 'text', value: commemorationOrationPrelude(language) },
       { type: 'separator' },
       ...content
     ];
   }
 
   return content;
+}
+
+const COMMEMORATION_ORATION_PRELUDES: Readonly<Record<string, string>> = Object.freeze({
+  Latin: 'Orémus.',
+  English: 'Let us pray.'
+});
+
+function commemorationOrationPrelude(language: string): string {
+  return (
+    COMMEMORATION_ORATION_PRELUDES[language] ??
+    COMMEMORATION_ORATION_PRELUDES[language.split('-', 1)[0] ?? ''] ??
+    COMMEMORATION_ORATION_PRELUDES.Latin!
+  );
 }
 
 function prependCommemorationAntiphonHeading(

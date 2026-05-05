@@ -111,7 +111,7 @@ function renderRuns(
 
 function slotLines(
   composed: ReturnType<typeof composeHour>,
-  slot: 'psalmody' | 'hymn',
+  slot: 'psalmody' | 'hymn' | 'commemoration-orations',
   language: string
 ): readonly string[] {
   const section = composed.sections.find((candidate) => candidate.slot === slot);
@@ -1676,6 +1676,49 @@ describe('composeHour', () => {
       'Before the ending of the day'
     );
     expect(renderRuns(composed.sections[0]!.lines[1]!, 'English-UK')).toBe('Thanks be to God.');
+  });
+
+  it('uses a language-aware commemoration oration prelude', () => {
+    const corpus = new InMemoryTextIndex();
+    corpus.addFile(
+      makeFile('horas/Latin/Tempora/Pasc1-1', 'Oratio', [
+        { type: 'text', value: 'Deus, qui hodiérna die.' }
+      ])
+    );
+
+    const hour: HourStructure = {
+      hour: 'lauds',
+      slots: {
+        'commemoration-orations': {
+          kind: 'ordered-refs',
+          refs: [{ path: 'horas/Latin/Tempora/Pasc1-1', section: 'Oratio' }]
+        }
+      },
+      directives: []
+    };
+
+    const composedEnglish = composeHour({
+      corpus,
+      summary: buildSummary(hour),
+      version: stubVersion,
+      hour: 'lauds',
+      options: { languages: ['English-UK'], langfb: 'Latin' }
+    });
+    const composedGerman = composeHour({
+      corpus,
+      summary: buildSummary(hour),
+      version: stubVersion,
+      hour: 'lauds',
+      options: { languages: ['Deutsch'], langfb: 'Latin' }
+    });
+
+    expect(slotLines(composedEnglish, 'commemoration-orations', 'English-UK')).toContain(
+      'Let us pray.'
+    );
+    expect(slotLines(composedGerman, 'commemoration-orations', 'Deutsch')).toContain('Orémus.');
+    expect(slotLines(composedGerman, 'commemoration-orations', 'Deutsch')).not.toContain(
+      'Let us pray.'
+    );
   });
 
   it('surfaces residual reference nodes instead of dropping them', () => {

@@ -406,6 +406,72 @@ describe('resolveReference', () => {
     ]);
   });
 
+  it('wraps localized source fallback Compline responsories with boundary separators', () => {
+    const source = {
+      path: 'horas/Latin/Psalterium/Common/Responsories.txt',
+      section: 'Completorium'
+    };
+    const index = new InMemoryTextIndex();
+    index.addFile({
+      path: 'horas/Latin/Psalterium/Special/Minor Special.txt',
+      sections: [
+        {
+          header: 'Responsory Completorium',
+          content: [
+            sourcedText('R.br. In manus tuas, Domine.', source),
+            sourcedText('R. In manus tuas, Domine.', source)
+          ],
+          startLine: 1,
+          endLine: 2
+        }
+      ]
+    });
+    index.addFile({
+      path: 'horas/Latin/Psalterium/Common/Responsories.txt',
+      sections: [
+        {
+          header: 'Completorium',
+          content: [
+            { type: 'text', value: 'R.br. In manus tuas, Domine.' },
+            { type: 'text', value: 'R. In manus tuas, Domine.' }
+          ],
+          startLine: 1,
+          endLine: 2
+        }
+      ]
+    });
+    index.addFile({
+      path: 'horas/English/Psalterium/Common/Responsories.txt',
+      sections: [
+        {
+          header: 'Completorium',
+          content: [
+            { type: 'text', value: 'R.br. Into thy hands, O Lord.' },
+            { type: 'text', value: 'R. Into thy hands, O Lord.' }
+          ],
+          startLine: 1,
+          endLine: 2
+        }
+      ]
+    });
+
+    const resolved = resolveReference(
+      index,
+      {
+        path: 'horas/Latin/Psalterium/Special/Minor Special',
+        section: 'Responsory Completorium'
+      },
+      { languages: ['English'], langfb: 'Latin' }
+    );
+
+    expect(resolved.English?.content).toEqual([
+      { type: 'separator' },
+      { type: 'text', value: 'R.br. Into thy hands, O Lord.' },
+      { type: 'text', value: 'R. Into thy hands, O Lord.' },
+      { type: 'separator' }
+    ]);
+  });
+
   it('returns nothing when the section is missing everywhere', () => {
     const index = new InMemoryTextIndex();
     index.addFile(fakeFile('horas/Latin/Commune/C4', 'Hymnus', 'Te lucis'));

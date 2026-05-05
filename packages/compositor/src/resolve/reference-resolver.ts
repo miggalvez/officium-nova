@@ -193,7 +193,7 @@ function resolveForLanguage(
           { resolveForLanguage, resolveSectionByName }
         );
         if (sourceLocalized) {
-          return sourceLocalized;
+          return withComplineResponsoryBoundaries(sourceLocalized, reference, candidatePath);
         }
       }
       return withComplineResponsoryBoundaries(selected, reference, candidatePath);
