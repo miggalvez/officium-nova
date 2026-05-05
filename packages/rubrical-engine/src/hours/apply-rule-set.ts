@@ -463,7 +463,57 @@ function findProperReference(
     return undefined;
   }
 
-  return findReferenceInFiles(files, properHeadersForSlot(slot.name, input.hour, input));
+  const headers = properHeadersForSlot(slot.name, input.hour, input);
+  if (
+    slot.name === 'hymn' &&
+    input.hour === 'vespers' &&
+    usesPostCumNostraConfessorHymnVariant(files, input)
+  ) {
+    return findReferenceInFilesPreservingFileOrder(files, [
+      ...postCumNostraConfessorVespersHymnHeaders(input),
+      ...headers
+    ]);
+  }
+
+  return findReferenceInFiles(files, headers);
+}
+
+function postCumNostraConfessorVespersHymnHeaders(input: ApplyRuleSetInput): readonly string[] {
+  const side = (input as InternalVespersAwareInput).__vespersSide;
+  return side === 'second'
+    ? ['Hymnus1 Vespera 3', 'Hymnus1 Vespera']
+    : ['Hymnus1 Vespera'];
+}
+
+function usesPostCumNostraConfessorHymnVariant(
+  files: readonly ParsedFile[],
+  input: ApplyRuleSetInput
+): boolean {
+  const isPostCumNostraVersion = /1955|196/iu.test(input.version?.handle ?? '');
+  let referencesConfessorCommon = false;
+  let hasMtv = false;
+
+  for (const file of files) {
+    const ruleText = ruleTextForFile(file);
+    referencesConfessorCommon ||= /\b(?:vide|ex)\s+C[45][a-z0-9]?\b/iu.test(ruleText);
+    hasMtv ||= /(?:^|;)\s*mtv\b/iu.test(ruleText);
+
+    if (referencesConfessorCommon && (isPostCumNostraVersion || hasMtv)) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+function ruleTextForFile(file: ParsedFile | undefined): string {
+  return (
+    file?.sections
+      .filter((section) => section.header === 'Rule')
+      .flatMap((section) => section.rules ?? [])
+      .map((rule) => rule.raw)
+      .join('\n') ?? ''
+  );
 }
 
 function findInheritedSecondVespersReference(
@@ -1925,6 +1975,20 @@ function findReferenceInFiles(
           section: header
         };
       }
+    }
+  }
+
+  return undefined;
+}
+
+function findReferenceInFilesPreservingFileOrder(
+  files: readonly ParsedFile[],
+  headers: readonly string[]
+): TextReference | undefined {
+  for (const file of files) {
+    const ref = findReferenceInFile(file, file.path.replace(/\.txt$/u, ''), headers);
+    if (ref) {
+      return ref;
     }
   }
 

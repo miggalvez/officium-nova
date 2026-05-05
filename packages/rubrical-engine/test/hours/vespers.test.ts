@@ -273,6 +273,154 @@ describe('structureVespers', () => {
     }
   });
 
+  it('uses the post-Cum Nostra Confessor hymn variant for inherited C4 Vespers', () => {
+    const { corpus, skeleton, version } = setup();
+    corpus.add(
+      'horas/Latin/Sancti/05-05.txt',
+      `
+[Rank]
+S. Pii V;;Duplex;;3
+
+[Rule]
+vide C4;mtv
+`.trim()
+    );
+    corpus.add(
+      'horas/Latin/Commune/C4.txt',
+      `
+[Rule]
+Psalmi Dominica
+
+[Hymnus Vespera]
+Base Confessor hymn
+
+[Hymnus1 Vespera]
+Post-Cum Nostra Confessor hymn
+`.trim()
+    );
+    const celeb = celebration('Sancti/05-05');
+    const hourRules = deriveHourRuleSet(celeb, rules(), 'vespers');
+
+    const result = structureVespers({
+      skeleton,
+      celebration: celeb,
+      commemorations: [],
+      celebrationRules: rules(),
+      hourRules,
+      temporal: temporal('2026-05-05', 'Pasc4-2', 2),
+      policy: rubrics1960Policy,
+      corpus,
+      version
+    });
+
+    expect(result.hour.slots.hymn).toEqual({
+      kind: 'single-ref',
+      ref: {
+        path: 'horas/Latin/Commune/C4',
+        section: 'Hymnus1 Vespera'
+      }
+    });
+  });
+
+  it('preserves a proper Vespers hymn before inherited C4/C5 hymn variants', () => {
+    const { corpus, skeleton, version } = setup();
+    corpus.add(
+      'horas/Latin/Sancti/05-06.txt',
+      `
+[Rank]
+Proper Confessor;;Duplex;;3
+
+[Rule]
+vide C4;mtv
+
+[Hymnus Vespera]
+Proper Confessor hymn
+`.trim()
+    );
+    corpus.add(
+      'horas/Latin/Commune/C4.txt',
+      `
+[Hymnus1 Vespera]
+Inherited Confessor hymn variant
+`.trim()
+    );
+    const celeb = celebration('Sancti/05-06');
+    const hourRules = deriveHourRuleSet(celeb, rules(), 'vespers');
+
+    const result = structureVespers({
+      skeleton,
+      celebration: celeb,
+      commemorations: [],
+      celebrationRules: rules(),
+      hourRules,
+      temporal: temporal('2026-05-06', 'Pasc4-3', 3),
+      policy: rubrics1960Policy,
+      corpus,
+      version
+    });
+
+    expect(result.hour.slots.hymn).toEqual({
+      kind: 'single-ref',
+      ref: {
+        path: 'horas/Latin/Sancti/05-06',
+        section: 'Hymnus Vespera'
+      }
+    });
+  });
+
+  it('detects post-Cum Nostra Confessor hymn variants through nested suffixed common references', () => {
+    const { corpus, skeleton, version } = setup();
+    corpus.add(
+      'horas/Latin/Sancti/05-07.txt',
+      `
+[Rank]
+Nested Confessor;;Duplex;;3
+
+[Rule]
+vide LocalConfessor
+`.trim()
+    );
+    corpus.add(
+      'horas/Latin/Sancti/LocalConfessor.txt',
+      `
+[Rule]
+vide C4a;mtv
+`.trim()
+    );
+    corpus.add(
+      'horas/Latin/Commune/C4a.txt',
+      `
+[Hymnus Vespera]
+Base suffixed Confessor hymn
+
+[Hymnus1 Vespera]
+Variant suffixed Confessor hymn
+`.trim()
+    );
+    const celeb = celebration('Sancti/05-07');
+    const hourRules = deriveHourRuleSet(celeb, rules(), 'vespers');
+
+    const result = structureVespers({
+      skeleton,
+      celebration: celeb,
+      commemorations: [],
+      celebrationRules: rules(),
+      hourRules,
+      temporal: temporal('2026-05-07', 'Pasc4-4', 4),
+      policy: rubrics1960Policy,
+      corpus,
+      version
+    });
+
+    expect(result.hour.slots.hymn).toEqual({
+      kind: 'single-ref',
+      ref: {
+        path: 'horas/Latin/Commune/C4a',
+        section: 'Hymnus1 Vespera'
+      }
+    });
+  });
+
   it('attaches commemoration slots from concurrence inputs', () => {
     const { corpus, skeleton } = setup();
     const celeb = celebration('Sancti/12-08');
