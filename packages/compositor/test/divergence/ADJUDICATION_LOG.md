@@ -6134,6 +6134,34 @@ The upstream issue already exists for this family.
 unadjudicated rows drop from `1467` to `1447` and `perl-bug` rows rise
 from `669` to `689`.
 
+### 2026-05-05 — Pattern: 2026 Tridentinum Sunday Prime antiphon fanout (perl-bug)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** The refreshed Rubrics 1960 2026 frontier carried 20
+Sunday Prime rows with the stable key-hash `e3d07cc1`: Perl used the
+older full `Dominica` antiphon `Allelúja, * confitémini Dómino...`,
+while the compositor emitted the shorter `Tridentinum` antiphon
+`Allelúja, * allelúja, allelúja`.
+
+**Root cause.** This is fanout from the already documented 1960
+Tridentinum Sunday Prime psalm-table family. The Rubrics 1960 source row
+is `Psalterium/Psalmi/Psalmi minor#Tridentinum`, whose `Prima Dominica`
+entry explicitly begins with the shorter alleluia antiphon and supplies
+Psalms `53,117,118(1-16),118(17-32)`. The compositor preserves that
+keyed source row; the Perl comparison surface uses the older full
+`Dominica` antiphon text.
+
+**Resolution.** Class `perl-bug`. Added row-level adjudications for the
+20 Rubrics 1960 2026 Sunday Prime rows sharing stable key-hash
+`e3d07cc1`. The upstream issue already exists for this family.
+
+**Citation.** `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:218`.
+
+**Impact.** Rubrics 1960 2026 divergent hours remain `2136`, while
+unadjudicated rows drop from `1447` to `1427` and `perl-bug` rows rise
+from `689` to `709`.
+
 ## See also
 
 - [ADR-011 — Divergence adjudication protocol](../../../../docs/adr/011-phase-3-divergence-adjudication.md)

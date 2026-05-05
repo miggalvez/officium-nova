@@ -20737,6 +20737,17 @@
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited psalter source carries the complete antiphon without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-06-14/Prime/e3d07cc1": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-06-14",
+    "hour": "Prime",
+    "firstExpected": "Ant. Allelúja, * confitémini Dómino, quóniam in sǽculum misericórdia ejus, allelúja, allelúja.",
+    "firstActual": "Ant. Allelúja, * allelúja, allelúja",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:218 - the 1960 Tridentinum Sunday Prime row explicitly begins Prima Dominica=Allelúja, * allelúja, allelúja;;53,117,118(1-16),118(17-32). The compositor preserves that source-backed antiphon while the Perl comparison surface uses the older full Dominica antiphon.",
+    "notes": "Rubrics 1960 2026 fanout for the 1960 Tridentinum Sunday Prime antiphon source; stable key-hash e3d07cc1 extends the existing 2024 source-backed adjudication.",
+    "resolvedAt": "2026-05-05"
+  },
   "Rubrics 1960 - 1960/2026-06-14/Vespers/019555e4": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-06-14",
@@ -20884,6 +20895,17 @@
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited psalter source carries the complete antiphon without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-06-21/Prime/e3d07cc1": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-06-21",
+    "hour": "Prime",
+    "firstExpected": "Ant. Allelúja, * confitémini Dómino, quóniam in sǽculum misericórdia ejus, allelúja, allelúja.",
+    "firstActual": "Ant. Allelúja, * allelúja, allelúja",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:218 - the 1960 Tridentinum Sunday Prime row explicitly begins Prima Dominica=Allelúja, * allelúja, allelúja;;53,117,118(1-16),118(17-32). The compositor preserves that source-backed antiphon while the Perl comparison surface uses the older full Dominica antiphon.",
+    "notes": "Rubrics 1960 2026 fanout for the 1960 Tridentinum Sunday Prime antiphon source; stable key-hash e3d07cc1 extends the existing 2024 source-backed adjudication.",
+    "resolvedAt": "2026-05-05"
+  },
   "Rubrics 1960 - 1960/2026-06-21/Vespers/019555e4": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-06-21",
@@ -21007,6 +21029,17 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:12-15 — the Day0 third-nocturn antiphon is `Ut quid, Dómine, * recessísti longe?` without a trailing `‡`. The compositor preserves the corpus text; the Perl comparison surface adds an unsupported trailing continuation marker.",
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited psalter source carries the complete antiphon without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
+    "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-06-28/Prime/e3d07cc1": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-06-28",
+    "hour": "Prime",
+    "firstExpected": "Ant. Allelúja, * confitémini Dómino, quóniam in sǽculum misericórdia ejus, allelúja, allelúja.",
+    "firstActual": "Ant. Allelúja, * allelúja, allelúja",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:218 - the 1960 Tridentinum Sunday Prime row explicitly begins Prima Dominica=Allelúja, * allelúja, allelúja;;53,117,118(1-16),118(17-32). The compositor preserves that source-backed antiphon while the Perl comparison surface uses the older full Dominica antiphon.",
+    "notes": "Rubrics 1960 2026 fanout for the 1960 Tridentinum Sunday Prime antiphon source; stable key-hash e3d07cc1 extends the existing 2024 source-backed adjudication.",
     "resolvedAt": "2026-05-05"
   },
   "Rubrics 1960 - 1960/2026-07-02/Compline/318cf47a": {
@@ -21191,6 +21224,17 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:12-15 — the Day0 third-nocturn antiphon is `Ut quid, Dómine, * recessísti longe?` without a trailing `‡`. The compositor preserves the corpus text; the Perl comparison surface adds an unsupported trailing continuation marker.",
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited psalter source carries the complete antiphon without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
+    "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-07-05/Prime/e3d07cc1": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-07-05",
+    "hour": "Prime",
+    "firstExpected": "Ant. Allelúja, * confitémini Dómino, quóniam in sǽculum misericórdia ejus, allelúja, allelúja.",
+    "firstActual": "Ant. Allelúja, * allelúja, allelúja",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:218 - the 1960 Tridentinum Sunday Prime row explicitly begins Prima Dominica=Allelúja, * allelúja, allelúja;;53,117,118(1-16),118(17-32). The compositor preserves that source-backed antiphon while the Perl comparison surface uses the older full Dominica antiphon.",
+    "notes": "Rubrics 1960 2026 fanout for the 1960 Tridentinum Sunday Prime antiphon source; stable key-hash e3d07cc1 extends the existing 2024 source-backed adjudication.",
     "resolvedAt": "2026-05-05"
   },
   "Rubrics 1960 - 1960/2026-07-05/Vespers/019555e4": {
@@ -21384,6 +21428,17 @@
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited psalter source carries the complete antiphon without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-07-12/Prime/e3d07cc1": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-07-12",
+    "hour": "Prime",
+    "firstExpected": "Ant. Allelúja, * confitémini Dómino, quóniam in sǽculum misericórdia ejus, allelúja, allelúja.",
+    "firstActual": "Ant. Allelúja, * allelúja, allelúja",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:218 - the 1960 Tridentinum Sunday Prime row explicitly begins Prima Dominica=Allelúja, * allelúja, allelúja;;53,117,118(1-16),118(17-32). The compositor preserves that source-backed antiphon while the Perl comparison surface uses the older full Dominica antiphon.",
+    "notes": "Rubrics 1960 2026 fanout for the 1960 Tridentinum Sunday Prime antiphon source; stable key-hash e3d07cc1 extends the existing 2024 source-backed adjudication.",
+    "resolvedAt": "2026-05-05"
+  },
   "Rubrics 1960 - 1960/2026-07-12/Vespers/019555e4": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-07-12",
@@ -21549,6 +21604,17 @@
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited psalter source carries the complete antiphon without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-07-19/Prime/e3d07cc1": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-07-19",
+    "hour": "Prime",
+    "firstExpected": "Ant. Allelúja, * confitémini Dómino, quóniam in sǽculum misericórdia ejus, allelúja, allelúja.",
+    "firstActual": "Ant. Allelúja, * allelúja, allelúja",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:218 - the 1960 Tridentinum Sunday Prime row explicitly begins Prima Dominica=Allelúja, * allelúja, allelúja;;53,117,118(1-16),118(17-32). The compositor preserves that source-backed antiphon while the Perl comparison surface uses the older full Dominica antiphon.",
+    "notes": "Rubrics 1960 2026 fanout for the 1960 Tridentinum Sunday Prime antiphon source; stable key-hash e3d07cc1 extends the existing 2024 source-backed adjudication.",
+    "resolvedAt": "2026-05-05"
+  },
   "Rubrics 1960 - 1960/2026-07-19/Vespers/019555e4": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-07-19",
@@ -21624,6 +21690,17 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:12-15 — the Day0 third-nocturn antiphon is `Ut quid, Dómine, * recessísti longe?` without a trailing `‡`. The compositor preserves the corpus text; the Perl comparison surface adds an unsupported trailing continuation marker.",
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited psalter source carries the complete antiphon without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
+    "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-07-26/Prime/e3d07cc1": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-07-26",
+    "hour": "Prime",
+    "firstExpected": "Ant. Allelúja, * confitémini Dómino, quóniam in sǽculum misericórdia ejus, allelúja, allelúja.",
+    "firstActual": "Ant. Allelúja, * allelúja, allelúja",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:218 - the 1960 Tridentinum Sunday Prime row explicitly begins Prima Dominica=Allelúja, * allelúja, allelúja;;53,117,118(1-16),118(17-32). The compositor preserves that source-backed antiphon while the Perl comparison surface uses the older full Dominica antiphon.",
+    "notes": "Rubrics 1960 2026 fanout for the 1960 Tridentinum Sunday Prime antiphon source; stable key-hash e3d07cc1 extends the existing 2024 source-backed adjudication.",
     "resolvedAt": "2026-05-05"
   },
   "Rubrics 1960 - 1960/2026-07-26/Vespers/019555e4": {
@@ -21815,6 +21892,17 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:12-15 — the Day0 third-nocturn antiphon is `Ut quid, Dómine, * recessísti longe?` without a trailing `‡`. The compositor preserves the corpus text; the Perl comparison surface adds an unsupported trailing continuation marker.",
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited psalter source carries the complete antiphon without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
+    "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-08-02/Prime/e3d07cc1": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-08-02",
+    "hour": "Prime",
+    "firstExpected": "Ant. Allelúja, * confitémini Dómino, quóniam in sǽculum misericórdia ejus, allelúja, allelúja.",
+    "firstActual": "Ant. Allelúja, * allelúja, allelúja",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:218 - the 1960 Tridentinum Sunday Prime row explicitly begins Prima Dominica=Allelúja, * allelúja, allelúja;;53,117,118(1-16),118(17-32). The compositor preserves that source-backed antiphon while the Perl comparison surface uses the older full Dominica antiphon.",
+    "notes": "Rubrics 1960 2026 fanout for the 1960 Tridentinum Sunday Prime antiphon source; stable key-hash e3d07cc1 extends the existing 2024 source-backed adjudication.",
     "resolvedAt": "2026-05-05"
   },
   "Rubrics 1960 - 1960/2026-08-02/Vespers/019555e4": {
@@ -22012,6 +22100,17 @@
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited psalter source carries the complete antiphon without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-08-09/Prime/e3d07cc1": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-08-09",
+    "hour": "Prime",
+    "firstExpected": "Ant. Allelúja, * confitémini Dómino, quóniam in sǽculum misericórdia ejus, allelúja, allelúja.",
+    "firstActual": "Ant. Allelúja, * allelúja, allelúja",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:218 - the 1960 Tridentinum Sunday Prime row explicitly begins Prima Dominica=Allelúja, * allelúja, allelúja;;53,117,118(1-16),118(17-32). The compositor preserves that source-backed antiphon while the Perl comparison surface uses the older full Dominica antiphon.",
+    "notes": "Rubrics 1960 2026 fanout for the 1960 Tridentinum Sunday Prime antiphon source; stable key-hash e3d07cc1 extends the existing 2024 source-backed adjudication.",
+    "resolvedAt": "2026-05-05"
+  },
   "Rubrics 1960 - 1960/2026-08-09/Vespers/019555e4": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-08-09",
@@ -22181,6 +22280,17 @@
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited psalter source carries the complete antiphon without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-08-16/Prime/e3d07cc1": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-08-16",
+    "hour": "Prime",
+    "firstExpected": "Ant. Allelúja, * confitémini Dómino, quóniam in sǽculum misericórdia ejus, allelúja, allelúja.",
+    "firstActual": "Ant. Allelúja, * allelúja, allelúja",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:218 - the 1960 Tridentinum Sunday Prime row explicitly begins Prima Dominica=Allelúja, * allelúja, allelúja;;53,117,118(1-16),118(17-32). The compositor preserves that source-backed antiphon while the Perl comparison surface uses the older full Dominica antiphon.",
+    "notes": "Rubrics 1960 2026 fanout for the 1960 Tridentinum Sunday Prime antiphon source; stable key-hash e3d07cc1 extends the existing 2024 source-backed adjudication.",
+    "resolvedAt": "2026-05-05"
+  },
   "Rubrics 1960 - 1960/2026-08-16/Vespers/019555e4": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-08-16",
@@ -22295,6 +22405,17 @@
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited psalter source carries the complete antiphon without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-08-23/Prime/e3d07cc1": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-08-23",
+    "hour": "Prime",
+    "firstExpected": "Ant. Allelúja, * confitémini Dómino, quóniam in sǽculum misericórdia ejus, allelúja, allelúja.",
+    "firstActual": "Ant. Allelúja, * allelúja, allelúja",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:218 - the 1960 Tridentinum Sunday Prime row explicitly begins Prima Dominica=Allelúja, * allelúja, allelúja;;53,117,118(1-16),118(17-32). The compositor preserves that source-backed antiphon while the Perl comparison surface uses the older full Dominica antiphon.",
+    "notes": "Rubrics 1960 2026 fanout for the 1960 Tridentinum Sunday Prime antiphon source; stable key-hash e3d07cc1 extends the existing 2024 source-backed adjudication.",
+    "resolvedAt": "2026-05-05"
+  },
   "Rubrics 1960 - 1960/2026-08-23/Vespers/019555e4": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-08-23",
@@ -22381,6 +22502,17 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:12-15 — the Day0 third-nocturn antiphon is `Ut quid, Dómine, * recessísti longe?` without a trailing `‡`. The compositor preserves the corpus text; the Perl comparison surface adds an unsupported trailing continuation marker.",
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited psalter source carries the complete antiphon without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
+    "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-08-30/Prime/e3d07cc1": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-08-30",
+    "hour": "Prime",
+    "firstExpected": "Ant. Allelúja, * confitémini Dómino, quóniam in sǽculum misericórdia ejus, allelúja, allelúja.",
+    "firstActual": "Ant. Allelúja, * allelúja, allelúja",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:218 - the 1960 Tridentinum Sunday Prime row explicitly begins Prima Dominica=Allelúja, * allelúja, allelúja;;53,117,118(1-16),118(17-32). The compositor preserves that source-backed antiphon while the Perl comparison surface uses the older full Dominica antiphon.",
+    "notes": "Rubrics 1960 2026 fanout for the 1960 Tridentinum Sunday Prime antiphon source; stable key-hash e3d07cc1 extends the existing 2024 source-backed adjudication.",
     "resolvedAt": "2026-05-05"
   },
   "Rubrics 1960 - 1960/2026-08-30/Vespers/019555e4": {
@@ -22480,6 +22612,17 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:12-15 — the Day0 third-nocturn antiphon is `Ut quid, Dómine, * recessísti longe?` without a trailing `‡`. The compositor preserves the corpus text; the Perl comparison surface adds an unsupported trailing continuation marker.",
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited psalter source carries the complete antiphon without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
+    "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-09-06/Prime/e3d07cc1": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-09-06",
+    "hour": "Prime",
+    "firstExpected": "Ant. Allelúja, * confitémini Dómino, quóniam in sǽculum misericórdia ejus, allelúja, allelúja.",
+    "firstActual": "Ant. Allelúja, * allelúja, allelúja",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:218 - the 1960 Tridentinum Sunday Prime row explicitly begins Prima Dominica=Allelúja, * allelúja, allelúja;;53,117,118(1-16),118(17-32). The compositor preserves that source-backed antiphon while the Perl comparison surface uses the older full Dominica antiphon.",
+    "notes": "Rubrics 1960 2026 fanout for the 1960 Tridentinum Sunday Prime antiphon source; stable key-hash e3d07cc1 extends the existing 2024 source-backed adjudication.",
     "resolvedAt": "2026-05-05"
   },
   "Rubrics 1960 - 1960/2026-09-06/Vespers/019555e4": {
@@ -22765,6 +22908,17 @@
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited psalter source carries the complete antiphon without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-09-13/Prime/e3d07cc1": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-09-13",
+    "hour": "Prime",
+    "firstExpected": "Ant. Allelúja, * confitémini Dómino, quóniam in sǽculum misericórdia ejus, allelúja, allelúja.",
+    "firstActual": "Ant. Allelúja, * allelúja, allelúja",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:218 - the 1960 Tridentinum Sunday Prime row explicitly begins Prima Dominica=Allelúja, * allelúja, allelúja;;53,117,118(1-16),118(17-32). The compositor preserves that source-backed antiphon while the Perl comparison surface uses the older full Dominica antiphon.",
+    "notes": "Rubrics 1960 2026 fanout for the 1960 Tridentinum Sunday Prime antiphon source; stable key-hash e3d07cc1 extends the existing 2024 source-backed adjudication.",
+    "resolvedAt": "2026-05-05"
+  },
   "Rubrics 1960 - 1960/2026-09-13/Vespers/019555e4": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-09-13",
@@ -22910,6 +23064,17 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:12-15 — the Day0 third-nocturn antiphon is `Ut quid, Dómine, * recessísti longe?` without a trailing `‡`. The compositor preserves the corpus text; the Perl comparison surface adds an unsupported trailing continuation marker.",
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited psalter source carries the complete antiphon without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
+    "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-09-20/Prime/e3d07cc1": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-09-20",
+    "hour": "Prime",
+    "firstExpected": "Ant. Allelúja, * confitémini Dómino, quóniam in sǽculum misericórdia ejus, allelúja, allelúja.",
+    "firstActual": "Ant. Allelúja, * allelúja, allelúja",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:218 - the 1960 Tridentinum Sunday Prime row explicitly begins Prima Dominica=Allelúja, * allelúja, allelúja;;53,117,118(1-16),118(17-32). The compositor preserves that source-backed antiphon while the Perl comparison surface uses the older full Dominica antiphon.",
+    "notes": "Rubrics 1960 2026 fanout for the 1960 Tridentinum Sunday Prime antiphon source; stable key-hash e3d07cc1 extends the existing 2024 source-backed adjudication.",
     "resolvedAt": "2026-05-05"
   },
   "Rubrics 1960 - 1960/2026-09-20/Vespers/019555e4": {
@@ -23066,6 +23231,17 @@
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited psalter source carries the complete antiphon without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-09-27/Prime/e3d07cc1": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-09-27",
+    "hour": "Prime",
+    "firstExpected": "Ant. Allelúja, * confitémini Dómino, quóniam in sǽculum misericórdia ejus, allelúja, allelúja.",
+    "firstActual": "Ant. Allelúja, * allelúja, allelúja",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:218 - the 1960 Tridentinum Sunday Prime row explicitly begins Prima Dominica=Allelúja, * allelúja, allelúja;;53,117,118(1-16),118(17-32). The compositor preserves that source-backed antiphon while the Perl comparison surface uses the older full Dominica antiphon.",
+    "notes": "Rubrics 1960 2026 fanout for the 1960 Tridentinum Sunday Prime antiphon source; stable key-hash e3d07cc1 extends the existing 2024 source-backed adjudication.",
+    "resolvedAt": "2026-05-05"
+  },
   "Rubrics 1960 - 1960/2026-09-27/Vespers/019555e4": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-09-27",
@@ -23152,6 +23328,17 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:12-15 — the Day0 third-nocturn antiphon is `Ut quid, Dómine, * recessísti longe?` without a trailing `‡`. The compositor preserves the corpus text; the Perl comparison surface adds an unsupported trailing continuation marker.",
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited psalter source carries the complete antiphon without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
+    "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-10-04/Prime/e3d07cc1": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-10-04",
+    "hour": "Prime",
+    "firstExpected": "Ant. Allelúja, * confitémini Dómino, quóniam in sǽculum misericórdia ejus, allelúja, allelúja.",
+    "firstActual": "Ant. Allelúja, * allelúja, allelúja",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:218 - the 1960 Tridentinum Sunday Prime row explicitly begins Prima Dominica=Allelúja, * allelúja, allelúja;;53,117,118(1-16),118(17-32). The compositor preserves that source-backed antiphon while the Perl comparison surface uses the older full Dominica antiphon.",
+    "notes": "Rubrics 1960 2026 fanout for the 1960 Tridentinum Sunday Prime antiphon source; stable key-hash e3d07cc1 extends the existing 2024 source-backed adjudication.",
     "resolvedAt": "2026-05-05"
   },
   "Rubrics 1960 - 1960/2026-10-04/Vespers/019555e4": {
@@ -23301,6 +23488,17 @@
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited psalter source carries the complete antiphon without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-10-11/Prime/e3d07cc1": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-10-11",
+    "hour": "Prime",
+    "firstExpected": "Ant. Allelúja, * confitémini Dómino, quóniam in sǽculum misericórdia ejus, allelúja, allelúja.",
+    "firstActual": "Ant. Allelúja, * allelúja, allelúja",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:218 - the 1960 Tridentinum Sunday Prime row explicitly begins Prima Dominica=Allelúja, * allelúja, allelúja;;53,117,118(1-16),118(17-32). The compositor preserves that source-backed antiphon while the Perl comparison surface uses the older full Dominica antiphon.",
+    "notes": "Rubrics 1960 2026 fanout for the 1960 Tridentinum Sunday Prime antiphon source; stable key-hash e3d07cc1 extends the existing 2024 source-backed adjudication.",
+    "resolvedAt": "2026-05-05"
+  },
   "Rubrics 1960 - 1960/2026-10-11/Vespers/019555e4": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-10-11",
@@ -23387,6 +23585,17 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:12-15 — the Day0 third-nocturn antiphon is `Ut quid, Dómine, * recessísti longe?` without a trailing `‡`. The compositor preserves the corpus text; the Perl comparison surface adds an unsupported trailing continuation marker.",
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited psalter source carries the complete antiphon without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
+    "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-10-18/Prime/e3d07cc1": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-10-18",
+    "hour": "Prime",
+    "firstExpected": "Ant. Allelúja, * confitémini Dómino, quóniam in sǽculum misericórdia ejus, allelúja, allelúja.",
+    "firstActual": "Ant. Allelúja, * allelúja, allelúja",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:218 - the 1960 Tridentinum Sunday Prime row explicitly begins Prima Dominica=Allelúja, * allelúja, allelúja;;53,117,118(1-16),118(17-32). The compositor preserves that source-backed antiphon while the Perl comparison surface uses the older full Dominica antiphon.",
+    "notes": "Rubrics 1960 2026 fanout for the 1960 Tridentinum Sunday Prime antiphon source; stable key-hash e3d07cc1 extends the existing 2024 source-backed adjudication.",
     "resolvedAt": "2026-05-05"
   },
   "Rubrics 1960 - 1960/2026-10-18/Vespers/019555e4": {
@@ -24114,6 +24323,17 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:12-15 — the Day0 third-nocturn antiphon is `Ut quid, Dómine, * recessísti longe?` without a trailing `‡`. The compositor preserves the corpus text; the Perl comparison surface adds an unsupported trailing continuation marker.",
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited psalter source carries the complete antiphon without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
+    "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-11-22/Prime/e3d07cc1": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-11-22",
+    "hour": "Prime",
+    "firstExpected": "Ant. Allelúja, * confitémini Dómino, quóniam in sǽculum misericórdia ejus, allelúja, allelúja.",
+    "firstActual": "Ant. Allelúja, * allelúja, allelúja",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:218 - the 1960 Tridentinum Sunday Prime row explicitly begins Prima Dominica=Allelúja, * allelúja, allelúja;;53,117,118(1-16),118(17-32). The compositor preserves that source-backed antiphon while the Perl comparison surface uses the older full Dominica antiphon.",
+    "notes": "Rubrics 1960 2026 fanout for the 1960 Tridentinum Sunday Prime antiphon source; stable key-hash e3d07cc1 extends the existing 2024 source-backed adjudication.",
     "resolvedAt": "2026-05-05"
   },
   "Rubrics 1960 - 1960/2026-11-22/Vespers/019555e4": {
