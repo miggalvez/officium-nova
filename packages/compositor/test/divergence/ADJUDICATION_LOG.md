@@ -6212,6 +6212,35 @@ The Perl comparison surface stops at the separator on these rows.
 unadjudicated rows drop from `1411` to `1397` and `perl-bug` rows rise
 from `725` to `739`.
 
+### 2026-05-05 — Pattern: 2026 Tuesday Matins Confessor-common antiphon fanout (perl-bug)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** The refreshed Rubrics 1960 2026 frontier carried 13
+Matins rows with stable key-hash `7c44d977`: Perl kept the Tuesday
+psalter antiphon `Expúgna, Dómine...`, while the compositor emitted the
+Confessor common Matins antiphon `Beátus vir...`.
+
+**Root cause.** This is fanout from the already documented simplified
+Roman Confessor common-antiphon family. The affected offices route
+through Confessor common variants (`C4`, `C4-1`, `C4a`, `C5`, or
+`C5a`); those commons declare `Antiphonas horas`, and `Commune/C4`
+supplies the inherited Matins antiphon set. The compositor follows that
+source-backed inherited common, while the Perl comparison surface keeps
+the ordinary Tuesday psalter antiphon on these rows.
+
+**Resolution.** Class `perl-bug`. Added row-level adjudications for the
+13 Rubrics 1960 2026 Matins rows sharing stable key-hash `7c44d977`.
+
+**Citation.** `upstream/web/www/horas/Latin/Commune/C4.txt:7-12`;
+`upstream/web/www/horas/Latin/Commune/C4.txt:106-115`;
+`upstream/web/www/horas/Latin/Commune/C5.txt:1-12`;
+`upstream/web/www/horas/Latin/Commune/C5a.txt:1-12`.
+
+**Impact.** Rubrics 1960 2026 divergent hours remain `2136`, while
+unadjudicated rows drop from `1397` to `1384` and `perl-bug` rows rise
+from `739` to `752`.
+
 ## See also
 
 - [ADR-011 — Divergence adjudication protocol](../../../../docs/adr/011-phase-3-divergence-adjudication.md)
