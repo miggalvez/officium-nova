@@ -17723,6 +17723,28 @@
     "notes": "Rubrics 1960 2026 fanout for the ferial Prime fallback chapter family. Representative witness: 2026-01-19 Prime.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-01-20/Compline/c262774b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-01-20",
+    "hour": "Compline",
+    "firstExpected": "15:1 Consérva me, Dómine, quóniam sperávi in te. * Dixi Dómino: Deus meus es tu, quóniam bonórum meórum non eges.",
+    "firstActual": "15:1 Consérva me, Dómine, quóniam sperávi in te. ‡ Dixi Dómino: Deus meus es tu, * quóniam bonórum meórum non eges.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm15.txt:1 — the source line places the flex marker before Dixi Domino and the mediant before quoniam; the compositor preserves that source-backed psalm pointing while the Perl comparison surface collapses it to a single asterisk before Dixi Domino.",
+    "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
+    "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-01-27/Compline/c262774b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-01-27",
+    "hour": "Compline",
+    "firstExpected": "15:1 Consérva me, Dómine, quóniam sperávi in te. * Dixi Dómino: Deus meus es tu, quóniam bonórum meórum non eges.",
+    "firstActual": "15:1 Consérva me, Dómine, quóniam sperávi in te. ‡ Dixi Dómino: Deus meus es tu, * quóniam bonórum meórum non eges.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm15.txt:1 — the source line places the flex marker before Dixi Domino and the mediant before quoniam; the compositor preserves that source-backed psalm pointing while the Perl comparison surface collapses it to a single asterisk before Dixi Domino.",
+    "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
+    "resolvedAt": "2026-05-05"
+  },
   "Rubrics 1960 - 1960/2026-02-02/None/318cf47a": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-02-02",
@@ -17770,6 +17792,39 @@
     "notes": "2026 Rubrics 1960 fallback-hymn doxology row. Engine slot coverage in january-hymn-routing.test.ts verifies representative Nat/Epi/Asc/Corp/Heart/local doxology sources for this reusable family.",
     "resolvedAt": "2026-05-05",
     "commitSha": "e6f1475"
+  },
+  "Rubrics 1960 - 1960/2026-02-03/Compline/c262774b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-02-03",
+    "hour": "Compline",
+    "firstExpected": "15:1 Consérva me, Dómine, quóniam sperávi in te. * Dixi Dómino: Deus meus es tu, quóniam bonórum meórum non eges.",
+    "firstActual": "15:1 Consérva me, Dómine, quóniam sperávi in te. ‡ Dixi Dómino: Deus meus es tu, * quóniam bonórum meórum non eges.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm15.txt:1 — the source line places the flex marker before Dixi Domino and the mediant before quoniam; the compositor preserves that source-backed psalm pointing while the Perl comparison surface collapses it to a single asterisk before Dixi Domino.",
+    "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
+    "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-02-05/Matins/c262774b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-02-05",
+    "hour": "Matins",
+    "firstExpected": "15:1 Consérva me, Dómine, quóniam sperávi in te. * Dixi Dómino: Deus meus es tu, quóniam bonórum meórum non eges.",
+    "firstActual": "15:1 Consérva me, Dómine, quóniam sperávi in te. ‡ Dixi Dómino: Deus meus es tu, * quóniam bonórum meórum non eges.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm15.txt:1 — the source line places the flex marker before Dixi Domino and the mediant before quoniam; the compositor preserves that source-backed psalm pointing while the Perl comparison surface collapses it to a single asterisk before Dixi Domino.",
+    "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
+    "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-02-10/Compline/c262774b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-02-10",
+    "hour": "Compline",
+    "firstExpected": "15:1 Consérva me, Dómine, quóniam sperávi in te. * Dixi Dómino: Deus meus es tu, quóniam bonórum meórum non eges.",
+    "firstActual": "15:1 Consérva me, Dómine, quóniam sperávi in te. ‡ Dixi Dómino: Deus meus es tu, * quóniam bonórum meórum non eges.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm15.txt:1 — the source line places the flex marker before Dixi Domino and the mediant before quoniam; the compositor preserves that source-backed psalm pointing while the Perl comparison surface collapses it to a single asterisk before Dixi Domino.",
+    "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
+    "resolvedAt": "2026-05-05"
   },
   "Rubrics 1960 - 1960/2026-02-11/None/318cf47a": {
     "policy": "Rubrics 1960 - 1960",
@@ -17889,6 +17944,17 @@
     "notes": "Rubrics 1960 2026 fanout for the ferial Prime fallback chapter family. Representative witness: 2026-01-19 Prime.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-02-17/Compline/c262774b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-02-17",
+    "hour": "Compline",
+    "firstExpected": "15:1 Consérva me, Dómine, quóniam sperávi in te. * Dixi Dómino: Deus meus es tu, quóniam bonórum meórum non eges.",
+    "firstActual": "15:1 Consérva me, Dómine, quóniam sperávi in te. ‡ Dixi Dómino: Deus meus es tu, * quóniam bonórum meórum non eges.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm15.txt:1 — the source line places the flex marker before Dixi Domino and the mediant before quoniam; the compositor preserves that source-backed psalm pointing while the Perl comparison surface collapses it to a single asterisk before Dixi Domino.",
+    "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
+    "resolvedAt": "2026-05-05"
+  },
   "Rubrics 1960 - 1960/2026-02-17/Prime/b7853e49": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-02-17",
@@ -17966,6 +18032,17 @@
     "notes": "Rubrics 1960 2026 fanout for the ferial Prime fallback chapter family. Representative witness: 2026-01-19 Prime.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-03-03/Compline/c262774b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-03-03",
+    "hour": "Compline",
+    "firstExpected": "15:1 Consérva me, Dómine, quóniam sperávi in te. * Dixi Dómino: Deus meus es tu, quóniam bonórum meórum non eges.",
+    "firstActual": "15:1 Consérva me, Dómine, quóniam sperávi in te. ‡ Dixi Dómino: Deus meus es tu, * quóniam bonórum meórum non eges.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm15.txt:1 — the source line places the flex marker before Dixi Domino and the mediant before quoniam; the compositor preserves that source-backed psalm pointing while the Perl comparison surface collapses it to a single asterisk before Dixi Domino.",
+    "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
+    "resolvedAt": "2026-05-05"
+  },
   "Rubrics 1960 - 1960/2026-03-03/Prime/b7853e49": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-03-03",
@@ -18032,6 +18109,17 @@
     "notes": "Rubrics 1960 2026 fanout for the ferial Prime fallback chapter family. Representative witness: 2026-01-19 Prime.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-03-10/Compline/c262774b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-03-10",
+    "hour": "Compline",
+    "firstExpected": "15:1 Consérva me, Dómine, quóniam sperávi in te. * Dixi Dómino: Deus meus es tu, quóniam bonórum meórum non eges.",
+    "firstActual": "15:1 Consérva me, Dómine, quóniam sperávi in te. ‡ Dixi Dómino: Deus meus es tu, * quóniam bonórum meórum non eges.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm15.txt:1 — the source line places the flex marker before Dixi Domino and the mediant before quoniam; the compositor preserves that source-backed psalm pointing while the Perl comparison surface collapses it to a single asterisk before Dixi Domino.",
+    "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
+    "resolvedAt": "2026-05-05"
+  },
   "Rubrics 1960 - 1960/2026-03-10/Prime/b7853e49": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-03-10",
@@ -18096,6 +18184,17 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Psalterium/Special/Prima Special.txt:1-7 and upstream/web/www/horas/Latin/Psalterium/Special/Prima Special.txt:45-59 — the source-backed ferial Prime fallback has the `Zach 8:19` chapter and then begins `[Responsory]` directly with `R.br. Christe, Fili Dei vivi...`; the Rubrics 1960 Perl comparison surface keeps the Sunday `1 Tim. 1:17` citation on these ferial Prime rows.",
     "notes": "Rubrics 1960 2026 fanout for the ferial Prime fallback chapter family. Representative witness: 2026-01-19 Prime.",
+    "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-03-17/Compline/c262774b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-03-17",
+    "hour": "Compline",
+    "firstExpected": "15:1 Consérva me, Dómine, quóniam sperávi in te. * Dixi Dómino: Deus meus es tu, quóniam bonórum meórum non eges.",
+    "firstActual": "15:1 Consérva me, Dómine, quóniam sperávi in te. ‡ Dixi Dómino: Deus meus es tu, * quóniam bonórum meórum non eges.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm15.txt:1 — the source line places the flex marker before Dixi Domino and the mediant before quoniam; the compositor preserves that source-backed psalm pointing while the Perl comparison surface collapses it to a single asterisk before Dixi Domino.",
+    "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
     "resolvedAt": "2026-05-05"
   },
   "Rubrics 1960 - 1960/2026-03-17/Prime/b7853e49": {
@@ -18256,6 +18355,17 @@
     "notes": "Rubrics 1960 2026 fanout for the ferial Prime fallback chapter family. Representative witness: 2026-01-19 Prime.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-03-31/Compline/c262774b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-03-31",
+    "hour": "Compline",
+    "firstExpected": "15:1 Consérva me, Dómine, quóniam sperávi in te. * Dixi Dómino: Deus meus es tu, quóniam bonórum meórum non eges.",
+    "firstActual": "15:1 Consérva me, Dómine, quóniam sperávi in te. ‡ Dixi Dómino: Deus meus es tu, * quóniam bonórum meórum non eges.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm15.txt:1 — the source line places the flex marker before Dixi Domino and the mediant before quoniam; the compositor preserves that source-backed psalm pointing while the Perl comparison surface collapses it to a single asterisk before Dixi Domino.",
+    "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
+    "resolvedAt": "2026-05-05"
+  },
   "Rubrics 1960 - 1960/2026-03-31/Prime/b7853e49": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-03-31",
@@ -18276,6 +18386,28 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Psalterium/Special/Prima Special.txt:1-7 and upstream/web/www/horas/Latin/Psalterium/Special/Prima Special.txt:45-59 — the source-backed ferial Prime fallback has the `Zach 8:19` chapter and then begins `[Responsory]` directly with `R.br. Christe, Fili Dei vivi...`; the Rubrics 1960 Perl comparison surface keeps the Sunday `1 Tim. 1:17` citation on these ferial Prime rows.",
     "notes": "Rubrics 1960 2026 fanout for the ferial Prime fallback chapter family. Representative witness: 2026-01-19 Prime.",
+    "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-04-04/Matins/c262774b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-04-04",
+    "hour": "Matins",
+    "firstExpected": "15:1 Consérva me, Dómine, quóniam sperávi in te. * Dixi Dómino: Deus meus es tu, quóniam bonórum meórum non eges.",
+    "firstActual": "15:1 Consérva me, Dómine, quóniam sperávi in te. ‡ Dixi Dómino: Deus meus es tu, * quóniam bonórum meórum non eges.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm15.txt:1 — the source line places the flex marker before Dixi Domino and the mediant before quoniam; the compositor preserves that source-backed psalm pointing while the Perl comparison surface collapses it to a single asterisk before Dixi Domino.",
+    "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
+    "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-04-14/Compline/c262774b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-04-14",
+    "hour": "Compline",
+    "firstExpected": "15:1 Consérva me, Dómine, quóniam sperávi in te. * Dixi Dómino: Deus meus es tu, quóniam bonórum meórum non eges.",
+    "firstActual": "15:1 Consérva me, Dómine, quóniam sperávi in te. ‡ Dixi Dómino: Deus meus es tu, * quóniam bonórum meórum non eges.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm15.txt:1 — the source line places the flex marker before Dixi Domino and the mediant before quoniam; the compositor preserves that source-backed psalm pointing while the Perl comparison surface collapses it to a single asterisk before Dixi Domino.",
+    "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
     "resolvedAt": "2026-05-05"
   },
   "Rubrics 1960 - 1960/2026-04-15/None/dcdd92bf": {
@@ -18470,6 +18602,17 @@
     "resolvedAt": "2026-05-05",
     "commitSha": "26e2fdd"
   },
+  "Rubrics 1960 - 1960/2026-04-21/Compline/c262774b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-04-21",
+    "hour": "Compline",
+    "firstExpected": "15:1 Consérva me, Dómine, quóniam sperávi in te. * Dixi Dómino: Deus meus es tu, quóniam bonórum meórum non eges.",
+    "firstActual": "15:1 Consérva me, Dómine, quóniam sperávi in te. ‡ Dixi Dómino: Deus meus es tu, * quóniam bonórum meórum non eges.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm15.txt:1 — the source line places the flex marker before Dixi Domino and the mediant before quoniam; the compositor preserves that source-backed psalm pointing while the Perl comparison surface collapses it to a single asterisk before Dixi Domino.",
+    "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
+    "resolvedAt": "2026-05-05"
+  },
   "Rubrics 1960 - 1960/2026-04-23/None/dcdd92bf": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-04-23",
@@ -18505,6 +18648,28 @@
     "notes": "Phase 2/3 fix plus adjudication: seasonal Paschal fallback-hymn doxology now reaches minor-hour fallback hymns; residual Perl rows keep the non-seasonal stanza.",
     "resolvedAt": "2026-05-05",
     "commitSha": "26e2fdd"
+  },
+  "Rubrics 1960 - 1960/2026-04-28/Compline/c262774b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-04-28",
+    "hour": "Compline",
+    "firstExpected": "15:1 Consérva me, Dómine, quóniam sperávi in te. * Dixi Dómino: Deus meus es tu, quóniam bonórum meórum non eges.",
+    "firstActual": "15:1 Consérva me, Dómine, quóniam sperávi in te. ‡ Dixi Dómino: Deus meus es tu, * quóniam bonórum meórum non eges.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm15.txt:1 — the source line places the flex marker before Dixi Domino and the mediant before quoniam; the compositor preserves that source-backed psalm pointing while the Perl comparison surface collapses it to a single asterisk before Dixi Domino.",
+    "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
+    "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-05-05/Compline/c262774b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-05-05",
+    "hour": "Compline",
+    "firstExpected": "15:1 Consérva me, Dómine, quóniam sperávi in te. * Dixi Dómino: Deus meus es tu, quóniam bonórum meórum non eges.",
+    "firstActual": "15:1 Consérva me, Dómine, quóniam sperávi in te. ‡ Dixi Dómino: Deus meus es tu, * quóniam bonórum meórum non eges.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm15.txt:1 — the source line places the flex marker before Dixi Domino and the mediant before quoniam; the compositor preserves that source-backed psalm pointing while the Perl comparison surface collapses it to a single asterisk before Dixi Domino.",
+    "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
+    "resolvedAt": "2026-05-05"
   },
   "Rubrics 1960 - 1960/2026-05-06/None/dcdd92bf": {
     "policy": "Rubrics 1960 - 1960",
@@ -18614,6 +18779,17 @@
     "resolvedAt": "2026-05-05",
     "commitSha": "26e2fdd"
   },
+  "Rubrics 1960 - 1960/2026-05-12/Compline/c262774b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-05-12",
+    "hour": "Compline",
+    "firstExpected": "15:1 Consérva me, Dómine, quóniam sperávi in te. * Dixi Dómino: Deus meus es tu, quóniam bonórum meórum non eges.",
+    "firstActual": "15:1 Consérva me, Dómine, quóniam sperávi in te. ‡ Dixi Dómino: Deus meus es tu, * quóniam bonórum meórum non eges.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm15.txt:1 — the source line places the flex marker before Dixi Domino and the mediant before quoniam; the compositor preserves that source-backed psalm pointing while the Perl comparison surface collapses it to a single asterisk before Dixi Domino.",
+    "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
+    "resolvedAt": "2026-05-05"
+  },
   "Rubrics 1960 - 1960/2026-05-13/Compline/318cf47a": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-05-13",
@@ -18721,6 +18897,17 @@
     "notes": "2026 Rubrics 1960 fallback-hymn doxology row. Engine slot coverage in january-hymn-routing.test.ts verifies representative Nat/Epi/Asc/Corp/Heart/local doxology sources for this reusable family.",
     "resolvedAt": "2026-05-05",
     "commitSha": "e6f1475"
+  },
+  "Rubrics 1960 - 1960/2026-05-19/Compline/c262774b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-05-19",
+    "hour": "Compline",
+    "firstExpected": "15:1 Consérva me, Dómine, quóniam sperávi in te. * Dixi Dómino: Deus meus es tu, quóniam bonórum meórum non eges.",
+    "firstActual": "15:1 Consérva me, Dómine, quóniam sperávi in te. ‡ Dixi Dómino: Deus meus es tu, * quóniam bonórum meórum non eges.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm15.txt:1 — the source line places the flex marker before Dixi Domino and the mediant before quoniam; the compositor preserves that source-backed psalm pointing while the Perl comparison surface collapses it to a single asterisk before Dixi Domino.",
+    "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
+    "resolvedAt": "2026-05-05"
   },
   "Rubrics 1960 - 1960/2026-05-21/None/318cf47a": {
     "policy": "Rubrics 1960 - 1960",
@@ -19034,6 +19221,17 @@
     "resolvedAt": "2026-05-05",
     "commitSha": "26e2fdd"
   },
+  "Rubrics 1960 - 1960/2026-06-02/Compline/c262774b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-06-02",
+    "hour": "Compline",
+    "firstExpected": "15:1 Consérva me, Dómine, quóniam sperávi in te. * Dixi Dómino: Deus meus es tu, quóniam bonórum meórum non eges.",
+    "firstActual": "15:1 Consérva me, Dómine, quóniam sperávi in te. ‡ Dixi Dómino: Deus meus es tu, * quóniam bonórum meórum non eges.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm15.txt:1 — the source line places the flex marker before Dixi Domino and the mediant before quoniam; the compositor preserves that source-backed psalm pointing while the Perl comparison surface collapses it to a single asterisk before Dixi Domino.",
+    "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
+    "resolvedAt": "2026-05-05"
+  },
   "Rubrics 1960 - 1960/2026-06-02/Prime/b7853e49": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-06-02",
@@ -19054,6 +19252,17 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Psalterium/Special/Prima Special.txt:1-7 and upstream/web/www/horas/Latin/Psalterium/Special/Prima Special.txt:45-59 — the source-backed ferial Prime fallback has the `Zach 8:19` chapter and then begins `[Responsory]` directly with `R.br. Christe, Fili Dei vivi...`; the Rubrics 1960 Perl comparison surface keeps the Sunday `1 Tim. 1:17` citation on these ferial Prime rows.",
     "notes": "Rubrics 1960 2026 fanout for the ferial Prime fallback chapter family. Representative witness: 2026-01-19 Prime.",
+    "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-06-04/Matins/c262774b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-06-04",
+    "hour": "Matins",
+    "firstExpected": "15:1 Consérva me, Dómine, quóniam sperávi in te. * Dixi Dómino: Deus meus es tu, quóniam bonórum meórum non eges.",
+    "firstActual": "15:1 Consérva me, Dómine, quóniam sperávi in te. ‡ Dixi Dómino: Deus meus es tu, * quóniam bonórum meórum non eges.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm15.txt:1 — the source line places the flex marker before Dixi Domino and the mediant before quoniam; the compositor preserves that source-backed psalm pointing while the Perl comparison surface collapses it to a single asterisk before Dixi Domino.",
+    "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
     "resolvedAt": "2026-05-05"
   },
   "Rubrics 1960 - 1960/2026-06-04/None/318cf47a": {
@@ -19200,6 +19409,17 @@
     "resolvedAt": "2026-05-05",
     "commitSha": "e6f1475"
   },
+  "Rubrics 1960 - 1960/2026-06-09/Compline/c262774b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-06-09",
+    "hour": "Compline",
+    "firstExpected": "15:1 Consérva me, Dómine, quóniam sperávi in te. * Dixi Dómino: Deus meus es tu, quóniam bonórum meórum non eges.",
+    "firstActual": "15:1 Consérva me, Dómine, quóniam sperávi in te. ‡ Dixi Dómino: Deus meus es tu, * quóniam bonórum meórum non eges.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm15.txt:1 — the source line places the flex marker before Dixi Domino and the mediant before quoniam; the compositor preserves that source-backed psalm pointing while the Perl comparison surface collapses it to a single asterisk before Dixi Domino.",
+    "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
+    "resolvedAt": "2026-05-05"
+  },
   "Rubrics 1960 - 1960/2026-06-09/None/318cf47a": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-06-09",
@@ -19305,6 +19525,17 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Psalterium/Special/Prima Special.txt:1-7 and upstream/web/www/horas/Latin/Psalterium/Special/Prima Special.txt:45-59 — the source-backed ferial Prime fallback has the `Zach 8:19` chapter and then begins `[Responsory]` directly with `R.br. Christe, Fili Dei vivi...`; the Rubrics 1960 Perl comparison surface keeps the Sunday `1 Tim. 1:17` citation on these ferial Prime rows.",
     "notes": "Rubrics 1960 2026 fanout for the ferial Prime fallback chapter family. Representative witness: 2026-01-19 Prime.",
+    "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-06-16/Compline/c262774b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-06-16",
+    "hour": "Compline",
+    "firstExpected": "15:1 Consérva me, Dómine, quóniam sperávi in te. * Dixi Dómino: Deus meus es tu, quóniam bonórum meórum non eges.",
+    "firstActual": "15:1 Consérva me, Dómine, quóniam sperávi in te. ‡ Dixi Dómino: Deus meus es tu, * quóniam bonórum meórum non eges.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm15.txt:1 — the source line places the flex marker before Dixi Domino and the mediant before quoniam; the compositor preserves that source-backed psalm pointing while the Perl comparison surface collapses it to a single asterisk before Dixi Domino.",
+    "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
     "resolvedAt": "2026-05-05"
   },
   "Rubrics 1960 - 1960/2026-06-16/Prime/b7853e49": {
@@ -19543,6 +19774,17 @@
     "notes": "Rubrics 1960 2026 fanout for the ferial Prime fallback chapter family. Representative witness: 2026-01-19 Prime.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-07-07/Compline/c262774b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-07-07",
+    "hour": "Compline",
+    "firstExpected": "15:1 Consérva me, Dómine, quóniam sperávi in te. * Dixi Dómino: Deus meus es tu, quóniam bonórum meórum non eges.",
+    "firstActual": "15:1 Consérva me, Dómine, quóniam sperávi in te. ‡ Dixi Dómino: Deus meus es tu, * quóniam bonórum meórum non eges.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm15.txt:1 — the source line places the flex marker before Dixi Domino and the mediant before quoniam; the compositor preserves that source-backed psalm pointing while the Perl comparison surface collapses it to a single asterisk before Dixi Domino.",
+    "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
+    "resolvedAt": "2026-05-05"
+  },
   "Rubrics 1960 - 1960/2026-07-09/Prime/b7853e49": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-07-09",
@@ -19613,6 +19855,17 @@
     "notes": "Rubrics 1960 2026 fanout for the ferial Prime fallback chapter family. Representative witness: 2026-01-19 Prime.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-07-14/Compline/c262774b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-07-14",
+    "hour": "Compline",
+    "firstExpected": "15:1 Consérva me, Dómine, quóniam sperávi in te. * Dixi Dómino: Deus meus es tu, quóniam bonórum meórum non eges.",
+    "firstActual": "15:1 Consérva me, Dómine, quóniam sperávi in te. ‡ Dixi Dómino: Deus meus es tu, * quóniam bonórum meórum non eges.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm15.txt:1 — the source line places the flex marker before Dixi Domino and the mediant before quoniam; the compositor preserves that source-backed psalm pointing while the Perl comparison surface collapses it to a single asterisk before Dixi Domino.",
+    "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
+    "resolvedAt": "2026-05-05"
+  },
   "Rubrics 1960 - 1960/2026-07-16/Prime/b7853e49": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-07-16",
@@ -19635,6 +19888,17 @@
     "notes": "Rubrics 1960 2026 fanout for the ferial Prime fallback chapter family. Representative witness: 2026-01-19 Prime.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-07-21/Compline/c262774b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-07-21",
+    "hour": "Compline",
+    "firstExpected": "15:1 Consérva me, Dómine, quóniam sperávi in te. * Dixi Dómino: Deus meus es tu, quóniam bonórum meórum non eges.",
+    "firstActual": "15:1 Consérva me, Dómine, quóniam sperávi in te. ‡ Dixi Dómino: Deus meus es tu, * quóniam bonórum meórum non eges.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm15.txt:1 — the source line places the flex marker before Dixi Domino and the mediant before quoniam; the compositor preserves that source-backed psalm pointing while the Perl comparison surface collapses it to a single asterisk before Dixi Domino.",
+    "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
+    "resolvedAt": "2026-05-05"
+  },
   "Rubrics 1960 - 1960/2026-07-24/Prime/b7853e49": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-07-24",
@@ -19655,6 +19919,17 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Psalterium/Special/Prima Special.txt:1-7 and upstream/web/www/horas/Latin/Psalterium/Special/Prima Special.txt:45-59 — the source-backed ferial Prime fallback has the `Zach 8:19` chapter and then begins `[Responsory]` directly with `R.br. Christe, Fili Dei vivi...`; the Rubrics 1960 Perl comparison surface keeps the Sunday `1 Tim. 1:17` citation on these ferial Prime rows.",
     "notes": "Rubrics 1960 2026 fanout for the ferial Prime fallback chapter family. Representative witness: 2026-01-19 Prime.",
+    "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-07-28/Compline/c262774b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-07-28",
+    "hour": "Compline",
+    "firstExpected": "15:1 Consérva me, Dómine, quóniam sperávi in te. * Dixi Dómino: Deus meus es tu, quóniam bonórum meórum non eges.",
+    "firstActual": "15:1 Consérva me, Dómine, quóniam sperávi in te. ‡ Dixi Dómino: Deus meus es tu, * quóniam bonórum meórum non eges.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm15.txt:1 — the source line places the flex marker before Dixi Domino and the mediant before quoniam; the compositor preserves that source-backed psalm pointing while the Perl comparison surface collapses it to a single asterisk before Dixi Domino.",
+    "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
     "resolvedAt": "2026-05-05"
   },
   "Rubrics 1960 - 1960/2026-07-30/Prime/b7853e49": {
@@ -19725,6 +20000,17 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Psalterium/Special/Prima Special.txt:1-7 and upstream/web/www/horas/Latin/Psalterium/Special/Prima Special.txt:45-59 — the source-backed ferial Prime fallback has the `Zach 8:19` chapter and then begins `[Responsory]` directly with `R.br. Christe, Fili Dei vivi...`; the Rubrics 1960 Perl comparison surface keeps the Sunday `1 Tim. 1:17` citation on these ferial Prime rows.",
     "notes": "Rubrics 1960 2026 fanout for the ferial Prime fallback chapter family. Representative witness: 2026-01-19 Prime.",
+    "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-08-04/Compline/c262774b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-08-04",
+    "hour": "Compline",
+    "firstExpected": "15:1 Consérva me, Dómine, quóniam sperávi in te. * Dixi Dómino: Deus meus es tu, quóniam bonórum meórum non eges.",
+    "firstActual": "15:1 Consérva me, Dómine, quóniam sperávi in te. ‡ Dixi Dómino: Deus meus es tu, * quóniam bonórum meórum non eges.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm15.txt:1 — the source line places the flex marker before Dixi Domino and the mediant before quoniam; the compositor preserves that source-backed psalm pointing while the Perl comparison surface collapses it to a single asterisk before Dixi Domino.",
+    "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
     "resolvedAt": "2026-05-05"
   },
   "Rubrics 1960 - 1960/2026-08-05/None/318cf47a": {
@@ -19823,6 +20109,17 @@
     "resolvedAt": "2026-05-05",
     "commitSha": "e6f1475"
   },
+  "Rubrics 1960 - 1960/2026-08-11/Compline/c262774b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-08-11",
+    "hour": "Compline",
+    "firstExpected": "15:1 Consérva me, Dómine, quóniam sperávi in te. * Dixi Dómino: Deus meus es tu, quóniam bonórum meórum non eges.",
+    "firstActual": "15:1 Consérva me, Dómine, quóniam sperávi in te. ‡ Dixi Dómino: Deus meus es tu, * quóniam bonórum meórum non eges.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm15.txt:1 — the source line places the flex marker before Dixi Domino and the mediant before quoniam; the compositor preserves that source-backed psalm pointing while the Perl comparison surface collapses it to a single asterisk before Dixi Domino.",
+    "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
+    "resolvedAt": "2026-05-05"
+  },
   "Rubrics 1960 - 1960/2026-08-11/Prime/b7853e49": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-08-11",
@@ -19893,6 +20190,17 @@
     "resolvedAt": "2026-05-05",
     "commitSha": "e6f1475"
   },
+  "Rubrics 1960 - 1960/2026-08-18/Compline/c262774b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-08-18",
+    "hour": "Compline",
+    "firstExpected": "15:1 Consérva me, Dómine, quóniam sperávi in te. * Dixi Dómino: Deus meus es tu, quóniam bonórum meórum non eges.",
+    "firstActual": "15:1 Consérva me, Dómine, quóniam sperávi in te. ‡ Dixi Dómino: Deus meus es tu, * quóniam bonórum meórum non eges.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm15.txt:1 — the source line places the flex marker before Dixi Domino and the mediant before quoniam; the compositor preserves that source-backed psalm pointing while the Perl comparison surface collapses it to a single asterisk before Dixi Domino.",
+    "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
+    "resolvedAt": "2026-05-05"
+  },
   "Rubrics 1960 - 1960/2026-08-18/Prime/b7853e49": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-08-18",
@@ -19952,6 +20260,17 @@
     "resolvedAt": "2026-05-05",
     "commitSha": "e6f1475"
   },
+  "Rubrics 1960 - 1960/2026-08-25/Compline/c262774b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-08-25",
+    "hour": "Compline",
+    "firstExpected": "15:1 Consérva me, Dómine, quóniam sperávi in te. * Dixi Dómino: Deus meus es tu, quóniam bonórum meórum non eges.",
+    "firstActual": "15:1 Consérva me, Dómine, quóniam sperávi in te. ‡ Dixi Dómino: Deus meus es tu, * quóniam bonórum meórum non eges.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm15.txt:1 — the source line places the flex marker before Dixi Domino and the mediant before quoniam; the compositor preserves that source-backed psalm pointing while the Perl comparison surface collapses it to a single asterisk before Dixi Domino.",
+    "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
+    "resolvedAt": "2026-05-05"
+  },
   "Rubrics 1960 - 1960/2026-08-26/Prime/b7853e49": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-08-26",
@@ -19961,6 +20280,17 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Psalterium/Special/Prima Special.txt:1-7 and upstream/web/www/horas/Latin/Psalterium/Special/Prima Special.txt:45-59 — the source-backed ferial Prime fallback has the `Zach 8:19` chapter and then begins `[Responsory]` directly with `R.br. Christe, Fili Dei vivi...`; the Rubrics 1960 Perl comparison surface keeps the Sunday `1 Tim. 1:17` citation on these ferial Prime rows.",
     "notes": "Rubrics 1960 2026 fanout for the ferial Prime fallback chapter family. Representative witness: 2026-01-19 Prime.",
+    "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-09-01/Compline/c262774b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-09-01",
+    "hour": "Compline",
+    "firstExpected": "15:1 Consérva me, Dómine, quóniam sperávi in te. * Dixi Dómino: Deus meus es tu, quóniam bonórum meórum non eges.",
+    "firstActual": "15:1 Consérva me, Dómine, quóniam sperávi in te. ‡ Dixi Dómino: Deus meus es tu, * quóniam bonórum meórum non eges.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm15.txt:1 — the source line places the flex marker before Dixi Domino and the mediant before quoniam; the compositor preserves that source-backed psalm pointing while the Perl comparison surface collapses it to a single asterisk before Dixi Domino.",
+    "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
     "resolvedAt": "2026-05-05"
   },
   "Rubrics 1960 - 1960/2026-09-01/Prime/b7853e49": {
@@ -20173,6 +20503,17 @@
     "notes": "Rubrics 1960 2026 fanout for the ferial Prime fallback chapter family. Representative witness: 2026-01-19 Prime.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-09-22/Compline/c262774b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-09-22",
+    "hour": "Compline",
+    "firstExpected": "15:1 Consérva me, Dómine, quóniam sperávi in te. * Dixi Dómino: Deus meus es tu, quóniam bonórum meórum non eges.",
+    "firstActual": "15:1 Consérva me, Dómine, quóniam sperávi in te. ‡ Dixi Dómino: Deus meus es tu, * quóniam bonórum meórum non eges.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm15.txt:1 — the source line places the flex marker before Dixi Domino and the mediant before quoniam; the compositor preserves that source-backed psalm pointing while the Perl comparison surface collapses it to a single asterisk before Dixi Domino.",
+    "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
+    "resolvedAt": "2026-05-05"
+  },
   "Rubrics 1960 - 1960/2026-09-23/Prime/b7853e49": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-09-23",
@@ -20239,6 +20580,17 @@
     "notes": "Rubrics 1960 2026 fanout for the ferial Prime fallback chapter family. Representative witness: 2026-01-19 Prime.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-10-06/Compline/c262774b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-10-06",
+    "hour": "Compline",
+    "firstExpected": "15:1 Consérva me, Dómine, quóniam sperávi in te. * Dixi Dómino: Deus meus es tu, quóniam bonórum meórum non eges.",
+    "firstActual": "15:1 Consérva me, Dómine, quóniam sperávi in te. ‡ Dixi Dómino: Deus meus es tu, * quóniam bonórum meórum non eges.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm15.txt:1 — the source line places the flex marker before Dixi Domino and the mediant before quoniam; the compositor preserves that source-backed psalm pointing while the Perl comparison surface collapses it to a single asterisk before Dixi Domino.",
+    "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
+    "resolvedAt": "2026-05-05"
+  },
   "Rubrics 1960 - 1960/2026-10-07/None/318cf47a": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-10-07",
@@ -20298,6 +20650,28 @@
     "notes": "Rubrics 1960 2026 fanout for the ferial Prime fallback chapter family. Representative witness: 2026-01-19 Prime.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-10-13/Compline/c262774b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-10-13",
+    "hour": "Compline",
+    "firstExpected": "15:1 Consérva me, Dómine, quóniam sperávi in te. * Dixi Dómino: Deus meus es tu, quóniam bonórum meórum non eges.",
+    "firstActual": "15:1 Consérva me, Dómine, quóniam sperávi in te. ‡ Dixi Dómino: Deus meus es tu, * quóniam bonórum meórum non eges.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm15.txt:1 — the source line places the flex marker before Dixi Domino and the mediant before quoniam; the compositor preserves that source-backed psalm pointing while the Perl comparison surface collapses it to a single asterisk before Dixi Domino.",
+    "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
+    "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-10-20/Compline/c262774b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-10-20",
+    "hour": "Compline",
+    "firstExpected": "15:1 Consérva me, Dómine, quóniam sperávi in te. * Dixi Dómino: Deus meus es tu, quóniam bonórum meórum non eges.",
+    "firstActual": "15:1 Consérva me, Dómine, quóniam sperávi in te. ‡ Dixi Dómino: Deus meus es tu, * quóniam bonórum meórum non eges.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm15.txt:1 — the source line places the flex marker before Dixi Domino and the mediant before quoniam; the compositor preserves that source-backed psalm pointing while the Perl comparison surface collapses it to a single asterisk before Dixi Domino.",
+    "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
+    "resolvedAt": "2026-05-05"
+  },
   "Rubrics 1960 - 1960/2026-10-21/Prime/b7853e49": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-10-21",
@@ -20329,6 +20703,17 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Psalterium/Special/Prima Special.txt:1-7 and upstream/web/www/horas/Latin/Psalterium/Special/Prima Special.txt:45-59 — the source-backed ferial Prime fallback has the `Zach 8:19` chapter and then begins `[Responsory]` directly with `R.br. Christe, Fili Dei vivi...`; the Rubrics 1960 Perl comparison surface keeps the Sunday `1 Tim. 1:17` citation on these ferial Prime rows.",
     "notes": "Rubrics 1960 2026 fanout for the ferial Prime fallback chapter family. Representative witness: 2026-01-19 Prime.",
+    "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-10-27/Compline/c262774b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-10-27",
+    "hour": "Compline",
+    "firstExpected": "15:1 Consérva me, Dómine, quóniam sperávi in te. * Dixi Dómino: Deus meus es tu, quóniam bonórum meórum non eges.",
+    "firstActual": "15:1 Consérva me, Dómine, quóniam sperávi in te. ‡ Dixi Dómino: Deus meus es tu, * quóniam bonórum meórum non eges.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm15.txt:1 — the source line places the flex marker before Dixi Domino and the mediant before quoniam; the compositor preserves that source-backed psalm pointing while the Perl comparison surface collapses it to a single asterisk before Dixi Domino.",
+    "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
     "resolvedAt": "2026-05-05"
   },
   "Rubrics 1960 - 1960/2026-10-27/Prime/b7853e49": {
@@ -20412,6 +20797,17 @@
     "resolvedAt": "2026-05-05",
     "commitSha": "e6f1475"
   },
+  "Rubrics 1960 - 1960/2026-11-03/Compline/c262774b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-11-03",
+    "hour": "Compline",
+    "firstExpected": "15:1 Consérva me, Dómine, quóniam sperávi in te. * Dixi Dómino: Deus meus es tu, quóniam bonórum meórum non eges.",
+    "firstActual": "15:1 Consérva me, Dómine, quóniam sperávi in te. ‡ Dixi Dómino: Deus meus es tu, * quóniam bonórum meórum non eges.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm15.txt:1 — the source line places the flex marker before Dixi Domino and the mediant before quoniam; the compositor preserves that source-backed psalm pointing while the Perl comparison surface collapses it to a single asterisk before Dixi Domino.",
+    "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
+    "resolvedAt": "2026-05-05"
+  },
   "Rubrics 1960 - 1960/2026-11-03/Prime/b7853e49": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-11-03",
@@ -20493,6 +20889,17 @@
     "resolvedAt": "2026-05-05",
     "commitSha": "e6f1475"
   },
+  "Rubrics 1960 - 1960/2026-11-10/Compline/c262774b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-11-10",
+    "hour": "Compline",
+    "firstExpected": "15:1 Consérva me, Dómine, quóniam sperávi in te. * Dixi Dómino: Deus meus es tu, quóniam bonórum meórum non eges.",
+    "firstActual": "15:1 Consérva me, Dómine, quóniam sperávi in te. ‡ Dixi Dómino: Deus meus es tu, * quóniam bonórum meórum non eges.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm15.txt:1 — the source line places the flex marker before Dixi Domino and the mediant before quoniam; the compositor preserves that source-backed psalm pointing while the Perl comparison surface collapses it to a single asterisk before Dixi Domino.",
+    "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
+    "resolvedAt": "2026-05-05"
+  },
   "Rubrics 1960 - 1960/2026-11-13/Prime/b7853e49": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-11-13",
@@ -20502,6 +20909,17 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Psalterium/Special/Prima Special.txt:1-7 and upstream/web/www/horas/Latin/Psalterium/Special/Prima Special.txt:45-59 — the source-backed ferial Prime fallback has the `Zach 8:19` chapter and then begins `[Responsory]` directly with `R.br. Christe, Fili Dei vivi...`; the Rubrics 1960 Perl comparison surface keeps the Sunday `1 Tim. 1:17` citation on these ferial Prime rows.",
     "notes": "Rubrics 1960 2026 fanout for the ferial Prime fallback chapter family. Representative witness: 2026-01-19 Prime.",
+    "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-11-17/Compline/c262774b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-11-17",
+    "hour": "Compline",
+    "firstExpected": "15:1 Consérva me, Dómine, quóniam sperávi in te. * Dixi Dómino: Deus meus es tu, quóniam bonórum meórum non eges.",
+    "firstActual": "15:1 Consérva me, Dómine, quóniam sperávi in te. ‡ Dixi Dómino: Deus meus es tu, * quóniam bonórum meórum non eges.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm15.txt:1 — the source line places the flex marker before Dixi Domino and the mediant before quoniam; the compositor preserves that source-backed psalm pointing while the Perl comparison surface collapses it to a single asterisk before Dixi Domino.",
+    "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
     "resolvedAt": "2026-05-05"
   },
   "Rubrics 1960 - 1960/2026-11-21/None/318cf47a": {
@@ -20551,6 +20969,17 @@
     "notes": "2026 Rubrics 1960 fallback-hymn doxology row. Engine slot coverage in january-hymn-routing.test.ts verifies representative Nat/Epi/Asc/Corp/Heart/local doxology sources for this reusable family.",
     "resolvedAt": "2026-05-05",
     "commitSha": "e6f1475"
+  },
+  "Rubrics 1960 - 1960/2026-11-24/Compline/c262774b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-11-24",
+    "hour": "Compline",
+    "firstExpected": "15:1 Consérva me, Dómine, quóniam sperávi in te. * Dixi Dómino: Deus meus es tu, quóniam bonórum meórum non eges.",
+    "firstActual": "15:1 Consérva me, Dómine, quóniam sperávi in te. ‡ Dixi Dómino: Deus meus es tu, * quóniam bonórum meórum non eges.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm15.txt:1 — the source line places the flex marker before Dixi Domino and the mediant before quoniam; the compositor preserves that source-backed psalm pointing while the Perl comparison surface collapses it to a single asterisk before Dixi Domino.",
+    "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
+    "resolvedAt": "2026-05-05"
   },
   "Rubrics 1960 - 1960/2026-11-27/Prime/b7853e49": {
     "policy": "Rubrics 1960 - 1960",
@@ -20610,6 +21039,17 @@
     "notes": "2026 Rubrics 1960 fallback-hymn doxology row. Engine slot coverage in january-hymn-routing.test.ts verifies representative Nat/Epi/Asc/Corp/Heart/local doxology sources for this reusable family.",
     "resolvedAt": "2026-05-05",
     "commitSha": "e6f1475"
+  },
+  "Rubrics 1960 - 1960/2026-12-01/Compline/c262774b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-12-01",
+    "hour": "Compline",
+    "firstExpected": "15:1 Consérva me, Dómine, quóniam sperávi in te. * Dixi Dómino: Deus meus es tu, quóniam bonórum meórum non eges.",
+    "firstActual": "15:1 Consérva me, Dómine, quóniam sperávi in te. ‡ Dixi Dómino: Deus meus es tu, * quóniam bonórum meórum non eges.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm15.txt:1 — the source line places the flex marker before Dixi Domino and the mediant before quoniam; the compositor preserves that source-backed psalm pointing while the Perl comparison surface collapses it to a single asterisk before Dixi Domino.",
+    "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
+    "resolvedAt": "2026-05-05"
   },
   "Rubrics 1960 - 1960/2026-12-02/Prime/b7853e49": {
     "policy": "Rubrics 1960 - 1960",
@@ -20712,6 +21152,28 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Psalterium/Special/Prima Special.txt:1-7 and upstream/web/www/horas/Latin/Psalterium/Special/Prima Special.txt:45-59 — the source-backed ferial Prime fallback has the `Zach 8:19` chapter and then begins `[Responsory]` directly with `R.br. Christe, Fili Dei vivi...`; the Rubrics 1960 Perl comparison surface keeps the Sunday `1 Tim. 1:17` citation on these ferial Prime rows.",
     "notes": "Rubrics 1960 2026 fanout for the ferial Prime fallback chapter family. Representative witness: 2026-01-19 Prime.",
+    "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-12-15/Compline/c262774b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-12-15",
+    "hour": "Compline",
+    "firstExpected": "15:1 Consérva me, Dómine, quóniam sperávi in te. * Dixi Dómino: Deus meus es tu, quóniam bonórum meórum non eges.",
+    "firstActual": "15:1 Consérva me, Dómine, quóniam sperávi in te. ‡ Dixi Dómino: Deus meus es tu, * quóniam bonórum meórum non eges.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm15.txt:1 — the source line places the flex marker before Dixi Domino and the mediant before quoniam; the compositor preserves that source-backed psalm pointing while the Perl comparison surface collapses it to a single asterisk before Dixi Domino.",
+    "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
+    "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-12-22/Compline/c262774b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-12-22",
+    "hour": "Compline",
+    "firstExpected": "15:1 Consérva me, Dómine, quóniam sperávi in te. * Dixi Dómino: Deus meus es tu, quóniam bonórum meórum non eges.",
+    "firstActual": "15:1 Consérva me, Dómine, quóniam sperávi in te. ‡ Dixi Dómino: Deus meus es tu, * quóniam bonórum meórum non eges.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm15.txt:1 — the source line places the flex marker before Dixi Domino and the mediant before quoniam; the compositor preserves that source-backed psalm pointing while the Perl comparison surface collapses it to a single asterisk before Dixi Domino.",
+    "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
     "resolvedAt": "2026-05-05"
   },
   "Rubrics 1960 - 1960/2026-12-25/None/318cf47a": {

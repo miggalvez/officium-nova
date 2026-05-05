@@ -5862,6 +5862,34 @@ doxology citation.
 `1882`; divergent hours remain `2211` because this tranche classifies
 known Perl drift without changing rendered output.
 
+### 2026-05-05 — Pattern: Psalm 15:1 half-verse pointing is flattened by Perl render surface (perl-bug, classified)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** The refreshed Rubrics 1960 2026 frontier exposed a
+Psalm 15:1 pointing family, mostly in Tuesday Compline with three Matins
+witnesses. Perl expected the visible mediant before `Dixi Dómino`,
+while the compositor preserved the source flex marker before
+`Dixi Dómino` and the source mediant before `quóniam`.
+
+**Root cause.** This is source-backed psalm pointing, not a compositor
+rendering defect. `Psalterium/Psalmorum/Psalm15.txt` places `‡ (2)`
+before `Dixi Dómino` and `*` before `quóniam`. The compositor already
+normalizes the parenthetical verse helper while retaining the liturgical
+pointing marks. The Perl comparison surface flattens that display to a
+single asterisk before `Dixi Dómino`.
+
+**Resolution.** Class `perl-bug`. Added 42 Rubrics 1960 2026 row keys
+for stable key-hash `c262774b`, and documented the family in
+`docs/upstream-issues.md`.
+
+**Citation.** `upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm15.txt:1`
+and `docs/upstream-issues.md`.
+
+**Impact.** Rubrics 1960 2026 unadjudicated rows drop from `1882` to
+`1840`; divergent hours remain `2211` because this tranche classifies
+known Perl drift without changing rendered output.
+
 ## See also
 
 - [ADR-011 — Divergence adjudication protocol](../../../../docs/adr/011-phase-3-divergence-adjudication.md)
