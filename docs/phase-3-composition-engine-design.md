@@ -550,7 +550,9 @@ precedes each Matins lesson and implemented the Te Deum
   `selectRomanBenedictions` helper in
   `packages/rubrical-engine/src/policy/_shared/roman.ts` feeds all
   three Roman policies: 9/12-lesson office → `[Nocturn N]:<offset>`,
-  3-lesson office → `[Nocturn 3]:<offset>` in
+  3-lesson Gospel-homily offices → `[Evangelica]:1` for the first
+  lesson and then `[Nocturn 3]:<offset>`, ordinary temporal ferias →
+  weekday rotation, other 3-lesson offices → `[Nocturn 3]:<offset>` in
   `horas/Latin/Psalterium/Benedictions.txt`. Mirrors Perl's
   `specmatins.pl:get_absolutio_et_benedictiones` simple path.
 - **Matins composition**:

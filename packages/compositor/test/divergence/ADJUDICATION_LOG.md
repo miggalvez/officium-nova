@@ -6040,6 +6040,41 @@ classifies the exact Compline `Præsta, Pater piíssime,` =>
 **Impact.** Rubrics 1960 2026 divergent hours remain at `2141`, and
 unadjudicated rows drop from `1502` to `1472`.
 
+### 2026-05-05 — Pattern: 3-lesson Gospel-homily Matins starts with Evangelica benediction (engine-bug, fixed)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** The refreshed Rubrics 1960 2026 frontier exposed a
+29-row Matins family, represented by 2026-02-21, where Perl selected
+`Benedictio. Evangélica léctio sit nobis salus et protéctio.` before a
+3-lesson Gospel homily while the compositor selected the ordinary
+`Nocturn 3:1` benediction `Ille nos benedícat, qui sine fine vivit et
+regnat.`
+
+**Root cause.** The shared Roman Benedictio selector treated all
+non-ordinary 3-lesson offices as plain `Nocturn 3` starts. Perl's
+3-lesson path first loads `Nocturn 3` and then replaces the first
+benediction with `[Evangelica]:1` for Gospel-homily days (post-Cineres,
+Lent ferias, Paschal/Pentecost octave days, ember days, and vigils).
+The upstream temporal witness `Quadp3-6` starts `Lectio1` with a Gospel
+pericope and homily.
+
+**Resolution.** Class `engine-bug`, fixed. The Roman shared selector now
+keeps ordinary temporal weekday rotation, but maps those Gospel-homily
+3-lesson families to `[Evangelica]:1` for the opening benediction while
+leaving the remaining entries on their existing Nocturn 3 / sanctoral
+selector paths.
+
+**Citation.** `upstream/web/cgi-bin/horas/specmatins.pl:595-638`,
+`upstream/web/www/horas/Latin/Psalterium/Benedictions.txt:18-35`,
+`upstream/web/www/horas/Latin/Tempora/Quadp3-6.txt:14-21`,
+and `packages/rubrical-engine/src/policy/_shared/roman.ts`.
+
+**Impact.** The exact Rubrics 1960 2026 benediction signature drops from
+`29` to `0`. Divergent hours remain at `2141`, and unadjudicated rows
+remain at `1472`, because the same Matins hours now expose later
+first-divergence families.
+
 ## See also
 
 - [ADR-011 — Divergence adjudication protocol](../../../../docs/adr/011-phase-3-divergence-adjudication.md)
