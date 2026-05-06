@@ -17833,6 +17833,17 @@
     "resolvedAt": "2026-05-05",
     "commitSha": "e6f1475"
   },
+  "Rubrics 1960 - 1960/2026-01-14/Matins/4522cc75": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-01-14",
+    "hour": "Matins",
+    "firstExpected": "Ant. Speciósus forma * præ fíliis hóminum, diffúsa est grátia in lábiis tuis.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
+    "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-01-15/Lauds/11e2194d": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-01-15",
@@ -17844,6 +17855,17 @@
     "notes": "2026 Rubrics 1960 Confessor C5 Lauds/Prime/Vespers `Dómine, quinque talénta` common-antiphon fanout. This extends the documented simplified Roman Confessor common-antiphon Perl comparison-surface family to all current 2026 first-divergence rows with this C5 antiphon.",
     "resolvedAt": "2026-05-05",
     "commitSha": "e1dcb32"
+  },
+  "Rubrics 1960 - 1960/2026-01-15/Matins/2fac8d22": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-01-15",
+    "hour": "Matins",
+    "firstExpected": "Ant. In Deo salutáre meum * et glória mea: et spes mea in Deo est.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
+    "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-01-15/Prime/b5505956": {
     "policy": "Rubrics 1960 - 1960",
@@ -17880,6 +17902,17 @@
     "notes": "2026 Rubrics 1960 Confessor C5 Lauds/Prime/Vespers `Dómine, quinque talénta` common-antiphon fanout. This extends the documented simplified Roman Confessor common-antiphon Perl comparison-surface family to all current 2026 first-divergence rows with this C5 antiphon.",
     "resolvedAt": "2026-05-05",
     "commitSha": "e1dcb32"
+  },
+  "Rubrics 1960 - 1960/2026-01-17/Matins/f7ee49ea": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-01-17",
+    "hour": "Matins",
+    "firstExpected": "Ant. Memor fuit in sǽculum * testaménti sui Dóminus Deus noster.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
+    "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-01-17/Prime/f01a4272": {
     "policy": "Rubrics 1960 - 1960",
@@ -17993,6 +18026,17 @@
     "resolvedAt": "2026-05-05",
     "commitSha": "e1dcb32"
   },
+  "Rubrics 1960 - 1960/2026-01-23/Matins/88adb0ee": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-01-23",
+    "hour": "Matins",
+    "firstExpected": "Ant. Suscitávit Dóminus * testimónium in Jacob: et legem pósuit in Israël.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
+    "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-01-23/Prime/ae30f785": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-01-23",
@@ -18096,6 +18140,17 @@
     "resolvedAt": "2026-05-05",
     "commitSha": "e1dcb32"
   },
+  "Rubrics 1960 - 1960/2026-01-28/Matins/4522cc75": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-01-28",
+    "hour": "Matins",
+    "firstExpected": "Ant. Speciósus forma * præ fíliis hóminum, diffúsa est grátia in lábiis tuis.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
+    "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-01-28/Vespers/c9964aa7": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-01-28",
@@ -18108,6 +18163,17 @@
     "resolvedAt": "2026-05-05",
     "commitSha": "e1dcb32"
   },
+  "Rubrics 1960 - 1960/2026-01-29/Matins/2fac8d22": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-01-29",
+    "hour": "Matins",
+    "firstExpected": "Ant. In Deo salutáre meum * et glória mea: et spes mea in Deo est.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
+    "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-01-31/Lauds/2be42b34": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-01-31",
@@ -18119,6 +18185,17 @@
     "notes": "2026 Rubrics 1960 Confessor C5 Lauds/Prime/Vespers `Dómine, quinque talénta` common-antiphon fanout. This extends the documented simplified Roman Confessor common-antiphon Perl comparison-surface family to all current 2026 first-divergence rows with this C5 antiphon.",
     "resolvedAt": "2026-05-05",
     "commitSha": "e1dcb32"
+  },
+  "Rubrics 1960 - 1960/2026-01-31/Matins/f7ee49ea": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-01-31",
+    "hour": "Matins",
+    "firstExpected": "Ant. Memor fuit in sǽculum * testaménti sui Dóminus Deus noster.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
+    "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-01-31/Prime/f01a4272": {
     "policy": "Rubrics 1960 - 1960",
@@ -18246,6 +18323,17 @@
     "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-02-04/Matins/4522cc75": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-02-04",
+    "hour": "Matins",
+    "firstExpected": "Ant. Speciósus forma * præ fíliis hóminum, diffúsa est grátia in lábiis tuis.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
+    "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-02-05/Matins/c262774b": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-02-05",
@@ -18256,6 +18344,17 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm15.txt:1 — the source line places the flex marker before Dixi Domino and the mediant before quoniam; the compositor preserves that source-backed psalm pointing while the Perl comparison surface collapses it to a single asterisk before Dixi Domino.",
     "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
     "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-02-06/Matins/88adb0ee": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-02-06",
+    "hour": "Matins",
+    "firstExpected": "Ant. Suscitávit Dóminus * testimónium in Jacob: et legem pósuit in Israël.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
+    "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-02-07/Lauds/2be42b34": {
     "policy": "Rubrics 1960 - 1960",
@@ -18268,6 +18367,17 @@
     "notes": "2026 Rubrics 1960 Confessor C5 Lauds/Prime/Vespers `Dómine, quinque talénta` common-antiphon fanout. This extends the documented simplified Roman Confessor common-antiphon Perl comparison-surface family to all current 2026 first-divergence rows with this C5 antiphon.",
     "resolvedAt": "2026-05-05",
     "commitSha": "e1dcb32"
+  },
+  "Rubrics 1960 - 1960/2026-02-07/Matins/f7ee49ea": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-02-07",
+    "hour": "Matins",
+    "firstExpected": "Ant. Memor fuit in sǽculum * testaménti sui Dóminus Deus noster.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
+    "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-02-07/Prime/f01a4272": {
     "policy": "Rubrics 1960 - 1960",
@@ -18313,6 +18423,17 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:15-20 — the Day0 `Vespera` source carries the full opening antiphon `Dixit Dóminus * Dómino meo: Sede a dextris meis.` without a trailing `‡`. The compositor preserves the corpus text; the Perl comparison surface adds an unsupported trailing continuation marker.",
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited psalter source carries the complete antiphon without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
     "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-02-09/Matins/2bbb208c": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-02-09",
+    "hour": "Matins",
+    "firstExpected": "Ant. Dóminus de cælo * prospéxit super fílios hóminum.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
+    "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-02-10/Compline/c262774b": {
     "policy": "Rubrics 1960 - 1960",
@@ -18384,6 +18505,17 @@
     "notes": "2026 Rubrics 1960 Confessor C5 Lauds/Prime/Vespers `Dómine, quinque talénta` common-antiphon fanout. This extends the documented simplified Roman Confessor common-antiphon Perl comparison-surface family to all current 2026 first-divergence rows with this C5 antiphon.",
     "resolvedAt": "2026-05-05",
     "commitSha": "e1dcb32"
+  },
+  "Rubrics 1960 - 1960/2026-02-12/Matins/2fac8d22": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-02-12",
+    "hour": "Matins",
+    "firstExpected": "Ant. In Deo salutáre meum * et glória mea: et spes mea in Deo est.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
+    "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-02-12/Prime/b5505956": {
     "policy": "Rubrics 1960 - 1960",
@@ -20383,6 +20515,28 @@
     "resolvedAt": "2026-05-05",
     "commitSha": "e6f1475"
   },
+  "Rubrics 1960 - 1960/2026-05-15/Matins/72eabd76": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-05-15",
+    "hour": "Matins",
+    "firstExpected": "Ant. Allelúja, * allelúja, allelúja.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
+    "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
+  "Rubrics 1960 - 1960/2026-05-16/Matins/72eabd76": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-05-16",
+    "hour": "Matins",
+    "firstExpected": "Ant. Allelúja, * allelúja, allelúja.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
+    "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-05-19/Compline/c262774b": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-05-19",
@@ -20393,6 +20547,28 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm15.txt:1 — the source line places the flex marker before Dixi Domino and the mediant before quoniam; the compositor preserves that source-backed psalm pointing while the Perl comparison surface collapses it to a single asterisk before Dixi Domino.",
     "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
     "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-05-19/Matins/72eabd76": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-05-19",
+    "hour": "Matins",
+    "firstExpected": "Ant. Allelúja, * allelúja, allelúja.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
+    "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
+  "Rubrics 1960 - 1960/2026-05-20/Matins/72eabd76": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-05-20",
+    "hour": "Matins",
+    "firstExpected": "Ant. Allelúja, * allelúja, allelúja.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
+    "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-05-21/None/318cf47a": {
     "policy": "Rubrics 1960 - 1960",
@@ -20930,6 +21106,17 @@
     "notes": "2026 Rubrics 1960 Compline fallback-hymn doxology row. This extends the source-backed fallback-hymn doxology adjudication to `Hymnus Completorium` witnesses.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-06-06/Matins/f7ee49ea": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-06-06",
+    "hour": "Matins",
+    "firstExpected": "Ant. Memor fuit in sǽculum * testaménti sui Dóminus Deus noster.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
+    "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-06-06/Vespers/b047f132": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-06-06",
@@ -21200,6 +21387,17 @@
     "resolvedAt": "2026-05-05",
     "commitSha": "e1dcb32"
   },
+  "Rubrics 1960 - 1960/2026-06-13/Matins/f7ee49ea": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-06-13",
+    "hour": "Matins",
+    "firstExpected": "Ant. Memor fuit in sǽculum * testaménti sui Dóminus Deus noster.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
+    "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-06-13/Prime/f01a4272": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-06-13",
@@ -21322,6 +21520,17 @@
     "notes": "Rubrics 1960 2026 fanout for the ferial Prime fallback chapter family. Representative witness: 2026-01-19 Prime.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-06-17/Matins/4522cc75": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-06-17",
+    "hour": "Matins",
+    "firstExpected": "Ant. Speciósus forma * præ fíliis hóminum, diffúsa est grátia in lábiis tuis.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
+    "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-06-18/Lauds/11e2194d": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-06-18",
@@ -21333,6 +21542,17 @@
     "notes": "2026 Rubrics 1960 Confessor C5 Lauds/Prime/Vespers `Dómine, quinque talénta` common-antiphon fanout. This extends the documented simplified Roman Confessor common-antiphon Perl comparison-surface family to all current 2026 first-divergence rows with this C5 antiphon.",
     "resolvedAt": "2026-05-05",
     "commitSha": "e1dcb32"
+  },
+  "Rubrics 1960 - 1960/2026-06-18/Matins/2fac8d22": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-06-18",
+    "hour": "Matins",
+    "firstExpected": "Ant. In Deo salutáre meum * et glória mea: et spes mea in Deo est.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
+    "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-06-18/Prime/b5505956": {
     "policy": "Rubrics 1960 - 1960",
@@ -21505,6 +21725,17 @@
     "notes": "2026 Rubrics 1960 Confessor C5 Lauds/Prime/Vespers `Dómine, quinque talénta` common-antiphon fanout. This extends the documented simplified Roman Confessor common-antiphon Perl comparison-surface family to all current 2026 first-divergence rows with this C5 antiphon.",
     "resolvedAt": "2026-05-05",
     "commitSha": "e1dcb32"
+  },
+  "Rubrics 1960 - 1960/2026-06-25/Matins/2fac8d22": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-06-25",
+    "hour": "Matins",
+    "firstExpected": "Ant. In Deo salutáre meum * et glória mea: et spes mea in Deo est.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
+    "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-06-25/Prime/b5505956": {
     "policy": "Rubrics 1960 - 1960",
@@ -22155,6 +22386,17 @@
     "resolvedAt": "2026-05-05",
     "commitSha": "e1dcb32"
   },
+  "Rubrics 1960 - 1960/2026-07-15/Matins/4522cc75": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-07-15",
+    "hour": "Matins",
+    "firstExpected": "Ant. Speciósus forma * præ fíliis hóminum, diffúsa est grátia in lábiis tuis.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
+    "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-07-15/Prime/bba0bfc7": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-07-15",
@@ -22279,6 +22521,17 @@
     "resolvedAt": "2026-05-05",
     "commitSha": "e1dcb32"
   },
+  "Rubrics 1960 - 1960/2026-07-18/Matins/f7ee49ea": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-07-18",
+    "hour": "Matins",
+    "firstExpected": "Ant. Memor fuit in sǽculum * testaménti sui Dóminus Deus noster.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
+    "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-07-18/Prime/f01a4272": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-07-18",
@@ -22346,6 +22599,17 @@
     "notes": "2026 Rubrics 1960 Confessor C5 Lauds/Prime/Vespers `Dómine, quinque talénta` common-antiphon fanout. This extends the documented simplified Roman Confessor common-antiphon Perl comparison-surface family to all current 2026 first-divergence rows with this C5 antiphon.",
     "resolvedAt": "2026-05-05",
     "commitSha": "e1dcb32"
+  },
+  "Rubrics 1960 - 1960/2026-07-20/Matins/2bbb208c": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-07-20",
+    "hour": "Matins",
+    "firstExpected": "Ant. Dóminus de cælo * prospéxit super fílios hóminum.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
+    "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-07-20/Prime/63c54bc5": {
     "policy": "Rubrics 1960 - 1960",
@@ -22639,6 +22903,17 @@
     "notes": "2026 Rubrics 1960 Confessor C5 Lauds/Prime/Vespers `Dómine, quinque talénta` common-antiphon fanout. This extends the documented simplified Roman Confessor common-antiphon Perl comparison-surface family to all current 2026 first-divergence rows with this C5 antiphon.",
     "resolvedAt": "2026-05-05",
     "commitSha": "e1dcb32"
+  },
+  "Rubrics 1960 - 1960/2026-07-31/Matins/88adb0ee": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-07-31",
+    "hour": "Matins",
+    "firstExpected": "Ant. Suscitávit Dóminus * testimónium in Jacob: et legem pósuit in Israël.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
+    "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-07-31/Prime/ae30f785": {
     "policy": "Rubrics 1960 - 1960",
@@ -23023,6 +23298,17 @@
     "resolvedAt": "2026-05-05",
     "commitSha": "e1dcb32"
   },
+  "Rubrics 1960 - 1960/2026-08-07/Matins/88adb0ee": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-08-07",
+    "hour": "Matins",
+    "firstExpected": "Ant. Suscitávit Dóminus * testimónium in Jacob: et legem pósuit in Israël.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
+    "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-08-07/Prime/ae30f785": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-08-07",
@@ -23058,6 +23344,17 @@
     "notes": "2026 Rubrics 1960 Confessor C5 Lauds/Prime/Vespers `Dómine, quinque talénta` common-antiphon fanout. This extends the documented simplified Roman Confessor common-antiphon Perl comparison-surface family to all current 2026 first-divergence rows with this C5 antiphon.",
     "resolvedAt": "2026-05-05",
     "commitSha": "e1dcb32"
+  },
+  "Rubrics 1960 - 1960/2026-08-08/Matins/f7ee49ea": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-08-08",
+    "hour": "Matins",
+    "firstExpected": "Ant. Memor fuit in sǽculum * testaménti sui Dóminus Deus noster.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
+    "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-08-08/Prime/f01a4272": {
     "policy": "Rubrics 1960 - 1960",
@@ -23307,6 +23604,17 @@
     "resolvedAt": "2026-05-05",
     "commitSha": "e1dcb32"
   },
+  "Rubrics 1960 - 1960/2026-08-17/Matins/2bbb208c": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-08-17",
+    "hour": "Matins",
+    "firstExpected": "Ant. Dóminus de cælo * prospéxit super fílios hóminum.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
+    "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-08-17/Prime/63c54bc5": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-08-17",
@@ -23365,6 +23673,17 @@
     "resolvedAt": "2026-05-05",
     "commitSha": "e1dcb32"
   },
+  "Rubrics 1960 - 1960/2026-08-19/Matins/4522cc75": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-08-19",
+    "hour": "Matins",
+    "firstExpected": "Ant. Speciósus forma * præ fíliis hóminum, diffúsa est grátia in lábiis tuis.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
+    "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-08-19/Prime/bba0bfc7": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-08-19",
@@ -23400,6 +23719,17 @@
     "notes": "2026 Rubrics 1960 Confessor C5 Lauds/Prime/Vespers `Dómine, quinque talénta` common-antiphon fanout. This extends the documented simplified Roman Confessor common-antiphon Perl comparison-surface family to all current 2026 first-divergence rows with this C5 antiphon.",
     "resolvedAt": "2026-05-05",
     "commitSha": "e1dcb32"
+  },
+  "Rubrics 1960 - 1960/2026-08-20/Matins/2fac8d22": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-08-20",
+    "hour": "Matins",
+    "firstExpected": "Ant. In Deo salutáre meum * et glória mea: et spes mea in Deo est.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
+    "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-08-20/Prime/b5505956": {
     "policy": "Rubrics 1960 - 1960",
@@ -23654,6 +23984,17 @@
     "resolvedAt": "2026-05-05",
     "commitSha": "e1dcb32"
   },
+  "Rubrics 1960 - 1960/2026-08-27/Matins/2fac8d22": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-08-27",
+    "hour": "Matins",
+    "firstExpected": "Ant. In Deo salutáre meum * et glória mea: et spes mea in Deo est.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
+    "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-08-27/Prime/b5505956": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-08-27",
@@ -23677,6 +24018,17 @@
     "notes": "2026 Rubrics 1960 Confessor C5 Lauds/Prime/Vespers `Dómine, quinque talénta` common-antiphon fanout. This extends the documented simplified Roman Confessor common-antiphon Perl comparison-surface family to all current 2026 first-divergence rows with this C5 antiphon.",
     "resolvedAt": "2026-05-05",
     "commitSha": "e1dcb32"
+  },
+  "Rubrics 1960 - 1960/2026-08-28/Matins/88adb0ee": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-08-28",
+    "hour": "Matins",
+    "firstExpected": "Ant. Suscitávit Dóminus * testimónium in Jacob: et legem pósuit in Israël.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
+    "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-08-29/Vespers/b047f132": {
     "policy": "Rubrics 1960 - 1960",
@@ -23733,6 +24085,17 @@
     "notes": "2026 Rubrics 1960 Confessor C5 Lauds/Prime/Vespers `Dómine, quinque talénta` common-antiphon fanout. This extends the documented simplified Roman Confessor common-antiphon Perl comparison-surface family to all current 2026 first-divergence rows with this C5 antiphon.",
     "resolvedAt": "2026-05-05",
     "commitSha": "e1dcb32"
+  },
+  "Rubrics 1960 - 1960/2026-08-31/Matins/2bbb208c": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-08-31",
+    "hour": "Matins",
+    "firstExpected": "Ant. Dóminus de cælo * prospéxit super fílios hóminum.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
+    "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-08-31/Prime/63c54bc5": {
     "policy": "Rubrics 1960 - 1960",
@@ -23792,6 +24155,17 @@
     "resolvedAt": "2026-05-05",
     "commitSha": "e1dcb32"
   },
+  "Rubrics 1960 - 1960/2026-09-02/Matins/4522cc75": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-09-02",
+    "hour": "Matins",
+    "firstExpected": "Ant. Speciósus forma * præ fíliis hóminum, diffúsa est grátia in lábiis tuis.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
+    "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-09-02/Prime/bba0bfc7": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-09-02",
@@ -23815,6 +24189,17 @@
     "notes": "2026 Rubrics 1960 Confessor C5 Lauds/Prime/Vespers `Dómine, quinque talénta` common-antiphon fanout. This extends the documented simplified Roman Confessor common-antiphon Perl comparison-surface family to all current 2026 first-divergence rows with this C5 antiphon.",
     "resolvedAt": "2026-05-05",
     "commitSha": "e1dcb32"
+  },
+  "Rubrics 1960 - 1960/2026-09-03/Matins/2fac8d22": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-09-03",
+    "hour": "Matins",
+    "firstExpected": "Ant. In Deo salutáre meum * et glória mea: et spes mea in Deo est.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
+    "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-09-03/Terce/2807ff6e": {
     "policy": "Rubrics 1960 - 1960",
@@ -23859,6 +24244,17 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:121 — the Friday Vespers psalter row carries `Domine, * probasti me et cognovisti me.;;138(1-13)` without a trailing continuation marker. The compositor preserves the source row while the Perl comparison surface appends an unsupported trailing `‡`.",
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited psalter source carries the complete antiphon without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
     "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-09-05/Matins/f7ee49ea": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-09-05",
+    "hour": "Matins",
+    "firstExpected": "Ant. Memor fuit in sǽculum * testaménti sui Dóminus Deus noster.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
+    "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-09-05/Vespers/b047f132": {
     "policy": "Rubrics 1960 - 1960",
@@ -24073,6 +24469,17 @@
     "notes": "2026 Rubrics 1960 Confessor C5 Lauds/Prime/Vespers `Dómine, quinque talénta` common-antiphon fanout. This extends the documented simplified Roman Confessor common-antiphon Perl comparison-surface family to all current 2026 first-divergence rows with this C5 antiphon.",
     "resolvedAt": "2026-05-05",
     "commitSha": "e1dcb32"
+  },
+  "Rubrics 1960 - 1960/2026-09-10/Matins/2fac8d22": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-09-10",
+    "hour": "Matins",
+    "firstExpected": "Ant. In Deo salutáre meum * et glória mea: et spes mea in Deo est.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
+    "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-09-10/Terce/2807ff6e": {
     "policy": "Rubrics 1960 - 1960",
@@ -24359,6 +24766,17 @@
     "resolvedAt": "2026-05-05",
     "commitSha": "e1dcb32"
   },
+  "Rubrics 1960 - 1960/2026-09-18/Matins/88adb0ee": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-09-18",
+    "hour": "Matins",
+    "firstExpected": "Ant. Suscitávit Dóminus * testimónium in Jacob: et legem pósuit in Israël.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
+    "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-09-18/Prime/ae30f785": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-09-18",
@@ -24638,6 +25056,17 @@
     "notes": "2026 Rubrics 1960 Confessor C5 Lauds/Prime/Vespers `Dómine, quinque talénta` common-antiphon fanout. This extends the documented simplified Roman Confessor common-antiphon Perl comparison-surface family to all current 2026 first-divergence rows with this C5 antiphon.",
     "resolvedAt": "2026-05-05",
     "commitSha": "e1dcb32"
+  },
+  "Rubrics 1960 - 1960/2026-09-30/Matins/4522cc75": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-09-30",
+    "hour": "Matins",
+    "firstExpected": "Ant. Speciósus forma * præ fíliis hóminum, diffúsa est grátia in lábiis tuis.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
+    "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-09-30/Prime/bba0bfc7": {
     "policy": "Rubrics 1960 - 1960",
@@ -24958,6 +25387,17 @@
     "resolvedAt": "2026-05-05",
     "commitSha": "e1dcb32"
   },
+  "Rubrics 1960 - 1960/2026-10-09/Matins/88adb0ee": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-10-09",
+    "hour": "Matins",
+    "firstExpected": "Ant. Suscitávit Dóminus * testimónium in Jacob: et legem pósuit in Israël.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
+    "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-10-09/Prime/ae30f785": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-10-09",
@@ -24993,6 +25433,17 @@
     "notes": "2026 Rubrics 1960 Confessor C5 Lauds/Prime/Vespers `Dómine, quinque talénta` common-antiphon fanout. This extends the documented simplified Roman Confessor common-antiphon Perl comparison-surface family to all current 2026 first-divergence rows with this C5 antiphon.",
     "resolvedAt": "2026-05-05",
     "commitSha": "e1dcb32"
+  },
+  "Rubrics 1960 - 1960/2026-10-10/Matins/f7ee49ea": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-10-10",
+    "hour": "Matins",
+    "firstExpected": "Ant. Memor fuit in sǽculum * testaménti sui Dóminus Deus noster.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
+    "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-10-10/Prime/f01a4272": {
     "policy": "Rubrics 1960 - 1960",
@@ -25231,6 +25682,17 @@
     "resolvedAt": "2026-05-05",
     "commitSha": "e1dcb32"
   },
+  "Rubrics 1960 - 1960/2026-10-19/Matins/2bbb208c": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-10-19",
+    "hour": "Matins",
+    "firstExpected": "Ant. Dóminus de cælo * prospéxit super fílios hóminum.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
+    "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-10-19/Vespers/b8382b61": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-10-19",
@@ -25411,6 +25873,17 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:100 — the psalter-major row carries `Ecce quam bonum * et quam jucúndum habitáre fratres in unum.` without a trailing `‡`; the compositor preserves that source text while the Perl comparison surface appends an unsupported marker.",
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited psalter source carries the complete antiphon without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
     "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-10-23/Matins/88adb0ee": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-10-23",
+    "hour": "Matins",
+    "firstExpected": "Ant. Suscitávit Dóminus * testimónium in Jacob: et legem pósuit in Israël.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
+    "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-10-26/Lauds/fbd9d530": {
     "policy": "Rubrics 1960 - 1960",
@@ -25670,6 +26143,17 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Special/Prima Special.txt:1-7 and upstream/web/www/horas/Latin/Psalterium/Special/Prima Special.txt:45-59 — the source-backed ferial Prime fallback has the `Zach 8:19` chapter and then begins `[Responsory]` directly with `R.br. Christe, Fili Dei vivi...`; the Rubrics 1960 Perl comparison surface keeps the Sunday `1 Tim. 1:17` citation on these ferial Prime rows.",
     "notes": "Rubrics 1960 2026 fanout for the ferial Prime fallback chapter family. Representative witness: 2026-01-19 Prime.",
     "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-11-04/Matins/4522cc75": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-11-04",
+    "hour": "Matins",
+    "firstExpected": "Ant. Speciósus forma * præ fíliis hóminum, diffúsa est grátia in lábiis tuis.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
+    "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-11-05/Lauds/52cc7e9c": {
     "policy": "Rubrics 1960 - 1960",
@@ -26066,6 +26550,17 @@
     "resolvedAt": "2026-05-05",
     "commitSha": "e1dcb32"
   },
+  "Rubrics 1960 - 1960/2026-11-20/Matins/88adb0ee": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-11-20",
+    "hour": "Matins",
+    "firstExpected": "Ant. Suscitávit Dóminus * testimónium in Jacob: et legem pósuit in Israël.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
+    "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-11-20/Vespers/7d120c6f": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-11-20",
@@ -26262,6 +26757,17 @@
     "notes": "2026 Rubrics 1960 Confessor C5 Lauds/Prime/Vespers `Dómine, quinque talénta` common-antiphon fanout. This extends the documented simplified Roman Confessor common-antiphon Perl comparison-surface family to all current 2026 first-divergence rows with this C5 antiphon.",
     "resolvedAt": "2026-05-05",
     "commitSha": "e1dcb32"
+  },
+  "Rubrics 1960 - 1960/2026-11-26/Matins/2fac8d22": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-11-26",
+    "hour": "Matins",
+    "firstExpected": "Ant. In Deo salutáre meum * et glória mea: et spes mea in Deo est.",
+    "firstActual": "Ant. Beátus vir, * qui in lege Dómini meditátur: volúntas ejus pérmanet die ac nocte, et ómnia quæcúmque fáciet, semper prosperabúntur.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
+    "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-11-26/Prime/b5505956": {
     "policy": "Rubrics 1960 - 1960",
