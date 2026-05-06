@@ -22,6 +22,53 @@ anchor.
 
 ## Entries
 
+### 2026-05-06 — Pattern: post-Epiphany ferias borrow Epiphany texts without feast psalmody (engine/compositor fixed)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** `Rubrics 1960 - 1960` / 2026 Jan 7 Matins
+previously diverged at the first rendered line because the compositor
+inherited Epiphany's feast-only Matins opening suppression through
+`vide Sancti/01-06`. Jan 7 Lauds likewise inherited Epiphany proper
+psalmody instead of the weekday psalter. After that ownership fix,
+Jan 7-9 first-divergence rows advanced to existing unsupported
+trailing-`‡` marker families, and Jan 9 Matins reached exact parity.
+
+**Root cause.** `Tempora/Nat07` through `Tempora/Nat12` are temporal
+ferias with `vide Sancti/01-06`, `Feria Te Deum`, and `Infra octavam
+Epiphaniæ Domini`. The `vide` instruction supplies Epiphany textual
+material such as the Invitatory, Matins hymn, responsories, and
+seasonal versicles, but Jan 6's feast-only directives (`Psalmi
+Dominica`, `Antiphonas horas`, `Omit ad Matutinum Incipit
+Invitatorium Hymnus`, and Vespers fifth-psalm overrides) do not carry
+the feria psalmody shape. Matins also needed the active conditional
+branch to receive the final responsory Gloria before Te Deum; an
+inactive branch containing `&Gloria` had prevented that append.
+
+**Resolution.** Class `engine-bug` plus a narrow compositor conditional
+rendering fix. Rubrics 1960 now strips the Epiphany feast-only
+directives for these temporal ferias, preserves ferial Matins/Lauds/
+Vespers psalmody, keeps the borrowed Epiphany Invitatory and Matins
+hymn, uses the seasonal Epiphany ferial Matins versicle, and appends
+the final pre-Te-Deum responsory Gloria after evaluating conditionals.
+The newly exposed Jan 7-9 marker-only rows are classified as
+`perl-bug` fanout of the existing Rubrics 1960 trailing-marker family.
+
+**Citation.**
+
+- `upstream/web/www/horas/Latin/Tempora/Nat07.txt:4-10`
+- `upstream/web/www/horas/Latin/Tempora/Nat09.txt:4-10`
+- `upstream/web/www/horas/Latin/Sancti/01-06.txt:4-12`
+- `upstream/web/www/horas/Latin/Sancti/01-06.txt:54-61`
+- `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:201-208`
+- `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:65`
+- `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:58`
+
+**Impact.** Jan 7 Matins/Lauds move past the source-selection bug;
+Jan 9 Matins now compares exactly. Eight newly exposed Jan 7-9
+trailing-marker row keys are adjudicated as existing `perl-bug`
+fanout.
+
 ### 2026-05-06 — Pattern: spaced-colon reference substitutions (parser-bug, fixed)
 
 **Commit.** Current tranche commit.

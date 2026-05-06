@@ -17530,6 +17530,28 @@
     "notes": "Rubrics 1960 2026 fanout for the source-backed `Psalm5 Vespera=116` fifth-Vespers psalm override; stable key-hash 39846534 extends the existing Roman Vespers fifth-psalm adjudication.",
     "resolvedAt": "2026-05-06"
   },
+  "Rubrics 1960 - 1960/2026-01-07/Lauds/a8acbf46": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-01-07",
+    "hour": "Lauds",
+    "firstExpected": "Ant. Dóminus regnávit, * exsúltet terra. ‡",
+    "firstActual": "Ant. Dóminus regnávit, * exsúltet terra.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:65 — the weekday Lauds psalter source carries the complete antiphon `Dóminus regnávit, * exsúltet terra.` without a trailing `‡`. The compositor preserves the source text; the Perl comparison surface adds an unsupported trailing continuation marker.",
+    "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited source carries the complete antiphon or incipit without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
+    "resolvedAt": "2026-05-06"
+  },
+  "Rubrics 1960 - 1960/2026-01-07/Matins/1b8cb0d6": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-01-07",
+    "hour": "Matins",
+    "firstExpected": "Ant. Magnus Dóminus * et laudábilis nimis in civitáte Dei nostri. ‡",
+    "firstActual": "Ant. Magnus Dóminus * et laudábilis nimis in civitáte Dei nostri.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:58 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:75 — the Matins psalter source carries the complete antiphon `Magnus Dóminus * et laudábilis nimis in civitáte Dei nostri.` without a trailing `‡`. The compositor preserves the source text; the Perl comparison surface adds an unsupported trailing continuation marker.",
+    "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited source carries the complete antiphon or incipit without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-01-07/None/318cf47a": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-01-07",
@@ -17577,6 +17599,39 @@
     "notes": "2026 Rubrics 1960 fallback-hymn doxology row. Engine slot coverage in january-hymn-routing.test.ts verifies representative Nat/Epi/Asc/Corp/Heart/local doxology sources for this reusable family.",
     "resolvedAt": "2026-05-05",
     "commitSha": "e6f1475"
+  },
+  "Rubrics 1960 - 1960/2026-01-07/Vespers/cc3c00d8": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-01-07",
+    "hour": "Vespers",
+    "firstExpected": "Ant. Beáti omnes * qui timent Dóminum. ‡",
+    "firstActual": "Ant. Beáti omnes * qui timent Dóminum.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:79 — the weekday Vespers source row carries the full opening antiphon `Beáti omnes * qui timent Dóminum.` without an extra trailing continuation marker. The compositor preserves that corpus text; the Perl comparison surface abbreviates it to an incipit under Reduced 1955 and appends an unsupported trailing `‡` under Rubrics 1960.",
+    "notes": "Representative entry for the Roman Lenten ferial Vespers antiphon surface family where Perl abbreviates source-backed weekday Vespers openings or adds an unsupported trailing continuation marker.",
+    "resolvedAt": "2026-05-06"
+  },
+  "Rubrics 1960 - 1960/2026-01-08/Lauds/52cc7e9c": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-01-08",
+    "hour": "Lauds",
+    "firstExpected": "Ant. Dómine, * refúgium factus es nobis. ‡",
+    "firstActual": "Ant. Dómine, * refúgium factus es nobis.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:87 — the psalter-major row carries `Dómine, * refúgium factus es nobis.` without a trailing `‡`; the compositor preserves that source text while the Perl comparison surface appends an unsupported marker.",
+    "notes": "Representative entries for the Rubrics 1960 antiphon-surface family where Perl appends a trailing continuation marker that is not present in the psalter source.",
+    "resolvedAt": "2026-05-06"
+  },
+  "Rubrics 1960 - 1960/2026-01-08/Matins/02b507e6": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-01-08",
+    "hour": "Matins",
+    "firstExpected": "Ant. Exsúrgat Deus, * et dissipéntur inimíci ejus. ‡",
+    "firstActual": "Ant. Exsúrgat Deus, * et dissipéntur inimíci ejus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:92 — the psalter-matins row carries `Exsúrgat Deus, * et dissipéntur inimíci ejus.` without a trailing `‡`; the compositor preserves that source text while the Perl comparison surface appends an unsupported marker.",
+    "notes": "Representative entries for the Rubrics 1960 antiphon-surface family where Perl appends a trailing continuation marker that is not present in the psalter source.",
+    "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-01-08/None/318cf47a": {
     "policy": "Rubrics 1960 - 1960",
@@ -17626,6 +17681,28 @@
     "resolvedAt": "2026-05-05",
     "commitSha": "e6f1475"
   },
+  "Rubrics 1960 - 1960/2026-01-08/Vespers/2eac8bef": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-01-08",
+    "hour": "Vespers",
+    "firstExpected": "Ant. Ecce quam bonum * et quam jucúndum habitáre fratres in unum. ‡",
+    "firstActual": "Ant. Ecce quam bonum * et quam jucúndum habitáre fratres in unum.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:100 — the psalter-major row carries `Ecce quam bonum * et quam jucúndum habitáre fratres in unum.` without a trailing `‡`; the compositor preserves that source text while the Perl comparison surface appends an unsupported marker.",
+    "notes": "Representative entries for the Rubrics 1960 antiphon-surface family where Perl appends a trailing continuation marker that is not present in the psalter source.",
+    "resolvedAt": "2026-05-06"
+  },
+  "Rubrics 1960 - 1960/2026-01-09/Lauds/d64d0218": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-01-09",
+    "hour": "Lauds",
+    "firstExpected": "Ant. Lauda, * Jerúsalem, Dóminum. ‡",
+    "firstActual": "Ant. Lauda, * Jerúsalem, Dóminum.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:111 — the psalter-major row carries `Lauda, * Jerúsalem, Dóminum.` without a trailing `‡`; the compositor preserves that source text while the Perl comparison surface appends an unsupported marker.",
+    "notes": "Representative entries for the Rubrics 1960 antiphon-surface family where Perl appends a trailing continuation marker that is not present in the psalter source.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-01-09/None/318cf47a": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-01-09",
@@ -17673,6 +17750,17 @@
     "notes": "2026 Rubrics 1960 fallback-hymn doxology row. Engine slot coverage in january-hymn-routing.test.ts verifies representative Nat/Epi/Asc/Corp/Heart/local doxology sources for this reusable family.",
     "resolvedAt": "2026-05-05",
     "commitSha": "e6f1475"
+  },
+  "Rubrics 1960 - 1960/2026-01-09/Vespers/c057106b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-01-09",
+    "hour": "Vespers",
+    "firstExpected": "Ant. Dómine, * probásti me et cognovísti me. ‡",
+    "firstActual": "Ant. Dómine, * probásti me et cognovísti me.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:121 — the Friday Vespers psalter row carries `Domine, * probasti me et cognovisti me.;;138(1-13)` without a trailing continuation marker. The compositor preserves the source row while the Perl comparison surface appends an unsupported trailing `‡`.",
+    "notes": "Fanout of the already-documented Rubrics 1960 unsupported trailing-continuation-marker antiphon family.",
+    "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-01-10/Matins/9d86e50c": {
     "policy": "Rubrics 1960 - 1960",
