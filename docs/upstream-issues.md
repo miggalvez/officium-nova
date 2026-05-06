@@ -24,6 +24,41 @@ entry here and re-run the adjudication harness.
 
 ## Current entries
 
+### 2026-05-06 — Simplified Roman Confessor common None antiphons fall back to the psalter
+
+**Classification.** `perl-bug`
+
+**Summary.** In the Rubrics 1960 2026 comparison surface, selected
+Confessor offices keep ordinary weekday `Nona` psalter antiphons at
+None. Officium Novum emits the source-backed Confessor common antiphon
+`Serve bone...`.
+
+**Primary source.**
+
+- `upstream/web/www/horas/Latin/Sancti/01-15.txt:4-12`
+- `upstream/web/www/horas/Latin/Sancti/01-17.txt:4-10`
+- `upstream/web/www/horas/Latin/Commune/C4.txt:7-18`
+- `upstream/web/www/horas/Latin/Commune/C5.txt:1-19`
+- `upstream/web/www/horas/Latin/Commune/C5b.txt:1-13`
+- `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:49-63`
+
+**Reproduction.**
+Run:
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Rubrics 1960 - 1960" --date 2026-01-15 --hour None --no-write-docs --debug-window 25
+```
+
+Then inspect the first None antiphon. Perl keeps the weekday psalter
+`Nona` antiphon; the compositor follows the inherited common where
+`Antiphonas horas` selects the fifth common antiphon.
+
+**Affected stable divergence-row keys.**
+
+| Policy | Dates | Hours | Row key suffixes |
+|---|---|---|---|
+| Rubrics 1960 - 1960 | 2026 current-year frontier | None | 36 row-specific keys in `packages/compositor/test/divergence/adjudications.json` with first actual `Serve bone...` |
+
 ### 2026-05-06 — Simplified Roman Confessor pontiff common antiphons fall back to the psalter
 
 **Classification.** `perl-bug`

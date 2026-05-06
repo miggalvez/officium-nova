@@ -17855,6 +17855,17 @@
     "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
     "resolvedAt": "2026-05-06"
   },
+  "Rubrics 1960 - 1960/2026-01-14/None/121381f8": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-01-14",
+    "hour": "None",
+    "firstExpected": "Ant. Deus meus * misericórdia tua prævéniet me.",
+    "firstActual": "Ant. Serve bone * et fidélis, intra in gáudium Dómini tui.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-15.txt:4-12 and upstream/web/www/horas/Latin/Sancti/01-17.txt:4-10 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C5.txt:1-19 and upstream/web/www/horas/Latin/Commune/C5b.txt:1-13 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:49-63 — representative 2026 Confessor offices route through C4/C5/C5b common rules, which declare Antiphonas horas and supply Serve bone as the fifth common antiphon used at None. The Perl comparison surface keeps ordinary weekday Nona psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor C4/C5/C5b None common-antiphon fanout. Representative probe: 2026-01-15 None.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-01-14/Prime/8b1d2d1f": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-01-14",
@@ -17898,6 +17909,17 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
     "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
+  "Rubrics 1960 - 1960/2026-01-15/None/9b6cc4ca": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-01-15",
+    "hour": "None",
+    "firstExpected": "Ant. Invocábimus * nomen tuum, Dómine: narrábimus mirabília tua.",
+    "firstActual": "Ant. Serve bone * et fidélis, intra in gáudium Dómini tui.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-15.txt:4-12 and upstream/web/www/horas/Latin/Sancti/01-17.txt:4-10 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C5.txt:1-19 and upstream/web/www/horas/Latin/Commune/C5b.txt:1-13 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:49-63 — representative 2026 Confessor offices route through C4/C5/C5b common rules, which declare Antiphonas horas and supply Serve bone as the fifth common antiphon used at None. The Perl comparison surface keeps ordinary weekday Nona psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor C4/C5/C5b None common-antiphon fanout. Representative probe: 2026-01-15 None.",
     "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-01-15/Prime/b5505956": {
@@ -17945,6 +17967,17 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
     "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
+  "Rubrics 1960 - 1960/2026-01-17/None/68427168": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-01-17",
+    "hour": "None",
+    "firstExpected": "Ant. Ne tacúeris Deus, * quia sermónibus ódii circumdedérunt me.",
+    "firstActual": "Ant. Serve bone * et fidélis, intra in gáudium Dómini tui.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-15.txt:4-12 and upstream/web/www/horas/Latin/Sancti/01-17.txt:4-10 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C5.txt:1-19 and upstream/web/www/horas/Latin/Commune/C5b.txt:1-13 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:49-63 — representative 2026 Confessor offices route through C4/C5/C5b common rules, which declare Antiphonas horas and supply Serve bone as the fifth common antiphon used at None. The Perl comparison surface keeps ordinary weekday Nona psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor C4/C5/C5b None common-antiphon fanout. Representative probe: 2026-01-15 None.",
     "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-01-17/Prime/f01a4272": {
@@ -18068,6 +18101,17 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
     "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
+  "Rubrics 1960 - 1960/2026-01-23/None/21ab0ed2": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-01-23",
+    "hour": "None",
+    "firstExpected": "Ant. Misericórdia et véritas * præcédent fáciem tuam, Dómine.",
+    "firstActual": "Ant. Serve bone * et fidélis, intra in gáudium Dómini tui.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-15.txt:4-12 and upstream/web/www/horas/Latin/Sancti/01-17.txt:4-10 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C5.txt:1-19 and upstream/web/www/horas/Latin/Commune/C5b.txt:1-13 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:49-63 — representative 2026 Confessor offices route through C4/C5/C5b common rules, which declare Antiphonas horas and supply Serve bone as the fifth common antiphon used at None. The Perl comparison surface keeps ordinary weekday Nona psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor C4/C5/C5b None common-antiphon fanout. Representative probe: 2026-01-15 None.",
     "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-01-23/Prime/ae30f785": {
@@ -18251,6 +18295,17 @@
     "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
     "resolvedAt": "2026-05-06"
   },
+  "Rubrics 1960 - 1960/2026-01-29/None/9b6cc4ca": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-01-29",
+    "hour": "None",
+    "firstExpected": "Ant. Invocábimus * nomen tuum, Dómine: narrábimus mirabília tua.",
+    "firstActual": "Ant. Serve bone * et fidélis, intra in gáudium Dómini tui.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-15.txt:4-12 and upstream/web/www/horas/Latin/Sancti/01-17.txt:4-10 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C5.txt:1-19 and upstream/web/www/horas/Latin/Commune/C5b.txt:1-13 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:49-63 — representative 2026 Confessor offices route through C4/C5/C5b common rules, which declare Antiphonas horas and supply Serve bone as the fifth common antiphon used at None. The Perl comparison surface keeps ordinary weekday Nona psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor C4/C5/C5b None common-antiphon fanout. Representative probe: 2026-01-15 None.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-01-29/Prime/24017684": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-01-29",
@@ -18294,6 +18349,17 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
     "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
+  "Rubrics 1960 - 1960/2026-01-31/None/68427168": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-01-31",
+    "hour": "None",
+    "firstExpected": "Ant. Ne tacúeris Deus, * quia sermónibus ódii circumdedérunt me.",
+    "firstActual": "Ant. Serve bone * et fidélis, intra in gáudium Dómini tui.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-15.txt:4-12 and upstream/web/www/horas/Latin/Sancti/01-17.txt:4-10 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C5.txt:1-19 and upstream/web/www/horas/Latin/Commune/C5b.txt:1-13 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:49-63 — representative 2026 Confessor offices route through C4/C5/C5b common rules, which declare Antiphonas horas and supply Serve bone as the fifth common antiphon used at None. The Perl comparison surface keeps ordinary weekday Nona psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor C4/C5/C5b None common-antiphon fanout. Representative probe: 2026-01-15 None.",
     "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-01-31/Prime/f01a4272": {
@@ -18444,6 +18510,17 @@
     "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
     "resolvedAt": "2026-05-06"
   },
+  "Rubrics 1960 - 1960/2026-02-04/None/121381f8": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-02-04",
+    "hour": "None",
+    "firstExpected": "Ant. Deus meus * misericórdia tua prævéniet me.",
+    "firstActual": "Ant. Serve bone * et fidélis, intra in gáudium Dómini tui.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-15.txt:4-12 and upstream/web/www/horas/Latin/Sancti/01-17.txt:4-10 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C5.txt:1-19 and upstream/web/www/horas/Latin/Commune/C5b.txt:1-13 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:49-63 — representative 2026 Confessor offices route through C4/C5/C5b common rules, which declare Antiphonas horas and supply Serve bone as the fifth common antiphon used at None. The Perl comparison surface keeps ordinary weekday Nona psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor C4/C5/C5b None common-antiphon fanout. Representative probe: 2026-01-15 None.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-02-04/Prime/8b1d2d1f": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-02-04",
@@ -18499,6 +18576,17 @@
     "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
     "resolvedAt": "2026-05-06"
   },
+  "Rubrics 1960 - 1960/2026-02-06/None/21ab0ed2": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-02-06",
+    "hour": "None",
+    "firstExpected": "Ant. Misericórdia et véritas * præcédent fáciem tuam, Dómine.",
+    "firstActual": "Ant. Serve bone * et fidélis, intra in gáudium Dómini tui.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-15.txt:4-12 and upstream/web/www/horas/Latin/Sancti/01-17.txt:4-10 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C5.txt:1-19 and upstream/web/www/horas/Latin/Commune/C5b.txt:1-13 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:49-63 — representative 2026 Confessor offices route through C4/C5/C5b common rules, which declare Antiphonas horas and supply Serve bone as the fifth common antiphon used at None. The Perl comparison surface keeps ordinary weekday Nona psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor C4/C5/C5b None common-antiphon fanout. Representative probe: 2026-01-15 None.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-02-06/Prime/ffd85841": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-02-06",
@@ -18542,6 +18630,17 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
     "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
+  "Rubrics 1960 - 1960/2026-02-07/None/68427168": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-02-07",
+    "hour": "None",
+    "firstExpected": "Ant. Ne tacúeris Deus, * quia sermónibus ódii circumdedérunt me.",
+    "firstActual": "Ant. Serve bone * et fidélis, intra in gáudium Dómini tui.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-15.txt:4-12 and upstream/web/www/horas/Latin/Sancti/01-17.txt:4-10 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C5.txt:1-19 and upstream/web/www/horas/Latin/Commune/C5b.txt:1-13 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:49-63 — representative 2026 Confessor offices route through C4/C5/C5b common rules, which declare Antiphonas horas and supply Serve bone as the fifth common antiphon used at None. The Perl comparison surface keeps ordinary weekday Nona psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor C4/C5/C5b None common-antiphon fanout. Representative probe: 2026-01-15 None.",
     "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-02-07/Prime/f01a4272": {
@@ -18609,6 +18708,17 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
     "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
+  "Rubrics 1960 - 1960/2026-02-09/None/e01745bd": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-02-09",
+    "hour": "None",
+    "firstExpected": "Ant. Exsultáte, justi, * et gloriámini, omnes recti corde.",
+    "firstActual": "Ant. Serve bone * et fidélis, intra in gáudium Dómini tui.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-15.txt:4-12 and upstream/web/www/horas/Latin/Sancti/01-17.txt:4-10 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C5.txt:1-19 and upstream/web/www/horas/Latin/Commune/C5b.txt:1-13 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:49-63 — representative 2026 Confessor offices route through C4/C5/C5b common rules, which declare Antiphonas horas and supply Serve bone as the fifth common antiphon used at None. The Perl comparison surface keeps ordinary weekday Nona psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor C4/C5/C5b None common-antiphon fanout. Representative probe: 2026-01-15 None.",
     "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-02-09/Prime/408a8ad6": {
@@ -18713,6 +18823,17 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
     "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
+  "Rubrics 1960 - 1960/2026-02-12/None/9b6cc4ca": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-02-12",
+    "hour": "None",
+    "firstExpected": "Ant. Invocábimus * nomen tuum, Dómine: narrábimus mirabília tua.",
+    "firstActual": "Ant. Serve bone * et fidélis, intra in gáudium Dómini tui.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-15.txt:4-12 and upstream/web/www/horas/Latin/Sancti/01-17.txt:4-10 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C5.txt:1-19 and upstream/web/www/horas/Latin/Commune/C5b.txt:1-13 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:49-63 — representative 2026 Confessor offices route through C4/C5/C5b common rules, which declare Antiphonas horas and supply Serve bone as the fifth common antiphon used at None. The Perl comparison surface keeps ordinary weekday Nona psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor C4/C5/C5b None common-antiphon fanout. Representative probe: 2026-01-15 None.",
     "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-02-12/Prime/b5505956": {
@@ -21326,6 +21447,17 @@
     "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
     "resolvedAt": "2026-05-06"
   },
+  "Rubrics 1960 - 1960/2026-06-06/None/68427168": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-06-06",
+    "hour": "None",
+    "firstExpected": "Ant. Ne tacúeris Deus, * quia sermónibus ódii circumdedérunt me.",
+    "firstActual": "Ant. Serve bone * et fidélis, intra in gáudium Dómini tui.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-15.txt:4-12 and upstream/web/www/horas/Latin/Sancti/01-17.txt:4-10 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C5.txt:1-19 and upstream/web/www/horas/Latin/Commune/C5b.txt:1-13 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:49-63 — representative 2026 Confessor offices route through C4/C5/C5b common rules, which declare Antiphonas horas and supply Serve bone as the fifth common antiphon used at None. The Perl comparison surface keeps ordinary weekday Nona psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor C4/C5/C5b None common-antiphon fanout. Representative probe: 2026-01-15 None.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-06-06/Prime/78631968": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-06-06",
@@ -21618,6 +21750,17 @@
     "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
     "resolvedAt": "2026-05-06"
   },
+  "Rubrics 1960 - 1960/2026-06-13/None/68427168": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-06-13",
+    "hour": "None",
+    "firstExpected": "Ant. Ne tacúeris Deus, * quia sermónibus ódii circumdedérunt me.",
+    "firstActual": "Ant. Serve bone * et fidélis, intra in gáudium Dómini tui.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-15.txt:4-12 and upstream/web/www/horas/Latin/Sancti/01-17.txt:4-10 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C5.txt:1-19 and upstream/web/www/horas/Latin/Commune/C5b.txt:1-13 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:49-63 — representative 2026 Confessor offices route through C4/C5/C5b common rules, which declare Antiphonas horas and supply Serve bone as the fifth common antiphon used at None. The Perl comparison surface keeps ordinary weekday Nona psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor C4/C5/C5b None common-antiphon fanout. Representative probe: 2026-01-15 None.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-06-13/Prime/f01a4272": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-06-13",
@@ -21762,6 +21905,17 @@
     "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
     "resolvedAt": "2026-05-06"
   },
+  "Rubrics 1960 - 1960/2026-06-17/None/121381f8": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-06-17",
+    "hour": "None",
+    "firstExpected": "Ant. Deus meus * misericórdia tua prævéniet me.",
+    "firstActual": "Ant. Serve bone * et fidélis, intra in gáudium Dómini tui.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-15.txt:4-12 and upstream/web/www/horas/Latin/Sancti/01-17.txt:4-10 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C5.txt:1-19 and upstream/web/www/horas/Latin/Commune/C5b.txt:1-13 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:49-63 — representative 2026 Confessor offices route through C4/C5/C5b common rules, which declare Antiphonas horas and supply Serve bone as the fifth common antiphon used at None. The Perl comparison surface keeps ordinary weekday Nona psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor C4/C5/C5b None common-antiphon fanout. Representative probe: 2026-01-15 None.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-06-17/Prime/8b1d2d1f": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-06-17",
@@ -21805,6 +21959,17 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
     "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
+  "Rubrics 1960 - 1960/2026-06-18/None/9b6cc4ca": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-06-18",
+    "hour": "None",
+    "firstExpected": "Ant. Invocábimus * nomen tuum, Dómine: narrábimus mirabília tua.",
+    "firstActual": "Ant. Serve bone * et fidélis, intra in gáudium Dómini tui.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-15.txt:4-12 and upstream/web/www/horas/Latin/Sancti/01-17.txt:4-10 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C5.txt:1-19 and upstream/web/www/horas/Latin/Commune/C5b.txt:1-13 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:49-63 — representative 2026 Confessor offices route through C4/C5/C5b common rules, which declare Antiphonas horas and supply Serve bone as the fifth common antiphon used at None. The Perl comparison surface keeps ordinary weekday Nona psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor C4/C5/C5b None common-antiphon fanout. Representative probe: 2026-01-15 None.",
     "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-06-18/Prime/b5505956": {
@@ -21988,6 +22153,17 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
     "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
+  "Rubrics 1960 - 1960/2026-06-25/None/9b6cc4ca": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-06-25",
+    "hour": "None",
+    "firstExpected": "Ant. Invocábimus * nomen tuum, Dómine: narrábimus mirabília tua.",
+    "firstActual": "Ant. Serve bone * et fidélis, intra in gáudium Dómini tui.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-15.txt:4-12 and upstream/web/www/horas/Latin/Sancti/01-17.txt:4-10 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C5.txt:1-19 and upstream/web/www/horas/Latin/Commune/C5b.txt:1-13 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:49-63 — representative 2026 Confessor offices route through C4/C5/C5b common rules, which declare Antiphonas horas and supply Serve bone as the fifth common antiphon used at None. The Perl comparison surface keeps ordinary weekday Nona psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor C4/C5/C5b None common-antiphon fanout. Representative probe: 2026-01-15 None.",
     "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-06-25/Prime/b5505956": {
@@ -22705,6 +22881,17 @@
     "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
     "resolvedAt": "2026-05-06"
   },
+  "Rubrics 1960 - 1960/2026-07-15/None/121381f8": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-07-15",
+    "hour": "None",
+    "firstExpected": "Ant. Deus meus * misericórdia tua prævéniet me.",
+    "firstActual": "Ant. Serve bone * et fidélis, intra in gáudium Dómini tui.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-15.txt:4-12 and upstream/web/www/horas/Latin/Sancti/01-17.txt:4-10 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C5.txt:1-19 and upstream/web/www/horas/Latin/Commune/C5b.txt:1-13 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:49-63 — representative 2026 Confessor offices route through C4/C5/C5b common rules, which declare Antiphonas horas and supply Serve bone as the fifth common antiphon used at None. The Perl comparison surface keeps ordinary weekday Nona psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor C4/C5/C5b None common-antiphon fanout. Representative probe: 2026-01-15 None.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-07-15/Prime/bba0bfc7": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-07-15",
@@ -22840,6 +23027,17 @@
     "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
     "resolvedAt": "2026-05-06"
   },
+  "Rubrics 1960 - 1960/2026-07-18/None/68427168": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-07-18",
+    "hour": "None",
+    "firstExpected": "Ant. Ne tacúeris Deus, * quia sermónibus ódii circumdedérunt me.",
+    "firstActual": "Ant. Serve bone * et fidélis, intra in gáudium Dómini tui.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-15.txt:4-12 and upstream/web/www/horas/Latin/Sancti/01-17.txt:4-10 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C5.txt:1-19 and upstream/web/www/horas/Latin/Commune/C5b.txt:1-13 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:49-63 — representative 2026 Confessor offices route through C4/C5/C5b common rules, which declare Antiphonas horas and supply Serve bone as the fifth common antiphon used at None. The Perl comparison surface keeps ordinary weekday Nona psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor C4/C5/C5b None common-antiphon fanout. Representative probe: 2026-01-15 None.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-07-18/Prime/f01a4272": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-07-18",
@@ -22917,6 +23115,17 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
     "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
+  "Rubrics 1960 - 1960/2026-07-20/None/e01745bd": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-07-20",
+    "hour": "None",
+    "firstExpected": "Ant. Exsultáte, justi, * et gloriámini, omnes recti corde.",
+    "firstActual": "Ant. Serve bone * et fidélis, intra in gáudium Dómini tui.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-15.txt:4-12 and upstream/web/www/horas/Latin/Sancti/01-17.txt:4-10 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C5.txt:1-19 and upstream/web/www/horas/Latin/Commune/C5b.txt:1-13 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:49-63 — representative 2026 Confessor offices route through C4/C5/C5b common rules, which declare Antiphonas horas and supply Serve bone as the fifth common antiphon used at None. The Perl comparison surface keeps ordinary weekday Nona psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor C4/C5/C5b None common-antiphon fanout. Representative probe: 2026-01-15 None.",
     "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-07-20/Prime/63c54bc5": {
@@ -23221,6 +23430,17 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
     "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
+  "Rubrics 1960 - 1960/2026-07-31/None/21ab0ed2": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-07-31",
+    "hour": "None",
+    "firstExpected": "Ant. Misericórdia et véritas * præcédent fáciem tuam, Dómine.",
+    "firstActual": "Ant. Serve bone * et fidélis, intra in gáudium Dómini tui.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-15.txt:4-12 and upstream/web/www/horas/Latin/Sancti/01-17.txt:4-10 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C5.txt:1-19 and upstream/web/www/horas/Latin/Commune/C5b.txt:1-13 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:49-63 — representative 2026 Confessor offices route through C4/C5/C5b common rules, which declare Antiphonas horas and supply Serve bone as the fifth common antiphon used at None. The Perl comparison surface keeps ordinary weekday Nona psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor C4/C5/C5b None common-antiphon fanout. Representative probe: 2026-01-15 None.",
     "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-07-31/Prime/ae30f785": {
@@ -23617,6 +23837,17 @@
     "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
     "resolvedAt": "2026-05-06"
   },
+  "Rubrics 1960 - 1960/2026-08-07/None/21ab0ed2": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-08-07",
+    "hour": "None",
+    "firstExpected": "Ant. Misericórdia et véritas * præcédent fáciem tuam, Dómine.",
+    "firstActual": "Ant. Serve bone * et fidélis, intra in gáudium Dómini tui.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-15.txt:4-12 and upstream/web/www/horas/Latin/Sancti/01-17.txt:4-10 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C5.txt:1-19 and upstream/web/www/horas/Latin/Commune/C5b.txt:1-13 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:49-63 — representative 2026 Confessor offices route through C4/C5/C5b common rules, which declare Antiphonas horas and supply Serve bone as the fifth common antiphon used at None. The Perl comparison surface keeps ordinary weekday Nona psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor C4/C5/C5b None common-antiphon fanout. Representative probe: 2026-01-15 None.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-08-07/Prime/ae30f785": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-08-07",
@@ -23662,6 +23893,17 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
     "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
+  "Rubrics 1960 - 1960/2026-08-08/None/68427168": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-08-08",
+    "hour": "None",
+    "firstExpected": "Ant. Ne tacúeris Deus, * quia sermónibus ódii circumdedérunt me.",
+    "firstActual": "Ant. Serve bone * et fidélis, intra in gáudium Dómini tui.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-15.txt:4-12 and upstream/web/www/horas/Latin/Sancti/01-17.txt:4-10 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C5.txt:1-19 and upstream/web/www/horas/Latin/Commune/C5b.txt:1-13 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:49-63 — representative 2026 Confessor offices route through C4/C5/C5b common rules, which declare Antiphonas horas and supply Serve bone as the fifth common antiphon used at None. The Perl comparison surface keeps ordinary weekday Nona psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor C4/C5/C5b None common-antiphon fanout. Representative probe: 2026-01-15 None.",
     "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-08-08/Prime/f01a4272": {
@@ -23923,6 +24165,17 @@
     "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
     "resolvedAt": "2026-05-06"
   },
+  "Rubrics 1960 - 1960/2026-08-17/None/e01745bd": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-08-17",
+    "hour": "None",
+    "firstExpected": "Ant. Exsultáte, justi, * et gloriámini, omnes recti corde.",
+    "firstActual": "Ant. Serve bone * et fidélis, intra in gáudium Dómini tui.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-15.txt:4-12 and upstream/web/www/horas/Latin/Sancti/01-17.txt:4-10 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C5.txt:1-19 and upstream/web/www/horas/Latin/Commune/C5b.txt:1-13 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:49-63 — representative 2026 Confessor offices route through C4/C5/C5b common rules, which declare Antiphonas horas and supply Serve bone as the fifth common antiphon used at None. The Perl comparison surface keeps ordinary weekday Nona psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor C4/C5/C5b None common-antiphon fanout. Representative probe: 2026-01-15 None.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-08-17/Prime/63c54bc5": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-08-17",
@@ -23992,6 +24245,17 @@
     "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
     "resolvedAt": "2026-05-06"
   },
+  "Rubrics 1960 - 1960/2026-08-19/None/121381f8": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-08-19",
+    "hour": "None",
+    "firstExpected": "Ant. Deus meus * misericórdia tua prævéniet me.",
+    "firstActual": "Ant. Serve bone * et fidélis, intra in gáudium Dómini tui.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-15.txt:4-12 and upstream/web/www/horas/Latin/Sancti/01-17.txt:4-10 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C5.txt:1-19 and upstream/web/www/horas/Latin/Commune/C5b.txt:1-13 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:49-63 — representative 2026 Confessor offices route through C4/C5/C5b common rules, which declare Antiphonas horas and supply Serve bone as the fifth common antiphon used at None. The Perl comparison surface keeps ordinary weekday Nona psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor C4/C5/C5b None common-antiphon fanout. Representative probe: 2026-01-15 None.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-08-19/Prime/bba0bfc7": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-08-19",
@@ -24037,6 +24301,17 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
     "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
+  "Rubrics 1960 - 1960/2026-08-20/None/9b6cc4ca": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-08-20",
+    "hour": "None",
+    "firstExpected": "Ant. Invocábimus * nomen tuum, Dómine: narrábimus mirabília tua.",
+    "firstActual": "Ant. Serve bone * et fidélis, intra in gáudium Dómini tui.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-15.txt:4-12 and upstream/web/www/horas/Latin/Sancti/01-17.txt:4-10 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C5.txt:1-19 and upstream/web/www/horas/Latin/Commune/C5b.txt:1-13 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:49-63 — representative 2026 Confessor offices route through C4/C5/C5b common rules, which declare Antiphonas horas and supply Serve bone as the fifth common antiphon used at None. The Perl comparison surface keeps ordinary weekday Nona psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor C4/C5/C5b None common-antiphon fanout. Representative probe: 2026-01-15 None.",
     "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-08-20/Prime/b5505956": {
@@ -24303,6 +24578,17 @@
     "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
     "resolvedAt": "2026-05-06"
   },
+  "Rubrics 1960 - 1960/2026-08-27/None/9b6cc4ca": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-08-27",
+    "hour": "None",
+    "firstExpected": "Ant. Invocábimus * nomen tuum, Dómine: narrábimus mirabília tua.",
+    "firstActual": "Ant. Serve bone * et fidélis, intra in gáudium Dómini tui.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-15.txt:4-12 and upstream/web/www/horas/Latin/Sancti/01-17.txt:4-10 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C5.txt:1-19 and upstream/web/www/horas/Latin/Commune/C5b.txt:1-13 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:49-63 — representative 2026 Confessor offices route through C4/C5/C5b common rules, which declare Antiphonas horas and supply Serve bone as the fifth common antiphon used at None. The Perl comparison surface keeps ordinary weekday Nona psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor C4/C5/C5b None common-antiphon fanout. Representative probe: 2026-01-15 None.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-08-27/Prime/b5505956": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-08-27",
@@ -24347,6 +24633,17 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
     "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
+  "Rubrics 1960 - 1960/2026-08-28/None/21ab0ed2": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-08-28",
+    "hour": "None",
+    "firstExpected": "Ant. Misericórdia et véritas * præcédent fáciem tuam, Dómine.",
+    "firstActual": "Ant. Serve bone * et fidélis, intra in gáudium Dómini tui.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-15.txt:4-12 and upstream/web/www/horas/Latin/Sancti/01-17.txt:4-10 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C5.txt:1-19 and upstream/web/www/horas/Latin/Commune/C5b.txt:1-13 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:49-63 — representative 2026 Confessor offices route through C4/C5/C5b common rules, which declare Antiphonas horas and supply Serve bone as the fifth common antiphon used at None. The Perl comparison surface keeps ordinary weekday Nona psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor C4/C5/C5b None common-antiphon fanout. Representative probe: 2026-01-15 None.",
     "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-08-28/Prime/ffd85841": {
@@ -24438,6 +24735,17 @@
     "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
     "resolvedAt": "2026-05-06"
   },
+  "Rubrics 1960 - 1960/2026-08-31/None/e01745bd": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-08-31",
+    "hour": "None",
+    "firstExpected": "Ant. Exsultáte, justi, * et gloriámini, omnes recti corde.",
+    "firstActual": "Ant. Serve bone * et fidélis, intra in gáudium Dómini tui.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-15.txt:4-12 and upstream/web/www/horas/Latin/Sancti/01-17.txt:4-10 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C5.txt:1-19 and upstream/web/www/horas/Latin/Commune/C5b.txt:1-13 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:49-63 — representative 2026 Confessor offices route through C4/C5/C5b common rules, which declare Antiphonas horas and supply Serve bone as the fifth common antiphon used at None. The Perl comparison surface keeps ordinary weekday Nona psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor C4/C5/C5b None common-antiphon fanout. Representative probe: 2026-01-15 None.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-08-31/Prime/63c54bc5": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-08-31",
@@ -24505,6 +24813,17 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
     "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
+  "Rubrics 1960 - 1960/2026-09-02/None/121381f8": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-09-02",
+    "hour": "None",
+    "firstExpected": "Ant. Deus meus * misericórdia tua prævéniet me.",
+    "firstActual": "Ant. Serve bone * et fidélis, intra in gáudium Dómini tui.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-15.txt:4-12 and upstream/web/www/horas/Latin/Sancti/01-17.txt:4-10 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C5.txt:1-19 and upstream/web/www/horas/Latin/Commune/C5b.txt:1-13 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:49-63 — representative 2026 Confessor offices route through C4/C5/C5b common rules, which declare Antiphonas horas and supply Serve bone as the fifth common antiphon used at None. The Perl comparison surface keeps ordinary weekday Nona psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor C4/C5/C5b None common-antiphon fanout. Representative probe: 2026-01-15 None.",
     "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-09-02/Prime/bba0bfc7": {
@@ -24628,6 +24947,17 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
     "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
+  "Rubrics 1960 - 1960/2026-09-05/None/68427168": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-09-05",
+    "hour": "None",
+    "firstExpected": "Ant. Ne tacúeris Deus, * quia sermónibus ódii circumdedérunt me.",
+    "firstActual": "Ant. Serve bone * et fidélis, intra in gáudium Dómini tui.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-15.txt:4-12 and upstream/web/www/horas/Latin/Sancti/01-17.txt:4-10 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C5.txt:1-19 and upstream/web/www/horas/Latin/Commune/C5b.txt:1-13 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:49-63 — representative 2026 Confessor offices route through C4/C5/C5b common rules, which declare Antiphonas horas and supply Serve bone as the fifth common antiphon used at None. The Perl comparison surface keeps ordinary weekday Nona psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor C4/C5/C5b None common-antiphon fanout. Representative probe: 2026-01-15 None.",
     "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-09-05/Prime/78631968": {
@@ -25162,6 +25492,17 @@
     "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
     "resolvedAt": "2026-05-06"
   },
+  "Rubrics 1960 - 1960/2026-09-18/None/21ab0ed2": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-09-18",
+    "hour": "None",
+    "firstExpected": "Ant. Misericórdia et véritas * præcédent fáciem tuam, Dómine.",
+    "firstActual": "Ant. Serve bone * et fidélis, intra in gáudium Dómini tui.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-15.txt:4-12 and upstream/web/www/horas/Latin/Sancti/01-17.txt:4-10 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C5.txt:1-19 and upstream/web/www/horas/Latin/Commune/C5b.txt:1-13 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:49-63 — representative 2026 Confessor offices route through C4/C5/C5b common rules, which declare Antiphonas horas and supply Serve bone as the fifth common antiphon used at None. The Perl comparison surface keeps ordinary weekday Nona psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor C4/C5/C5b None common-antiphon fanout. Representative probe: 2026-01-15 None.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-09-18/Prime/ae30f785": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-09-18",
@@ -25484,6 +25825,17 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
     "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
+  "Rubrics 1960 - 1960/2026-09-30/None/121381f8": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-09-30",
+    "hour": "None",
+    "firstExpected": "Ant. Deus meus * misericórdia tua prævéniet me.",
+    "firstActual": "Ant. Serve bone * et fidélis, intra in gáudium Dómini tui.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-15.txt:4-12 and upstream/web/www/horas/Latin/Sancti/01-17.txt:4-10 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C5.txt:1-19 and upstream/web/www/horas/Latin/Commune/C5b.txt:1-13 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:49-63 — representative 2026 Confessor offices route through C4/C5/C5b common rules, which declare Antiphonas horas and supply Serve bone as the fifth common antiphon used at None. The Perl comparison surface keeps ordinary weekday Nona psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor C4/C5/C5b None common-antiphon fanout. Representative probe: 2026-01-15 None.",
     "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-09-30/Prime/bba0bfc7": {
@@ -25816,6 +26168,17 @@
     "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
     "resolvedAt": "2026-05-06"
   },
+  "Rubrics 1960 - 1960/2026-10-09/None/21ab0ed2": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-10-09",
+    "hour": "None",
+    "firstExpected": "Ant. Misericórdia et véritas * præcédent fáciem tuam, Dómine.",
+    "firstActual": "Ant. Serve bone * et fidélis, intra in gáudium Dómini tui.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-15.txt:4-12 and upstream/web/www/horas/Latin/Sancti/01-17.txt:4-10 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C5.txt:1-19 and upstream/web/www/horas/Latin/Commune/C5b.txt:1-13 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:49-63 — representative 2026 Confessor offices route through C4/C5/C5b common rules, which declare Antiphonas horas and supply Serve bone as the fifth common antiphon used at None. The Perl comparison surface keeps ordinary weekday Nona psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor C4/C5/C5b None common-antiphon fanout. Representative probe: 2026-01-15 None.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-10-09/Prime/ae30f785": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-10-09",
@@ -25861,6 +26224,17 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
     "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
+  "Rubrics 1960 - 1960/2026-10-10/None/68427168": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-10-10",
+    "hour": "None",
+    "firstExpected": "Ant. Ne tacúeris Deus, * quia sermónibus ódii circumdedérunt me.",
+    "firstActual": "Ant. Serve bone * et fidélis, intra in gáudium Dómini tui.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-15.txt:4-12 and upstream/web/www/horas/Latin/Sancti/01-17.txt:4-10 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C5.txt:1-19 and upstream/web/www/horas/Latin/Commune/C5b.txt:1-13 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:49-63 — representative 2026 Confessor offices route through C4/C5/C5b common rules, which declare Antiphonas horas and supply Serve bone as the fifth common antiphon used at None. The Perl comparison surface keeps ordinary weekday Nona psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor C4/C5/C5b None common-antiphon fanout. Representative probe: 2026-01-15 None.",
     "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-10-10/Prime/f01a4272": {
@@ -26606,6 +26980,17 @@
     "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
     "resolvedAt": "2026-05-06"
   },
+  "Rubrics 1960 - 1960/2026-11-04/None/121381f8": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-11-04",
+    "hour": "None",
+    "firstExpected": "Ant. Deus meus * misericórdia tua prævéniet me.",
+    "firstActual": "Ant. Serve bone * et fidélis, intra in gáudium Dómini tui.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-15.txt:4-12 and upstream/web/www/horas/Latin/Sancti/01-17.txt:4-10 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C5.txt:1-19 and upstream/web/www/horas/Latin/Commune/C5b.txt:1-13 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:49-63 — representative 2026 Confessor offices route through C4/C5/C5b common rules, which declare Antiphonas horas and supply Serve bone as the fifth common antiphon used at None. The Perl comparison surface keeps ordinary weekday Nona psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor C4/C5/C5b None common-antiphon fanout. Representative probe: 2026-01-15 None.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-11-04/Prime/8b1d2d1f": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-11-04",
@@ -27273,6 +27658,17 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
     "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
+  "Rubrics 1960 - 1960/2026-11-26/None/9b6cc4ca": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-11-26",
+    "hour": "None",
+    "firstExpected": "Ant. Invocábimus * nomen tuum, Dómine: narrábimus mirabília tua.",
+    "firstActual": "Ant. Serve bone * et fidélis, intra in gáudium Dómini tui.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-15.txt:4-12 and upstream/web/www/horas/Latin/Sancti/01-17.txt:4-10 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C5.txt:1-19 and upstream/web/www/horas/Latin/Commune/C5b.txt:1-13 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:49-63 — representative 2026 Confessor offices route through C4/C5/C5b common rules, which declare Antiphonas horas and supply Serve bone as the fifth common antiphon used at None. The Perl comparison surface keeps ordinary weekday Nona psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor C4/C5/C5b None common-antiphon fanout. Representative probe: 2026-01-15 None.",
     "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-11-26/Prime/b5505956": {
