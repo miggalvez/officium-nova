@@ -6654,6 +6654,34 @@ advances directly to Psalm 118(1-16).
 hours remain `999`, and unadjudicated rows drop from `828` to `819`;
 `perl-bug` rows rise from `1093` to `1102`.
 
+### 2026-05-06 — Pattern: 2026 Passiontide Compline responsory Gloria omission (engine-bug)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** The refreshed Rubrics 1960 2026 frontier carried 9
+Passiontide Compline rows where Perl emitted `Gloria omittitur` in the
+short responsory, while the compositor emitted `V. Glória Patri, et
+Fílio, * et Spirítui Sancto.`.
+
+**Root cause.** The compositor already had `omit-responsory-gloria`
+support and the `Gloria omittitur` fallback expansion path, but Rubrics
+1960 seasonal directives only applied the Passiontide responsory-Gloria
+omission to Prime, Terce, Sext, and None. Compline should carry
+`omit-responsory-gloria` for offices of the season in Passiontide while
+keeping Psalm and Nunc dimittis Gloria Patri intact.
+
+**Resolution.** Class `engine-bug`; fixed `deriveSeasonalDirectives1960`
+to emit `omit-responsory-gloria` for Passiontide Compline of the season,
+and added unit/integration coverage for the `2026-03-29` witness plus the
+Appendix-A golden update.
+
+**Citation.** `upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:807-815`;
+`upstream/web/www/horas/Latin/Psalterium/Common/Translate.txt:22-23`.
+
+**Impact.** Rubrics 1960 2026 divergent hours drop from `1921` to
+`1912`, exact-match hours rise from `999` to `1008`, and unadjudicated
+rows drop from `819` to `810`; `perl-bug` rows remain `1102`.
+
 ## See also
 
 - [ADR-011 — Divergence adjudication protocol](../../../../docs/adr/011-phase-3-divergence-adjudication.md)

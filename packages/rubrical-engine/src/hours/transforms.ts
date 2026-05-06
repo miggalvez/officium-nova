@@ -59,7 +59,11 @@ export function deriveSeasonalDirectives1960(
   if (
     isOfficeOfSeason(params.celebration) &&
     temporal.season === 'passiontide' &&
-    (hour === 'prime' || hour === 'terce' || hour === 'sext' || hour === 'none')
+    (hour === 'prime' ||
+      hour === 'terce' ||
+      hour === 'sext' ||
+      hour === 'none' ||
+      hour === 'compline')
   ) {
     directives.add('omit-responsory-gloria');
   }
