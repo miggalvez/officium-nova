@@ -6428,6 +6428,40 @@ including the temporal `Oratio 2` collect.
 `1928`, exact-match hours rise from `905` to `992`, and unadjudicated
 rows drop from `1137` to `1050`; `perl-bug` rows remain `878`.
 
+### 2026-05-06 — Pattern: 2026 Confessor-common Matins Beatus vir fanout (perl-bug)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** The refreshed Rubrics 1960 2026 frontier carried 46
+Matins rows where Perl kept ordinary weekday psalter antiphons such as
+`Speciósus forma...`, `In Deo salutáre meum...`, or `Memor fuit...`,
+while the compositor emitted the inherited Confessor common Matins
+antiphon `Beátus vir...`.
+
+**Root cause.** This extends the already documented simplified Roman
+Confessor common-antiphon comparison-surface family. Representative
+offices such as `2026-01-14` route through `vide C4a`; `C4a` inherits
+`C4`, the common declares `Antiphonas horas`, and `Commune/C4` supplies
+the Matins antiphon set beginning with `Beátus vir...`. Other rows in
+the same signature route through the same C4/C4a/C5/C5a common-antiphon
+family. The compositor follows the source-backed inherited common, while
+the Perl comparison surface keeps ordinary weekday psalter antiphons.
+
+**Resolution.** Class `perl-bug`. Added row-level adjudications for all
+46 current Rubrics 1960 2026 unadjudicated rows whose first actual line
+is the inherited Confessor common Matins `Beátus vir...` antiphon.
+
+**Citation.** `upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18`;
+`upstream/web/www/horas/Latin/Commune/C4a.txt:1-14`;
+`upstream/web/www/horas/Latin/Commune/C4.txt:7-12`;
+`upstream/web/www/horas/Latin/Commune/C4.txt:106-115`;
+`upstream/web/www/horas/Latin/Commune/C5.txt:9-19`;
+`upstream/web/www/horas/Latin/Commune/C5a.txt:1-13`.
+
+**Impact.** Rubrics 1960 2026 divergent hours remain `1928`, exact-match
+hours remain `992`, and unadjudicated rows drop from `1050` to `1004`;
+`perl-bug` rows rise from `878` to `924`.
+
 ## See also
 
 - [ADR-011 — Divergence adjudication protocol](../../../../docs/adr/011-phase-3-divergence-adjudication.md)
