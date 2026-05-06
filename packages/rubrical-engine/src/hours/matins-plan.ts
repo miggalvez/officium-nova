@@ -1042,7 +1042,6 @@ function flattenVisibleMatinsAntiphonContent(
         version: input.version
       })
     ) {
-      lastProducedRange = undefined;
       continue;
     }
 
@@ -1058,8 +1057,9 @@ function flattenVisibleMatinsAntiphonContent(
     }
 
     out.push(...visibleChildren);
-    lastProducedRange =
-      visibleChildren.length > 0 ? { start, end: out.length } : undefined;
+    if (visibleChildren.length > 0) {
+      lastProducedRange = { start, end: out.length };
+    }
   }
 
   return Object.freeze(out);
