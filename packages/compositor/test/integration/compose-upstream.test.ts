@@ -1747,6 +1747,26 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
     expect(benedictusAntiphonIndex).toBeGreaterThan(chapterIndex);
   }, 240_000);
 
+  it('keeps 1960 Ember Wednesday genuflection as posture metadata without spoken Office text', async () => {
+    const { engine, resolvedCorpus } = await createHarness('Rubrics 1960 - 1960');
+    const summary = engine.resolveDayOfficeSummary('2026-02-25');
+    expect(summary.hours.lauds?.directives).toContain('genuflection-at-oration');
+
+    const lauds = composeHour({
+      corpus: resolvedCorpus.index,
+      summary,
+      version: engine.version,
+      hour: 'lauds',
+      options: { languages: ['Latin'], joinLaudsToMatins: false }
+    });
+
+    const lines = canonicalLatinLines(lauds);
+    expect(lines).toContain(normalizeLatin('Dómine, exáudi oratiónem meam.'));
+    expect(lines).toContain(normalizeLatin('Orémus.'));
+    expect(lines).not.toContain(normalizeLatin('Flectámus génua.'));
+    expect(lines).not.toContain(normalizeLatin('Leváte.'));
+  }, 240_000);
+
   it('uses the Per Annum Prime short lesson for Rubrics 1960 sanctoral fallback offices', async () => {
     const { engine, resolvedCorpus } = await createHarness('Rubrics 1960 - 1960');
     const summary = engine.resolveDayOfficeSummary('2026-01-16');
