@@ -621,6 +621,10 @@ function decoratePsalmodyAssignments(
   }
 
   if (input.hour === 'lauds' || input.hour === 'vespers') {
+    if (usesPostEpiphanyFeriaFerialMajorHourPsalmody1960(input)) {
+      return assignments;
+    }
+
     const antiphons = resolveMajorHourAntiphonRefs(properFiles, input);
     const properPsalmRefs = resolveMajorHourPsalmRefs(properFiles, input, assignments.length);
     const preservePsalterPsalmRefs = isRubrics1960ThirdClassSanctoralWeekday(input);
@@ -676,6 +680,14 @@ function decoratePsalmodyAssignments(
   }
 
   return assignments;
+}
+
+function usesPostEpiphanyFeriaFerialMajorHourPsalmody1960(input: ApplyRuleSetInput): boolean {
+  return (
+    input.policy.name === 'rubrics-1960' &&
+    input.celebration.source === 'temporal' &&
+    /^Tempora\/Nat(?:0[7-9]|1[0-2])$/u.test(input.celebration.feastRef.path)
+  );
 }
 
 function resolveMajorHourAntiphonRefs(
