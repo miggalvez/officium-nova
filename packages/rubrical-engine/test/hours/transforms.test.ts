@@ -134,6 +134,18 @@ describe('deriveSeasonalDirectives1960', () => {
     expect(directives.has('omit-gloria-patri')).toBe(false);
   });
 
+  it('emits omit-responsory-gloria for Passiontide Compline of the season', () => {
+    const directives = deriveSeasonalDirectives1960({
+      hour: 'compline',
+      celebration: celebration('Tempora/Quad5-0'),
+      celebrationRules: celebrationRules(),
+      hourRules: hourRules('compline'),
+      temporal: temporal('Quad5-0', 'passiontide', 0)
+    });
+    expect(directives.has('omit-responsory-gloria')).toBe(true);
+    expect(directives.has('omit-gloria-patri')).toBe(false);
+  });
+
   it('keeps Passiontide feast responsories from inheriting the seasonal Gloria omission', () => {
     const directives = deriveSeasonalDirectives1960({
       hour: 'terce',

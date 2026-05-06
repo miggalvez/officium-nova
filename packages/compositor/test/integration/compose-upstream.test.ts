@@ -3206,6 +3206,38 @@ describeIfUpstream('Phase 3 composition smoke against upstream corpus (Roman pol
     ]);
   }, 240_000);
 
+  it('omits the Rubrics 1960 Passiontide Compline short-responsory Gloria in 2026', async () => {
+    const { engine, resolvedCorpus } = await createHarness('Rubrics 1960 - 1960');
+    const summary = engine.resolveDayOfficeSummary('2026-03-29');
+    const complineStructure = summary.hours.compline;
+    expect(complineStructure?.directives).toContain('omit-responsory-gloria');
+    expect(complineStructure?.directives).not.toContain('omit-gloria-patri');
+
+    const compline = composeHour({
+      corpus: resolvedCorpus.index,
+      summary,
+      version: engine.version,
+      hour: 'compline',
+      options: { languages: ['Latin'] }
+    });
+
+    const responsory = compline.sections.find((section) => section.slot === 'responsory');
+    expect(responsory, '2026-03-29 Compline should include the ordinary responsory').toBeDefined();
+    expect(responsory?.lines.map(renderLatinText)).toEqual([
+      '_',
+      'In manus tuas, Dómine, * Comméndo spíritum meum.',
+      'In manus tuas, Dómine, * Comméndo spíritum meum.',
+      'Redemísti nos, Dómine, Deus veritátis.',
+      'Comméndo spíritum meum.',
+      'Gloria omittitur',
+      'In manus tuas, Dómine, * Comméndo spíritum meum.',
+      '_'
+    ]);
+    expect(sectionTexts(compline, 'canticle-ad-nunc-dimittis')).toContain(
+      'Glória Patri, et Fílio, * et Spirítui Sancto.'
+    );
+  }, 240_000);
+
   it('renders ordinary Rubrics 1960 Compline seasonal final Marian antiphons in 2026', async () => {
     const { engine, resolvedCorpus } = await createHarness('Rubrics 1960 - 1960');
 
