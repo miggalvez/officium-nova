@@ -24,6 +24,39 @@ entry here and re-run the adjudication harness.
 
 ## Current entries
 
+### 2026-05-06 — C4a Doctor orations use guarded Summorum Pontificum orthography
+
+**Classification.** `perl-bug`
+
+**Summary.** In the Rubrics 1960 2026 comparison surface, selected
+Doctor offices routed through `C4a` emit the guarded `cælis` spelling
+from the `communis Summorum Pontificum` variant. Officium Novum emits
+the unguarded C4a Doctor oration spelling `cœlis`.
+
+**Primary source.**
+
+- `upstream/web/www/horas/Latin/Sancti/04-21.txt:6-13`
+- `upstream/web/www/horas/Latin/Sancti/05-09.txt:6-13`
+- `upstream/web/www/horas/Latin/Commune/C4a.txt:19-22`
+
+**Reproduction.**
+Run:
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Rubrics 1960 - 1960" --date 2026-04-21 --hour Lauds --no-write-docs --debug-window 12
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Rubrics 1960 - 1960" --date 2026-05-09 --hour Lauds --no-write-docs --debug-window 12
+```
+
+Then inspect the closing collect. The 2026 witnesses route through
+`vide C4a`; the unguarded `[Oratio]` line has `cœlis`, while `cælis`
+is guarded by `(sed communi Summorum Pontificum)` and does not apply.
+
+**Affected stable divergence-row keys.**
+
+| Policy | Dates | Hours | Row key suffixes |
+|---|---|---|---|
+| Rubrics 1960 - 1960 | 2026-04-21, 2026-05-09 | Matins, Lauds, Terce, Sext, None | `40c56f3d`, `57580852` |
+
 ### 2026-05-06 — Simplified Roman Confessor common Terce/Sext antiphons fall back to the psalter
 
 **Classification.** `perl-bug`

@@ -20692,6 +20692,54 @@
     "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-04-21/Lauds/40c56f3d": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-04-21",
+    "hour": "Lauds",
+    "firstExpected": "Deus, qui pópulo tuo ætérnæ salútis beátum Ansélmum minístrum tribuísti: præsta, quǽsumus; ut, quem Doctórem vitæ habúimus in terris, intercessórem habére mereámur in cælis.",
+    "firstActual": "Deus, qui pópulo tuo ætérnæ salútis beátum Ansélmum minístrum tribuísti: præsta, quǽsumus; ut, quem Doctórem vitæ habúimus in terris, intercessórem habére mereámur in cœlis.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/04-21.txt:6-13, upstream/web/www/horas/Latin/Sancti/05-09.txt:6-13, and upstream/web/www/horas/Latin/Commune/C4a.txt:19-22 — both 2026 Doctor witnesses route through `vide C4a`; the default C4a Doctor oration has `intercessórem habére mereámur in cœlis`, while the `cælis` variant is guarded by `(sed communi Summorum Pontificum)` and does not apply to these rows. The compositor follows the unguarded C4a source; the Perl comparison surface emits the guarded orthography.",
+    "resolvedAt": "2026-05-06",
+    "commitSha": "c6127c6",
+    "notes": "2026 Rubrics 1960 C4a Doctor-oration guarded-variant fanout. Representative probes: 2026-04-21 Lauds and 2026-05-09 Lauds."
+  },
+  "Rubrics 1960 - 1960/2026-04-21/None/40c56f3d": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-04-21",
+    "hour": "None",
+    "firstExpected": "Deus, qui pópulo tuo ætérnæ salútis beátum Ansélmum minístrum tribuísti: præsta, quǽsumus; ut, quem Doctórem vitæ habúimus in terris, intercessórem habére mereámur in cælis.",
+    "firstActual": "Deus, qui pópulo tuo ætérnæ salútis beátum Ansélmum minístrum tribuísti: præsta, quǽsumus; ut, quem Doctórem vitæ habúimus in terris, intercessórem habére mereámur in cœlis.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/04-21.txt:6-13, upstream/web/www/horas/Latin/Sancti/05-09.txt:6-13, and upstream/web/www/horas/Latin/Commune/C4a.txt:19-22 — both 2026 Doctor witnesses route through `vide C4a`; the default C4a Doctor oration has `intercessórem habére mereámur in cœlis`, while the `cælis` variant is guarded by `(sed communi Summorum Pontificum)` and does not apply to these rows. The compositor follows the unguarded C4a source; the Perl comparison surface emits the guarded orthography.",
+    "resolvedAt": "2026-05-06",
+    "commitSha": "c6127c6",
+    "notes": "2026 Rubrics 1960 C4a Doctor-oration guarded-variant fanout. Representative probes: 2026-04-21 Lauds and 2026-05-09 Lauds."
+  },
+  "Rubrics 1960 - 1960/2026-04-21/Sext/40c56f3d": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-04-21",
+    "hour": "Sext",
+    "firstExpected": "Deus, qui pópulo tuo ætérnæ salútis beátum Ansélmum minístrum tribuísti: præsta, quǽsumus; ut, quem Doctórem vitæ habúimus in terris, intercessórem habére mereámur in cælis.",
+    "firstActual": "Deus, qui pópulo tuo ætérnæ salútis beátum Ansélmum minístrum tribuísti: præsta, quǽsumus; ut, quem Doctórem vitæ habúimus in terris, intercessórem habére mereámur in cœlis.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/04-21.txt:6-13, upstream/web/www/horas/Latin/Sancti/05-09.txt:6-13, and upstream/web/www/horas/Latin/Commune/C4a.txt:19-22 — both 2026 Doctor witnesses route through `vide C4a`; the default C4a Doctor oration has `intercessórem habére mereámur in cœlis`, while the `cælis` variant is guarded by `(sed communi Summorum Pontificum)` and does not apply to these rows. The compositor follows the unguarded C4a source; the Perl comparison surface emits the guarded orthography.",
+    "resolvedAt": "2026-05-06",
+    "commitSha": "c6127c6",
+    "notes": "2026 Rubrics 1960 C4a Doctor-oration guarded-variant fanout. Representative probes: 2026-04-21 Lauds and 2026-05-09 Lauds."
+  },
+  "Rubrics 1960 - 1960/2026-04-21/Terce/40c56f3d": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-04-21",
+    "hour": "Terce",
+    "firstExpected": "Deus, qui pópulo tuo ætérnæ salútis beátum Ansélmum minístrum tribuísti: præsta, quǽsumus; ut, quem Doctórem vitæ habúimus in terris, intercessórem habére mereámur in cælis.",
+    "firstActual": "Deus, qui pópulo tuo ætérnæ salútis beátum Ansélmum minístrum tribuísti: præsta, quǽsumus; ut, quem Doctórem vitæ habúimus in terris, intercessórem habére mereámur in cœlis.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/04-21.txt:6-13, upstream/web/www/horas/Latin/Sancti/05-09.txt:6-13, and upstream/web/www/horas/Latin/Commune/C4a.txt:19-22 — both 2026 Doctor witnesses route through `vide C4a`; the default C4a Doctor oration has `intercessórem habére mereámur in cœlis`, while the `cælis` variant is guarded by `(sed communi Summorum Pontificum)` and does not apply to these rows. The compositor follows the unguarded C4a source; the Perl comparison surface emits the guarded orthography.",
+    "resolvedAt": "2026-05-06",
+    "commitSha": "c6127c6",
+    "notes": "2026 Rubrics 1960 C4a Doctor-oration guarded-variant fanout. Representative probes: 2026-04-21 Lauds and 2026-05-09 Lauds."
+  },
   "Rubrics 1960 - 1960/2026-04-23/None/dcdd92bf": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-04-23",
@@ -20854,6 +20902,66 @@
     "notes": "Phase 2/3 fix plus adjudication: seasonal Paschal fallback-hymn doxology now reaches minor-hour fallback hymns; residual Perl rows keep the non-seasonal stanza.",
     "resolvedAt": "2026-05-05",
     "commitSha": "26e2fdd"
+  },
+  "Rubrics 1960 - 1960/2026-05-09/Lauds/57580852": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-05-09",
+    "hour": "Lauds",
+    "firstExpected": "Deus, qui pópulo tuo ætérnæ salútis beátum Gregórium minístrum tribuísti: præsta, quǽsumus; ut, quem Doctórem vitæ habúimus in terris, intercessórem habére mereámur in cælis.",
+    "firstActual": "Deus, qui pópulo tuo ætérnæ salútis beátum Gregórium minístrum tribuísti: præsta, quǽsumus; ut, quem Doctórem vitæ habúimus in terris, intercessórem habére mereámur in cœlis.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/04-21.txt:6-13, upstream/web/www/horas/Latin/Sancti/05-09.txt:6-13, and upstream/web/www/horas/Latin/Commune/C4a.txt:19-22 — both 2026 Doctor witnesses route through `vide C4a`; the default C4a Doctor oration has `intercessórem habére mereámur in cœlis`, while the `cælis` variant is guarded by `(sed communi Summorum Pontificum)` and does not apply to these rows. The compositor follows the unguarded C4a source; the Perl comparison surface emits the guarded orthography.",
+    "resolvedAt": "2026-05-06",
+    "commitSha": "c6127c6",
+    "notes": "2026 Rubrics 1960 C4a Doctor-oration guarded-variant fanout. Representative probes: 2026-04-21 Lauds and 2026-05-09 Lauds."
+  },
+  "Rubrics 1960 - 1960/2026-05-09/Matins/57580852": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-05-09",
+    "hour": "Matins",
+    "firstExpected": "Deus, qui pópulo tuo ætérnæ salútis beátum Gregórium minístrum tribuísti: præsta, quǽsumus; ut, quem Doctórem vitæ habúimus in terris, intercessórem habére mereámur in cælis.",
+    "firstActual": "Deus, qui pópulo tuo ætérnæ salútis beátum Gregórium minístrum tribuísti: præsta, quǽsumus; ut, quem Doctórem vitæ habúimus in terris, intercessórem habére mereámur in cœlis.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/04-21.txt:6-13, upstream/web/www/horas/Latin/Sancti/05-09.txt:6-13, and upstream/web/www/horas/Latin/Commune/C4a.txt:19-22 — both 2026 Doctor witnesses route through `vide C4a`; the default C4a Doctor oration has `intercessórem habére mereámur in cœlis`, while the `cælis` variant is guarded by `(sed communi Summorum Pontificum)` and does not apply to these rows. The compositor follows the unguarded C4a source; the Perl comparison surface emits the guarded orthography.",
+    "resolvedAt": "2026-05-06",
+    "commitSha": "c6127c6",
+    "notes": "2026 Rubrics 1960 C4a Doctor-oration guarded-variant fanout. Representative probes: 2026-04-21 Lauds and 2026-05-09 Lauds."
+  },
+  "Rubrics 1960 - 1960/2026-05-09/None/57580852": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-05-09",
+    "hour": "None",
+    "firstExpected": "Deus, qui pópulo tuo ætérnæ salútis beátum Gregórium minístrum tribuísti: præsta, quǽsumus; ut, quem Doctórem vitæ habúimus in terris, intercessórem habére mereámur in cælis.",
+    "firstActual": "Deus, qui pópulo tuo ætérnæ salútis beátum Gregórium minístrum tribuísti: præsta, quǽsumus; ut, quem Doctórem vitæ habúimus in terris, intercessórem habére mereámur in cœlis.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/04-21.txt:6-13, upstream/web/www/horas/Latin/Sancti/05-09.txt:6-13, and upstream/web/www/horas/Latin/Commune/C4a.txt:19-22 — both 2026 Doctor witnesses route through `vide C4a`; the default C4a Doctor oration has `intercessórem habére mereámur in cœlis`, while the `cælis` variant is guarded by `(sed communi Summorum Pontificum)` and does not apply to these rows. The compositor follows the unguarded C4a source; the Perl comparison surface emits the guarded orthography.",
+    "resolvedAt": "2026-05-06",
+    "commitSha": "c6127c6",
+    "notes": "2026 Rubrics 1960 C4a Doctor-oration guarded-variant fanout. Representative probes: 2026-04-21 Lauds and 2026-05-09 Lauds."
+  },
+  "Rubrics 1960 - 1960/2026-05-09/Sext/57580852": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-05-09",
+    "hour": "Sext",
+    "firstExpected": "Deus, qui pópulo tuo ætérnæ salútis beátum Gregórium minístrum tribuísti: præsta, quǽsumus; ut, quem Doctórem vitæ habúimus in terris, intercessórem habére mereámur in cælis.",
+    "firstActual": "Deus, qui pópulo tuo ætérnæ salútis beátum Gregórium minístrum tribuísti: præsta, quǽsumus; ut, quem Doctórem vitæ habúimus in terris, intercessórem habére mereámur in cœlis.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/04-21.txt:6-13, upstream/web/www/horas/Latin/Sancti/05-09.txt:6-13, and upstream/web/www/horas/Latin/Commune/C4a.txt:19-22 — both 2026 Doctor witnesses route through `vide C4a`; the default C4a Doctor oration has `intercessórem habére mereámur in cœlis`, while the `cælis` variant is guarded by `(sed communi Summorum Pontificum)` and does not apply to these rows. The compositor follows the unguarded C4a source; the Perl comparison surface emits the guarded orthography.",
+    "resolvedAt": "2026-05-06",
+    "commitSha": "c6127c6",
+    "notes": "2026 Rubrics 1960 C4a Doctor-oration guarded-variant fanout. Representative probes: 2026-04-21 Lauds and 2026-05-09 Lauds."
+  },
+  "Rubrics 1960 - 1960/2026-05-09/Terce/57580852": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-05-09",
+    "hour": "Terce",
+    "firstExpected": "Deus, qui pópulo tuo ætérnæ salútis beátum Gregórium minístrum tribuísti: præsta, quǽsumus; ut, quem Doctórem vitæ habúimus in terris, intercessórem habére mereámur in cælis.",
+    "firstActual": "Deus, qui pópulo tuo ætérnæ salútis beátum Gregórium minístrum tribuísti: præsta, quǽsumus; ut, quem Doctórem vitæ habúimus in terris, intercessórem habére mereámur in cœlis.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/04-21.txt:6-13, upstream/web/www/horas/Latin/Sancti/05-09.txt:6-13, and upstream/web/www/horas/Latin/Commune/C4a.txt:19-22 — both 2026 Doctor witnesses route through `vide C4a`; the default C4a Doctor oration has `intercessórem habére mereámur in cœlis`, while the `cælis` variant is guarded by `(sed communi Summorum Pontificum)` and does not apply to these rows. The compositor follows the unguarded C4a source; the Perl comparison surface emits the guarded orthography.",
+    "resolvedAt": "2026-05-06",
+    "commitSha": "c6127c6",
+    "notes": "2026 Rubrics 1960 C4a Doctor-oration guarded-variant fanout. Representative probes: 2026-04-21 Lauds and 2026-05-09 Lauds."
   },
   "Rubrics 1960 - 1960/2026-05-11/None/dcdd92bf": {
     "policy": "Rubrics 1960 - 1960",
