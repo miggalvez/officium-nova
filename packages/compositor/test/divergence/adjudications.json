@@ -17833,6 +17833,17 @@
     "resolvedAt": "2026-05-05",
     "commitSha": "e6f1475"
   },
+  "Rubrics 1960 - 1960/2026-01-14/Lauds/7c9c46cc": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-01-14",
+    "hour": "Lauds",
+    "firstExpected": "Ant. Dóminus regnávit, * exsúltet terra. ‡",
+    "firstActual": "Ant. Ecce sacérdos magnus, * qui in diébus suis plácuit Deo, et invéntus est justus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C4b.txt:1-12 — representative 2026 Confessor pontiff offices route through C4/C4a/C4b, those commons declare Antiphonas horas, and C4 supplies Ecce sacérdos magnus as the first common antiphon for Lauds/Prime/Vespers. The compositor follows the source-backed common; the Perl comparison surface keeps ordinary weekday psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor pontiff C4/C4a/C4b Lauds/Prime/Vespers common-antiphon fanout. Representative probes: 2026-01-14 Lauds and Prime.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-01-14/Matins/4522cc75": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-01-14",
@@ -17842,6 +17853,28 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
     "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
+  "Rubrics 1960 - 1960/2026-01-14/Prime/8b1d2d1f": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-01-14",
+    "hour": "Prime",
+    "firstExpected": "Ant. Misericórdia tua, * Dómine, ante óculos meos: et complácui in veritáte tua.",
+    "firstActual": "Ant. Ecce sacérdos magnus, * qui in diébus suis plácuit Deo, et invéntus est justus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C4b.txt:1-12 — representative 2026 Confessor pontiff offices route through C4/C4a/C4b, those commons declare Antiphonas horas, and C4 supplies Ecce sacérdos magnus as the first common antiphon for Lauds/Prime/Vespers. The compositor follows the source-backed common; the Perl comparison surface keeps ordinary weekday psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor pontiff C4/C4a/C4b Lauds/Prime/Vespers common-antiphon fanout. Representative probes: 2026-01-14 Lauds and Prime.",
+    "resolvedAt": "2026-05-06"
+  },
+  "Rubrics 1960 - 1960/2026-01-14/Vespers/29b9e575": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-01-14",
+    "hour": "Vespers",
+    "firstExpected": "Ant. Beáti omnes * qui timent Dóminum. ‡",
+    "firstActual": "Ant. Ecce sacérdos magnus, * qui in diébus suis plácuit Deo, et invéntus est justus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C4b.txt:1-12 — representative 2026 Confessor pontiff offices route through C4/C4a/C4b, those commons declare Antiphonas horas, and C4 supplies Ecce sacérdos magnus as the first common antiphon for Lauds/Prime/Vespers. The compositor follows the source-backed common; the Perl comparison surface keeps ordinary weekday psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor pontiff C4/C4a/C4b Lauds/Prime/Vespers common-antiphon fanout. Representative probes: 2026-01-14 Lauds and Prime.",
     "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-01-15/Lauds/11e2194d": {
@@ -18105,6 +18138,17 @@
     "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-01-27/Lauds/d1de3956": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-01-27",
+    "hour": "Lauds",
+    "firstExpected": "Ant. Cantáte * Dómino et benedícite nómini ejus.",
+    "firstActual": "Ant. Ecce sacérdos magnus, * qui in diébus suis plácuit Deo, et invéntus est justus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C4b.txt:1-12 — representative 2026 Confessor pontiff offices route through C4/C4a/C4b, those commons declare Antiphonas horas, and C4 supplies Ecce sacérdos magnus as the first common antiphon for Lauds/Prime/Vespers. The compositor follows the source-backed common; the Perl comparison surface keeps ordinary weekday psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor pontiff C4/C4a/C4b Lauds/Prime/Vespers common-antiphon fanout. Representative probes: 2026-01-14 Lauds and Prime.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-01-27/Matins/7c44d977": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-01-27",
@@ -18127,6 +18171,28 @@
     "citation": "upstream/web/www/horas/Latin/Sancti/01-27.txt:7-10 and upstream/web/www/horas/Latin/Sancti/08-04.txt:7-13 and upstream/web/www/horas/Latin/Sancti/11-24.txt:7-17 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C5.txt:9-19 and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:49-55 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; C4/C5 supply the fifth common antiphon `Serve bone...`, while the Tuesday psalter table supplies `Salvasti nos...` only for ordinary ferial None. The compositor follows the source-backed common antiphon; the Perl comparison surface keeps the ordinary Tuesday psalter antiphon on these simplified Roman rows.",
     "notes": "2026 Rubrics 1960 Confessor common None antiphon fanout. Same source-backed common-antiphon family as the existing 2024 C5 `Serve bone` rows, extended to C4/C4a/C5/C5a Tuesday None witnesses.",
     "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-01-27/Prime/6d59d499": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-01-27",
+    "hour": "Prime",
+    "firstExpected": "Ant. Deus meus * in te confído non erubéscam.",
+    "firstActual": "Ant. Ecce sacérdos magnus, * qui in diébus suis plácuit Deo, et invéntus est justus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C4b.txt:1-12 — representative 2026 Confessor pontiff offices route through C4/C4a/C4b, those commons declare Antiphonas horas, and C4 supplies Ecce sacérdos magnus as the first common antiphon for Lauds/Prime/Vespers. The compositor follows the source-backed common; the Perl comparison surface keeps ordinary weekday psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor pontiff C4/C4a/C4b Lauds/Prime/Vespers common-antiphon fanout. Representative probes: 2026-01-14 Lauds and Prime.",
+    "resolvedAt": "2026-05-06"
+  },
+  "Rubrics 1960 - 1960/2026-01-27/Vespers/aec81ece": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-01-27",
+    "hour": "Vespers",
+    "firstExpected": "Ant. Qui hábitas in cælis, * miserére nobis.",
+    "firstActual": "Ant. Ecce sacérdos magnus, * qui in diébus suis plácuit Deo, et invéntus est justus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C4b.txt:1-12 — representative 2026 Confessor pontiff offices route through C4/C4a/C4b, those commons declare Antiphonas horas, and C4 supplies Ecce sacérdos magnus as the first common antiphon for Lauds/Prime/Vespers. The compositor follows the source-backed common; the Perl comparison surface keeps ordinary weekday psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor pontiff C4/C4a/C4b Lauds/Prime/Vespers common-antiphon fanout. Representative probes: 2026-01-14 Lauds and Prime.",
+    "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-01-28/Lauds/e9e7d01d": {
     "policy": "Rubrics 1960 - 1960",
@@ -18163,6 +18229,17 @@
     "resolvedAt": "2026-05-05",
     "commitSha": "e1dcb32"
   },
+  "Rubrics 1960 - 1960/2026-01-29/Lauds/eb336761": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-01-29",
+    "hour": "Lauds",
+    "firstExpected": "Ant. Jubiláte * in conspéctu regis Dómini.",
+    "firstActual": "Ant. Ecce sacérdos magnus, * qui in diébus suis plácuit Deo, et invéntus est justus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C4b.txt:1-12 — representative 2026 Confessor pontiff offices route through C4/C4a/C4b, those commons declare Antiphonas horas, and C4 supplies Ecce sacérdos magnus as the first common antiphon for Lauds/Prime/Vespers. The compositor follows the source-backed common; the Perl comparison surface keeps ordinary weekday psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor pontiff C4/C4a/C4b Lauds/Prime/Vespers common-antiphon fanout. Representative probes: 2026-01-14 Lauds and Prime.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-01-29/Matins/2fac8d22": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-01-29",
@@ -18172,6 +18249,28 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
     "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
+  "Rubrics 1960 - 1960/2026-01-29/Prime/24017684": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-01-29",
+    "hour": "Prime",
+    "firstExpected": "Ant. In loco páscuæ * ibi Dóminus me collocávit.",
+    "firstActual": "Ant. Ecce sacérdos magnus, * qui in diébus suis plácuit Deo, et invéntus est justus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C4b.txt:1-12 — representative 2026 Confessor pontiff offices route through C4/C4a/C4b, those commons declare Antiphonas horas, and C4 supplies Ecce sacérdos magnus as the first common antiphon for Lauds/Prime/Vespers. The compositor follows the source-backed common; the Perl comparison surface keeps ordinary weekday psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor pontiff C4/C4a/C4b Lauds/Prime/Vespers common-antiphon fanout. Representative probes: 2026-01-14 Lauds and Prime.",
+    "resolvedAt": "2026-05-06"
+  },
+  "Rubrics 1960 - 1960/2026-01-29/Vespers/a9a48687": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-01-29",
+    "hour": "Vespers",
+    "firstExpected": "Ant. Ecce quam bonum * et quam jucúndum habitáre fratres in unum. ‡",
+    "firstActual": "Ant. Ecce sacérdos magnus, * qui in diébus suis plácuit Deo, et invéntus est justus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C4b.txt:1-12 — representative 2026 Confessor pontiff offices route through C4/C4a/C4b, those commons declare Antiphonas horas, and C4 supplies Ecce sacérdos magnus as the first common antiphon for Lauds/Prime/Vespers. The compositor follows the source-backed common; the Perl comparison surface keeps ordinary weekday psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor pontiff C4/C4a/C4b Lauds/Prime/Vespers common-antiphon fanout. Representative probes: 2026-01-14 Lauds and Prime.",
     "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-01-31/Lauds/2be42b34": {
@@ -18323,6 +18422,17 @@
     "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-02-04/Lauds/7c9c46cc": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-02-04",
+    "hour": "Lauds",
+    "firstExpected": "Ant. Dóminus regnávit, * exsúltet terra. ‡",
+    "firstActual": "Ant. Ecce sacérdos magnus, * qui in diébus suis plácuit Deo, et invéntus est justus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C4b.txt:1-12 — representative 2026 Confessor pontiff offices route through C4/C4a/C4b, those commons declare Antiphonas horas, and C4 supplies Ecce sacérdos magnus as the first common antiphon for Lauds/Prime/Vespers. The compositor follows the source-backed common; the Perl comparison surface keeps ordinary weekday psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor pontiff C4/C4a/C4b Lauds/Prime/Vespers common-antiphon fanout. Representative probes: 2026-01-14 Lauds and Prime.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-02-04/Matins/4522cc75": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-02-04",
@@ -18332,6 +18442,28 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
     "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
+  "Rubrics 1960 - 1960/2026-02-04/Prime/8b1d2d1f": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-02-04",
+    "hour": "Prime",
+    "firstExpected": "Ant. Misericórdia tua, * Dómine, ante óculos meos: et complácui in veritáte tua.",
+    "firstActual": "Ant. Ecce sacérdos magnus, * qui in diébus suis plácuit Deo, et invéntus est justus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C4b.txt:1-12 — representative 2026 Confessor pontiff offices route through C4/C4a/C4b, those commons declare Antiphonas horas, and C4 supplies Ecce sacérdos magnus as the first common antiphon for Lauds/Prime/Vespers. The compositor follows the source-backed common; the Perl comparison surface keeps ordinary weekday psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor pontiff C4/C4a/C4b Lauds/Prime/Vespers common-antiphon fanout. Representative probes: 2026-01-14 Lauds and Prime.",
+    "resolvedAt": "2026-05-06"
+  },
+  "Rubrics 1960 - 1960/2026-02-04/Vespers/29b9e575": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-02-04",
+    "hour": "Vespers",
+    "firstExpected": "Ant. Beáti omnes * qui timent Dóminum. ‡",
+    "firstActual": "Ant. Ecce sacérdos magnus, * qui in diébus suis plácuit Deo, et invéntus est justus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C4b.txt:1-12 — representative 2026 Confessor pontiff offices route through C4/C4a/C4b, those commons declare Antiphonas horas, and C4 supplies Ecce sacérdos magnus as the first common antiphon for Lauds/Prime/Vespers. The compositor follows the source-backed common; the Perl comparison surface keeps ordinary weekday psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor pontiff C4/C4a/C4b Lauds/Prime/Vespers common-antiphon fanout. Representative probes: 2026-01-14 Lauds and Prime.",
     "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-02-05/Matins/c262774b": {
@@ -18345,6 +18477,17 @@
     "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-02-06/Lauds/437abb7a": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-02-06",
+    "hour": "Lauds",
+    "firstExpected": "Ant. Exaltáte * Dóminum Deum nostrum, et adoráte in monte sancto ejus.",
+    "firstActual": "Ant. Ecce sacérdos magnus, * qui in diébus suis plácuit Deo, et invéntus est justus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C4b.txt:1-12 — representative 2026 Confessor pontiff offices route through C4/C4a/C4b, those commons declare Antiphonas horas, and C4 supplies Ecce sacérdos magnus as the first common antiphon for Lauds/Prime/Vespers. The compositor follows the source-backed common; the Perl comparison surface keeps ordinary weekday psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor pontiff C4/C4a/C4b Lauds/Prime/Vespers common-antiphon fanout. Representative probes: 2026-01-14 Lauds and Prime.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-02-06/Matins/88adb0ee": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-02-06",
@@ -18354,6 +18497,28 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
     "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
+  "Rubrics 1960 - 1960/2026-02-06/Prime/ffd85841": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-02-06",
+    "hour": "Prime",
+    "firstExpected": "Ant. Ne discédas a me, * Dómine: quóniam tribulátio próxima est: quóniam non est qui ádjuvet.",
+    "firstActual": "Ant. Ecce sacérdos magnus, * qui in diébus suis plácuit Deo, et invéntus est justus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C4b.txt:1-12 — representative 2026 Confessor pontiff offices route through C4/C4a/C4b, those commons declare Antiphonas horas, and C4 supplies Ecce sacérdos magnus as the first common antiphon for Lauds/Prime/Vespers. The compositor follows the source-backed common; the Perl comparison surface keeps ordinary weekday psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor pontiff C4/C4a/C4b Lauds/Prime/Vespers common-antiphon fanout. Representative probes: 2026-01-14 Lauds and Prime.",
+    "resolvedAt": "2026-05-06"
+  },
+  "Rubrics 1960 - 1960/2026-02-06/Vespers/871a212b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-02-06",
+    "hour": "Vespers",
+    "firstExpected": "Ant. Dómine, * probásti me et cognovísti me. ‡",
+    "firstActual": "Ant. Ecce sacérdos magnus, * qui in diébus suis plácuit Deo, et invéntus est justus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C4b.txt:1-12 — representative 2026 Confessor pontiff offices route through C4/C4a/C4b, those commons declare Antiphonas horas, and C4 supplies Ecce sacérdos magnus as the first common antiphon for Lauds/Prime/Vespers. The compositor follows the source-backed common; the Perl comparison surface keeps ordinary weekday psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor pontiff C4/C4a/C4b Lauds/Prime/Vespers common-antiphon fanout. Representative probes: 2026-01-14 Lauds and Prime.",
     "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-02-07/Lauds/2be42b34": {
@@ -18424,6 +18589,17 @@
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited psalter source carries the complete antiphon without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-02-09/Lauds/40bb4c86": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-02-09",
+    "hour": "Lauds",
+    "firstExpected": "Ant. Jubiláte * Deo in voce exsultatiónis.",
+    "firstActual": "Ant. Ecce sacérdos magnus, * qui in diébus suis plácuit Deo, et invéntus est justus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C4b.txt:1-12 — representative 2026 Confessor pontiff offices route through C4/C4a/C4b, those commons declare Antiphonas horas, and C4 supplies Ecce sacérdos magnus as the first common antiphon for Lauds/Prime/Vespers. The compositor follows the source-backed common; the Perl comparison surface keeps ordinary weekday psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor pontiff C4/C4a/C4b Lauds/Prime/Vespers common-antiphon fanout. Representative probes: 2026-01-14 Lauds and Prime.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-02-09/Matins/2bbb208c": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-02-09",
@@ -18433,6 +18609,28 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
     "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
+  "Rubrics 1960 - 1960/2026-02-09/Prime/408a8ad6": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-02-09",
+    "hour": "Prime",
+    "firstExpected": "Ant. Ínnocens mánibus * et mundo corde ascéndet in montem Dómini.",
+    "firstActual": "Ant. Ecce sacérdos magnus, * qui in diébus suis plácuit Deo, et invéntus est justus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C4b.txt:1-12 — representative 2026 Confessor pontiff offices route through C4/C4a/C4b, those commons declare Antiphonas horas, and C4 supplies Ecce sacérdos magnus as the first common antiphon for Lauds/Prime/Vespers. The compositor follows the source-backed common; the Perl comparison surface keeps ordinary weekday psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor pontiff C4/C4a/C4b Lauds/Prime/Vespers common-antiphon fanout. Representative probes: 2026-01-14 Lauds and Prime.",
+    "resolvedAt": "2026-05-06"
+  },
+  "Rubrics 1960 - 1960/2026-02-09/Vespers/bcb54929": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-02-09",
+    "hour": "Vespers",
+    "firstExpected": "Ant. Inclinávit Dóminus * aurem suam mihi.",
+    "firstActual": "Ant. Ecce sacérdos magnus, * qui in diébus suis plácuit Deo, et invéntus est justus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C4b.txt:1-12 — representative 2026 Confessor pontiff offices route through C4/C4a/C4b, those commons declare Antiphonas horas, and C4 supplies Ecce sacérdos magnus as the first common antiphon for Lauds/Prime/Vespers. The compositor follows the source-backed common; the Perl comparison surface keeps ordinary weekday psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor pontiff C4/C4a/C4b Lauds/Prime/Vespers common-antiphon fanout. Representative probes: 2026-01-14 Lauds and Prime.",
     "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-02-10/Compline/c262774b": {
@@ -21106,6 +21304,17 @@
     "notes": "2026 Rubrics 1960 Compline fallback-hymn doxology row. This extends the source-backed fallback-hymn doxology adjudication to `Hymnus Completorium` witnesses.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-06-06/Lauds/d3f2a61e": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-06-06",
+    "hour": "Lauds",
+    "firstExpected": "Ant. Fílii Sion * exsúltent in Rege suo.",
+    "firstActual": "Ant. Ecce sacérdos magnus, * qui in diébus suis plácuit Deo, et invéntus est justus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C4b.txt:1-12 — representative 2026 Confessor pontiff offices route through C4/C4a/C4b, those commons declare Antiphonas horas, and C4 supplies Ecce sacérdos magnus as the first common antiphon for Lauds/Prime/Vespers. The compositor follows the source-backed common; the Perl comparison surface keeps ordinary weekday psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor pontiff C4/C4a/C4b Lauds/Prime/Vespers common-antiphon fanout. Representative probes: 2026-01-14 Lauds and Prime.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-06-06/Matins/f7ee49ea": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-06-06",
@@ -21115,6 +21324,17 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
     "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
+  "Rubrics 1960 - 1960/2026-06-06/Prime/78631968": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-06-06",
+    "hour": "Prime",
+    "firstExpected": "Ant. Exaltáre, Dómine, * qui júdicas terram: redde retributiónem supérbis.",
+    "firstActual": "Ant. Ecce sacérdos magnus, * qui in diébus suis plácuit Deo, et invéntus est justus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C4b.txt:1-12 — representative 2026 Confessor pontiff offices route through C4/C4a/C4b, those commons declare Antiphonas horas, and C4 supplies Ecce sacérdos magnus as the first common antiphon for Lauds/Prime/Vespers. The compositor follows the source-backed common; the Perl comparison surface keeps ordinary weekday psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor pontiff C4/C4a/C4b Lauds/Prime/Vespers common-antiphon fanout. Representative probes: 2026-01-14 Lauds and Prime.",
     "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-06-06/Vespers/b047f132": {
@@ -21520,6 +21740,17 @@
     "notes": "Rubrics 1960 2026 fanout for the ferial Prime fallback chapter family. Representative witness: 2026-01-19 Prime.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-06-17/Lauds/7c9c46cc": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-06-17",
+    "hour": "Lauds",
+    "firstExpected": "Ant. Dóminus regnávit, * exsúltet terra. ‡",
+    "firstActual": "Ant. Ecce sacérdos magnus, * qui in diébus suis plácuit Deo, et invéntus est justus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C4b.txt:1-12 — representative 2026 Confessor pontiff offices route through C4/C4a/C4b, those commons declare Antiphonas horas, and C4 supplies Ecce sacérdos magnus as the first common antiphon for Lauds/Prime/Vespers. The compositor follows the source-backed common; the Perl comparison surface keeps ordinary weekday psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor pontiff C4/C4a/C4b Lauds/Prime/Vespers common-antiphon fanout. Representative probes: 2026-01-14 Lauds and Prime.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-06-17/Matins/4522cc75": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-06-17",
@@ -21529,6 +21760,28 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
     "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
+  "Rubrics 1960 - 1960/2026-06-17/Prime/8b1d2d1f": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-06-17",
+    "hour": "Prime",
+    "firstExpected": "Ant. Misericórdia tua, * Dómine, ante óculos meos: et complácui in veritáte tua.",
+    "firstActual": "Ant. Ecce sacérdos magnus, * qui in diébus suis plácuit Deo, et invéntus est justus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C4b.txt:1-12 — representative 2026 Confessor pontiff offices route through C4/C4a/C4b, those commons declare Antiphonas horas, and C4 supplies Ecce sacérdos magnus as the first common antiphon for Lauds/Prime/Vespers. The compositor follows the source-backed common; the Perl comparison surface keeps ordinary weekday psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor pontiff C4/C4a/C4b Lauds/Prime/Vespers common-antiphon fanout. Representative probes: 2026-01-14 Lauds and Prime.",
+    "resolvedAt": "2026-05-06"
+  },
+  "Rubrics 1960 - 1960/2026-06-17/Vespers/29b9e575": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-06-17",
+    "hour": "Vespers",
+    "firstExpected": "Ant. Beáti omnes * qui timent Dóminum. ‡",
+    "firstActual": "Ant. Ecce sacérdos magnus, * qui in diébus suis plácuit Deo, et invéntus est justus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C4b.txt:1-12 — representative 2026 Confessor pontiff offices route through C4/C4a/C4b, those commons declare Antiphonas horas, and C4 supplies Ecce sacérdos magnus as the first common antiphon for Lauds/Prime/Vespers. The compositor follows the source-backed common; the Perl comparison surface keeps ordinary weekday psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor pontiff C4/C4a/C4b Lauds/Prime/Vespers common-antiphon fanout. Representative probes: 2026-01-14 Lauds and Prime.",
     "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-06-18/Lauds/11e2194d": {
@@ -22126,6 +22379,17 @@
     "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-07-07/Lauds/d1de3956": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-07-07",
+    "hour": "Lauds",
+    "firstExpected": "Ant. Cantáte * Dómino et benedícite nómini ejus.",
+    "firstActual": "Ant. Ecce sacérdos magnus, * qui in diébus suis plácuit Deo, et invéntus est justus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C4b.txt:1-12 — representative 2026 Confessor pontiff offices route through C4/C4a/C4b, those commons declare Antiphonas horas, and C4 supplies Ecce sacérdos magnus as the first common antiphon for Lauds/Prime/Vespers. The compositor follows the source-backed common; the Perl comparison surface keeps ordinary weekday psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor pontiff C4/C4a/C4b Lauds/Prime/Vespers common-antiphon fanout. Representative probes: 2026-01-14 Lauds and Prime.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-07-07/Matins/7c44d977": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-07-07",
@@ -22137,6 +22401,17 @@
     "notes": "2026 Rubrics 1960 Tuesday Matins Confessor-common antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family to the exact `Expugna, Domine` psalter fallback rows.",
     "resolvedAt": "2026-05-05",
     "commitSha": "94bdfc9"
+  },
+  "Rubrics 1960 - 1960/2026-07-07/Vespers/aec81ece": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-07-07",
+    "hour": "Vespers",
+    "firstExpected": "Ant. Qui hábitas in cælis, * miserére nobis.",
+    "firstActual": "Ant. Ecce sacérdos magnus, * qui in diébus suis plácuit Deo, et invéntus est justus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C4b.txt:1-12 — representative 2026 Confessor pontiff offices route through C4/C4a/C4b, those commons declare Antiphonas horas, and C4 supplies Ecce sacérdos magnus as the first common antiphon for Lauds/Prime/Vespers. The compositor follows the source-backed common; the Perl comparison surface keeps ordinary weekday psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor pontiff C4/C4a/C4b Lauds/Prime/Vespers common-antiphon fanout. Representative probes: 2026-01-14 Lauds and Prime.",
+    "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-07-09/Lauds/52cc7e9c": {
     "policy": "Rubrics 1960 - 1960",
@@ -22351,6 +22626,17 @@
     "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-07-14/Lauds/d1de3956": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-07-14",
+    "hour": "Lauds",
+    "firstExpected": "Ant. Cantáte * Dómino et benedícite nómini ejus.",
+    "firstActual": "Ant. Ecce sacérdos magnus, * qui in diébus suis plácuit Deo, et invéntus est justus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C4b.txt:1-12 — representative 2026 Confessor pontiff offices route through C4/C4a/C4b, those commons declare Antiphonas horas, and C4 supplies Ecce sacérdos magnus as the first common antiphon for Lauds/Prime/Vespers. The compositor follows the source-backed common; the Perl comparison surface keeps ordinary weekday psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor pontiff C4/C4a/C4b Lauds/Prime/Vespers common-antiphon fanout. Representative probes: 2026-01-14 Lauds and Prime.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-07-14/Matins/7c44d977": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-07-14",
@@ -22373,6 +22659,28 @@
     "citation": "upstream/web/www/horas/Latin/Sancti/01-27.txt:7-10 and upstream/web/www/horas/Latin/Sancti/08-04.txt:7-13 and upstream/web/www/horas/Latin/Sancti/11-24.txt:7-17 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C5.txt:9-19 and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:49-55 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; C4/C5 supply the fifth common antiphon `Serve bone...`, while the Tuesday psalter table supplies `Salvasti nos...` only for ordinary ferial None. The compositor follows the source-backed common antiphon; the Perl comparison surface keeps the ordinary Tuesday psalter antiphon on these simplified Roman rows.",
     "notes": "2026 Rubrics 1960 Confessor common None antiphon fanout. Same source-backed common-antiphon family as the existing 2024 C5 `Serve bone` rows, extended to C4/C4a/C5/C5a Tuesday None witnesses.",
     "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-07-14/Prime/6d59d499": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-07-14",
+    "hour": "Prime",
+    "firstExpected": "Ant. Deus meus * in te confído non erubéscam.",
+    "firstActual": "Ant. Ecce sacérdos magnus, * qui in diébus suis plácuit Deo, et invéntus est justus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C4b.txt:1-12 — representative 2026 Confessor pontiff offices route through C4/C4a/C4b, those commons declare Antiphonas horas, and C4 supplies Ecce sacérdos magnus as the first common antiphon for Lauds/Prime/Vespers. The compositor follows the source-backed common; the Perl comparison surface keeps ordinary weekday psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor pontiff C4/C4a/C4b Lauds/Prime/Vespers common-antiphon fanout. Representative probes: 2026-01-14 Lauds and Prime.",
+    "resolvedAt": "2026-05-06"
+  },
+  "Rubrics 1960 - 1960/2026-07-14/Vespers/aec81ece": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-07-14",
+    "hour": "Vespers",
+    "firstExpected": "Ant. Qui hábitas in cælis, * miserére nobis.",
+    "firstActual": "Ant. Ecce sacérdos magnus, * qui in diébus suis plácuit Deo, et invéntus est justus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C4b.txt:1-12 — representative 2026 Confessor pontiff offices route through C4/C4a/C4b, those commons declare Antiphonas horas, and C4 supplies Ecce sacérdos magnus as the first common antiphon for Lauds/Prime/Vespers. The compositor follows the source-backed common; the Perl comparison surface keeps ordinary weekday psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor pontiff C4/C4a/C4b Lauds/Prime/Vespers common-antiphon fanout. Representative probes: 2026-01-14 Lauds and Prime.",
+    "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-07-15/Lauds/e9e7d01d": {
     "policy": "Rubrics 1960 - 1960",
@@ -24019,6 +24327,17 @@
     "resolvedAt": "2026-05-05",
     "commitSha": "e1dcb32"
   },
+  "Rubrics 1960 - 1960/2026-08-28/Lauds/437abb7a": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-08-28",
+    "hour": "Lauds",
+    "firstExpected": "Ant. Exaltáte * Dóminum Deum nostrum, et adoráte in monte sancto ejus.",
+    "firstActual": "Ant. Ecce sacérdos magnus, * qui in diébus suis plácuit Deo, et invéntus est justus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C4b.txt:1-12 — representative 2026 Confessor pontiff offices route through C4/C4a/C4b, those commons declare Antiphonas horas, and C4 supplies Ecce sacérdos magnus as the first common antiphon for Lauds/Prime/Vespers. The compositor follows the source-backed common; the Perl comparison surface keeps ordinary weekday psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor pontiff C4/C4a/C4b Lauds/Prime/Vespers common-antiphon fanout. Representative probes: 2026-01-14 Lauds and Prime.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-08-28/Matins/88adb0ee": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-08-28",
@@ -24028,6 +24347,28 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
     "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
+  "Rubrics 1960 - 1960/2026-08-28/Prime/ffd85841": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-08-28",
+    "hour": "Prime",
+    "firstExpected": "Ant. Ne discédas a me, * Dómine: quóniam tribulátio próxima est: quóniam non est qui ádjuvet.",
+    "firstActual": "Ant. Ecce sacérdos magnus, * qui in diébus suis plácuit Deo, et invéntus est justus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C4b.txt:1-12 — representative 2026 Confessor pontiff offices route through C4/C4a/C4b, those commons declare Antiphonas horas, and C4 supplies Ecce sacérdos magnus as the first common antiphon for Lauds/Prime/Vespers. The compositor follows the source-backed common; the Perl comparison surface keeps ordinary weekday psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor pontiff C4/C4a/C4b Lauds/Prime/Vespers common-antiphon fanout. Representative probes: 2026-01-14 Lauds and Prime.",
+    "resolvedAt": "2026-05-06"
+  },
+  "Rubrics 1960 - 1960/2026-08-28/Vespers/871a212b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-08-28",
+    "hour": "Vespers",
+    "firstExpected": "Ant. Dómine, * probásti me et cognovísti me. ‡",
+    "firstActual": "Ant. Ecce sacérdos magnus, * qui in diébus suis plácuit Deo, et invéntus est justus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C4b.txt:1-12 — representative 2026 Confessor pontiff offices route through C4/C4a/C4b, those commons declare Antiphonas horas, and C4 supplies Ecce sacérdos magnus as the first common antiphon for Lauds/Prime/Vespers. The compositor follows the source-backed common; the Perl comparison surface keeps ordinary weekday psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor pontiff C4/C4a/C4b Lauds/Prime/Vespers common-antiphon fanout. Representative probes: 2026-01-14 Lauds and Prime.",
     "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-08-29/Vespers/b047f132": {
@@ -24190,6 +24531,17 @@
     "resolvedAt": "2026-05-05",
     "commitSha": "e1dcb32"
   },
+  "Rubrics 1960 - 1960/2026-09-03/Lauds/eb336761": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-09-03",
+    "hour": "Lauds",
+    "firstExpected": "Ant. Jubiláte * in conspéctu regis Dómini.",
+    "firstActual": "Ant. Ecce sacérdos magnus, * qui in diébus suis plácuit Deo, et invéntus est justus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C4b.txt:1-12 — representative 2026 Confessor pontiff offices route through C4/C4a/C4b, those commons declare Antiphonas horas, and C4 supplies Ecce sacérdos magnus as the first common antiphon for Lauds/Prime/Vespers. The compositor follows the source-backed common; the Perl comparison surface keeps ordinary weekday psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor pontiff C4/C4a/C4b Lauds/Prime/Vespers common-antiphon fanout. Representative probes: 2026-01-14 Lauds and Prime.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-09-03/Matins/2fac8d22": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-09-03",
@@ -24211,6 +24563,17 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:26 — the weekday minor-hour row carries `Feria V = Quam bonus * Israël Deus, his, qui recto sunt corde.` without a trailing `‡`; the compositor preserves that source text while the Perl comparison surface appends an unsupported marker.",
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited psalter source carries the complete antiphon without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
     "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-09-03/Vespers/a9a48687": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-09-03",
+    "hour": "Vespers",
+    "firstExpected": "Ant. Ecce quam bonum * et quam jucúndum habitáre fratres in unum. ‡",
+    "firstActual": "Ant. Ecce sacérdos magnus, * qui in diébus suis plácuit Deo, et invéntus est justus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C4b.txt:1-12 — representative 2026 Confessor pontiff offices route through C4/C4a/C4b, those commons declare Antiphonas horas, and C4 supplies Ecce sacérdos magnus as the first common antiphon for Lauds/Prime/Vespers. The compositor follows the source-backed common; the Perl comparison surface keeps ordinary weekday psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor pontiff C4/C4a/C4b Lauds/Prime/Vespers common-antiphon fanout. Representative probes: 2026-01-14 Lauds and Prime.",
+    "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-09-04/Lauds/d64d0218": {
     "policy": "Rubrics 1960 - 1960",
@@ -24245,6 +24608,17 @@
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited psalter source carries the complete antiphon without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-09-05/Lauds/d3f2a61e": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-09-05",
+    "hour": "Lauds",
+    "firstExpected": "Ant. Fílii Sion * exsúltent in Rege suo.",
+    "firstActual": "Ant. Ecce sacérdos magnus, * qui in diébus suis plácuit Deo, et invéntus est justus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C4b.txt:1-12 — representative 2026 Confessor pontiff offices route through C4/C4a/C4b, those commons declare Antiphonas horas, and C4 supplies Ecce sacérdos magnus as the first common antiphon for Lauds/Prime/Vespers. The compositor follows the source-backed common; the Perl comparison surface keeps ordinary weekday psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor pontiff C4/C4a/C4b Lauds/Prime/Vespers common-antiphon fanout. Representative probes: 2026-01-14 Lauds and Prime.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-09-05/Matins/f7ee49ea": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-09-05",
@@ -24254,6 +24628,17 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
     "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
+  "Rubrics 1960 - 1960/2026-09-05/Prime/78631968": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-09-05",
+    "hour": "Prime",
+    "firstExpected": "Ant. Exaltáre, Dómine, * qui júdicas terram: redde retributiónem supérbis.",
+    "firstActual": "Ant. Ecce sacérdos magnus, * qui in diébus suis plácuit Deo, et invéntus est justus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C4b.txt:1-12 — representative 2026 Confessor pontiff offices route through C4/C4a/C4b, those commons declare Antiphonas horas, and C4 supplies Ecce sacérdos magnus as the first common antiphon for Lauds/Prime/Vespers. The compositor follows the source-backed common; the Perl comparison surface keeps ordinary weekday psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor pontiff C4/C4a/C4b Lauds/Prime/Vespers common-antiphon fanout. Representative probes: 2026-01-14 Lauds and Prime.",
     "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-09-05/Vespers/b047f132": {
@@ -24868,6 +25253,17 @@
     "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-09-22/Lauds/d1de3956": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-09-22",
+    "hour": "Lauds",
+    "firstExpected": "Ant. Cantáte * Dómino et benedícite nómini ejus.",
+    "firstActual": "Ant. Ecce sacérdos magnus, * qui in diébus suis plácuit Deo, et invéntus est justus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C4b.txt:1-12 — representative 2026 Confessor pontiff offices route through C4/C4a/C4b, those commons declare Antiphonas horas, and C4 supplies Ecce sacérdos magnus as the first common antiphon for Lauds/Prime/Vespers. The compositor follows the source-backed common; the Perl comparison surface keeps ordinary weekday psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor pontiff C4/C4a/C4b Lauds/Prime/Vespers common-antiphon fanout. Representative probes: 2026-01-14 Lauds and Prime.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-09-22/Matins/7c44d977": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-09-22",
@@ -24890,6 +25286,28 @@
     "citation": "upstream/web/www/horas/Latin/Sancti/01-27.txt:7-10 and upstream/web/www/horas/Latin/Sancti/08-04.txt:7-13 and upstream/web/www/horas/Latin/Sancti/11-24.txt:7-17 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C5.txt:9-19 and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:49-55 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; C4/C5 supply the fifth common antiphon `Serve bone...`, while the Tuesday psalter table supplies `Salvasti nos...` only for ordinary ferial None. The compositor follows the source-backed common antiphon; the Perl comparison surface keeps the ordinary Tuesday psalter antiphon on these simplified Roman rows.",
     "notes": "2026 Rubrics 1960 Confessor common None antiphon fanout. Same source-backed common-antiphon family as the existing 2024 C5 `Serve bone` rows, extended to C4/C4a/C5/C5a Tuesday None witnesses.",
     "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-09-22/Prime/6d59d499": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-09-22",
+    "hour": "Prime",
+    "firstExpected": "Ant. Deus meus * in te confído non erubéscam.",
+    "firstActual": "Ant. Ecce sacérdos magnus, * qui in diébus suis plácuit Deo, et invéntus est justus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C4b.txt:1-12 — representative 2026 Confessor pontiff offices route through C4/C4a/C4b, those commons declare Antiphonas horas, and C4 supplies Ecce sacérdos magnus as the first common antiphon for Lauds/Prime/Vespers. The compositor follows the source-backed common; the Perl comparison surface keeps ordinary weekday psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor pontiff C4/C4a/C4b Lauds/Prime/Vespers common-antiphon fanout. Representative probes: 2026-01-14 Lauds and Prime.",
+    "resolvedAt": "2026-05-06"
+  },
+  "Rubrics 1960 - 1960/2026-09-22/Vespers/aec81ece": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-09-22",
+    "hour": "Vespers",
+    "firstExpected": "Ant. Qui hábitas in cælis, * miserére nobis.",
+    "firstActual": "Ant. Ecce sacérdos magnus, * qui in diébus suis plácuit Deo, et invéntus est justus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C4b.txt:1-12 — representative 2026 Confessor pontiff offices route through C4/C4a/C4b, those commons declare Antiphonas horas, and C4 supplies Ecce sacérdos magnus as the first common antiphon for Lauds/Prime/Vespers. The compositor follows the source-backed common; the Perl comparison surface keeps ordinary weekday psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor pontiff C4/C4a/C4b Lauds/Prime/Vespers common-antiphon fanout. Representative probes: 2026-01-14 Lauds and Prime.",
+    "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-09-23/Prime/b7853e49": {
     "policy": "Rubrics 1960 - 1960",
@@ -25874,6 +26292,17 @@
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited psalter source carries the complete antiphon without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-10-23/Lauds/437abb7a": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-10-23",
+    "hour": "Lauds",
+    "firstExpected": "Ant. Exaltáte * Dóminum Deum nostrum, et adoráte in monte sancto ejus.",
+    "firstActual": "Ant. Ecce sacérdos magnus, * qui in diébus suis plácuit Deo, et invéntus est justus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C4b.txt:1-12 — representative 2026 Confessor pontiff offices route through C4/C4a/C4b, those commons declare Antiphonas horas, and C4 supplies Ecce sacérdos magnus as the first common antiphon for Lauds/Prime/Vespers. The compositor follows the source-backed common; the Perl comparison surface keeps ordinary weekday psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor pontiff C4/C4a/C4b Lauds/Prime/Vespers common-antiphon fanout. Representative probes: 2026-01-14 Lauds and Prime.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-10-23/Matins/88adb0ee": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-10-23",
@@ -25883,6 +26312,17 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
     "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
+  "Rubrics 1960 - 1960/2026-10-23/Vespers/871a212b": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-10-23",
+    "hour": "Vespers",
+    "firstExpected": "Ant. Dómine, * probásti me et cognovísti me. ‡",
+    "firstActual": "Ant. Ecce sacérdos magnus, * qui in diébus suis plácuit Deo, et invéntus est justus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C4b.txt:1-12 — representative 2026 Confessor pontiff offices route through C4/C4a/C4b, those commons declare Antiphonas horas, and C4 supplies Ecce sacérdos magnus as the first common antiphon for Lauds/Prime/Vespers. The compositor follows the source-backed common; the Perl comparison surface keeps ordinary weekday psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor pontiff C4/C4a/C4b Lauds/Prime/Vespers common-antiphon fanout. Representative probes: 2026-01-14 Lauds and Prime.",
     "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-10-26/Lauds/fbd9d530": {
@@ -26144,6 +26584,17 @@
     "notes": "Rubrics 1960 2026 fanout for the ferial Prime fallback chapter family. Representative witness: 2026-01-19 Prime.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-11-04/Lauds/7c9c46cc": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-11-04",
+    "hour": "Lauds",
+    "firstExpected": "Ant. Dóminus regnávit, * exsúltet terra. ‡",
+    "firstActual": "Ant. Ecce sacérdos magnus, * qui in diébus suis plácuit Deo, et invéntus est justus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C4b.txt:1-12 — representative 2026 Confessor pontiff offices route through C4/C4a/C4b, those commons declare Antiphonas horas, and C4 supplies Ecce sacérdos magnus as the first common antiphon for Lauds/Prime/Vespers. The compositor follows the source-backed common; the Perl comparison surface keeps ordinary weekday psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor pontiff C4/C4a/C4b Lauds/Prime/Vespers common-antiphon fanout. Representative probes: 2026-01-14 Lauds and Prime.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-11-04/Matins/4522cc75": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-11-04",
@@ -26153,6 +26604,28 @@
     "class": "perl-bug",
     "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18, upstream/web/www/horas/Latin/Commune/C4a.txt:1-14, upstream/web/www/horas/Latin/Commune/C4.txt:7-12, upstream/web/www/horas/Latin/Commune/C4.txt:106-115, upstream/web/www/horas/Latin/Commune/C5.txt:9-19, and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; Commune/C4 supplies the Matins antiphon `Beatus vir...`. The compositor follows the source-backed inherited common while the Perl comparison surface keeps ordinary weekday psalter antiphons on these simplified Roman rows.",
     "notes": "2026 Rubrics 1960 Confessor-common Matins `Beatus vir` antiphon fanout. This extends the already documented simplified Roman Confessor common-antiphon Perl comparison-surface family beyond the previously adjudicated Tuesday rows to all current first-divergence rows with this inherited common antiphon.",
+    "resolvedAt": "2026-05-06"
+  },
+  "Rubrics 1960 - 1960/2026-11-04/Prime/8b1d2d1f": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-11-04",
+    "hour": "Prime",
+    "firstExpected": "Ant. Misericórdia tua, * Dómine, ante óculos meos: et complácui in veritáte tua.",
+    "firstActual": "Ant. Ecce sacérdos magnus, * qui in diébus suis plácuit Deo, et invéntus est justus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C4b.txt:1-12 — representative 2026 Confessor pontiff offices route through C4/C4a/C4b, those commons declare Antiphonas horas, and C4 supplies Ecce sacérdos magnus as the first common antiphon for Lauds/Prime/Vespers. The compositor follows the source-backed common; the Perl comparison surface keeps ordinary weekday psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor pontiff C4/C4a/C4b Lauds/Prime/Vespers common-antiphon fanout. Representative probes: 2026-01-14 Lauds and Prime.",
+    "resolvedAt": "2026-05-06"
+  },
+  "Rubrics 1960 - 1960/2026-11-04/Vespers/29b9e575": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-11-04",
+    "hour": "Vespers",
+    "firstExpected": "Ant. Beáti omnes * qui timent Dóminum. ‡",
+    "firstActual": "Ant. Ecce sacérdos magnus, * qui in diébus suis plácuit Deo, et invéntus est justus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C4b.txt:1-12 — representative 2026 Confessor pontiff offices route through C4/C4a/C4b, those commons declare Antiphonas horas, and C4 supplies Ecce sacérdos magnus as the first common antiphon for Lauds/Prime/Vespers. The compositor follows the source-backed common; the Perl comparison surface keeps ordinary weekday psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor pontiff C4/C4a/C4b Lauds/Prime/Vespers common-antiphon fanout. Representative probes: 2026-01-14 Lauds and Prime.",
     "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-11-05/Lauds/52cc7e9c": {
@@ -26504,6 +26977,17 @@
     "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-11-17/Lauds/d1de3956": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-11-17",
+    "hour": "Lauds",
+    "firstExpected": "Ant. Cantáte * Dómino et benedícite nómini ejus.",
+    "firstActual": "Ant. Ecce sacérdos magnus, * qui in diébus suis plácuit Deo, et invéntus est justus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C4b.txt:1-12 — representative 2026 Confessor pontiff offices route through C4/C4a/C4b, those commons declare Antiphonas horas, and C4 supplies Ecce sacérdos magnus as the first common antiphon for Lauds/Prime/Vespers. The compositor follows the source-backed common; the Perl comparison surface keeps ordinary weekday psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor pontiff C4/C4a/C4b Lauds/Prime/Vespers common-antiphon fanout. Representative probes: 2026-01-14 Lauds and Prime.",
+    "resolvedAt": "2026-05-06"
+  },
   "Rubrics 1960 - 1960/2026-11-17/Matins/7c44d977": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-11-17",
@@ -26526,6 +27010,28 @@
     "citation": "upstream/web/www/horas/Latin/Sancti/01-27.txt:7-10 and upstream/web/www/horas/Latin/Sancti/08-04.txt:7-13 and upstream/web/www/horas/Latin/Sancti/11-24.txt:7-17 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C5.txt:9-19 and upstream/web/www/horas/Latin/Commune/C5a.txt:1-13 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:49-55 — the affected 2026 Confessor offices route through C4/C4a/C5/C5a common rules, which declare `Antiphonas horas`; C4/C5 supply the fifth common antiphon `Serve bone...`, while the Tuesday psalter table supplies `Salvasti nos...` only for ordinary ferial None. The compositor follows the source-backed common antiphon; the Perl comparison surface keeps the ordinary Tuesday psalter antiphon on these simplified Roman rows.",
     "notes": "2026 Rubrics 1960 Confessor common None antiphon fanout. Same source-backed common-antiphon family as the existing 2024 C5 `Serve bone` rows, extended to C4/C4a/C5/C5a Tuesday None witnesses.",
     "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-11-17/Prime/6d59d499": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-11-17",
+    "hour": "Prime",
+    "firstExpected": "Ant. Deus meus * in te confído non erubéscam.",
+    "firstActual": "Ant. Ecce sacérdos magnus, * qui in diébus suis plácuit Deo, et invéntus est justus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C4b.txt:1-12 — representative 2026 Confessor pontiff offices route through C4/C4a/C4b, those commons declare Antiphonas horas, and C4 supplies Ecce sacérdos magnus as the first common antiphon for Lauds/Prime/Vespers. The compositor follows the source-backed common; the Perl comparison surface keeps ordinary weekday psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor pontiff C4/C4a/C4b Lauds/Prime/Vespers common-antiphon fanout. Representative probes: 2026-01-14 Lauds and Prime.",
+    "resolvedAt": "2026-05-06"
+  },
+  "Rubrics 1960 - 1960/2026-11-17/Vespers/aec81ece": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-11-17",
+    "hour": "Vespers",
+    "firstExpected": "Ant. Qui hábitas in cælis, * miserére nobis.",
+    "firstActual": "Ant. Ecce sacérdos magnus, * qui in diébus suis plácuit Deo, et invéntus est justus.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18 and upstream/web/www/horas/Latin/Commune/C4.txt:7-18 and upstream/web/www/horas/Latin/Commune/C4a.txt:1-14 and upstream/web/www/horas/Latin/Commune/C4b.txt:1-12 — representative 2026 Confessor pontiff offices route through C4/C4a/C4b, those commons declare Antiphonas horas, and C4 supplies Ecce sacérdos magnus as the first common antiphon for Lauds/Prime/Vespers. The compositor follows the source-backed common; the Perl comparison surface keeps ordinary weekday psalter antiphons.",
+    "notes": "2026 Rubrics 1960 Confessor pontiff C4/C4a/C4b Lauds/Prime/Vespers common-antiphon fanout. Representative probes: 2026-01-14 Lauds and Prime.",
+    "resolvedAt": "2026-05-06"
   },
   "Rubrics 1960 - 1960/2026-11-19/Terce/2807ff6e": {
     "policy": "Rubrics 1960 - 1960",

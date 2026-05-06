@@ -6462,6 +6462,40 @@ is the inherited Confessor common Matins `Beátus vir...` antiphon.
 hours remain `992`, and unadjudicated rows drop from `1050` to `1004`;
 `perl-bug` rows rise from `878` to `924`.
 
+### 2026-05-06 — Pattern: 2026 Confessor pontiff Ecce sacerdos fanout (perl-bug)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** The refreshed Rubrics 1960 2026 frontier carried 46
+Lauds, Prime, and Vespers rows where Perl kept ordinary weekday psalter
+antiphons such as `Dóminus regnávit...`, `Misericórdia tua...`, or
+`Beáti omnes...`, while the compositor emitted the Confessor pontiff
+common antiphon `Ecce sacérdos magnus...`.
+
+**Root cause.** This extends the already documented simplified Roman
+Confessor common-antiphon comparison-surface family. Representative
+offices such as `2026-01-14` route through `vide C4a`; `C4a` inherits
+`C4`, the common declares `Antiphonas horas`, and `Commune/C4` supplies
+`Ecce sacérdos magnus...` as the first common antiphon for
+Lauds/Prime/Vespers. Related rows route through `C4`, `C4a`, or `C4b`,
+all of which inherit the same C4 common-antiphon surface. The compositor
+follows the source-backed inherited common, while the Perl comparison
+surface keeps ordinary weekday psalter antiphons.
+
+**Resolution.** Class `perl-bug`. Added row-level adjudications for all
+46 current Rubrics 1960 2026 unadjudicated rows whose first actual line
+is the inherited Confessor pontiff common `Ecce sacérdos magnus...`
+antiphon.
+
+**Citation.** `upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18`;
+`upstream/web/www/horas/Latin/Commune/C4.txt:7-18`;
+`upstream/web/www/horas/Latin/Commune/C4a.txt:1-14`;
+`upstream/web/www/horas/Latin/Commune/C4b.txt:1-12`.
+
+**Impact.** Rubrics 1960 2026 divergent hours remain `1928`, exact-match
+hours remain `992`, and unadjudicated rows drop from `1004` to `958`;
+`perl-bug` rows rise from `924` to `970`.
+
 ## See also
 
 - [ADR-011 — Divergence adjudication protocol](../../../../docs/adr/011-phase-3-divergence-adjudication.md)
