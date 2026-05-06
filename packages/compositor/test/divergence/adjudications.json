@@ -19183,6 +19183,17 @@
     "notes": "Rubrics 1960 2026 fanout for the ferial Prime fallback chapter family. Representative witness: 2026-01-19 Prime.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-02-18/Matins/c12d0e8c": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-02-18",
+    "hour": "Matins",
+    "firstExpected": "Ant. Confitebúntur tibi * pópuli, Deus, in ætérnum.",
+    "firstActual": "Ant. Confitebúntur tibi * pópuli Deus in ætérnum.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:52-54 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:69-71 — the 2026 witnesses are Wednesdays, so Roman Matins uses the `Day3` psalter source. `Day3` gives `Confitebúntur tibi * pópuli Deus in ætérnum.` without the comma after `pópuli`; the comma-bearing variant is `Day31`, which does not apply. Perl surfaces the unsupported `pópuli, Deus,` punctuation.",
+    "resolvedAt": "2026-05-06",
+    "commitSha": "58323bf"
+  },
   "Rubrics 1960 - 1960/2026-02-18/Vespers/cc3c00d8": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-02-18",
@@ -19303,6 +19314,17 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:41 — the weekday Vespers psalter source carries the complete antiphon `Lætátus sum * in his, quæ dicta sunt mihi.` without a trailing `‡`. The compositor preserves the source text; the Perl comparison surface adds an unsupported trailing continuation marker.",
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited source carries the complete antiphon or incipit without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
     "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-02-25/Matins/c12d0e8c": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-02-25",
+    "hour": "Matins",
+    "firstExpected": "Ant. Confitebúntur tibi * pópuli, Deus, in ætérnum.",
+    "firstActual": "Ant. Confitebúntur tibi * pópuli Deus in ætérnum.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:52-54 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:69-71 — the 2026 witnesses are Wednesdays, so Roman Matins uses the `Day3` psalter source. `Day3` gives `Confitebúntur tibi * pópuli Deus in ætérnum.` without the comma after `pópuli`; the comma-bearing variant is `Day31`, which does not apply. Perl surfaces the unsupported `pópuli, Deus,` punctuation.",
+    "resolvedAt": "2026-05-06",
+    "commitSha": "58323bf"
   },
   "Rubrics 1960 - 1960/2026-02-25/Prime/b7853e49": {
     "policy": "Rubrics 1960 - 1960",
@@ -19502,6 +19524,17 @@
     "notes": "Rubrics 1960 2026 fanout for the ferial Prime fallback chapter family. Representative witness: 2026-01-19 Prime.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-03-04/Matins/c12d0e8c": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-03-04",
+    "hour": "Matins",
+    "firstExpected": "Ant. Confitebúntur tibi * pópuli, Deus, in ætérnum.",
+    "firstActual": "Ant. Confitebúntur tibi * pópuli Deus in ætérnum.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:52-54 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:69-71 — the 2026 witnesses are Wednesdays, so Roman Matins uses the `Day3` psalter source. `Day3` gives `Confitebúntur tibi * pópuli Deus in ætérnum.` without the comma after `pópuli`; the comma-bearing variant is `Day31`, which does not apply. Perl surfaces the unsupported `pópuli, Deus,` punctuation.",
+    "resolvedAt": "2026-05-06",
+    "commitSha": "58323bf"
+  },
   "Rubrics 1960 - 1960/2026-03-04/Prime/b7853e49": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-03-04",
@@ -19700,6 +19733,17 @@
     "notes": "Rubrics 1960 2026 fanout for the ferial Prime fallback chapter family. Representative witness: 2026-01-19 Prime.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-03-11/Matins/c12d0e8c": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-03-11",
+    "hour": "Matins",
+    "firstExpected": "Ant. Confitebúntur tibi * pópuli, Deus, in ætérnum.",
+    "firstActual": "Ant. Confitebúntur tibi * pópuli Deus in ætérnum.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:52-54 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:69-71 — the 2026 witnesses are Wednesdays, so Roman Matins uses the `Day3` psalter source. `Day3` gives `Confitebúntur tibi * pópuli Deus in ætérnum.` without the comma after `pópuli`; the comma-bearing variant is `Day31`, which does not apply. Perl surfaces the unsupported `pópuli, Deus,` punctuation.",
+    "resolvedAt": "2026-05-06",
+    "commitSha": "58323bf"
+  },
   "Rubrics 1960 - 1960/2026-03-11/Prime/b7853e49": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-03-11",
@@ -19897,6 +19941,17 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Special/Prima Special.txt:1-7 and upstream/web/www/horas/Latin/Psalterium/Special/Prima Special.txt:45-59 — the source-backed ferial Prime fallback has the `Zach 8:19` chapter and then begins `[Responsory]` directly with `R.br. Christe, Fili Dei vivi...`; the Rubrics 1960 Perl comparison surface keeps the Sunday `1 Tim. 1:17` citation on these ferial Prime rows.",
     "notes": "Rubrics 1960 2026 fanout for the ferial Prime fallback chapter family. Representative witness: 2026-01-19 Prime.",
     "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-03-18/Matins/c12d0e8c": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-03-18",
+    "hour": "Matins",
+    "firstExpected": "Ant. Confitebúntur tibi * pópuli, Deus, in ætérnum.",
+    "firstActual": "Ant. Confitebúntur tibi * pópuli Deus in ætérnum.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:52-54 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:69-71 — the 2026 witnesses are Wednesdays, so Roman Matins uses the `Day3` psalter source. `Day3` gives `Confitebúntur tibi * pópuli Deus in ætérnum.` without the comma after `pópuli`; the comma-bearing variant is `Day31`, which does not apply. Perl surfaces the unsupported `pópuli, Deus,` punctuation.",
+    "resolvedAt": "2026-05-06",
+    "commitSha": "58323bf"
   },
   "Rubrics 1960 - 1960/2026-03-18/Prime/b7853e49": {
     "policy": "Rubrics 1960 - 1960",
@@ -20323,6 +20378,17 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Special/Prima Special.txt:1-7 and upstream/web/www/horas/Latin/Psalterium/Special/Prima Special.txt:45-59 — the source-backed ferial Prime fallback has the `Zach 8:19` chapter and then begins `[Responsory]` directly with `R.br. Christe, Fili Dei vivi...`; the Rubrics 1960 Perl comparison surface keeps the Sunday `1 Tim. 1:17` citation on these ferial Prime rows.",
     "notes": "Rubrics 1960 2026 fanout for the ferial Prime fallback chapter family. Representative witness: 2026-01-19 Prime.",
     "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-04-01/Matins/c12d0e8c": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-04-01",
+    "hour": "Matins",
+    "firstExpected": "Ant. Confitebúntur tibi * pópuli, Deus, in ætérnum.",
+    "firstActual": "Ant. Confitebúntur tibi * pópuli Deus in ætérnum.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:52-54 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:69-71 — the 2026 witnesses are Wednesdays, so Roman Matins uses the `Day3` psalter source. `Day3` gives `Confitebúntur tibi * pópuli Deus in ætérnum.` without the comma after `pópuli`; the comma-bearing variant is `Day31`, which does not apply. Perl surfaces the unsupported `pópuli, Deus,` punctuation.",
+    "resolvedAt": "2026-05-06",
+    "commitSha": "58323bf"
   },
   "Rubrics 1960 - 1960/2026-04-01/Prime/b7853e49": {
     "policy": "Rubrics 1960 - 1960",
@@ -26200,6 +26266,17 @@
     "notes": "2026 Rubrics 1960 Confessor pontiff C4/C4a/C4b Lauds/Prime/Vespers common-antiphon fanout. Representative probes: 2026-01-14 Lauds and Prime.",
     "resolvedAt": "2026-05-06"
   },
+  "Rubrics 1960 - 1960/2026-09-23/Matins/c12d0e8c": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-09-23",
+    "hour": "Matins",
+    "firstExpected": "Ant. Confitebúntur tibi * pópuli, Deus, in ætérnum.",
+    "firstActual": "Ant. Confitebúntur tibi * pópuli Deus in ætérnum.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:52-54 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:69-71 — the 2026 witnesses are Wednesdays, so Roman Matins uses the `Day3` psalter source. `Day3` gives `Confitebúntur tibi * pópuli Deus in ætérnum.` without the comma after `pópuli`; the comma-bearing variant is `Day31`, which does not apply. Perl surfaces the unsupported `pópuli, Deus,` punctuation.",
+    "resolvedAt": "2026-05-06",
+    "commitSha": "58323bf"
+  },
   "Rubrics 1960 - 1960/2026-09-23/Prime/b7853e49": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-09-23",
@@ -28784,6 +28861,17 @@
     "resolvedAt": "2026-05-05",
     "commitSha": "d9c4204"
   },
+  "Rubrics 1960 - 1960/2026-12-09/Matins/c12d0e8c": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-12-09",
+    "hour": "Matins",
+    "firstExpected": "Ant. Confitebúntur tibi * pópuli, Deus, in ætérnum.",
+    "firstActual": "Ant. Confitebúntur tibi * pópuli Deus in ætérnum.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:52-54 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:69-71 — the 2026 witnesses are Wednesdays, so Roman Matins uses the `Day3` psalter source. `Day3` gives `Confitebúntur tibi * pópuli Deus in ætérnum.` without the comma after `pópuli`; the comma-bearing variant is `Day31`, which does not apply. Perl surfaces the unsupported `pópuli, Deus,` punctuation.",
+    "resolvedAt": "2026-05-06",
+    "commitSha": "58323bf"
+  },
   "Rubrics 1960 - 1960/2026-12-09/Vespers/cc3c00d8": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-12-09",
@@ -28883,6 +28971,17 @@
     "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-12-16/Matins/c12d0e8c": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-12-16",
+    "hour": "Matins",
+    "firstExpected": "Ant. Confitebúntur tibi * pópuli, Deus, in ætérnum.",
+    "firstActual": "Ant. Confitebúntur tibi * pópuli Deus in ætérnum.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:52-54 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:69-71 — the 2026 witnesses are Wednesdays, so Roman Matins uses the `Day3` psalter source. `Day3` gives `Confitebúntur tibi * pópuli Deus in ætérnum.` without the comma after `pópuli`; the comma-bearing variant is `Day31`, which does not apply. Perl surfaces the unsupported `pópuli, Deus,` punctuation.",
+    "resolvedAt": "2026-05-06",
+    "commitSha": "58323bf"
+  },
   "Rubrics 1960 - 1960/2026-12-16/Vespers/cc3c00d8": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-12-16",
@@ -28949,6 +29048,17 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmorum/Psalm15.txt:1 — the source line places the flex marker before Dixi Domino and the mediant before quoniam; the compositor preserves that source-backed psalm pointing while the Perl comparison surface collapses it to a single asterisk before Dixi Domino.",
     "notes": "Source-backed Psalm 15:1 pointing: the corpus carries the half-verse marker plus original mediant; Perl flattens the displayed pointing on these rows.",
     "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-12-23/Matins/c12d0e8c": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-12-23",
+    "hour": "Matins",
+    "firstExpected": "Ant. Confitebúntur tibi * pópuli, Deus, in ætérnum.",
+    "firstActual": "Ant. Confitebúntur tibi * pópuli Deus in ætérnum.",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:52-54 and upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:69-71 — the 2026 witnesses are Wednesdays, so Roman Matins uses the `Day3` psalter source. `Day3` gives `Confitebúntur tibi * pópuli Deus in ætérnum.` without the comma after `pópuli`; the comma-bearing variant is `Day31`, which does not apply. Perl surfaces the unsupported `pópuli, Deus,` punctuation.",
+    "resolvedAt": "2026-05-06",
+    "commitSha": "58323bf"
   },
   "Rubrics 1960 - 1960/2026-12-23/Vespers/cc3c00d8": {
     "policy": "Rubrics 1960 - 1960",
