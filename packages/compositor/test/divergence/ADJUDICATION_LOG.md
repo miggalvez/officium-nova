@@ -6567,6 +6567,35 @@ actual lines are the Confessor common `Euge, serve bone...` or
 hours remain `992`, and unadjudicated rows drop from `922` to `854`;
 `perl-bug` rows rise from `1006` to `1074`.
 
+### 2026-05-06 — Pattern: 2026 Day3 Confitebuntur Matins punctuation fanout (perl-bug)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** The refreshed Rubrics 1960 2026 frontier carried 10
+Matins rows where Perl emitted the Psalm 44 reopening antiphon as
+`Confitebúntur tibi * pópuli, Deus, in ætérnum.`, while the compositor
+emitted `Confitebúntur tibi * pópuli Deus in ætérnum.`.
+
+**Root cause.** This extends the already documented Roman Matins Psalm
+44 reopening-antiphon punctuation family. The 2026 witnesses are
+Wednesdays, so Roman Matins correctly resolves the psalter-matins source
+to `Day3`, not `Day31`. `Day3` gives the second Psalm 44 antiphon as
+`Confitebúntur tibi * pópuli Deus in ætérnum.` without the extra comma
+after `pópuli`; the comma-bearing `pópuli, Deus,` variant belongs to
+`Day31`, which does not apply. The compositor preserves the source row,
+while the Perl comparison surface inserts unsupported punctuation.
+
+**Resolution.** Class `perl-bug`. Added row-level adjudications for all
+10 current Rubrics 1960 2026 unadjudicated Matins rows with the shared
+`c12d0e8c` key suffix.
+
+**Citation.** `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:52-54`;
+`upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:69-71`.
+
+**Impact.** Rubrics 1960 2026 divergent hours remain `1928`, exact-match
+hours remain `992`, and unadjudicated rows drop from `854` to `844`;
+`perl-bug` rows rise from `1074` to `1084`.
+
 ## See also
 
 - [ADR-011 — Divergence adjudication protocol](../../../../docs/adr/011-phase-3-divergence-adjudication.md)

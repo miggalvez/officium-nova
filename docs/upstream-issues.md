@@ -1267,6 +1267,16 @@ comma.
 |---|---|---|---|
 | Reduced - 1955 | 2024-02-14 | Matins | `d6ab45d4` |
 | Rubrics 1960 - 1960 | 2024-02-14 | Matins | `c12d0e8c` |
+| Rubrics 1960 - 1960 | 2026-02-18 | Matins | `c12d0e8c` |
+| Rubrics 1960 - 1960 | 2026-02-25 | Matins | `c12d0e8c` |
+| Rubrics 1960 - 1960 | 2026-03-04 | Matins | `c12d0e8c` |
+| Rubrics 1960 - 1960 | 2026-03-11 | Matins | `c12d0e8c` |
+| Rubrics 1960 - 1960 | 2026-03-18 | Matins | `c12d0e8c` |
+| Rubrics 1960 - 1960 | 2026-04-01 | Matins | `c12d0e8c` |
+| Rubrics 1960 - 1960 | 2026-09-23 | Matins | `c12d0e8c` |
+| Rubrics 1960 - 1960 | 2026-12-09 | Matins | `c12d0e8c` |
+| Rubrics 1960 - 1960 | 2026-12-16 | Matins | `c12d0e8c` |
+| Rubrics 1960 - 1960 | 2026-12-23 | Matins | `c12d0e8c` |
 
 ### 2026-04-19 — Divino Afflatu opening rubric prose is dropped by the Perl render surface
 
