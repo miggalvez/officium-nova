@@ -18484,6 +18484,18 @@
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited psalter source carries the complete antiphon without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-02-01/Prime/67634c25": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-02-01",
+    "hour": "Prime",
+    "firstExpected": "Psalmus 118(1-16) [2]",
+    "firstActual": "Psalmus 92 [2]",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:219 — the Quad Sunday `Prima Dominica SQP` row explicitly orders Prime as `53,92,118(1-16),118(17-32)`. The compositor follows that source-backed sequence, while the Perl comparison surface skips Psalm 92 and advances directly to Psalm 118(1-16).",
+    "notes": "Fanout entry for the 2026 Roman Quad-Sunday Prime SQP family; representative source proof is recorded in ADJUDICATION_LOG.md under the 2026-04-20 SQP tranche.",
+    "resolvedAt": "2026-05-06",
+    "commitSha": "b9bf979"
+  },
   "Rubrics 1960 - 1960/2026-02-01/Vespers/019555e4": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-02-01",
@@ -18786,6 +18798,18 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:12-15 — the Day0 third-nocturn antiphon is `Ut quid, Dómine, * recessísti longe?` without a trailing `‡`. The compositor preserves the corpus text; the Perl comparison surface adds an unsupported trailing continuation marker.",
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited psalter source carries the complete antiphon without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
     "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-02-08/Prime/67634c25": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-02-08",
+    "hour": "Prime",
+    "firstExpected": "Psalmus 118(1-16) [2]",
+    "firstActual": "Psalmus 92 [2]",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:219 — the Quad Sunday `Prima Dominica SQP` row explicitly orders Prime as `53,92,118(1-16),118(17-32)`. The compositor follows that source-backed sequence, while the Perl comparison surface skips Psalm 92 and advances directly to Psalm 118(1-16).",
+    "notes": "Fanout entry for the 2026 Roman Quad-Sunday Prime SQP family; representative source proof is recorded in ADJUDICATION_LOG.md under the 2026-04-20 SQP tranche.",
+    "resolvedAt": "2026-05-06",
+    "commitSha": "b9bf979"
   },
   "Rubrics 1960 - 1960/2026-02-08/Vespers/019555e4": {
     "policy": "Rubrics 1960 - 1960",
@@ -19095,6 +19119,18 @@
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited psalter source carries the complete antiphon without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-02-15/Prime/67634c25": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-02-15",
+    "hour": "Prime",
+    "firstExpected": "Psalmus 118(1-16) [2]",
+    "firstActual": "Psalmus 92 [2]",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:219 — the Quad Sunday `Prima Dominica SQP` row explicitly orders Prime as `53,92,118(1-16),118(17-32)`. The compositor follows that source-backed sequence, while the Perl comparison surface skips Psalm 92 and advances directly to Psalm 118(1-16).",
+    "notes": "Fanout entry for the 2026 Roman Quad-Sunday Prime SQP family; representative source proof is recorded in ADJUDICATION_LOG.md under the 2026-04-20 SQP tranche.",
+    "resolvedAt": "2026-05-06",
+    "commitSha": "b9bf979"
+  },
   "Rubrics 1960 - 1960/2026-02-15/Vespers/019555e4": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-02-15",
@@ -19259,6 +19295,18 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:12-15 — the Day0 third-nocturn antiphon is `Ut quid, Dómine, * recessísti longe?` without a trailing `‡`. The compositor preserves the corpus text; the Perl comparison surface adds an unsupported trailing continuation marker.",
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited psalter source carries the complete antiphon without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
     "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-02-22/Prime/67634c25": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-02-22",
+    "hour": "Prime",
+    "firstExpected": "Psalmus 118(1-16) [2]",
+    "firstActual": "Psalmus 92 [2]",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:219 — the Quad Sunday `Prima Dominica SQP` row explicitly orders Prime as `53,92,118(1-16),118(17-32)`. The compositor follows that source-backed sequence, while the Perl comparison surface skips Psalm 92 and advances directly to Psalm 118(1-16).",
+    "notes": "Fanout entry for the 2026 Roman Quad-Sunday Prime SQP family; representative source proof is recorded in ADJUDICATION_LOG.md under the 2026-04-20 SQP tranche.",
+    "resolvedAt": "2026-05-06",
+    "commitSha": "b9bf979"
   },
   "Rubrics 1960 - 1960/2026-02-22/Vespers/019555e4": {
     "policy": "Rubrics 1960 - 1960",
@@ -19435,6 +19483,18 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:12-15 — the Day0 third-nocturn antiphon is `Ut quid, Dómine, * recessísti longe?` without a trailing `‡`. The compositor preserves the corpus text; the Perl comparison surface adds an unsupported trailing continuation marker.",
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited psalter source carries the complete antiphon without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
     "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-03-01/Prime/67634c25": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-03-01",
+    "hour": "Prime",
+    "firstExpected": "Psalmus 118(1-16) [2]",
+    "firstActual": "Psalmus 92 [2]",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:219 — the Quad Sunday `Prima Dominica SQP` row explicitly orders Prime as `53,92,118(1-16),118(17-32)`. The compositor follows that source-backed sequence, while the Perl comparison surface skips Psalm 92 and advances directly to Psalm 118(1-16).",
+    "notes": "Fanout entry for the 2026 Roman Quad-Sunday Prime SQP family; representative source proof is recorded in ADJUDICATION_LOG.md under the 2026-04-20 SQP tranche.",
+    "resolvedAt": "2026-05-06",
+    "commitSha": "b9bf979"
   },
   "Rubrics 1960 - 1960/2026-03-01/Vespers/019555e4": {
     "policy": "Rubrics 1960 - 1960",
@@ -19645,6 +19705,18 @@
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited psalter source carries the complete antiphon without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-03-08/Prime/67634c25": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-03-08",
+    "hour": "Prime",
+    "firstExpected": "Psalmus 118(1-16) [2]",
+    "firstActual": "Psalmus 92 [2]",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:219 — the Quad Sunday `Prima Dominica SQP` row explicitly orders Prime as `53,92,118(1-16),118(17-32)`. The compositor follows that source-backed sequence, while the Perl comparison surface skips Psalm 92 and advances directly to Psalm 118(1-16).",
+    "notes": "Fanout entry for the 2026 Roman Quad-Sunday Prime SQP family; representative source proof is recorded in ADJUDICATION_LOG.md under the 2026-04-20 SQP tranche.",
+    "resolvedAt": "2026-05-06",
+    "commitSha": "b9bf979"
+  },
   "Rubrics 1960 - 1960/2026-03-08/Vespers/019555e4": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-03-08",
@@ -19854,6 +19926,18 @@
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited psalter source carries the complete antiphon without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
     "resolvedAt": "2026-05-05"
   },
+  "Rubrics 1960 - 1960/2026-03-15/Prime/67634c25": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-03-15",
+    "hour": "Prime",
+    "firstExpected": "Psalmus 118(1-16) [2]",
+    "firstActual": "Psalmus 92 [2]",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:219 — the Quad Sunday `Prima Dominica SQP` row explicitly orders Prime as `53,92,118(1-16),118(17-32)`. The compositor follows that source-backed sequence, while the Perl comparison surface skips Psalm 92 and advances directly to Psalm 118(1-16).",
+    "notes": "Fanout entry for the 2026 Roman Quad-Sunday Prime SQP family; representative source proof is recorded in ADJUDICATION_LOG.md under the 2026-04-20 SQP tranche.",
+    "resolvedAt": "2026-05-06",
+    "commitSha": "b9bf979"
+  },
   "Rubrics 1960 - 1960/2026-03-15/Vespers/019555e4": {
     "policy": "Rubrics 1960 - 1960",
     "date": "2026-03-15",
@@ -20042,6 +20126,18 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:12-15 — the Day0 third-nocturn antiphon is `Ut quid, Dómine, * recessísti longe?` without a trailing `‡`. The compositor preserves the corpus text; the Perl comparison surface adds an unsupported trailing continuation marker.",
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited psalter source carries the complete antiphon without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
     "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-03-22/Prime/67634c25": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-03-22",
+    "hour": "Prime",
+    "firstExpected": "Psalmus 118(1-16) [2]",
+    "firstActual": "Psalmus 92 [2]",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:219 — the Quad Sunday `Prima Dominica SQP` row explicitly orders Prime as `53,92,118(1-16),118(17-32)`. The compositor follows that source-backed sequence, while the Perl comparison surface skips Psalm 92 and advances directly to Psalm 118(1-16).",
+    "notes": "Fanout entry for the 2026 Roman Quad-Sunday Prime SQP family; representative source proof is recorded in ADJUDICATION_LOG.md under the 2026-04-20 SQP tranche.",
+    "resolvedAt": "2026-05-06",
+    "commitSha": "b9bf979"
   },
   "Rubrics 1960 - 1960/2026-03-22/Vespers/019555e4": {
     "policy": "Rubrics 1960 - 1960",
@@ -20312,6 +20408,18 @@
     "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi matutinum.txt:12-15 — the Day0 third-nocturn antiphon is `Ut quid, Dómine, * recessísti longe?` without a trailing `‡`. The compositor preserves the corpus text; the Perl comparison surface adds an unsupported trailing continuation marker.",
     "notes": "Fanout entry for the Rubrics 1960 2026 complete-antiphon trailing-marker family. The cited psalter source carries the complete antiphon without a final continuation marker; Perl appends unsupported trailing `‡` on the comparison surface.",
     "resolvedAt": "2026-05-05"
+  },
+  "Rubrics 1960 - 1960/2026-03-29/Prime/67634c25": {
+    "policy": "Rubrics 1960 - 1960",
+    "date": "2026-03-29",
+    "hour": "Prime",
+    "firstExpected": "Psalmus 118(1-16) [2]",
+    "firstActual": "Psalmus 92 [2]",
+    "class": "perl-bug",
+    "citation": "upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:219 — the Quad Sunday `Prima Dominica SQP` row explicitly orders Prime as `53,92,118(1-16),118(17-32)`. The compositor follows that source-backed sequence, while the Perl comparison surface skips Psalm 92 and advances directly to Psalm 118(1-16).",
+    "notes": "Fanout entry for the 2026 Roman Quad-Sunday Prime SQP family; representative source proof is recorded in ADJUDICATION_LOG.md under the 2026-04-20 SQP tranche.",
+    "resolvedAt": "2026-05-06",
+    "commitSha": "b9bf979"
   },
   "Rubrics 1960 - 1960/2026-03-29/Vespers/019555e4": {
     "policy": "Rubrics 1960 - 1960",

@@ -6627,6 +6627,33 @@ the `40c56f3d` and `57580852` key suffixes.
 hours remain `992`, and unadjudicated rows drop from `844` to `835`;
 `perl-bug` rows rise from `1084` to `1093`.
 
+### 2026-05-06 — Pattern: 2026 Roman Quad-Sunday Prime SQP psalm fanout (perl-bug)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** The refreshed Rubrics 1960 2026 frontier carried 9
+Sunday Prime rows from Septuagesima through Palm Sunday where Perl
+emitted `Psalmus 118(1-16) [2]`, while the compositor emitted
+`Psalmus 92 [2]`.
+
+**Root cause.** This is the 2026 fanout of the already documented
+Roman Quad-Sunday Prime SQP family. The Tridentinum psalter-minor table
+has a dedicated `Prima Dominica SQP` row ordering Prime as
+`53,92,118(1-16),118(17-32)`, and the engine now correctly prefers that
+row for `Quad*` Sundays. The compositor follows the source-backed row;
+the Perl comparison surface skips the source-backed Psalm 92 unit and
+advances directly to Psalm 118(1-16).
+
+**Resolution.** Class `perl-bug`. Added row-level adjudications for all
+9 current Rubrics 1960 2026 unadjudicated Prime rows with the
+`67634c25` key suffix.
+
+**Citation.** `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi minor.txt:219`.
+
+**Impact.** Rubrics 1960 2026 divergent hours remain `1921`, exact-match
+hours remain `999`, and unadjudicated rows drop from `828` to `819`;
+`perl-bug` rows rise from `1093` to `1102`.
+
 ## See also
 
 - [ADR-011 — Divergence adjudication protocol](../../../../docs/adr/011-phase-3-divergence-adjudication.md)
