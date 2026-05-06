@@ -24,6 +24,39 @@ entry here and re-run the adjudication harness.
 
 ## Current entries
 
+### 2026-05-06 — Simplified Roman Confessor pontiff common antiphons fall back to the psalter
+
+**Classification.** `perl-bug`
+
+**Summary.** In the Rubrics 1960 2026 comparison surface, selected
+Confessor pontiff offices keep ordinary weekday psalter antiphons at
+Lauds, Prime, and Vespers. Officium Novum emits the source-backed
+Confessor pontiff common antiphon `Ecce sacérdos magnus...`.
+
+**Primary source.**
+
+- `upstream/web/www/horas/Latin/Sancti/01-14.txt:6-18`
+- `upstream/web/www/horas/Latin/Commune/C4.txt:7-18`
+- `upstream/web/www/horas/Latin/Commune/C4a.txt:1-14`
+- `upstream/web/www/horas/Latin/Commune/C4b.txt:1-12`
+
+**Reproduction.**
+Run:
+
+```bash
+pnpm -C packages/compositor compare:phase-3-perl -- --version "Rubrics 1960 - 1960" --date 2026-01-14 --hour Lauds --no-write-docs --debug-window 25
+```
+
+Then inspect the first antiphon. Perl keeps the weekday psalter
+antiphon; the compositor follows the inherited C4/C4a common where
+`Antiphonas horas` selects the common antiphon set.
+
+**Affected stable divergence-row keys.**
+
+| Policy | Dates | Hours | Row key suffixes |
+|---|---|---|---|
+| Rubrics 1960 - 1960 | 2026 current-year frontier | Lauds, Prime, Vespers | 46 row-specific keys in `packages/compositor/test/divergence/adjudications.json` with first actual `Ecce sacérdos magnus...` |
+
 ### 2026-05-05 — Psalm 15:1 half-verse pointing flattened by Perl render surface
 
 **Classification.** `perl-bug`
