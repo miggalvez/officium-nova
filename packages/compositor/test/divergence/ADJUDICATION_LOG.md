@@ -6596,6 +6596,35 @@ while the Perl comparison surface inserts unsupported punctuation.
 hours remain `992`, and unadjudicated rows drop from `854` to `844`;
 `perl-bug` rows rise from `1074` to `1084`.
 
+### 2026-05-06 — Pattern: 2026 C4a Doctor-orations guarded orthography fanout (perl-bug)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** The refreshed Rubrics 1960 2026 frontier carried 9
+rows for St. Anselm and St. Gregory Nazianzen where Perl emitted the
+C4a Doctor collect ending with `intercessórem habére mereámur in
+cælis.`, while the compositor emitted `intercessórem habére mereámur in
+cœlis.`.
+
+**Root cause.** The affected offices route through `vide C4a`. C4a's
+default Doctor `[Oratio]` line uses `cœlis`; the following `cælis`
+variant is guarded by `(sed communi Summorum Pontificum)` and does not
+apply to these Doctor witnesses. The compositor follows the unguarded
+C4a source row, while the Perl comparison surface emits the guarded
+variant's orthography.
+
+**Resolution.** Class `perl-bug`. Added row-level adjudications for all
+9 current Rubrics 1960 2026 unadjudicated C4a Doctor-orations rows with
+the `40c56f3d` and `57580852` key suffixes.
+
+**Citation.** `upstream/web/www/horas/Latin/Sancti/04-21.txt:6-13`;
+`upstream/web/www/horas/Latin/Sancti/05-09.txt:6-13`;
+`upstream/web/www/horas/Latin/Commune/C4a.txt:19-22`.
+
+**Impact.** Rubrics 1960 2026 divergent hours remain `1928`, exact-match
+hours remain `992`, and unadjudicated rows drop from `844` to `835`;
+`perl-bug` rows rise from `1084` to `1093`.
+
 ## See also
 
 - [ADR-011 — Divergence adjudication protocol](../../../../docs/adr/011-phase-3-divergence-adjudication.md)
