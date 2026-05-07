@@ -22,6 +22,48 @@ anchor.
 
 ## Entries
 
+### 2026-05-06 — Pattern: Rubrics 1960 2026 existing-signature row-key fanout (mixed adjudication)
+
+**Commit.** Current tranche commit.
+
+**Ledger signal.** The refreshed `Rubrics 1960 - 1960` / 2026
+ledger still had rows counted as `unadjudicated` even though their
+normalized first expected / first actual pair already matched an
+adjudicated row elsewhere in the sidecar. Because ADR-011 keys include
+the policy, date, hour, and signature hash, these reusable decisions
+need explicit per-row fanout entries.
+
+**Root cause.** These rows are not new source-selection or rendering
+families. They are 2026 witnesses of already-classified patterns:
+Saturday BMV supplement selection, Holy Family/local doxology
+substitution, post-Epiphany Matins suppression, Ash Wednesday minor
+hour antiphons, Triduum Compline, Paschal/Sunday Vespers antiphon and
+psalm ownership, apostle/festive versicle rows, bracketed hymn text,
+Marian-common antiphon ownership, Advent versicles, and late-December
+Nativity-octave ownership.
+
+**Resolution.** Mixed existing classifications. Added 31 row-key
+entries by exact normalized signature match against existing cited
+sidecar rows: 30 `perl-bug` fanout entries and one
+`rendering-difference` fanout entry. No engine or compositor behavior
+changed.
+
+**Citation.** Each new row keeps the citation from its exact
+signature-matched template row in `adjudications.json`. Representative
+template citations include:
+
+- `upstream/web/www/horas/Latin/Tempora/Nat03.txt:6-15`
+- `upstream/web/www/horas/Latin/Commune/C10.txt:7-15`
+- `upstream/web/www/horas/Latin/Commune/C10.txt:81-90`
+- `upstream/web/www/horas/Latin/Psalterium/Special/Minor Special.txt:716-730`
+- `upstream/web/www/horas/Latin/Tempora/Quadp3-0.txt:4-12`
+- `upstream/web/www/horas/Latin/Tempora/Pasc0-0.txt:25-55`
+- `upstream/web/www/horas/Latin/Psalterium/Psalmi/Psalmi major.txt:15-20`
+- `upstream/web/www/horas/Latin/Tempora/Adv1-0.txt:149-150`
+
+**Impact.** Thirty-one 2026 rows move from `unadjudicated` to an
+existing source-backed classification without changing rendered output.
+
 ### 2026-05-06 — Pattern: post-Epiphany ferias borrow Epiphany texts without feast psalmody (engine/compositor fixed)
 
 **Commit.** Current tranche commit.
